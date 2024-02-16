@@ -1,0 +1,1 @@
+enum LanguagesCodeEnum {english,arabic,initial}
