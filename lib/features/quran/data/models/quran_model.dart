@@ -35,7 +35,11 @@ class QuranModel {
       typeEn: json['type_en'],
       ar: json['ar'],
       en: json['en'],
-      array: json['array']);
+      array: (json['array'] as List<Map<String, dynamic>>)
+          .map(
+            (e) => Array.fromJson(e),
+          )
+          .toList());
 
   Map<String, dynamic> toJson() => {
         'id': id,
