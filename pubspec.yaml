@@ -30,9 +30,8 @@ environment:
 dependencies:
   connectivity_plus: ^4.0.2
   dartz: ^0.10.1
-  flutter_bloc: ^8.1.2
+  flutter_bloc: ^8.1.4
   flutter_native_splash: 2.3.7
-  flutter_otp_text_field: ^1.1.1
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.9
   fluttertoast: ^8.2.2
@@ -42,7 +41,6 @@ dependencies:
   google_maps_flutter: ^2.5.3
   internet_connection_checker: ^1.0.0+1
   intl: any
-  mirai_dropdown_menu: ^0.0.7+3
   retrofit: ">=4.0.0 <5.0.0"
   shared_preferences: ^2.0.15
   url_launcher: ^6.2.4

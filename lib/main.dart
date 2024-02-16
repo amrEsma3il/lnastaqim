@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'config/routing/app_routingconfig/app_router_configuration.dart';
+import 'features/quran/bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
 
 
 void main() async {
@@ -19,19 +21,29 @@ class Lnastaqim extends StatelessWidget {
     return ScreenUtilInit(
       minTextAdapt: true,
       splitScreenMode: true,
-      designSize: const Size(375, 812),
+      designSize: const Size(393, 852),
       builder: (context, child) {
         
         
-        return GetMaterialApp(
-          
-         
-          locale: const Locale('ar'),
-          debugShowCheckedModeBanner: false,
-       
-          getPages: routes,
-          
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => QuranSowarCubit()..getAllQuranSowar(),
+            ),
+           
+          ],
+      
         
+          child: GetMaterialApp(
+            
+           
+            locale: const Locale('ar'),
+            debugShowCheckedModeBanner: false,
+                 
+            getPages: routes,
+            
+          
+          ),
         );},
   
     );
