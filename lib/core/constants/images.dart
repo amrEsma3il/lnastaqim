@@ -1,6 +1,6 @@
 class AppImages{
 
-  static const String rootImages = "assets/imgs";
+  static const String rootImages = "assets/images";
   static const String pattern='assets/images/pattern.png';
    static const String madania='assets/images/madania.png';
     static const String kaaba='assets/images/Kaaba.png';
