@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 
 import 'config/routing/app_routingconfig/app_router_configuration.dart';
 import 'features/quran/bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
+import 'features/quran/bussniess_logic/quran_sowar/search_or_not_cubit.dart';
+import 'features/quran/bussniess_logic/quran_sowar/sora_selected_cubit.dart';
 
 
 void main() async {
@@ -28,9 +30,14 @@ class Lnastaqim extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) => QuranSowarCubit()..getAllQuranSowar(),
+              create: (context) => QuranSowarCubit()..getAllQuranSowar(), 
             ),
-           
+             BlocProvider(
+              create: (context) => SoraSelected(), 
+            ),
+              BlocProvider(
+              create: (context) => SearchOrNot(), 
+            ),
           ],
       
         
