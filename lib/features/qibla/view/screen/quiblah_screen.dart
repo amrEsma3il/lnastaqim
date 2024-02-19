@@ -1,38 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lnastaqim/features/qibla/bussiness_logic.dart/quiblah_controller.dart';
+import 'package:lnastaqim/features/qibla/view/screen/compass_Screen.dart';
+
+import '../widget/custom_quiblah_screen.dart';
 
 class QuiblahScreen extends StatelessWidget {
   const QuiblahScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child:Column(
-        children: [
-          GestureDetector(
-            onTap: ()async
-            {
-              PermissionStatus locationstatus =
-                          await Permission.location.request();
-                      if (locationstatus == PermissionStatus.granted) {}
-                      if (locationstatus == PermissionStatus.denied) {
-                        const SnackBar(
-                          content: Text('This premission is recommended'),
-                        );
-                      }
-                      if (locationstatus ==
-                          PermissionStatus.permanentlyDenied) {
-                        openAppSettings();
-                      }
-            },
-            child: const Text(
-              'Get Current Position'
-            ),
-          ),
-        ],
-        ),
-         ),
+    return BlocProvider<QuiblahCubit>(
+      create: (BuildContext context) => QuiblahCubit(true),
+      child: BlocBuilder<QuiblahCubit, bool>(
+        builder: (BuildContext context, bool state) {
+          return FutureBuilder(
+              builder: (BuildContext context, snapshot) {
+                if (context.read<QuiblahCubit>().hasPremission) {
+                  return const CompassScreen();
+                } else {
+                  return const CustomQuiblahScreen();
+                }
+              },
+              future: context.read<QuiblahCubit>().getPremission());
+        },
+      ),
     );
   }
 }

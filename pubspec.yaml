@@ -45,8 +45,8 @@ dependencies:
   shared_preferences: ^2.0.15
   url_launcher: ^6.2.4
   permission_handler: ^11.1.0
-  geolocator: ^8.0.5
   cupertino_icons: ^1.0.2
+  flutter_qiblah: ^2.1.0
   dio: ^5.4.0
   flutter:
     sdk: flutter
