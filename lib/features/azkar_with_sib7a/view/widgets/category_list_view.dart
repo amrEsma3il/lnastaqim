@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lnastaqim/config/routing/app_routes_info/app_routes_name.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/category_item.dart';
 
 import '../../data/models/AzkarModel.dart';
@@ -23,8 +25,14 @@ class AzkarCategoryListView extends StatelessWidget {
               .where((item) => item.category == categoriesList[index])
               .toList();
 
-          return CategoryItem(
-            azkarModels: filteredItems,
+          return GestureDetector(
+            onTap: () {
+              Get.toNamed(AppRouteName.azkarDetails,
+                  arguments: categoriesList[index]);
+            },
+            child: CategoryItem(
+              azkarModels: filteredItems,
+            ),
           );
         });
   }

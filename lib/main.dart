@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:lnastaqim/features/azkar_with_sib7a/bussniess_logic/azkar_cubit/azkar_cubit.dart';
 
 import 'config/routing/app_routingconfig/app_router_configuration.dart';
+import 'features/azkar_with_sib7a/business_logic/azkar_category_cubit/azkar_category_cubit.dart';
+import 'features/azkar_with_sib7a/business_logic/azkar_details_cubit/azkar_details_cubit.dart';
 import 'features/quran/bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
 
 void main() async {
@@ -30,7 +31,10 @@ class Lnastaqim extends StatelessWidget {
             ),
             BlocProvider(
                 create: (BuildContext context) =>
-                    AzkarCubit()..getAzkarCategory())
+                    AzkarCategoryCubit()..getAzkarCategory()),
+            BlocProvider(
+                create: (BuildContext context) =>
+                    AzkarDetailsCubit()..getAzkarDetails()),
           ],
           child: GetMaterialApp(
             locale: const Locale('ar'),

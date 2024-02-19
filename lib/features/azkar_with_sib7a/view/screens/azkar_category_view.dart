@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lnastaqim/core/constants/images.dart';
-import 'package:lnastaqim/features/azkar_with_sib7a/bussniess_logic/azkar_cubit/azkar_cubit.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/data/models/AzkarModel.dart';
 
 import '../../../../core/constants/colors.dart';
+import '../../business_logic/azkar_category_cubit/azkar_category_cubit.dart';
 import '../widgets/category_list_view.dart';
 
 class AzkarView extends StatelessWidget {
@@ -14,7 +14,7 @@ class AzkarView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<AzkarCubit, List<AzkarModel>>(
+        child: BlocBuilder<AzkarCategoryCubit, List<AzkarModel>>(
           builder: (context, state) {
             return Container(
               decoration: const BoxDecoration(

@@ -3,8 +3,8 @@ import 'package:lnastaqim/features/azkar_with_sib7a/data/models/AzkarModel.dart'
 
 import '../../data/repository/azkar_repository.dart';
 
-class AzkarCubit extends Cubit<List<AzkarModel>> {
-  AzkarCubit() : super(AzkarRepository.getAzkarCategory());
+class AzkarDetailsCubit extends Cubit<List<AzkarModel>> {
+  AzkarDetailsCubit() : super(AzkarRepository.getAzkarDetails());
 
-  getAzkarCategory() => emit(state);
+  getAzkarDetails() => emit(state);
 }

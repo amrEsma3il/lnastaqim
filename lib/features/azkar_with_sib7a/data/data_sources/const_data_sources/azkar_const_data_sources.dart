@@ -5,4 +5,8 @@ class AzkarConstDataSources {
   static List<AzkarModel> getAzkarCategory() => AzkarDataBase.azkarJsonData
       .map((azkarJson) => AzkarModel.fromJson(azkarJson))
       .toList();
+
+  static List<AzkarModel> getAzkarDetails() => AzkarDataBase.azkarJsonData
+      .map((azkarJson) => AzkarModel.fromJson(azkarJson))
+      .toList();
 }

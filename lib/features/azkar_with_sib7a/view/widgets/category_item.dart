@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/data/models/AzkarModel.dart';
 
@@ -9,18 +10,17 @@ class CategoryItem extends StatelessWidget {
   });
 
   final List<AzkarModel> azkarModels;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30.0, right: 30, bottom: 15),
+      padding: EdgeInsets.only(left: 30.w, right: 30.w, bottom: 15.h),
       child: Container(
-        height: 41,
+        height: 41.h,
         decoration: ShapeDecoration(
             color: Colors.white,
             shape: RoundedRectangleBorder(
                 side: BorderSide(color: AppColor.darkBrown),
-                borderRadius: BorderRadius.circular(15))),
+                borderRadius: BorderRadius.circular(15.r))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -33,7 +33,7 @@ class CategoryItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                       color: AppColor.darkBrown,
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w500),
                 ),
               ),
