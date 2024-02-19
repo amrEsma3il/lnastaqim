@@ -5,11 +5,6 @@ import 'package:permission_handler/permission_handler.dart';
 class QuiblahCubit extends Cubit<bool> {
   QuiblahCubit(super.initialState);
   bool hasPremission = false;
-  Animation<double>? animation; 
-  AnimationController? animationController;
-  TickerProvider? tickerProvider;
-  double begin=0.0;
-  void switchPremission(bool premission) => emit(!hasPremission);
 
   Future getPremission() async {
     PermissionStatus locationstatus = await Permission.location.request();
@@ -23,13 +18,7 @@ class QuiblahCubit extends Cubit<bool> {
     }
     if (locationstatus == PermissionStatus.permanentlyDenied) {
       openAppSettings();
-      hasPremission=true;
+      hasPremission = true;
     }
-  }
-
-  void getQuiblahDirection()
-  {
-    animationController=AnimationController(vsync: tickerProvider!,duration:const Duration(milliseconds: 5000) );
-    animation=Tween(begin: 0.0,end: 0.0).animate(animationController!);
   }
 }
