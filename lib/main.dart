@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lnastaqim/features/azkar_with_sib7a/bussniess_logic/azkar_cubit/azkar_cubit.dart';
 
 import 'config/routing/app_routingconfig/app_router_configuration.dart';
 import 'features/quran/bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,29 +23,22 @@ class Lnastaqim extends StatelessWidget {
       splitScreenMode: true,
       designSize: const Size(393, 852),
       builder: (context, child) {
-        
-        
         return MultiBlocProvider(
           providers: [
             BlocProvider(
               create: (context) => QuranSowarCubit()..getAllQuranSowar(),
             ),
-           
+            BlocProvider(
+                create: (BuildContext context) =>
+                    AzkarCubit()..getAzkarCategory())
           ],
-      
-        
           child: GetMaterialApp(
-            
-           
             locale: const Locale('ar'),
             debugShowCheckedModeBanner: false,
-                 
             getPages: routes,
-            
-          
           ),
-        );},
-  
+        );
+      },
     );
   }
 }
