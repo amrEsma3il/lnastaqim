@@ -7,8 +7,20 @@ import '../../../../core/constants/colors.dart';
 import '../../business_logic/azkar_category_cubit/azkar_category_cubit.dart';
 import '../widgets/category_list_view.dart';
 
-class AzkarView extends StatelessWidget {
+class AzkarView extends StatefulWidget {
   const AzkarView({super.key});
+
+  @override
+  State<AzkarView> createState() => _AzkarViewState();
+}
+
+class _AzkarViewState extends State<AzkarView> {
+  bool isListViewVisible = false;
+  void toggleVisibility() {
+    setState(() {
+      isListViewVisible = !isListViewVisible;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,38 +44,80 @@ class AzkarView extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      height: 41,
-                      decoration: ShapeDecoration(
-                          color: AppColor.darkBrown,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15))),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.only(right: 10.0),
-                            child: Text(
-                              "الاذكار",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500),
+                    isListViewVisible
+                        ? Container(
+                            height: 41,
+                            decoration: ShapeDecoration(
+                                shadows: [
+                                  BoxShadow(
+                                      offset: const Offset(0, -1),
+                                      color: const Color(0xff000000)
+                                          .withOpacity(0.25),
+                                      blurRadius: 16,
+                                      blurStyle: BlurStyle.outer,
+                                      spreadRadius:
+                                          BorderSide.strokeAlignInside)
+                                ],
+                                color: AppColor.lightBrownWithOpacity10,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15))),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 10.0),
+                                  child: Text(
+                                    "الاذكار",
+                                    style: TextStyle(
+                                        color: AppColor.darkBrown,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                IconButton(
+                                    onPressed: toggleVisibility,
+                                    icon: Icon(
+                                      Icons.arrow_drop_down,
+                                      color: AppColor.darkBrown,
+                                    )),
+                              ],
+                            ),
+                          )
+                        : Container(
+                            height: 41,
+                            decoration: ShapeDecoration(
+                                color: AppColor.darkBrown,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15))),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.only(right: 10.0),
+                                  child: Text(
+                                    "الاذكار",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                IconButton(
+                                    onPressed: toggleVisibility,
+                                    icon: const Icon(
+                                      Icons.arrow_drop_up,
+                                      color: Colors.white,
+                                    )),
+                              ],
                             ),
                           ),
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.arrow_drop_up,
-                                color: Colors.white,
-                              )),
-                        ],
-                      ),
-                    ),
                     const SizedBox(
                       height: 20,
                     ),
-                    Expanded(child: AzkarCategoryListView(items: state)),
+                    Visibility(
+                        visible: isListViewVisible,
+                        child: Expanded(
+                            child: AzkarCategoryListView(items: state))),
                   ],
                 ),
               ),

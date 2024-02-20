@@ -16,7 +16,7 @@ class CustomAzkarDetailsAppBar extends StatelessWidget {
     return Container(
       height: 90.h,
       decoration: ShapeDecoration(
-          color: AppColor.floralWhite, shape: const RoundedRectangleBorder()),
+          color: AppColor.creame, shape: const RoundedRectangleBorder()),
       child: Row(
         children: [
           IconButton(

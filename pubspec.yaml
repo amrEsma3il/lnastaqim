@@ -44,6 +44,7 @@ dependencies:
   retrofit: ">=4.0.0 <5.0.0"
   shared_preferences: ^2.0.15
   url_launcher: ^6.2.4
+  flutter_staggered_animations: ^1.1.1
 
   cupertino_icons: ^1.0.2
   dio: ^5.4.0
@@ -77,6 +78,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/icons/
+    - assets/images/sibha.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

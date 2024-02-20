@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -9,7 +8,8 @@ import '../../data/models/quran_model.dart';
 class QuranAyaComponent extends StatelessWidget {
   final QuranModel quranAyaEntity;
   const QuranAyaComponent({
-    super.key, required this.quranAyaEntity,
+    super.key,
+    required this.quranAyaEntity,
   });
 
   @override
@@ -19,8 +19,7 @@ class QuranAyaComponent extends StatelessWidget {
       width: 362.w,
       height: 63.h,
       decoration: BoxDecoration(
-          color: AppColor.crame,
-          borderRadius: BorderRadius.circular(15.r)),
+          color: AppColor.creame, borderRadius: BorderRadius.circular(15.r)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

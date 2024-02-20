@@ -4,6 +4,7 @@ import 'package:lnastaqim/features/azkar_with_sib7a/view/screens/azkar_category_
 import '../../../features/azkar_with_sib7a/view/screens/azkar_details_view.dart';
 import '../../../features/quran/view/screens/quran_sowar.dart';
 import '../../../features/quran/view/screens/sora_details.dart';
+import '../../../features/sibha/views/screens/sibha_view.dart';
 import '../app_routes_info/app_routes_name.dart';
 
 List<GetPage<dynamic>>? routes = [
@@ -25,6 +26,11 @@ List<GetPage<dynamic>>? routes = [
   GetPage(
       page: () => const AzkarDetailsView(),
       name: AppRouteName.azkarDetails,
+      transition: Transition.leftToRightWithFade,
+      transitionDuration: const Duration(milliseconds: 500)),
+  GetPage(
+      page: () => const SibhaView(),
+      name: AppRouteName.sibhaView,
       transition: Transition.leftToRightWithFade,
       transitionDuration: const Duration(milliseconds: 500)),
 ];
