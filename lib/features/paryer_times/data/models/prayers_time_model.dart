@@ -5,8 +5,8 @@ class PrayersTimeModel {
   late String asr;
   late String maghrib;
   late String isha;
-  Prayer? currentPrayer;
-  Prayer? nextPrayer;
+  PrayerModel? currentPrayer;
+  PrayerModel? nextPrayer;
   String? lastThirdOfTheNight;
   double? qiblaDirection;
 
@@ -23,9 +23,9 @@ class PrayersTimeModel {
       this.qiblaDirection});
 }
 
-class Prayer {
+class PrayerModel {
   String? name;
   int? index;
 
-  Prayer({this.name, this.index});
+  PrayerModel({this.name, this.index});
 }

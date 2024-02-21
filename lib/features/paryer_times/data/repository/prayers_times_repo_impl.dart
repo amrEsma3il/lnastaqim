@@ -25,4 +25,11 @@ class PrayersTimesRepoImpl implements PrayersTimesRepo {
         lastThirdOfTheNight: timeFormat.format(sunnahTimes.lastThirdOfTheNight),
         qiblaDirection: qibla.direction);
   }
+
+  @override
+  CalculationParameters getCalculationParameters() {
+    final params = CalculationMethod.egyptian.getParameters();
+    params.madhab = Madhab.shafi;
+    return params;
+  }
 }
