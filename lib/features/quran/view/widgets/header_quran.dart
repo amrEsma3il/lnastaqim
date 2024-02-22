@@ -31,7 +31,7 @@ class HeaderSection extends StatelessWidget {
             Stack(
               children: [
                 AnimatedContainer(
-                  duration: const Duration(milliseconds: 320),
+                  duration: const Duration(milliseconds: 350),
                   curve: Curves.easeIn,
                   margin: EdgeInsets.only(left: 11.w),
                   height: 40.h,
@@ -45,7 +45,7 @@ class HeaderSection extends StatelessWidget {
                       contentPadding: EdgeInsets.fromLTRB(0, 0, 13.w, 13.h),
                       hintText: searchState ? 'بحث' : '',
                       constraints:
-                          BoxConstraints(maxHeight: 40.h, maxWidth: 220),
+                          BoxConstraints(maxHeight: 40.h, maxWidth: 240),
                       border: InputBorder.none,
                       enabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,

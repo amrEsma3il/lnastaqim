@@ -11,6 +11,8 @@ class AppColor{
    static const transparent=Colors.transparent;
      static const black=Colors.black;
        static const Color softGray = Color(0xFFE4DFDF);
+              static const Color heighlightColor = Color.fromARGB(255, 220, 203, 135);
+
    //#522700
   //background: #;
 

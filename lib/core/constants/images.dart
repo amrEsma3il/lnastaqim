@@ -11,4 +11,7 @@ class AppImages {
   static const String quran = '$rootImages/quran.png';
   static const String burgarMark = '$rootImages/burgar.png';
   static const String indicator = '$rootImages/indicator.png';
+    static const String banner = '$rootImages/banner.png';
+
+  //assets/images/banner.png
 }
