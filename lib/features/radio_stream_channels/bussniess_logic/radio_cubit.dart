@@ -5,7 +5,6 @@ import 'package:lnastaqim/features/radio_stream_channels/data/repositories/radio
 import 'package:meta/meta.dart';
 import 'package:radio_player/radio_player.dart';
 
-
 part 'radio_state.dart';
 
 class RadioCubit extends Cubit<RadioState> {
@@ -13,7 +12,18 @@ class RadioCubit extends Cubit<RadioState> {
   static RadioCubit get(context) => BlocProvider.of(context);
 
   RadioModel radioChannels = RadioRepository.fetchRadioChannels();
-
   RadioPlayer radioPlayer = RadioPlayer();
+  bool isPlaying = false;
+  List<String>? metadata;
 
+  void initRadio() {
+    radioPlayer.stateStream.listen((value) {
+      isPlaying = value;
+      emit(state);
+    });
+    radioPlayer.metadataStream.listen((value) {
+      metadata = value;
+      emit(state);
+    });
+  }
 }

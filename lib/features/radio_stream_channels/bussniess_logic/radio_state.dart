@@ -9,4 +9,4 @@ class RadioLoading extends RadioState {}
 
 class RadioPlaying extends RadioState {}
 
-class RadioError extends RadioState {}
+class RadioStopped extends RadioState {}
