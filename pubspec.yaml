@@ -52,7 +52,7 @@ dependencies:
   freezed_annotation: ^2.4.1
   flutter_localizations:
     sdk: flutter
-  flutter_radio_player: ^2.0.2
+  radio_player: ^1.5.0
 
 
 dev_dependencies:

@@ -211,14 +211,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.17"
-  flutter_radio_player:
-    dependency: "direct main"
-    description:
-      name: flutter_radio_player
-      sha256: "6157fccff7a99061ad97f2169fc2f852491eaa6b91c7b544f709ee71518ce01b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.2"
   flutter_screenutil:
     dependency: "direct main"
     description:
@@ -565,6 +557,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.1"
+  radio_player:
+    dependency: "direct main"
+    description:
+      name: radio_player
+      sha256: "3c66491ccaef621a0cdddbc2173bd9a47c1b7b73895fc5c06a3aa46d08a3db99"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.0"
   retrofit:
     dependency: "direct main"
     description:

@@ -46,26 +46,26 @@ class RadioModel {
 
 class Channel {
   Channel({
-    this.name,
+    this.title,
     this.description,
     this.image,
     this.url,
   });
 
   Channel.fromJson(dynamic json) {
-    name = json['name'];
+    title = json['title'];
     description = json['description'];
     image = json['image'];
     url = json['url'];
   }
-  String? name;
+  String? title;
   String? description;
   String? image;
   String? url;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['name'] = name;
+    map['title'] = title;
     map['description'] = description;
     map['image'] = image;
     map['url'] = url;
