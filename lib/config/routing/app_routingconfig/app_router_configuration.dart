@@ -1,5 +1,6 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
+import '../../../features/quran/view/screens/moshaf_view.dart';
 import '../../../features/quran/view/screens/sora_details.dart';
 
 import '../../../features/quran/view/screens/quran_sowar.dart';
@@ -16,6 +17,13 @@ List<GetPage<dynamic>>? routes = [
     curve: Curves.easeInOut,
       page: () =>  SoraDetails(soraModel: Get.arguments),
       name: AppRouteName.soraDetails,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 500)),
+       GetPage(
+   
+    curve: Curves.easeInOut,
+      page: () =>  const Moshaf(),
+      name: AppRouteName.moshaf,
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
 ];

@@ -44,10 +44,13 @@ class QuranSowar extends StatelessWidget {
                         height: 22.h,
                       ),
                       Expanded(
-                        child: ListView.builder(
-                          itemCount: state.length,
-                          itemBuilder: (context, index) =>
-                              QuranSoraComponent(quranAyaEntity: state[index]),
+                        child: Padding(
+                          padding:  EdgeInsets.only(bottom: 68.h),
+                          child: ListView.builder(
+                            itemCount: state.length,
+                            itemBuilder: (context, index) =>
+                                QuranSoraComponent(quranAyaEntity: state[index]),
+                          ),
                         ),
                       ),
                     ],

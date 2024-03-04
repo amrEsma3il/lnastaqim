@@ -53,6 +53,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   audioplayers: ^4.0.0
+  flutter_tts: ^3.8.5
+  my_fatoorah: ^3.2.0
+  unity_ads_plugin: ^0.3.11
 
 
 dev_dependencies:
@@ -77,7 +80,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
-    - assets/icons/
+    - assets/icons/ 
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -92,6 +95,9 @@ flutter:
     - family: Mushaf
       fonts:
         - asset: assets\fonts\Al Mushaf Quran.ttf
+    - family: Amiri
+      fonts:
+        - asset: assets\fonts\Amiri.ttf
     
     - family: Majeed
       fonts:

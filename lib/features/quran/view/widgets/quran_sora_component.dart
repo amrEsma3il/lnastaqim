@@ -19,7 +19,7 @@ class QuranSoraComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        BlocProvider.of<QuranSowarVersusCubit>(context).selectedVerse(0);
+        BlocProvider.of<QuranSowarVersusCubit>(context).selectedVerse(-1);
         BlocProvider.of<QuranSowarCubit>(context)
             .goToSoraDetailsEsvent(quranAyaEntity);
       },
