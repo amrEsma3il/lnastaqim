@@ -107,15 +107,26 @@ class Moshaf extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                              SizedBox(
+                                height: i ==
+                                        (quranPages[603 - index]['content']
+                                                    as List)
+                                                .length -
+                                            1
+                                    ? 9.h
+                                    : 0,
+                              )
                             ],
                           )
-                        } else if ((quranPages[603 - index]['content'][i]
-                                as String)
+                        } else if ((quranPages[603 - index]['content'][i] as String)
                             .contains(" ﷽")) ...{
                           Column(
                             children: [
-                              SizedBox(height: 5.h),
-                              Center(
+                              SizedBox(
+                                height: i == 0 ? 12.h : 2.5.h,
+                              ),
+                              Padding(
+                                padding:  EdgeInsets.only(left:2.5.w),
                                 child: Text(" ﷽",
                                     style: TextStyle(
                                         fontSize: 22.sp,
@@ -125,12 +136,14 @@ class Moshaf extends StatelessWidget {
                             ],
                           )
                         } else if (!((quranPages[603 - index]['content'][i]
-                                        as String)
-                                    .contains("سُورَةُ") ||
-                                (quranPages[603 - index]['content'][i]
-                                        as String)
-                                    .contains(" ﷽")) &&
-                            ((quranPages[603 - index]['content'][i - 1]
+                                            as String)
+                                        .contains("سُورَةُ") ||
+                                    (quranPages[603 - index]['content'][i]
+                                            as String)
+                                        .contains(" ﷽")) &&
+                                i == 0
+                            ? i == 0
+                            : ((quranPages[603 - index]['content'][i - 1]
                                         as String)
                                     .contains("سُورَةُ") ||
                                 (quranPages[603 - index]['content'][i - 1]
@@ -138,23 +151,25 @@ class Moshaf extends StatelessWidget {
                                     .contains(" ﷽"))) ...{
                           Column(
                             children: [
-                              SizedBox(height: 5.h),
+                              SizedBox(
+                                height: i == 0 ? 18.h : 13.h,
+                              ),
                               Center(
                                 child: Container(
-                                    width: Get.width - 12.w,
+                                    width: Get.width - 20.w,
                                     padding:
-                                        EdgeInsets.only(top: 2.h,bottom: 10.h),
+                                        EdgeInsets.only(top: 2.h),
                                     child:
                                         BlocBuilder<QuranSowarVersusCubit, int>(
                                       builder: (context, state) {
                                         return RichText(
                                             selectionColor: AppColor.softGray,
-                                            textAlign: TextAlign.center,
-                                            textDirection: TextDirection.rtl,
+                                            textAlign: TextAlign.justify,
+                                           
                                             text: TextSpan(
                                                 style: TextStyle(
-                                                    wordSpacing: -4.5.w,
-                                                    height: 1.3.h,
+                                                    wordSpacing: -3.w,
+                                                    height: 1.7.h,
                                                     color: AppColor.black,
                                                     fontSize: 24.sp,
                                                     fontWeight: FontWeight.w600,
@@ -163,21 +178,23 @@ class Moshaf extends StatelessWidget {
                                                   for (int aya = i;
                                                       (aya <=
                                                               (quranPages[603 - index]
-                                                                              ['content']
+                                                                              [
+                                                                              'content']
                                                                           as List)
                                                                       .length -
                                                                   1) &&
-                                                          (!(quranPages[603 - index]
-                                                                          ['content'][aya]
-                                                                      as String)
-                                                                  .contains(
-                                                                      "سُورَةُ") );
+                                                          (!(quranPages[603 -
+                                                                          index]
+                                                                      [
+                                                                      'content'][aya]
+                                                                  as String)
+                                                              .contains(
+                                                                  "سُورَةُ"));
                                                       aya++) ...{
                                                     TextSpan(
                                                         style: TextStyle(
-                                                          
                                                             backgroundColor: state ==
-                                                                    603 - index
+                                                                   aya
                                                                 ? const Color
                                                                     .fromARGB(
                                                                     255,
@@ -193,8 +210,7 @@ class Moshaf extends StatelessWidget {
                                                                             QuranSowarVersusCubit>(
                                                                         context)
                                                                     .selectedVerse(
-                                                                        603 -
-                                                                            index);
+                                                                      aya);
 
                                                                 Future.delayed(
                                                                     const Duration(
@@ -238,7 +254,7 @@ class Moshaf extends StatelessWidget {
                                                       text:
                                                           " ${(i + 1).toString().toArabic} ",
                                                       style: TextStyle(
-                                                        fontSize: 32.sp,
+                                                        fontSize: 25.sp,
                                                         color: const Color
                                                             .fromARGB(
                                                             255, 101, 88, 182),
