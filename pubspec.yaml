@@ -54,8 +54,6 @@ dependencies:
     sdk: flutter
   audioplayers: ^4.0.0
   flutter_tts: ^3.8.5
-  my_fatoorah: ^3.2.0
-  unity_ads_plugin: ^0.3.11
 
 
 dev_dependencies:
