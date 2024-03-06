@@ -80,7 +80,7 @@ class Moshaf extends StatelessWidget {
                                         right: 0,
                                         child: CustomPaint(
                                           size: Size(130.w,
-                                              135.h), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
+                                              135.h), 
                                           painter: RPSCustomPainter(),
                                         ),
                                       ),
@@ -88,7 +88,7 @@ class Moshaf extends StatelessWidget {
                                         left: 0,
                                         child: CustomPaint(
                                           size: Size(130.w,
-                                              130.h), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
+                                              130.h), 
                                           painter: LPSCustomPainter(),
                                         ),
                                       ),
@@ -249,12 +249,14 @@ class Moshaf extends StatelessWidget {
                                                                 ['content'][aya]
                                                             .toString()
                                                             .toArabic),
-                                                    //${(0 + 1).toString().toArabic}
+                                                 
                                                     TextSpan(
                                                       text:
-                                                          " ${(i + 1).toString().toArabic} ",
+                                                          " ${(quranPages[
+                                                                    603 - index]
+                                                                ['verse'][aya]).toString().toArabic} ",
                                                       style: TextStyle(
-                                                        fontSize: 25.sp,
+                                                        fontSize: 29.sp,
                                                         color: const Color
                                                             .fromARGB(
                                                             255, 101, 88, 182),
