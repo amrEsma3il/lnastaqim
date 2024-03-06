@@ -56,7 +56,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 3,
     "hizbQuarter": 1,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
   },
   {
     "content": [
@@ -75,7 +75,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 4,
     "hizbQuarter": 1,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [17, 18, 19, 20, 21, 22, 23, 24]
   },
   {
     "content": [
@@ -91,7 +91,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 4,
     "hizbQuarter": 2,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [25, 26, 27, 28, 29]
   },
   {
     "content": [
@@ -110,7 +110,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 5,
     "hizbQuarter": 2,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [30, 31, 32, 33, 34, 35, 36, 37]
   },
   {
     "content": [
@@ -132,7 +132,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 7,
     "hizbQuarter": 3,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48]
   },
   {
     "content": [
@@ -152,7 +152,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 7,
     "hizbQuarter": 3,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [49, 50, 51, 52, 53, 54, 55, 56, 57]
   },
   {
     "content": [
@@ -167,7 +167,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 8,
     "hizbQuarter": 4,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [58, 59, 60, 61]
   },
   {
     "content": [
@@ -186,7 +186,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 9,
     "hizbQuarter": 4,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [62, 63, 64, 65, 66, 67, 68, 69]
   },
   {
     "content": [
@@ -204,7 +204,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 10,
     "hizbQuarter": 5,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [70, 71, 72, 73, 74, 75, 76]
   },
   {
     "content": [
@@ -222,7 +222,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 11,
     "hizbQuarter": 5,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [77, 78, 79, 80, 81, 82, 83]
   },
   {
     "content": [
@@ -238,7 +238,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 12,
     "hizbQuarter": 5,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [84, 85, 86, 87, 88]
   },
   {
     "content": [
@@ -254,13 +254,13 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 12,
     "hizbQuarter": 6,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [89, 90, 91, 92, 93]
   },
   {
     "content": [
       "قُلْ إِن كَانَتْ لَكُمُ ٱلدَّارُ ٱلْءَاخِرَةُ عِندَ ٱللَّهِ خَالِصَةًۭ مِّن دُونِ ٱلنَّاسِ فَتَمَنَّوُا۟ ٱلْمَوْتَ إِن كُنتُمْ صَٰدِقِينَ",
       "وَلَن يَتَمَنَّوْهُ أَبَدًۢا بِمَا قَدَّمَتْ أَيْدِيهِمْ ۗ وَٱللَّهُ عَلِيمٌۢ بِٱلظَّٰلِمِينَ",
-      "وَلَتَجِدَنَّهُمْ أَحْرَصَ ٱلنَّاسِ عَلَىٰ حَيَوٰةٍۢ وَمِنَ ٱلَّذِينَ أَشْرَكُوا۟ ۚ يَوَدُّ أَحَدُهُمْ لَوْ يُعَمَّرُ أَلْفَ سَنَةٍۢ وَمَا هُوَ بِمُزَحْزِحِهِۦ مِنَ ٱلْعَذَابِ أَن يُعَمَّرَ ۗ وَٱللَّهُ بَصِيرٌۢ بِمَا يَعْمَلُونَ",
+      "وَلَتَجِد��نَّهُمْ أَحْرَصَ ٱلنَّاسِ عَلَىٰ حَيَوٰةٍۢ وَمِنَ ٱلَّذِينَ أَشْرَكُوا۟ ۚ يَوَدُّ أَحَدُهُمْ لَوْ يُعَمَّرُ أَلْفَ سَنَةٍۢ وَمَا هُوَ بِمُزَحْزِحِهِۦ مِنَ ٱلْعَذَابِ أَن يُعَمَّرَ ۗ وَٱللَّهُ بَصِيرٌۢ بِمَا يَعْمَلُونَ",
       "قُلْ مَن كَانَ عَدُوًّۭا لِّجِبْرِيلَ فَإِنَّهُۥ نَزَّلَهُۥ عَلَىٰ قَلْبِكَ بِإِذْنِ ٱللَّهِ مُصَدِّقًۭا لِّمَا بَيْنَ يَدَيْهِ وَهُدًۭى وَبُشْرَىٰ لِلْمُؤْمِنِينَ",
       "مَن كَانَ عَدُوًّۭا لِّلَّهِ وَمَلَٰٓئِكَتِهِۦ وَرُسُلِهِۦ وَجِبْرِيلَ وَمِيكَىٰلَ فَإِنَّ ٱللَّهَ عَدُوٌّۭ لِّلْكَٰفِرِينَ",
       "وَلَقَدْ أَنزَلْنَآ إِلَيْكَ ءَايَٰتٍۭ بَيِّنَٰتٍۢ ۖ وَمَا يَكْفُرُ بِهَآ إِلَّا ٱلْفَٰسِقُونَ",
@@ -273,7 +273,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 13,
     "hizbQuarter": 6,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [94, 95, 96, 97, 98, 99, 100, 101]
   },
   {
     "content": [
@@ -288,7 +288,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 14,
     "hizbQuarter": 6,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [102, 103, 104, 105]
   },
   {
     "content": [
@@ -306,7 +306,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 14,
     "hizbQuarter": 7,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [106, 107, 108, 109, 110, 111, 112]
   },
   {
     "content": [
@@ -324,7 +324,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 15,
     "hizbQuarter": 7,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [113, 114, 115, 116, 117, 118, 119]
   },
   {
     "content": [
@@ -342,7 +342,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 16,
     "hizbQuarter": 8,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [120, 121, 122, 123, 124, 125, 126]
   },
   {
     "content": [
@@ -361,7 +361,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 17,
     "hizbQuarter": 8,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [127, 128, 129, 130, 131, 132, 133, 134]
   },
   {
     "content": [
@@ -379,7 +379,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 17,
     "hizbQuarter": 8,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [135, 136, 137, 138, 139, 140, 141]
   },
   {
     "content": [
@@ -394,7 +394,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 18,
     "hizbQuarter": 9,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [142, 143, 144, 145]
   },
   {
     "content": [
@@ -413,7 +413,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 20,
     "hizbQuarter": 9,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [146, 147, 148, 149, 150, 151, 152, 153]
   },
   {
     "content": [
@@ -434,7 +434,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 20,
     "hizbQuarter": 10,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [154, 155, 156, 157, 158, 159, 160, 161, 162, 163]
   },
   {
     "content": [
@@ -451,7 +451,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 22,
     "hizbQuarter": 10,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [164, 165, 166, 167, 168, 169]
   },
   {
     "content": [
@@ -469,7 +469,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 22,
     "hizbQuarter": 10,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [170, 171, 172, 173, 174, 175, 176]
   },
   {
     "content": [
@@ -485,7 +485,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 23,
     "hizbQuarter": 11,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [177, 178, 179, 180, 181]
   },
   {
     "content": [
@@ -501,7 +501,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 24,
     "hizbQuarter": 11,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [182, 183, 184, 185, 186]
   },
   {
     "content": [
@@ -516,7 +516,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 25,
     "hizbQuarter": 12,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [187, 188, 189, 190]
   },
   {
     "content": [
@@ -533,7 +533,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 25,
     "hizbQuarter": 12,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [191, 192, 193, 194, 195, 196]
   },
   {
     "content": [
@@ -550,7 +550,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 26,
     "hizbQuarter": 12,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [197, 198, 199, 200, 201, 202]
   },
   {
     "content": [
@@ -569,7 +569,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 26,
     "hizbQuarter": 13,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [203, 204, 205, 206, 207, 208, 209, 210]
   },
   {
     "content": [
@@ -585,7 +585,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 27,
     "hizbQuarter": 13,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [211, 212, 213, 214, 215]
   },
   {
     "content": [
@@ -600,7 +600,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 28,
     "hizbQuarter": 14,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [216, 217, 218, 219]
   },
   {
     "content": [
@@ -616,7 +616,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 29,
     "hizbQuarter": 14,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [220, 221, 222, 223, 224]
   },
   {
     "content": [
@@ -633,7 +633,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 30,
     "hizbQuarter": 14,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [225, 226, 227, 228, 229, 230]
   },
   {
     "content": [
@@ -647,7 +647,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 31,
     "hizbQuarter": 15,
     "sajda": null,
-    "verse": [1, 2, 3]
+    "verse": [231, 232, 233]
   },
   {
     "content": [
@@ -662,7 +662,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 32,
     "hizbQuarter": 15,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [234, 235, 236, 237]
   },
   {
     "content": [
@@ -681,7 +681,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 33,
     "hizbQuarter": 16,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [238, 239, 240, 241, 242, 243, 244, 245]
   },
   {
     "content": [
@@ -695,7 +695,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 33,
     "hizbQuarter": 16,
     "sajda": null,
-    "verse": [1, 2, 3]
+    "verse": [246, 247, 248]
   },
   {
     "content": [
@@ -710,7 +710,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 34,
     "hizbQuarter": 16,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [249, 250, 251, 252]
   },
   {
     "content": [
@@ -725,7 +725,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 35,
     "hizbQuarter": 17,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [253, 254, 255, 256]
   },
   {
     "content": [
@@ -739,7 +739,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 36,
     "hizbQuarter": 17,
     "sajda": null,
-    "verse": [1, 2, 3]
+    "verse": [257, 258, 259]
   },
   {
     "content": [
@@ -755,7 +755,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 37,
     "hizbQuarter": 18,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [260, 261, 262, 263, 264]
   },
   {
     "content": [
@@ -771,7 +771,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 38,
     "hizbQuarter": 18,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [265, 266, 267, 268, 269]
   },
   {
     "content": [
@@ -787,7 +787,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 39,
     "hizbQuarter": 19,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [270, 271, 272, 273, 274]
   },
   {
     "content": [
@@ -805,7 +805,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 39,
     "hizbQuarter": 19,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [275, 276, 277, 278, 279, 280, 281]
   },
   {
     "content": [
@@ -817,7 +817,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 40,
     "hizbQuarter": 19,
     "sajda": null,
-    "verse": [1]
+    "verse": [282]
   },
   {
     "content": [
@@ -832,7 +832,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 41,
     "hizbQuarter": 20,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [283, 284, 285, 286]
   },
   {
     "content": [
@@ -871,7 +871,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 43,
     "hizbQuarter": 21,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [10, 11, 12, 13, 14, 15]
   },
   {
     "content": [
@@ -889,7 +889,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 44,
     "hizbQuarter": 21,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [16, 17, 18, 19, 20, 21, 22]
   },
   {
     "content": [
@@ -907,7 +907,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 44,
     "hizbQuarter": 21,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [23, 24, 25, 26, 27, 28, 29]
   },
   {
     "content": [
@@ -926,7 +926,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 45,
     "hizbQuarter": 22,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [30, 31, 32, 33, 34, 35, 36, 37]
   },
   {
     "content": [
@@ -945,7 +945,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 46,
     "hizbQuarter": 22,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [38, 39, 40, 41, 42, 43, 44, 45]
   },
   {
     "content": [
@@ -963,7 +963,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 46,
     "hizbQuarter": 23,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [46, 47, 48, 49, 50, 51, 52]
   },
   {
     "content": [
@@ -983,7 +983,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 47,
     "hizbQuarter": 23,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [53, 54, 55, 56, 57, 58, 59, 60, 61]
   },
   {
     "content": [
@@ -1003,7 +1003,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 48,
     "hizbQuarter": 23,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [62, 63, 64, 65, 66, 67, 68, 69, 70]
   },
   {
     "content": [
@@ -1021,7 +1021,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 49,
     "hizbQuarter": 24,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [71, 72, 73, 74, 75, 76, 77]
   },
   {
     "content": [
@@ -1038,7 +1038,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 50,
     "hizbQuarter": 24,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [78, 79, 80, 81, 82, 83]
   },
   {
     "content": [
@@ -1057,7 +1057,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 50,
     "hizbQuarter": 24,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [84, 85, 86, 87, 88, 89, 90, 91]
   },
   {
     "content": [
@@ -1077,7 +1077,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 51,
     "hizbQuarter": 25,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [92, 93, 94, 95, 96, 97, 98, 99, 100]
   },
   {
     "content": [
@@ -1096,7 +1096,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 52,
     "hizbQuarter": 25,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [101, 102, 103, 104, 105, 106, 107, 108]
   },
   {
     "content": [
@@ -1114,7 +1114,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 53,
     "hizbQuarter": 26,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [109, 110, 111, 112, 113, 114, 115]
   },
   {
     "content": [
@@ -1131,7 +1131,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 54,
     "hizbQuarter": 26,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [116, 117, 118, 119, 120, 121]
   },
   {
     "content": [
@@ -1153,7 +1153,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 55,
     "hizbQuarter": 26,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132]
   },
   {
     "content": [
@@ -1172,7 +1172,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 55,
     "hizbQuarter": 27,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [133, 134, 135, 136, 137, 138, 139, 140]
   },
   {
     "content": [
@@ -1191,7 +1191,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 56,
     "hizbQuarter": 27,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [141, 142, 143, 144, 145, 146, 147, 148]
   },
   {
     "content": [
@@ -1207,13 +1207,13 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 57,
     "hizbQuarter": 28,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [149, 150, 151, 152, 153]
   },
   {
     "content": [
       "ثُمَّ أَنزَلَ عَلَيْكُم مِّنۢ بَعْدِ ٱلْغَمِّ أَمَنَةًۭ نُّعَاسًۭا يَغْشَىٰ طَآئِفَةًۭ مِّنكُمْ ۖ وَطَآئِفَةٌۭ قَدْ أَهَمَّتْهُمْ أَنفُسُهُمْ يَظُنُّونَ بِٱللَّهِ غَيْرَ ٱلْحَقِّ ظَنَّ ٱلْجَٰهِلِيَّةِ ۖ يَقُولُونَ هَل لَّنَا مِنَ ٱلْأَمْرِ مِن شَىْءٍۢ ۗ قُلْ إِنَّ ٱلْأَمْرَ كُلَّهُۥ لِلَّهِ ۗ يُخْفُونَ فِىٓ أَنفُسِهِم مَّا لَا يُبْدُونَ لَكَ ۖ يَقُولُونَ لَوْ كَانَ لَنَا مِنَ ٱلْأَمْرِ شَىْءٌۭ مَّا قُتِلْنَا هَٰهُنَا ۗ قُل لَّوْ كُنتُمْ فِى بُيُوتِكُمْ لَبَرَزَ ٱلَّذِينَ كُتِبَ عَلَيْهِمُ ٱلْقَتْلُ إِلَىٰ مَضَاجِعِهِمْ ۖ وَلِيَبْتَلِىَ ٱللَّهُ مَا فِى صُدُورِكُمْ وَلِيُمَحِّصَ مَا فِى قُلُوبِكُمْ ۗ وَٱللَّهُ عَلِيمٌۢ بِذَاتِ ٱلصُّدُورِ",
       "إِنَّ ٱلَّذِينَ تَوَلَّوْا۟ مِنكُمْ يَوْمَ ٱلْتَقَى ٱلْجَمْعَانِ إِنَّمَا ٱسْتَزَلَّهُمُ ٱلشَّيْطَٰنُ بِبَعْضِ مَا كَسَبُوا۟ ۖ وَلَقَدْ عَفَا ٱللَّهُ عَنْهُمْ ۗ إِنَّ ٱللَّهَ غَفُورٌ حَلِيمٌۭ",
-      "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ لَا تَكُونُوا۟ كَٱلَّذِينَ كَفَرُوا۟ وَقَالُوا۟ لِإِخْوَٰنِهِمْ إِذَا ضَرَبُوا۟ فِى ٱلْأَرْضِ أَوْ كَانُوا۟ غُزًّۭى لَّوْ كَانُوا۟ عِندَنَا مَا مَاتُوا۟ وَمَا قُتِلُوا۟ لِيَجْعَلَ ٱللَّهُ ذَٰلِكَ حَسْرَةًۭ فِى قُلُوبِهِمْ ۗ وَٱللَّهُ يُحْىِۦ وَيُمِيتُ ۗ وَٱللَّهُ بِمَا تَعْمَلُونَ بَصِيرٌۭ",
+      "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ لَا تَكُونُوا۟ كَٱلَّذِينَ كَفَرُوا۟ وَقَالُوا۟ لِإِخْوَٰنِهِمْ إِذَا ضَرَبُوا۟ فِى ٱلْأَرْضِ أَوْ كَانُوا۟ غُزًّۭى لَّوْ كَانُوا۟ عِندَنَا مَا مَاتُوا۟ وَمَا قُتِلُوا۟ لِيَجْعَلَ ٱللَّهُ ذَٰلِكَ حَسْرَةًۭ فِى قُلُوبِهِمْ ۗ وَٱللَّهُ يُحْىِۦ وَيُمِ��تُ ۗ وَٱللَّهُ بِمَا تَعْمَلُونَ بَصِيرٌۭ",
       "وَلَئِن قُتِلْتُمْ فِى سَبِيلِ ٱللَّهِ أَوْ مُتُّمْ لَمَغْفِرَةٌۭ مِّنَ ٱللَّهِ وَرَحْمَةٌ خَيْرٌۭ مِّمَّا يَجْمَعُونَ"
     ],
     "juz": 4,
@@ -1222,7 +1222,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 58,
     "hizbQuarter": 28,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [154, 155, 156, 157]
   },
   {
     "content": [
@@ -1241,7 +1241,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 58,
     "hizbQuarter": 28,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [158, 159, 160, 161, 162, 163, 164, 165]
   },
   {
     "content": [
@@ -1260,7 +1260,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 59,
     "hizbQuarter": 29,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [166, 167, 168, 169, 170, 171, 172, 173]
   },
   {
     "content": [
@@ -1278,7 +1278,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 59,
     "hizbQuarter": 29,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [174, 175, 176, 177, 178, 179, 180]
   },
   {
     "content": [
@@ -1295,7 +1295,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 60,
     "hizbQuarter": 30,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [181, 182, 183, 184, 185, 186]
   },
   {
     "content": [
@@ -1314,7 +1314,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 61,
     "hizbQuarter": 30,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [187, 188, 189, 190, 191, 192, 193, 194]
   },
   {
     "content": [
@@ -1332,7 +1332,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 61,
     "hizbQuarter": 30,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, ""]
+    "verse": [195, 196, 197, 198, 199, 200, ""]
   },
   {
     "content": [
@@ -1366,7 +1366,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 63,
     "hizbQuarter": 31,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [7, 8, 9, 10, 11]
   },
   {
     "content": [
@@ -1380,7 +1380,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 63,
     "hizbQuarter": 32,
     "sajda": null,
-    "verse": [1, 2, 3]
+    "verse": [12, 13, 14]
   },
   {
     "content": [
@@ -1396,7 +1396,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 64,
     "hizbQuarter": 32,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [15, 16, 17, 18, 19]
   },
   {
     "content": [
@@ -1411,7 +1411,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 65,
     "hizbQuarter": 32,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [20, 21, 22, 23]
   },
   {
     "content": [
@@ -1425,7 +1425,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 66,
     "hizbQuarter": 33,
     "sajda": null,
-    "verse": [1, 2, 3]
+    "verse": [24, 25, 26]
   },
   {
     "content": [
@@ -1443,7 +1443,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 66,
     "hizbQuarter": 33,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [27, 28, 29, 30, 31, 32, 33]
   },
   {
     "content": [
@@ -1458,7 +1458,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 67,
     "hizbQuarter": 34,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [34, 35, 36, 37]
   },
   {
     "content": [
@@ -1476,7 +1476,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 68,
     "hizbQuarter": 34,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [38, 39, 40, 41, 42, 43, 44]
   },
   {
     "content": [
@@ -1494,7 +1494,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 69,
     "hizbQuarter": 34,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [45, 46, 47, 48, 49, 50, 51]
   },
   {
     "content": [
@@ -1513,7 +1513,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 69,
     "hizbQuarter": 35,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [52, 53, 54, 55, 56, 57, 58, 59]
   },
   {
     "content": [
@@ -1530,7 +1530,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 70,
     "hizbQuarter": 35,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [60, 61, 62, 63, 64, 65]
   },
   {
     "content": [
@@ -1550,7 +1550,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 71,
     "hizbQuarter": 36,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [66, 67, 68, 69, 70, 71, 72, 73, 74]
   },
   {
     "content": [
@@ -1566,7 +1566,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 72,
     "hizbQuarter": 36,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [75, 76, 77, 78, 79]
   },
   {
     "content": [
@@ -1584,7 +1584,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 72,
     "hizbQuarter": 36,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [80, 81, 82, 83, 84, 85, 86]
   },
   {
     "content": [
@@ -1600,7 +1600,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 73,
     "hizbQuarter": 37,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [87, 88, 89, 90, 91]
   },
   {
     "content": [
@@ -1614,7 +1614,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 74,
     "hizbQuarter": 37,
     "sajda": null,
-    "verse": [1, 2, 3]
+    "verse": [92, 93, 94]
   },
   {
     "content": [
@@ -1632,7 +1632,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 76,
     "hizbQuarter": 38,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [95, 96, 97, 98, 99, 100, 101]
   },
   {
     "content": [
@@ -1647,7 +1647,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 77,
     "hizbQuarter": 38,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [102, 103, 104, 105]
   },
   {
     "content": [
@@ -1666,7 +1666,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 78,
     "hizbQuarter": 38,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [106, 107, 108, 109, 110, 111, 112, 113]
   },
   {
     "content": [
@@ -1685,7 +1685,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 79,
     "hizbQuarter": 39,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [114, 115, 116, 117, 118, 119, 120, 121]
   },
   {
     "content": [
@@ -1702,7 +1702,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 80,
     "hizbQuarter": 39,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [122, 123, 124, 125, 126, 127]
   },
   {
     "content": [
@@ -1720,7 +1720,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 80,
     "hizbQuarter": 39,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [128, 129, 130, 131, 132, 133, 134]
   },
   {
     "content": [
@@ -1737,7 +1737,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 81,
     "hizbQuarter": 40,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [135, 136, 137, 138, 139, 140]
   },
   {
     "content": [
@@ -1755,7 +1755,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 82,
     "hizbQuarter": 40,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [141, 142, 143, 144, 145, 146, 147]
   },
   {
     "content": [
@@ -1773,7 +1773,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 83,
     "hizbQuarter": 41,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [148, 149, 150, 151, 152, 153, 154]
   },
   {
     "content": [
@@ -1792,7 +1792,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 83,
     "hizbQuarter": 41,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [155, 156, 157, 158, 159, 160, 161, 162]
   },
   {
     "content": [
@@ -1811,7 +1811,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 84,
     "hizbQuarter": 42,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [163, 164, 165, 166, 167, 168, 169, 170]
   },
   {
     "content": [
@@ -1827,7 +1827,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 85,
     "hizbQuarter": 42,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [171, 172, 173, 174, 175]
   },
   {
     "content": [
@@ -1843,7 +1843,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 86,
     "hizbQuarter": 43,
     "sajda": null,
-    "verse": [1, "", "", 1, 2]
+    "verse": [176, "", "", 1, 2]
   },
   {
     "content": [
@@ -1857,7 +1857,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 86,
     "hizbQuarter": 43,
     "sajda": null,
-    "verse": [1, 2, 3]
+    "verse": [3, 4, 5]
   },
   {
     "content": [
@@ -1872,7 +1872,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 87,
     "hizbQuarter": 43,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [6, 7, 8, 9]
   },
   {
     "content": [
@@ -1887,7 +1887,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 88,
     "hizbQuarter": 44,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [10, 11, 12, 13]
   },
   {
     "content": [
@@ -1902,7 +1902,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 88,
     "hizbQuarter": 44,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [14, 15, 16, 17]
   },
   {
     "content": [
@@ -1919,7 +1919,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 89,
     "hizbQuarter": 44,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [18, 19, 20, 21, 22, 23]
   },
   {
     "content": [
@@ -1938,7 +1938,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 90,
     "hizbQuarter": 45,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [24, 25, 26, 27, 28, 29, 30, 31]
   },
   {
     "content": [
@@ -1954,7 +1954,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 91,
     "hizbQuarter": 45,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [32, 33, 34, 35, 36]
   },
   {
     "content": [
@@ -1970,7 +1970,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 91,
     "hizbQuarter": 46,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [37, 38, 39, 40, 41]
   },
   {
     "content": [
@@ -1985,7 +1985,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 92,
     "hizbQuarter": 46,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [42, 43, 44, 45]
   },
   {
     "content": [
@@ -2001,7 +2001,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 92,
     "hizbQuarter": 46,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [46, 47, 48, 49, 50]
   },
   {
     "content": [
@@ -2019,7 +2019,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 94,
     "hizbQuarter": 47,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [51, 52, 53, 54, 55, 56, 57]
   },
   {
     "content": [
@@ -2037,7 +2037,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 94,
     "hizbQuarter": 47,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [58, 59, 60, 61, 62, 63, 64]
   },
   {
     "content": [
@@ -2054,7 +2054,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 95,
     "hizbQuarter": 48,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [65, 66, 67, 68, 69, 70]
   },
   {
     "content": [
@@ -2071,7 +2071,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 95,
     "hizbQuarter": 48,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [71, 72, 73, 74, 75, 76]
   },
   {
     "content": [
@@ -2088,7 +2088,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 96,
     "hizbQuarter": 49,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [77, 78, 79, 80, 81, 82]
   },
   {
     "content": [
@@ -2106,7 +2106,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 97,
     "hizbQuarter": 49,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [83, 84, 85, 86, 87, 88, 89]
   },
   {
     "content": [
@@ -2123,7 +2123,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 98,
     "hizbQuarter": 49,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [90, 91, 92, 93, 94, 95]
   },
   {
     "content": [
@@ -2142,7 +2142,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 99,
     "hizbQuarter": 50,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [96, 97, 98, 99, 100, 101, 102, 103]
   },
   {
     "content": [
@@ -2158,7 +2158,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 99,
     "hizbQuarter": 50,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [104, 105, 106, 107, 108]
   },
   {
     "content": [
@@ -2174,7 +2174,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 100,
     "hizbQuarter": 51,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [109, 110, 111, 112, 113]
   },
   {
     "content": [
@@ -2192,7 +2192,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 101,
     "hizbQuarter": 51,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [114, 115, 116, 117, 118, 119, 120]
   },
   {
     "content": [
@@ -2234,7 +2234,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 103,
     "hizbQuarter": 52,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
   },
   {
     "content": [
@@ -2254,7 +2254,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 104,
     "hizbQuarter": 52,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [19, 20, 21, 22, 23, 24, 25, 26, 27]
   },
   {
     "content": [
@@ -2273,7 +2273,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 105,
     "hizbQuarter": 52,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [28, 29, 30, 31, 32, 33, 34, 35]
   },
   {
     "content": [
@@ -2293,7 +2293,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 106,
     "hizbQuarter": 53,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [36, 37, 38, 39, 40, 41, 42, 43, 44]
   },
   {
     "content": [
@@ -2312,7 +2312,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 107,
     "hizbQuarter": 53,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [45, 46, 47, 48, 49, 50, 51, 52]
   },
   {
     "content": [
@@ -2330,7 +2330,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 108,
     "hizbQuarter": 54,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [53, 54, 55, 56, 57, 58, 59]
   },
   {
     "content": [
@@ -2350,7 +2350,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 109,
     "hizbQuarter": 54,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [60, 61, 62, 63, 64, 65, 66, 67, 68]
   },
   {
     "content": [
@@ -2366,7 +2366,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 110,
     "hizbQuarter": 54,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [69, 70, 71, 72, 73]
   },
   {
     "content": [
@@ -2385,7 +2385,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 110,
     "hizbQuarter": 55,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [74, 75, 76, 77, 78, 79, 80, 81]
   },
   {
     "content": [
@@ -2405,7 +2405,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 111,
     "hizbQuarter": 55,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [82, 83, 84, 85, 86, 87, 88, 89, 90]
   },
   {
     "content": [
@@ -2420,7 +2420,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 112,
     "hizbQuarter": 55,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [91, 92, 93, 94]
   },
   {
     "content": [
@@ -2438,7 +2438,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 114,
     "hizbQuarter": 56,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [95, 96, 97, 98, 99, 100, 101]
   },
   {
     "content": [
@@ -2458,7 +2458,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 114,
     "hizbQuarter": 56,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [102, 103, 104, 105, 106, 107, 108, 109, 110]
   },
   {
     "content": [
@@ -2477,7 +2477,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 115,
     "hizbQuarter": 57,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [111, 112, 113, 114, 115, 116, 117, 118]
   },
   {
     "content": [
@@ -2494,7 +2494,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 116,
     "hizbQuarter": 57,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [119, 120, 121, 122, 123, 124]
   },
   {
     "content": [
@@ -2512,7 +2512,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 117,
     "hizbQuarter": 58,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [125, 126, 127, 128, 129, 130, 131]
   },
   {
     "content": [
@@ -2529,7 +2529,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 117,
     "hizbQuarter": 58,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [132, 133, 134, 135, 136, 137]
   },
   {
     "content": [
@@ -2545,7 +2545,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 118,
     "hizbQuarter": 59,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [138, 139, 140, 141, 142]
   },
   {
     "content": [
@@ -2560,7 +2560,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 119,
     "hizbQuarter": 59,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [143, 144, 145, 146]
   },
   {
     "content": [
@@ -2576,7 +2576,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 120,
     "hizbQuarter": 60,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [147, 148, 149, 150, 151]
   },
   {
     "content": [
@@ -2593,7 +2593,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 121,
     "hizbQuarter": 60,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [152, 153, 154, 155, 156, 157]
   },
   {
     "content": [
@@ -2612,7 +2612,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 121,
     "hizbQuarter": 60,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [158, 159, 160, 161, 162, 163, 164, 165]
   },
   {
     "content": [
@@ -2658,7 +2658,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 123,
     "hizbQuarter": 61,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
   },
   {
     "content": [
@@ -2677,7 +2677,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 124,
     "hizbQuarter": 61,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [23, 24, 25, 26, 27, 28, 29, 30]
   },
   {
     "content": [
@@ -2695,7 +2695,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 125,
     "hizbQuarter": 62,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [31, 32, 33, 34, 35, 36, 37]
   },
   {
     "content": [
@@ -2712,7 +2712,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 126,
     "hizbQuarter": 62,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [38, 39, 40, 41, 42, 43]
   },
   {
     "content": [
@@ -2731,7 +2731,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 127,
     "hizbQuarter": 63,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [44, 45, 46, 47, 48, 49, 50, 51]
   },
   {
     "content": [
@@ -2748,7 +2748,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 128,
     "hizbQuarter": 63,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [52, 53, 54, 55, 56, 57]
   },
   {
     "content": [
@@ -2769,7 +2769,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 130,
     "hizbQuarter": 64,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [58, 59, 60, 61, 62, 63, 64, 65, 66, 67]
   },
   {
     "content": [
@@ -2786,7 +2786,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 131,
     "hizbQuarter": 64,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [68, 69, 70, 71, 72, 73]
   },
   {
     "content": [
@@ -2805,7 +2805,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 131,
     "hizbQuarter": 64,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [74, 75, 76, 77, 78, 79, 80, 81]
   },
   {
     "content": [
@@ -2822,7 +2822,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 132,
     "hizbQuarter": 64,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [82, 83, 84, 85, 86, 87]
   },
   {
     "content": [
@@ -2841,7 +2841,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 133,
     "hizbQuarter": 65,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [88, 89, 90, 91, 92, 93, 94, 95]
   },
   {
     "content": [
@@ -2861,7 +2861,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 134,
     "hizbQuarter": 65,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [96, 97, 98, 99, 100, 101, 102, 103, 104]
   },
   {
     "content": [
@@ -2888,7 +2888,24 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 135,
     "hizbQuarter": 66,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+    "verse": [
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120
+    ]
   },
   {
     "content": [
@@ -2909,7 +2926,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 137,
     "hizbQuarter": 66,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [121, 122, 123, 124, 125, 126, 127, 128, 129, 130]
   },
   {
     "content": [
@@ -2927,7 +2944,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 137,
     "hizbQuarter": 66,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [131, 132, 133, 134, 135, 136, 137]
   },
   {
     "content": [
@@ -2944,7 +2961,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 138,
     "hizbQuarter": 67,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [138, 139, 140, 141, 142, 143]
   },
   {
     "content": [
@@ -2961,7 +2978,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 139,
     "hizbQuarter": 67,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [144, 145, 146, 147, 148, 149]
   },
   {
     "content": [
@@ -2978,7 +2995,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 140,
     "hizbQuarter": 67,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [150, 151, 152, 153, 154, 155]
   },
   {
     "content": [
@@ -2993,7 +3010,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 141,
     "hizbQuarter": 68,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [156, 157, 158, 159]
   },
   {
     "content": [
@@ -3008,7 +3025,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 142,
     "hizbQuarter": 68,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [160, 161, 162, 163]
   },
   {
     "content": [
@@ -3026,7 +3043,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 142,
     "hizbQuarter": 68,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [164, 165, 166, 167, 168, 169, 170]
   },
   {
     "content": [
@@ -3045,7 +3062,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 143,
     "hizbQuarter": 69,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [171, 172, 173, 174, 175, 176, 177, 178]
   },
   {
     "content": [
@@ -3065,7 +3082,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 144,
     "hizbQuarter": 69,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [179, 180, 181, 182, 183, 184, 185, 186, 187]
   },
   {
     "content": [
@@ -3084,7 +3101,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 145,
     "hizbQuarter": 70,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [188, 189, 190, 191, 192, 193, 194, 195]
   },
   {
     "content": [
@@ -3106,7 +3123,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 145,
     "hizbQuarter": 70,
     "sajda": {"id": 1, "recommended": true, "obligatory": false},
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206]
   },
   {
     "content": [
@@ -3146,7 +3163,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 147,
     "hizbQuarter": 71,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [9, 10, 11, 12, 13, 14, 15, 16]
   },
   {
     "content": [
@@ -3166,7 +3183,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 148,
     "hizbQuarter": 72,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [17, 18, 19, 20, 21, 22, 23, 24, 25]
   },
   {
     "content": [
@@ -3185,7 +3202,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 149,
     "hizbQuarter": 72,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [26, 27, 28, 29, 30, 31, 32, 33]
   },
   {
     "content": [
@@ -3193,7 +3210,7 @@ List<Map<String, dynamic>> quranPages = [
       "وَمَا كَانَ صَلَاتُهُمْ عِندَ ٱلْبَيْتِ إِلَّا مُكَآءًۭ وَتَصْدِيَةًۭ ۚ فَذُوقُوا۟ ٱلْعَذَابَ بِمَا كُنتُمْ تَكْفُرُونَ",
       "إِنَّ ٱلَّذِينَ كَفَرُوا۟ يُنفِقُونَ أَمْوَٰلَهُمْ لِيَصُدُّوا۟ عَن سَبِيلِ ٱللَّهِ ۚ فَسَيُنفِقُونَهَا ثُمَّ تَكُونُ عَلَيْهِمْ حَسْرَةًۭ ثُمَّ يُغْلَبُونَ ۗ وَٱلَّذِينَ كَفَرُوٓا۟ إِلَىٰ جَهَنَّمَ يُحْشَرُونَ",
       "لِيَمِيزَ ٱللَّهُ ٱلْخَبِيثَ مِنَ ٱلطَّيِّبِ وَيَجْعَلَ ٱلْخَبِيثَ بَعْضَهُۥ عَلَىٰ بَعْضٍۢ فَيَرْكُمَهُۥ جَمِيعًۭا فَيَجْعَلَهُۥ فِى جَهَنَّمَ ۚ أُو۟لَٰٓئِكَ هُمُ ٱلْخَٰسِرُونَ",
-      "قُل لِّلَّذِينَ كَفَرُوٓا۟ إِن يَنتَهُوا۟ يُغْفَرْ لَهُم مَّا قَدْ سَلَفَ وَإِن يَعُودُوا۟ فَقَدْ مَضَتْ سُنَّتُ ٱلْأَوَّلِينَ",
+      "قُل لِّلَّذِينَ كَفَرُوٓا۟ إِن يَنتَهُ��ا۟ يُغْفَرْ لَهُم مَّا قَدْ سَلَفَ وَإِن يَعُودُوا۟ فَقَدْ مَضَتْ سُنَّتُ ٱلْأَوَّلِينَ",
       "وَقَٰتِلُوهُمْ حَتَّىٰ لَا تَكُونَ فِتْنَةٌۭ وَيَكُونَ ٱلدِّينُ كُلُّهُۥ لِلَّهِ ۚ فَإِنِ ٱنتَهَوْا۟ فَإِنَّ ٱللَّهَ بِمَا يَعْمَلُونَ بَصِيرٌۭ",
       "وَإِن تَوَلَّوْا۟ فَٱعْلَمُوٓا۟ أَنَّ ٱللَّهَ مَوْلَىٰكُمْ ۚ نِعْمَ ٱلْمَوْلَىٰ وَنِعْمَ ٱلنَّصِيرُ"
     ],
@@ -3203,7 +3220,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 150,
     "hizbQuarter": 72,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [34, 35, 36, 37, 38, 39, 40]
   },
   {
     "content": [
@@ -3219,7 +3236,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 151,
     "hizbQuarter": 73,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [41, 42, 43, 44, 45]
   },
   {
     "content": [
@@ -3237,7 +3254,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 152,
     "hizbQuarter": 73,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [46, 47, 48, 49, 50, 51, 52]
   },
   {
     "content": [
@@ -3257,7 +3274,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 153,
     "hizbQuarter": 74,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [53, 54, 55, 56, 57, 58, 59, 60, 61]
   },
   {
     "content": [
@@ -3276,7 +3293,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 154,
     "hizbQuarter": 74,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [62, 63, 64, 65, 66, 67, 68, 69]
   },
   {
     "content": [
@@ -3293,7 +3310,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 155,
     "hizbQuarter": 74,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [70, 71, 72, 73, 74, 75]
   },
   {
     "content": [
@@ -3329,7 +3346,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 157,
     "hizbQuarter": 75,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [7, 8, 9, 10, 11, 12, 13]
   },
   {
     "content": [
@@ -3347,7 +3364,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 158,
     "hizbQuarter": 76,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [14, 15, 16, 17, 18, 19, 20]
   },
   {
     "content": [
@@ -3364,7 +3381,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 159,
     "hizbQuarter": 76,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [21, 22, 23, 24, 25, 26]
   },
   {
     "content": [
@@ -3380,7 +3397,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 160,
     "hizbQuarter": 76,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [27, 28, 29, 30, 31]
   },
   {
     "content": [
@@ -3396,7 +3413,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 160,
     "hizbQuarter": 77,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [32, 33, 34, 35, 36]
   },
   {
     "content": [
@@ -3411,7 +3428,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 161,
     "hizbQuarter": 77,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [37, 38, 39, 40]
   },
   {
     "content": [
@@ -3429,7 +3446,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 162,
     "hizbQuarter": 78,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [41, 42, 43, 44, 45, 46, 47]
   },
   {
     "content": [
@@ -3447,7 +3464,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 162,
     "hizbQuarter": 78,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [48, 49, 50, 51, 52, 53, 54]
   },
   {
     "content": [
@@ -3465,7 +3482,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 163,
     "hizbQuarter": 79,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [55, 56, 57, 58, 59, 60, 61]
   },
   {
     "content": [
@@ -3483,7 +3500,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 164,
     "hizbQuarter": 79,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [62, 63, 64, 65, 66, 67, 68]
   },
   {
     "content": [
@@ -3498,7 +3515,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 164,
     "hizbQuarter": 79,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [69, 70, 71, 72]
   },
   {
     "content": [
@@ -3516,7 +3533,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 165,
     "hizbQuarter": 80,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [73, 74, 75, 76, 77, 78, 79]
   },
   {
     "content": [
@@ -3534,7 +3551,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 166,
     "hizbQuarter": 80,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [80, 81, 82, 83, 84, 85, 86]
   },
   {
     "content": [
@@ -3552,7 +3569,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 167,
     "hizbQuarter": 81,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [87, 88, 89, 90, 91, 92, 93]
   },
   {
     "content": [
@@ -3569,7 +3586,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 167,
     "hizbQuarter": 81,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [94, 95, 96, 97, 98, 99]
   },
   {
     "content": [
@@ -3587,7 +3604,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 168,
     "hizbQuarter": 81,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [100, 101, 102, 103, 104, 105, 106]
   },
   {
     "content": [
@@ -3603,7 +3620,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 169,
     "hizbQuarter": 82,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [107, 108, 109, 110, 111]
   },
   {
     "content": [
@@ -3620,7 +3637,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 169,
     "hizbQuarter": 82,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [112, 113, 114, 115, 116, 117]
   },
   {
     "content": [
@@ -3636,7 +3653,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 170,
     "hizbQuarter": 83,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [118, 119, 120, 121, 122]
   },
   {
     "content": [
@@ -3655,7 +3672,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 171,
     "hizbQuarter": 83,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, ""]
+    "verse": [123, 124, 125, 126, 127, 128, 129, ""]
   },
   {
     "content": [
@@ -3692,7 +3709,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 173,
     "hizbQuarter": 84,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [7, 8, 9, 10, 11, 12, 13, 14]
   },
   {
     "content": [
@@ -3709,7 +3726,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 173,
     "hizbQuarter": 84,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [15, 16, 17, 18, 19, 20]
   },
   {
     "content": [
@@ -3725,7 +3742,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 174,
     "hizbQuarter": 84,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [21, 22, 23, 24, 25]
   },
   {
     "content": [
@@ -3744,7 +3761,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 175,
     "hizbQuarter": 85,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [26, 27, 28, 29, 30, 31, 32, 33]
   },
   {
     "content": [
@@ -3764,7 +3781,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 176,
     "hizbQuarter": 85,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [34, 35, 36, 37, 38, 39, 40, 41, 42]
   },
   {
     "content": [
@@ -3786,7 +3803,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 176,
     "hizbQuarter": 86,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
   },
   {
     "content": [
@@ -3805,7 +3822,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 178,
     "hizbQuarter": 86,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [54, 55, 56, 57, 58, 59, 60, 61]
   },
   {
     "content": [
@@ -3825,7 +3842,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 178,
     "hizbQuarter": 86,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [62, 63, 64, 65, 66, 67, 68, 69, 70]
   },
   {
     "content": [
@@ -3844,7 +3861,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 179,
     "hizbQuarter": 87,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [71, 72, 73, 74, 75, 76, 77, 78]
   },
   {
     "content": [
@@ -3865,7 +3882,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 180,
     "hizbQuarter": 87,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [79, 80, 81, 82, 83, 84, 85, 86, 87, 88]
   },
   {
     "content": [
@@ -3885,7 +3902,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 181,
     "hizbQuarter": 88,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [89, 90, 91, 92, 93, 94, 95, 96, 97]
   },
   {
     "content": [
@@ -3905,7 +3922,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 182,
     "hizbQuarter": 88,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [98, 99, 100, 101, 102, 103, 104, 105, 106]
   },
   {
     "content": [
@@ -3926,7 +3943,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 183,
     "hizbQuarter": 88,
     "sajda": null,
-    "verse": [1, 2, 3, "", "", 1, 2, 3, 4, 5]
+    "verse": [107, 108, 109, "", "", 1, 2, 3, 4, 5]
   },
   {
     "content": [
@@ -3944,7 +3961,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 184,
     "hizbQuarter": 89,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [6, 7, 8, 9, 10, 11, 12]
   },
   {
     "content": [
@@ -3962,7 +3979,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 184,
     "hizbQuarter": 89,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [13, 14, 15, 16, 17, 18, 19]
   },
   {
     "content": [
@@ -3982,7 +3999,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 185,
     "hizbQuarter": 90,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [20, 21, 22, 23, 24, 25, 26, 27, 28]
   },
   {
     "content": [
@@ -4002,7 +4019,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 186,
     "hizbQuarter": 90,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [29, 30, 31, 32, 33, 34, 35, 36, 37]
   },
   {
     "content": [
@@ -4021,7 +4038,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 186,
     "hizbQuarter": 91,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [38, 39, 40, 41, 42, 43, 44, 45]
   },
   {
     "content": [
@@ -4040,7 +4057,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 187,
     "hizbQuarter": 91,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [46, 47, 48, 49, 50, 51, 52, 53]
   },
   {
     "content": [
@@ -4060,7 +4077,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 188,
     "hizbQuarter": 92,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [54, 55, 56, 57, 58, 59, 60, 61, 62]
   },
   {
     "content": [
@@ -4080,7 +4097,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 189,
     "hizbQuarter": 92,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [63, 64, 65, 66, 67, 68, 69, 70, 71]
   },
   {
     "content": [
@@ -4101,7 +4118,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 189,
     "hizbQuarter": 92,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [72, 73, 74, 75, 76, 77, 78, 79, 80, 81]
   },
   {
     "content": [
@@ -4119,7 +4136,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 190,
     "hizbQuarter": 93,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [82, 83, 84, 85, 86, 87, 88]
   },
   {
     "content": [
@@ -4139,7 +4156,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 191,
     "hizbQuarter": 93,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [89, 90, 91, 92, 93, 94, 95, 96, 97]
   },
   {
     "content": [
@@ -4161,7 +4178,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 191,
     "hizbQuarter": 94,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108]
   },
   {
     "content": [
@@ -4181,7 +4198,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 192,
     "hizbQuarter": 94,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [109, 110, 111, 112, 113, 114, 115, 116, 117]
   },
   {
     "content": [
@@ -4204,7 +4221,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 193,
     "hizbQuarter": 94,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, "", "", 1, 2, 3, 4]
+    "verse": [118, 119, 120, 121, 122, 123, "", "", 1, 2, 3, 4]
   },
   {
     "content": [
@@ -4225,7 +4242,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 194,
     "hizbQuarter": 95,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
   },
   {
     "content": [
@@ -4235,7 +4252,7 @@ List<Map<String, dynamic>> quranPages = [
       "وَجَآءُو عَلَىٰ قَمِيصِهِۦ بِدَمٍۢ كَذِبٍۢ ۚ قَالَ بَلْ سَوَّلَتْ لَكُمْ أَنفُسُكُمْ أَمْرًۭا ۖ فَصَبْرٌۭ جَمِيلٌۭ ۖ وَٱللَّهُ ٱلْمُسْتَعَانُ عَلَىٰ مَا تَصِفُونَ",
       "وَجَآءَتْ سَيَّارَةٌۭ فَأَرْسَلُوا۟ وَارِدَهُمْ فَأَدْلَىٰ دَلْوَهُۥ ۖ قَالَ يَٰبُشْرَىٰ هَٰذَا غُلَٰمٌۭ ۚ وَأَسَرُّوهُ بِضَٰعَةًۭ ۚ وَٱللَّهُ عَلِيمٌۢ بِمَا يَعْمَلُونَ",
       "وَشَرَوْهُ بِثَمَنٍۭ بَخْسٍۢ دَرَٰهِمَ مَعْدُودَةٍۢ وَكَانُوا۟ فِيهِ مِنَ ٱلزَّٰهِدِينَ",
-      "وَقَالَ ٱلَّذِى ٱشْتَرَىٰهُ مِن مِّصْرَ لِٱمْرَأَتِهِۦٓ أَكْرِمِى مَثْوَىٰهُ عَسَىٰٓ أَن يَنفَعَنَآ أَوْ نَتَّخِذَهُۥ وَلَدًۭا ۚ وَكَذَٰلِكَ مَكَّنَّا لِيُوسُفَ فِى ٱلْأَرْضِ وَلِنُعَلِّمَهُۥ مِن تَأْوِيلِ ٱلْأَحَادِيثِ ۚ وَٱللَّهُ غَالِبٌ عَلَىٰٓ أَمْرِهِۦ وَلَٰكِنَّ أَكْثَرَ ٱلنَّاسِ لَا يَعْلَمُونَ",
+      "وَقَالَ ٱلَّذِى ٱشْتَرَىٰهُ مِن مِّصْرَ لِٱمْرَأَتِهِۦٓ أَكْرِمِى مَثْوَىٰهُ عَسَىٰٓ أَن يَنفَعَنَآ أَوْ نَتَّخِذَهُۥ وَلَدًۭا ۚ وَكَذَٰلِكَ مَكَّنَّا لِيُوسُفَ فِى ٱلْأَرْضِ وَلِنُعَلِّمَهُۥ مِن تَأْوِيلِ ٱلْأَحَادِيثِ ۚ وَٱللَّهُ غَالِبٌ عَلَىٰٓ أَمْرِ��ِۦ وَلَٰكِنَّ أَكْثَرَ ٱلنَّاسِ لَا يَعْلَمُونَ",
       "وَلَمَّا بَلَغَ أَشُدَّهُۥٓ ءَاتَيْنَٰهُ حُكْمًۭا وَعِلْمًۭا ۚ وَكَذَٰلِكَ نَجْزِى ٱلْمُحْسِنِينَ"
     ],
     "juz": 12,
@@ -4244,7 +4261,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 195,
     "hizbQuarter": 95,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [15, 16, 17, 18, 19, 20, 21, 22]
   },
   {
     "content": [
@@ -4263,7 +4280,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 196,
     "hizbQuarter": 96,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [23, 24, 25, 26, 27, 28, 29, 30]
   },
   {
     "content": [
@@ -4281,7 +4298,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 197,
     "hizbQuarter": 96,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [31, 32, 33, 34, 35, 36, 37]
   },
   {
     "content": [
@@ -4298,7 +4315,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 198,
     "hizbQuarter": 96,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [38, 39, 40, 41, 42, 43]
   },
   {
     "content": [
@@ -4318,7 +4335,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 199,
     "hizbQuarter": 96,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [44, 45, 46, 47, 48, 49, 50, 51, 52]
   },
   {
     "content": [
@@ -4340,7 +4357,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 200,
     "hizbQuarter": 97,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63]
   },
   {
     "content": [
@@ -4357,7 +4374,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 201,
     "hizbQuarter": 97,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [64, 65, 66, 67, 68, 69]
   },
   {
     "content": [
@@ -4377,7 +4394,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 201,
     "hizbQuarter": 98,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [70, 71, 72, 73, 74, 75, 76, 77, 78]
   },
   {
     "content": [
@@ -4396,7 +4413,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 202,
     "hizbQuarter": 98,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [79, 80, 81, 82, 83, 84, 85, 86]
   },
   {
     "content": [
@@ -4416,7 +4433,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 203,
     "hizbQuarter": 98,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [87, 88, 89, 90, 91, 92, 93, 94, 95]
   },
   {
     "content": [
@@ -4435,7 +4452,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 203,
     "hizbQuarter": 99,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [96, 97, 98, 99, 100, 101, 102, 103]
   },
   {
     "content": [
@@ -4454,7 +4471,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 204,
     "hizbQuarter": 99,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [104, 105, 106, 107, 108, 109, 110, 111]
   },
   {
     "content": [
@@ -4491,7 +4508,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 206,
     "hizbQuarter": 100,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [6, 7, 8, 9, 10, 11, 12, 13]
   },
   {
     "content": [
@@ -4507,7 +4524,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 206,
     "hizbQuarter": 100,
     "sajda": {"id": 2, "recommended": true, "obligatory": false},
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [14, 15, 16, 17, 18]
   },
   {
     "content": [
@@ -4528,7 +4545,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 208,
     "hizbQuarter": 101,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [19, 20, 21, 22, 23, 24, 25, 26, 27, 28]
   },
   {
     "content": [
@@ -4545,7 +4562,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 209,
     "hizbQuarter": 101,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [29, 30, 31, 32, 33, 34]
   },
   {
     "content": [
@@ -4564,7 +4581,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 210,
     "hizbQuarter": 102,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [35, 36, 37, 38, 39, 40, 41, 42]
   },
   {
     "content": [
@@ -4583,7 +4600,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 211,
     "hizbQuarter": 102,
     "sajda": null,
-    "verse": [1, "", "", 1, 2, 3, 4, 5]
+    "verse": [43, "", "", 1, 2, 3, 4, 5]
   },
   {
     "content": [
@@ -4599,7 +4616,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 212,
     "hizbQuarter": 103,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [6, 7, 8, 9, 10]
   },
   {
     "content": [
@@ -4618,7 +4635,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 213,
     "hizbQuarter": 103,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [11, 12, 13, 14, 15, 16, 17, 18]
   },
   {
     "content": [
@@ -4635,7 +4652,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 214,
     "hizbQuarter": 103,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [19, 20, 21, 22, 23, 24]
   },
   {
     "content": [
@@ -4655,7 +4672,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 215,
     "hizbQuarter": 104,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [25, 26, 27, 28, 29, 30, 31, 32, 33]
   },
   {
     "content": [
@@ -4675,7 +4692,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 217,
     "hizbQuarter": 104,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [34, 35, 36, 37, 38, 39, 40, 41, 42]
   },
   {
     "content": [
@@ -4696,7 +4713,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 217,
     "hizbQuarter": 104,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [43, 44, 45, 46, 47, 48, 49, 50, 51, 52]
   },
   {
     "content": [
@@ -4751,7 +4768,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 220,
     "hizbQuarter": 105,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+    "verse": [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
   },
   {
     "content": [
@@ -4783,26 +4800,26 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 106,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
     ]
   },
   {
@@ -4821,7 +4838,7 @@ List<Map<String, dynamic>> quranPages = [
       "قَالُوا۟ بَلْ جِئْنَٰكَ بِمَا كَانُوا۟ فِيهِ يَمْتَرُونَ",
       "وَأَتَيْنَٰكَ بِٱلْحَقِّ وَإِنَّا لَصَٰدِقُونَ",
       "فَأَسْرِ بِأَهْلِكَ بِقِطْعٍۢ مِّنَ ٱلَّيْلِ وَٱتَّبِعْ أَدْبَٰرَهُمْ وَلَا يَلْتَفِتْ مِنكُمْ أَحَدٌۭ وَٱمْضُوا۟ حَيْثُ تُؤْمَرُونَ",
-      "وَقَضَيْنَآ إِلَيْهِ ذَٰلِكَ ٱلْأَمْرَ أَنَّ دَابِرَ هَٰٓؤُلَآءِ مَقْطُوعٌۭ مُّصْبِحِينَ",
+      "وَقَضَيْنَآ إِلَيْهِ ذَٰلِ��َ ٱلْأَمْرَ أَنَّ دَابِرَ هَٰٓؤُلَآءِ مَقْطُوعٌۭ مُّصْبِحِينَ",
       "وَجَآءَ أَهْلُ ٱلْمَدِينَةِ يَسْتَبْشِرُونَ",
       "قَالَ إِنَّ هَٰٓؤُلَآءِ ضَيْفِى فَلَا تَفْضَحُونِ",
       "وَٱتَّقُوا۟ ٱللَّهَ وَلَا تُخْزُونِ",
@@ -4833,7 +4850,27 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 222,
     "hizbQuarter": 106,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    "verse": [
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70
+    ]
   },
   {
     "content": [
@@ -4865,26 +4902,26 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 106,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90
     ]
   },
   {
@@ -4913,7 +4950,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 224,
     "hizbQuarter": 107,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, "", "", 1, 2, 3, 4, 5, 6]
+    "verse": [91, 92, 93, 94, 95, 96, 97, 98, 99, "", "", 1, 2, 3, 4, 5, 6]
   },
   {
     "content": [
@@ -4932,7 +4969,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 225,
     "hizbQuarter": 107,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [7, 8, 9, 10, 11, 12, 13, 14]
   },
   {
     "content": [
@@ -4955,7 +4992,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 227,
     "hizbQuarter": 107,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    "verse": [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
   },
   {
     "content": [
@@ -4974,7 +5011,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 227,
     "hizbQuarter": 108,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [27, 28, 29, 30, 31, 32, 33, 34]
   },
   {
     "content": [
@@ -4993,7 +5030,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 229,
     "hizbQuarter": 108,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [35, 36, 37, 38, 39, 40, 41, 42]
   },
   {
     "content": [
@@ -5016,7 +5053,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 230,
     "hizbQuarter": 109,
     "sajda": {"id": 3, "recommended": true, "obligatory": false},
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    "verse": [43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54]
   },
   {
     "content": [
@@ -5037,7 +5074,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 231,
     "hizbQuarter": 109,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [55, 56, 57, 58, 59, 60, 61, 62, 63, 64]
   },
   {
     "content": [
@@ -5056,7 +5093,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 233,
     "hizbQuarter": 109,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [65, 66, 67, 68, 69, 70, 71, 72]
   },
   {
     "content": [
@@ -5074,7 +5111,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 234,
     "hizbQuarter": 110,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [73, 74, 75, 76, 77, 78, 79]
   },
   {
     "content": [
@@ -5093,7 +5130,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 235,
     "hizbQuarter": 110,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [80, 81, 82, 83, 84, 85, 86, 87]
   },
   {
     "content": [
@@ -5110,7 +5147,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 236,
     "hizbQuarter": 111,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [88, 89, 90, 91, 92, 93]
   },
   {
     "content": [
@@ -5130,7 +5167,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 237,
     "hizbQuarter": 111,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [94, 95, 96, 97, 98, 99, 100, 101, 102]
   },
   {
     "content": [
@@ -5149,7 +5186,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 237,
     "hizbQuarter": 111,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [103, 104, 105, 106, 107, 108, 109, 110]
   },
   {
     "content": [
@@ -5168,7 +5205,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 238,
     "hizbQuarter": 112,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [111, 112, 113, 114, 115, 116, 117, 118]
   },
   {
     "content": [
@@ -5189,7 +5226,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 239,
     "hizbQuarter": 112,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [119, 120, 121, 122, 123, 124, 125, 126, 127, 128]
   },
   {
     "content": [
@@ -5230,7 +5267,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 241,
     "hizbQuarter": 113,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
   },
   {
     "content": [
@@ -5251,7 +5288,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 242,
     "hizbQuarter": 114,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
   },
   {
     "content": [
@@ -5273,7 +5310,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 243,
     "hizbQuarter": 114,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38]
   },
   {
     "content": [
@@ -5295,7 +5332,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 244,
     "hizbQuarter": 114,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]
   },
   {
     "content": [
@@ -5315,7 +5352,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 245,
     "hizbQuarter": 115,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [50, 51, 52, 53, 54, 55, 56, 57, 58]
   },
   {
     "content": [
@@ -5334,7 +5371,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 246,
     "hizbQuarter": 115,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [59, 60, 61, 62, 63, 64, 65, 66]
   },
   {
     "content": [
@@ -5354,7 +5391,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 247,
     "hizbQuarter": 116,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [67, 68, 69, 70, 71, 72, 73, 74, 75]
   },
   {
     "content": [
@@ -5376,7 +5413,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 249,
     "hizbQuarter": 116,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86]
   },
   {
     "content": [
@@ -5397,7 +5434,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 250,
     "hizbQuarter": 116,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [87, 88, 89, 90, 91, 92, 93, 94, 95, 96]
   },
   {
     "content": [
@@ -5416,7 +5453,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 251,
     "hizbQuarter": 117,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [97, 98, 99, 100, 101, 102, 103, 104]
   },
   {
     "content": [
@@ -5424,7 +5461,7 @@ List<Map<String, dynamic>> quranPages = [
       "وَقُرْءَانًۭا فَرَقْنَٰهُ لِتَقْرَأَهُۥ عَلَى ٱلنَّاسِ عَلَىٰ مُكْثٍۢ وَنَزَّلْنَٰهُ تَنزِيلًۭا",
       "قُلْ ءَامِنُوا۟ بِهِۦٓ أَوْ لَا تُؤْمِنُوٓا۟ ۚ إِنَّ ٱلَّذِينَ أُوتُوا۟ ٱلْعِلْمَ مِن قَبْلِهِۦٓ إِذَا يُتْلَىٰ عَلَيْهِمْ يَخِرُّونَ لِلْأَذْقَانِ سُجَّدًۭا",
       "وَيَقُولُونَ سُبْحَٰنَ رَبِّنَآ إِن كَانَ وَعْدُ رَبِّنَا لَمَفْعُولًۭا",
-      "وَيَخِرُّونَ لِلْأَذْقَانِ يَبْكُونَ وَيَزِيدُهُمْ خُشُوعًۭا ۩",
+      "وَيَخِرُّونَ لِلْأَذْقَانِ يَبْكُونَ وَيَزِيدُهُمْ خُشُو��ًۭا ۩",
       "قُلِ ٱدْعُوا۟ ٱللَّهَ أَوِ ٱدْعُوا۟ ٱلرَّحْمَٰنَ ۖ أَيًّۭا مَّا تَدْعُوا۟ فَلَهُ ٱلْأَسْمَآءُ ٱلْحُسْنَىٰ ۚ وَلَا تَجْهَرْ بِصَلَاتِكَ وَلَا تُخَافِتْ بِهَا وَٱبْتَغِ بَيْنَ ذَٰلِكَ سَبِيلًۭا",
       "وَقُلِ ٱلْحَمْدُ لِلَّهِ ٱلَّذِى لَمْ يَتَّخِذْ وَلَدًۭا وَلَمْ يَكُن لَّهُۥ شَرِيكٌۭ فِى ٱلْمُلْكِ وَلَمْ يَكُن لَّهُۥ وَلِىٌّۭ مِّنَ ٱلذُّلِّ ۖ وَكَبِّرْهُ تَكْبِيرًۢا",
       "سُورَةُ الكَهۡفِ",
@@ -5440,7 +5477,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 252,
     "hizbQuarter": 117,
     "sajda": {"id": 4, "recommended": true, "obligatory": false},
-    "verse": [1, 2, 3, 4, 5, 6, 7, "", "", 1, 2, 3, 4]
+    "verse": [105, 106, 107, 108, 109, 110, 111, "", "", 1, 2, 3, 4]
   },
   {
     "content": [
@@ -5462,7 +5499,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 253,
     "hizbQuarter": 117,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
   },
   {
     "content": [
@@ -5478,7 +5515,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 254,
     "hizbQuarter": 118,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [16, 17, 18, 19, 20]
   },
   {
     "content": [
@@ -5496,7 +5533,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 255,
     "hizbQuarter": 118,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [21, 22, 23, 24, 25, 26, 27]
   },
   {
     "content": [
@@ -5514,7 +5551,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 256,
     "hizbQuarter": 119,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [28, 29, 30, 31, 32, 33, 34]
   },
   {
     "content": [
@@ -5536,7 +5573,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 257,
     "hizbQuarter": 119,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45]
   },
   {
     "content": [
@@ -5555,7 +5592,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 258,
     "hizbQuarter": 120,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [46, 47, 48, 49, 50, 51, 52, 53]
   },
   {
     "content": [
@@ -5574,7 +5611,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 260,
     "hizbQuarter": 120,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [54, 55, 56, 57, 58, 59, 60, 61]
   },
   {
     "content": [
@@ -5598,7 +5635,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 261,
     "hizbQuarter": 120,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    "verse": [62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74]
   },
   {
     "content": [
@@ -5618,7 +5655,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 262,
     "hizbQuarter": 121,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [75, 76, 77, 78, 79, 80, 81, 82, 83]
   },
   {
     "content": [
@@ -5643,7 +5680,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 262,
     "hizbQuarter": 121,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    "verse": [84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97]
   },
   {
     "content": [
@@ -5667,7 +5704,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 263,
     "hizbQuarter": 122,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    "verse": [98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110]
   },
   {
     "content": [
@@ -5716,7 +5753,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 265,
     "hizbQuarter": 123,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    "verse": [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
   },
   {
     "content": [
@@ -5740,7 +5777,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 265,
     "hizbQuarter": 123,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    "verse": [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38]
   },
   {
     "content": [
@@ -5764,7 +5801,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 267,
     "hizbQuarter": 123,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    "verse": [39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
   },
   {
     "content": [
@@ -5788,7 +5825,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 267,
     "hizbQuarter": 124,
     "sajda": {"id": 5, "recommended": true, "obligatory": false},
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    "verse": [52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64]
   },
   {
     "content": [
@@ -5811,7 +5848,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 268,
     "hizbQuarter": 124,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    "verse": [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76]
   },
   {
     "content": [
@@ -5841,7 +5878,27 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 269,
     "hizbQuarter": 124,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    "verse": [
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95
+    ]
   },
   {
     "content": [
@@ -5869,7 +5926,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 270,
     "hizbQuarter": 125,
     "sajda": null,
-    "verse": [1, 2, 3, "", "", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    "verse": [96, 97, 98, "", "", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
   },
   {
     "content": [
@@ -5906,18 +5963,6 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 125,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
       13,
       14,
       15,
@@ -5930,7 +5975,19 @@ List<Map<String, dynamic>> quranPages = [
       22,
       23,
       24,
-      25
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37
     ]
   },
   {
@@ -5956,7 +6013,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 271,
     "hizbQuarter": 125,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    "verse": [38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
   },
   {
     "content": [
@@ -5980,7 +6037,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 272,
     "hizbQuarter": 126,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    "verse": [52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64]
   },
   {
     "content": [
@@ -6003,7 +6060,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 272,
     "hizbQuarter": 126,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    "verse": [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76]
   },
   {
     "content": [
@@ -6025,7 +6082,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 273,
     "hizbQuarter": 127,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87]
   },
   {
     "content": [
@@ -6047,7 +6104,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 274,
     "hizbQuarter": 127,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98]
   },
   {
     "content": [
@@ -6073,12 +6130,28 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 275,
     "hizbQuarter": 128,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    "verse": [
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113
+    ]
   },
   {
     "content": [
       "فَتَعَٰلَى ٱللَّهُ ٱلْمَلِكُ ٱلْحَقُّ ۗ وَلَا تَعْجَلْ بِٱلْقُرْءَانِ مِن قَبْلِ أَن يُقْضَىٰٓ إِلَيْكَ وَحْيُهُۥ ۖ وَقُل رَّبِّ زِدْنِى عِلْمًۭا",
-      "وَلَقَدْ عَهِدْنَآ إِلَىٰٓ ءَادَمَ مِن قَبْلُ فَنَسِىَ وَلَمْ نَجِدْ لَهُۥ عَزْمًۭا",
+      "وَلَقَدْ عَهِدْنَآ إِلَىٰٓ ءَادَمَ مِن قَبْل�� فَنَسِىَ وَلَمْ نَجِدْ لَهُۥ عَزْمًۭا",
       "وَإِذْ قُلْنَا لِلْمَلَٰٓئِكَةِ ٱسْجُدُوا۟ لِءَادَمَ فَسَجَدُوٓا۟ إِلَّآ إِبْلِيسَ أَبَىٰ",
       "فَقُلْنَا يَٰٓـَٔادَمُ إِنَّ هَٰذَا عَدُوٌّۭ لَّكَ وَلِزَوْجِكَ فَلَا يُخْرِجَنَّكُمَا مِنَ ٱلْجَنَّةِ فَتَشْقَىٰٓ",
       "إِنَّ لَكَ أَلَّا تَجُوعَ فِيهَا وَلَا تَعْرَىٰ",
@@ -6096,7 +6169,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 276,
     "hizbQuarter": 128,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    "verse": [114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125]
   },
   {
     "content": [
@@ -6117,7 +6190,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 277,
     "hizbQuarter": 128,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [126, 127, 128, 129, 130, 131, 132, 133, 134, 135]
   },
   {
     "content": [
@@ -6165,7 +6238,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 279,
     "hizbQuarter": 129,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    "verse": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
   },
   {
     "content": [
@@ -6187,7 +6260,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 280,
     "hizbQuarter": 130,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
   },
   {
     "content": [
@@ -6207,7 +6280,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 281,
     "hizbQuarter": 130,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [36, 37, 38, 39, 40, 41, 42, 43, 44]
   },
   {
     "content": [
@@ -6231,7 +6304,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 282,
     "hizbQuarter": 131,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    "verse": [45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57]
   },
   {
     "content": [
@@ -6257,7 +6330,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 282,
     "hizbQuarter": 131,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    "verse": [58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72]
   },
   {
     "content": [
@@ -6277,7 +6350,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 283,
     "hizbQuarter": 131,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [73, 74, 75, 76, 77, 78, 79, 80, 81]
   },
   {
     "content": [
@@ -6297,7 +6370,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 283,
     "hizbQuarter": 132,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [82, 83, 84, 85, 86, 87, 88, 89, 90]
   },
   {
     "content": [
@@ -6319,7 +6392,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 284,
     "hizbQuarter": 132,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101]
   },
   {
     "content": [
@@ -6342,7 +6415,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 284,
     "hizbQuarter": 132,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ""]
+    "verse": [102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, ""]
   },
   {
     "content": [
@@ -6380,7 +6453,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 286,
     "hizbQuarter": 133,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
   },
   {
     "content": [
@@ -6399,7 +6472,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 287,
     "hizbQuarter": 134,
     "sajda": {"id": 6, "recommended": true, "obligatory": false},
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [16, 17, 18, 19, 20, 21, 22, 23]
   },
   {
     "content": [
@@ -6417,7 +6490,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 288,
     "hizbQuarter": 134,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [24, 25, 26, 27, 28, 29, 30]
   },
   {
     "content": [
@@ -6436,7 +6509,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 289,
     "hizbQuarter": 135,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [31, 32, 33, 34, 35, 36, 37, 38]
   },
   {
     "content": [
@@ -6455,7 +6528,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 290,
     "hizbQuarter": 135,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [39, 40, 41, 42, 43, 44, 45, 46]
   },
   {
     "content": [
@@ -6475,7 +6548,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 291,
     "hizbQuarter": 135,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [47, 48, 49, 50, 51, 52, 53, 54, 55]
   },
   {
     "content": [
@@ -6495,7 +6568,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 292,
     "hizbQuarter": 136,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [56, 57, 58, 59, 60, 61, 62, 63, 64]
   },
   {
     "content": [
@@ -6514,7 +6587,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 293,
     "hizbQuarter": 136,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [65, 66, 67, 68, 69, 70, 71, 72]
   },
   {
     "content": [
@@ -6532,7 +6605,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 294,
     "hizbQuarter": 136,
     "sajda": {"id": 7, "recommended": true, "obligatory": false},
-    "verse": [1, 2, 3, 4, 5, 6, ""]
+    "verse": [73, 74, 75, 76, 77, 78, ""]
   },
   {
     "content": [
@@ -6582,7 +6655,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 296,
     "hizbQuarter": 137,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
   },
   {
     "content": [
@@ -6608,7 +6681,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 297,
     "hizbQuarter": 138,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    "verse": [28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42]
   },
   {
     "content": [
@@ -6636,7 +6709,25 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 298,
     "hizbQuarter": 138,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+    "verse": [
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ]
   },
   {
     "content": [
@@ -6662,7 +6753,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 298,
     "hizbQuarter": 138,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    "verse": [60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74]
   },
   {
     "content": [
@@ -6688,7 +6779,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 299,
     "hizbQuarter": 139,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    "verse": [75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89]
   },
   {
     "content": [
@@ -6714,7 +6805,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 300,
     "hizbQuarter": 139,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    "verse": [90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104]
   },
   {
     "content": [
@@ -6740,7 +6831,23 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 300,
     "hizbQuarter": 139,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, ""]
+    "verse": [
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      ""
+    ]
   },
   {
     "content": [
@@ -6783,7 +6890,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 302,
     "hizbQuarter": 140,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
   },
   {
     "content": [
@@ -6801,7 +6908,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 304,
     "hizbQuarter": 141,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [21, 22, 23, 24, 25, 26, 27]
   },
   {
     "content": [
@@ -6816,7 +6923,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 304,
     "hizbQuarter": 141,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [28, 29, 30, 31]
   },
   {
     "content": [
@@ -6832,7 +6939,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 305,
     "hizbQuarter": 142,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [32, 33, 34, 35, 36]
   },
   {
     "content": [
@@ -6850,7 +6957,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 306,
     "hizbQuarter": 142,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [37, 38, 39, 40, 41, 42, 43]
   },
   {
     "content": [
@@ -6871,7 +6978,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 307,
     "hizbQuarter": 143,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
   },
   {
     "content": [
@@ -6887,7 +6994,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 308,
     "hizbQuarter": 143,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [54, 55, 56, 57, 58]
   },
   {
     "content": [
@@ -6901,7 +7008,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 308,
     "hizbQuarter": 143,
     "sajda": null,
-    "verse": [1, 2, 3]
+    "verse": [59, 60, 61]
   },
   {
     "content": [
@@ -6919,7 +7026,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 310,
     "hizbQuarter": 144,
     "sajda": null,
-    "verse": [1, 2, 3, "", "", 1, 2]
+    "verse": [62, 63, 64, "", "", 1, 2]
   },
   {
     "content": [
@@ -6939,7 +7046,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 311,
     "hizbQuarter": 144,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [3, 4, 5, 6, 7, 8, 9, 10, 11]
   },
   {
     "content": [
@@ -6959,7 +7066,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 311,
     "hizbQuarter": 144,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [12, 13, 14, 15, 16, 17, 18, 19, 20]
   },
   {
     "content": [
@@ -6982,7 +7089,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 312,
     "hizbQuarter": 145,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    "verse": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
   },
   {
     "content": [
@@ -7004,7 +7111,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 313,
     "hizbQuarter": 145,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43]
   },
   {
     "content": [
@@ -7027,7 +7134,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 314,
     "hizbQuarter": 146,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    "verse": [44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55]
   },
   {
     "content": [
@@ -7050,7 +7157,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 315,
     "hizbQuarter": 146,
     "sajda": {"id": 8, "recommended": true, "obligatory": false},
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    "verse": [56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67]
   },
   {
     "content": [
@@ -7072,7 +7179,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 315,
     "hizbQuarter": 146,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ""]
+    "verse": [68, 69, 70, 71, 72, 73, 74, 75, 76, 77, ""]
   },
   {
     "content": [
@@ -7156,26 +7263,26 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 147,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
     ]
   },
   {
@@ -7209,27 +7316,27 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 148,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60
     ]
   },
   {
@@ -7265,29 +7372,29 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 148,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83
     ]
   },
   {
@@ -7328,34 +7435,34 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 149,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25,
-      26,
-      27,
-      28
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111
     ]
   },
   {
@@ -7393,31 +7500,31 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 149,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136
     ]
   },
   {
@@ -7453,29 +7560,29 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 149,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159
     ]
   },
   {
@@ -7512,30 +7619,30 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 150,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183
     ]
   },
   {
@@ -7571,29 +7678,29 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 150,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190,
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199,
+      200,
+      201,
+      202,
+      203,
+      204,
+      205,
+      206
     ]
   },
   {
@@ -7628,27 +7735,27 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 150,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
+      207,
+      208,
+      209,
+      210,
+      211,
+      212,
+      213,
+      214,
+      215,
+      216,
+      217,
+      218,
+      219,
+      220,
+      221,
+      222,
+      223,
+      224,
+      225,
+      226,
+      227,
       ""
     ]
   },
@@ -7695,7 +7802,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 328,
     "hizbQuarter": 151,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [14, 15, 16, 17, 18, 19, 20, 21, 22]
   },
   {
     "content": [
@@ -7719,7 +7826,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 329,
     "hizbQuarter": 152,
     "sajda": {"id": 9, "recommended": true, "obligatory": false},
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    "verse": [23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
   },
   {
     "content": [
@@ -7739,7 +7846,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 329,
     "hizbQuarter": 152,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [36, 37, 38, 39, 40, 41, 42, 43, 44]
   },
   {
     "content": [
@@ -7761,7 +7868,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 330,
     "hizbQuarter": 152,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55]
   },
   {
     "content": [
@@ -7780,7 +7887,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 331,
     "hizbQuarter": 153,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [56, 57, 58, 59, 60, 61, 62, 63]
   },
   {
     "content": [
@@ -7804,7 +7911,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 332,
     "hizbQuarter": 153,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    "verse": [64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76]
   },
   {
     "content": [
@@ -7827,7 +7934,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 333,
     "hizbQuarter": 154,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    "verse": [77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88]
   },
   {
     "content": [
@@ -7850,7 +7957,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 334,
     "hizbQuarter": 154,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, "", "", 1, 2, 3, 4, 5]
+    "verse": [89, 90, 91, 92, 93, "", "", 1, 2, 3, 4, 5]
   },
   {
     "content": [
@@ -7869,7 +7976,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 334,
     "hizbQuarter": 155,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [6, 7, 8, 9, 10, 11, 12, 13]
   },
   {
     "content": [
@@ -7888,7 +7995,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 335,
     "hizbQuarter": 155,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [14, 15, 16, 17, 18, 19, 20, 21]
   },
   {
     "content": [
@@ -7906,7 +8013,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 336,
     "hizbQuarter": 155,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [22, 23, 24, 25, 26, 27, 28]
   },
   {
     "content": [
@@ -7924,7 +8031,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 337,
     "hizbQuarter": 156,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [29, 30, 31, 32, 33, 34, 35]
   },
   {
     "content": [
@@ -7943,7 +8050,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 338,
     "hizbQuarter": 156,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [36, 37, 38, 39, 40, 41, 42, 43]
   },
   {
     "content": [
@@ -7961,7 +8068,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 338,
     "hizbQuarter": 156,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [44, 45, 46, 47, 48, 49, 50]
   },
   {
     "content": [
@@ -7981,7 +8088,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 339,
     "hizbQuarter": 157,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [51, 52, 53, 54, 55, 56, 57, 58, 59]
   },
   {
     "content": [
@@ -8003,7 +8110,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 340,
     "hizbQuarter": 157,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70]
   },
   {
     "content": [
@@ -8021,7 +8128,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 341,
     "hizbQuarter": 158,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [71, 72, 73, 74, 75, 76, 77]
   },
   {
     "content": [
@@ -8039,7 +8146,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 341,
     "hizbQuarter": 158,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [78, 79, 80, 81, 82, 83, 84]
   },
   {
     "content": [
@@ -8062,7 +8169,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 342,
     "hizbQuarter": 159,
     "sajda": null,
-    "verse": [1, 2, 3, 4, "", "", 1, 2, 3, 4, 5, 6]
+    "verse": [85, 86, 87, 88, "", "", 1, 2, 3, 4, 5, 6]
   },
   {
     "content": [
@@ -8081,7 +8188,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 343,
     "hizbQuarter": 159,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [7, 8, 9, 10, 11, 12, 13, 14]
   },
   {
     "content": [
@@ -8101,7 +8208,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 344,
     "hizbQuarter": 159,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [15, 16, 17, 18, 19, 20, 21, 22, 23]
   },
   {
     "content": [
@@ -8119,7 +8226,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 344,
     "hizbQuarter": 160,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [24, 25, 26, 27, 28, 29, 30]
   },
   {
     "content": [
@@ -8138,7 +8245,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 345,
     "hizbQuarter": 160,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [31, 32, 33, 34, 35, 36, 37, 38]
   },
   {
     "content": [
@@ -8156,7 +8263,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 346,
     "hizbQuarter": 160,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [39, 40, 41, 42, 43, 44, 45]
   },
   {
     "content": [
@@ -8174,7 +8281,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 347,
     "hizbQuarter": 161,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [46, 47, 48, 49, 50, 51, 52]
   },
   {
     "content": [
@@ -8196,7 +8303,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 347,
     "hizbQuarter": 161,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63]
   },
   {
     "content": [
@@ -8220,7 +8327,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 349,
     "hizbQuarter": 162,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, "", "", 1, 2, 3, 4, 5]
+    "verse": [64, 65, 66, 67, 68, 69, "", "", 1, 2, 3, 4, 5]
   },
   {
     "content": [
@@ -8241,7 +8348,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 350,
     "hizbQuarter": 162,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
   },
   {
     "content": [
@@ -8261,7 +8368,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 351,
     "hizbQuarter": 162,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [16, 17, 18, 19, 20, 21, 22, 23, 24]
   },
   {
     "content": [
@@ -8280,7 +8387,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 352,
     "hizbQuarter": 163,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [25, 26, 27, 28, 29, 30, 31, 32]
   },
   {
     "content": [
@@ -8300,7 +8407,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 353,
     "hizbQuarter": 163,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [33, 34, 35, 36, 37, 38, 39, 40, 41]
   },
   {
     "content": [
@@ -8320,7 +8427,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 353,
     "hizbQuarter": 163,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [42, 43, 44, 45, 46, 47, 48, 49, 50]
   },
   {
     "content": [
@@ -8341,7 +8448,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 354,
     "hizbQuarter": 164,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [51, 52, 53, 54, 55, 56, 57, 58, 59, 60]
   },
   {
     "content": [
@@ -8384,7 +8491,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 356,
     "hizbQuarter": 164,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [12, 13, 14, 15, 16, 17, 18, 19]
   },
   {
     "content": [
@@ -8404,7 +8511,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 357,
     "hizbQuarter": 165,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [20, 21, 22, 23, 24, 25, 26, 27, 28]
   },
   {
     "content": [
@@ -8422,7 +8529,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 357,
     "hizbQuarter": 165,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, ""]
+    "verse": [29, 30, 31, 32, 33, 34, ""]
   },
   {
     "content": [
@@ -8465,7 +8572,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 359,
     "hizbQuarter": 166,
     "sajda": {"id": 10, "recommended": false, "obligatory": true},
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [12, 13, 14, 15, 16, 17, 18, 19, 20]
   },
   {
     "content": [
@@ -8487,7 +8594,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 360,
     "hizbQuarter": 166,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ""]
+    "verse": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, ""]
   },
   {
     "content": [
@@ -8525,7 +8632,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 362,
     "hizbQuarter": 167,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [7, 8, 9, 10, 11, 12, 13, 14, 15]
   },
   {
     "content": [
@@ -8543,7 +8650,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 363,
     "hizbQuarter": 168,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [16, 17, 18, 19, 20, 21, 22]
   },
   {
     "content": [
@@ -8562,7 +8669,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 364,
     "hizbQuarter": 168,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [23, 24, 25, 26, 27, 28, 29, 30]
   },
   {
     "content": [
@@ -8578,7 +8685,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 365,
     "hizbQuarter": 169,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [31, 32, 33, 34, 35]
   },
   {
     "content": [
@@ -8597,7 +8704,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 366,
     "hizbQuarter": 169,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [36, 37, 38, 39, 40, 41, 42, 43]
   },
   {
     "content": [
@@ -8615,7 +8722,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 366,
     "hizbQuarter": 169,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [44, 45, 46, 47, 48, 49, 50]
   },
   {
     "content": [
@@ -8630,7 +8737,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 367,
     "hizbQuarter": 170,
     "sajda": null,
-    "verse": [1, 2, 3, 4]
+    "verse": [51, 52, 53, 54]
   },
   {
     "content": [
@@ -8649,7 +8756,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 368,
     "hizbQuarter": 171,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [55, 56, 57, 58, 59, 60, 61, 62]
   },
   {
     "content": [
@@ -8671,7 +8778,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 369,
     "hizbQuarter": 171,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73]
   },
   {
     "content": [
@@ -8709,7 +8816,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 371,
     "hizbQuarter": 172,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [8, 9, 10, 11, 12, 13, 14]
   },
   {
     "content": [
@@ -8728,13 +8835,13 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 372,
     "hizbQuarter": 172,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [15, 16, 17, 18, 19, 20, 21, 22]
   },
   {
     "content": [
       "وَلَا تَنفَعُ ٱلشَّفَٰعَةُ عِندَهُۥٓ إِلَّا لِمَنْ أَذِنَ لَهُۥ ۚ حَتَّىٰٓ إِذَا فُزِّعَ عَن قُلُوبِهِمْ قَالُوا۟ مَاذَا قَالَ رَبُّكُمْ ۖ قَالُوا۟ ٱلْحَقَّ ۖ وَهُوَ ٱلْعَلِىُّ ٱلْكَبِيرُ",
       "۞ قُلْ مَن يَرْزُقُكُم مِّنَ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ ۖ قُلِ ٱللَّهُ ۖ وَإِنَّآ أَوْ إِيَّاكُمْ لَعَلَىٰ هُدًى أَوْ فِى ضَلَٰلٍۢ مُّبِينٍۢ",
-      "قُل لَّا تُسْـَٔلُونَ عَمَّآ أَجْرَمْنَا وَلَا نُسْـَٔلُ عَمَّا تَعْمَلُونَ",
+      "قُل لَّا تُسْـَٔلُونَ عَمَّآ أَجْرَمْنَا وَلَا نُسْـَٔل�� عَمَّا تَعْمَلُونَ",
       "قُلْ يَجْمَعُ بَيْنَنَا رَبُّنَا ثُمَّ يَفْتَحُ بَيْنَنَا بِٱلْحَقِّ وَهُوَ ٱلْفَتَّاحُ ٱلْعَلِيمُ",
       "قُلْ أَرُونِىَ ٱلَّذِينَ أَلْحَقْتُم بِهِۦ شُرَكَآءَ ۖ كَلَّا ۚ بَلْ هُوَ ٱللَّهُ ٱلْعَزِيزُ ٱلْحَكِيمُ",
       "وَمَآ أَرْسَلْنَٰكَ إِلَّا كَآفَّةًۭ لِّلنَّاسِ بَشِيرًۭا وَنَذِيرًۭا وَلَٰكِنَّ أَكْثَرَ ٱلنَّاسِ لَا يَعْلَمُونَ",
@@ -8748,7 +8855,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 373,
     "hizbQuarter": 173,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [23, 24, 25, 26, 27, 28, 29, 30, 31]
   },
   {
     "content": [
@@ -8767,7 +8874,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 374,
     "hizbQuarter": 173,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [32, 33, 34, 35, 36, 37, 38, 39]
   },
   {
     "content": [
@@ -8787,7 +8894,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 375,
     "hizbQuarter": 174,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [40, 41, 42, 43, 44, 45, 46, 47, 48]
   },
   {
     "content": [
@@ -8809,7 +8916,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 376,
     "hizbQuarter": 174,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, "", "", 1, 2, 3]
+    "verse": [49, 50, 51, 52, 53, 54, "", "", 1, 2, 3]
   },
   {
     "content": [
@@ -8828,7 +8935,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 377,
     "hizbQuarter": 174,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [4, 5, 6, 7, 8, 9, 10, 11]
   },
   {
     "content": [
@@ -8846,7 +8953,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 378,
     "hizbQuarter": 175,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [12, 13, 14, 15, 16, 17, 18]
   },
   {
     "content": [
@@ -8869,7 +8976,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 379,
     "hizbQuarter": 175,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    "verse": [19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
   },
   {
     "content": [
@@ -8888,7 +8995,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 380,
     "hizbQuarter": 175,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [31, 32, 33, 34, 35, 36, 37, 38]
   },
   {
     "content": [
@@ -8905,7 +9012,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 380,
     "hizbQuarter": 176,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [39, 40, 41, 42, 43, 44]
   },
   {
     "content": [
@@ -8931,7 +9038,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 381,
     "hizbQuarter": 176,
     "sajda": null,
-    "verse": [1, "", "", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    "verse": [45, "", "", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
   },
   {
     "content": [
@@ -8957,7 +9064,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 382,
     "hizbQuarter": 176,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    "verse": [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
   },
   {
     "content": [
@@ -8981,7 +9088,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 383,
     "hizbQuarter": 177,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    "verse": [28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
   },
   {
     "content": [
@@ -9006,7 +9113,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 384,
     "hizbQuarter": 177,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    "verse": [41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54]
   },
   {
     "content": [
@@ -9033,7 +9140,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 385,
     "hizbQuarter": 178,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+    "verse": [55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70]
   },
   {
     "content": [
@@ -9058,7 +9165,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 385,
     "hizbQuarter": 178,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, ""]
+    "verse": [71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, ""]
   },
   {
     "content": [
@@ -9159,33 +9266,33 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 179,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
       25,
       26,
-      27
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
     ]
   },
   {
@@ -9223,31 +9330,31 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 179,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76
     ]
   },
   {
@@ -9286,32 +9393,32 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 180,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25,
-      26
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102
     ]
   },
   {
@@ -9348,30 +9455,30 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 180,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126
     ]
   },
   {
@@ -9411,33 +9518,33 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 181,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25,
-      26,
-      27
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153
     ]
   },
   {
@@ -9480,35 +9587,35 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 181,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25,
-      26,
-      27,
-      28,
-      29,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
       ""
     ]
   },
@@ -9559,7 +9666,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 392,
     "hizbQuarter": 182,
     "sajda": {"id": 11, "recommended": true, "obligatory": false},
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
   },
   {
     "content": [
@@ -9586,7 +9693,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 394,
     "hizbQuarter": 182,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+    "verse": [27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42]
   },
   {
     "content": [
@@ -9616,7 +9723,27 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 394,
     "hizbQuarter": 183,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    "verse": [
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61
+    ]
   },
   {
     "content": [
@@ -9650,28 +9777,28 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 183,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83
     ]
   },
   {
@@ -9695,7 +9822,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 396,
     "hizbQuarter": 183,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, "", "", 1, 2, 3, 4, 5]
+    "verse": [84, 85, 86, 87, 88, "", "", 1, 2, 3, 4, 5]
   },
   {
     "content": [
@@ -9711,7 +9838,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 397,
     "hizbQuarter": 184,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [6, 7, 8, 9, 10]
   },
   {
     "content": [
@@ -9733,7 +9860,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 397,
     "hizbQuarter": 184,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
   },
   {
     "content": [
@@ -9754,7 +9881,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 398,
     "hizbQuarter": 184,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
   },
   {
     "content": [
@@ -9774,7 +9901,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 399,
     "hizbQuarter": 185,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [32, 33, 34, 35, 36, 37, 38, 39, 40]
   },
   {
     "content": [
@@ -9792,7 +9919,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 400,
     "hizbQuarter": 185,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [41, 42, 43, 44, 45, 46, 47]
   },
   {
     "content": [
@@ -9812,7 +9939,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 401,
     "hizbQuarter": 186,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [48, 49, 50, 51, 52, 53, 54, 55, 56]
   },
   {
     "content": [
@@ -9834,7 +9961,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 402,
     "hizbQuarter": 186,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67]
   },
   {
     "content": [
@@ -9852,7 +9979,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 403,
     "hizbQuarter": 186,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [68, 69, 70, 71, 72, 73, 74]
   },
   {
     "content": [
@@ -9873,7 +10000,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 404,
     "hizbQuarter": 187,
     "sajda": null,
-    "verse": [1, "", "", 1, 2, 3, 4, 5, 6, 7]
+    "verse": [75, "", "", 1, 2, 3, 4, 5, 6, 7]
   },
   {
     "content": [
@@ -9893,7 +10020,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 405,
     "hizbQuarter": 187,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [8, 9, 10, 11, 12, 13, 14, 15, 16]
   },
   {
     "content": [
@@ -9913,7 +10040,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 406,
     "hizbQuarter": 188,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [17, 18, 19, 20, 21, 22, 23, 24, 25]
   },
   {
     "content": [
@@ -9932,7 +10059,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 407,
     "hizbQuarter": 188,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [26, 27, 28, 29, 30, 31, 32, 33]
   },
   {
     "content": [
@@ -9950,7 +10077,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 408,
     "hizbQuarter": 188,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [34, 35, 36, 37, 38, 39, 40]
   },
   {
     "content": [
@@ -9970,7 +10097,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 408,
     "hizbQuarter": 189,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [41, 42, 43, 44, 45, 46, 47, 48, 49]
   },
   {
     "content": [
@@ -9990,7 +10117,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 409,
     "hizbQuarter": 189,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [50, 51, 52, 53, 54, 55, 56, 57, 58]
   },
   {
     "content": [
@@ -10009,7 +10136,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 410,
     "hizbQuarter": 190,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [59, 60, 61, 62, 63, 64, 65, 66]
   },
   {
     "content": [
@@ -10031,7 +10158,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 411,
     "hizbQuarter": 190,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77]
   },
   {
     "content": [
@@ -10050,7 +10177,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 412,
     "hizbQuarter": 190,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [78, 79, 80, 81, 82, 83, 84, 85]
   },
   {
     "content": [
@@ -10094,7 +10221,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 415,
     "hizbQuarter": 191,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [12, 13, 14, 15, 16, 17, 18, 19, 20]
   },
   {
     "content": [
@@ -10114,7 +10241,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 416,
     "hizbQuarter": 192,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [21, 22, 23, 24, 25, 26, 27, 28, 29]
   },
   {
     "content": [
@@ -10134,7 +10261,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 417,
     "hizbQuarter": 192,
     "sajda": {"id": 13, "recommended": false, "obligatory": true},
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [30, 31, 32, 33, 34, 35, 36, 37, 38]
   },
   {
     "content": [
@@ -10153,7 +10280,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 418,
     "hizbQuarter": 192,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [39, 40, 41, 42, 43, 44, 45, 46]
   },
   {
     "content": [
@@ -10172,7 +10299,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 418,
     "hizbQuarter": 193,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [47, 48, 49, 50, 51, 52, 53, 54]
   },
   {
     "content": [
@@ -10211,7 +10338,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 420,
     "hizbQuarter": 194,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [11, 12, 13, 14, 15]
   },
   {
     "content": [
@@ -10229,7 +10356,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 421,
     "hizbQuarter": 194,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [16, 17, 18, 19, 20, 21, 22]
   },
   {
     "content": [
@@ -10237,7 +10364,7 @@ List<Map<String, dynamic>> quranPages = [
       "أَمْ يَقُولُونَ ٱفْتَرَىٰ عَلَى ٱللَّهِ كَذِبًۭا ۖ فَإِن يَشَإِ ٱللَّهُ يَخْتِمْ عَلَىٰ قَلْبِكَ ۗ وَيَمْحُ ٱللَّهُ ٱلْبَٰطِلَ وَيُحِقُّ ٱلْحَقَّ بِكَلِمَٰتِهِۦٓ ۚ إِنَّهُۥ عَلِيمٌۢ بِذَاتِ ٱلصُّدُورِ",
       "وَهُوَ ٱلَّذِى يَقْبَلُ ٱلتَّوْبَةَ عَنْ عِبَادِهِۦ وَيَعْفُوا۟ عَنِ ٱلسَّيِّـَٔاتِ وَيَعْلَمُ مَا تَفْعَلُونَ",
       "وَيَسْتَجِيبُ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ وَيَزِيدُهُم مِّن فَضْلِهِۦ ۚ وَٱلْكَٰفِرُونَ لَهُمْ عَذَابٌۭ شَدِيدٌۭ",
-      "۞ وَلَوْ بَسَطَ ٱللَّهُ ٱلرِّزْقَ لِعِبَادِهِۦ لَبَغَوْا۟ فِى ٱلْأَرْضِ وَلَٰكِن يُنَزِّلُ بِقَدَرٍۢ مَّا يَشَآءُ ۚ إِنَّهُۥ بِعِبَادِهِۦ خَبِيرٌۢ بَصِيرٌۭ",
+      "۞ وَلَوْ بَسَطَ ٱللَّهُ ٱلرِّزْقَ لِ��ِبَادِهِۦ لَبَغَوْا۟ فِى ٱلْأَرْضِ وَلَٰكِن يُنَزِّلُ بِقَدَرٍۢ مَّا يَشَآءُ ۚ إِنَّهُۥ بِعِبَادِهِۦ خَبِيرٌۢ بَصِيرٌۭ",
       "وَهُوَ ٱلَّذِى يُنَزِّلُ ٱلْغَيْثَ مِنۢ بَعْدِ مَا قَنَطُوا۟ وَيَنشُرُ رَحْمَتَهُۥ ۚ وَهُوَ ٱلْوَلِىُّ ٱلْحَمِيدُ",
       "وَمِنْ ءَايَٰتِهِۦ خَلْقُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ وَمَا بَثَّ فِيهِمَا مِن دَآبَّةٍۢ ۚ وَهُوَ عَلَىٰ جَمْعِهِمْ إِذَا يَشَآءُ قَدِيرٌۭ",
       "وَمَآ أَصَٰبَكُم مِّن مُّصِيبَةٍۢ فَبِمَا كَسَبَتْ أَيْدِيكُمْ وَيَعْفُوا۟ عَن كَثِيرٍۢ",
@@ -10249,7 +10376,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 422,
     "hizbQuarter": 195,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [23, 24, 25, 26, 27, 28, 29, 30, 31]
   },
   {
     "content": [
@@ -10273,7 +10400,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 423,
     "hizbQuarter": 195,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    "verse": [32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
   },
   {
     "content": [
@@ -10291,7 +10418,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 423,
     "hizbQuarter": 196,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [45, 46, 47, 48, 49, 50, 51]
   },
   {
     "content": [
@@ -10316,7 +10443,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 424,
     "hizbQuarter": 196,
     "sajda": null,
-    "verse": [1, 2, "", "", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [52, 53, "", "", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   },
   {
     "content": [
@@ -10339,7 +10466,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 425,
     "hizbQuarter": 196,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    "verse": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
   },
   {
     "content": [
@@ -10361,7 +10488,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 426,
     "hizbQuarter": 197,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    "verse": [23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]
   },
   {
     "content": [
@@ -10386,7 +10513,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 428,
     "hizbQuarter": 197,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    "verse": [34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
   },
   {
     "content": [
@@ -10410,7 +10537,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 429,
     "hizbQuarter": 198,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    "verse": [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60]
   },
   {
     "content": [
@@ -10434,7 +10561,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 430,
     "hizbQuarter": 198,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    "verse": [61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73]
   },
   {
     "content": [
@@ -10461,7 +10588,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 430,
     "hizbQuarter": 198,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+    "verse": [74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89]
   },
   {
     "content": [
@@ -10546,27 +10673,27 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 199,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
       19,
       20,
-      21
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
     ]
   },
   {
@@ -10600,26 +10727,26 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 199,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
       ""
     ]
   },
@@ -10666,7 +10793,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 436,
     "hizbQuarter": 200,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [14, 15, 16, 17, 18, 19, 20, 21, 22]
   },
   {
     "content": [
@@ -10687,7 +10814,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 437,
     "hizbQuarter": 200,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
   },
   {
     "content": [
@@ -10710,7 +10837,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 438,
     "hizbQuarter": 201,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, "", "", 1, 2, 3, 4, 5]
+    "verse": [33, 34, 35, 36, 37, "", "", 1, 2, 3, 4, 5]
   },
   {
     "content": [
@@ -10730,7 +10857,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 439,
     "hizbQuarter": 201,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [6, 7, 8, 9, 10, 11, 12, 13, 14]
   },
   {
     "content": [
@@ -10747,7 +10874,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 439,
     "hizbQuarter": 201,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [15, 16, 17, 18, 19, 20]
   },
   {
     "content": [
@@ -10766,7 +10893,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 441,
     "hizbQuarter": 202,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [21, 22, 23, 24, 25, 26, 27, 28]
   },
   {
     "content": [
@@ -10785,7 +10912,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 441,
     "hizbQuarter": 202,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, ""]
+    "verse": [29, 30, 31, 32, 33, 34, 35, ""]
   },
   {
     "content": [
@@ -10827,7 +10954,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 443,
     "hizbQuarter": 203,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [12, 13, 14, 15, 16, 17, 18, 19]
   },
   {
     "content": [
@@ -10848,7 +10975,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 445,
     "hizbQuarter": 203,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
   },
   {
     "content": [
@@ -10868,7 +10995,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 445,
     "hizbQuarter": 204,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [30, 31, 32, 33, 34, 35, 36, 37, 38]
   },
   {
     "content": [
@@ -10907,13 +11034,13 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 447,
     "hizbQuarter": 204,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [10, 11, 12, 13, 14, 15]
   },
   {
     "content": [
       "قُل لِّلْمُخَلَّفِينَ مِنَ ٱلْأَعْرَابِ سَتُدْعَوْنَ إِلَىٰ قَوْمٍ أُو۟لِى بَأْسٍۢ شَدِيدٍۢ تُقَٰتِلُونَهُمْ أَوْ يُسْلِمُونَ ۖ فَإِن تُطِيعُوا۟ يُؤْتِكُمُ ٱللَّهُ أَجْرًا حَسَنًۭا ۖ وَإِن تَتَوَلَّوْا۟ كَمَا تَوَلَّيْتُم مِّن قَبْلُ يُعَذِّبْكُمْ عَذَابًا أَلِيمًۭا",
       "لَّيْسَ عَلَى ٱلْأَعْمَىٰ حَرَجٌۭ وَلَا عَلَى ٱلْأَعْرَجِ حَرَجٌۭ وَلَا عَلَى ٱلْمَرِيضِ حَرَجٌۭ ۗ وَمَن يُطِعِ ٱللَّهَ وَرَسُولَهُۥ يُدْخِلْهُ جَنَّٰتٍۢ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَٰرُ ۖ وَمَن يَتَوَلَّ يُعَذِّبْهُ عَذَابًا أَلِيمًۭا",
-      "۞ لَّقَدْ رَضِىَ ٱللَّهُ عَنِ ٱلْمُؤْمِنِينَ إِذْ يُبَايِعُونَكَ تَحْتَ ٱلشَّجَرَةِ فَعَلِمَ مَا فِى قُلُوبِهِمْ فَأَنزَلَ ٱلسَّكِينَةَ عَلَيْهِمْ وَأَثَٰبَهُمْ فَتْحًۭا قَرِيبًۭا",
+      "۞ لَّقَدْ رَضِىَ ٱللَّهُ عَنِ ٱلْمُؤْمِنِينَ إِذ�� يُبَايِعُونَكَ تَحْتَ ٱلشَّجَرَةِ فَعَلِمَ مَا فِى قُلُوبِهِمْ فَأَنزَلَ ٱلسَّكِينَةَ عَلَيْهِمْ وَأَثَٰبَهُمْ فَتْحًۭا قَرِيبًۭا",
       "وَمَغَانِمَ كَثِيرَةًۭ يَأْخُذُونَهَا ۗ وَكَانَ ٱللَّهُ عَزِيزًا حَكِيمًۭا",
       "وَعَدَكُمُ ٱللَّهُ مَغَانِمَ كَثِيرَةًۭ تَأْخُذُونَهَا فَعَجَّلَ لَكُمْ هَٰذِهِۦ وَكَفَّ أَيْدِىَ ٱلنَّاسِ عَنكُمْ وَلِتَكُونَ ءَايَةًۭ لِّلْمُؤْمِنِينَ وَيَهْدِيَكُمْ صِرَٰطًۭا مُّسْتَقِيمًۭا",
       "وَأُخْرَىٰ لَمْ تَقْدِرُوا۟ عَلَيْهَا قَدْ أَحَاطَ ٱللَّهُ بِهَا ۚ وَكَانَ ٱللَّهُ عَلَىٰ كُلِّ شَىْءٍۢ قَدِيرًۭا",
@@ -10926,7 +11053,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 448,
     "hizbQuarter": 205,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [16, 17, 18, 19, 20, 21, 22, 23]
   },
   {
     "content": [
@@ -10942,7 +11069,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 449,
     "hizbQuarter": 205,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [24, 25, 26, 27, 28]
   },
   {
     "content": [
@@ -10960,7 +11087,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 450,
     "hizbQuarter": 206,
     "sajda": null,
-    "verse": [1, "", "", 1, 2, 3, 4]
+    "verse": [29, "", "", 1, 2, 3, 4]
   },
   {
     "content": [
@@ -10978,7 +11105,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 451,
     "hizbQuarter": 206,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [5, 6, 7, 8, 9, 10, 11]
   },
   {
     "content": [
@@ -10996,7 +11123,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 451,
     "hizbQuarter": 207,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [12, 13, 14, 15, 16, 17, 18]
   },
   {
     "content": [
@@ -11056,26 +11183,26 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 208,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
       16,
       17,
       18,
       19,
-      20
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
     ]
   },
   {
@@ -11105,7 +11232,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 455,
     "hizbQuarter": 208,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "", "", 1, 2, 3, 4, 5, 6]
+    "verse": [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, "", "", 1, 2, 3, 4, 5, 6]
   },
   {
     "content": [
@@ -11141,12 +11268,6 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 208,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
       7,
       8,
       9,
@@ -11164,7 +11285,13 @@ List<Map<String, dynamic>> quranPages = [
       21,
       22,
       23,
-      24
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30
     ]
   },
   {
@@ -11198,27 +11325,27 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 209,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
     ]
   },
   {
@@ -11256,15 +11383,15 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 209,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
       "",
       "",
       1,
@@ -11309,7 +11436,25 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 459,
     "hizbQuarter": 210,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+    "verse": [
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ]
   },
   {
     "content": [
@@ -11339,7 +11484,27 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 459,
     "hizbQuarter": 210,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, ""]
+    "verse": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      ""
+    ]
   },
   {
     "content": [
@@ -11434,7 +11599,26 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 462,
     "hizbQuarter": 211,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+    "verse": [
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44
+    ]
   },
   {
     "content": [
@@ -11472,24 +11656,24 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 211,
     "sajda": {"id": 13, "recommended": false, "obligatory": true},
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
       "",
       "",
       1,
@@ -11531,12 +11715,6 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 212,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
       7,
       8,
       9,
@@ -11551,7 +11729,13 @@ List<Map<String, dynamic>> quranPages = [
       18,
       19,
       20,
-      21
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27
     ]
   },
   {
@@ -11586,28 +11770,28 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 212,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49
     ]
   },
   {
@@ -11644,12 +11828,12 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 213,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
       "",
       "",
       1,
@@ -11704,22 +11888,6 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 213,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
       17,
       18,
       19,
@@ -11727,7 +11895,23 @@ List<Map<String, dynamic>> quranPages = [
       21,
       22,
       23,
-      24
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40
     ]
   },
   {
@@ -11767,33 +11951,33 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 213,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25,
-      26,
-      27
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67
     ]
   },
   {
@@ -11835,17 +12019,17 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 214,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
       "",
       "",
       1,
@@ -11910,22 +12094,6 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 214,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
       17,
       18,
       19,
@@ -11943,7 +12111,23 @@ List<Map<String, dynamic>> quranPages = [
       31,
       32,
       33,
-      34
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50
     ]
   },
   {
@@ -11982,32 +12166,32 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 215,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25,
-      26
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76
     ]
   },
   {
@@ -12045,26 +12229,26 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 215,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
       "",
       "",
       1,
@@ -12089,7 +12273,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 473,
     "hizbQuarter": 215,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [4, 5, 6, 7, 8, 9, 10, 11]
   },
   {
     "content": [
@@ -12107,12 +12291,12 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 473,
     "hizbQuarter": 216,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [12, 13, 14, 15, 16, 17, 18]
   },
   {
     "content": [
       "وَٱلَّذِينَ ءَامَنُوا۟ بِٱللَّهِ وَرُسُلِهِۦٓ أُو۟لَٰٓئِكَ هُمُ ٱلصِّدِّيقُونَ ۖ وَٱلشُّهَدَآءُ عِندَ رَبِّهِمْ لَهُمْ أَجْرُهُمْ وَنُورُهُمْ ۖ وَٱلَّذِينَ كَفَرُوا۟ وَكَذَّبُوا۟ بِـَٔايَٰتِنَآ أُو۟لَٰٓئِكَ أَصْحَٰبُ ٱلْجَحِيمِ",
-      "ٱعْلَمُوٓا۟ أَنَّمَا ٱلْحَيَوٰةُ ٱلدُّنْيَا لَعِبٌۭ وَلَهْوٌۭ وَزِينَةٌۭ وَتَفَاخُرٌۢ بَيْنَكُمْ وَتَكَاثُرٌۭ فِى ٱلْأَمْوَٰلِ وَٱلْأَوْلَٰدِ ۖ كَمَثَلِ غَيْثٍ أَعْجَبَ ٱلْكُفَّارَ نَبَاتُهُۥ ثُمَّ يَهِيجُ فَتَرَىٰهُ مُصْفَرًّۭا ثُمَّ يَكُونُ حُطَٰمًۭا ۖ وَفِى ٱلْءَاخِرَةِ عَذَابٌۭ شَدِيدٌۭ وَمَغْفِرَةٌۭ مِّنَ ٱللَّهِ وَرِضْوَٰنٌۭ ۚ وَمَا ٱلْحَيَوٰةُ ٱلدُّنْيَآ إِلَّا مَتَٰعُ ٱلْغُرُورِ",
+      "ٱعْلَمُوٓا۟ أَنَّمَا ٱلْحَيَوٰةُ ٱلدُّنْيَا لَعِبٌۭ وَلَهْوٌۭ وَزِينَةٌۭ ��َتَفَاخُرٌۢ بَيْنَكُمْ وَتَكَاثُرٌۭ فِى ٱلْأَمْوَٰلِ وَٱلْأَوْلَٰدِ ۖ كَمَثَلِ غَيْثٍ أَعْجَبَ ٱلْكُفَّارَ نَبَاتُهُۥ ثُمَّ يَهِيجُ فَتَرَىٰهُ مُصْفَرًّۭا ثُمَّ يَكُونُ حُطَٰمًۭا ۖ وَفِى ٱلْءَاخِرَةِ عَذَابٌۭ شَدِيدٌۭ وَمَغْفِرَةٌۭ مِّنَ ٱللَّهِ وَرِضْوَٰنٌۭ ۚ وَمَا ٱلْحَيَوٰةُ ٱلدُّنْيَآ إِلَّا مَتَٰعُ ٱلْغُرُورِ",
       "سَابِقُوٓا۟ إِلَىٰ مَغْفِرَةٍۢ مِّن رَّبِّكُمْ وَجَنَّةٍ عَرْضُهَا كَعَرْضِ ٱلسَّمَآءِ وَٱلْأَرْضِ أُعِدَّتْ لِلَّذِينَ ءَامَنُوا۟ بِٱللَّهِ وَرُسُلِهِۦ ۚ ذَٰلِكَ فَضْلُ ٱللَّهِ يُؤْتِيهِ مَن يَشَآءُ ۚ وَٱللَّهُ ذُو ٱلْفَضْلِ ٱلْعَظِيمِ",
       "مَآ أَصَابَ مِن مُّصِيبَةٍۢ فِى ٱلْأَرْضِ وَلَا فِىٓ أَنفُسِكُمْ إِلَّا فِى كِتَٰبٍۢ مِّن قَبْلِ أَن نَّبْرَأَهَآ ۚ إِنَّ ذَٰلِكَ عَلَى ٱللَّهِ يَسِيرٌۭ",
       "لِّكَيْلَا تَأْسَوْا۟ عَلَىٰ مَا فَاتَكُمْ وَلَا تَفْرَحُوا۟ بِمَآ ءَاتَىٰكُمْ ۗ وَٱللَّهُ لَا يُحِبُّ كُلَّ مُخْتَالٍۢ فَخُورٍ",
@@ -12124,7 +12308,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 474,
     "hizbQuarter": 216,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [19, 20, 21, 22, 23, 24]
   },
   {
     "content": [
@@ -12140,7 +12324,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 475,
     "hizbQuarter": 216,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [25, 26, 27, 28, 29]
   },
   {
     "content": [
@@ -12175,7 +12359,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 477,
     "hizbQuarter": 217,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [7, 8, 9, 10, 11]
   },
   {
     "content": [
@@ -12196,7 +12380,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 478,
     "hizbQuarter": 218,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
   },
   {
     "content": [
@@ -12213,7 +12397,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 479,
     "hizbQuarter": 218,
     "sajda": null,
-    "verse": [1, "", "", 1, 2, 3]
+    "verse": [22, "", "", 1, 2, 3]
   },
   {
     "content": [
@@ -12230,7 +12414,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 479,
     "hizbQuarter": 218,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [4, 5, 6, 7, 8, 9]
   },
   {
     "content": [
@@ -12248,7 +12432,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 480,
     "hizbQuarter": 219,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [10, 11, 12, 13, 14, 15, 16]
   },
   {
     "content": [
@@ -12268,7 +12452,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 481,
     "hizbQuarter": 219,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, ""]
+    "verse": [17, 18, 19, 20, 21, 22, 23, 24, ""]
   },
   {
     "content": [
@@ -12302,7 +12486,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 483,
     "hizbQuarter": 220,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6]
+    "verse": [6, 7, 8, 9, 10, 11]
   },
   {
     "content": [
@@ -12322,7 +12506,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 484,
     "hizbQuarter": 220,
     "sajda": null,
-    "verse": [1, 2, "", "", 1, 2, 3, 4, 5]
+    "verse": [12, 13, "", "", 1, 2, 3, 4, 5]
   },
   {
     "content": [
@@ -12342,7 +12526,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 485,
     "hizbQuarter": 220,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    "verse": [6, 7, 8, 9, 10, 11, 12, 13, 14]
   },
   {
     "content": [
@@ -12383,7 +12567,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 488,
     "hizbQuarter": 222,
     "sajda": null,
-    "verse": [1, 2, 3, "", "", 1, 2, 3, 4]
+    "verse": [9, 10, 11, "", "", 1, 2, 3, 4]
   },
   {
     "content": [
@@ -12402,7 +12586,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 489,
     "hizbQuarter": 222,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, ""]
+    "verse": [5, 6, 7, 8, 9, 10, 11, ""]
   },
   {
     "content": [
@@ -12444,7 +12628,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 491,
     "hizbQuarter": 222,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, ""]
+    "verse": [10, 11, 12, 13, 14, 15, 16, 17, 18, ""]
   },
   {
     "content": [
@@ -12479,7 +12663,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 493,
     "hizbQuarter": 223,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7]
+    "verse": [6, 7, 8, 9, 10, 11, 12]
   },
   {
     "content": [
@@ -12515,7 +12699,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 495,
     "hizbQuarter": 224,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5]
+    "verse": [8, 9, 10, 11, 12]
   },
   {
     "content": [
@@ -12565,7 +12749,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 497,
     "hizbQuarter": 225,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    "verse": [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
   },
   {
     "content": [
@@ -12598,10 +12782,10 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 226,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
+      27,
+      28,
+      29,
+      30,
       "",
       "",
       1,
@@ -12658,21 +12842,6 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 226,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
       16,
       17,
       18,
@@ -12684,7 +12853,22 @@ List<Map<String, dynamic>> quranPages = [
       24,
       25,
       26,
-      27
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42
     ]
   },
   {
@@ -12707,7 +12891,7 @@ List<Map<String, dynamic>> quranPages = [
       "كَذَّبَتْ ثَمُودُ وَعَادٌۢ بِٱلْقَارِعَةِ",
       "فَأَمَّا ثَمُودُ فَأُهْلِكُوا۟ بِٱلطَّاغِيَةِ",
       "وَأَمَّا عَادٌۭ فَأُهْلِكُوا۟ بِرِيحٍۢ صَرْصَرٍ عَاتِيَةٍۢ",
-      "سَخَّرَهَا عَلَيْهِمْ سَبْعَ لَيَالٍۢ وَثَمَٰنِيَةَ أَيَّامٍ حُسُومًۭا فَتَرَى ٱلْقَوْمَ فِيهَا صَرْعَىٰ كَأَنَّهُمْ أَعْجَازُ نَخْلٍ خَاوِيَةٍۢ",
+      "سَخَّرَهَا عَلَيْهِمْ سَبْعَ لَيَالٍۢ وَثَمَٰنِيَةَ أَيَّامٍ حُسُومًۭا فَتَرَى ٱلْقَوْمَ فِيهَا صَر��عَىٰ كَأَنَّهُمْ أَعْجَازُ نَخْلٍ خَاوِيَةٍۢ",
       "فَهَلْ تَرَىٰ لَهُم مِّنۢ بَاقِيَةٍۢ"
     ],
     "juz": 29,
@@ -12716,7 +12900,28 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 500,
     "hizbQuarter": 227,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "", "", 1, 2, 3, 4, 5, 6, 7, 8]
+    "verse": [
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      "",
+      "",
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
   },
   {
     "content": [
@@ -12754,14 +12959,6 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 227,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
       9,
       10,
       11,
@@ -12779,7 +12976,15 @@ List<Map<String, dynamic>> quranPages = [
       23,
       24,
       25,
-      26
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34
     ]
   },
   {
@@ -12822,24 +13027,24 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 227,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
       "",
       "",
       1,
@@ -12893,16 +13098,6 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 228,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
       11,
       12,
       13,
@@ -12921,7 +13116,17 @@ List<Map<String, dynamic>> quranPages = [
       26,
       27,
       28,
-      29
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
     ]
   },
   {
@@ -12950,7 +13155,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 504,
     "hizbQuarter": 228,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, "", "", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    "verse": [40, 41, 42, 43, 44, "", "", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   },
   {
     "content": [
@@ -12979,7 +13184,26 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 505,
     "hizbQuarter": 228,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+    "verse": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28
+    ]
   },
   {
     "content": [
@@ -13031,7 +13255,7 @@ List<Map<String, dynamic>> quranPages = [
     "ruku": 507,
     "hizbQuarter": 229,
     "sajda": null,
-    "verse": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    "verse": [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]
   },
   {
     "content": [
@@ -13117,7 +13341,7 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 230,
     "sajda": null,
     "verse": [
-      1,
+      20,
       "",
       "",
       1,
@@ -13179,23 +13403,6 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 230,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
       18,
       19,
       20,
@@ -13208,7 +13415,24 @@ List<Map<String, dynamic>> quranPages = [
       27,
       28,
       29,
-      30
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47
     ]
   },
   {
@@ -13251,15 +13475,15 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 231,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
       "",
       "",
       1,
@@ -13321,27 +13545,27 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 231,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
       20,
       21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
       "",
       "",
       1,
@@ -13381,11 +13605,6 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 232,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
       6,
       7,
       8,
@@ -13400,7 +13619,12 @@ List<Map<String, dynamic>> quranPages = [
       17,
       18,
       19,
-      20
+      20,
+      21,
+      22,
+      23,
+      24,
+      25
     ]
   },
   {
@@ -13440,12 +13664,12 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 232,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
       "",
       "",
       1,
@@ -13510,25 +13734,6 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 232,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
       20,
       21,
       22,
@@ -13540,7 +13745,26 @@ List<Map<String, dynamic>> quranPages = [
       28,
       29,
       30,
-      31
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50
     ]
   },
   {
@@ -13656,16 +13880,16 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 233,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
       "",
       "",
       1,
@@ -13727,21 +13951,6 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 233,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
       16,
       17,
       18,
@@ -13758,6 +13967,21 @@ List<Map<String, dynamic>> quranPages = [
       29,
       30,
       31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
       ""
     ]
   },
@@ -14041,12 +14265,6 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 235,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
       7,
       8,
       9,
@@ -14068,7 +14286,13 @@ List<Map<String, dynamic>> quranPages = [
       25,
       26,
       27,
-      28
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34
     ]
   },
   {
@@ -14110,8 +14334,8 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 236,
     "sajda": {"id": 14, "recommended": true, "obligatory": false},
     "verse": [
-      1,
-      2,
+      35,
+      36,
       "",
       "",
       1,
@@ -14327,10 +14551,10 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 237,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
+      16,
+      17,
+      18,
+      19,
       "",
       "",
       1,
@@ -14463,13 +14687,13 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 238,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
       "",
       "",
       1,
@@ -14611,13 +14835,13 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 239,
     "sajda": null,
     "verse": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
       "",
       "",
       1,
@@ -14776,7 +15000,7 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 240,
     "sajda": null,
     "verse": [
-      1,
+      8,
       "",
       "",
       1,
@@ -14835,8 +15059,8 @@ List<Map<String, dynamic>> quranPages = [
     "hizbQuarter": 240,
     "sajda": null,
     "verse": [
-      1,
-      2,
+      10,
+      11,
       "",
       "",
       1,
