@@ -270,7 +270,7 @@ class Moshaf extends StatelessWidget {
                             ],
                           )
                         },
-                      }
+                      },
                     ],
                   )),
                 ],

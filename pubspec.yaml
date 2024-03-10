@@ -112,9 +112,12 @@ flutter:
     - family: Authmanic
       fonts:
         - asset: assets/fonts/UthmanicHafs_V20.ttf
+    - family: Basmala
+      fonts:
+        - asset: assets/fonts/QCF_BSML.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
- #assets/fonts/UthmanicHafs1B Ver13.ttf
+ #assets/fonts/UthmanicHafs1B Ver13.ttf assets/fonts/QCF_BSML.ttf
