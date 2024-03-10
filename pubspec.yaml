@@ -47,6 +47,7 @@ dependencies:
   permission_handler: ^11.1.0
   cupertino_icons: ^1.0.2
   flutter_qiblah: ^2.1.0
+  geolocator: ^9.0.2
   dio: ^5.4.0
   flutter:
     sdk: flutter
