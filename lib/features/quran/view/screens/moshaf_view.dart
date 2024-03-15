@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lnastaqim/features/quran/bussniess_logic/quran/quran_cubit.dart';
 import 'package:lnastaqim/features/quran/view/widgets/custom_span.dart';
 
-class Moshaf extends StatelessWidget {
-  const Moshaf({super.key});
+class MoshafView extends StatelessWidget {
+  const MoshafView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,10 @@ class Moshaf extends StatelessWidget {
               padEnds: false,
               physics: const ClampingScrollPhysics(),
               itemBuilder: (context, index) {
-                return MoshafPage(pageIndex: index);
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: MoshafPage(pageIndex: index),
+                );
               })),
     );
   }
@@ -46,18 +49,8 @@ class MoshafPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     text: TextSpan(
                         children: List.generate(ayahs.length, (ayahIndex) {
-                      if (ayahIndex == 0) {
-                        return span(
-                            isFirstAyah: true,
-                            text:
-                                "${ayahs[ayahIndex].code_v2[0]}${ayahs[ayahIndex].code_v2.substring(1)}",
-                            pageIndex: pageIndex,
-                            fontSize: 100,
-                            surahNum: cubit.getSurahNumberFromPage(pageIndex),
-                            ayahNum: ayahs[ayahIndex].ayahUQNumber);
-                      }
                       return span(
-                        isFirstAyah: false,
+                        isFirstAyah: ayahIndex == 0 ? true : false,
                         text: ayahs[ayahIndex].code_v2,
                         pageIndex: pageIndex,
                         fontSize: 100,
