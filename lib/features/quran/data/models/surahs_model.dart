@@ -27,6 +27,7 @@ class Surah {
 }
 
 class Ayah {
+  final int hizbQuarter;
   final int ayahUQNumber;
   final int ayahNumber;
   final String text;
@@ -37,6 +38,8 @@ class Ayah {
   dynamic sajda;
 
   Ayah({
+        required this.hizbQuarter,
+
     required this.ayahUQNumber,
     required this.ayahNumber,
     required this.text,
@@ -49,6 +52,7 @@ class Ayah {
 
   factory Ayah.fromJson(Map<String, dynamic> json) {
     return Ayah(
+      hizbQuarter: json['hizbQuarter'],
       ayahUQNumber: json['number'],
       ayahNumber: json['numberInSurah'],
       text: json['text'],

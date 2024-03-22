@@ -14,6 +14,50 @@ class QuranCubit extends Cubit<QuranState> {
   List<Surah> surahs = [];
   List<List<Ayah>> pages = [];
   List<Ayah> allAyahs = [];
+  List<int> downThePageIndex = [
+    75,
+    206,
+    330,
+    340,
+    348,
+    365,
+    375,
+    413,
+    416,
+    434,
+    444,
+    451,
+    497,
+    505,
+    524,
+    547,
+    554,
+    556,
+    583
+  ];
+  List<int> topOfThePageIndex = [
+    76,
+    207,
+    331,
+    341,
+    349,
+    366,
+    376,
+    414,
+    417,
+    435,
+    445,
+    452,
+    498,
+    506,
+    525,
+    548,
+    554,
+    555,
+    557,
+    583,
+    584
+  ];
 
   Future<void> loadQuran() async {
     surahs = quranSurahs.map((s) => Surah.fromJson(s)).toList();
@@ -36,4 +80,21 @@ class QuranCubit extends Cubit<QuranState> {
       .surahNumber;
 
   List<Ayah> getCurrentPageAyahs(int pageIndex) => pages[pageIndex];
+
+   Ayah getPageInfo(int page) => allAyahs.firstWhere((a) => a.page == page + 1);
+
+  int getSurahNumberByAyah(Ayah ayah) =>
+      surahs.firstWhere((s) => s.ayahs.contains(ayah)).surahNumber;
+
+
+  String getSurahNameFromPage(int pageNumber) {
+    try {
+      return surahs
+          .firstWhere(
+              (s) => s.ayahs.contains(getCurrentPageAyahs(pageNumber).first))
+          .arabicName;
+    } catch (e) {
+      return "Surah not found";
+    }
+  }
 }

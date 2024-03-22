@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lnastaqim/core/utilits/extensions/color_from_hex.dart';
 
 TextSpan span({
   required String text,
@@ -24,7 +26,7 @@ TextSpan span({
         style: TextStyle(
             fontFamily: 'page${pageIndex + 1}',
             fontSize: fontSize,
-            height: 2,
+          
             letterSpacing: 30,
             color: Colors.black,
             backgroundColor: Colors.transparent),
@@ -37,7 +39,6 @@ TextSpan span({
         style: TextStyle(
             fontFamily: 'page${pageIndex + 1}',
             fontSize: fontSize,
-            height: 2,
             letterSpacing: 5,
             // wordSpacing: wordSpacing + 10,
             color: Colors.black,
@@ -53,7 +54,6 @@ TextSpan span({
       style: TextStyle(
           fontFamily: 'page${pageIndex + 1}',
           fontSize: fontSize,
-          height: 2,
           letterSpacing: 5,
           color: Colors.black,
           backgroundColor: Colors.transparent),
@@ -64,12 +64,22 @@ TextSpan span({
 
     final TextSpan lastCharacterSpan = TextSpan(
       text: lastCharacter,
-      style: TextStyle(
+      style: TextStyle(shadows: [Shadow(
+                            color:"#404c6e".toColor,offset: Offset(1.3.w, 1.3.h),blurRadius: 1.3.r
+                          ),
+                          Shadow(
+                            color:"#404c6e".toColor,offset: Offset(1.3.w, 1.3.h),blurRadius: 1.3.r
+                          ),
+                       
+                          Shadow(
+                            color:"#404c6e".toColor,offset: Offset(1.3.w, 1.3.h),blurRadius: 1.3.r
+                          ),Shadow(
+                            color:"#404c6e".toColor,offset: Offset(1.3.w, 1.3.h),blurRadius: 1.3.r
+                          )],
           fontFamily: 'page${pageIndex + 1}',
           fontSize: fontSize,
-          height: 2,
           letterSpacing: 5,
-          color: Colors.red,
+          color:"#404c6e".toColor,
           backgroundColor: Colors.transparent),
       recognizer: LongPressGestureRecognizer(
           duration: const Duration(milliseconds: 500))

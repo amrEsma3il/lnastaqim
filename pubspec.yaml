@@ -54,6 +54,8 @@ dependencies:
     sdk: flutter
   audioplayers: ^4.0.0
   flutter_tts: ^3.8.5
+  meta: ^1.10.0
+  collection: ^1.18.0
 
 
 dev_dependencies:
@@ -79,6 +81,9 @@ flutter:
     - assets/
     - assets/images/
     - assets/icons/ 
+    - assets/svgs/
+    - assets/svgs/surah_name/
+    - assets/svgs/bookmark.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -88,11 +93,17 @@ flutter:
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
-  # example:
+  # example: assets/fonts/thuluth-decorated.ttf      ... 
   fonts:
     - family: Mushaf
       fonts:
         - asset: assets\fonts\Al Mushaf Quran.ttf
+    - family: Naskh
+      fonts:
+        - asset: assets/fonts/NotoNaskhArabic-VariableFont_wght.ttf
+    - family: Thuluth
+      fonts: 
+        - asset: assets/fonts/thuluth-decorated.ttf
     - family: Amiri
       fonts:
         - asset: assets\fonts\Amiri.ttf
