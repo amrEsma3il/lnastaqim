@@ -31,8 +31,8 @@ class Ayah {
   final int ayahUQNumber;
   final int ayahNumber;
   final String text;
-  final String aya_text_emlaey;
-  final String code_v2;
+  final String ayaTextEmlaey;
+  final String codeV2;
   final int juz;
   final int page;
   dynamic sajda;
@@ -43,8 +43,8 @@ class Ayah {
     required this.ayahUQNumber,
     required this.ayahNumber,
     required this.text,
-    required this.aya_text_emlaey,
-    required this.code_v2,
+    required this.ayaTextEmlaey,
+    required this.codeV2,
     required this.juz,
     required this.page,
     required this.sajda,
@@ -56,8 +56,8 @@ class Ayah {
       ayahUQNumber: json['number'],
       ayahNumber: json['numberInSurah'],
       text: json['text'],
-      aya_text_emlaey: json['aya_text_emlaey'],
-      code_v2: json['code_v2'],
+      ayaTextEmlaey: json['aya_text_emlaey'],
+      codeV2: json['code_v2'],
       juz: json['juz'],
       page: json['page'],
       sajda: json['sajda'],

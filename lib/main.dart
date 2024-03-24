@@ -37,6 +37,7 @@ class Lnastaqim extends StatelessWidget {
               create: (context) => QuranSowarVersusCubit(),
             ),
             BlocProvider(
+              lazy: false,
               create: (context) => QuranCubit()..loadQuran(),
             ),
           ],
