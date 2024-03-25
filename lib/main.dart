@@ -10,6 +10,7 @@ import 'features/quran/bussniess_logic/quran_sowar/search_or_not_cubit.dart';
 import 'features/quran/bussniess_logic/sowra_detail/sora_details_cubit.dart';
 
 void main() async {
+  print("object");
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(const Lnastaqim());

@@ -1,14 +1,14 @@
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lnastaqim/core/local_database/quran/quran_v2.dart';
-import 'package:meta/meta.dart';
 
+import '../../data/models/select_aya_model.dart';
 import '../../data/models/surahs_model.dart';
 
-part 'quran_state.dart';
 
-class QuranCubit extends Cubit<QuranState> {
-  QuranCubit() : super(QuranInitial());
+class QuranCubit extends Cubit<SelectAyaModel> {
+  QuranCubit() : super(SelectAyaModel(ayaNumber: -1,offset: Offset(0,0)));
   static QuranCubit get(context) => BlocProvider.of(context);
 
   List<Surah> surahs = [];
@@ -58,6 +58,41 @@ class QuranCubit extends Cubit<QuranState> {
     583,
     584
   ];
+  int selectedAyahNo=-1;
+
+onMoshafPageChangedEvent(){
+
+  emit(SelectAyaModel(ayaNumber: -1,offset: Offset(0,0)));
+}
+
+
+   toggleAyahSelection({required SelectAyaModel selectAya}) {
+    if(
+    selectAya.ayaNumber==state.ayaNumber
+
+    ){
+      emit(SelectAyaModel(ayaNumber: -1,offset: Offset(0,0)));
+
+    }else{
+      emit(selectAya);
+
+    }
+
+  }
+
+
+   // toggleAyahSelection({required int ayaNumber}) {
+   //  if (state.contains(ayaNumber)) {
+   //    state.remove(ayaNumber);
+   //    emit(state);
+   //  } else {
+   //    state.clear();
+   //    state.add(ayaNumber);
+   //    emit(state);
+   //
+   //  }
+
+  // }
 
   Future<void> loadQuran() async {
     surahs = quranSurahs.map((s) => Surah.fromJson(s)).toList();

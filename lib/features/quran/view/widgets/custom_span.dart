@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lnastaqim/core/utilits/extensions/color_from_hex.dart';
 
 TextSpan span({
+  required Color backgroundColor,
   required String text,
   required int pageIndex,
   double? fontSize,
@@ -29,7 +30,7 @@ TextSpan span({
           
             letterSpacing: 30,
             color: Colors.black,
-            backgroundColor: Colors.transparent),
+            backgroundColor:backgroundColor),
         recognizer: LongPressGestureRecognizer(
             duration: const Duration(milliseconds: 500))
           ..onLongPressStart = onLongPressStart,
@@ -42,7 +43,7 @@ TextSpan span({
             letterSpacing: 5,
             // wordSpacing: wordSpacing + 10,
             color: Colors.black,
-            backgroundColor: Colors.transparent),
+            backgroundColor: backgroundColor),
         recognizer: LongPressGestureRecognizer(
             duration: const Duration(milliseconds: 500))
           ..onLongPressStart = onLongPressStart,
@@ -56,7 +57,7 @@ TextSpan span({
           fontSize: fontSize,
           letterSpacing: 5,
           color: Colors.black,
-          backgroundColor: Colors.transparent),
+          backgroundColor: backgroundColor),
       recognizer: LongPressGestureRecognizer(
           duration: const Duration(milliseconds: 500))
         ..onLongPressStart = onLongPressStart,
@@ -80,19 +81,21 @@ TextSpan span({
           fontSize: fontSize,
           letterSpacing: 5,
           color:"#404c6e".toColor,
-          backgroundColor: Colors.transparent),
+          backgroundColor: backgroundColor),
       recognizer: LongPressGestureRecognizer(
           duration: const Duration(milliseconds: 500))
         ..onLongPressStart = onLongPressStart,
     );
 
     return TextSpan(
+
       children: isFirstAyah
           ? [first!, second!, lastCharacterSpan]
           : [initialTextSpan, lastCharacterSpan],
       recognizer: LongPressGestureRecognizer(
           duration: const Duration(milliseconds: 500))
         ..onLongPressStart = onLongPressStart,
+
     );
   } else {
     return const TextSpan(text: '');

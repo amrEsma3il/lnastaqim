@@ -7,6 +7,7 @@ import 'package:lnastaqim/features/quran/bussniess_logic/quran/quran_cubit.dart'
 import 'package:lnastaqim/features/quran/view/widgets/custom_span.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../data/models/select_aya_model.dart';
 import '../widgets/quran_page_info_banner.dart';
 import '../widgets/surah_banner/surah_banner.dart';
 
@@ -17,17 +18,29 @@ class MoshafView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: PageView.builder(
-              itemCount: 604,
-              reverse: true,
-              padEnds: false,
-              physics: const ClampingScrollPhysics(),
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  child: MoshafPage(pageIndex: 603 - index),
-                );
-              })),
+          child: GestureDetector(
+            onTap: (){
+              QuranCubit.get(context).onMoshafPageChangedEvent();
+            },
+            onHorizontalDragStart: (position){
+              QuranCubit.get(context).onMoshafPageChangedEvent();
+            },
+            child: PageView.builder(
+              
+              onPageChanged: (index){
+                QuranCubit.get(context).onMoshafPageChangedEvent();
+              },
+                itemCount: 604,
+                reverse: true,
+                padEnds: false,
+                physics: const ClampingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: MoshafPage(pageIndex:603-index),
+                  );
+                }),
+          )),
     );
   }
 }
@@ -39,8 +52,8 @@ class MoshafPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<QuranCubit, QuranState>(
-      builder: (context, state) {
+    return BlocBuilder<QuranCubit, SelectAyaModel>(
+      builder: (context, moshafPageState) {
         var cubit = QuranCubit.get(context);
         var pageAyahs =
             cubit.getCurrentPageAyahsSeparatedForBasmalah(pageIndex);
@@ -98,13 +111,16 @@ class MoshafPage extends StatelessWidget {
                               ),
                               children:
                                   List.generate(ayahs.length, (ayahIndex) {
-                                return span(
+                                return span(backgroundColor:moshafPageState.ayaNumber== ayahs[ayahIndex].ayahUQNumber?const Color.fromARGB(255, 150, 126, 68):Colors.transparent,
                                   onLongPressStart:
                                       (LongPressStartDetails details) {
-
-                                        print(details.globalPosition);
-                                        print(Get.height);
-                                        print( Get.width- details.globalPosition.dx);
+                                 print(moshafPageState);
+                             cubit.toggleAyahSelection(selectAya:SelectAyaModel(ayaNumber: ayahs[ayahIndex].ayahUQNumber,offset: details.globalPosition ));
+                                        // print(details.globalPosition);
+                                        // print(Get.height);
+                                        // print( Get.width- details.globalPosition.dx);
+                                        // print(ayahs[ayahIndex].codeV2);
+                                        // print(pageIndex);
                                       },
                                   isFirstAyah: ayahIndex == 0 ? true : false,
                                   text: ayahIndex == 0
@@ -126,9 +142,12 @@ class MoshafPage extends StatelessWidget {
                 })
               ],
             ),
-            Positioned(
-              right: 60.1,
-              top: 452-108.h,
+         moshafPageState.ayaNumber!=-1?   Positioned(
+              right:  Get.width- moshafPageState.offset.dx.w< Get.width/4?1.w:(
+
+                  Get.width- moshafPageState.offset.dx.w>(Get.width/4)*3?68.w:37.w
+              ),
+              top:moshafPageState.offset.dy-104.h,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 4.h),
                 decoration: BoxDecoration(
@@ -199,7 +218,7 @@ class MoshafPage extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
+            ):const SizedBox.shrink(),
           ],
         );
       },
