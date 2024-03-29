@@ -24,7 +24,7 @@ class HeaderSection extends StatelessWidget {
           children: [
             IconButton(
                 onPressed: () {
-                  List<SearchAyahEntity>  searchResult= cubit.searchInMoshaf(searchText: 'بقرة');
+                  List<SearchAyahEntity>  searchResult= cubit.searchInMoshaf(searchText: 'يا');
                   print(searchResult.length);
                   print(searchResult.map((e) => e.aya.text));
 
