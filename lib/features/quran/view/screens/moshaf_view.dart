@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
 import 'package:lnastaqim/core/utilits/extensions/color_from_hex.dart';
 import 'package:lnastaqim/features/quran/bussniess_logic/quran/quran_cubit.dart';
 import 'package:lnastaqim/features/quran/view/widgets/custom_span.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/constants/images.dart';
 import '../../data/models/select_aya_model.dart';
 import '../widgets/quran_page_info_banner.dart';
 import '../widgets/surah_banner/surah_banner.dart';
@@ -64,7 +66,7 @@ class MoshafPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 QuranPageInfoBanner(index: pageIndex),
-                SizedBox(height: 4.h),
+                SizedBox(height: 2.h),
                 ...List.generate(pageAyahs.length, (i) {
                   final ayahs = pageAyahs[i];
                   return Column(
@@ -107,7 +109,7 @@ class MoshafPage extends StatelessWidget {
                                       offset: Offset(0.7.w, 0.7.h),
                                       blurRadius: 0.7.r),
                                 ],
-                                height: 2.h,
+                                height: 2.04.h,
                               ),
                               children:
                                   List.generate(ayahs.length, (ayahIndex) {
@@ -135,11 +137,16 @@ class MoshafPage extends StatelessWidget {
                               })),
                         ),
                       ),
+
                       SurahBanner(
                           pageIndex: pageIndex, ayaIndex: i, firstPlace: false),
+
+
                     ],
                   );
-                })
+                }),
+
+
               ],
             ),
          moshafPageState.ayaNumber!=-1?   Positioned(
@@ -169,7 +176,7 @@ class MoshafPage extends StatelessWidget {
                       children: [
                         IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.real_estate_agent_outlined)),
+                            icon: Icon(Icons.menu_book_rounded,color: "#404c6e".toColor,)),
                         Container(
                           width: 1.5.w,
                           height: 19.h,
@@ -189,7 +196,7 @@ class MoshafPage extends StatelessWidget {
                         ),
                         IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.bookmark_border)),
+                            icon: Icon(Icons.bookmark_border,color: "#404c6e".toColor,)),
                         Container(
                           width: 1.5.w,
                           height: 19.h,
@@ -197,14 +204,14 @@ class MoshafPage extends StatelessWidget {
                         ),
                         IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.content_copy_sharp)),
+                            icon: Icon(Icons.content_copy_sharp,color: "#404c6e".toColor,)),
                         Container(
                           width: 1.5.w,
                           height: 19.h,
                           color: Color.fromARGB(255, 150, 126, 68),
                         ),
                         IconButton(
-                            onPressed: () {}, icon: Icon(Icons.share_outlined)),
+                            onPressed: () {}, icon: Icon(Icons.share_outlined,color: "#404c6e".toColor,)),
                         Container(
                           width: 1.5.w,
                           height: 19.h,
@@ -212,13 +219,42 @@ class MoshafPage extends StatelessWidget {
                         ),
                         IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.note_alt_outlined)),
+                            icon: Icon(Icons.note_alt_outlined,color: "#404c6e".toColor,)),
                       ],
                     ),
                   ),
                 ),
               ),
             ):const SizedBox.shrink(),
+
+            Positioned(
+              right: Get.width/2-29.w,
+              bottom: 6.h,
+              child: Center(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Padding(
+                      padding:  EdgeInsets.only(bottom:3.h),
+                      child: Image.asset(
+                        AppImages.numberingaPage4,
+                        width: 32.w,
+                        height: 31.h,
+                        // color:"#404c6e".toColor,
+                      ),
+                    ),
+                    Text(
+                      (pageIndex + 1).toString().toArabic,
+                      style: TextStyle(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w900,
+                          fontFamily: 'naskh',
+                          color:const Color.fromARGB(255, 150, 126, 68)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         );
       },

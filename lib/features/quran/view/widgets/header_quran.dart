@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/images.dart';
+import '../../bussniess_logic/quran/quran_cubit.dart';
 import '../../bussniess_logic/quran_sowar/search_or_not_cubit.dart';
+import '../../data/models/search_ayah_entity.dart';
 
 class HeaderSection extends StatelessWidget {
   const HeaderSection({
@@ -14,6 +16,7 @@ class HeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = QuranCubit.get(context);
     return BlocBuilder<SearchOrNot, bool>(
       builder: (context, searchState) {
         return Row(
@@ -21,7 +24,15 @@ class HeaderSection extends StatelessWidget {
           children: [
             IconButton(
                 onPressed: () {
-                  BlocProvider.of<SearchOrNot>(context).swithSearchStatus();
+                  List<SearchAyahEntity>  searchResult= cubit.searchInMoshaf(searchText: 'بقرة');
+                  print(searchResult.length);
+                  print(searchResult.map((e) => e.aya.text));
+
+                  //   searchResult.forEach((ayaInfo) {
+                  //   print(ayaInfo.aya.text);
+                  //
+                  // });
+                  // BlocProvider.of<SearchOrNot>(context).swithSearchStatus();
                 },
                 icon: Icon(
                   searchState ? Icons.cancel_outlined : Icons.search,
