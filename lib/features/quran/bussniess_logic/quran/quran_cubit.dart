@@ -13,7 +13,7 @@ import '../../../../core/utilits/functions/search_string_pattern/boyer_moore_alg
 // import '../../../../core/utilits/functions/search_string_pattern/kmp_algo.dart' as kmp;
 
 class QuranCubit extends Cubit<SelectAyaModel> {
-  QuranCubit() : super(const SelectAyaModel(ayaNumber: -1, offset: Offset(0, 0)));
+  QuranCubit() : super( SelectAyaModel(ayaNumber: -1, offset: Offset(0, 0)));
   static QuranCubit get(context) => BlocProvider.of(context);
 
   TextEditingController searchController = TextEditingController();
@@ -77,12 +77,12 @@ class QuranCubit extends Cubit<SelectAyaModel> {
   int selectedAyahNo = -1;
 
   onMoshafPageChangedEvent() {
-    emit(const SelectAyaModel(ayaNumber: -1, offset: Offset(0, 0)));
+    emit(SelectAyaModel(ayaNumber: -1, offset: Offset(0, 0)));
   }
 
   toggleAyahSelection({required SelectAyaModel selectAya}) {
     if (selectAya.ayaNumber == state.ayaNumber) {
-      emit(const SelectAyaModel(ayaNumber: -1, offset: Offset(0, 0)));
+      emit( SelectAyaModel(ayaNumber: -1, offset: Offset(0, 0)));
     } else {
       emit(selectAya);
     }
