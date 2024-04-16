@@ -21,28 +21,27 @@ class MoshafView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: GestureDetector(
-            onTap: (){
+        onTap: () {
+          QuranCubit.get(context).onMoshafPageChangedEvent();
+        },
+        onHorizontalDragStart: (position) {
+          QuranCubit.get(context).onMoshafPageChangedEvent();
+        },
+        child: PageView.builder(
+            onPageChanged: (index) {
               QuranCubit.get(context).onMoshafPageChangedEvent();
             },
-            onHorizontalDragStart: (position){
-              QuranCubit.get(context).onMoshafPageChangedEvent();
-            },
-            child: PageView.builder(
-              
-              onPageChanged: (index){
-                QuranCubit.get(context).onMoshafPageChangedEvent();
-              },
-                itemCount: 604,
-                reverse: true,
-                padEnds: false,
-                physics: const ClampingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.w),
-                    child: MoshafPage(pageIndex:603-index),
-                  );
-                }),
-          )),
+            itemCount: 604,
+            reverse: true,
+            padEnds: false,
+            physics: const ClampingScrollPhysics(),
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: MoshafPage(pageIndex: 603 - index),
+              );
+            }),
+      )),
     );
   }
 }
@@ -113,17 +112,25 @@ class MoshafPage extends StatelessWidget {
                               ),
                               children:
                                   List.generate(ayahs.length, (ayahIndex) {
-                                return span(backgroundColor:moshafPageState.ayaNumber== ayahs[ayahIndex].ayahUQNumber?const Color.fromARGB(255, 150, 126, 68):Colors.transparent,
+                                return span(
+                                  backgroundColor: moshafPageState.ayaNumber ==
+                                          ayahs[ayahIndex].ayahUQNumber
+                                      ? const Color.fromARGB(255, 150, 126, 68)
+                                      : Colors.transparent,
                                   onLongPressStart:
                                       (LongPressStartDetails details) {
-                                 print(moshafPageState);
-                             cubit.toggleAyahSelection(selectAya:SelectAyaModel(ayaNumber: ayahs[ayahIndex].ayahUQNumber,offset: details.globalPosition ));
-                                        // print(details.globalPosition);
-                                        // print(Get.height);
-                                        // print( Get.width- details.globalPosition.dx);
-                                        // print(ayahs[ayahIndex].codeV2);
-                                        // print(pageIndex);
-                                      },
+                                    print(moshafPageState);
+                                    cubit.toggleAyahSelection(
+                                        selectAya: SelectAyaModel(
+                                            ayaNumber:
+                                                ayahs[ayahIndex].ayahUQNumber,
+                                            offset: details.globalPosition));
+                                    // print(details.globalPosition);
+                                    // print(Get.height);
+                                    // print( Get.width- details.globalPosition.dx);
+                                    // print(ayahs[ayahIndex].codeV2);
+                                    // print(pageIndex);
+                                  },
                                   isFirstAyah: ayahIndex == 0 ? true : false,
                                   text: ayahIndex == 0
                                       ? "${ayahs[ayahIndex].codeV2[0]}${ayahs[ayahIndex].codeV2.substring(1)}"
@@ -134,108 +141,129 @@ class MoshafPage extends StatelessWidget {
                                       cubit.getSurahNumberFromPage(pageIndex),
                                   ayahNum: ayahs[ayahIndex].ayahUQNumber,
                                 );
+                              
+                              
                               })),
                         ),
                       ),
-
+                 
                       SurahBanner(
                           pageIndex: pageIndex, ayaIndex: i, firstPlace: false),
-
-
                     ],
                   );
                 }),
-
-
               ],
             ),
-         moshafPageState.ayaNumber!=-1?   Positioned(
-              right:  Get.width- moshafPageState.offset.dx.w< Get.width/4?1.w:(
-
-                  Get.width- moshafPageState.offset.dx.w>(Get.width/4)*3?68.w:37.w
-              ),
-              top:moshafPageState.offset.dy-104.h,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 4.h),
-                decoration: BoxDecoration(
-                  color: "#404c6e".toColor,
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.all(Radius.circular(8)),
-                      border: Border.all(
-                          width: 2,
-                          color:
-                              Get.theme.colorScheme.primary.withOpacity(.5))),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 2.w),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.menu_book_rounded,color: "#404c6e".toColor,)),
-                        Container(
-                          width: 1.5.w,
-                          height: 19.h,
-                          color: Color.fromARGB(255, 150, 126, 68),
+            moshafPageState.ayaNumber != -1
+                ? Positioned(
+                    right:
+                        Get.width - moshafPageState.offset.dx.w < Get.width / 4
+                            ? 1.w
+                            : (Get.width - moshafPageState.offset.dx.w >
+                                    (Get.width / 4) * 3
+                                ? 68.w
+                                : 37.w),
+                    top: moshafPageState.offset.dy - 104.h,
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 6.w, vertical: 4.h),
+                      decoration: BoxDecoration(
+                        color: "#404c6e".toColor,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8)),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8)),
+                            border: Border.all(
+                                width: 2,
+                                color: Get.theme.colorScheme.primary
+                                    .withOpacity(.5))),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 2.w),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.menu_book_rounded,
+                                    color: "#404c6e".toColor,
+                                  )),
+                              Container(
+                                width: 1.5.w,
+                                height: 19.h,
+                                color: Color.fromARGB(255, 150, 126, 68),
+                              ),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.play_arrow_rounded,
+                                    color: Color.fromARGB(255, 150, 126, 68),
+                                    size: 32,
+                                  )),
+                              Container(
+                                width: 1.5.w,
+                                height: 19.h,
+                                color: Color.fromARGB(255, 150, 126, 68),
+                              ),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.bookmark_border,
+                                    color: "#404c6e".toColor,
+                                  )),
+                              Container(
+                                width: 1.5.w,
+                                height: 19.h,
+                                color: Color.fromARGB(255, 150, 126, 68),
+                              ),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.content_copy_sharp,
+                                    color: "#404c6e".toColor,
+                                  )),
+                              Container(
+                                width: 1.5.w,
+                                height: 19.h,
+                                color: Color.fromARGB(255, 150, 126, 68),
+                              ),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.share_outlined,
+                                    color: "#404c6e".toColor,
+                                  )),
+                              Container(
+                                width: 1.5.w,
+                                height: 19.h,
+                                color: Color.fromARGB(255, 150, 126, 68),
+                              ),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.note_alt_outlined,
+                                    color: "#404c6e".toColor,
+                                  )),
+                            ],
+                          ),
                         ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.play_arrow_rounded,
-                              color: Color.fromARGB(255, 150, 126, 68),
-                              size: 32,
-                            )),
-                        Container(
-                          width: 1.5.w,
-                          height: 19.h,
-                          color: Color.fromARGB(255, 150, 126, 68),
-                        ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.bookmark_border,color: "#404c6e".toColor,)),
-                        Container(
-                          width: 1.5.w,
-                          height: 19.h,
-                          color: Color.fromARGB(255, 150, 126, 68),
-                        ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.content_copy_sharp,color: "#404c6e".toColor,)),
-                        Container(
-                          width: 1.5.w,
-                          height: 19.h,
-                          color: Color.fromARGB(255, 150, 126, 68),
-                        ),
-                        IconButton(
-                            onPressed: () {}, icon: Icon(Icons.share_outlined,color: "#404c6e".toColor,)),
-                        Container(
-                          width: 1.5.w,
-                          height: 19.h,
-                          color: Color.fromARGB(255, 150, 126, 68),
-                        ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.note_alt_outlined,color: "#404c6e".toColor,)),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            ):const SizedBox.shrink(),
-
+                  )
+                : const SizedBox.shrink(),
             Positioned(
-              right: Get.width/2-29.w,
+              right: Get.width / 2 - 29.w,
               bottom: 6.h,
               child: Center(
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
                     Padding(
-                      padding:  EdgeInsets.only(bottom:3.h),
+                      padding: EdgeInsets.only(bottom: 3.h),
                       child: Image.asset(
                         AppImages.numberingaPage4,
                         width: 32.w,
@@ -249,7 +277,7 @@ class MoshafPage extends StatelessWidget {
                           fontSize: 13.sp,
                           fontWeight: FontWeight.w900,
                           fontFamily: 'naskh',
-                          color:const Color.fromARGB(255, 150, 126, 68)),
+                          color: const Color.fromARGB(255, 150, 126, 68)),
                     ),
                   ],
                 ),
