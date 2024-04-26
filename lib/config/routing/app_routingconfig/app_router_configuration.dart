@@ -1,6 +1,5 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
-
 import '../../../features/quran/view/screens/moshaf_view.dart';
 import '../../../features/quran/view/screens/quran_sowar.dart';
 import '../../../features/quran/view/screens/sora_details.dart';
@@ -24,4 +23,5 @@ List<GetPage<dynamic>>? routes = [
       name: AppRouteName.moshaf,
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
+     
 ];

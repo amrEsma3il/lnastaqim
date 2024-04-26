@@ -7,8 +7,8 @@ import 'package:lnastaqim/core/utilits/extensions/color_from_hex.dart';
 import 'package:lnastaqim/features/quran/bussniess_logic/quran/quran_cubit.dart';
 import 'package:lnastaqim/features/quran/view/widgets/custom_span.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../../core/constants/images.dart';
+import 'package:lnastaqim/features/tafaseer/view/screen/tafseer.dart';
+import '../../../tafaseer/bussniess_logic/tafseer_cubit.dart';
 import '../../data/models/select_aya_model.dart';
 import '../widgets/quran_page_info_banner.dart';
 import '../widgets/surah_banner/surah_banner.dart';
@@ -119,7 +119,9 @@ class MoshafPage extends StatelessWidget {
                                       : Colors.transparent,
                                   onLongPressStart:
                                       (LongPressStartDetails details) {
-                                    print(moshafPageState);
+                                    print(ayahs[ayahIndex].ayahUQNumber);
+                                    TafseerCubit.get(context).getayanumber(
+                                        ayahs[ayahIndex].ayahUQNumber);
                                     cubit.toggleAyahSelection(
                                         selectAya: SelectAyaModel(
                                             ayaNumber:
@@ -141,12 +143,9 @@ class MoshafPage extends StatelessWidget {
                                       cubit.getSurahNumberFromPage(pageIndex),
                                   ayahNum: ayahs[ayahIndex].ayahUQNumber,
                                 );
-                              
-                              
                               })),
                         ),
                       ),
-                 
                       SurahBanner(
                           pageIndex: pageIndex, ayaIndex: i, firstPlace: false),
                     ],
@@ -186,12 +185,7 @@ class MoshafPage extends StatelessWidget {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.menu_book_rounded,
-                                    color: "#404c6e".toColor,
-                                  )),
+                              const TafseerScreen(),
                               Container(
                                 width: 1.5.w,
                                 height: 19.h,
@@ -262,15 +256,15 @@ class MoshafPage extends StatelessWidget {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 3.h),
-                      child: Image.asset(
-                        AppImages.numberingaPage4,
-                        width: 32.w,
-                        height: 31.h,
-                        // color:"#404c6e".toColor,
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.only(bottom: 3.h),
+                    //   child: Image.asset(
+                    //     AppImages.numberingaPage4,
+                    //     width: 32.w,
+                    //     height: 31.h,
+                    //     // color:"#404c6e".toColor,
+                    //   ),
+                    // ),
                     Text(
                       (pageIndex + 1).toString().toArabic,
                       style: TextStyle(
