@@ -1,19 +1,20 @@
+import 'dart:math' as math;
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lnastaqim/core/local_database/quran/quran_v2.dart';
 import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
 
+import '../../../../core/utilits/functions/search_string_pattern/boyer_moore_algo.dart'
+    as boyer_more;
 import '../../data/models/search_ayah_entity.dart';
 import '../../data/models/select_aya_model.dart';
 import '../../data/models/surahs_model.dart';
-import 'dart:math' as math;
-import '../../../../core/utilits/functions/search_string_pattern/boyer_moore_algo.dart'
-    as boyer_more;
 // import '../../../../core/utilits/functions/search_string_pattern/kmp_algo.dart' as kmp;
 
 class QuranCubit extends Cubit<SelectAyaModel> {
-  QuranCubit() : super( SelectAyaModel(ayaNumber: -1, offset: Offset(0, 0)));
+  QuranCubit() : super(SelectAyaModel(ayaNumber: -1, offset: Offset(0, 0)));
   static QuranCubit get(context) => BlocProvider.of(context);
 
   TextEditingController searchController = TextEditingController();
@@ -82,7 +83,7 @@ class QuranCubit extends Cubit<SelectAyaModel> {
 
   toggleAyahSelection({required SelectAyaModel selectAya}) {
     if (selectAya.ayaNumber == state.ayaNumber) {
-      emit( SelectAyaModel(ayaNumber: -1, offset: Offset(0, 0)));
+      emit(SelectAyaModel(ayaNumber: -1, offset: Offset(0, 0)));
     } else {
       emit(selectAya);
     }
@@ -137,6 +138,25 @@ class QuranCubit extends Cubit<SelectAyaModel> {
     } catch (e) {
       return "Surah not found";
     }
+  }
+
+  String getSurahNameFromAyah(Ayah ayah) {
+    try {
+      return surahs.firstWhere((s) => s.ayahs.contains(ayah)).arabicName;
+    } catch (e) {
+      return "Surah not found";
+    }
+  }
+
+  Ayah getSelectedAyah(int pageNumber, int ayahNumber) {
+    List<Ayah> pageAyahs = getCurrentPageAyahs(pageNumber);
+    Ayah selectedAyah =
+        pageAyahs.firstWhere((ayah) => ayah.ayahNumber == ayahNumber);
+    return selectedAyah;
+  }
+
+  int getPageFromAyah(int ayahPage) {
+    return ayahPage;
   }
 
   String getHizbQuarterDisplayByPage(int pageNumber) {
@@ -201,26 +221,27 @@ class QuranCubit extends Cubit<SelectAyaModel> {
   List<SearchAyahEntity> searchInMoshaf(
       {String? type = 'normal',
       int? searchWhere = 1,
-        String? surahName,
+      String? surahName,
       int? noOfjuzOrHizbOrSurah,
       required String searchText}) {
-
     List<SearchAyahEntity> ayatOfSearch = [];
 
-    List<Ayah> filterdAyat=searchWhere==1?allAyahs:( searchWhere==2?getJuzByNo(noOfjuzOrHizbOrSurah!):(searchWhere==3?getHizbByNo(noOfjuzOrHizbOrSurah!):getSurahByNo(surahName!)));
-      for (int i = 0; i <= filterdAyat.length - 1; i++) {
-        List<int> matchesPositions = boyer_more.searchPattern(
-            type == 'normal'
-                ? filterdAyat[i].ayaTextEmlaey
-                : filterdAyat[i].text,
-            searchText);
-        if (matchesPositions.isNotEmpty) {
-          ayatOfSearch.add(SearchAyahEntity(
-              aya: filterdAyat[i], startPosition: matchesPositions[0]));
-        }
+    List<Ayah> filterdAyat = searchWhere == 1
+        ? allAyahs
+        : (searchWhere == 2
+            ? getJuzByNo(noOfjuzOrHizbOrSurah!)
+            : (searchWhere == 3
+                ? getHizbByNo(noOfjuzOrHizbOrSurah!)
+                : getSurahByNo(surahName!)));
+    for (int i = 0; i <= filterdAyat.length - 1; i++) {
+      List<int> matchesPositions = boyer_more.searchPattern(
+          type == 'normal' ? filterdAyat[i].ayaTextEmlaey : filterdAyat[i].text,
+          searchText);
+      if (matchesPositions.isNotEmpty) {
+        ayatOfSearch.add(SearchAyahEntity(
+            aya: filterdAyat[i], startPosition: matchesPositions[0]));
       }
-
-
+    }
 
     return ayatOfSearch;
   }
