@@ -11,7 +11,8 @@ import 'package:lnastaqim/features/bookmark/data/models/bookmark_model.dart';
 import 'package:lnastaqim/features/bookmark/views/bookmark_bottom_sheet.dart';
 import 'package:lnastaqim/features/quran/bussniess_logic/quran/quran_cubit.dart';
 import 'package:lnastaqim/features/quran/view/widgets/custom_span.dart';
-import 'package:share_plus/share_plus.dart';
+import 'package:lnastaqim/features/share/views/widgets/share_bottom_sheet.dart';
+import 'package:screenshot/screenshot.dart';
 
 import '../../data/models/select_aya_model.dart';
 import '../widgets/quran_page_info_banner.dart';
@@ -56,32 +57,40 @@ class MoshafView extends StatelessWidget {
   }
 }
 
-class MoshafPage extends StatelessWidget {
+class MoshafPage extends StatefulWidget {
   const MoshafPage({super.key, required this.pageIndex});
 
   final int pageIndex;
 
+  @override
+  State<MoshafPage> createState() => _MoshafPageState();
+}
+
+class _MoshafPageState extends State<MoshafPage> {
+  final screenShotController = ScreenshotController();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<QuranCubit, SelectAyaModel>(
       builder: (context, moshafPageState) {
         var cubit = QuranCubit.get(context);
         var pageAyahs =
-            cubit.getCurrentPageAyahsSeparatedForBasmalah(pageIndex);
+            cubit.getCurrentPageAyahsSeparatedForBasmalah(widget.pageIndex);
         return Stack(
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                QuranPageInfoBanner(index: pageIndex),
+                QuranPageInfoBanner(index: widget.pageIndex),
                 SizedBox(height: 2.h),
                 ...List.generate(pageAyahs.length, (i) {
                   final ayahs = pageAyahs[i];
                   return Column(
                     children: [
                       SurahBanner(
-                          pageIndex: pageIndex, ayaIndex: i, firstPlace: true),
+                          pageIndex: widget.pageIndex,
+                          ayaIndex: i,
+                          firstPlace: true),
                       cubit.getSurahNumberByAyah(ayahs.first) == 9 ||
                               cubit.getSurahNumberByAyah(ayahs.first) == 1
                           ? const SizedBox.shrink()
@@ -157,10 +166,10 @@ class MoshafPage extends StatelessWidget {
                                     text: ayahIndex == 0
                                         ? "${ayahs[ayahIndex].codeV2[0]}${ayahs[ayahIndex].codeV2.substring(1)}"
                                         : ayahs[ayahIndex].codeV2,
-                                    pageIndex: pageIndex,
+                                    pageIndex: widget.pageIndex,
                                     fontSize: 100.sp,
-                                    surahNum:
-                                        cubit.getSurahNumberFromPage(pageIndex),
+                                    surahNum: cubit.getSurahNumberFromPage(
+                                        widget.pageIndex),
                                     ayahNum: ayahs[ayahIndex].ayahUQNumber,
                                   );
                                 }
@@ -187,17 +196,19 @@ class MoshafPage extends StatelessWidget {
                                   text: ayahIndex == 0
                                       ? "${ayahs[ayahIndex].codeV2[0]}${ayahs[ayahIndex].codeV2.substring(1)}"
                                       : ayahs[ayahIndex].codeV2,
-                                  pageIndex: pageIndex,
+                                  pageIndex: widget.pageIndex,
                                   fontSize: 100.sp,
-                                  surahNum:
-                                      cubit.getSurahNumberFromPage(pageIndex),
+                                  surahNum: cubit
+                                      .getSurahNumberFromPage(widget.pageIndex),
                                   ayahNum: ayahs[ayahIndex].ayahUQNumber,
                                 );
                               })),
                         ),
                       ),
                       SurahBanner(
-                          pageIndex: pageIndex, ayaIndex: i, firstPlace: false),
+                          pageIndex: widget.pageIndex,
+                          ayaIndex: i,
+                          firstPlace: false),
                     ],
                   );
                 }),
@@ -306,14 +317,17 @@ class MoshafPage extends StatelessWidget {
                                 color: const Color.fromARGB(255, 150, 126, 68),
                               ),
                               IconButton(
-                                  onPressed: () {
+                                  onPressed: () async {
                                     if (moshafPageState.ayaNumber != -1) {
                                       final selectedAyah = pageAyahs
                                           .expand((ayahList) => ayahList)
                                           .firstWhere((ayah) =>
                                               ayah.ayahUQNumber ==
                                               moshafPageState.ayaNumber);
-                                      Share.share(selectedAyah.text);
+                                      showShareBottomSheet(
+                                          context,
+                                          selectedAyah.ayahNumber,
+                                          selectedAyah);
                                     }
                                   },
                                   icon: Icon(
@@ -355,7 +369,7 @@ class MoshafPage extends StatelessWidget {
                     //   ),
                     // ),
                     Text(
-                      (pageIndex + 1).toString().toArabic,
+                      (widget.pageIndex + 1).toString().toArabic,
                       style: TextStyle(
                           fontSize: 13.sp,
                           fontWeight: FontWeight.w900,

@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/core/constants/images.dart';
-import '../../bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
 
+import '../../bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
 import '../../data/models/quran_model.dart';
 import '../widgets/bottom_nav_bar.dart';
-import '../widgets/quran_sora_component.dart';
 import '../widgets/header_quran.dart';
+import '../widgets/quran_sora_component.dart';
 
 class QuranSowar extends StatelessWidget {
   const QuranSowar({super.key});
@@ -45,11 +45,11 @@ class QuranSowar extends StatelessWidget {
                       ),
                       Expanded(
                         child: Padding(
-                          padding:  EdgeInsets.only(bottom: 68.h),
+                          padding: EdgeInsets.only(bottom: 68.h),
                           child: ListView.builder(
                             itemCount: state.length,
-                            itemBuilder: (context, index) =>
-                                QuranSoraComponent(quranAyaEntity: state[index]),
+                            itemBuilder: (context, index) => QuranSoraComponent(
+                                quranAyaEntity: state[index]),
                           ),
                         ),
                       ),

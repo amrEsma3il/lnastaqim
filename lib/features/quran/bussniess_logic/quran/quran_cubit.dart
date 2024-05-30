@@ -122,6 +122,16 @@ class QuranCubit extends Cubit<SelectAyaModel> {
           (s) => s.ayahs.contains(getCurrentPageAyahs(pageNumber).first))
       .surahNumber;
 
+  int getSurahNumberByName(String surahName) {
+    try {
+      return surahs
+          .firstWhere((surah) => surah.arabicName == surahName)
+          .surahNumber;
+    } catch (e) {
+      return -1;
+    }
+  }
+
   List<Ayah> getCurrentPageAyahs(int pageIndex) => pages[pageIndex];
 
   Ayah getPageInfo(int page) => allAyahs.firstWhere((a) => a.page == page + 1);
@@ -153,10 +163,6 @@ class QuranCubit extends Cubit<SelectAyaModel> {
     Ayah selectedAyah =
         pageAyahs.firstWhere((ayah) => ayah.ayahNumber == ayahNumber);
     return selectedAyah;
-  }
-
-  int getPageFromAyah(int ayahPage) {
-    return ayahPage;
   }
 
   String getHizbQuarterDisplayByPage(int pageNumber) {
