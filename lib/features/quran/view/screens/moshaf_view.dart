@@ -9,6 +9,7 @@ import 'package:lnastaqim/core/utilits/extensions/color_from_hex.dart';
 import 'package:lnastaqim/features/bookmark/bussniess_logic/bookmark_cubit/bookmark_cubit.dart';
 import 'package:lnastaqim/features/bookmark/data/models/bookmark_model.dart';
 import 'package:lnastaqim/features/bookmark/views/bookmark_bottom_sheet.dart';
+import 'package:lnastaqim/features/note/views/note_bottom_sheet.dart';
 import 'package:lnastaqim/features/quran/bussniess_logic/quran/quran_cubit.dart';
 import 'package:lnastaqim/features/quran/view/widgets/custom_span.dart';
 import 'package:lnastaqim/features/share/views/widgets/share_bottom_sheet.dart';
@@ -340,7 +341,17 @@ class _MoshafPageState extends State<MoshafPage> {
                                 color: const Color.fromARGB(255, 150, 126, 68),
                               ),
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (moshafPageState.ayaNumber != -1) {
+                                      final selectedAyah = pageAyahs
+                                          .expand((ayahList) => ayahList)
+                                          .firstWhere((ayah) =>
+                                              ayah.ayahUQNumber ==
+                                              moshafPageState.ayaNumber);
+                                      showNoteBottomSheet(
+                                          context, selectedAyah);
+                                    }
+                                  },
                                   icon: Icon(
                                     Icons.note_alt_outlined,
                                     color: "#404c6e".toColor,
