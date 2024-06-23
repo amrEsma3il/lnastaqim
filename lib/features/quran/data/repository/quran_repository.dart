@@ -3,9 +3,9 @@ import '../models/quran_model.dart';
 
 
 class QuranRepository {
-  static List<QuranModel> getAllQuranSowar() =>QuranConstDataSources.getAllQuranSowar();
+  static List<SoraModel> getAllQuranSowar() =>QuranConstDataSources.getAllQuranSowar();
       
 
-  static QuranModel getSoraDetails( Map<String,dynamic>quaranJson) =>QuranConstDataSources.getSoraDetails(quaranJson);
+  // static SoraModel getSoraDetails( SoraModel quaranJson) =>QuranConstDataSources.getSoraDetails(quaranJson);
    
 }
