@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/features/quran/bussniess_logic/quran/quran_cubit.dart';
-
+import 'package:lnastaqim/features/tafaseer/bussniess_logic/tafseer_cubit.dart';
 import 'config/routing/app_routingconfig/app_router_configuration.dart';
 import 'features/quran/bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
 import 'features/quran/bussniess_logic/quran_sowar/search_or_not_cubit.dart';
@@ -43,6 +43,10 @@ class Lnastaqim extends StatelessWidget {
               lazy: false,
               create: (context) => QuranCubit()..loadQuran(),
             ),
+             BlocProvider(
+              create: (context) => TafseerCubit(),
+            ),
+
           ],
           child: GetMaterialApp(
             locale: const Locale('ar'),

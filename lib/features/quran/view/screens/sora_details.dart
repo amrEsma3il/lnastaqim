@@ -132,6 +132,8 @@ class SoraDetails extends StatelessWidget {
                                                 ),
                                               ),
                                             );
+                                    
+                                    
                                           },
                                         text: "${soraModel.array![index].ar}"),
 //${(0 + 1).toString().toArabic}
