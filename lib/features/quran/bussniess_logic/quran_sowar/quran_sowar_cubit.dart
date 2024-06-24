@@ -8,13 +8,10 @@ import '../../data/repository/quran_repository.dart';
 class QuranSowarCubit extends Cubit<List<SoraModel>> {
   QuranSowarCubit() : super(QuranRepository.getAllQuranSowar());
 
-   getAllQuranSowar() => emit(state );
+  getAllQuranSowar() => emit(state);
 
-
-
-   goToSoraDetailsEsvent(SoraModel soraModel){
-
-    Get.toNamed(AppRouteName.soraDetails,arguments: soraModel);
-   }
+  goToSoraDetailsEsvent(SoraModel soraModel) {
+    Get.toNamed(AppRouteName.soraDetails, arguments: soraModel);
+  }
   //  searchOnSora() => emit(state);
 }

@@ -1,23 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
 import 'package:lnastaqim/core/utilits/extensions/color_from_hex.dart';
+import 'package:lnastaqim/features/bookmark/bussniess_logic/bookmark_cubit/bookmark_cubit.dart';
+import 'package:lnastaqim/features/bookmark/data/models/bookmark_model.dart';
+import 'package:lnastaqim/features/bookmark/views/bookmark_bottom_sheet.dart';
+import 'package:lnastaqim/features/note/views/note_bottom_sheet.dart';
 import 'package:lnastaqim/features/quran/bussniess_logic/quran/quran_cubit.dart';
 import 'package:lnastaqim/features/quran/view/widgets/custom_span.dart';
+
+import 'package:lnastaqim/features/share/views/widgets/share_bottom_sheet.dart';
+import 'package:screenshot/screenshot.dart';
+
 import 'package:flutter_svg/svg.dart';
 import 'package:lnastaqim/features/tafaseer/view/screen/tafseer.dart';
 import '../../../tafaseer/bussniess_logic/tafseer_cubit.dart';
+
 import '../../data/models/select_aya_model.dart';
 import '../widgets/quran_page_info_banner.dart';
 import '../widgets/surah_banner/surah_banner.dart';
 
 class MoshafView extends StatelessWidget {
-  const MoshafView({super.key});
+  const MoshafView({super.key, this.indexP});
+
+  final int? indexP;
 
   @override
   Widget build(BuildContext context) {
+    final pageController = PageController(
+      initialPage: indexP ?? 0,
+    );
     return Scaffold(
       body: SafeArea(
           child: GestureDetector(
@@ -28,6 +44,9 @@ class MoshafView extends StatelessWidget {
           QuranCubit.get(context).onMoshafPageChangedEvent();
         },
         child: PageView.builder(
+
+            controller: pageController,
+
             onPageChanged: (index) {
               QuranCubit.get(context).onMoshafPageChangedEvent();
             },
@@ -46,32 +65,40 @@ class MoshafView extends StatelessWidget {
   }
 }
 
-class MoshafPage extends StatelessWidget {
+class MoshafPage extends StatefulWidget {
   const MoshafPage({super.key, required this.pageIndex});
 
   final int pageIndex;
 
+  @override
+  State<MoshafPage> createState() => _MoshafPageState();
+}
+
+class _MoshafPageState extends State<MoshafPage> {
+  final screenShotController = ScreenshotController();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<QuranCubit, SelectAyaModel>(
       builder: (context, moshafPageState) {
         var cubit = QuranCubit.get(context);
         var pageAyahs =
-            cubit.getCurrentPageAyahsSeparatedForBasmalah(pageIndex);
+            cubit.getCurrentPageAyahsSeparatedForBasmalah(widget.pageIndex);
         return Stack(
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                QuranPageInfoBanner(index: pageIndex),
+                QuranPageInfoBanner(index: widget.pageIndex),
                 SizedBox(height: 2.h),
                 ...List.generate(pageAyahs.length, (i) {
                   final ayahs = pageAyahs[i];
                   return Column(
                     children: [
                       SurahBanner(
-                          pageIndex: pageIndex, ayaIndex: i, firstPlace: true),
+                          pageIndex: widget.pageIndex,
+                          ayaIndex: i,
+                          firstPlace: true),
                       cubit.getSurahNumberByAyah(ayahs.first) == 9 ||
                               cubit.getSurahNumberByAyah(ayahs.first) == 1
                           ? const SizedBox.shrink()
@@ -112,6 +139,50 @@ class MoshafPage extends StatelessWidget {
                               ),
                               children:
                                   List.generate(ayahs.length, (ayahIndex) {
+
+                                var bookmarks =
+                                    BlocProvider.of<BookmarkCubit>(context)
+                                        .bookmarks;
+                                var bookmarkedAyah = bookmarks?.firstWhere(
+                                  (bookmark) =>
+                                      bookmark.ayah == ayahs[ayahIndex].text,
+                                  orElse: () => BookmarkModel(
+                                      ayah: "",
+                                      ayahNum: 0,
+                                      color: 0,
+                                      name: "",
+                                      pageNum: ""),
+                                );
+
+                                if (bookmarkedAyah != null &&
+                                    bookmarkedAyah.ayah ==
+                                        ayahs[ayahIndex].text) {
+                                  return span(
+                                    backgroundColor: Color(bookmarkedAyah.color)
+                                        .withOpacity(0.3),
+                                    onLongPressStart:
+                                        (LongPressStartDetails details) {
+                                      print(moshafPageState);
+                                      cubit.toggleAyahSelection(
+                                        selectAya: SelectAyaModel(
+                                          ayaNumber:
+                                              ayahs[ayahIndex].ayahUQNumber,
+                                          offset: details.globalPosition,
+                                        ),
+                                      );
+                                    },
+                                    isFirstAyah: ayahIndex == 0 ? true : false,
+                                    text: ayahIndex == 0
+                                        ? "${ayahs[ayahIndex].codeV2[0]}${ayahs[ayahIndex].codeV2.substring(1)}"
+                                        : ayahs[ayahIndex].codeV2,
+                                    pageIndex: widget.pageIndex,
+                                    fontSize: 100.sp,
+                                    surahNum: cubit.getSurahNumberFromPage(
+                                        widget.pageIndex),
+                                    ayahNum: ayahs[ayahIndex].ayahUQNumber,
+                                  );
+                                }
+
                                 return span(
                                   backgroundColor: moshafPageState.ayaNumber ==
                                           ayahs[ayahIndex].ayahUQNumber
@@ -119,9 +190,13 @@ class MoshafPage extends StatelessWidget {
                                       : Colors.transparent,
                                   onLongPressStart:
                                       (LongPressStartDetails details) {
+
+                                    print(moshafPageState);
+
                                     print(ayahs[ayahIndex].ayahUQNumber);
                                     TafseerCubit.get(context).getayanumber(
                                         ayahs[ayahIndex].ayahUQNumber);
+
                                     cubit.toggleAyahSelection(
                                         selectAya: SelectAyaModel(
                                             ayaNumber:
@@ -137,17 +212,21 @@ class MoshafPage extends StatelessWidget {
                                   text: ayahIndex == 0
                                       ? "${ayahs[ayahIndex].codeV2[0]}${ayahs[ayahIndex].codeV2.substring(1)}"
                                       : ayahs[ayahIndex].codeV2,
-                                  pageIndex: pageIndex,
+                                  pageIndex: widget.pageIndex,
                                   fontSize: 100.sp,
-                                  surahNum:
-                                      cubit.getSurahNumberFromPage(pageIndex),
+                                  surahNum: cubit
+                                      .getSurahNumberFromPage(widget.pageIndex),
                                   ayahNum: ayahs[ayahIndex].ayahUQNumber,
                                 );
                               })),
                         ),
                       ),
                       SurahBanner(
-                          pageIndex: pageIndex, ayaIndex: i, firstPlace: false),
+
+                          pageIndex: widget.pageIndex,
+                          ayaIndex: i,
+                          firstPlace: false),
+
                     ],
                   );
                 }),
@@ -185,6 +264,7 @@ class MoshafPage extends StatelessWidget {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
+
                               const TafseerScreen(),
                               Container(
                                 width: 1.5.w,
@@ -194,6 +274,7 @@ class MoshafPage extends StatelessWidget {
                               IconButton(
                                   onPressed: () {},
                                   icon: Icon(
+
                                     Icons.play_arrow_rounded,
                                     color: Color.fromARGB(255, 150, 126, 68),
                                     size: 32,
@@ -201,10 +282,15 @@ class MoshafPage extends StatelessWidget {
                               Container(
                                 width: 1.5.w,
                                 height: 19.h,
-                                color: Color.fromARGB(255, 150, 126, 68),
+
+                                color: const Color.fromARGB(255, 150, 126, 68),
                               ),
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showBookmarkBottomSheet(
+                                        context, pageAyahs, moshafPageState);
+                                  },
+
                                   icon: Icon(
                                     Icons.bookmark_border,
                                     color: "#404c6e".toColor,
@@ -212,10 +298,34 @@ class MoshafPage extends StatelessWidget {
                               Container(
                                 width: 1.5.w,
                                 height: 19.h,
-                                color: Color.fromARGB(255, 150, 126, 68),
+
+                                color: const Color.fromARGB(255, 150, 126, 68),
                               ),
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (moshafPageState.ayaNumber != -1) {
+                                      final selectedAyah = pageAyahs
+                                          .expand((ayahList) => ayahList)
+                                          .firstWhere((ayah) =>
+                                              ayah.ayahUQNumber ==
+                                              moshafPageState.ayaNumber);
+                                      print(selectedAyah.page);
+                                      print(selectedAyah.ayahNumber);
+
+                                      Clipboard.setData(ClipboardData(
+                                              text: selectedAyah.text))
+                                          .then((_) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Center(
+                                                  child: Text(
+                                                      'تم النسخ إلى الحافظه'))),
+                                        );
+                                      });
+                                    }
+                                  },
+
                                   icon: Icon(
                                     Icons.content_copy_sharp,
                                     color: "#404c6e".toColor,
@@ -223,10 +333,24 @@ class MoshafPage extends StatelessWidget {
                               Container(
                                 width: 1.5.w,
                                 height: 19.h,
-                                color: Color.fromARGB(255, 150, 126, 68),
+
+                                color: const Color.fromARGB(255, 150, 126, 68),
                               ),
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    if (moshafPageState.ayaNumber != -1) {
+                                      final selectedAyah = pageAyahs
+                                          .expand((ayahList) => ayahList)
+                                          .firstWhere((ayah) =>
+                                              ayah.ayahUQNumber ==
+                                              moshafPageState.ayaNumber);
+                                      showShareBottomSheet(
+                                          context,
+                                          selectedAyah.ayahNumber,
+                                          selectedAyah);
+                                    }
+                                  },
+
                                   icon: Icon(
                                     Icons.share_outlined,
                                     color: "#404c6e".toColor,
@@ -234,10 +358,22 @@ class MoshafPage extends StatelessWidget {
                               Container(
                                 width: 1.5.w,
                                 height: 19.h,
-                                color: Color.fromARGB(255, 150, 126, 68),
+
+                                color: const Color.fromARGB(255, 150, 126, 68),
                               ),
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (moshafPageState.ayaNumber != -1) {
+                                      final selectedAyah = pageAyahs
+                                          .expand((ayahList) => ayahList)
+                                          .firstWhere((ayah) =>
+                                              ayah.ayahUQNumber ==
+                                              moshafPageState.ayaNumber);
+                                      showNoteBottomSheet(
+                                          context, selectedAyah);
+                                    }
+                                  },
+
                                   icon: Icon(
                                     Icons.note_alt_outlined,
                                     color: "#404c6e".toColor,
@@ -266,7 +402,7 @@ class MoshafPage extends StatelessWidget {
                     //   ),
                     // ),
                     Text(
-                      (pageIndex + 1).toString().toArabic,
+                      (widget.pageIndex + 1).toString().toArabic,
                       style: TextStyle(
                           fontSize: 13.sp,
                           fontWeight: FontWeight.w900,
