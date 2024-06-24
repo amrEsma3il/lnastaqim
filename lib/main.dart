@@ -61,7 +61,7 @@ class Lnastaqim extends StatelessWidget {
             BlocProvider(
                 create: (context) => BookmarkCubit()..fetchBookmarks()),
             BlocProvider(create: (context) => AddNoteCubit()),
-            BlocProvider(create: (context) => NoteCubit()..fetchNotes())
+            BlocProvider(create: (context) => NoteCubit()..fetchNotes()),
 
              BlocProvider(
               create: (context) => TafseerCubit(),
