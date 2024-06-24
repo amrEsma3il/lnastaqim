@@ -12,8 +12,13 @@ import 'package:lnastaqim/features/bookmark/views/bookmark_bottom_sheet.dart';
 import 'package:lnastaqim/features/note/views/note_bottom_sheet.dart';
 import 'package:lnastaqim/features/quran/bussniess_logic/quran/quran_cubit.dart';
 import 'package:lnastaqim/features/quran/view/widgets/custom_span.dart';
+
 import 'package:lnastaqim/features/share/views/widgets/share_bottom_sheet.dart';
 import 'package:screenshot/screenshot.dart';
+
+import 'package:flutter_svg/svg.dart';
+import 'package:lnastaqim/features/tafaseer/view/screen/tafseer.dart';
+import '../../../tafaseer/bussniess_logic/tafseer_cubit.dart';
 
 import '../../data/models/select_aya_model.dart';
 import '../widgets/quran_page_info_banner.dart';
@@ -39,7 +44,9 @@ class MoshafView extends StatelessWidget {
           QuranCubit.get(context).onMoshafPageChangedEvent();
         },
         child: PageView.builder(
+
             controller: pageController,
+
             onPageChanged: (index) {
               QuranCubit.get(context).onMoshafPageChangedEvent();
             },
@@ -132,6 +139,7 @@ class _MoshafPageState extends State<MoshafPage> {
                               ),
                               children:
                                   List.generate(ayahs.length, (ayahIndex) {
+
                                 var bookmarks =
                                     BlocProvider.of<BookmarkCubit>(context)
                                         .bookmarks;
@@ -174,6 +182,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                     ayahNum: ayahs[ayahIndex].ayahUQNumber,
                                   );
                                 }
+
                                 return span(
                                   backgroundColor: moshafPageState.ayaNumber ==
                                           ayahs[ayahIndex].ayahUQNumber
@@ -181,7 +190,13 @@ class _MoshafPageState extends State<MoshafPage> {
                                       : Colors.transparent,
                                   onLongPressStart:
                                       (LongPressStartDetails details) {
+
                                     print(moshafPageState);
+
+                                    print(ayahs[ayahIndex].ayahUQNumber);
+                                    TafseerCubit.get(context).getayanumber(
+                                        ayahs[ayahIndex].ayahUQNumber);
+
                                     cubit.toggleAyahSelection(
                                         selectAya: SelectAyaModel(
                                             ayaNumber:
@@ -207,9 +222,11 @@ class _MoshafPageState extends State<MoshafPage> {
                         ),
                       ),
                       SurahBanner(
+
                           pageIndex: widget.pageIndex,
                           ayaIndex: i,
                           firstPlace: false),
+
                     ],
                   );
                 }),
@@ -247,20 +264,17 @@ class _MoshafPageState extends State<MoshafPage> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.menu_book_rounded,
-                                    color: "#404c6e".toColor,
-                                  )),
+
+                              const TafseerScreen(),
                               Container(
                                 width: 1.5.w,
                                 height: 19.h,
-                                color: const Color.fromARGB(255, 150, 126, 68),
+                                color: Color.fromARGB(255, 150, 126, 68),
                               ),
                               IconButton(
                                   onPressed: () {},
-                                  icon: const Icon(
+                                  icon: Icon(
+
                                     Icons.play_arrow_rounded,
                                     color: Color.fromARGB(255, 150, 126, 68),
                                     size: 32,
@@ -268,6 +282,7 @@ class _MoshafPageState extends State<MoshafPage> {
                               Container(
                                 width: 1.5.w,
                                 height: 19.h,
+
                                 color: const Color.fromARGB(255, 150, 126, 68),
                               ),
                               IconButton(
@@ -275,6 +290,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                     showBookmarkBottomSheet(
                                         context, pageAyahs, moshafPageState);
                                   },
+
                                   icon: Icon(
                                     Icons.bookmark_border,
                                     color: "#404c6e".toColor,
@@ -282,6 +298,7 @@ class _MoshafPageState extends State<MoshafPage> {
                               Container(
                                 width: 1.5.w,
                                 height: 19.h,
+
                                 color: const Color.fromARGB(255, 150, 126, 68),
                               ),
                               IconButton(
@@ -308,6 +325,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                       });
                                     }
                                   },
+
                                   icon: Icon(
                                     Icons.content_copy_sharp,
                                     color: "#404c6e".toColor,
@@ -315,6 +333,7 @@ class _MoshafPageState extends State<MoshafPage> {
                               Container(
                                 width: 1.5.w,
                                 height: 19.h,
+
                                 color: const Color.fromARGB(255, 150, 126, 68),
                               ),
                               IconButton(
@@ -331,6 +350,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                           selectedAyah);
                                     }
                                   },
+
                                   icon: Icon(
                                     Icons.share_outlined,
                                     color: "#404c6e".toColor,
@@ -338,6 +358,7 @@ class _MoshafPageState extends State<MoshafPage> {
                               Container(
                                 width: 1.5.w,
                                 height: 19.h,
+
                                 color: const Color.fromARGB(255, 150, 126, 68),
                               ),
                               IconButton(
@@ -352,6 +373,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                           context, selectedAyah);
                                     }
                                   },
+
                                   icon: Icon(
                                     Icons.note_alt_outlined,
                                     color: "#404c6e".toColor,

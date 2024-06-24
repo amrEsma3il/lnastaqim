@@ -9,7 +9,7 @@ import 'package:lnastaqim/features/note/bussniess_logic/add_note_cubit/add_note_
 import 'package:lnastaqim/features/note/bussniess_logic/note_cubit/note_cubit.dart';
 import 'package:lnastaqim/features/note/data/models/note_model.dart';
 import 'package:lnastaqim/features/quran/bussniess_logic/quran/quran_cubit.dart';
-
+import 'package:lnastaqim/features/tafaseer/bussniess_logic/tafseer_cubit.dart';
 import 'config/routing/app_routingconfig/app_router_configuration.dart';
 import 'core/constants/constants.dart';
 import 'features/bookmark/bussniess_logic/add_bookmark_cubit/add_bookmark_cubit.dart';
@@ -56,11 +56,18 @@ class Lnastaqim extends StatelessWidget {
               lazy: false,
               create: (context) => QuranCubit()..loadQuran(),
             ),
+
             BlocProvider(create: (context) => AddBookmarkCubit()),
             BlocProvider(
                 create: (context) => BookmarkCubit()..fetchBookmarks()),
             BlocProvider(create: (context) => AddNoteCubit()),
             BlocProvider(create: (context) => NoteCubit()..fetchNotes())
+
+             BlocProvider(
+              create: (context) => TafseerCubit(),
+            ),
+
+
           ],
           child: GetMaterialApp(
             locale: const Locale('ar'),
