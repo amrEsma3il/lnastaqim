@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/core/constants/images.dart';
-import '../../bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
 
+import '../../bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
 import '../../data/models/quran_model.dart';
 import '../widgets/bottom_nav_bar.dart';
+import '../widgets/header_quran.dart';
 import '../widgets/quran_sora_component.dart';
-import 'header_quran.dart';
 
 class QuranSowar extends StatelessWidget {
   const QuranSowar({super.key});
@@ -16,7 +16,7 @@ class QuranSowar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: SafeArea(
-      child: BlocBuilder<QuranSowarCubit, List<QuranModel>>(
+      child: BlocBuilder<QuranSowarCubit, List<SoraModel>>(
         builder: (context, state) {
           return SizedBox(
             height: Get.height,
@@ -44,10 +44,13 @@ class QuranSowar extends StatelessWidget {
                         height: 22.h,
                       ),
                       Expanded(
-                        child: ListView.builder(
-                          itemCount: state.length,
-                          itemBuilder: (context, index) =>
-                              QuranSoraComponent(quranAyaEntity: state[index]),
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 68.h),
+                          child: ListView.builder(
+                            itemCount: state.length,
+                            itemBuilder: (context, index) => QuranSoraComponent(
+                                quranAyaEntity: state[index]),
+                          ),
                         ),
                       ),
                     ],

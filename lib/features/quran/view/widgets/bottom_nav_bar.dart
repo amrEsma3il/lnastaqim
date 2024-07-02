@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
+import '../../../../config/routing/app_routes_info/app_routes_name.dart';
 import '../../../../core/constants/colors.dart';
 import '../../data/data_sources/const_data_sources/bottom_nav_bar.dart';
 
@@ -27,11 +29,16 @@ class BottomNavBar extends StatelessWidget {
           children: [
             ...List.generate(
                 navBarIconDataSource.length,
-                (index) => Image.asset(
-                      navBarIconDataSource[index],
-                      width: 23.w,
-                      height: 23.h,
-                    ))
+                (index) => GestureDetector(
+                  onTap: () {
+                 index==1?   Get.toNamed(AppRouteName.moshaf):null;
+                  },
+                  child: Image.asset(
+                        navBarIconDataSource[index],
+                        width: 23.w,
+                        height: 23.h,
+                      ),
+                ))
           ],
         ),
       ),

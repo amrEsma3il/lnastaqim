@@ -1,30 +1,30 @@
-class QuranModel {
-  final int id;
-  final String name;
-  final String nameEn;
-  final String nameTranslation;
-  final int words;
-  final int letters;
-  final String type;
-  final String typeEn;
-  final String ar;
-  final String en;
-  final List<Array> array;
+class SoraModel {
+  final int ?id;
+  final String? name;
+  final String? nameEn;
+  final String? nameTranslation;
+  final int? words;
+  final int ?letters;
+  final String? type;
+  final String ?typeEn;
+  final String ?ar;
+  final String ?en;
+  final List<AyatOfSora>? array;
 
-  QuranModel(
-      {required this.id,
-      required this.name,
-      required this.nameEn,
-      required this.nameTranslation,
-      required this.words,
-      required this.letters,
-      required this.type,
-      required this.typeEn,
-      required this.ar,
-      required this.en,
-      required this.array});
+  SoraModel(
+      { this.id,
+       this.name,
+       this.nameEn,
+       this.nameTranslation,
+       this.words,
+       this.letters,
+       this.type,
+       this.typeEn,
+       this.ar,
+       this.en,
+       this.array});
 
-  factory QuranModel.fromJson(Map<String, dynamic> json) => QuranModel(
+  factory SoraModel.fromJson(Map<String, dynamic> json) => SoraModel(
       id: json['id'],
       name: json['name'],
       nameEn: json['name_en'],
@@ -37,7 +37,7 @@ class QuranModel {
       en: json['en'],
       array: (json['array'] as List<Map<String, dynamic>>)
           .map(
-            (e) => Array.fromJson(e),
+            (e) => AyatOfSora.fromJson(e),
           )
           .toList());
 
@@ -52,29 +52,29 @@ class QuranModel {
         'type_en': typeEn,
         'ar': ar,
         'en': en,
-        'array': array.map((aya) => aya.toJson()).toList(),
+        'array': array!.map((aya) => aya.toJson()).toList(),
       };
 }
 
-class Array {
-  final int id;
-  final String ar;
-  final String en;
-  final String filename;
-  final String path;
-  final String dir;
-  final int size;
+class AyatOfSora {
+  final int? id;
+  final String? ar;
+  final String ?en;
+  final String ?filename;
+  final String ?path;
+  final String ?dir;
+  final int ?size;
 
-  Array(
-      {required this.id,
-      required this.ar,
-      required this.en,
-      required this.filename,
-      required this.path,
-      required this.dir,
-      required this.size});
+  AyatOfSora(
+      { this.id,
+       this.ar,
+       this.en,
+       this.filename,
+       this.path,
+       this.dir,
+       this.size});
 
-  factory Array.fromJson(Map<String, dynamic> json) => Array(
+  factory AyatOfSora.fromJson(Map<String, dynamic> json) => AyatOfSora(
       id: json['id'],
       ar: json['ar'],
       en: json['en'],
