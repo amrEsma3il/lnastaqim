@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lnastaqim/features/paryer_times/view/screens/test_screen.dart';
+
+import 'config/routing/app_routingconfig/app_router_configuration.dart';
+import 'features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
+
 import 'package:hive_flutter/adapters.dart';
 import 'package:lnastaqim/features/bookmark/bussniess_logic/bookmark_cubit/bookmark_cubit.dart';
 import 'package:lnastaqim/features/bookmark/data/models/bookmark_model.dart';
@@ -13,6 +18,7 @@ import 'package:lnastaqim/features/tafaseer/bussniess_logic/tafseer_cubit.dart';
 import 'config/routing/app_routingconfig/app_router_configuration.dart';
 import 'core/constants/constants.dart';
 import 'features/bookmark/bussniess_logic/add_bookmark_cubit/add_bookmark_cubit.dart';
+
 import 'features/quran/bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
 import 'features/quran/bussniess_logic/quran_sowar/search_or_not_cubit.dart';
 import 'features/quran/bussniess_logic/sowra_detail/sora_details_cubit.dart';
@@ -67,6 +73,9 @@ class Lnastaqim extends StatelessWidget {
               create: (context) => TafseerCubit(),
             ),
 
+            BlocProvider(
+              create: (context) => PrayersTimesCubit(),
+            ),
 
           ],
           child: GetMaterialApp(
