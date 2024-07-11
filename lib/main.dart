@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:lnastaqim/features/paryer_times/view/screens/test_screen.dart';
 
 import 'config/routing/app_routingconfig/app_router_configuration.dart';
 import 'features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
@@ -15,7 +14,6 @@ import 'package:lnastaqim/features/note/bussniess_logic/note_cubit/note_cubit.da
 import 'package:lnastaqim/features/note/data/models/note_model.dart';
 import 'package:lnastaqim/features/quran/bussniess_logic/quran/quran_cubit.dart';
 import 'package:lnastaqim/features/tafaseer/bussniess_logic/tafseer_cubit.dart';
-import 'config/routing/app_routingconfig/app_router_configuration.dart';
 import 'core/constants/constants.dart';
 import 'features/bookmark/bussniess_logic/add_bookmark_cubit/add_bookmark_cubit.dart';
 

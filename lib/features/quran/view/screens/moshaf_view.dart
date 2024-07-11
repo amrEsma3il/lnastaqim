@@ -16,7 +16,6 @@ import 'package:lnastaqim/features/quran/view/widgets/custom_span.dart';
 import 'package:lnastaqim/features/share/views/widgets/share_bottom_sheet.dart';
 import 'package:screenshot/screenshot.dart';
 
-import 'package:flutter_svg/svg.dart';
 import 'package:lnastaqim/features/tafaseer/view/screen/tafseer.dart';
 import '../../../tafaseer/bussniess_logic/tafseer_cubit.dart';
 
