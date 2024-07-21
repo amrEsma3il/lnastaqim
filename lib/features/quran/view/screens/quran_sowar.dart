@@ -62,6 +62,7 @@ class QuranSowar extends StatelessWidget {
           );
         },
       ),
+
     ));
   }
 }

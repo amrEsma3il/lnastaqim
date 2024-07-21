@@ -17,9 +17,12 @@ import 'package:lnastaqim/features/tafaseer/bussniess_logic/tafseer_cubit.dart';
 import 'core/constants/constants.dart';
 import 'features/bookmark/bussniess_logic/add_bookmark_cubit/add_bookmark_cubit.dart';
 
-import 'features/quran/bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
 import 'features/quran/bussniess_logic/quran_sowar/search_or_not_cubit.dart';
 import 'features/quran/bussniess_logic/sowra_detail/sora_details_cubit.dart';
+
+import 'features/azkar_with_sib7a/business_logic/azkar_category_cubit/azkar_category_cubit.dart';
+import 'features/azkar_with_sib7a/business_logic/azkar_details_cubit/azkar_details_cubit.dart';
+import 'features/quran/bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
 
 void main() async {
   // List<List<int>> matchesInQuran=[];
@@ -75,6 +78,11 @@ class Lnastaqim extends StatelessWidget {
               create: (context) => PrayersTimesCubit(),
             ),
 
+  BlocProvider(                create: (BuildContext context) =>
+                    AzkarCategoryCubit()..getAzkarCategory()),
+            BlocProvider(
+                create: (BuildContext context) =>
+                    AzkarDetailsCubit()..getAzkarDetails()),
           ],
           child: GetMaterialApp(
             locale: const Locale('ar'),

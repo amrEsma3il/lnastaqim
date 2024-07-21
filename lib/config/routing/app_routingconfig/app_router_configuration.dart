@@ -7,6 +7,11 @@ import 'package:lnastaqim/features/note/views/note_view.dart';
 import '../../../features/quran/view/screens/moshaf_view.dart';
 import '../../../features/quran/view/screens/quran_sowar.dart';
 import '../../../features/quran/view/screens/sora_details.dart';
+import 'package:lnastaqim/features/azkar_with_sib7a/view/screens/azkar_category_view.dart';
+
+import '../../../features/azkar_with_sib7a/view/screens/azkar_details_view.dart';
+import '../../../features/quran/view/screens/sora_details.dart';
+import '../../../features/sibha/views/screens/sibha_view.dart';
 import '../app_routes_info/app_routes_name.dart';
 
 List<GetPage<dynamic>>? routes = [
@@ -40,5 +45,20 @@ List<GetPage<dynamic>>? routes = [
       name: AppRouteName.note,
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
-
+ GetPage(
+      curve: Curves.easeInOut,
+      page: () => const AzkarView(),
+      name: AppRouteName.azkarView,
+      transition: Transition.leftToRightWithFade,
+      transitionDuration: const Duration(milliseconds: 500)),
+  GetPage(
+      page: () => const AzkarDetailsView(),
+      name: AppRouteName.azkarDetails,
+      transition: Transition.leftToRightWithFade,
+      transitionDuration: const Duration(milliseconds: 500)),
+  GetPage(
+      page: () => const SibhaView(),
+      name: AppRouteName.sibhaView,
+      transition: Transition.leftToRightWithFade,
+      transitionDuration: const Duration(milliseconds: 500)),
 ];
