@@ -31,6 +31,7 @@ class BottomNavBar extends StatelessWidget {
                 navBarIconDataSource.length,
                 (index) => GestureDetector(
                   onTap: () {
+                      index==3?   Get.toNamed(AppRouteName.paryerTimes):null;
                  index==1?   Get.toNamed(AppRouteName.moshaf):null;
                   },
                   child: Image.asset(

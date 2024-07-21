@@ -9,7 +9,7 @@ class AppRouteName {
 
   static const String tafseer="/TafseerScreen";
 
-
+static const String paryerTimes="/paryerTimes";
 
   static const String sibhaView = "/";
 

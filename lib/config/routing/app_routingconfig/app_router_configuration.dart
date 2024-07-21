@@ -4,13 +4,14 @@ import 'package:get/get.dart';
 import 'package:lnastaqim/features/bookmark/views/bookmarks_view.dart';
 import 'package:lnastaqim/features/note/views/note_view.dart';
 
+import '../../../features/paryer_times/view/screens/test_screen.dart';
 import '../../../features/quran/view/screens/moshaf_view.dart';
 import '../../../features/quran/view/screens/quran_sowar.dart';
 import '../../../features/quran/view/screens/sora_details.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/view/screens/azkar_category_view.dart';
 
 import '../../../features/azkar_with_sib7a/view/screens/azkar_details_view.dart';
-import '../../../features/quran/view/screens/sora_details.dart';
+
 import '../../../features/sibha/views/screens/sibha_view.dart';
 import '../app_routes_info/app_routes_name.dart';
 
@@ -24,6 +25,12 @@ List<GetPage<dynamic>>? routes = [
       curve: Curves.easeInOut,
       page: () => SoraDetails(soraModel: Get.arguments),
       name: AppRouteName.soraDetails,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 500)),
+        GetPage(
+      curve: Curves.easeInOut,
+      page: () => const ParyerTimesScreen(),
+      name: AppRouteName.paryerTimes,
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
   GetPage(

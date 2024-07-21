@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lnastaqim/features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
 import 'package:lnastaqim/features/paryer_times/view/widgets/prayers_stepper.dart';
 
-class TestScreen extends StatelessWidget {
-  const TestScreen({super.key});
+class ParyerTimesScreen extends StatelessWidget {
+  const ParyerTimesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
