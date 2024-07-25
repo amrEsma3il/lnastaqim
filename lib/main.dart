@@ -1,9 +1,12 @@
+import 'package:alarm/alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'config/routing/app_routingconfig/app_router_configuration.dart';
+import 'core/utilits/services/local_notification_service.dart';
+import 'core/utilits/services/work_manager_service.dart';
 import 'features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
 
 import 'package:hive_flutter/adapters.dart';
@@ -29,11 +32,17 @@ void main() async {
   // List<int> boyerMore=boyer_more.searchPattern();
   // print("object");
   WidgetsFlutterBinding.ensureInitialized();
+  await Alarm.init();
   await Hive.initFlutter();
   Hive.registerAdapter(BookmarkModelAdapter());
   await Hive.openBox<BookmarkModel>(kBookmarkBox);
   Hive.registerAdapter(NoteModelAdapter());
   await Hive.openBox<NoteModel>(kNoteBox);
+    await Future.wait([
+    LocalNotificationService.init(),
+   
+    WorkManagerService().init(),
+  ]);
 
   runApp(const Lnastaqim());
 }

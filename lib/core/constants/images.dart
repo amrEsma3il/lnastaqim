@@ -1,5 +1,6 @@
 class AppImages {
   static const String rootImages = "assets/images";
+  
   static const String pattern = '$rootImages/pattern.png';
   static const String madania = '$rootImages/madania.png';
   static const String kaaba = '$rootImages/Kaaba.png';
@@ -19,4 +20,10 @@ class AppImages {
 
   static const String azkarBackground = 'assets/images/azkar_background.png';
   static const String azkarHeader = 'assets/images/Group.png';
+
+
+
+  // notifications
+   static const String notificationLargeIcon = '$rootImages/notification_largeIcon.png';
+  static const String notificationBigPicture = '$rootImages/notification_bigPicture.png';
 }
