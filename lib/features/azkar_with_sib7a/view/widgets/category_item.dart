@@ -19,7 +19,7 @@ class CategoryItem extends StatelessWidget {
         decoration: ShapeDecoration(
             color: Colors.white,
             shape: RoundedRectangleBorder(
-                side: BorderSide(color: AppColor.darkBrown),
+                side: BorderSide(color: AppColor.primary),
                 borderRadius: BorderRadius.circular(15.r))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,7 +32,7 @@ class CategoryItem extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                      color: AppColor.darkBrown,
+                      color: AppColor.primary,
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w500),
                 ),
@@ -44,7 +44,7 @@ class CategoryItem extends StatelessWidget {
                   child: Icon(
                     Icons.arrow_forward_ios,
                     size: 17,
-                    color: AppColor.darkBrown,
+                    color: AppColor.primary,
                   ),
                 )),
           ],

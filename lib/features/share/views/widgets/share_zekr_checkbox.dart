@@ -1,21 +1,23 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:lnastaqim/features/share/views/widgets/share_fun.dart';
 
-import '../../../quran/data/models/surahs_model.dart';
+class ShareZekrCheckBox extends StatefulWidget {
+  const ShareZekrCheckBox({
+    Key? key,
+    required this.zekr,
+    required this.image,
+  }) : super(key: key);
 
-class ShareCheckBox extends StatefulWidget {
-  const ShareCheckBox(
-      {Key? key, required this.ayahNumber, required this.selectedAyah})
-      : super(key: key);
-
-  final String ayahNumber;
-  final Ayah selectedAyah;
+  final String zekr;
+  final Uint8List image;
 
   @override
-  State<ShareCheckBox> createState() => _ShareCheckBoxState();
+  State<ShareZekrCheckBox> createState() => _ShareZekrCheckBoxState();
 }
 
-class _ShareCheckBoxState extends State<ShareCheckBox> {
+class _ShareZekrCheckBoxState extends State<ShareZekrCheckBox> {
   bool _isTextChecked = true;
   bool _isImageChecked = false;
 
@@ -72,11 +74,13 @@ class _ShareCheckBoxState extends State<ShareCheckBox> {
         ),
         const SizedBox(height: 20),
         GestureDetector(
-          onTap: () {
+          onTap: () async {
             if (_isTextChecked) {
-              shareAyahText(widget.selectedAyah);
+              shareText(widget.zekr);
             } else if (_isImageChecked) {
-              shareAyahAsImage(widget.ayahNumber, context, widget.selectedAyah);
+              if (widget.image != null) {
+                await shareImage(widget.image, "zekr");
+              }
             } else {
               print("No option selected");
             }

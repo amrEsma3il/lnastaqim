@@ -16,7 +16,7 @@ class CustomAzkarDetailsAppBar extends StatelessWidget {
     return Container(
       height: 90.h,
       decoration: ShapeDecoration(
-          color: AppColor.creame, shape: const RoundedRectangleBorder()),
+          color: AppColor.white, shape: const RoundedRectangleBorder()),
       child: Row(
         children: [
           IconButton(
@@ -26,7 +26,7 @@ class CustomAzkarDetailsAppBar extends StatelessWidget {
               icon: Icon(
                 Icons.arrow_back_ios_new,
                 size: 17,
-                color: AppColor.lightBrown,
+                color: AppColor.primary,
               )),
           SizedBox(
             width: category.length > 20 ? 30.w : 60.w,
@@ -37,7 +37,7 @@ class CustomAzkarDetailsAppBar extends StatelessWidget {
               style: TextStyle(
                   fontSize: category.length > 25 ? 18.sp : 27.sp,
                   fontWeight: FontWeight.w700,
-                  color: AppColor.darkBrown),
+                  color: AppColor.primary),
             ),
           )
         ],
