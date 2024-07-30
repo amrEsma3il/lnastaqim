@@ -20,6 +20,7 @@ class AppImages {
 
   static const String azkarBackground = 'assets/images/azkar_background.png';
   static const String azkarHeader = 'assets/images/Group.png';
+  static const String menu = '$rootImages/menu.png';
 
 
 

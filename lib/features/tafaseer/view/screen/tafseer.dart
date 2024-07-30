@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lnastaqim/core/local_database/tafaseer/tabri.dart';
 import 'package:lnastaqim/core/utilits/extensions/color_from_hex.dart';
+import '../../../../core/constants/colors.dart';
 import '../../bussniess_logic/tafseer_cubit.dart';
 import '../widget/toggle_button.dart';
 
@@ -18,7 +19,7 @@ class TafseerScreen extends StatelessWidget {
               TabriTafseer.tafaseerJasonData);
           showModalBottomSheet(
             context: context,
-            backgroundColor: Colors.grey.shade400,
+            backgroundColor:AppColor.rhino,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     topRight: Radius.circular(48.r),

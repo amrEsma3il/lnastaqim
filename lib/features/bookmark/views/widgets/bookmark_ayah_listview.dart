@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../quran/bussniess_logic/quran/quran_cubit.dart';
 import '../../../quran/view/screens/moshaf_view.dart';
 import '../../bussniess_logic/bookmark_cubit/bookmark_cubit.dart';
 import '../../data/models/bookmark_model.dart';
@@ -27,10 +28,11 @@ class BookmarksAyahListView extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (BuildContext context) => MoshafView(
-                          indexP: 604 - int.parse(bookmarks[index].pageNum),
+                        builder: (BuildContext context) => const MoshafView(
+                          // indexP: 604 - int.parse(bookmarks[index].pageNum),
                         ),
                       ));
+                             QuranCubit.get(context).pageController.jumpToPage( 604 - int.parse(bookmarks[index].pageNum));
                 },
                 child: BookmarkAyah(
                   bookmarkModel: bookmarks[index],
