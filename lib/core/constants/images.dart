@@ -21,11 +21,21 @@ class AppImages {
   static const String numberingaPage2 = 'assets/images/page_num_container2.png';
 
   static const String azkarBackground = 'assets/images/azkar_background.png';
+  static const String homeBackground = 'assets/images/home_background.png';
+
   static const String azkarHeader = 'assets/images/Group.png';
+  static const String forwardIcon = 'assets/images/forward_icon.svg';
 
   // notifications
   static const String notificationLargeIcon =
       '$rootImages/notification_largeIcon.png';
   static const String notificationBigPicture =
       '$rootImages/notification_bigPicture.png';
+
+  static const String storyFeature = '$rootImages/story_feature_icon.svg';
+  static const String qiblaFeature = '$rootImages/qibla_feature_icon.svg';
+  static const String quranFeature = '$rootImages/quran_feature_icon.svg';
+  static const String sibhaFeature = '$rootImages/azkar_feature_icon.svg';
+  static const String listenFeature = '$rootImages/listen_feature_icon.svg';
+  static const String ahadesFeature = '$rootImages/ahades_feature_icon.svg';
 }

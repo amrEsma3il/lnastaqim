@@ -1,5 +1,6 @@
 class AppRouteName {
-  static const String quranSowar = "/";
+  static const String home = "/";
+  static const String quranSowar = "/quran";
   static const String soraDetails = "/soradetail";
 
   static const String moshaf = "/moshaf";
@@ -14,4 +15,5 @@ class AppRouteName {
 
   static const String azkarView = "/azkar";
   static const String azkarDetails = "/azkarDetails";
+  static const String qibla = "/qibla";
 }
