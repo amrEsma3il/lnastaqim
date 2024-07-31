@@ -19,7 +19,7 @@ class AzkarDetailsView extends StatelessWidget {
     final category = Get.arguments as String;
 
     return Scaffold(
-      backgroundColor: AppColor.white2,
+      backgroundColor: AppColor.creame,
       body: SafeArea(
         child: BlocBuilder<AzkarDetailsCubit, List<AzkarModel>>(
           builder: (context, state) {

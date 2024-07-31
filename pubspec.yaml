@@ -72,15 +72,13 @@ dependencies:
   hive_flutter: ^1.1.0
   hive: ^2.2.3
   alarm: ^3.1.5
-  screenshot: ^3.0.0
+  screenshot: 2.5.0
   path_provider: ^2.1.3
   radio_player: ^1.6.0
   workmanager:
   timezone: ^0.9.4
   flutter_timezone: ^1.0.8
   flutter_local_notifications:
-  smooth_page_indicator: ^1.2.0+3
-  carousel_slider: ^4.2.1
 
 
 dev_dependencies:

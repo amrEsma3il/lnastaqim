@@ -1,6 +1,5 @@
 import "dart:io";
 
-import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/svg.dart";
@@ -13,8 +12,8 @@ import 'package:share_plus/share_plus.dart';
 import "../../../quran/bussniess_logic/quran/quran_cubit.dart";
 import "../../../quran/data/models/surahs_model.dart";
 
-void shareText(String selectedText) {
-  Share.share(selectedText);
+void shareAyahText(selectedAyah) {
+  Share.share(selectedAyah.text);
 }
 
 Future<void> shareAyahAsImage(
@@ -108,15 +107,4 @@ Future<void> shareAyahAsImage(
 
   final xfile = XFile(path);
   await Share.shareXFiles([xfile]);
-}
-
-Future<void> shareImage(Uint8List image, String name) async {
-  final directory = await getTemporaryDirectory();
-  final imagePath = File('${directory.path}/$name.png');
-  await imagePath.writeAsBytes(image);
-
-  final XFile file = XFile(imagePath.path);
-  Share.shareXFiles(
-    [file],
-  );
 }

@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/data/models/AzkarModel.dart';
-import 'package:lnastaqim/features/share/views/widgets/share_zekr_checkbox.dart';
-import 'package:screenshot/screenshot.dart';
 
-import '../../../share/views/widgets/share_bottom_sheet.dart';
-
-class AzkarDetailsItem extends StatefulWidget {
+class AzkarDetailsItem extends StatelessWidget {
   const AzkarDetailsItem({
     super.key,
     required this.azkarModel,
@@ -17,41 +12,31 @@ class AzkarDetailsItem extends StatefulWidget {
   final AzkarModel azkarModel;
 
   @override
-  State<AzkarDetailsItem> createState() => _AzkarDetailsItemState();
-}
-
-class _AzkarDetailsItemState extends State<AzkarDetailsItem> {
-  final ScreenshotController screenshotController = ScreenshotController();
-
-  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(right: 15.w, left: 15.w, bottom: 25.h),
       child: Container(
         decoration: ShapeDecoration(
-            color: AppColor.white,
+            color: AppColor.lightBrownWithOpacity10,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.r))),
         child: Column(
           children: [
-            Screenshot(
-              controller: screenshotController,
-              child: Container(
-                width: double.infinity,
-                decoration: ShapeDecoration(
-                    color: AppColor.primary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.r))),
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(15.w, 12.h, 15.w, 10.h),
-                  child: Center(
-                    child: Text(
-                      widget.azkarModel.zekr ?? "",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14.sp,
-                      ),
+            Container(
+              width: double.infinity,
+              decoration: ShapeDecoration(
+                  color: AppColor.darkBrown,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.r))),
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(15.w, 12.h, 15.w, 10.h),
+                child: Center(
+                  child: Text(
+                    azkarModel.zekr ?? "",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14.sp,
                     ),
                   ),
                 ),
@@ -67,18 +52,9 @@ class _AzkarDetailsItemState extends State<AzkarDetailsItem> {
                   Expanded(
                     child: CircleAvatar(
                       radius: 25,
-                      backgroundColor: AppColor.primary.withOpacity(0.3),
+                      backgroundColor: AppColor.pantone,
                       child: IconButton(
-                          onPressed: () async {
-                            var image = await screenshotController.capture();
-                            if (image != null) {
-                              showShareBottomSheet(
-                                  context,
-                                  ShareZekrCheckBox(
-                                      zekr: widget.azkarModel.zekr ?? "",
-                                      image: image));
-                            }
-                          },
+                          onPressed: () {},
                           icon: const Icon(
                             Icons.share,
                             size: 24,
@@ -89,9 +65,9 @@ class _AzkarDetailsItemState extends State<AzkarDetailsItem> {
                   Expanded(
                     child: CircleAvatar(
                       radius: 25,
-                      backgroundColor: AppColor.primary.withOpacity(0.3),
+                      backgroundColor: AppColor.pantone,
                       child: Text(
-                        widget.azkarModel.count ?? "",
+                        azkarModel.count ?? "",
                         style: const TextStyle(
                             fontSize: 25,
                             color: Colors.white,
@@ -102,7 +78,7 @@ class _AzkarDetailsItemState extends State<AzkarDetailsItem> {
                   Expanded(
                     child: CircleAvatar(
                       radius: 25,
-                      backgroundColor: AppColor.primary.withOpacity(0.3),
+                      backgroundColor: AppColor.pantone,
                       child: IconButton(
                           onPressed: () {},
                           icon: const Icon(
@@ -115,19 +91,9 @@ class _AzkarDetailsItemState extends State<AzkarDetailsItem> {
                   Expanded(
                     child: CircleAvatar(
                       radius: 25,
-                      backgroundColor: AppColor.primary.withOpacity(0.3),
+                      backgroundColor: AppColor.pantone,
                       child: IconButton(
-                          onPressed: () {
-                            Clipboard.setData(ClipboardData(
-                                    text: widget.azkarModel.zekr ?? ""))
-                                .then((_) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Center(
-                                        child: Text('تم النسخ إلى الحافظه'))),
-                              );
-                            });
-                          },
+                          onPressed: () {},
                           icon: const Icon(
                             Icons.copy,
                             size: 24,
