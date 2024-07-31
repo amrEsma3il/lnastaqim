@@ -1,22 +1,16 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
 import '../../../../core/constants/colors.dart';
 import '../../data/data_sources/const_data_sources/bottom_nav_bar.dart';
-
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
     super.key,
   });
-
-  static const List items = [
-    AppRouteName.quranSowar,
-    AppRouteName.moshaf,
-    AppRouteName.azkarView,
-    AppRouteName.paryerTimes,
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,17 +30,16 @@ class BottomNavBar extends StatelessWidget {
             ...List.generate(
                 navBarIconDataSource.length,
                 (index) => GestureDetector(
-                      onTap: () {
-                        Get.toNamed(items[index]);
-                        //      index==3?   Get.toNamed(AppRouteName.paryerTimes):null;
-                        // index==1?   Get.toNamed(AppRouteName.moshaf):null;
-                      },
-                      child: Image.asset(
+                  onTap: () {
+                      index==3?   Get.toNamed(AppRouteName.paryerTimes):null;
+                 index==1?   Get.toNamed(AppRouteName.moshaf):null;
+                  },
+                  child: Image.asset(
                         navBarIconDataSource[index],
                         width: 23.w,
                         height: 23.h,
                       ),
-                    ))
+                ))
           ],
         ),
       ),
