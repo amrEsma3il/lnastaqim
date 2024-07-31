@@ -10,7 +10,7 @@ class NoteCollection extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(AppRouteName.note);
+        Get.offNamed(AppRouteName.note);
       },
       child: Container(
         width: double.infinity,

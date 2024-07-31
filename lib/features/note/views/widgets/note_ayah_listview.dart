@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 import '../../../quran/bussniess_logic/quran/quran_cubit.dart';
 import '../../../quran/view/screens/moshaf_view.dart';
@@ -24,13 +25,15 @@ class NoteAyahListView extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => const MoshafView(
-                          // indexP: 604 - int.parse(notes[index].pageNum),
-                        ),
-                      ));
+                  QuranCubit.get(context).onMoshafPageChangedEvent();
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (BuildContext context) => const MoshafView(
+                  //         // indexP: 604 - int.parse(notes[index].pageNum),
+                  //       ),
+                  //     ));
+                  Get.back();
                              QuranCubit.get(context).pageController.jumpToPage(604 - int.parse(notes[index].pageNum));
                 },
                 child: NoteAyah(
