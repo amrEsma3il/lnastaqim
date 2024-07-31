@@ -28,7 +28,6 @@ class AppImages {
   static const String menu = '$rootImages/menu.png';
 
 
-  static const String azkarHeader = 'assets/images/Group.png';
   static const String forwardIcon = 'assets/images/forward_icon.svg';
 
   // notifications

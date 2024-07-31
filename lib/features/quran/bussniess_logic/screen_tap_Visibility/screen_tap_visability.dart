@@ -67,6 +67,12 @@ class ScreenOverlayCubit extends Cubit<int> {
 //     });
   }
 
+
+
+  clearIverlayVisability(){
+    emit(0);
+  }
+
   menuShow() {
     emit(2);
   }

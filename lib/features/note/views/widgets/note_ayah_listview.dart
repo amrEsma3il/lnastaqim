@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import '../../../quran/bussniess_logic/quran/quran_cubit.dart';
+import '../../../quran/bussniess_logic/screen_tap_Visibility/screen_tap_visability.dart';
 import '../../../quran/view/screens/moshaf_view.dart';
 import '../../bussniess_logic/note_cubit/note_cubit.dart';
 import '../../data/models/note_model.dart';
@@ -25,7 +26,8 @@ class NoteAyahListView extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {
-                  QuranCubit.get(context).onMoshafPageChangedEvent();
+     
+                      QuranCubit.get(context).clearScreen(context);
                   // Navigator.push(
                   //     context,
                   //     MaterialPageRoute(

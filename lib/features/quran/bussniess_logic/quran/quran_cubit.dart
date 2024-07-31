@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lnastaqim/core/local_database/quran/quran_v2.dart';
 import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
@@ -84,7 +85,7 @@ class QuranCubit extends Cubit<SelectAyaModel> {
   int selectedAyahNo = -1;
   // static List<Map<String,dynamic>> menuItems=QuranRepository.menuItems;
 
-  onMoshafPageChangedEvent() {
+  clearMenuOverlayEvent() {
     emit(SelectAyaModel(ayaNumber: -1, offset: const Offset(0, 0)));
       //TODO:implement aya select visible overlay correct
     //  screenOverlayCubit.stream.listen((visibileState) {
@@ -304,5 +305,11 @@ class QuranCubit extends Cubit<SelectAyaModel> {
     }
 
     return ayatOfSearch;
+  }
+
+
+  clearScreen(BuildContext context){
+    clearMenuOverlayEvent();
+    ScreenOverlayCubit.get(context).clearIverlayVisability();
   }
 }

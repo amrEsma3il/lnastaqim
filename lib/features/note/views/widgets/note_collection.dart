@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
+import 'package:get/route_manager.dart';
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
+import '../../../quran/bussniess_logic/quran/quran_cubit.dart';
+import '../../../quran/bussniess_logic/screen_tap_Visibility/screen_tap_visability.dart';
 
 class NoteCollection extends StatelessWidget {
   const NoteCollection({super.key});
@@ -10,6 +11,7 @@ class NoteCollection extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+     QuranCubit.get(context).clearScreen(context);
         Get.offNamed(AppRouteName.note);
       },
       child: Container(

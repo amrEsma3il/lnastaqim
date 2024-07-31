@@ -10,7 +10,7 @@ class BookMarkCollection extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(AppRouteName.bookmark);
+        Get.offNamed(AppRouteName.bookmark);
       },
       child: Container(
         width: double.infinity,
