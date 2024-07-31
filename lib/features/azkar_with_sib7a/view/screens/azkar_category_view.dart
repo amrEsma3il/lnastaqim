@@ -39,7 +39,7 @@ class _AzkarViewState extends State<AzkarView> {
                 child: Column(
                   children: [
                     const Image(
-                      image: AssetImage(AppImages.azkarHeader),
+                      image: AssetImage(AppImages.azkar),
                     ),
                     const SizedBox(
                       height: 20,
@@ -58,7 +58,7 @@ class _AzkarViewState extends State<AzkarView> {
                                       spreadRadius:
                                           BorderSide.strokeAlignInside)
                                 ],
-                                color: AppColor.lightBrownWithOpacity10,
+                                color: AppColor.white2,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15))),
                             child: Row(
@@ -69,7 +69,7 @@ class _AzkarViewState extends State<AzkarView> {
                                   child: Text(
                                     "الاذكار",
                                     style: TextStyle(
-                                        color: AppColor.darkBrown,
+                                        color: AppColor.primary,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500),
                                   ),
@@ -78,7 +78,7 @@ class _AzkarViewState extends State<AzkarView> {
                                     onPressed: toggleVisibility,
                                     icon: Icon(
                                       Icons.arrow_drop_down,
-                                      color: AppColor.darkBrown,
+                                      color: AppColor.primary,
                                     )),
                               ],
                             ),
@@ -86,7 +86,7 @@ class _AzkarViewState extends State<AzkarView> {
                         : Container(
                             height: 41,
                             decoration: ShapeDecoration(
-                                color: AppColor.darkBrown,
+                                color: AppColor.primary,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15))),
                             child: Row(
