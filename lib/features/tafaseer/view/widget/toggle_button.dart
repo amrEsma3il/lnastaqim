@@ -36,7 +36,7 @@ class ToggleButton extends StatelessWidget {
                 },
                 children: [
                   TafsirType(
-                    name: 'الطابري',
+                    name: 'الطبري',
                     onPressed: () {
                       ChangeTafseerCubit.get(context).changeColor(0);
                       TafseerCubit.get(context).tafsir = true;

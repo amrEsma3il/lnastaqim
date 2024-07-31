@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:io';
 import 'package:adhan/adhan.dart';
@@ -39,83 +38,66 @@ class LocalNotificationService {
     );
   }
 
-
-static void alarmNotification()async{
+  static void alarmNotification() async {
 //  tz.initializeTimeZones();
 //     tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
 //     var currentTime = tz.TZDateTime.now(tz.local);
 
- final AlarmSettings alarmSettings=AlarmSettings(
-  id: 42,
-  dateTime: DateTime.now().add(const Duration(minutes: 1)),
-  assetAudioPath: 'assets/sounds/azhan.mp3',
-  // loopAudio: true,
-  vibrate: true,
-  volume: 0.8,
-  // fadeDuration: 3.0,
-  notificationTitle: 'حان الان موعد اذان الضهر',
-  notificationBody: '«اللهم رب هذه الدعوة التامة، والصلاة القائمة، آت محمدًا الوسيلة والفضيلة، وابعثه مقامًا محمودًا الذي وعدته؛ حلت له شفاعتي يوم القيامة هذا»',
-  enableNotificationOnKill: Platform.isIOS,
-);
+    final AlarmSettings alarmSettings = AlarmSettings(
+      id: 42,
+      dateTime: DateTime.now().add(const Duration(minutes: 1)),
+      assetAudioPath: 'assets/sounds/azhan.mp3',
+      // loopAudio: true,
+      vibrate: true,
+      volume: 0.8,
+      // fadeDuration: 3.0,
+      notificationTitle: 'حان الان موعد اذان الضهر',
+      notificationBody:
+          '«اللهم رب هذه الدعوة التامة، والصلاة القائمة، آت محمدًا الوسيلة والفضيلة، وابعثه مقامًا محمودًا الذي وعدته؛ حلت له شفاعتي يوم القيامة هذا»',
+      enableNotificationOnKill: Platform.isIOS,
+    );
 
-await Alarm.set(alarmSettings: alarmSettings);
-}
+    await Alarm.set(alarmSettings: alarmSettings);
+  }
+
   //basic Notification
   static void showBasicNotification() async {
-    
-               ms.Random random = ms.Random();
+    ms.Random random = ms.Random();
+    int randomIndex = random.nextInt(AzkarDataBase.azkarJsonData.length);
+    Map<String, String> randomZekr = AzkarDataBase.azkarJsonData[randomIndex];
 
-         int randomIndex = random.nextInt(AzkarDataBase.azkarJsonData.length);
- Map<String, String> randomZekr= AzkarDataBase.azkarJsonData[randomIndex];
-
-
-  //  String largeIconPath = await getImageFilePath(AppImages.notificationLargeIcon);
-  // String bigPicturePath = await getImageFilePath(AppImages.notificationBigPicture);
-    AndroidNotificationDetails android =  AndroidNotificationDetails(
-    'id 1',
-    'basic notification',
-    channelDescription: "body description",
-    importance: Importance.max,
-    priority: Priority.high,
-     ongoing: true,
-autoCancel: false,
- actions: <AndroidNotificationAction>[
+    AndroidNotificationDetails android = AndroidNotificationDetails(
+      'id 1',
+      'basic notification',
+      channelDescription: "body description",
+      importance: Importance.max,
+      priority: Priority.high,
+      ongoing: true,
+      autoCancel: false,
+      actions: <AndroidNotificationAction>[
         const AndroidNotificationAction(
           'dismiss_action',
           'Dismiss',
           cancelNotification: true,
         ),
       ],
-    sound: const RawResourceAndroidNotificationSound('sound'),
-    // color:  Color.fromARGB(255, 255, 90, 20), // Custom notification color
-    // largeIcon: FilePathAndroidBitmap(largeIconPath),
-    styleInformation:
-    BigTextStyleInformation(
-     randomZekr['zekr']!,
-    htmlFormatBigText: true,
-    contentTitle: randomZekr['category'],
-    htmlFormatContentTitle: true,
-    summaryText: 'اذكار وادعية',
-    htmlFormatSummaryText: true,
-  ),
-    //  BigPictureStyleInformation(
-    //   FilePathAndroidBitmap(bigPicturePath),
-    //   largeIcon: FilePathAndroidBitmap(largeIconPath),
-    //   // contentTitle: '<b>Custom Title</b>', // HTML formatting for bold text
-    //   htmlFormatContentTitle: true,
-    //   summaryText: 'Custom Summary Text',
-    //   htmlFormatSummaryText: true,
-    // ),
-  );
+      sound: const RawResourceAndroidNotificationSound('sound'),
+      styleInformation: BigTextStyleInformation(
+        randomZekr['zekr']!,
+        htmlFormatBigText: true,
+        contentTitle: randomZekr['category'],
+        htmlFormatContentTitle: true,
+        summaryText: 'اذكار وادعية',
+        htmlFormatSummaryText: true,
+      ),
+    );
     NotificationDetails details = NotificationDetails(
       android: android,
     );
-
     await flutterLocalNotificationsPlugin.show(
-
       0,
       randomZekr['category'],
-       randomZekr['zekr'],
+      randomZekr['zekr'],
       details,
       payload: "Payload Data",
     );
@@ -171,7 +153,7 @@ autoCancel: false,
       priority: Priority.high,
       autoCancel: false,
       ongoing: true,
-       sound: RawResourceAndroidNotificationSound('sound'),
+      sound: RawResourceAndroidNotificationSound('sound'),
     );
     NotificationDetails details = const NotificationDetails(
       android: android,
@@ -183,7 +165,7 @@ autoCancel: false,
     log(currentTimeZone);
     tz.setLocalLocation(tz.getLocation(currentTimeZone));
     log(tz.local.name);
-        log("After ${tz.TZDateTime.now(tz.getLocation(currentTimeZone)).hour}");
+    log("After ${tz.TZDateTime.now(tz.getLocation(currentTimeZone)).hour}");
     log("After ${tz.TZDateTime.now(tz.getLocation(currentTimeZone)).minute}");
     await flutterLocalNotificationsPlugin.zonedSchedule(
       2,
@@ -207,7 +189,6 @@ autoCancel: false,
 
   //showDailySchduledNotification
   static void showDailySchduledNotification() async {
-  
     const AndroidNotificationDetails android = AndroidNotificationDetails(
       'daily schduled notification',
       'id 4',
@@ -221,42 +202,39 @@ autoCancel: false,
     tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
     var currentTime = tz.TZDateTime.now(tz.local);
 
-          final coordinates = Coordinates(31.2156, 29.9553); // Example: Alexandria, Egypt
+    final coordinates =
+        Coordinates(31.2156, 29.9553); // Example: Alexandria, Egypt
     final params = CalculationMethod.egyptian.getParameters();
     final prayerTimes = PrayerTimes.today(coordinates, params);
 
-     final localTime = tz.TZDateTime.from(prayerTimes.asr, tz.local);
-  log("==========================================");
-  log(localTime.timeZoneName);
+    final localTime = tz.TZDateTime.from(prayerTimes.asr, tz.local);
+    log("==========================================");
+    log(localTime.timeZoneName);
     log(localTime.year.toString());
 
     log(localTime.month.toString());
 
     log(localTime.day.toString());
-  log(localTime.hour.toString());
+    log(localTime.hour.toString());
 
-  log(localTime.minute.toString());
-  log(localTime.second.toString());
+    log(localTime.minute.toString());
+    log(localTime.second.toString());
 
-  log("==========================================");   
+    log("==========================================");
     log("currentTime.year:${currentTime.year}");
     log("currentTime.month:${currentTime.month}");
     log("currentTime.day:${currentTime.day}");
     log("currentTime.hour:${currentTime.hour}");
     log("currentTime.minute:${currentTime.minute}");
     log("currentTime.second:${currentTime.second}");
-    var scheduleTime = tz.TZDateTime( 
-      tz.local,
-      currentTime.year,
-      currentTime.month,
-      currentTime.day,
-      currentTime.hour,
-      currentTime.minute,
-      15
-
-
-     
-    );
+    var scheduleTime = tz.TZDateTime(
+        tz.local,
+        currentTime.year,
+        currentTime.month,
+        currentTime.day,
+        currentTime.hour,
+        currentTime.minute,
+        15);
     log("scheduledTime.year:${scheduleTime.year}");
     log("scheduledTime.month:${scheduleTime.month}");
     log("scheduledTime.day:${scheduleTime.day}");

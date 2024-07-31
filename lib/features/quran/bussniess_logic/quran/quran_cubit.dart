@@ -6,18 +6,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lnastaqim/core/local_database/quran/quran_v2.dart';
 import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
 
+import '../../../../core/local_database/quran/quran_local_database.dart';
 import '../../../../core/utilits/functions/search_string_pattern/boyer_moore_algo.dart'
     as boyer_more;
 import '../../data/models/search_ayah_entity.dart';
 import '../../data/models/select_aya_model.dart';
 import '../../data/models/surahs_model.dart';
+import '../screen_tap_Visibility/screen_tap_visability.dart';
 // import '../../../../core/utilits/functions/search_string_pattern/kmp_algo.dart' as kmp;
 
 class QuranCubit extends Cubit<SelectAyaModel> {
-  QuranCubit() : super(SelectAyaModel(ayaNumber: -1, offset: Offset(0, 0)));
+  QuranCubit() : super(SelectAyaModel(ayaNumber: -1, offset: const Offset(0, 0)));
   static QuranCubit get(context) => BlocProvider.of(context);
-
-  TextEditingController searchController = TextEditingController();
+  final ScreenOverlayCubit screenOverlayCubit=ScreenOverlayCubit();
+  final LayerLink layerLink = LayerLink();
+ PageController pageController = PageController(
+    
+    );
+  // TextEditingController searchController = TextEditingController();
   TextEditingController juzHizbSurahNoController = TextEditingController();
   List<Surah> surahs = [];
   List<List<Ayah>> pages = [];
@@ -76,17 +82,36 @@ class QuranCubit extends Cubit<SelectAyaModel> {
   int juzOrHizbOrSurahNo = 0;
 
   int selectedAyahNo = -1;
+  // static List<Map<String,dynamic>> menuItems=QuranRepository.menuItems;
 
   onMoshafPageChangedEvent() {
-    emit(SelectAyaModel(ayaNumber: -1, offset: Offset(0, 0)));
+    emit(SelectAyaModel(ayaNumber: -1, offset: const Offset(0, 0)));
+      //TODO:implement aya select visible overlay correct
+    //  screenOverlayCubit.stream.listen((visibileState) {
+      // React to changes in FirstCubit's state
+  
+
+//   if (visibileState==0||visibileState==1) {
+//     screenOverlayCubit.keepOverlayState(visibileState);
+// }
+
+    // });
+    
   }
 
   toggleAyahSelection({required SelectAyaModel selectAya}) {
     if (selectAya.ayaNumber == state.ayaNumber) {
-      emit(SelectAyaModel(ayaNumber: -1, offset: Offset(0, 0)));
+      emit(SelectAyaModel(ayaNumber: -1, offset: const Offset(0, 0)));
     } else {
       emit(selectAya);
     }
+  }
+
+
+  searchAya(int ayaNumber) {
+ 
+      emit(SelectAyaModel(ayaNumber:ayaNumber , offset: const Offset(0, 0)));
+    
   }
 
   // toggleAyahSelection({required int ayaNumber}) {
@@ -101,6 +126,11 @@ class QuranCubit extends Cubit<SelectAyaModel> {
   //  }
 
   // }
+  
+
+ 
+
+
 
   Future<void> loadQuran() async {
     surahs = quranSurahs.map((s) => Surah.fromJson(s)).toList();
@@ -122,6 +152,18 @@ class QuranCubit extends Cubit<SelectAyaModel> {
           (s) => s.ayahs.contains(getCurrentPageAyahs(pageNumber).first))
       .surahNumber;
 
+
+  String getSurahNameFromPage(int pageNumber) {
+    try {
+      return surahs
+          .firstWhere(
+              (s) => s.ayahs.contains(getCurrentPageAyahs(pageNumber).first))
+          .arabicName;
+    } catch (e) {
+      return "Surah not found";
+    }
+  }
+  
   int getSurahNumberByName(String surahName) {
     try {
       return surahs
@@ -139,16 +181,7 @@ class QuranCubit extends Cubit<SelectAyaModel> {
   int getSurahNumberByAyah(Ayah ayah) =>
       surahs.firstWhere((s) => s.ayahs.contains(ayah)).surahNumber;
 
-  String getSurahNameFromPage(int pageNumber) {
-    try {
-      return surahs
-          .firstWhere(
-              (s) => s.ayahs.contains(getCurrentPageAyahs(pageNumber).first))
-          .arabicName;
-    } catch (e) {
-      return "Surah not found";
-    }
-  }
+
 
   String getSurahNameFromAyah(Ayah ayah) {
     try {
@@ -157,6 +190,27 @@ class QuranCubit extends Cubit<SelectAyaModel> {
       return "Surah not found";
     }
   }
+
+  //surah functions
+  int? getSurahStartPage(String surahName) {
+  for (var surah in QuranDataBase.quranJsonData) {
+    if (surah['name'] == surahName) {
+      return surah['startPage'];
+    }
+  }
+  // Return null if the Surah name is not found
+  return null;
+}
+
+  int?  getSurahNumber(String surahName) {
+  for (var surah in QuranDataBase.quranJsonData) {
+    if (surah['name'] == surahName) {
+      return surah['id'];
+    }
+  }
+  // Return null if the Surah name is not found
+  return null;
+}
 
   Ayah getSelectedAyah(int pageNumber, int ayahNumber) {
     List<Ayah> pageAyahs = getCurrentPageAyahs(pageNumber);
