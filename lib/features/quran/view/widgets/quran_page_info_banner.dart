@@ -20,17 +20,17 @@ class QuranPageInfoBanner extends StatelessWidget {
         // const Gap(16),
         Row(
           children: [
-            GestureDetector(
-              onTap: () {
-                // bookmarkCtrl.addPageBookmarkOnTap(context, index);
-              },
-              child: SvgPicture.asset(
-                'assets/svgs/bookmark.svg',
-                height: 46.h,
-                width: 30.w,
-                // color: Color.fromARGB(255, 17, 24, 164),
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: () {
+            //     // bookmarkCtrl.addPageBookmarkOnTap(context, index);
+            //   },
+            //   child: SvgPicture.asset(
+            //     'assets/svgs/bookmark.svg',
+            //     height: 46.h,
+            //     width: 30.w,
+            //     // color: Color.fromARGB(255, 17, 24, 164),
+            //   ),
+            // ),
          SizedBox(width: 5.w,),
             Text(
               '${'الجزء'}:${cubit.getPageInfo(index).juz.toString().toArabic}',

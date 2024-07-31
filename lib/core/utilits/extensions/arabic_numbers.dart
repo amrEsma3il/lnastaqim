@@ -16,4 +16,25 @@ extension ArabicNumbersConverter on String {
         .replaceAll('8', "٨")
         .replaceAll('9', "٩").replaceAll("(", "").replaceAll(")", "").replaceAll("  ", " ").replaceAll("   ", " ").replaceAll("ا۟", "اْ").replaceAll("و۟", "وْ");
   }
+
+    String get toEnglish => _replacedTextToEnglish();
+
+  String _replacedTextToEnglish() {
+    return replaceAll('٠', "0")
+        .replaceAll('١', "1")
+        .replaceAll('٢', "2")
+        .replaceAll('٣', "3")
+        .replaceAll('٤', "4")
+        .replaceAll('٥', "5")
+        .replaceAll('٦', "6")
+        .replaceAll('٧', "7")
+        .replaceAll('٨', "8")
+        .replaceAll('٩', "9")
+        .replaceAll("(", "")
+        .replaceAll(")", "")
+        .replaceAll("  ", " ")
+        .replaceAll("   ", " ")
+        .replaceAll("ا۟", "اْ")
+        .replaceAll("و۟", "وْ");
+  }
 }

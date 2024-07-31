@@ -12,7 +12,7 @@ class WorkManagerService {
     await Workmanager().registerPeriodicTask(
       'id1',
       'show simple notification',
-      frequency: const Duration(minutes: 15),
+      frequency: const Duration(hours: 2),
     );
   }
 
@@ -32,7 +32,7 @@ void actionTask() {
   //show notification
   Workmanager().executeTask((taskName, inputData)  {
   // LocalNotificationService.showBasicNotification();
-  LocalNotificationService.alarmNotification();
+  LocalNotificationService.showBasicNotification();
 
     return Future.value(true);
   });
