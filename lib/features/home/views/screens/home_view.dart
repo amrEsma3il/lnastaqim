@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
 import 'package:lnastaqim/core/constants/images.dart';
 import 'package:lnastaqim/features/home/data/models/prayer_time_model.dart';
@@ -40,10 +41,10 @@ class _HomeViewState extends State<HomeView> {
                   fit: BoxFit.cover,
                   image: const AssetImage(AppImages.homeBackground),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 50.0, left: 20),
+                 Padding(
+                  padding: EdgeInsets.only(top: 55.h, left: 20.w),
                   child:
-                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                      const Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                     Icon(
                       Icons.search,
                       color: Colors.white,
