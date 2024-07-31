@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lnastaqim/core/constants/images.dart';
 import 'package:lnastaqim/features/home/data/models/prayer_time_model.dart';
 
-import '../widgets/ayah_w_3bra.dart';
+import '../widgets/carousel_slider_ayah.dart';
 import '../widgets/features_grid_view.dart';
 import '../widgets/prayer_time_item.dart';
 
@@ -27,76 +27,83 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xfff2f4f9),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Stack(
-            children: [
-              Image(
-                image: AssetImage(AppImages.homeBackground),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 50.0, left: 20),
-                child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                  Icon(
-                    Icons.search,
-                    color: Colors.white,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Icon(
-                      Icons.notifications_none_outlined,
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Stack(
+              children: [
+                Image(
+                  image: AssetImage(AppImages.homeBackground),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 50.0, left: 20),
+                  child:
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    Icon(
+                      Icons.search,
                       color: Colors.white,
                     ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Icon(
+                        Icons.notifications_none_outlined,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Icon(
+                      Icons.wb_sunny_outlined,
+                      color: Colors.white,
+                    )
+                  ]),
+                )
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "مواعيد الصلاوات",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
-                  Icon(
-                    Icons.wb_sunny_outlined,
-                    color: Colors.white,
-                  )
-                ]),
-              )
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "مواعيد الصلاوات",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                    children: List.generate(items.length, (index) {
-                  return Expanded(
-                      child: PrayerTimeItem(
-                    prayerTimeModel: items[index],
-                  ));
-                })),
-              ],
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                      children: List.generate(items.length, (index) {
+                    return Expanded(
+                        child: PrayerTimeItem(
+                      prayerTimeModel: items[index],
+                    ));
+                  })),
+                ],
+              ),
             ),
-          ),
-          const AyahW3bra(),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(15.0, 0, 15, 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "المميزات",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                FeaturesGridView(),
-              ],
+            const CarouselSliderAyah(),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "المميزات",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  FeaturesGridView(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

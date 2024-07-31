@@ -30,9 +30,9 @@ class WorkManagerService {
 @pragma('vm-entry-point')
 void actionTask() {
   //show notification
-  Workmanager().executeTask((taskName, inputData)  {
-  // LocalNotificationService.showBasicNotification();
-  LocalNotificationService.alarmNotification();
+  Workmanager().executeTask((taskName, inputData) {
+    // LocalNotificationService.showBasicNotification();
+    LocalNotificationService.showBasicNotification();
 
     return Future.value(true);
   });
