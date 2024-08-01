@@ -1,10 +1,6 @@
 import 'package:workmanager/workmanager.dart';
 
 import 'local_notification_service.dart';
-// steps
-//1.init work manager
-//2.excute our task.
-//3.register our task in work manager
 
 class WorkManagerService {
   void registerMyTask() async {
@@ -16,10 +12,22 @@ class WorkManagerService {
     );
   }
 
+  void registerMoringAndEveningAzkarTask() {
+    Workmanager().registerPeriodicTask(
+      'id8',
+      'name8',
+      frequency: const Duration(hours: 1),
+      inputData: {
+        'تسابيح':
+            "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم\nقُلْ هُوَ ٱللَّهُ أَحَدٌ، ٱللَّهُ ٱلصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ."
+      },
+    );
+  }
+
   //init work manager service
   Future<void> init() async {
     await Workmanager().initialize(actionTask);
-    registerMyTask();
+    registerMoringAndEveningAzkarTask();
   }
 
   void cancelTask(String id) {
@@ -29,16 +37,9 @@ class WorkManagerService {
 
 @pragma('vm-entry-point')
 void actionTask() {
-  //show notification
-
-  Workmanager().executeTask((taskName, inputData)  {
-  // LocalNotificationService.showBasicNotification();
-  LocalNotificationService.showBasicNotification();
-
+  Workmanager().executeTask((taskName, inputData) {
+    LocalNotificationService.showMorningAndEveningAzkarScheduledNotification();
 
     return Future.value(true);
   });
 }
-
-//1.schedule notification at 9 pm.
-//2.execute for this notification.
