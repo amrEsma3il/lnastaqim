@@ -28,71 +28,58 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  adhan: ^2.0.0+1
+  alarm: ^3.1.5
+  audioplayers: ^4.0.0
+  carousel_slider: ^4.2.1
+  collection: ^1.18.0
   connectivity_plus: ^4.0.2
+  cupertino_icons: ^1.0.2
   dartz: ^0.10.1
+  dio: ^5.4.0
+  equatable: ^2.0.5
+  flutter:
+    sdk: flutter
   flutter_bloc: ^8.1.4
+  flutter_local_notifications: null
+  flutter_localizations:
+    sdk: flutter
   flutter_native_splash: 2.3.7
+  flutter_qiblah: ^2.1.0
   flutter_screenutil: ^5.9.0
+  flutter_staggered_animations: ^1.1.1
   flutter_svg: ^2.0.9
+  flutter_timezone: ^1.0.8
+  flutter_tts: ^3.8.5
   fluttertoast: ^8.2.2
+  freezed_annotation: ^2.4.1
+  geolocator: ^9.0.2
   get: ^4.6.1
   get_it: ^7.6.4
   go_router: ^10.1.2
   google_maps_flutter: ^2.5.3
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
   internet_connection_checker: ^1.0.0+1
   intl: any
-  retrofit: ">=4.0.0 <5.0.0"
-  shared_preferences: ^2.0.15
-  url_launcher: ^6.2.4
-  flutter_staggered_animations: ^1.1.1
-
-  permission_handler: ^11.1.0
-
-  equatable: ^2.0.5
-
-  cupertino_icons: ^1.0.2
-  flutter_qiblah: ^2.1.0
-  geolocator: ^9.0.2
-  dio: ^5.4.0
-  flutter:
-    sdk: flutter
-  freezed_annotation: ^2.4.1
-  flutter_localizations:
-    sdk: flutter
-
-  # radio_player: ^1.5.0
-
-  adhan: ^2.0.0+1
-
-  audioplayers: ^4.0.0
-  flutter_tts: ^3.8.5
   meta: ^1.10.0
-  collection: ^1.18.0
-  share_plus: ^9.0.0
-  hive_flutter: ^1.1.0
-  hive: ^2.2.3
-  alarm: ^3.1.5
-  screenshot: 2.5.0
   path_provider: ^2.1.3
+  permission_handler: ^11.1.0
   radio_player: ^1.6.0
-  workmanager:
-  timezone: ^0.9.4
-  flutter_timezone: ^1.0.8
-  flutter_local_notifications:
+  retrofit: ">=4.0.0 <5.0.0"
+  screenshot: ^3.0.0
+  share_plus: ^9.0.0
+  shared_preferences: ^2.0.15
   smooth_page_indicator: ^1.2.0+3
-  carousel_slider: ^4.2.1
-
+  timezone: ^0.9.4
+  url_launcher: ^6.2.4
+  workmanager: null
 
 dev_dependencies:
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
+  build_runner: ^2.4.9
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-  build_runner: ^2.4.9
   hive_generator: ^2.0.1
 
 # For information on the generic Dart part of this file, see the
@@ -107,7 +94,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
-    - assets/icons/ 
+    - assets/icons/
     - assets/svgs/
     - assets/svgs/surah_name/
     - assets/svgs/bookmark.svg
@@ -118,7 +105,6 @@ flutter:
     - assets/sounds/
     - assets/sounds/azhan.mp3
 
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
@@ -127,7 +113,7 @@ flutter:
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
-  # example: assets/fonts/thuluth-decorated.ttf      ... 
+  # example: assets/fonts/thuluth-decorated.ttf      ...
   fonts:
     - family: Mushaf
       fonts:
@@ -136,12 +122,12 @@ flutter:
       fonts:
         - asset: assets/fonts/NotoNaskhArabic-VariableFont_wght.ttf
     - family: Thuluth
-      fonts: 
+      fonts:
         - asset: assets/fonts/thuluth-decorated.ttf
     - family: Amiri
       fonts:
         - asset: assets\fonts\Amiri.ttf
-    
+
     - family: Majeed
       fonts:
         - asset: assets/fonts/Al Majeed Quranic Font_shiped.ttf
@@ -161,11 +147,9 @@ flutter:
         - asset: assets/fonts/QCF_BSML.ttf
     #   - asset: fonts/TrajanPro_Bold.ttf
     #     weight: 700
-
     # For details regarding fonts from package dependencies,
     # see https://flutter.dev/custom-fonts/#from-packages
     # assets/fonts/UthmanicHafs1B Ver13.ttf assets/fonts/QCF_BSML.ttf
-
     - family: page1
       fonts:
         - asset: assets/fonts/quran_fonts/p2001.ttf
