@@ -12,6 +12,15 @@ class WorkManagerService {
     );
   }
 
+  void registerTask() {
+    Workmanager().registerPeriodicTask(
+      'id4',
+      'name4',
+      frequency: const Duration(minutes: 1),
+      inputData: {'تسابيح': 'اللهم صل وسلم وزد وبارك على نبينا وحبيبنا محمد.'},
+    );
+  }
+
   void registerMoringAndEveningAzkarTask() {
     Workmanager().registerPeriodicTask(
       'id8',
@@ -24,10 +33,21 @@ class WorkManagerService {
     );
   }
 
+  void registerAllSalwat() {
+    Workmanager().registerPeriodicTask(
+      'id9',
+      'name9',
+      frequency: const Duration(minutes: 1),
+      inputData: {'الصلوات': "الصلاه"},
+    );
+  }
+
   //init work manager service
   Future<void> init() async {
-    await Workmanager().initialize(actionTask);
+    await Workmanager().initialize(actionTask, isInDebugMode: false);
+    registerTask();
     registerMoringAndEveningAzkarTask();
+    registerAllSalwat();
   }
 
   void cancelTask(String id) {
@@ -38,7 +58,9 @@ class WorkManagerService {
 @pragma('vm-entry-point')
 void actionTask() {
   Workmanager().executeTask((taskName, inputData) {
+    LocalNotificationService.showSalahNabiNotification();
     LocalNotificationService.showMorningAndEveningAzkarScheduledNotification();
+    LocalNotificationService.allSalwatNotifications();
 
     return Future.value(true);
   });

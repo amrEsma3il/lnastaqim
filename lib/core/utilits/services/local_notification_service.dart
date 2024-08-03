@@ -3,10 +3,12 @@ import 'dart:io';
 import 'dart:math' as ms;
 
 import 'package:alarm/alarm.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
+import '../../../features/paryer_times/data/models/prayers_time_model.dart';
 import '../../local_database/azkar/azkar_local_database.dart';
 
 class LocalNotificationService {
@@ -14,6 +16,8 @@ class LocalNotificationService {
       FlutterLocalNotificationsPlugin();
   static StreamController<NotificationResponse> streamController =
       StreamController();
+  static PrayersTimeModel? prayerTimesModel;
+
   static onTap(NotificationResponse notificationResponse) {
     // log(notificationResponse.id!.toString());
     // log(notificationResponse.payload!.toString());
@@ -169,6 +173,171 @@ class LocalNotificationService {
             UILocalNotificationDateInterpretation.absoluteTime,
       );
     }
+  }
+
+  static TimeOfDay parseTime(String time) {
+    final period = time.endsWith('AM') ? 'AM' : 'PM';
+    final timeWithoutPeriod = time.replaceAll(period, '');
+    final timeParts = timeWithoutPeriod.split(':');
+
+    int hour = int.parse(timeParts[0].trim());
+    final int minute = int.parse(timeParts[1].trim());
+
+    if (period == 'PM' && hour != 12) {
+      hour += 12;
+    } else if (period == 'AM' && hour == 12) {
+      hour = 0;
+    }
+
+    return TimeOfDay(hour: hour, minute: minute);
+  }
+
+  static bool isTimeEqual(TimeOfDay time1, TimeOfDay time2) {
+    return time1.hour == time2.hour && time1.minute == time2.minute;
+  }
+
+  static allSalwatNotifications() async {
+    NotificationDetails details = const NotificationDetails(
+        android: AndroidNotificationDetails(
+      'channel_id4',
+      'Daily Shduled notification',
+      importance: Importance.max,
+      priority: Priority.high,
+    ));
+
+    tz.initializeTimeZones();
+    tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
+    var currentTimeZone = tz.TZDateTime.now(tz.local);
+    // var currentTimeOfDay =
+    //     TimeOfDay(hour: currentTimeZone.hour, minute: currentTimeZone.minute);
+    var fajrTime = parseTime(prayerTimesModel!.fajr);
+    var dhuhrTime = parseTime(prayerTimesModel!.dhuhr);
+    var asrTime = parseTime(prayerTimesModel!.asr);
+    var maghribTime = parseTime(prayerTimesModel!.maghrib);
+    var ishaTime = parseTime(prayerTimesModel!.isha);
+    if (currentTimeZone.hour == fajrTime.hour &&
+        currentTimeZone.minute == fajrTime.minute) {
+      var shduledTime = tz.TZDateTime(
+          tz.local,
+          currentTimeZone.year,
+          currentTimeZone.month,
+          currentTimeZone.day,
+          currentTimeZone.hour,
+          currentTimeZone.minute);
+      if (shduledTime.isBefore(currentTimeZone)) {
+        shduledTime = shduledTime.add(const Duration(days: 1));
+      }
+      flutterLocalNotificationsPlugin.zonedSchedule(
+          2,
+          'الصلاه',
+          'موعد اذان الفجر  بتوقيت المنصوره',
+          payload: 'zonedSchedule',
+          shduledTime,
+          details,
+          uiLocalNotificationDateInterpretation:
+              UILocalNotificationDateInterpretation.absoluteTime);
+    }
+    if (currentTimeZone.hour > 2 && currentTimeZone.minute > 10) {
+      var shduledTime = tz.TZDateTime(
+          tz.local,
+          currentTimeZone.year,
+          currentTimeZone.month,
+          currentTimeZone.day,
+          currentTimeZone.hour,
+          currentTimeZone.minute);
+      if (shduledTime.isBefore(currentTimeZone)) {
+        shduledTime = shduledTime.add(const Duration(days: 1));
+      }
+      flutterLocalNotificationsPlugin.zonedSchedule(
+          2,
+          'الصلاه',
+          'موعد اذان الظهر بتوقيت المنصوره',
+          payload: 'zonedSchedule',
+          shduledTime,
+          details,
+          uiLocalNotificationDateInterpretation:
+              UILocalNotificationDateInterpretation.absoluteTime);
+    }
+    if (currentTimeZone.hour == dhuhrTime.hour &&
+        currentTimeZone.minute == dhuhrTime.minute) {
+      var shduledTime = tz.TZDateTime(
+          tz.local,
+          currentTimeZone.year,
+          currentTimeZone.month,
+          currentTimeZone.day,
+          currentTimeZone.hour,
+          currentTimeZone.minute);
+      if (shduledTime.isBefore(currentTimeZone)) {
+        shduledTime = shduledTime.add(const Duration(days: 1));
+      }
+      flutterLocalNotificationsPlugin.zonedSchedule(
+          2,
+          'الصلاه',
+          'موعد اذان العصر بتوقيت المنصوره',
+          payload: 'zonedSchedule',
+          shduledTime,
+          details,
+          uiLocalNotificationDateInterpretation:
+              UILocalNotificationDateInterpretation.absoluteTime);
+    }
+    if (currentTimeZone.hour == 20 && currentTimeZone.minute == 47) {
+      var shduledTime = tz.TZDateTime(
+          tz.local,
+          currentTimeZone.year,
+          currentTimeZone.month,
+          currentTimeZone.day,
+          currentTimeZone.hour,
+          currentTimeZone.minute);
+      if (shduledTime.isBefore(currentTimeZone)) {
+        shduledTime = shduledTime.add(const Duration(days: 1));
+      }
+      flutterLocalNotificationsPlugin.zonedSchedule(
+          2,
+          'الصلاه',
+          'موعد اذان المغرب بتوقيت المنصوره',
+          payload: 'zonedSchedule',
+          shduledTime,
+          details,
+          uiLocalNotificationDateInterpretation:
+              UILocalNotificationDateInterpretation.absoluteTime);
+    }
+    if (currentTimeZone.hour == 20 && currentTimeZone.minute == 50) {
+      var shduledTime = tz.TZDateTime(
+          tz.local,
+          currentTimeZone.year,
+          currentTimeZone.month,
+          currentTimeZone.day,
+          currentTimeZone.hour,
+          currentTimeZone.minute);
+      if (shduledTime.isBefore(currentTimeZone)) {
+        shduledTime = shduledTime.add(const Duration(days: 1));
+      }
+      flutterLocalNotificationsPlugin.zonedSchedule(
+          2,
+          'الصلاه',
+          'موعد اذان العشاء بتوقيت المنصوره',
+          payload: 'zonedSchedule',
+          shduledTime,
+          details,
+          uiLocalNotificationDateInterpretation:
+              UILocalNotificationDateInterpretation.absoluteTime);
+    }
+  }
+
+  static void showSalahNabiNotification() {
+    NotificationDetails details = const NotificationDetails(
+        android: AndroidNotificationDetails(
+      'channel_id',
+      'channel_name',
+      importance: Importance.max,
+      priority: Priority.high,
+    ));
+    flutterLocalNotificationsPlugin.show(
+        0,
+        'تسابيح',
+        'اللهم صل وسلم وزد وبارك على نبينا وحبيبنا محمد.',
+        payload: 'basic notification',
+        details);
   }
 
   static void cancelNotification(int id) async {
