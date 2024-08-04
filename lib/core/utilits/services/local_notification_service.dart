@@ -225,7 +225,7 @@ class LocalNotificationService {
           currentTimeZone.hour,
           currentTimeZone.minute);
       if (shduledTime.isBefore(currentTimeZone)) {
-        shduledTime = shduledTime.add(const Duration(days: 1));
+        shduledTime = shduledTime.add(const Duration(hours: 1));
       }
       flutterLocalNotificationsPlugin.zonedSchedule(
           2,
@@ -237,7 +237,7 @@ class LocalNotificationService {
           uiLocalNotificationDateInterpretation:
               UILocalNotificationDateInterpretation.absoluteTime);
     }
-    if (currentTimeZone.hour > 2 && currentTimeZone.minute > 10) {
+    if (currentTimeZone.hour == 23 && currentTimeZone.minute > 10) {
       var shduledTime = tz.TZDateTime(
           tz.local,
           currentTimeZone.year,
@@ -246,7 +246,7 @@ class LocalNotificationService {
           currentTimeZone.hour,
           currentTimeZone.minute);
       if (shduledTime.isBefore(currentTimeZone)) {
-        shduledTime = shduledTime.add(const Duration(days: 1));
+        shduledTime = shduledTime.add(const Duration(hours: 1));
       }
       flutterLocalNotificationsPlugin.zonedSchedule(
           2,
@@ -268,7 +268,7 @@ class LocalNotificationService {
           currentTimeZone.hour,
           currentTimeZone.minute);
       if (shduledTime.isBefore(currentTimeZone)) {
-        shduledTime = shduledTime.add(const Duration(days: 1));
+        shduledTime = shduledTime.add(const Duration(hours: 1));
       }
       flutterLocalNotificationsPlugin.zonedSchedule(
           2,
@@ -289,7 +289,7 @@ class LocalNotificationService {
           currentTimeZone.hour,
           currentTimeZone.minute);
       if (shduledTime.isBefore(currentTimeZone)) {
-        shduledTime = shduledTime.add(const Duration(days: 1));
+        shduledTime = shduledTime.add(const Duration(hours: 1));
       }
       flutterLocalNotificationsPlugin.zonedSchedule(
           2,
@@ -310,7 +310,7 @@ class LocalNotificationService {
           currentTimeZone.hour,
           currentTimeZone.minute);
       if (shduledTime.isBefore(currentTimeZone)) {
-        shduledTime = shduledTime.add(const Duration(days: 1));
+        shduledTime = shduledTime.add(const Duration(hours: 1));
       }
       flutterLocalNotificationsPlugin.zonedSchedule(
           2,

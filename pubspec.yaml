@@ -104,6 +104,10 @@ flutter:
     - assets/images/notification_bigPicture.png
     - assets/sounds/
     - assets/sounds/azhan.mp3
+    - assets/sounds/salahnabi.mp3
+
+    
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
