@@ -31,12 +31,12 @@ List<GetPage<dynamic>>? routes = [
       name: AppRouteName.soraDetails,
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
-  GetPage(
-      curve: Curves.easeInOut,
-      page: () => const ParyerTimesScreen(),
-      name: AppRouteName.paryerTimes,
-      transition: Transition.fadeIn,
-      transitionDuration: const Duration(milliseconds: 500)),
+  // GetPage(
+  //     curve: Curves.easeInOut,
+  //     page: () => const ParyerTimesScreen(),
+  //     name: AppRouteName.paryerTimes,
+  //     transition: Transition.fadeIn,
+  //     transitionDuration: const Duration(milliseconds: 500)),
   GetPage(
       curve: Curves.easeInOut,
       page: () => const MoshafView(),

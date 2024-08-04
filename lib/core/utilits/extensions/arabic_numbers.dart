@@ -14,7 +14,7 @@ extension ArabicNumbersConverter on String {
         .replaceAll('6', "٦")
         .replaceAll('7', "٧")
         .replaceAll('8', "٨")
-        .replaceAll('9', "٩").replaceAll("(", "").replaceAll(")", "").replaceAll("  ", " ").replaceAll("   ", " ").replaceAll("ا۟", "اْ").replaceAll("و۟", "وْ");
+        .replaceAll('9', "٩").replaceAll("(", "").replaceAll(")", "").replaceAll("  ", " ").replaceAll("   ", " ").replaceAll("ا۟", "اْ").replaceAll("و۟", "وْ").replaceAll("AM", "ص").replaceAll("PM", "م");
   }
 
     String get toEnglish => _replacedTextToEnglish();
