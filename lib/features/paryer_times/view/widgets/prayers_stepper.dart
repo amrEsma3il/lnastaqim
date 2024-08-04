@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
@@ -74,6 +76,9 @@ class StepperItem extends StatelessWidget {
           const SizedBox(height: 10),
         BlocBuilder<PrayersTimesCubit, PrayersTimeModel>(
             builder: (context, paryerState) {
+              log("===============index=====");
+              log( paryerState.currentPrayer!.index!.toString());
+                 log( paryerState.currentPrayer!.name!.toString());
               return Row(
                 children: [
                   isFirst
@@ -107,7 +112,7 @@ class Line extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         child: Container(
-      height: 1.1,
+      height: 1.2,
       color: isChecked ? AppColor.blueColor : Colors.grey,
     ));
   }
@@ -124,7 +129,7 @@ class Step extends StatelessWidget {
       height: 17,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
-          color: isChecked ? AppColor.blueColor : null,
+          color: isChecked ? AppColor.blueColor : null, //
           border: Border.all(
             color: AppColor.blueColor,
             width: 2,
