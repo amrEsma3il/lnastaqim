@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -11,8 +12,8 @@ class DateCubit extends Cubit<Map<String,String>> {
   DateCubit() : super({"gregorian":"","hijri": ""});
 
  static DateCubit get(BuildContext context)=>BlocProvider.of<DateCubit>(context);
-
-
+late Timer timer;
+      static final GlobalKey<NavigatorState> dateNavigatorKey = GlobalKey<NavigatorState>();
     getDates(){
    DateTime now = DateTime.now();
     log(now.toString());
@@ -24,5 +25,12 @@ class DateCubit extends Cubit<Map<String,String>> {
 
       emit({"gregorian": DateTimeService.formatgreGorianDate(now)
                                       .toArabic,"hijri": formattedHijriDate.toArabic});
+
+timer=Timer.periodic(const Duration(minutes: 1), (timer) {
+      // log(now.toString());
+ 
+   emit({"gregorian": DateTimeService.formatgreGorianDate(now)
+                                      .toArabic,"hijri": formattedHijriDate.toArabic});
+});
     }
 }

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:adhan/adhan.dart';
@@ -16,7 +17,8 @@ class PrayersTimesCubit extends Cubit<PrayersTimeModel> {
 
 
 static PrayersTimesCubit get(BuildContext context)=>BlocProvider.of<PrayersTimesCubit>(context);
-  
+  late Timer timer;
+
 
 
   fetchPrayersTimes()async{
@@ -29,5 +31,11 @@ final myCoordinates = Coordinates(31.360835, 31.572778);
 
    PrayersTimeModel prayerTimesModel = PrayersTimesRepo.fetchPrayersTimes(myCoordinates, params);
    emit(prayerTimesModel);
+
+   timer=Timer.periodic(const Duration(minutes: 1), (timer) {  
+      //  log("test from paryer times");
+
+    emit(prayerTimesModel);
+});
   }
 }
