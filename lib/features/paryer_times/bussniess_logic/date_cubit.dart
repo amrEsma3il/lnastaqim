@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
-
+import 'dart:math' as ms;
+ 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
@@ -27,10 +28,13 @@ late Timer timer;
                                       .toArabic,"hijri": formattedHijriDate.toArabic});
 
 timer=Timer.periodic(const Duration(minutes: 1), (timer) {
-      // log(now.toString());
- 
+  //  ms.Random random = ms.Random();
+  //   int randomIndex = random.nextInt(10000);
+  log( DateTimeService.formatgreGorianDate(now)
+                                      .toArabic);
    emit({"gregorian": DateTimeService.formatgreGorianDate(now)
-                                      .toArabic,"hijri": formattedHijriDate.toArabic});
+                                      .toArabic.toArabic,"hijri": formattedHijriDate.toArabic});
+                                            log("==================test from date==========");
 });
     }
 }

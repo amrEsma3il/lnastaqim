@@ -23,9 +23,9 @@ static PrayersTimesCubit get(BuildContext context)=>BlocProvider.of<PrayersTimes
 
   fetchPrayersTimes()async{
     log("test from paryer times");
-// Position? position=await LocationService.determinePosition();
-// final myCoordinates = Coordinates(position!.latitude,position.longitude);
-final myCoordinates = Coordinates(31.360835, 31.572778);
+Position? position=await LocationService.determinePosition();
+final myCoordinates = Coordinates(position!.latitude,position.longitude);
+// final myCoordinates = Coordinates(31.360835, 31.572778);
 
   late CalculationParameters params = PrayersTimesRepo.getCalculationParameters();
 
@@ -33,9 +33,12 @@ final myCoordinates = Coordinates(31.360835, 31.572778);
    emit(prayerTimesModel);
 
    timer=Timer.periodic(const Duration(minutes: 1), (timer) {  
-      //  log("test from paryer times");
+log(prayerTimesModel.currentPrayer!.index.toString());
+log(prayerTimesModel.currentPrayer!.name.toString());
 
     emit(prayerTimesModel);
+           log("-----------------test from paryer times-----------------");
+
 });
   }
 }
