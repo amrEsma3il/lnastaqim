@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math' as ms;
 
+import 'package:adhan/adhan.dart';
 import 'package:alarm/alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -9,6 +10,7 @@ import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 import '../../../features/paryer_times/data/models/prayers_time_model.dart';
+import '../../../features/paryer_times/data/repository/prayers_times_repo.dart';
 import '../../local_database/azkar/azkar_local_database.dart';
 
 class LocalNotificationService {
@@ -16,13 +18,16 @@ class LocalNotificationService {
       FlutterLocalNotificationsPlugin();
   static StreamController<NotificationResponse> streamController =
       StreamController();
-  static PrayersTimeModel? prayerTimesModel;
 
-  static onTap(NotificationResponse notificationResponse) {
-    // log(notificationResponse.id!.toString());
-    // log(notificationResponse.payload!.toString());
+  static Coordinates myCoordinates = Coordinates(31.360835, 31.572778);
+
+  static CalculationParameters params =
+      PrayersTimesRepo.getCalculationParameters();
+  static PrayersTimeModel prayerTimesModel =
+      PrayersTimesRepo.fetchPrayersTimes(myCoordinates, params);
+
+  static void onTap(NotificationResponse notificationResponse) {
     streamController.add(notificationResponse);
-    // Navigator.push(context, route);
   }
 
   static Future init() async {
@@ -38,18 +43,12 @@ class LocalNotificationService {
   }
 
   static void alarmNotification() async {
-//  tz.initializeTimeZones();
-//     tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
-//     var currentTime = tz.TZDateTime.now(tz.local);
-
     final AlarmSettings alarmSettings = AlarmSettings(
       id: 42,
       dateTime: DateTime.now().add(const Duration(minutes: 1)),
       assetAudioPath: 'assets/sounds/azhan.mp3',
-      // loopAudio: true,
       vibrate: true,
       volume: 0.8,
-      // fadeDuration: 3.0,
       notificationTitle: 'حان الان موعد اذان الضهر',
       notificationBody:
           '«اللهم رب هذه الدعوة التامة، والصلاة القائمة، آت محمدًا الوسيلة والفضيلة، وابعثه مقامًا محمودًا الذي وعدته؛ حلت له شفاعتي يوم القيامة هذا»',
@@ -59,7 +58,6 @@ class LocalNotificationService {
     await Alarm.set(alarmSettings: alarmSettings);
   }
 
-  //basic Notification
   static void showBasicNotification() async {
     ms.Random random = ms.Random();
     int randomIndex = random.nextInt(AzkarDataBase.azkarJsonData.length);
@@ -192,146 +190,23 @@ class LocalNotificationService {
     return TimeOfDay(hour: hour, minute: minute);
   }
 
-  static bool isTimeEqual(TimeOfDay time1, TimeOfDay time2) {
-    return time1.hour == time2.hour && time1.minute == time2.minute;
-  }
-
-  static allSalwatNotifications() async {
-    NotificationDetails details = const NotificationDetails(
-        android: AndroidNotificationDetails(
-      'channel_id4',
-      'Daily Shduled notification',
-      importance: Importance.max,
-      priority: Priority.high,
-    ));
-
-    tz.initializeTimeZones();
-    tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
-    var currentTimeZone = tz.TZDateTime.now(tz.local);
-    // var currentTimeOfDay =
-    //     TimeOfDay(hour: currentTimeZone.hour, minute: currentTimeZone.minute);
-    var fajrTime = parseTime(prayerTimesModel!.fajr);
-    var dhuhrTime = parseTime(prayerTimesModel!.dhuhr);
-    var asrTime = parseTime(prayerTimesModel!.asr);
-    var maghribTime = parseTime(prayerTimesModel!.maghrib);
-    var ishaTime = parseTime(prayerTimesModel!.isha);
-    if (currentTimeZone.hour == fajrTime.hour &&
-        currentTimeZone.minute == fajrTime.minute) {
-      var shduledTime = tz.TZDateTime(
-          tz.local,
-          currentTimeZone.year,
-          currentTimeZone.month,
-          currentTimeZone.day,
-          currentTimeZone.hour,
-          currentTimeZone.minute);
-      if (shduledTime.isBefore(currentTimeZone)) {
-        shduledTime = shduledTime.add(const Duration(hours: 1));
-      }
-      flutterLocalNotificationsPlugin.zonedSchedule(
-          2,
-          'الصلاه',
-          'موعد اذان الفجر  بتوقيت المنصوره',
-          payload: 'zonedSchedule',
-          shduledTime,
-          details,
-          uiLocalNotificationDateInterpretation:
-              UILocalNotificationDateInterpretation.absoluteTime);
-    }
-    if (currentTimeZone.hour == 23 && currentTimeZone.minute > 10) {
-      var shduledTime = tz.TZDateTime(
-          tz.local,
-          currentTimeZone.year,
-          currentTimeZone.month,
-          currentTimeZone.day,
-          currentTimeZone.hour,
-          currentTimeZone.minute);
-      if (shduledTime.isBefore(currentTimeZone)) {
-        shduledTime = shduledTime.add(const Duration(hours: 1));
-      }
-      flutterLocalNotificationsPlugin.zonedSchedule(
-          2,
-          'الصلاه',
-          'موعد اذان الظهر بتوقيت المنصوره',
-          payload: 'zonedSchedule',
-          shduledTime,
-          details,
-          uiLocalNotificationDateInterpretation:
-              UILocalNotificationDateInterpretation.absoluteTime);
-    }
-    if (currentTimeZone.hour == dhuhrTime.hour &&
-        currentTimeZone.minute == dhuhrTime.minute) {
-      var shduledTime = tz.TZDateTime(
-          tz.local,
-          currentTimeZone.year,
-          currentTimeZone.month,
-          currentTimeZone.day,
-          currentTimeZone.hour,
-          currentTimeZone.minute);
-      if (shduledTime.isBefore(currentTimeZone)) {
-        shduledTime = shduledTime.add(const Duration(hours: 1));
-      }
-      flutterLocalNotificationsPlugin.zonedSchedule(
-          2,
-          'الصلاه',
-          'موعد اذان العصر بتوقيت المنصوره',
-          payload: 'zonedSchedule',
-          shduledTime,
-          details,
-          uiLocalNotificationDateInterpretation:
-              UILocalNotificationDateInterpretation.absoluteTime);
-    }
-    if (currentTimeZone.hour == 20 && currentTimeZone.minute == 47) {
-      var shduledTime = tz.TZDateTime(
-          tz.local,
-          currentTimeZone.year,
-          currentTimeZone.month,
-          currentTimeZone.day,
-          currentTimeZone.hour,
-          currentTimeZone.minute);
-      if (shduledTime.isBefore(currentTimeZone)) {
-        shduledTime = shduledTime.add(const Duration(hours: 1));
-      }
-      flutterLocalNotificationsPlugin.zonedSchedule(
-          2,
-          'الصلاه',
-          'موعد اذان المغرب بتوقيت المنصوره',
-          payload: 'zonedSchedule',
-          shduledTime,
-          details,
-          uiLocalNotificationDateInterpretation:
-              UILocalNotificationDateInterpretation.absoluteTime);
-    }
-    if (currentTimeZone.hour == 20 && currentTimeZone.minute == 50) {
-      var shduledTime = tz.TZDateTime(
-          tz.local,
-          currentTimeZone.year,
-          currentTimeZone.month,
-          currentTimeZone.day,
-          currentTimeZone.hour,
-          currentTimeZone.minute);
-      if (shduledTime.isBefore(currentTimeZone)) {
-        shduledTime = shduledTime.add(const Duration(hours: 1));
-      }
-      flutterLocalNotificationsPlugin.zonedSchedule(
-          2,
-          'الصلاه',
-          'موعد اذان العشاء بتوقيت المنصوره',
-          payload: 'zonedSchedule',
-          shduledTime,
-          details,
-          uiLocalNotificationDateInterpretation:
-              UILocalNotificationDateInterpretation.absoluteTime);
-    }
-  }
+  static var fajrTime = parseTime(prayerTimesModel.fajr);
+  static var dhuhrTime = parseTime(prayerTimesModel.dhuhr);
+  static var asrTime = parseTime(prayerTimesModel.asr);
+  static var maghribTime = parseTime(prayerTimesModel.maghrib);
+  static var ishaTime = parseTime(prayerTimesModel.isha);
 
   static void showSalahNabiNotification() {
-    NotificationDetails details = const NotificationDetails(
-        android: AndroidNotificationDetails(
-      'channel_id',
-      'channel_name',
-      importance: Importance.max,
-      priority: Priority.high,
-    ));
+    NotificationDetails details = NotificationDetails(
+      android: AndroidNotificationDetails(
+        'channel_id',
+        'channel_name',
+        importance: Importance.max,
+        priority: Priority.high,
+        sound:
+            RawResourceAndroidNotificationSound('salahnabi'.split('.').first),
+      ),
+    );
     flutterLocalNotificationsPlugin.show(
         0,
         'تسابيح',
@@ -342,5 +217,170 @@ class LocalNotificationService {
 
   static void cancelNotification(int id) async {
     await flutterLocalNotificationsPlugin.cancel(id);
+  }
+
+  static void salahFajrNotification() {
+    NotificationDetails details = NotificationDetails(
+        android: AndroidNotificationDetails(
+      'channel_id4',
+      'Daily Shduled notification',
+      importance: Importance.max,
+      priority: Priority.high,
+      sound: RawResourceAndroidNotificationSound('azhan'.split('.').first),
+    ));
+    tz.initializeTimeZones();
+    tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
+    var currentTimeZone = tz.TZDateTime.now(tz.local);
+    var shduledTime = tz.TZDateTime(
+        tz.local,
+        currentTimeZone.year,
+        currentTimeZone.month,
+        currentTimeZone.day,
+        fajrTime.hour,
+        fajrTime.minute);
+    if (shduledTime.isBefore(currentTimeZone)) {
+      shduledTime = shduledTime.add(const Duration(days: 1));
+    }
+    flutterLocalNotificationsPlugin.zonedSchedule(
+        3,
+        'صلاه الفجر',
+        'موعد اذان الفجر بتوقيت المنصوره',
+        payload: 'zonedSchedule',
+        shduledTime,
+        details,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
+  }
+
+  static void salahDuhrNotification() {
+    NotificationDetails details = NotificationDetails(
+        android: AndroidNotificationDetails(
+      'channel_id4',
+      'Daily Shduled notification',
+      importance: Importance.max,
+      priority: Priority.high,
+      sound: RawResourceAndroidNotificationSound('azhan'.split('.').first),
+    ));
+    tz.initializeTimeZones();
+    tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
+    var currentTimeZone = tz.TZDateTime.now(tz.local);
+    var shduledTime = tz.TZDateTime(
+        tz.local,
+        currentTimeZone.year,
+        currentTimeZone.month,
+        currentTimeZone.day,
+        dhuhrTime.hour,
+        dhuhrTime.minute);
+    if (shduledTime.isBefore(currentTimeZone)) {
+      shduledTime = shduledTime.add(const Duration(days: 1));
+    }
+    flutterLocalNotificationsPlugin.zonedSchedule(
+        10,
+        'صلاه الظهر',
+        'موعد اذان الظهر بتوقيت المنصوره',
+        payload: 'zonedSchedule',
+        shduledTime,
+        details,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
+  }
+
+  static void salahAsrNotification() {
+    NotificationDetails details = NotificationDetails(
+        android: AndroidNotificationDetails(
+      'channel_id4',
+      'Daily Shduled notification',
+      importance: Importance.max,
+      priority: Priority.high,
+      sound: RawResourceAndroidNotificationSound('azhan'.split('.').first),
+    ));
+    tz.initializeTimeZones();
+    tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
+    var currentTimeZone = tz.TZDateTime.now(tz.local);
+    var shduledTime = tz.TZDateTime(
+        tz.local,
+        currentTimeZone.year,
+        currentTimeZone.month,
+        currentTimeZone.day,
+        asrTime.hour,
+        asrTime.minute);
+    if (shduledTime.isBefore(currentTimeZone)) {
+      shduledTime = shduledTime.add(const Duration(days: 1));
+    }
+    flutterLocalNotificationsPlugin.zonedSchedule(
+        11,
+        'صلاه العصر',
+        'موعد اذان العصر بتوقيت المنصوره',
+        payload: 'zonedSchedule',
+        shduledTime,
+        details,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
+  }
+
+  static void salahMagribNotification() {
+    NotificationDetails details = NotificationDetails(
+        android: AndroidNotificationDetails(
+      'channel_id4',
+      'Daily Shduled notification',
+      importance: Importance.max,
+      priority: Priority.high,
+      sound: RawResourceAndroidNotificationSound('azhan'.split('.').first),
+    ));
+    tz.initializeTimeZones();
+    tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
+    var currentTimeZone = tz.TZDateTime.now(tz.local);
+    var shduledTime = tz.TZDateTime(
+        tz.local,
+        currentTimeZone.year,
+        currentTimeZone.month,
+        currentTimeZone.day,
+        maghribTime.hour,
+        maghribTime.minute);
+    if (shduledTime.isBefore(currentTimeZone)) {
+      shduledTime = shduledTime.add(const Duration(days: 1));
+    }
+    flutterLocalNotificationsPlugin.zonedSchedule(
+        12,
+        'صلاه المغرب',
+        'موعد اذان المغرب بتوقيت المنصوره',
+        payload: 'zonedSchedule',
+        shduledTime,
+        details,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
+  }
+
+  static void salahIshaNotification() {
+    NotificationDetails details = NotificationDetails(
+        android: AndroidNotificationDetails(
+      'channel_id4',
+      'Daily Shduled notification',
+      importance: Importance.max,
+      priority: Priority.high,
+      sound: RawResourceAndroidNotificationSound('azhan'.split('.').first),
+    ));
+    tz.initializeTimeZones();
+    tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
+    var currentTimeZone = tz.TZDateTime.now(tz.local);
+    var shduledTime = tz.TZDateTime(
+        tz.local,
+        currentTimeZone.year,
+        currentTimeZone.month,
+        currentTimeZone.day,
+        ishaTime.hour,
+        ishaTime.minute);
+    if (shduledTime.isBefore(currentTimeZone)) {
+      shduledTime = shduledTime.add(const Duration(days: 1));
+    }
+    flutterLocalNotificationsPlugin.zonedSchedule(
+        13,
+        'صلاه العشاء',
+        'موعد اذان العشاء بتوقيت المنصوره',
+        payload: 'zonedSchedule',
+        shduledTime,
+        details,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
   }
 }

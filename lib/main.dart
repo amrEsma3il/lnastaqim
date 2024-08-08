@@ -14,15 +14,17 @@ import 'package:lnastaqim/features/note/data/models/note_model.dart';
 import 'package:lnastaqim/features/quran/bussniess_logic/quran/quran_cubit.dart';
 import 'package:lnastaqim/features/tafaseer/bussniess_logic/tafseer_cubit.dart';
 
+import 'config/routing/app_routingconfig/app_router_configuration.dart';
 import 'core/constants/constants.dart';
 import 'core/utilits/controller/search_or_not/search_visibility.dart';
 import 'core/utilits/services/local_notification_service.dart';
 import 'core/utilits/services/work_manager_service.dart';
 import 'features/azkar_with_sib7a/business_logic/azkar_category_cubit/azkar_category_cubit.dart';
 import 'features/azkar_with_sib7a/business_logic/azkar_details_cubit/azkar_details_cubit.dart';
+import 'features/azkar_with_sib7a/view/screens/azkar_category_view.dart';
 import 'features/bookmark/bussniess_logic/add_bookmark_cubit/add_bookmark_cubit.dart';
+import 'features/home/views/screens/home_view.dart';
 import 'features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
-import 'features/paryer_times/view/screens/test_screen.dart';
 import 'features/quran/bussniess_logic/fast_transition/fast_transition_cubit.dart';
 import 'features/quran/bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
 import 'features/quran/bussniess_logic/quran_sowar/search_on_aya_from_whole_quran_cubit.dart';
@@ -30,6 +32,7 @@ import 'features/quran/bussniess_logic/quran_sowar/search_or_not_cubit.dart';
 import 'features/quran/bussniess_logic/screen_tap_Visibility/screen_tap_visability.dart';
 import 'features/quran/bussniess_logic/sowra_detail/sora_details_cubit.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   // List<List<int>> matchesInQuran=[];
   // List<int> boyerMore=boyer.searchPattern("وجاءت","");
@@ -53,8 +56,38 @@ void main() async {
   runApp(const Lnastaqim());
 }
 
-class Lnastaqim extends StatelessWidget {
+class Lnastaqim extends StatefulWidget {
   const Lnastaqim({Key? key}) : super(key: key);
+
+  @override
+  State<Lnastaqim> createState() => _LnastaqimState();
+}
+
+class _LnastaqimState extends State<Lnastaqim> {
+  @override
+  void initState() {
+    listenToNotificationStream();
+    super.initState();
+  }
+
+  void listenToNotificationStream() {
+    LocalNotificationService.streamController.stream
+        .listen((notificationResponse) {
+      if (notificationResponse.id == 2) {
+        navigatorKey.currentState?.push(
+          MaterialPageRoute(
+            builder: (_) => const AzkarView(),
+          ),
+        );
+      } else {
+        navigatorKey.currentState?.push(
+          MaterialPageRoute(
+            builder: (_) => const HomeView(),
+          ),
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,11 +146,10 @@ class Lnastaqim extends StatelessWidget {
                 create: (BuildContext context) =>
                     AzkarDetailsCubit()..getAzkarDetails()),
           ],
-          child: const GetMaterialApp(
-            locale: Locale('ar'),
-            home: ParyerTimesScreen(),
+          child: GetMaterialApp(
+            locale: const Locale('ar'),
             debugShowCheckedModeBanner: false,
-            // getPages: routes,
+            getPages: routes,
           ),
         );
       },

@@ -16,7 +16,7 @@ class WorkManagerService {
     Workmanager().registerPeriodicTask(
       'id4',
       'name4',
-      frequency: const Duration(minutes: 1),
+      frequency: const Duration(minutes: 15),
       inputData: {'تسابيح': 'اللهم صل وسلم وزد وبارك على نبينا وحبيبنا محمد.'},
     );
   }
@@ -33,12 +33,48 @@ class WorkManagerService {
     );
   }
 
-  void registerAllSalwat() {
+  void registerFajrTask() {
     Workmanager().registerPeriodicTask(
-      'id9',
-      'name9',
-      frequency: const Duration(minutes: 1),
-      inputData: {'الصلوات': "الصلاه"},
+      'id10',
+      'name10',
+      frequency: const Duration(days: 1),
+      inputData: {'صلاه الفجر': "صلاه الفجر"},
+    );
+  }
+
+  void registerDhuhrTask() {
+    Workmanager().registerPeriodicTask(
+      'id11',
+      'name11',
+      frequency: const Duration(days: 1),
+      inputData: {'صلاه الظهر': "صلاه الظهر"},
+    );
+  }
+
+  void registerAsrTask() {
+    Workmanager().registerPeriodicTask(
+      'id12',
+      'name12',
+      frequency: const Duration(days: 1),
+      inputData: {'صلاه العصر': "صلاه العصر"},
+    );
+  }
+
+  void registerMaghribTask() {
+    Workmanager().registerPeriodicTask(
+      'id13',
+      'name13',
+      frequency: const Duration(days: 1),
+      inputData: {'صلاه المغرب': "صلاه المغرب"},
+    );
+  }
+
+  void registerIshaTask() {
+    Workmanager().registerPeriodicTask(
+      'id14',
+      'name14',
+      frequency: const Duration(days: 1),
+      inputData: {'صلاه العشاء': "صلاه العشاء"},
     );
   }
 
@@ -47,7 +83,11 @@ class WorkManagerService {
     await Workmanager().initialize(actionTask, isInDebugMode: false);
     registerTask();
     registerMoringAndEveningAzkarTask();
-    registerAllSalwat();
+    registerFajrTask();
+    registerDhuhrTask();
+    registerAsrTask();
+    registerMaghribTask();
+    registerIshaTask();
   }
 
   void cancelTask(String id) {
@@ -60,7 +100,11 @@ void actionTask() {
   Workmanager().executeTask((taskName, inputData) {
     LocalNotificationService.showSalahNabiNotification();
     LocalNotificationService.showMorningAndEveningAzkarScheduledNotification();
-    LocalNotificationService.allSalwatNotifications();
+    LocalNotificationService.salahFajrNotification();
+    LocalNotificationService.salahDuhrNotification();
+    LocalNotificationService.salahAsrNotification();
+    LocalNotificationService.salahMagribNotification();
+    LocalNotificationService.salahIshaNotification();
 
     return Future.value(true);
   });
