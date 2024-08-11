@@ -8,7 +8,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:lnastaqim/features/paryer_times/data/models/prayers_time_model.dart';
 import 'package:lnastaqim/features/paryer_times/data/repository/prayers_times_repo.dart';
 
-import '../../../core/utilits/services/location_service.dart';
+import '../../../core/utilits/services/location_service.dart'; 
 
 part 'prayers_times_state.dart';
 
@@ -23,9 +23,9 @@ static PrayersTimesCubit get(BuildContext context)=>BlocProvider.of<PrayersTimes
 
   fetchPrayersTimes()async{
     log("test from paryer times");
-Position? position=await LocationService.determinePosition();
-final myCoordinates = Coordinates(position!.latitude,position.longitude);
-// final myCoordinates = Coordinates(31.360835, 31.572778);
+// Position? position=await LocationService.determinePosition();
+// final myCoordinates = Coordinates(position!.latitude,position.longitude);
+final myCoordinates = Coordinates(31.360835, 31.572778);
 
   late CalculationParameters params = PrayersTimesRepo.getCalculationParameters();
 
