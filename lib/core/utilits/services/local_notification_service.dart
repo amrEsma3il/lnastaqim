@@ -244,7 +244,7 @@ class LocalNotificationService {
     flutterLocalNotificationsPlugin.zonedSchedule(
         3,
         'صلاه الفجر',
-        'موعد اذان الفجر بتوقيت المنصوره',
+        'حان الان موعد اذان الفجر',
         payload: 'zonedSchedule',
         shduledTime,
         details,
@@ -277,7 +277,7 @@ class LocalNotificationService {
     flutterLocalNotificationsPlugin.zonedSchedule(
         10,
         'صلاه الظهر',
-        'موعد اذان الظهر بتوقيت المنصوره',
+        'حان الان موعد اذان الظهر',
         payload: 'zonedSchedule',
         shduledTime,
         details,
@@ -310,7 +310,7 @@ class LocalNotificationService {
     flutterLocalNotificationsPlugin.zonedSchedule(
         11,
         'صلاه العصر',
-        'موعد اذان العصر بتوقيت المنصوره',
+        'حان الان موعد اذان العصر',
         payload: 'zonedSchedule',
         shduledTime,
         details,
@@ -343,7 +343,7 @@ class LocalNotificationService {
     flutterLocalNotificationsPlugin.zonedSchedule(
         12,
         'صلاه المغرب',
-        'موعد اذان المغرب بتوقيت المنصوره',
+        'حان الان موعد اذان المغرب',
         payload: 'zonedSchedule',
         shduledTime,
         details,
@@ -376,7 +376,7 @@ class LocalNotificationService {
     flutterLocalNotificationsPlugin.zonedSchedule(
         13,
         'صلاه العشاء',
-        'موعد اذان العشاء بتوقيت المنصوره',
+        'حان الان موعد اذان العشاء',
         payload: 'zonedSchedule',
         shduledTime,
         details,
