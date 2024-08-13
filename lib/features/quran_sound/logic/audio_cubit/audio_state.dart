@@ -1,16 +1,18 @@
 import 'package:equatable/equatable.dart';
+import 'package:hive_flutter/adapters.dart';
 
+import '../../../../core/constants/keys.dart';
 import '../../data/models/reciter_entity.dart';
 
 
 class AudioControlState extends Equatable {
   final ReciterEntity selectedReciter;
-  final int currentVerse;
+  final int currentVerse,pageNum,audioRepeat;
   final bool isPlaying;
-  final int audioRepeat;
   final PlayVerseBarStatus playVerseBarStatus;
 
   const AudioControlState({ required this.playVerseBarStatus,
+  required this.pageNum,
   required this.audioRepeat,
      required this.selectedReciter,
     required this.currentVerse,
@@ -18,11 +20,13 @@ class AudioControlState extends Equatable {
   });
 
   factory AudioControlState.initial() {
+    Box<ReciterEntity> box=Hive.box<ReciterEntity>(AppKeys.reciterBox);
     return  AudioControlState(
-      selectedReciter:recitersInfo[0] ,
-      currentVerse: 1,
+      selectedReciter:box.get(AppKeys.reciterNameKey)?? recitersInfo[0] ,
+      currentVerse: 6222,
       audioRepeat: 0,
       isPlaying: false, playVerseBarStatus: PlayVerseBarStatus.init,
+      pageNum: 603
     );
   }
 
@@ -31,9 +35,12 @@ class AudioControlState extends Equatable {
     int? currentVerse,
     bool? isPlaying,
      int? audioRepeat,
-    PlayVerseBarStatus? playVerseBarStatus
+    PlayVerseBarStatus? playVerseBarStatus,
+       int? pageNum
+
   }) {
     return AudioControlState(
+      pageNum: pageNum??this.pageNum,
       audioRepeat: audioRepeat??this.audioRepeat,
       selectedReciter: selectedReciter?? this.selectedReciter,
       currentVerse: currentVerse ?? this.currentVerse,
@@ -43,7 +50,7 @@ class AudioControlState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [selectedReciter, currentVerse, isPlaying,playVerseBarStatus,audioRepeat];
+  List<Object?> get props => [selectedReciter, currentVerse, isPlaying,playVerseBarStatus,audioRepeat,pageNum];
 }
 
 

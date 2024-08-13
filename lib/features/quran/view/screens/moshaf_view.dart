@@ -77,7 +77,7 @@ class MoshafView extends StatelessWidget {
                     } else {
                       ScreenOverlayCubit.get(context).clearIverlayVisability();
                     }
-                    MoshafPageCubit.get(context).updatePage(603 - index);
+                    AudioControlCubit.get(context).updatePage(604 - index);
                   },
                   itemCount: 604,
                   reverse: true,
@@ -801,7 +801,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                               ),
                                             );
                                           }
-                                          MoshafPageCubit.get(context)
+                                          AudioControlCubit.get(context)
                                               .changeAyaIndex(ayahs[ayahIndex]
                                                   .ayahUQNumber);
                                         },
@@ -841,7 +841,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                                   offset:
                                                       details.globalPosition));
                                         }
-                                        MoshafPageCubit.get(context)
+                                        AudioControlCubit.get(context)
                                             .changeAyaIndex(
                                                 ayahs[ayahIndex].ayahUQNumber);
                                       },
@@ -908,17 +908,14 @@ class _MoshafPageState extends State<MoshafPage> {
                                   color:
                                       const Color.fromARGB(255, 150, 126, 68),
                                 ),
-                                BlocBuilder<MoshafPageCubit, MoshafPageState>(
-                                  builder: (context, pageChangeState) {
-                                    return IconButton(
+                                IconButton(
                                         onPressed: () {
-                                          // weap with bloc builder of moshafPageCubit
                                           // clear all tabs than open 1 tap
                                           //play specific verse
                                           //  if(!widget.verseSoundstate.isPlaying)  { QuranCubit.get(context)
                                           //         .clearMenuOverlayEvent();}
                                           QuranCubit.get(context).searchAya(
-                                              pageChangeState.ayahIndex);
+                                             widget.verseSoundstate.currentVerse);
                                           ScreenOverlayCubit.get(context)
                                               .overlaysVisability();
 
@@ -930,8 +927,8 @@ class _MoshafPageState extends State<MoshafPage> {
                                           } else {
                                             AudioControlCubit.get(context)
                                                 .togglePlayPause(context,
-                                                    verseNumber: pageChangeState
-                                                        .ayahIndex);
+                                                    verseNumber:   widget.verseSoundstate.
+                                                        currentVerse);
                                           }
                                         },
                                         icon: Icon(
@@ -941,9 +938,8 @@ class _MoshafPageState extends State<MoshafPage> {
                                           color: const Color.fromARGB(
                                               255, 150, 126, 68),
                                           size: 32,
-                                        ));
-                                  },
-                                ),
+                                        )),
+                                
                                 Container(
                                   width: 1.5.w,
                                   height: 19.h,

@@ -3,7 +3,7 @@
 
 class RadioDatabase {
   
-static List<Map<String, dynamic>> quranSowar = [
+static List<Map<String, dynamic>> recitersStream = [
     {
       "id": 1,
       "name": "إذاعة إبراهيم الأخضر",

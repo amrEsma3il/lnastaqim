@@ -8,10 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import '../../../../core/constants/colors.dart';
+import '../../../../core/constants/keys.dart';
 import '../../../quran/bussniess_logic/quran/quran_cubit.dart';
 import '../../data/models/reciter_entity.dart';
 import '../../view/widgets/reciters_component.dart';
@@ -39,7 +41,16 @@ updateVerseNumber(int verseNumber ){
   }
 
   selectReciters(ReciterEntity reciter) {
+        Box<ReciterEntity> box=Hive.box<ReciterEntity>(AppKeys.reciterBox);
+box.put(AppKeys.reciterNameKey,reciter);
     emit(state.copyWith(selectedReciter: reciter));
+  }
+
+changeAyaIndex(int verseNumber){
+  emit(state.copyWith(currentVerse: verseNumber));
+}
+ void updatePage( int newPageNum) {
+    emit(state.copyWith( pageNum: newPageNum));
   }
 
   Future<void> playVerse(int verseNumber,BuildContext context) async {
@@ -47,6 +58,16 @@ updateVerseNumber(int verseNumber ){
     final quranCubit=QuranCubit.get(context);
     final directory = await getApplicationDocumentsDirectory();
       final reciterDir = Directory('${directory.path}/${state.selectedReciter.reciter}');
+
+
+
+      if (state.pageNum != quranCubit.getPageNumber(verseNumber)) {
+        
+verseNumber=quranCubit.getFirstAyaPage(state.pageNum)!;
+// log("first verse in page${quranCubit.getFirstAyaPage(state.pageNum).ayahUQNumber}");
+      }
+          // quranCubit.searchAya(verseNumber);
+
  final filePath = '${reciterDir.path}/$verseNumber.mp3';
   
 
@@ -56,10 +77,12 @@ updateVerseNumber(int verseNumber ){
       playVerseBarStatus: PlayVerseBarStatus.turnOn
       ));
 if  ( context.mounted) {
-   print(quranCubit.getPageNumber(verseNumber).toDouble());
+  //  print(quranCubit.getPageNumber(verseNumber).toDouble());
   quranCubit.pageController.jumpToPage(604-quranCubit.getPageNumber(verseNumber));
+  emit(state.copyWith(pageNum: quranCubit.getPageNumber(verseNumber)));
   QuranCubit.get(context).searchAya(verseNumber);}
     log(verseRepatedNumber[ state.audioRepeat].toString());
+          quranCubit.searchAya(verseNumber);
 
      await _audioPlayer.play(DeviceFileSource(filePath));
  print(state.isPlaying.toString());
@@ -84,8 +107,11 @@ emit(state.copyWith(playVerseBarStatus: PlayVerseBarStatus.loading));
 if  ( context.mounted) {
   print(quranCubit.getPageNumber(verseNumber).toDouble());
   quranCubit.pageController.jumpToPage(604-quranCubit.getPageNumber(verseNumber));
+    emit(state.copyWith(pageNum: quranCubit.getPageNumber(verseNumber)));
+
   QuranCubit.get(context).searchAya(verseNumber);}
     log(verseRepatedNumber[ state.audioRepeat].toString());
+          quranCubit.searchAya(verseNumber);
 
   await _audioPlayer.play(DeviceFileSource(filePath));
      
@@ -95,6 +121,9 @@ if  ( context.mounted) {
       ));
     });
   
+    }
+    if (verseNumber==6236) {
+      stop();
     }
   }
 
@@ -127,7 +156,9 @@ if  ( context.mounted) {
 
   void stop() {
     _audioPlayer.stop();
-    emit(state.copyWith(isPlaying: false));
+    emit(state.copyWith(isPlaying: false,playVerseBarStatus: PlayVerseBarStatus.init));
+     
+
   }
   void repeatverse(){
     emit(state.copyWith(
@@ -138,7 +169,7 @@ if  ( context.mounted) {
   Future<void>   downloadProcess(int verseNumber,Directory reciterDir)async{
          await reciterDir.create(recursive: true);
 
-             for (int i = verseNumber; i <= verseNumber+6; i++) {
+             for (int i = verseNumber; i <= verseNumber+5; i++) {
       final url = '${state.selectedReciter.downloadUrl}$i.mp3';
       final filePath =
         '${reciterDir.path}/$i.mp3';

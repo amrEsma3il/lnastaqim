@@ -181,6 +181,20 @@ int getPageNumber(int ayanumber) {
   return pageNum;
 }
 
+int? getFirstAyaPage(int page) {
+  for (var surah in quranSurahs) {
+    for (var ayah in surah['ayahs']) {
+      if (ayah['page'] == page) {
+        //  log(pageNum.toString());
+        return ayah['number'];
+       
+       
+      }
+    }
+  }
+  return null;
+}
+
 
  String? getSurahNameFromPage2(int page){
 
@@ -224,6 +238,7 @@ for (int i = 0; i < quranSowar.length; i++) {
   List<Ayah> getCurrentPageAyahs(int pageIndex) => pages[pageIndex];
 
   Ayah getPageInfo(int page) => allAyahs.firstWhere((a) => a.page == page + 1);
+
 
   int getSurahNumberByAyah(Ayah ayah) =>
       surahs.firstWhere((s) => s.ayahs.contains(ayah)).surahNumber;

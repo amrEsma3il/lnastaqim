@@ -8,12 +8,15 @@ import 'package:geolocator/geolocator.dart';
 import 'package:lnastaqim/features/paryer_times/data/models/prayers_time_model.dart';
 import 'package:lnastaqim/features/paryer_times/data/repository/prayers_times_repo.dart';
 
-import '../../../core/utilits/services/location_service.dart'; 
+import '../../../core/utilits/services/location_service.dart';
+
 
 part 'prayers_times_state.dart';
 
 class PrayersTimesCubit extends Cubit<PrayersTimeModel> {
-  PrayersTimesCubit() : super(PrayersTimeModel(asr: "",dhuhr: "",fajr: "",maghrib: "",isha: "",sunrise: "",lastThirdOfTheNight: "",qiblaDirection: 0.0,currentPrayer: PrayerModel(name:"fajr",index: 0 )));
+  PrayersTimesCubit() : super(PrayersTimeModel(asr: "",dhuhr: "",fajr: "",maghrib: "",isha: "",sunrise: "",lastThirdOfTheNight: "",qiblaDirection: 0.0,currentPrayer: PrayerModel(name:"fajr",index: 0 ))){
+    fetchPrayersTimes();
+  }
 
 
 static PrayersTimesCubit get(BuildContext context)=>BlocProvider.of<PrayersTimesCubit>(context);
