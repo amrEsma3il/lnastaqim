@@ -232,7 +232,7 @@ class ScreenOverlayCubit extends Cubit<int> {
                                 QuranCubit.get(context).pageController.jumpToPage(pageIndex);
 
               } else {
-                showToast("يجب ادخال رقم الصفحة او اسم السورة",AppColor.darkYellow);
+                showToast("يجب ادخال رقم الصفحة او اسم السورة",AppColor.blueColor.withOpacity(.95));
               }
             
                 //  log("int.parse(pageNum.text.toEnglish) ${int.parse(pageNum.text.toEnglish)} ");
