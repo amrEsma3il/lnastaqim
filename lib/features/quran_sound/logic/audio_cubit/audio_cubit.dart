@@ -60,11 +60,11 @@ changeAyaIndex(int verseNumber){
       final reciterDir = Directory('${directory.path}/${state.selectedReciter.reciter}');
 
 
-
+log( "page state from audio cubit"+state.pageNum.toString());
       if (state.pageNum != quranCubit.getPageNumber(verseNumber)) {
         
 verseNumber=quranCubit.getFirstAyaPage(state.pageNum)!;
-// log("first verse in page${quranCubit.getFirstAyaPage(state.pageNum).ayahUQNumber}");
+log("first verse in page${quranCubit.getFirstAyaPage(state.pageNum)}");
       }
           // quranCubit.searchAya(verseNumber);
 

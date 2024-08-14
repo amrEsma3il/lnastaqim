@@ -918,8 +918,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                       backgroundColor:
                                           moshafPageState.ayaNumber ==
                                                   ayahs[ayahIndex].ayahUQNumber
-                                              ? const Color.fromARGB(
-                                                  255, 150, 126, 68)
+                                              ? AppColor.darkYellow
                                               : Colors.transparent,
                                       onLongPressStart:
                                           (LongPressStartDetails details) {
@@ -1002,7 +1001,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                   width: 1.5.w,
                                   height: 19.h,
                                   color:
-                                      const Color.fromARGB(255, 150, 126, 68),
+                                      AppColor.darkYellow,
                                 ),
                                 IconButton(
                                     onPressed: () {
@@ -1038,7 +1037,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                   width: 1.5.w,
                                   height: 19.h,
                                   color:
-                                      const Color.fromARGB(255, 150, 126, 68),
+                                      AppColor.darkYellow,
                                 ),
                                 IconButton(
                                     onPressed: () {
@@ -1053,7 +1052,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                   width: 1.5.w,
                                   height: 19.h,
                                   color:
-                                      const Color.fromARGB(255, 150, 126, 68),
+                                      AppColor.darkYellow,
                                 ),
                                 IconButton(
                                     onPressed: () {
@@ -1087,7 +1086,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                   width: 1.5.w,
                                   height: 19.h,
                                   color:
-                                      const Color.fromARGB(255, 150, 126, 68),
+                                      AppColor.darkYellow,
                                 ),
                                 IconButton(
                                     onPressed: () async {
@@ -1115,7 +1114,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                   width: 1.5.w,
                                   height: 19.h,
                                   color:
-                                      const Color.fromARGB(255, 150, 126, 68),
+                                      AppColor.darkYellow,
                                 ),
                                 IconButton(
                                     onPressed: () {
@@ -1150,7 +1149,7 @@ class _MoshafPageState extends State<MoshafPage> {
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w900,
                         fontFamily: 'naskh',
-                        color: const Color.fromARGB(255, 150, 126, 68)),
+                        color: AppColor.darkYellow),
                   ),
                 ),
               ),

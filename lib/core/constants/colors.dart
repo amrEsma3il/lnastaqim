@@ -16,20 +16,19 @@ class AppColor {
   static Color creame = const Color(0xffFAF6EB);
   static Color lightBrown = const Color(0xffA85000);
   static Color pantone = const Color(0xffA18575);
+  static Color darkYellow = const Color.fromARGB(255, 150, 126, 68);
 
+//const
   static Color lightBrownWithOpacity10 =
       const Color(0xffA85000).withOpacity(0.1);
   static Color primary = const Color(0xff404c6e);
-  static Color white2=const Color(0xffeaeef5);
+  static Color white2 = const Color(0xffeaeef5);
 
   static Color yellow1 = "#ebb734".toColor; //#
 
+  static Color rhino = "#757E99".toColor;
 
-  static  Color rhino ="#757E99".toColor;
-
-
-
-   static const Color grey = Color(0xff8e8e8e);
+  static const Color grey = Color(0xff8e8e8e);
   static const Color primaryColor = Color(0xFF1F8189);
   static const Color backgroundcolor = Color(0xffF8F9FD);
   static const Color mainBlue = Color(0xFF247CFF);
@@ -41,7 +40,6 @@ class AppColor {
   static const lightShadeGrayishBlue = Color(0xFFF5F6FA);
   static const lightShadeGreen = Color(0xFFE9FEF5);
   static const darkCyan = Color(0xFF1F8189);
-  static const lightGrayishCyan  = Color(0xFFE9FEF5);
-   static const moderateCyan = Color(0xFF49BEB7);
-
+  static const lightGrayishCyan = Color(0xFFE9FEF5);
+  static const moderateCyan = Color(0xFF49BEB7);
 }

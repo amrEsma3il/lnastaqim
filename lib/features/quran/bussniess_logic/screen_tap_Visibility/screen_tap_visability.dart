@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ import '../../../../config/routing/app_routes_info/app_routes_name.dart';
 import '../../../../core/utilits/extensions/arabic_numbers.dart';
 
 import '../../../../core/utilits/functions/check.dart';
+import '../../../../core/utilits/functions/toast_message.dart';
+import '../../../quran_sound/logic/audio_cubit/audio_cubit.dart';
 import '../quran/quran_cubit.dart';
 
 class ScreenOverlayCubit extends Cubit<int> {
@@ -214,14 +217,28 @@ class ScreenOverlayCubit extends Cubit<int> {
           actions: [
             TextButton(
               onPressed: () {
-                int pageIndex = 604 - int.parse(pageNum.text.toEnglish);
+              if (fastMove.text.isNotEmpty) {
+                    int pageIndex = 604 - int.parse(pageNum.text.toEnglish);
                 pageIndex = pageIndex > 604 ? 604 : pageIndex;
+             
                 Navigator.of(context).pop();
+                   AudioControlCubit.get(context).updatePage(int.parse(pageNum.text.toEnglish));
+                   log( int.parse(pageNum.text.toEnglish).toString());
+
                 fastMove.text = "";
                 surahName.text = "";
                 pageNum.text = "";
                 emit(0);
-                QuranCubit.get(context).pageController.jumpToPage(pageIndex);
+                                QuranCubit.get(context).pageController.jumpToPage(pageIndex);
+
+              } else {
+                showToast("يجب ادخال رقم الصفحة او اسم السورة",AppColor.darkYellow);
+              }
+            
+                //  log("int.parse(pageNum.text.toEnglish) ${int.parse(pageNum.text.toEnglish)} ");
+                  
+                
+             
               },
               child: const Text(
                 'موافق',
