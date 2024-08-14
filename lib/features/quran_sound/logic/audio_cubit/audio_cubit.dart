@@ -79,7 +79,7 @@ verseNumber=quranCubit.getFirstAyaPage(state.pageNum)!;
 if  ( context.mounted) {
   //  print(quranCubit.getPageNumber(verseNumber).toDouble());
   quranCubit.pageController.jumpToPage(604-quranCubit.getPageNumber(verseNumber));
-  emit(state.copyWith(pageNum: quranCubit.getPageNumber(verseNumber)));
+  emit(state.copyWith(pageNum: quranCubit.getPageNumber(verseNumber+1)));
   QuranCubit.get(context).searchAya(verseNumber);}
     log(verseRepatedNumber[ state.audioRepeat].toString());
           quranCubit.searchAya(verseNumber);

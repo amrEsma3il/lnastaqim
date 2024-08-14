@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -21,12 +23,13 @@ class AudioControlState extends Equatable {
 
   factory AudioControlState.initial() {
     Box<ReciterEntity> box=Hive.box<ReciterEntity>(AppKeys.reciterBox);
+    log(box.get(box.get(AppKeys.reciterNameKey))?.reciter??"nuuuulllllll");
     return  AudioControlState(
       selectedReciter:box.get(AppKeys.reciterNameKey)?? recitersInfo[0] ,
       currentVerse: 6222,
       audioRepeat: 0,
       isPlaying: false, playVerseBarStatus: PlayVerseBarStatus.init,
-      pageNum: 603
+      pageNum: 604
     );
   }
 

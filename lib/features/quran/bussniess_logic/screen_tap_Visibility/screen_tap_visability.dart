@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
+import '../../../../config/routing/app_routes_info/app_routes_name.dart';
 import '../../../../core/utilits/extensions/arabic_numbers.dart';
 
 import '../../../../core/utilits/functions/check.dart';
@@ -29,12 +30,30 @@ class ScreenOverlayCubit extends Cubit<int> {
             showPageDialog(context);
           }
         },
+        // {
+        //   "text": "الاعدادات",
+        //   "onTap": () {
+        //     // implement dialog here
+        //   }
+        // },
+
+        ///
         {
-          "text": "الاعدادات",
+          "text": "الملاحظات",
           "onTap": () {
-            // implement dialog here
+              emit(0);
+            Get.toNamed(AppRouteName.note);
+               
+          }
+        },{
+          "text": "المرجعيات",
+          "onTap": () {
+              emit(0);
+                        Get.toNamed(AppRouteName.bookmark);
+
           }
         },
+        ///
         {
           "text": "مساعدة",
           "onTap": () {

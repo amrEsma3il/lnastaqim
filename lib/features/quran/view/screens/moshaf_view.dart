@@ -151,6 +151,10 @@ class MoshafView extends StatelessWidget {
                                                         AudioControlCubit.get(
                                                                 context)
                                                             .stop();
+                                                        AudioControlCubit.get(
+                                                                context)
+                                                            .updateVerseNumber(
+                                                                6222);
                                                         Get.back();
                                                       },
                                                       icon: const Icon(
@@ -401,88 +405,181 @@ class MoshafView extends StatelessWidget {
                                             children: [
                                               BlocBuilder<AudioControlCubit,
                                                   AudioControlState>(
-                                                builder: (context, verseBarStatus) {
-
-                                                  if (verseBarStatus.playVerseBarStatus==PlayVerseBarStatus.turnOn) {
-                                                return      Expanded(
-                                                  child: Center(
-                                                    child: Padding(
-                                                      padding:  EdgeInsets.only(right: 10.w),
-                                                      child: Row(
-                                                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                                          children: [
-                                                                              Stack(
-                                                                                children: [
-                                                                                  Positioned(
-                                                                                    child: IconButton(
-                                                                                    icon: const Icon(Icons.repeat,  color: Colors.white,),
-                                                                                    onPressed: () {
-                                                                                     
-                                                                                      context.read<AudioControlCubit>().repeatverse();
-                                                                                    },
-                                                                                                                                                                  
-                                                                                                                                                                ),
-                                                                                  ),
-                                                                             Positioned(top: 2.5,right: 6,
-                                                                              child: Text(AudioControlCubit.verseRepatedNumber [verseBarStatus.audioRepeat].toString().toArabic,style: const TextStyle(color: Colors.white60,fontSize: 20),))   ],
-                                                                              ),
-                                                                            IconButton(
-                                                                              icon: const Icon(Icons.skip_next,  color: Colors.white,),
-                                                                              onPressed: () {
-                                                                                // final selectedReciter = context.read<AudioControlCubit>().state.selectedReciter;
-                                                                                context.read<AudioControlCubit>().playPreviousVerse(context);
-                                                                              },
-                                                                            ),
-                                                                            IconButton(
-                                                                              icon: BlocBuilder<AudioControlCubit, AudioControlState>(
-                                                                                builder: (context, state) {
-                                                                                  return Icon(  color: Colors.white,
-                                                                                    state.isPlaying ? Icons.pause : Icons.play_arrow,
-                                                                                  );
-                                                                                },
-                                                                              ),
-                                                                              onPressed: () {
-                                                                                context.read<AudioControlCubit>().togglePlayPause(context);
-                                                                              },
-                                                                            ),
-                                                                              IconButton(
-                                                                              icon: const Icon(Icons.stop,  color: Colors.white,),
-                                                                              onPressed: () {
-                                                                                // final selectedReciter = context.read<AudioControlCubit>().state.selectedReciter;
-                                                                                context.read<AudioControlCubit>().stop();
-                                                                              },
-                                                                            ),
-                                                                            IconButton(
-                                                                              icon: const Icon(Icons.skip_previous,  color: Colors.white,),
-                                                                              onPressed: () {
-                                                                                // final selectedReciter = context.read<AudioControlCubit>().state.selectedReciter;
-                                                                                context.read<AudioControlCubit>().playNextVerse(context);
-                                                                              },
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                    ),
-                                                  ),
-                                                );
-                                                  }
-
- if (verseBarStatus.playVerseBarStatus==PlayVerseBarStatus.loading) {
-                                                    return   Expanded(
-                                                      
-                                                      child: Padding(
-                                                        padding: EdgeInsets.only(right: 14.w,left: 6.w,top: 14.h,bottom: 3.h),
-                                                        child:  Column(crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            SizedBox(height:2.6.h,
-                                                              child: LinearProgressIndicator(color:AppColor.yellow1,backgroundColor: AppColor.bluishGray,)),
-                                                              SizedBox(height: 3.4.h,),
-                                                              Text("تحميل...",style: TextStyle(color: Colors.white70,fontSize: 19.r),)
-                                                          ],
+                                                builder:
+                                                    (context, verseBarStatus) {
+                                                  if (verseBarStatus
+                                                          .playVerseBarStatus ==
+                                                      PlayVerseBarStatus
+                                                          .turnOn) {
+                                                    return Expanded(
+                                                      child: Center(
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  right: 10.w),
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Stack(
+                                                                children: [
+                                                                  Positioned(
+                                                                    child:
+                                                                        IconButton(
+                                                                      icon:
+                                                                          const Icon(
+                                                                        Icons
+                                                                            .repeat,
+                                                                        color: Colors
+                                                                            .white,
+                                                                      ),
+                                                                      onPressed:
+                                                                          () {
+                                                                        context
+                                                                            .read<AudioControlCubit>()
+                                                                            .repeatverse();
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                  Positioned(
+                                                                      top: 2.5,
+                                                                      right: 6,
+                                                                      child:
+                                                                          Text(
+                                                                        AudioControlCubit
+                                                                            .verseRepatedNumber[verseBarStatus.audioRepeat]
+                                                                            .toString()
+                                                                            .toArabic,
+                                                                        style: const TextStyle(
+                                                                            color:
+                                                                                Colors.white60,
+                                                                            fontSize: 20),
+                                                                      ))
+                                                                ],
+                                                              ),
+                                                              IconButton(
+                                                                icon:
+                                                                    const Icon(
+                                                                  Icons
+                                                                      .skip_next,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                onPressed: () {
+                                                                  // final selectedReciter = context.read<AudioControlCubit>().state.selectedReciter;
+                                                                  context
+                                                                      .read<
+                                                                          AudioControlCubit>()
+                                                                      .playPreviousVerse(
+                                                                          context);
+                                                                },
+                                                              ),
+                                                              IconButton(
+                                                                icon: BlocBuilder<
+                                                                    AudioControlCubit,
+                                                                    AudioControlState>(
+                                                                  builder:
+                                                                      (context,
+                                                                          state) {
+                                                                    return Icon(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      state.isPlaying
+                                                                          ? Icons
+                                                                              .pause
+                                                                          : Icons
+                                                                              .play_arrow,
+                                                                    );
+                                                                  },
+                                                                ),
+                                                                onPressed: () {
+                                                                  context
+                                                                      .read<
+                                                                          AudioControlCubit>()
+                                                                      .togglePlayPause(
+                                                                          context);
+                                                                },
+                                                              ),
+                                                              IconButton(
+                                                                icon:
+                                                                    const Icon(
+                                                                  Icons.stop,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                onPressed: () {
+                                                                  // final selectedReciter = context.read<AudioControlCubit>().state.selectedReciter;
+                                                                  context
+                                                                      .read<
+                                                                          AudioControlCubit>()
+                                                                      .stop();
+                                                                },
+                                                              ),
+                                                              IconButton(
+                                                                icon:
+                                                                    const Icon(
+                                                                  Icons
+                                                                      .skip_previous,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                onPressed: () {
+                                                                  // final selectedReciter = context.read<AudioControlCubit>().state.selectedReciter;
+                                                                  context
+                                                                      .read<
+                                                                          AudioControlCubit>()
+                                                                      .playNextVerse(
+                                                                          context);
+                                                                },
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ));
-
+                                                      ),
+                                                    );
                                                   }
 
+                                                  if (verseBarStatus
+                                                          .playVerseBarStatus ==
+                                                      PlayVerseBarStatus
+                                                          .loading) {
+                                                    return Expanded(
+                                                        child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          right: 14.w,
+                                                          left: 6.w,
+                                                          top: 14.h,
+                                                          bottom: 3.h),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          SizedBox(
+                                                              height: 2.6.h,
+                                                              child:
+                                                                  LinearProgressIndicator(
+                                                                color: AppColor
+                                                                    .yellow1,
+                                                                backgroundColor:
+                                                                    AppColor
+                                                                        .bluishGray,
+                                                              )),
+                                                          SizedBox(
+                                                            height: 3.4.h,
+                                                          ),
+                                                          Text(
+                                                            "تحميل...",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white70,
+                                                                fontSize: 19.r),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ));
+                                                  }
 
                                                   return Row(
                                                     crossAxisAlignment:
@@ -616,6 +713,9 @@ class MoshafView extends StatelessWidget {
 
                         BlocBuilder<ScreenOverlayCubit, int>(
                           builder: (context, state) {
+                            List<Map<String, dynamic>> menuItems =
+                                ScreenOverlayCubit.get(context)
+                                    .menuItems(context);
                             return state == 2
                                 ? Positioned(
                                     width: 198,
@@ -625,7 +725,9 @@ class MoshafView extends StatelessWidget {
                                         showWhenUnlinked: false,
                                         child: Container(
                                           // width:  170,
-                                          height: 239,
+                                          height: menuItems.length >= 4
+                                              ? (60 * menuItems.length).toDouble()
+                                              : 239,
                                           decoration: BoxDecoration(
                                               color: AppColor.blueColor,
                                               borderRadius:
@@ -633,10 +735,7 @@ class MoshafView extends StatelessWidget {
                                           child: ListView.separated(
                                               itemBuilder: (context, index) =>
                                                   GestureDetector(
-                                                    onTap: ScreenOverlayCubit
-                                                                .get(context)
-                                                            .menuItems(
-                                                                context)[index]
+                                                    onTap: menuItems[index]
                                                         ['onTap'],
                                                     child: SizedBox(
                                                       width: Get.width,
@@ -648,11 +747,8 @@ class MoshafView extends StatelessWidget {
                                                                 15.h,
                                                                 16.h),
                                                         child: Text(
-                                                          ScreenOverlayCubit.get(
-                                                                      context)
-                                                                  .menuItems(
-                                                                      context)[
-                                                              index]['text'],
+                                                          menuItems[index]
+                                                              ['text'],
                                                           style: TextStyle(
                                                               fontSize: 18.sp,
                                                               fontFamily:
@@ -669,7 +765,7 @@ class MoshafView extends StatelessWidget {
                                                         height: 0.34,
                                                         color: Colors.white,
                                                       ),
-                                              itemCount: 4),
+                                              itemCount: menuItems.length),
                                         )))
                                 : const SizedBox();
                           },
@@ -909,37 +1005,35 @@ class _MoshafPageState extends State<MoshafPage> {
                                       const Color.fromARGB(255, 150, 126, 68),
                                 ),
                                 IconButton(
-                                        onPressed: () {
-                                          // clear all tabs than open 1 tap
-                                          //play specific verse
-                                          //  if(!widget.verseSoundstate.isPlaying)  { QuranCubit.get(context)
-                                          //         .clearMenuOverlayEvent();}
-                                          QuranCubit.get(context).searchAya(
-                                             widget.verseSoundstate.currentVerse);
-                                          ScreenOverlayCubit.get(context)
-                                              .overlaysVisability();
+                                    onPressed: () {
+                                      // clear all tabs than open 1 tap
+                                      //play specific verse
+                                      //  if(!widget.verseSoundstate.isPlaying)  { QuranCubit.get(context)
+                                      //         .clearMenuOverlayEvent();}
+                                      QuranCubit.get(context).searchAya(
+                                          widget.verseSoundstate.currentVerse);
+                                      ScreenOverlayCubit.get(context)
+                                          .overlaysVisability();
 
 // final verses= pageAyahs[pageChangeState.pageNum];
-                                          if (widget
-                                              .verseSoundstate.isPlaying) {
-                                            AudioControlCubit.get(context)
-                                                .stop();
-                                          } else {
-                                            AudioControlCubit.get(context)
-                                                .togglePlayPause(context,
-                                                    verseNumber:   widget.verseSoundstate.
-                                                        currentVerse);
-                                          }
-                                        },
-                                        icon: Icon(
-                                          widget.verseSoundstate.isPlaying
-                                              ? Icons.stop
-                                              : Icons.play_arrow_rounded,
-                                          color: const Color.fromARGB(
-                                              255, 150, 126, 68),
-                                          size: 32,
-                                        )),
-                                
+                                      if (widget.verseSoundstate.isPlaying) {
+                                        AudioControlCubit.get(context).stop();
+                                      } else {
+                                        AudioControlCubit.get(context)
+                                            .togglePlayPause(context,
+                                                verseNumber: widget
+                                                    .verseSoundstate
+                                                    .currentVerse);
+                                      }
+                                    },
+                                    icon: Icon(
+                                      widget.verseSoundstate.isPlaying
+                                          ? Icons.stop
+                                          : Icons.play_arrow_rounded,
+                                      color: const Color.fromARGB(
+                                          255, 150, 126, 68),
+                                      size: 32,
+                                    )),
                                 Container(
                                   width: 1.5.w,
                                   height: 19.h,
