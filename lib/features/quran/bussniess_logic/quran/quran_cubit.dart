@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:math' as math;
 
 import 'package:collection/collection.dart';
@@ -8,6 +9,7 @@ import 'package:lnastaqim/core/local_database/quran/quran_v2.dart';
 import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
 
 import '../../../../core/local_database/quran/quran_local_database.dart';
+import '../../../../core/local_database/quran/quran_transition_json.dart';
 import '../../../../core/utilits/functions/search_string_pattern/boyer_moore_algo.dart'
     as boyer_more;
 import '../../data/models/search_ayah_entity.dart';
@@ -164,6 +166,64 @@ class QuranCubit extends Cubit<SelectAyaModel> {
       return "Surah not found";
     }
   }
+
+
+int getPageNumber(int ayanumber) {
+  int pageNum=1;
+  for (var surah in quranSurahs) {
+    for (var ayah in surah['ayahs']) {
+      if (ayah['number'] == ayanumber) {
+        pageNum= ayah['page'];
+        log(pageNum.toString());
+      }
+    }
+  }
+  return pageNum;
+}
+
+int? getFirstAyaPage(int page) {
+  for (var surah in quranSurahs) {
+    for (var ayah in surah['ayahs']) {
+      if (ayah['page'] == page) {
+        //  log(pageNum.toString());
+        return ayah['number'];
+       
+       
+      }
+    }
+  }
+  return null;
+}
+
+
+ String? getSurahNameFromPage2(int page){
+
+List<Map<String, dynamic>> quranSowar=QuranTransition.quranSowar;
+for (int i = 0; i < quranSowar.length; i++) {
+
+  if (page>=quranSowar[i]["start_page"] && page <= quranSowar[i]["end_page"] ) {
+    return quranSowar[i]["name"];
+  }
+
+}
+  return null;
+  }
+
+
+
+
+   int? getSurahNumberFromPage2(int page){
+
+List<Map<String, dynamic>> quranSowar=QuranTransition.quranSowar;
+for (int i = 0; i < quranSowar.length; i++) {
+
+  if (page>=quranSowar[i]["start_page"] && page <= quranSowar[i]["end_page"] ) {
+    return quranSowar[i]["id"];
+  }
+
+}
+  return null;
+  }
   
   int getSurahNumberByName(String surahName) {
     try {
@@ -178,6 +238,7 @@ class QuranCubit extends Cubit<SelectAyaModel> {
   List<Ayah> getCurrentPageAyahs(int pageIndex) => pages[pageIndex];
 
   Ayah getPageInfo(int page) => allAyahs.firstWhere((a) => a.page == page + 1);
+
 
   int getSurahNumberByAyah(Ayah ayah) =>
       surahs.firstWhere((s) => s.ayahs.contains(ayah)).surahNumber;

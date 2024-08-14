@@ -10,10 +10,13 @@ import 'package:lnastaqim/features/paryer_times/data/repository/prayers_times_re
 
 import '../../../core/utilits/services/location_service.dart';
 
+
 part 'prayers_times_state.dart';
 
 class PrayersTimesCubit extends Cubit<PrayersTimeModel> {
-  PrayersTimesCubit() : super(PrayersTimeModel(asr: "",dhuhr: "",fajr: "",maghrib: "",isha: "",sunrise: "",lastThirdOfTheNight: "",qiblaDirection: 0.0,currentPrayer: PrayerModel(name:"fajr",index: 0 )));
+  PrayersTimesCubit() : super(PrayersTimeModel(asr: "",dhuhr: "",fajr: "",maghrib: "",isha: "",sunrise: "",lastThirdOfTheNight: "",qiblaDirection: 0.0,currentPrayer: PrayerModel(name:"fajr",index: 0 ))){
+    fetchPrayersTimes();
+  }
 
 
 static PrayersTimesCubit get(BuildContext context)=>BlocProvider.of<PrayersTimesCubit>(context);
@@ -33,9 +36,12 @@ final myCoordinates = Coordinates(31.360835, 31.572778);
    emit(prayerTimesModel);
 
    timer=Timer.periodic(const Duration(minutes: 1), (timer) {  
-      //  log("test from paryer times");
+log(prayerTimesModel.currentPrayer!.index.toString());
+log(prayerTimesModel.currentPrayer!.name.toString());
 
     emit(prayerTimesModel);
+           log("-----------------test from paryer times-----------------");
+
 });
   }
 }

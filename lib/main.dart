@@ -10,6 +10,7 @@ import 'package:lnastaqim/core/constants/colors.dart';
 
 import 'config/routing/app_routingconfig/app_router_configuration.dart';
 // import 'core/utilits/functions/search_string_pattern/boyer_moore_algo.dart' as boyer;
+import 'core/constants/keys.dart';
 import 'core/local_database/quran/quran_local_database.dart';
 import 'core/utilits/controller/search_or_not/search_visibility.dart';
 import 'core/utilits/services/local_notification_service.dart';
@@ -29,6 +30,7 @@ import 'core/constants/constants.dart';
 import 'features/bookmark/bussniess_logic/add_bookmark_cubit/add_bookmark_cubit.dart';
 
 import 'features/quran/bussniess_logic/fast_transition/fast_transition_cubit.dart';
+import 'features/quran/bussniess_logic/pageMoshaf_cubit/page_cubit.dart';
 import 'features/quran/bussniess_logic/quran_sowar/search_on_aya_from_whole_quran_cubit.dart';
 import 'features/quran/bussniess_logic/quran_sowar/search_or_not_cubit.dart';
 import 'features/quran/bussniess_logic/screen_tap_Visibility/screen_tap_visability.dart';
@@ -37,6 +39,8 @@ import 'features/quran/bussniess_logic/sowra_detail/sora_details_cubit.dart';
 import 'features/azkar_with_sib7a/business_logic/azkar_category_cubit/azkar_category_cubit.dart';
 import 'features/azkar_with_sib7a/business_logic/azkar_details_cubit/azkar_details_cubit.dart';
 import 'features/quran/bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
+import 'features/quran_sound/data/models/reciter_entity.dart';
+import 'features/quran_sound/logic/audio_cubit/audio_cubit.dart';
 
 void main() async {
   // List<List<int>> matchesInQuran=[];
@@ -50,6 +54,7 @@ void main() async {
   await Hive.openBox<BookmarkModel>(kBookmarkBox);
   Hive.registerAdapter(NoteModelAdapter());
   await Hive.openBox<NoteModel>(kNoteBox);
+  await Hive.openBox<ReciterEntity>(AppKeys.reciterBox);
   await Future.wait([
     LocalNotificationService.init(),
     WorkManagerService().init(),
@@ -62,7 +67,6 @@ void main() async {
 }
 
 class Lnastaqim extends StatelessWidget {
-    static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   const Lnastaqim({Key? key}) : super(key: key);
 
@@ -101,7 +105,14 @@ class Lnastaqim extends StatelessWidget {
               lazy: false,
               create: (context) => QuranCubit()..loadQuran(),
             ),
-
+//
+ BlocProvider(
+              create: (context) => AudioControlCubit()..audioPlayerListener(context),
+            ),
+            //  BlocProvider(
+            //   create: (context) => MoshafPageCubit()..initPage(),
+            // ),
+//
             BlocProvider(create: (context) => AddBookmarkCubit()),
             BlocProvider(
                 create: (context) => BookmarkCubit()..fetchBookmarks()),
@@ -113,7 +124,7 @@ class Lnastaqim extends StatelessWidget {
             ),
 
             BlocProvider(
-              create: (context) => PrayersTimesCubit()..fetchPrayersTimes(),
+              create: (context) => PrayersTimesCubit(),
             ),
 
 
@@ -129,7 +140,6 @@ class Lnastaqim extends StatelessWidget {
                     AzkarDetailsCubit()..getAzkarDetails()),
           ],
           child: GetMaterialApp(
-            navigatorKey: navigatorKey,
             locale: const Locale('ar'),
             debugShowCheckedModeBanner: false,
             getPages: routes,
