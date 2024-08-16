@@ -72,6 +72,7 @@ class AudioControlCubit extends Cubit<AudioControlState> {
     }
     // quranCubit.searchAya(verseNumber);
 
+
     final filePath = '${reciterDir.path}/$verseNumber.mp3';
 
     if (await File(filePath).exists()) {
