@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
 
-
 import 'dart:developer';
 
 import 'package:audioplayers/audioplayers.dart';
@@ -26,111 +25,115 @@ class AudioControlCubit extends Cubit<AudioControlState> {
       : _audioPlayer = AudioPlayer(),
         super(AudioControlState.initial());
 
+  static AudioControlCubit get(BuildContext context) =>
+      BlocProvider.of<AudioControlCubit>(context);
 
- static AudioControlCubit get(BuildContext context)=>BlocProvider.of<AudioControlCubit>(context);
- static List<int> verseRepatedNumber=[0,1,2,3,1000000];
-
- audioPlayerListener(BuildContext context){
-   _audioPlayer.onPlayerComplete.listen((_) {
-      playNextVerse(context);
+  audioPlayerListener(BuildContext context) {
+    _audioPlayer.onPlayerComplete.listen((_) {
+      if (state.repeatCount < state.maxRepeats) {
+        emit(state.copyWith(repeatCount: state.repeatCount + 1));
+        playVerse(state.currentVerse, context);
+      } else {
+        emit(state.copyWith(repeatCount: 0)); // Reset repeat counter
+        playNextVerse(context);
+      }
     });
- }
+  }
 
-updateVerseNumber(int verseNumber ){
+  updateVerseNumber(int verseNumber) {
     emit(state.copyWith(currentVerse: verseNumber));
   }
 
   selectReciters(ReciterEntity reciter) {
-        Box<ReciterEntity> box=Hive.box<ReciterEntity>(AppKeys.reciterBox);
-box.put(AppKeys.reciterNameKey,reciter);
+    Box<ReciterEntity> box = Hive.box<ReciterEntity>(AppKeys.reciterBox);
+    box.put(AppKeys.reciterNameKey, reciter);
     emit(state.copyWith(selectedReciter: reciter));
   }
 
-changeAyaIndex(int verseNumber){
-  emit(state.copyWith(currentVerse: verseNumber));
-}
- void updatePage( int newPageNum) {
-    emit(state.copyWith( pageNum: newPageNum));
+  changeAyaIndex(int verseNumber) {
+    emit(state.copyWith(currentVerse: verseNumber));
   }
 
-  Future<void> playVerse(int verseNumber,BuildContext context) async {
+  void updatePage(int newPageNum) {
+    emit(state.copyWith(pageNum: newPageNum));
+  }
+
+  Future<void> playVerse(int verseNumber, BuildContext context) async {
     // QuranCubit.get(context).searchAya(verseNumber-1);
-    final quranCubit=QuranCubit.get(context);
+    final quranCubit = QuranCubit.get(context);
     final directory = await getApplicationDocumentsDirectory();
-      final reciterDir = Directory('${directory.path}/${state.selectedReciter.reciter}');
+    final reciterDir =
+        Directory('${directory.path}/${state.selectedReciter.reciter}');
+
+    log("page state from audio cubit" + state.pageNum.toString());
+    if (state.pageNum != quranCubit.getPageNumber(verseNumber)) {
+      verseNumber = quranCubit.getFirstAyaPage(state.pageNum)!;
+      log("first verse in page${quranCubit.getFirstAyaPage(state.pageNum)}");
+    }
+    // quranCubit.searchAya(verseNumber);
 
 
-log( "page state from audio cubit${state.pageNum}");
-//TODO:every thing in verse control in this
-      if (state.pageNum != quranCubit.getPageNumber(verseNumber)) {
-        
-verseNumber=quranCubit.getFirstAyaPage(state.pageNum)!;
-log("first verse in page${quranCubit.getFirstAyaPage(state.pageNum)}");
-      }
-          // quranCubit.searchAya(verseNumber);
-
- final filePath = '${reciterDir.path}/$verseNumber.mp3';
-  
-
+    final filePath = '${reciterDir.path}/$verseNumber.mp3';
 
     if (await File(filePath).exists()) {
-   emit(state.copyWith(
-      playVerseBarStatus: PlayVerseBarStatus.turnOn
-      ));
-if  ( context.mounted) {
-  //  print(quranCubit.getPageNumber(verseNumber).toDouble());
-  quranCubit.pageController.jumpToPage(604-quranCubit.getPageNumber(verseNumber));
-  emit(state.copyWith(pageNum: quranCubit.getPageNumber(verseNumber+1)));
-  QuranCubit.get(context).searchAya(verseNumber);}
-    log(verseRepatedNumber[ state.audioRepeat].toString());
-          quranCubit.searchAya(verseNumber);
+      emit(state.copyWith(playVerseBarStatus: PlayVerseBarStatus.turnOn));
+      if (context.mounted) {
+        //  print(quranCubit.getPageNumber(verseNumber).toDouble());
+        quranCubit.pageController
+            .jumpToPage(604 - quranCubit.getPageNumber(verseNumber));
+        emit(
+            state.copyWith(pageNum: quranCubit.getPageNumber(verseNumber + 1)));
+        QuranCubit.get(context).searchAya(verseNumber);
+      }
+      // log(verseRepatedNumber[state.audioRepeat].toString());
+      quranCubit.searchAya(verseNumber);
 
-     await _audioPlayer.play(DeviceFileSource(filePath));
- print(state.isPlaying.toString());
+      await _audioPlayer.play(DeviceFileSource(filePath));
+      print(state.isPlaying.toString());
       emit(state.copyWith(
         isPlaying: true,
         currentVerse: verseNumber,
       ));
-     
 
-          if (!await File('${reciterDir.path}/${verseNumber+5}.mp3').exists() && verseNumber<6236-5) {
+      if (!await File('${reciterDir.path}/${verseNumber + 5}.mp3').exists() &&
+          verseNumber < 6236 - 5) {
         downloadProcess(verseNumber, reciterDir);
       }
     } else {
       print('Verse $verseNumber not found');
       //TODO:download 6 verse after and 2 befor
 
-emit(state.copyWith(playVerseBarStatus: PlayVerseBarStatus.loading));
-  print(state.playVerseBarStatus.toString());
-    downloadProcess(verseNumber,reciterDir).then((value) async {
-
+      emit(state.copyWith(playVerseBarStatus: PlayVerseBarStatus.loading));
+      print(state.playVerseBarStatus.toString());
+      downloadProcess(verseNumber, reciterDir).then((value) async {
         emit(state.copyWith(playVerseBarStatus: PlayVerseBarStatus.turnOn));
-if  ( context.mounted) {
-  print(quranCubit.getPageNumber(verseNumber).toDouble());
-  quranCubit.pageController.jumpToPage(604-quranCubit.getPageNumber(verseNumber));
-    emit(state.copyWith(pageNum: quranCubit.getPageNumber(verseNumber)));
+        if (context.mounted) {
+          print(quranCubit.getPageNumber(verseNumber).toDouble());
+          quranCubit.pageController
+              .jumpToPage(604 - quranCubit.getPageNumber(verseNumber));
+          emit(state.copyWith(pageNum: quranCubit.getPageNumber(verseNumber)));
 
-  QuranCubit.get(context).searchAya(verseNumber);}
-    log(verseRepatedNumber[ state.audioRepeat].toString());
-          quranCubit.searchAya(verseNumber);
+          QuranCubit.get(context).searchAya(verseNumber);
+        }
+        // log(verseRepatedNumber[state.audioRepeat].toString());
+        quranCubit.searchAya(verseNumber);
 
-  await _audioPlayer.play(DeviceFileSource(filePath));
-     
-      emit(state.copyWith(
-        isPlaying: true,
-        currentVerse: verseNumber,
-      ));
-    });
-  
+        await _audioPlayer.play(DeviceFileSource(filePath));
+
+        emit(state.copyWith(
+          isPlaying: true,
+          currentVerse: verseNumber,
+        ));
+      });
     }
-    if (verseNumber==6236) {
+    if (verseNumber == 6236) {
       stop();
     }
   }
 
   void playNextVerse(BuildContext context) {
     if (state.currentVerse < 6236) {
-      playVerse(state.currentVerse + 1,context);
+      playVerse(state.currentVerse + 1, context);
     } else {
       print('All verses played');
     }
@@ -138,16 +141,16 @@ if  ( context.mounted) {
 
   void playPreviousVerse(BuildContext context) {
     if (state.currentVerse > 1) {
-      playVerse(state.currentVerse - 1,context);
+      playVerse(state.currentVerse - 1, context);
     }
   }
 
-  void togglePlayPause(BuildContext context,{int? verseNumber}) {
+  void togglePlayPause(BuildContext context, {int? verseNumber}) {
     if (state.isPlaying) {
       _audioPlayer.pause();
     } else {
       if (_audioPlayer.state == PlayerState.stopped) {
-        playVerse(verseNumber?? state.currentVerse,context);
+        playVerse(verseNumber ?? state.currentVerse, context);
       } else {
         _audioPlayer.resume();
       }
@@ -157,25 +160,24 @@ if  ( context.mounted) {
 
   void stop() {
     _audioPlayer.stop();
-    emit(state.copyWith(isPlaying: false,playVerseBarStatus: PlayVerseBarStatus.init));
-     
-
-  }
-  void repeatverse(){
     emit(state.copyWith(
-    audioRepeat: state.audioRepeat+1>verseRepatedNumber.length-1?0:state.audioRepeat+1
-      ));
+        isPlaying: false, playVerseBarStatus: PlayVerseBarStatus.init));
   }
 
-  Future<void>   downloadProcess(int verseNumber,Directory reciterDir)async{
-         await reciterDir.create(recursive: true);
+  void toggleRepeat() {
+    int newMaxRepeats =
+     state.maxRepeats == 0 ?1:   ( state.maxRepeats == 1 ? 2 : 0);
+    emit(state.copyWith(maxRepeats: newMaxRepeats, repeatCount: 0));
+  }
 
-             for (int i = verseNumber; i <= verseNumber+5; i++) {
+  Future<void> downloadProcess(int verseNumber, Directory reciterDir) async {
+    await reciterDir.create(recursive: true);
+
+    for (int i = verseNumber; i <= verseNumber + 5; i++) {
       final url = '${state.selectedReciter.downloadUrl}$i.mp3';
-      final filePath =
-        '${reciterDir.path}/$i.mp3';
+      final filePath = '${reciterDir.path}/$i.mp3';
 
-      if (!await File(filePath).exists() ) {
+      if (!await File(filePath).exists()) {
         try {
           final response = await http.get(Uri.parse(url));
           if (response.statusCode == 200) {
@@ -186,63 +188,77 @@ if  ( context.mounted) {
           print('Error downloading verse $i: $e');
         }
       }
-
-      
     }
-    }
+  }
 
-
-
-
-    showReciters(BuildContext context){
-
-
-       showModalBottomSheet(
-    context: context,
-    backgroundColor: AppColor.blueColor.withOpacity(0.9),
-    shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(48.r), topLeft: Radius.circular(48.r))),
-    builder: (context) => Container(decoration: BoxDecoration(
+  showReciters(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AppColor.blueColor.withOpacity(0.9),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(48.r), topLeft: Radius.circular(48.r))),
+      builder: (context) => Container(
+        decoration: BoxDecoration(
             color: AppColor.blueColor.withOpacity(0.9),
-      
-      borderRadius: BorderRadius.only(
-            topRight: Radius.circular(48.r), topLeft: Radius.circular(48.r))),
-
-
-      height: 600.h,
-      width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child:Column(children: [Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding:  EdgeInsets.only(right: 8.w),
-              child: const Text("اختار القارئ",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w500),),
-            ),
-const SizedBox(width: 15,),
-          IconButton(onPressed: (){
-            Get.back();
-          }, icon: const Icon(Icons.close,color: Colors.white,size: 27,))
-          ],),
-        const SizedBox(height: 10,),
-        Expanded(
-              child: ListView.separated(
-                separatorBuilder: (context, index) => Container(width: Get.width,height: 0.3,color: Colors.white38,),
-                itemBuilder: (context, index) {
-                  ReciterEntity reciter = recitersInfo[index];
-                  return RecitersComponent(
-                    reciter: reciter,
-                  );
-                },
-                itemCount: recitersInfo.length,
-              ),
-            ),
-            ],)
-        
-         ),
-    ),
-  );
-    }
-
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(48.r),
+                topLeft: Radius.circular(48.r))),
+        height: 600.h,
+        width: double.infinity,
+        child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: 8.w),
+                      child: const Text(
+                        "اختار القارئ",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: const Icon(
+                          Icons.close,
+                          color: Colors.white,
+                          size: 27,
+                        ))
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Expanded(
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) => Container(
+                      width: Get.width,
+                      height: 0.3,
+                      color: Colors.white38,
+                    ),
+                    itemBuilder: (context, index) {
+                      ReciterEntity reciter = recitersInfo[index];
+                      return RecitersComponent(
+                        reciter: reciter,
+                      );
+                    },
+                    itemCount: recitersInfo.length,
+                  ),
+                ),
+              ],
+            )),
+      ),
+    );
+  }
 }

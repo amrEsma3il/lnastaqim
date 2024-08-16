@@ -12,6 +12,9 @@ class AppRouteName {
   static const String tafseer = "/TafseerScreen";
 
   static const String paryerTimes = "/paryerTimes";
+    static const String surahPlayerScreen = "/surahPlayerScreen";
+
+  //surahPlayerScreen
 
   static const String sibhaView = "/sibha";
 
