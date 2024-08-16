@@ -34,29 +34,34 @@ class _HomeViewState extends State<HomeView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             Stack(
+            Stack(
               children: [
                 Image(
                   width: Get.width,
                   fit: BoxFit.cover,
                   image: const AssetImage(AppImages.homeBackground),
                 ),
-                 Padding(
+                Padding(
                   padding: EdgeInsets.only(top: 55.h, left: 20.w),
                   child:
-                      const Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    Icon(
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    const Icon(
                       Icons.search,
                       color: Colors.white,
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Icon(
-                        Icons.notifications_none_outlined,
-                        color: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: IconButton(
+                        onPressed: () {
+                          Get.toNamed('/notification');
+                        },
+                        icon: const Icon(
+                          Icons.notifications_none_outlined,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.wb_sunny_outlined,
                       color: Colors.white,
                     )

@@ -7,6 +7,7 @@ import 'package:lnastaqim/features/qibla/view/screen/quiblah_screen.dart';
 
 import '../../../features/azkar_with_sib7a/view/screens/azkar_details_view.dart';
 import '../../../features/home/views/screens/home_view.dart';
+import '../../../features/notification/view/notification_screen.dart';
 import '../../../features/paryer_times/view/screens/test_screen.dart';
 import '../../../features/quran/view/screens/moshaf_view.dart';
 import '../../../features/quran/view/screens/quran_sowar.dart';
@@ -75,6 +76,12 @@ List<GetPage<dynamic>>? routes = [
       curve: Curves.easeInOut,
       page: () => const QuiblahScreen(),
       name: AppRouteName.qibla,
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 500)),
+  GetPage(
+      curve: Curves.easeInOut,
+      page: () => const NotificationScreen(),
+      name: AppRouteName.notification,
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 500)),
 ];
