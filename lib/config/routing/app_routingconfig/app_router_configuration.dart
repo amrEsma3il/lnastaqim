@@ -11,6 +11,7 @@ import '../../../features/paryer_times/view/screens/test_screen.dart';
 import '../../../features/quran/view/screens/moshaf_view.dart';
 import '../../../features/quran/view/screens/quran_sowar.dart';
 import '../../../features/quran/view/screens/sora_details.dart';
+import '../../../features/quran_sound_player/view/screens/surah_player_screen.dart';
 import '../../../features/sibha/views/screens/sibha_view.dart';
 import '../app_routes_info/app_routes_name.dart';
 
@@ -31,12 +32,12 @@ List<GetPage<dynamic>>? routes = [
       name: AppRouteName.soraDetails,
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
-  // GetPage(
-  //     curve: Curves.easeInOut,
-  //     page: () => const ParyerTimesScreen(),
-  //     name: AppRouteName.paryerTimes,
-  //     transition: Transition.fadeIn,
-  //     transitionDuration: const Duration(milliseconds: 500)),
+  GetPage(
+      curve: Curves.easeInOut,
+      page: () => const SurahPlayerScreen(),
+      name: AppRouteName.surahPlayerScreen,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 500)),
   GetPage(
       curve: Curves.easeInOut,
       page: () => const MoshafView(),

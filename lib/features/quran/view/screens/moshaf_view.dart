@@ -26,8 +26,7 @@ import '../../../quran_sound/logic/audio_cubit/audio_cubit.dart';
 import '../../../quran_sound/logic/audio_cubit/audio_state.dart';
 import '../../../share/views/widgets/share_ayah_checkbox.dart';
 import '../../../tafaseer/bussniess_logic/tafseer_cubit.dart';
-import '../../bussniess_logic/pageMoshaf_cubit/page_cubit.dart';
-import '../../bussniess_logic/pageMoshaf_cubit/page_state.dart';
+
 import '../../bussniess_logic/quran_sowar/search_on_aya_from_whole_quran_cubit.dart';
 import '../../bussniess_logic/screen_tap_Visibility/screen_tap_visability.dart';
 import '../../data/models/search_ayah_entity.dart';
@@ -438,7 +437,7 @@ class MoshafView extends StatelessWidget {
                                                                           () {
                                                                         context
                                                                             .read<AudioControlCubit>()
-                                                                            .repeatverse();
+                                                                            .toggleRepeat();
                                                                       },
                                                                     ),
                                                                   ),
@@ -447,8 +446,8 @@ class MoshafView extends StatelessWidget {
                                                                       right: 6,
                                                                       child:
                                                                           Text(
-                                                                        AudioControlCubit
-                                                                            .verseRepatedNumber[verseBarStatus.audioRepeat]
+                                                                            // verseBarStatus.maxRepeats==AudioControlCubit.infinity?"∞    ":
+                                                                       ( verseBarStatus.maxRepeats+1)
                                                                             .toString()
                                                                             .toArabic,
                                                                         style: const TextStyle(
