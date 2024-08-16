@@ -60,7 +60,8 @@ changeAyaIndex(int verseNumber){
       final reciterDir = Directory('${directory.path}/${state.selectedReciter.reciter}');
 
 
-log( "page state from audio cubit"+state.pageNum.toString());
+log( "page state from audio cubit${state.pageNum}");
+//TODO:every thing in verse control in this
       if (state.pageNum != quranCubit.getPageNumber(verseNumber)) {
         
 verseNumber=quranCubit.getFirstAyaPage(state.pageNum)!;

@@ -5,7 +5,9 @@ class AppRouteName {
 
   static const String moshaf = "/moshaf";
   static const String bookmark = "/bookmark";
-  static const String note = "/note";
+  static const String note = "/note";//
+    static const String radio = "/radio";//
+
 
   static const String tafseer = "/TafseerScreen";
 

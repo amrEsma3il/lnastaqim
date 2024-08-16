@@ -24,7 +24,7 @@ class FeaturesGridView extends StatelessWidget {
         text: "القبله",
         image: AppImages.qiblaFeature,
         route: AppRouteName.qibla),
-    FeatureModel(text: "قصص وعبر", image: AppImages.storyFeature),
+    FeatureModel(text: "الراديو", image: AppImages.storyFeature,route: AppRouteName.radio),
   ];
 
   @override
