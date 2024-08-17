@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lnastaqim/features/note/views/widgets/note_collection.dart';
 
+import '../../../core/constants/colors.dart';
 import '../../quran/bussniess_logic/quran/quran_cubit.dart';
 import '../bussniess_logic/add_note_cubit/add_note_cubit.dart';
 import '../bussniess_logic/note_cubit/note_cubit.dart';
@@ -12,7 +13,7 @@ void showNoteBottomSheet(BuildContext context, selectedAyah) {
   TextEditingController noteController = TextEditingController();
   showModalBottomSheet(
     context: context,
-    backgroundColor: Colors.grey.shade400,
+    backgroundColor:AppColor.blueColor.withOpacity(0.95),
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(48.r), topLeft: Radius.circular(48.r))),
@@ -43,33 +44,33 @@ void showNoteBottomSheet(BuildContext context, selectedAyah) {
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6),
                               borderSide:
-                                  const BorderSide(color: Color(0xff10355b)),
+                                  const BorderSide(color: Colors.white,width: 0.5),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6),
                               borderSide:
-                                  const BorderSide(color: Color(0xff10355b)),
+                                  const BorderSide(color: Colors.white,width: 0.5),
                             ),
                             disabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6),
                               borderSide:
-                                  const BorderSide(color: Color(0xff10355b)),
+                                  const BorderSide(color: Colors.white,width: 0.5),
                             ),
-                            hintText: "أضف ملاحظه",
+                            hintText: "أضف ملاحظة...",
                             hintStyle: const TextStyle(
-                                fontFamily: "naskh",
-                                fontSize: 22,
-                                color: Colors.grey)),
+                                // fontFamily: "naskh",
+                                fontSize: 18.5,
+                                color: Colors.white)),
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: 14,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           SizedBox(
-                            height: 50,
-                            width: 100,
+                            height: 40,
+                            width: 95,
                             child: ElevatedButton(
                                 onPressed: () {
                                   var name = QuranCubit.get(context)
@@ -86,18 +87,19 @@ void showNoteBottomSheet(BuildContext context, selectedAyah) {
                                 },
                                 style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(
-                                        const Color(0xff10355b)),
+                                      Colors.white),
                                     shape: MaterialStateProperty.all<
                                             RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(6.0),
+                                      borderRadius: BorderRadius.circular(12.r),
                                     ))),
                                 child: const Text(
                                   "حفظ",
                                   style: TextStyle(
-                                      fontFamily: "naskh",
-                                      fontSize: 15,
-                                      color: Colors.white),
+                                      // fontFamily: "naskh",
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      color:AppColor.blueColor),
                                 )),
                           )
                         ],

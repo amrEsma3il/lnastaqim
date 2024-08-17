@@ -14,6 +14,8 @@ import '../../../../core/utilits/models/hijri_date_model.dart';
 import '../../../../core/utilits/services/hijri_date_service.dart';
 import '../../../paryer_times/bussniess_logic/date_cubit.dart';
 import '../../../paryer_times/view/widgets/prayers_stepper.dart';
+import '../../../quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
+import '../../../quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_state.dart';
 import '../widgets/carousel_slider_ayah.dart';
 import '../widgets/features_grid_view.dart';
 import '../widgets/prayer_time_item.dart';
@@ -87,13 +89,19 @@ class _HomeViewState extends State<HomeView> {
                               GestureDetector(
                                 child: Row(
                                   children: [
-                                    const Text(
-                                      "لا توجد قراه بعد",
-                                      style: TextStyle(
-                                          color: Colors.white60,
-                                          fontSize: 21,
-                                          fontWeight: FontWeight.w400,
-                                          wordSpacing: 1.9),
+                                    BlocBuilder<MoshafBookmarkCubit, MoshafBookmarkState>(
+                                      builder: (context, moshafBookmarState) {
+                                             bool isMarkExist=moshafBookmarState.isMark&&moshafBookmarState.pageNumber!=0;
+                                          int   pageNumber=moshafBookmarState.pageNumber;
+                                        return  Text(
+                                         isMarkExist? '${'صفحة رقم '} ${pageNumber.toString().toArabic}': "لا توجد قراه بعد",
+                                          style: const TextStyle(
+                                              color: Colors.white60,
+                                              fontSize: 21,
+                                              fontWeight: FontWeight.w400,
+                                              wordSpacing: 1.9),
+                                        );
+                                      },
                                     ),
                                     SizedBox(
                                       width: 3.w,
@@ -108,14 +116,14 @@ class _HomeViewState extends State<HomeView> {
                               ),
                             ],
                           ),
-                          BlocBuilder<DateCubit, Map<String,String>>(
+                          BlocBuilder<DateCubit, Map<String, String>>(
                             builder: (context, dateState) {
                               return Column(
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.only(right: 5.w),
                                     child: Text(
-                                     dateState["gregorian"]!,
+                                      dateState["gregorian"]!,
                                       style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 21,
