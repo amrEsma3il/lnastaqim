@@ -5,12 +5,13 @@ import 'package:lnastaqim/features/bookmark/bussniess_logic/add_bookmark_cubit/a
 import 'package:lnastaqim/features/bookmark/views/widgets/bookmark_collection.dart';
 import 'package:lnastaqim/features/bookmark/views/widgets/bookmark_item.dart';
 
+import '../../../core/constants/colors.dart';
 import '../bussniess_logic/bookmark_cubit/bookmark_cubit.dart';
 
 void showBookmarkBottomSheet(BuildContext context, pageAyahs, moshafPageState) {
   showModalBottomSheet(
     context: context,
-    backgroundColor: Colors.grey.shade400,
+    backgroundColor: AppColor.blueColor.withOpacity(.95),
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(48.r), topLeft: Radius.circular(48.r))),

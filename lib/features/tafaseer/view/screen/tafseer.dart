@@ -19,7 +19,7 @@ class TafseerScreen extends StatelessWidget {
               TabriTafseer.tafaseerJasonData);
           showModalBottomSheet(
             context: context,
-            backgroundColor:AppColor.rhino,
+            backgroundColor:AppColor.blueColor.withOpacity(0.97),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     topRight: Radius.circular(48.r),

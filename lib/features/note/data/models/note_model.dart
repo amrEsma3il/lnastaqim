@@ -8,12 +8,15 @@ class NoteModel extends HiveObject {
   String note;
   @HiveField(1)
   int ayahNum;
-  @HiveField(3)
+  @HiveField(2)
   String pageNum;
-  @HiveField(4)
+  @HiveField(3)
   String surahName;
+  @HiveField(4)
+  int ayahNumInQuran;
 
   NoteModel({
+    required this.ayahNumInQuran,
     required this.note,
     required this.ayahNum,
     required this.pageNum,

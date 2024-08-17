@@ -21,12 +21,15 @@ import 'package:screenshot/screenshot.dart';
 import 'package:lnastaqim/features/tafaseer/view/screen/tafseer.dart';
 import '../../../../core/constants/images.dart';
 import '../../../../core/utilits/controller/search_or_not/search_visibility.dart';
+import '../../../../core/utilits/functions/toast_message.dart';
 import '../../../../core/utilits/widgets/custom_text_field.dart';
 import '../../../quran_sound/logic/audio_cubit/audio_cubit.dart';
 import '../../../quran_sound/logic/audio_cubit/audio_state.dart';
 import '../../../share/views/widgets/share_ayah_checkbox.dart';
 import '../../../tafaseer/bussniess_logic/tafseer_cubit.dart';
 
+import '../../bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
+import '../../bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_state.dart';
 import '../../bussniess_logic/quran_sowar/search_on_aya_from_whole_quran_cubit.dart';
 import '../../bussniess_logic/screen_tap_Visibility/screen_tap_visability.dart';
 import '../../data/models/search_ayah_entity.dart';
@@ -211,13 +214,24 @@ class MoshafView extends StatelessWidget {
                                                             ),
                                                           ),
                                                           IconButton(
-                                                            onPressed: () {},
-                                                            icon: const Icon(
-                                                              Icons
-                                                                  .bookmark_outline,
-                                                              color:
-                                                                  Colors.white,
-                                                              size: 25.5,
+                                                            onPressed: () {
+                                                              MoshafBookmarkCubit.get(context).updateBookmark(604-index);
+                                                            },
+                                                            icon: BlocBuilder<
+                                                                MoshafBookmarkCubit,
+                                                                MoshafBookmarkState>(
+                                                              builder: (context,
+                                                                  moshafBookmarkState) {
+                                                                    bool isBooked=moshafBookmarkState.isMark&&moshafBookmarkState.pageNumber==(604 - index);
+                                                                  // int  pageNum=moshafBookmarkState.pageNumber;
+                                                                return  Icon(isBooked?
+                                                                  Icons
+                                                                      .bookmark:Icons.bookmark_outline,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  size: 25.5,
+                                                                );
+                                                              },
                                                             ),
                                                           ),
                                                           // CompositedTransformTarget(
@@ -305,7 +319,7 @@ class MoshafView extends StatelessWidget {
                                                                             .start,
                                                                     children: [
                                                                       Text(
-                                                                        '${'صفحة'} ${(603 - index).toString().toArabic}, ',
+                                                                        '${'صفحة'} ${(604 - index).toString().toArabic}, ',
                                                                         style: TextStyle(
                                                                             fontSize: 15
                                                                                 .sp,
@@ -446,8 +460,9 @@ class MoshafView extends StatelessWidget {
                                                                       right: 6,
                                                                       child:
                                                                           Text(
-                                                                            // verseBarStatus.maxRepeats==AudioControlCubit.infinity?"∞    ":
-                                                                       ( verseBarStatus.maxRepeats+1)
+                                                                        // verseBarStatus.maxRepeats==AudioControlCubit.infinity?"∞    ":
+                                                                        (verseBarStatus.maxRepeats +
+                                                                                1)
                                                                             .toString()
                                                                             .toArabic,
                                                                         style: const TextStyle(
@@ -725,7 +740,8 @@ class MoshafView extends StatelessWidget {
                                         child: Container(
                                           // width:  170,
                                           height: menuItems.length >= 4
-                                              ? (60 * menuItems.length).toDouble()
+                                              ? (60 * menuItems.length)
+                                                  .toDouble()
                                               : 239,
                                           decoration: BoxDecoration(
                                               color: AppColor.blueColor,
@@ -999,8 +1015,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                 Container(
                                   width: 1.5.w,
                                   height: 19.h,
-                                  color:
-                                      AppColor.darkYellow,
+                                  color: AppColor.darkYellow,
                                 ),
                                 IconButton(
                                     onPressed: () {
@@ -1035,8 +1050,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                 Container(
                                   width: 1.5.w,
                                   height: 19.h,
-                                  color:
-                                      AppColor.darkYellow,
+                                  color: AppColor.darkYellow,
                                 ),
                                 IconButton(
                                     onPressed: () {
@@ -1050,8 +1064,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                 Container(
                                   width: 1.5.w,
                                   height: 19.h,
-                                  color:
-                                      AppColor.darkYellow,
+                                  color: AppColor.darkYellow,
                                 ),
                                 IconButton(
                                     onPressed: () {
@@ -1067,13 +1080,15 @@ class _MoshafPageState extends State<MoshafPage> {
                                         Clipboard.setData(ClipboardData(
                                                 text: selectedAyah.text))
                                             .then((_) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            const SnackBar(
-                                                content: Center(
-                                                    child: Text(
-                                                        'تم النسخ إلى الحافظه'))),
-                                          );
+                                          showToast('تم النسخ إلى الحافظه',
+                                              AppColor.blueColor);
+                                          // ScaffoldMessenger.of(context)
+                                          //     .showSnackBar(
+                                          //   const SnackBar(backgroundColor: AppColor.blueColor,
+                                          //       content: Center(
+                                          //           child: Text(
+                                          //               'تم النسخ إلى الحافظه'))),
+                                          // );
                                         });
                                       }
                                     },
@@ -1084,8 +1099,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                 Container(
                                   width: 1.5.w,
                                   height: 19.h,
-                                  color:
-                                      AppColor.darkYellow,
+                                  color: AppColor.darkYellow,
                                 ),
                                 IconButton(
                                     onPressed: () async {
@@ -1112,8 +1126,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                 Container(
                                   width: 1.5.w,
                                   height: 19.h,
-                                  color:
-                                      AppColor.darkYellow,
+                                  color: AppColor.darkYellow,
                                 ),
                                 IconButton(
                                     onPressed: () {
