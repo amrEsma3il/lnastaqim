@@ -26,8 +26,13 @@ static MoshafBookmarkCubit get(BuildContext context)=>BlocProvider.of<MoshafBook
     // final prefs = await SharedPreferences.getInstance();
     // await prefs.setBool('isMark', isMark);
     // await prefs.setInt('pageNumber', pageNumber);
+    if (state.pageNumber!=pageNumber) {
+       emit(state.copyWith(isMark:true, pageNumber: pageNumber));
+    } else {
+       emit(state.copyWith(isMark: !state.isMark, pageNumber: pageNumber));
+    }
 
-    emit(state.copyWith(isMark: !state.isMark, pageNumber: pageNumber));
+   
 
     // if (p) {
       

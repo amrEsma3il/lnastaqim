@@ -5,11 +5,12 @@ import 'package:lnastaqim/features/note/views/widgets/note_collection.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../quran/bussniess_logic/quran/quran_cubit.dart';
+import '../../quran/data/models/surahs_model.dart';
 import '../bussniess_logic/add_note_cubit/add_note_cubit.dart';
 import '../bussniess_logic/note_cubit/note_cubit.dart';
 import '../data/models/note_model.dart';
 
-void showNoteBottomSheet(BuildContext context, selectedAyah) {
+void showNoteBottomSheet(BuildContext context,Ayah selectedAyah) {
   TextEditingController noteController = TextEditingController();
   showModalBottomSheet(
     context: context,
@@ -75,7 +76,7 @@ void showNoteBottomSheet(BuildContext context, selectedAyah) {
                                 onPressed: () {
                                   var name = QuranCubit.get(context)
                                       .getSurahNameFromAyah(selectedAyah);
-                                  var note = NoteModel(
+                                  var note = NoteModel(ayahNumInQuran: selectedAyah.ayahUQNumber,
                                     note: noteController.text,
                                     ayahNum: selectedAyah.ayahNumber,
                                     surahName: name,
