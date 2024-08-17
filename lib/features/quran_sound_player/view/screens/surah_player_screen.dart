@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import '../../../../core/constants/colors.dart';
 import '../../logic/surah_player_cubit/surah_player_cubit.dart';
 import '../widgets/surah_controls_widget.dart';
 import '../widgets/surah_info_widget.dart';
@@ -13,34 +15,41 @@ class SurahPlayerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => SurahPlayerCubit(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('سورة البقرة'),
-          backgroundColor: Colors.teal,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {},
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.download),
-              onPressed: () {
-                // Download surah
-              },
+      child: SafeArea(
+        child: Scaffold(
+             
+          body:  Container(
+            decoration: const BoxDecoration(color: AppColor.blueColor),
+            padding: const EdgeInsets.fromLTRB(8,9,8,16),
+            child:  Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(width: Get.width,),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [Padding(
+                    padding: const EdgeInsets.only(right: 4.0),
+                    child: IconButton(onPressed: () {
+                    
+                                    }, icon:  Icon(Icons.arrow_back,color: AppColor.lightBlue,size: 28,)),
+                  ),
+                    
+                 Row(children: [   IconButton(onPressed: () {
+                  
+                }, icon:  Icon(Icons.music_note_outlined,color: AppColor.lightBlue,size: 26,)),
+                IconButton(onPressed: () {
+                  
+                }, icon:  Icon(Icons.favorite,color: AppColor.lightBlue,size: 26,))],)
+                ],),
+                   const SizedBox(height: 8),
+                const SurahInfoWidget(),
+                const SizedBox(height: 20),
+                const SurahSliderWidget(),
+                         const SizedBox(height: 17),
+                const SurahControlsWidget(),
+             
+                
+              ],
             ),
-          ],
-        ),
-        body: const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SurahInfoWidget(),
-              SizedBox(height: 20),
-              SurahControlsWidget(),
-              SizedBox(height: 20),
-              SurahSliderWidget(),
-            ],
           ),
         ),
       ),
