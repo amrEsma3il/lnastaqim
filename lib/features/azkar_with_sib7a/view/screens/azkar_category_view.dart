@@ -6,7 +6,7 @@ import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/other_category_
 
 import '../../../../core/constants/colors.dart';
 import '../../business_logic/azkar_category_cubit/azkar_category_cubit.dart';
-import '../widgets/adi3a_category_list_view.dart';
+import '../../../adi3a/widgets/adi3a_category_list_view.dart';
 import '../widgets/azkar_category_list_view.dart';
 
 class AzkarView extends StatefulWidget {

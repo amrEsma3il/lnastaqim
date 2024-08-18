@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:lnastaqim/config/routing/app_routes_info/app_routes_name.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/category_item.dart';
 
-import '../../data/models/AzkarModel.dart';
+import '../../azkar_with_sib7a/data/models/AzkarModel.dart';
 
 class Adi3aCategoryListView extends StatefulWidget {
   const Adi3aCategoryListView({super.key, required this.items});
