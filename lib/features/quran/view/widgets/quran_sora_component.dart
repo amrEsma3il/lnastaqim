@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/images.dart';
 import '../../bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
-import '../../bussniess_logic/sowra_detail/sora_details_cubit.dart';
 import '../../data/models/quran_model.dart';
 
 class QuranSoraComponent extends StatelessWidget {
-  final SoraModel quranAyaEntity;
+  final MoshafSurahIndexModel quranAyaEntity;
 
   const QuranSoraComponent({
     super.key,
@@ -19,9 +19,9 @@ class QuranSoraComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        BlocProvider.of<QuranSowarVersusCubit>(context).selectedVerse(-1);
+        Get.back();
         BlocProvider.of<QuranSowarCubit>(context)
-            .goToSoraDetailsEsvent(quranAyaEntity);
+            .goToSoraDetailsEsvent(context,quranAyaEntity);
       },
       child: Container(
         padding: EdgeInsets.fromLTRB(40.w, 6.h, 20.w, 6.h),
@@ -29,7 +29,7 @@ class QuranSoraComponent extends StatelessWidget {
         width: 362.w,
         height: 63.h,
         decoration: BoxDecoration(
-            color: AppColor.crame, borderRadius: BorderRadius.circular(15.r)),
+            color: AppColor.lightBlue, borderRadius: BorderRadius.circular(15.r)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -42,11 +42,11 @@ class QuranSoraComponent extends StatelessWidget {
                       AppImages.pattern,
                       width: 38.66.w,
                       height: 36.h,
-                      color: AppColor.brownText,
+                      color: const Color.fromARGB(255, 151, 109, 219),
                     ),
                     Text(
                       '${quranAyaEntity.id}',
-                      style: const TextStyle(color: AppColor.black),
+                      style: const TextStyle(color: AppColor.blueColor),
                     )
                   ],
                 ),
@@ -57,9 +57,9 @@ class QuranSoraComponent extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      quranAyaEntity.name!,
+                      quranAyaEntity.name,
                       style: TextStyle(
-                          color: AppColor.brownBackground,
+                          color: AppColor.blueColor,
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w700),
                     ),
@@ -67,9 +67,9 @@ class QuranSoraComponent extends StatelessWidget {
                       height: 3.h,
                     ),
                     Text(
-                      quranAyaEntity.type!,
+                     quranAyaEntity.makkia == 1?"مكية":"مدنية",
                       style: TextStyle(
-                          color: AppColor.brownBackground,
+                          color: AppColor.blueColor.withOpacity(0.9),
                           fontSize: 11.sp,
                           fontWeight: FontWeight.w500),
                     )
@@ -78,12 +78,12 @@ class QuranSoraComponent extends StatelessWidget {
               ],
             ),
             Image.asset(
-              quranAyaEntity.typeEn == 'medinan'
+              quranAyaEntity.makkia == 0
                   ? AppImages.madania
                   : AppImages.kaaba,
               width: 25.w,
               height: 25.h,
-              color: AppColor.brownBackground,
+              color: AppColor.blueColor.withOpacity(0.9),
             )
           ],
         ),

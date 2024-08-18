@@ -86,7 +86,7 @@ class Lnastaqim extends StatelessWidget {
               create: (context) => SearchOnAyaCubit(),
             ),
             BlocProvider(
-              create: (context) => QuranSowarCubit()..getAllQuranSowar(),
+              create: (context) => QuranSowarCubit(),
             ),
             BlocProvider(
               create: (context) => FastTransitionCubit(),

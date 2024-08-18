@@ -24,22 +24,22 @@ List<GetPage<dynamic>>? routes = [
       name: AppRouteName.home,
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
-  GetPage(
-      page: () => const QuranSowar(),
-      name: AppRouteName.quranSowar,
-      transition: Transition.fadeIn, 
-      transitionDuration: const Duration(milliseconds: 500)),
+  // GetPage(
+  //     page: () => const QuranSowar(),
+  //     name: AppRouteName.quranSowar,
+  //     transition: Transition.fadeIn, 
+  //     transitionDuration: const Duration(milliseconds: 500)),
         GetPage(
       page: () => const RadioScreen(),
       name: AppRouteName.radio,
       transition: Transition.fadeIn, 
       transitionDuration: const Duration(milliseconds: 500)),
-  GetPage(
-      curve: Curves.easeInOut,
-      page: () => SoraDetails(soraModel: Get.arguments),
-      name: AppRouteName.soraDetails,
-      transition: Transition.fadeIn,
-      transitionDuration: const Duration(milliseconds: 500)),
+  // GetPage(
+  //     curve: Curves.easeInOut,
+  //     page: () => SoraDetails(soraModel: Get.arguments),
+  //     name: AppRouteName.soraDetails,
+  //     transition: Transition.fadeIn,
+  //     transitionDuration: const Duration(milliseconds: 500)),
   GetPage(
       curve: Curves.easeInOut,
       page: () => const SurahPlayerScreen(),

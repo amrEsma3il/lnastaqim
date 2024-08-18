@@ -8,12 +8,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
+import '../../../../core/constants/images.dart';
 import '../../../../core/utilits/extensions/arabic_numbers.dart';
 
 import '../../../../core/utilits/functions/check.dart';
 import '../../../../core/utilits/functions/toast_message.dart';
 import '../../../quran_sound/logic/audio_cubit/audio_cubit.dart';
+import '../../data/models/quran_model.dart';
+import '../../view/widgets/quran_sora_component.dart';
 import '../quran/quran_cubit.dart';
+import '../quran_sowar/quran_sowar_cubit.dart';
 
 class ScreenOverlayCubit extends Cubit<int> {
   ScreenOverlayCubit() : super(0);
@@ -33,29 +37,31 @@ class ScreenOverlayCubit extends Cubit<int> {
             showPageDialog(context);
           }
         },
-        // {
-        //   "text": "الاعدادات",
-        //   "onTap": () {
-        //     // implement dialog here
-        //   }
-        // },
 
-        ///
         {
           "text": "الملاحظات",
           "onTap": () {
-              emit(0);
+            emit(0);
             Get.toNamed(AppRouteName.note);
-               
-          }
-        },{
-          "text": "المرجعيات",
-          "onTap": () {
-              emit(0);
-                        Get.toNamed(AppRouteName.bookmark);
-
           }
         },
+        {
+          "text": "المرجعيات",
+          "onTap": () {
+            emit(0);
+            Get.toNamed(AppRouteName.bookmark);
+          }
+        },
+        {
+          "text": "الفهرس",
+          "onTap": () {
+            emit(0);
+            showMoshafIndex(context);
+
+            // implement dialog here
+          }
+        },
+
         ///
         {
           "text": "مساعدة",
@@ -63,12 +69,12 @@ class ScreenOverlayCubit extends Cubit<int> {
             // implement dialog here
           }
         },
-        {
-          "text": "من نحن",
-          "onTap": () {
-            // implement dialog here
-          }
-        }
+        // {
+        //   "text": "من نحن",
+        //   "onTap": () {
+        //     // implement dialog here
+        //   }
+        // }
       ];
 
   overlaysVisability() {
@@ -89,9 +95,7 @@ class ScreenOverlayCubit extends Cubit<int> {
 //     });
   }
 
-
-
-  clearIverlayVisability(){
+  clearIverlayVisability() {
     emit(0);
   }
 
@@ -144,13 +148,11 @@ class ScreenOverlayCubit extends Cubit<int> {
                     hintStyle: TextStyle(color: Colors.white60),
                   ),
                   onChanged: (value) {
-
                     // onChangedDebounced(value,context);
                     bool isPage = isNumeric(value);
                     fastMove.text = value.toArabic;
-                    
+
                     if (isPage) {
-                    
                       pageNum.text = value.toArabic;
                       String surahNameText = QuranCubit.get(context)
                           .getSurahNameFromPage(int.parse(value) - 1);
@@ -217,28 +219,26 @@ class ScreenOverlayCubit extends Cubit<int> {
           actions: [
             TextButton(
               onPressed: () {
-              if (fastMove.text.isNotEmpty) {
-                    int pageIndex = 604 - int.parse(pageNum.text.toEnglish);
-                pageIndex = pageIndex > 604 ? 604 : pageIndex;
-             
-                Navigator.of(context).pop();
-                   AudioControlCubit.get(context).updatePage(int.parse(pageNum.text.toEnglish));
-                   log( int.parse(pageNum.text.toEnglish).toString());
+                if (fastMove.text.isNotEmpty) {
+                  int pageIndex = 604 - int.parse(pageNum.text.toEnglish);
+                  pageIndex = pageIndex > 604 ? 604 : pageIndex;
 
-                fastMove.text = "";
-                surahName.text = "";
-                pageNum.text = "";
-                emit(0);
-                                QuranCubit.get(context).pageController.jumpToPage(pageIndex);
+                  Navigator.of(context).pop();
+                  AudioControlCubit.get(context)
+                      .updatePage(int.parse(pageNum.text.toEnglish));
+                  log(int.parse(pageNum.text.toEnglish).toString());
 
-              } else {
-                showToast("يجب ادخال رقم الصفحة او اسم السورة",AppColor.blueColor.withOpacity(.95));
-              }
-            
+                  fastMove.text = "";
+                  surahName.text = "";
+                  pageNum.text = "";
+                  emit(0);
+                  QuranCubit.get(context).pageController.jumpToPage(pageIndex);
+                } else {
+                  showToast("يجب ادخال رقم الصفحة او اسم السورة",
+                      AppColor.blueColor.withOpacity(.95));
+                }
+
                 //  log("int.parse(pageNum.text.toEnglish) ${int.parse(pageNum.text.toEnglish)} ");
-                  
-                
-             
               },
               child: const Text(
                 'موافق',
@@ -251,52 +251,101 @@ class ScreenOverlayCubit extends Cubit<int> {
     );
   }
 
-  void onChangedDebounced(String value,BuildContext context) {
+  showMoshafIndex(BuildContext context) {
+    showBottomSheet(
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: 450,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20.h,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 68.h),
+                    child: BlocBuilder<QuranSowarCubit, List<MoshafSurahIndexModel>>(
+                      builder: (context, state) {
+                        return ListView.builder(
+                          itemCount: state.length,
+                          itemBuilder: (context, index) =>
+                              QuranSoraComponent(
+                               
+                                  quranAyaEntity: state[index]),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+        
+      },
+    );
+  }
+
+  void onChangedDebounced(String value, BuildContext context) {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () {
-      performHeavyComputation(value,context);
+      performHeavyComputation(value, context);
     });
   }
 
-
-
-
-    Future<void> performHeavyComputation(String value,BuildContext context) async {
+  Future<void> performHeavyComputation(
+      String value, BuildContext context) async {
     bool isPage = isNumeric(value);
-    fastMove.text = value.toArabic; // Assuming toArabic() is an extension method
+    fastMove.text =
+        value.toArabic; // Assuming toArabic() is an extension method
     if (isPage) {
-      pageNum.text = value.toArabic; // Assuming toArabic() is an extension method
-      final result = await compute(_heavyComputationForPage,{"page":int.parse(value) - 1,"context":context});
-      surahName.text = "${result!['surahNumberText']}.${result['surahNameText']}";
+      pageNum.text =
+          value.toArabic; // Assuming toArabic() is an extension method
+      final result = await compute(_heavyComputationForPage,
+          {"page": int.parse(value) - 1, "context": context});
+      surahName.text =
+          "${result!['surahNumberText']}.${result['surahNameText']}";
     } else {
-      final result = await compute(_heavyComputationForSurah, {"surah": value,"context":context});
+      final result = await compute(
+          _heavyComputationForSurah, {"surah": value, "context": context});
       if (result != null) {
-        pageNum.text = result['pageNumberText'].toString().toArabic; // Assuming toArabic() is an extension method
-        surahName.text = "${result['surahNumberText'].toString().toArabic}.$value"; // Assuming toArabic() is an extension method
+        pageNum.text = result['pageNumberText']
+            .toString()
+            .toArabic; // Assuming toArabic() is an extension method
+        surahName.text =
+            "${result['surahNumberText'].toString().toArabic}.$value"; // Assuming toArabic() is an extension method
       }
     }
   }
 
-
-  static Map<String, dynamic>? _heavyComputationForPage(Map<String, dynamic> args) {
+  static Map<String, dynamic>? _heavyComputationForPage(
+      Map<String, dynamic> args) {
     // Perform your heavy computation here
     // For example, fetching Surah name and number from a page number
-    int page=args['page'];
-     BuildContext context=args['context'];
+    int page = args['page'];
+    BuildContext context = args['context'];
     final surahNameText = QuranCubit.get(context).getSurahNameFromPage(page);
-    final surahNumberText = QuranCubit.get(context).getSurahNumberFromPage(page);
+    final surahNumberText =
+        QuranCubit.get(context).getSurahNumberFromPage(page);
     return {'surahNameText': surahNameText, 'surahNumberText': surahNumberText};
   }
 
-  static Map<String, dynamic>? _heavyComputationForSurah(Map<String, dynamic> args) {
+  static Map<String, dynamic>? _heavyComputationForSurah(
+      Map<String, dynamic> args) {
     // Perform your heavy computation here
     // For example, fetching Surah number and start page from Surah name
-    String surah=args['surah'];
-     BuildContext context=args['context'];
+    String surah = args['surah'];
+    BuildContext context = args['context'];
     final surahNumberText = QuranCubit.get(context).getSurahNumber(surah);
     final pageNumberText = QuranCubit.get(context).getSurahStartPage(surah);
     if (surahNumberText != null && pageNumberText != null) {
-      return {'surahNumberText': surahNumberText, 'pageNumberText': pageNumberText};
+      return {
+        'surahNumberText': surahNumberText,
+        'pageNumberText': pageNumberText
+      };
     }
     return null;
   }
