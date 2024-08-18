@@ -28,15 +28,11 @@ class NoteAyahListView extends StatelessWidget {
                 onTap: () {
      
                       QuranCubit.get(context).clearScreen(context);
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (BuildContext context) => const MoshafView(
-                  //         // indexP: 604 - int.parse(notes[index].pageNum),
-                  //       ),
-                  //     ));
-                  Get.back();
+                 
+                                    Get.back();
                              QuranCubit.get(context).pageController.jumpToPage(604 - int.parse(notes[index].pageNum));
+
+                  QuranCubit.get(context).searchAya(notes[index].ayahNumInQuran);
                 },
                 child: NoteAyah(
                   noteModel: notes[index],

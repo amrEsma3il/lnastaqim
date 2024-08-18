@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
+import '../../../../core/constants/colors.dart';
 import '../../../quran/bussniess_logic/quran/quran_cubit.dart';
 import '../../../quran/bussniess_logic/screen_tap_Visibility/screen_tap_visability.dart';
 
@@ -16,7 +17,7 @@ class NoteCollection extends StatelessWidget {
       },
       child: Container(
         width: double.infinity,
-        margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 2),
         padding: const EdgeInsets.symmetric(horizontal: 15),
         height: 50,
         decoration: ShapeDecoration(
@@ -28,12 +29,12 @@ class NoteCollection extends StatelessWidget {
             Text(
               "الملاحظات",
               style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 22,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xff10355b)),
+                  color:AppColor.blueColor),
             ),
             Spacer(),
-            Icon(Icons.note_alt_outlined, color: Color(0xff10355b)),
+            Icon(Icons.note_alt_outlined, color: AppColor.blueColor,size: 27,),
           ],
         ),
       ),

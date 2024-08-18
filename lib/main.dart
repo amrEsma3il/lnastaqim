@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:alarm/alarm.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,6 @@ import 'package:lnastaqim/core/constants/colors.dart';
 import 'config/routing/app_routingconfig/app_router_configuration.dart';
 // import 'core/utilits/functions/search_string_pattern/boyer_moore_algo.dart' as boyer;
 import 'core/constants/keys.dart';
-import 'core/local_database/quran/quran_local_database.dart';
 import 'core/utilits/controller/search_or_not/search_visibility.dart';
 import 'core/utilits/services/local_notification_service.dart';
 import 'core/utilits/services/work_manager_service.dart';
@@ -30,6 +28,7 @@ import 'core/constants/constants.dart';
 import 'features/bookmark/bussniess_logic/add_bookmark_cubit/add_bookmark_cubit.dart';
 
 import 'features/quran/bussniess_logic/fast_transition/fast_transition_cubit.dart';
+import 'features/quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
 import 'features/quran/bussniess_logic/quran_sowar/search_on_aya_from_whole_quran_cubit.dart';
 import 'features/quran/bussniess_logic/quran_sowar/search_or_not_cubit.dart';
 import 'features/quran/bussniess_logic/screen_tap_Visibility/screen_tap_visability.dart';
@@ -88,6 +87,7 @@ class Lnastaqim extends StatelessWidget {
             BlocProvider(
               create: (context) => QuranSowarCubit(),
             ),
+
             BlocProvider(
               create: (context) => FastTransitionCubit(),
             ),
@@ -97,6 +97,9 @@ class Lnastaqim extends StatelessWidget {
             BlocProvider(
               create: (context) => SearchOrNot(),
             ),
+             BlocProvider(
+              create: (context) => MoshafBookmarkCubit(),
+            ),//
             BlocProvider(
               create: (context) => QuranSowarVersusCubit(),
             ),

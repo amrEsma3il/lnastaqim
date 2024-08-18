@@ -28,7 +28,7 @@ class ToggleButton extends StatelessWidget {
               return ToggleButtons(
                 borderRadius: BorderRadius.circular(20.r),
                 borderColor: Colors.white,
-                fillColor: AppColor.blueColor,
+                fillColor: AppColor.rhino,
                 isSelected: List.generate(4,
                     (index) => ChangeTafseerCubit.get(context).state == index),
                 onPressed: (int index) {
