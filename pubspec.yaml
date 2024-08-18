@@ -68,7 +68,7 @@ dependencies:
   permission_handler: ^11.1.0
   radio_player: ^1.6.0
   retrofit: ">=4.0.0 <5.0.0"
-  screenshot: 2.5.0
+  screenshot: 2.4.0
   share_plus: ^9.0.0
   shared_preferences: ^2.0.15
   smooth_page_indicator: ^1.2.0+3
