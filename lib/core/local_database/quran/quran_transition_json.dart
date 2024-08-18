@@ -2,7 +2,7 @@ class QuranTransition {
   // 20240806004747
 // https://mp3quran.net/api/v3/suwar?language=ar
 
-static List<Map<String, dynamic>> quranSowar =[
+static List<Map<String, dynamic>> moshafSurahIndexList =[
     {
       "id": 1,
       "name": "الفاتحة",

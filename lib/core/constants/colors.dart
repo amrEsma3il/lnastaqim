@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:lnastaqim/core/utilits/extensions/color_from_hex.dart';
 
 class AppColor {
-  static Color crame = "#FAF6EB".toColor;
+  static Color crame = "#FAF6EB".toColor;//a9b6d9
+    static Color lightBlue = "#a9b6d9".toColor;//
+
   static Color darkBrown = "#522700".toColor;
   static Color amber = "#A85000".toColor;
   static Color brownText = "#A85000".toColor;

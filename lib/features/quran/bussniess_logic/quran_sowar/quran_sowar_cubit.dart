@@ -1,17 +1,18 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
-import '../../../../config/routing/app_routes_info/app_routes_name.dart';
 import '../../data/models/quran_model.dart';
 import '../../data/repository/quran_repository.dart';
+import '../quran/quran_cubit.dart';
 
-class QuranSowarCubit extends Cubit<List<SoraModel>> {
+class QuranSowarCubit extends Cubit<List<MoshafSurahIndexModel>> {
   QuranSowarCubit() : super(QuranRepository.getAllQuranSowar());
 
-  getAllQuranSowar() => emit(state);
+  // getAllQuranSowar() => emit(state);
 
-  goToSoraDetailsEsvent(SoraModel soraModel) {
-    Get.toNamed(AppRouteName.soraDetails, arguments: soraModel);
+  goToSoraDetailsEsvent(BuildContext context, MoshafSurahIndexModel soraModel) {
+    QuranCubit.get(context).pageController.jumpToPage(604-soraModel.startPage);
+    // Get.offNamed(AppRouteName.moshaf);
   }
   //  searchOnSora() => emit(state);
 }

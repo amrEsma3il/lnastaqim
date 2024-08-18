@@ -198,7 +198,7 @@ int? getFirstAyaPage(int page) {
 
  String? getSurahNameFromPage2(int page){
 
-List<Map<String, dynamic>> quranSowar=QuranTransition.quranSowar;
+List<Map<String, dynamic>> quranSowar=QuranTransition.moshafSurahIndexList;
 for (int i = 0; i < quranSowar.length; i++) {
 
   if (page>=quranSowar[i]["start_page"] && page <= quranSowar[i]["end_page"] ) {
@@ -214,7 +214,7 @@ for (int i = 0; i < quranSowar.length; i++) {
 
    int? getSurahNumberFromPage2(int page){
 
-List<Map<String, dynamic>> quranSowar=QuranTransition.quranSowar;
+List<Map<String, dynamic>> quranSowar=QuranTransition.moshafSurahIndexList;
 for (int i = 0; i < quranSowar.length; i++) {
 
   if (page>=quranSowar[i]["start_page"] && page <= quranSowar[i]["end_page"] ) {

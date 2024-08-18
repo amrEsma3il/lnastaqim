@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/constants/colors.dart';
 import '../../logic/surah_player_cubit/surah_player_cubit.dart';
 import '../../logic/surah_player_cubit/surah_player_state.dart';
 
@@ -14,42 +17,58 @@ class SurahControlsWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            IconButton(
-              icon: const Icon(Icons.skip_previous),
+               IconButton(
+              icon:  Icon(size: 25,
+                Icons.shuffle,color: AppColor.lightBlue,),
               onPressed: () {
-                context.read<SurahPlayerCubit>().previousSurah();
+                context.read<SurahPlayerCubit>().playRandomSurah();
               },
             ),
+            SizedBox(width: 11.w,),
+            Container(decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(width: 0.9,color: AppColor.lightBlue)),
+              child: IconButton(
+                icon:  Icon(Icons.skip_next,color: AppColor.lightBlue,),
+                onPressed: () {
+                  context.read<SurahPlayerCubit>().previousSurah();
+                },
+              ),
+            ),
+                        SizedBox(width: 16.w,),
+
             BlocBuilder<SurahPlayerCubit, SurahPlayerState>(
               builder: (context, state) {
-                return IconButton(
-                  icon: state.isPlaying
-                      ? const Icon(Icons.pause)
-                      : const Icon(Icons.play_arrow),
-                  onPressed: () {
-                    context.read<SurahPlayerCubit>().togglePlayPause();
-                  },
+                return CircleAvatar(
+                  radius: 27,
+                  backgroundColor: AppColor.lightBlue,
+                  child: IconButton(color: AppColor.blueColor,
+                    icon: state.isPlaying
+                        ? const Icon(Icons.pause_circle_outline)
+                        : const Icon(Icons.play_arrow_outlined),
+                    onPressed: () {
+                      context.read<SurahPlayerCubit>().togglePlayPause();
+                    },
+                  ),
                 );
               },
             ),
-            IconButton(
-              icon: const Icon(Icons.skip_next),
-              onPressed: () {
-                context.read<SurahPlayerCubit>().nextSurah();
-              },
+                        SizedBox(width: 16.w,),
+
+            Container(decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(width: 0.9,color: AppColor.lightBlue)),
+              child: IconButton(
+                icon:  Icon(Icons.skip_previous,color: AppColor.lightBlue,),
+                onPressed: () {
+                  context.read<SurahPlayerCubit>().nextSurah();
+                },
+              ),
             ),
-          ],
-        ),
-        const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            BlocBuilder<SurahPlayerCubit, SurahPlayerState>(
+                        SizedBox(width: 12.w,),
+
+             BlocBuilder<SurahPlayerCubit, SurahPlayerState>(
               builder: (context, state) {
                 return IconButton(
-                  icon: Icon(
+                  icon: Icon(size: 27,
                     Icons.repeat,
-                    color: state.maxRepeats > 0 ? Colors.teal : Colors.grey,
+                    color: state.maxRepeats > 0 ? Colors.teal :AppColor.lightBlue,
                   ),
                   onPressed: () {
                     context.read<SurahPlayerCubit>().toggleRepeat();
@@ -57,22 +76,16 @@ class SurahControlsWidget extends StatelessWidget {
                 );
               },
             ),
-            IconButton(
-              icon: const Icon(Icons.shuffle),
-              onPressed: () {
-                context.read<SurahPlayerCubit>().playRandomSurah();
-              },
-            ),
           ],
         ),
-        const SizedBox(height: 10),
-        BlocBuilder<SurahPlayerCubit, SurahPlayerState>(
-          builder: (context, state) {
-            return Text(
-              'Repeat: ${state.maxRepeats} time${state.maxRepeats > 1 ? 's' : ''}',
-            );
-          },
-        ),
+        // const SizedBox(height: 10),    const SizedBox(height: 10),
+        // BlocBuilder<SurahPlayerCubit, SurahPlayerState>(
+        //   builder: (context, state) {
+        //     return Text(
+        //       'Repeat: ${state.maxRepeats} time${state.maxRepeats > 1 ? 's' : ''}',
+        //     );
+        //   },
+        // ),
       ],
     );
   }
