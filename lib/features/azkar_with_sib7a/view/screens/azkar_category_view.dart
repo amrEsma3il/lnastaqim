@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lnastaqim/core/constants/images.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/data/models/AzkarModel.dart';
+import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/item_drop_menu.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/other_category_list_view.dart';
 
 import '../../../../core/constants/colors.dart';
@@ -18,32 +19,12 @@ class AzkarView extends StatefulWidget {
 
 class _AzkarViewState extends State<AzkarView> {
   bool isAzkarListViewVisible = false;
-  void toggleAzkarVisibility() {
-    setState(() {
-      isAzkarListViewVisible = !isAzkarListViewVisible;
-    });
-  }
 
   bool isAdi3aListViewVisible = false;
-  void toggleAdi3aVisibility() {
-    setState(() {
-      isAdi3aListViewVisible = !isAdi3aListViewVisible;
-    });
-  }
 
   bool isOtherListViewVisible = false;
-  void toggleOtherVisibility() {
-    setState(() {
-      isOtherListViewVisible = !isOtherListViewVisible;
-    });
-  }
 
   bool isSibhaVisible = false;
-  void toggleSibhaVisibility() {
-    setState(() {
-      isSibhaVisible = !isSibhaVisible;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,319 +49,33 @@ class _AzkarViewState extends State<AzkarView> {
                       const SizedBox(
                         height: 20,
                       ),
-                      isAzkarListViewVisible
-                          ? Container(
-                              height: 41,
-                              decoration: ShapeDecoration(
-                                  shadows: [
-                                    BoxShadow(
-                                        offset: const Offset(0, -1),
-                                        color: const Color(0xff000000)
-                                            .withOpacity(0.25),
-                                        blurRadius: 5,
-                                        blurStyle: BlurStyle.outer,
-                                        spreadRadius:
-                                            BorderSide.strokeAlignInside)
-                                  ],
-                                  color: AppColor.white2,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15))),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 10.0),
-                                    child: Text(
-                                      "الاذكار",
-                                      style: TextStyle(
-                                          color: AppColor.primary,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                  IconButton(
-                                      onPressed: toggleAzkarVisibility,
-                                      icon: Icon(
-                                        Icons.arrow_drop_down,
-                                        color: AppColor.primary,
-                                      )),
-                                ],
-                              ),
-                            )
-                          : Container(
-                              height: 41,
-                              decoration: ShapeDecoration(
-                                  color: AppColor.primary,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15))),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(right: 10.0),
-                                    child: Text(
-                                      "الاذكار",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                  IconButton(
-                                      onPressed: toggleAzkarVisibility,
-                                      icon: const Icon(
-                                        Icons.arrow_drop_up,
-                                        color: Colors.white,
-                                      )),
-                                ],
-                              ),
-                            ),
-                      const SizedBox(
-                        height: 20,
+                      ItemDropMenu(
+                        category: "azkar",
+                        text: "الأذكار",
+                        widget: AzkarCategoryListView(items: state),
                       ),
-                      Visibility(
-                          visible: isAzkarListViewVisible,
-                          child: SizedBox(
-                              height: 400,
-                              child: AzkarCategoryListView(items: state))),
-                      isAdi3aListViewVisible
-                          ? Container(
-                              height: 41,
-                              decoration: ShapeDecoration(
-                                  shadows: [
-                                    BoxShadow(
-                                        offset: const Offset(0, -1),
-                                        color: const Color(0xff000000)
-                                            .withOpacity(0.25),
-                                        blurRadius: 5,
-                                        blurStyle: BlurStyle.outer,
-                                        spreadRadius:
-                                            BorderSide.strokeAlignInside)
-                                  ],
-                                  color: AppColor.white2,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15))),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 10.0),
-                                    child: Text(
-                                      "الادعيه",
-                                      style: TextStyle(
-                                          color: AppColor.primary,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                  IconButton(
-                                      onPressed: toggleAdi3aVisibility,
-                                      icon: Icon(
-                                        Icons.arrow_drop_down,
-                                        color: AppColor.primary,
-                                      )),
-                                ],
-                              ),
-                            )
-                          : Container(
-                              height: 41,
-                              decoration: ShapeDecoration(
-                                  color: AppColor.primary,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15))),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(right: 10.0),
-                                    child: Text(
-                                      "الادعيه",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                  IconButton(
-                                      onPressed: toggleAdi3aVisibility,
-                                      icon: const Icon(
-                                        Icons.arrow_drop_up,
-                                        color: Colors.white,
-                                      )),
-                                ],
-                              ),
-                            ),
-                      const SizedBox(
-                        height: 20,
+                      ItemDropMenu(
+                        category: "adi3a",
+                        text: "الأدعية",
+                        widget: Adi3aCategoryListView(items: state),
                       ),
-                      Visibility(
-                          visible: isAdi3aListViewVisible,
-                          child: SizedBox(
-                              height: 400,
-                              child: Adi3aCategoryListView(items: state))),
-                      isOtherListViewVisible
-                          ? Container(
-                              height: 41,
-                              decoration: ShapeDecoration(
-                                  shadows: [
-                                    BoxShadow(
-                                        offset: const Offset(0, -1),
-                                        color: const Color(0xff000000)
-                                            .withOpacity(0.25),
-                                        blurRadius: 5,
-                                        blurStyle: BlurStyle.outer,
-                                        spreadRadius:
-                                            BorderSide.strokeAlignInside)
-                                  ],
-                                  color: AppColor.white2,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15))),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 10.0),
-                                    child: Text(
-                                      "اخرى",
-                                      style: TextStyle(
-                                          color: AppColor.primary,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                  IconButton(
-                                      onPressed: toggleOtherVisibility,
-                                      icon: Icon(
-                                        Icons.arrow_drop_down,
-                                        color: AppColor.primary,
-                                      )),
-                                ],
-                              ),
-                            )
-                          : Container(
-                              height: 41,
-                              decoration: ShapeDecoration(
-                                  color: AppColor.primary,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15))),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(right: 10.0),
-                                    child: Text(
-                                      "اخرى",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                  IconButton(
-                                      onPressed: toggleOtherVisibility,
-                                      icon: const Icon(
-                                        Icons.arrow_drop_up,
-                                        color: Colors.white,
-                                      )),
-                                ],
-                              ),
-                            ),
-                      const SizedBox(
-                        height: 20,
+                      ItemDropMenu(
+                        category: "other",
+                        text: "أخرى",
+                        widget: OtherCategoryListView(items: state),
                       ),
-                      Visibility(
-                          visible: isOtherListViewVisible,
-                          child: SizedBox(
-                              height: 400,
-                              child: OtherCategoryListView(items: state))),
-                      isSibhaVisible
-                          ? Container(
-                              height: 41,
-                              decoration: ShapeDecoration(
-                                  shadows: [
-                                    BoxShadow(
-                                        offset: const Offset(0, -1),
-                                        color: const Color(0xff000000)
-                                            .withOpacity(0.25),
-                                        blurRadius: 5,
-                                        blurStyle: BlurStyle.outer,
-                                        spreadRadius:
-                                            BorderSide.strokeAlignInside)
-                                  ],
-                                  color: AppColor.white2,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15))),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 10.0),
-                                    child: Text(
-                                      "السبحه",
-                                      style: TextStyle(
-                                          color: AppColor.primary,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                  IconButton(
-                                      onPressed: toggleSibhaVisibility,
-                                      icon: Icon(
-                                        Icons.arrow_drop_down,
-                                        color: AppColor.primary,
-                                      )),
-                                ],
-                              ),
-                            )
-                          : Container(
-                              height: 41,
-                              decoration: ShapeDecoration(
-                                  color: AppColor.primary,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15))),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(right: 10.0),
-                                    child: Text(
-                                      "السبحه",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                  IconButton(
-                                      onPressed: toggleSibhaVisibility,
-                                      icon: const Icon(
-                                        Icons.arrow_drop_up,
-                                        color: Colors.white,
-                                      )),
-                                ],
-                              ),
-                            ),
-                      const SizedBox(
-                        height: 20,
+                      ItemDropMenu(
+                        category: "sibha",
+                        text: "السبحه",
+                        widget: Container(
+                          height: 250,
+                          width: double.infinity,
+                          decoration: ShapeDecoration(
+                              color: AppColor.blueColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20))),
+                        ),
                       ),
-                      Visibility(
-                          visible: isSibhaVisible,
-                          child: Container(
-                            height: 250,
-                            width: double.infinity,
-                            decoration: ShapeDecoration(
-                                color: AppColor.blueColor,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20))),
-                          )),
                       const SizedBox(
                         height: 20,
                       ),
