@@ -36,7 +36,7 @@ import 'features/quran/bussniess_logic/sowra_detail/sora_details_cubit.dart';
 
 import 'features/azkar_with_sib7a/business_logic/azkar_category_cubit/azkar_category_cubit.dart';
 import 'features/azkar_with_sib7a/business_logic/azkar_details_cubit/azkar_details_cubit.dart';
-import 'features/quran/bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
+import 'features/quran/bussniess_logic/quran/index_cubit/index_cubit.dart';
 import 'features/quran_sound/data/models/reciter_entity.dart';
 import 'features/quran_sound/logic/audio_cubit/audio_cubit.dart';
 
@@ -85,7 +85,7 @@ class Lnastaqim extends StatelessWidget {
               create: (context) => SearchOnAyaCubit(),
             ),
             BlocProvider(
-              create: (context) => QuranSowarCubit(),
+              create: (context) => IndexCubit(),
             ),
 
             BlocProvider(
@@ -111,10 +111,7 @@ class Lnastaqim extends StatelessWidget {
  BlocProvider(
               create: (context) => AudioControlCubit()..audioPlayerListener(context),
             ),
-            //  BlocProvider(
-            //   create: (context) => MoshafPageCubit()..initPage(),
-            // ),
-//
+   
             BlocProvider(create: (context) => AddBookmarkCubit()),
             BlocProvider(
                 create: (context) => BookmarkCubit()..fetchBookmarks()),

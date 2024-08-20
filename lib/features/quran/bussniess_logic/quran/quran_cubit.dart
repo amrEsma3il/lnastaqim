@@ -12,9 +12,11 @@ import '../../../../core/local_database/quran/quran_local_database.dart';
 import '../../../../core/local_database/quran/quran_transition_json.dart';
 import '../../../../core/utilits/functions/search_string_pattern/boyer_moore_algo.dart'
     as boyer_more;
+import '../../data/models/quran_model.dart';
 import '../../data/models/search_ayah_entity.dart';
 import '../../data/models/select_aya_model.dart';
 import '../../data/models/surahs_model.dart';
+import '../../data/repository/quran_repository.dart';
 import '../screen_tap_Visibility/screen_tap_visability.dart';
 // import '../../../../core/utilits/functions/search_string_pattern/kmp_algo.dart' as kmp;
 
@@ -198,11 +200,10 @@ int? getFirstAyaPage(int page) {
 
  String? getSurahNameFromPage2(int page){
 
-List<Map<String, dynamic>> quranSowar=QuranTransition.moshafSurahIndexList;
-for (int i = 0; i < quranSowar.length; i++) {
+List<SurahIndex> quranSowar=QuranRepository.getSowarIndex();for (int i = 0; i < quranSowar.length; i++) {
 
-  if (page>=quranSowar[i]["start_page"] && page <= quranSowar[i]["end_page"] ) {
-    return quranSowar[i]["name"];
+  if (page>=quranSowar[i].startPage && page <= quranSowar[i].endPage) {
+    return quranSowar[i].name;
   }
 
 }
@@ -214,11 +215,11 @@ for (int i = 0; i < quranSowar.length; i++) {
 
    int? getSurahNumberFromPage2(int page){
 
-List<Map<String, dynamic>> quranSowar=QuranTransition.moshafSurahIndexList;
+List<SurahIndex> quranSowar=QuranRepository.getSowarIndex();
 for (int i = 0; i < quranSowar.length; i++) {
 
-  if (page>=quranSowar[i]["start_page"] && page <= quranSowar[i]["end_page"] ) {
-    return quranSowar[i]["id"];
+  if (page>=quranSowar[i].startPage&& page <= quranSowar[i].endPage) {
+    return quranSowar[i].id;
   }
 
 }

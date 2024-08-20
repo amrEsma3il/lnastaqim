@@ -1,15 +1,13 @@
-
 import '../data_sources/const_data_sources/quran_const_data_sources.dart';
 import '../models/quran_model.dart';
 
-
 class QuranRepository {
-  static List<MoshafSurahIndexModel> getAllQuranSowar() =>QuranConstDataSources.getAllQuranSowar();
-      
+  static  List<SurahIndex> getSowarIndex() =>
+      QuranConstDataSources.getAllQuranIndex().sowarIndex;
 
+  static List<ChapterIndex> getChaptersIndex() =>
+      QuranConstDataSources.getAllQuranIndex().chapterIndex;
 
-
-  // static SoraModel getSoraDetails( SoraModel quaranJson) =>QuranConstDataSources.getSoraDetails(quaranJson);
-   
+  static List<HizbIndex> getHizpIndex() =>
+      QuranConstDataSources.getAllQuranIndex().hizbIndex;
 }
-

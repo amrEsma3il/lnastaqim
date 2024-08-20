@@ -16,8 +16,9 @@ import '../../../../core/utilits/functions/toast_message.dart';
 import '../../../quran_sound/logic/audio_cubit/audio_cubit.dart';
 import '../../data/models/quran_model.dart';
 import '../../view/widgets/quran_sora_component.dart';
+import '../quran/index_cubit/index_state.dart';
 import '../quran/quran_cubit.dart';
-import '../quran_sowar/quran_sowar_cubit.dart';
+import '../quran/index_cubit/index_cubit.dart';
 
 class ScreenOverlayCubit extends Cubit<int> {
   ScreenOverlayCubit() : super(0);
@@ -56,7 +57,7 @@ class ScreenOverlayCubit extends Cubit<int> {
           "text": "الفهرس",
           "onTap": () {
             emit(0);
-            showMoshafIndex(context);
+          Get.toNamed(AppRouteName.moshafIndex);
 
             // implement dialog here
           }
@@ -251,43 +252,46 @@ class ScreenOverlayCubit extends Cubit<int> {
     );
   }
 
-  showMoshafIndex(BuildContext context) {
-    showBottomSheet(
-      context: context,
-      builder: (context) {
-        return SizedBox(
-          height: 450,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20.h,
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 68.h),
-                    child: BlocBuilder<QuranSowarCubit, List<MoshafSurahIndexModel>>(
-                      builder: (context, state) {
-                        return ListView.builder(
-                          itemCount: state.length,
-                          itemBuilder: (context, index) =>
-                              QuranSoraComponent(
+  // showMoshafIndex(BuildContext context) {
+  //   showBottomSheet(
+  //     context: context,
+  //     builder: (context) {
+  //       return
+  //        SizedBox(
+  //         // height: 450,
+  //         child: Padding(
+  //           padding: EdgeInsets.symmetric(horizontal: 15.w),
+  //           child: Column(
+  //             children: [
+  //               SizedBox(
+  //                 height: 20.h,
+  //               ),
+  //               Expanded(
+  //                 child: Padding(
+  //                   padding: EdgeInsets.only(bottom: 20.h),
+  //                   child: BlocBuilder<IndexCubit, IndexState>(
+  //                     builder: (context, state) {
+  //                            final List<dynamic> indexState=state is SurahIndexState?SurahIndexState.indexList: (state is ChapterIndexState ?ChapterIndexState.indexList: state is HizbIndexState  ?HizbIndexState.indexList:SurahIndexState.indexList);
+  //                       return ListView.builder(
+                     
+  //                         itemCount: indexState.length,
+  //                         itemBuilder: (context, index) =>
+  //                             QuranSoraComponent(
                                
-                                  quranAyaEntity: state[index]),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
+  //                             indexEntity: indexState[index],),
+  //                       );
+  //                     },
+  //                   ),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
         
-      },
-    );
-  }
+  //     },
+  //   );
+  // }
 
   void onChangedDebounced(String value, BuildContext context) {
     if (_debounce?.isActive ?? false) _debounce?.cancel();

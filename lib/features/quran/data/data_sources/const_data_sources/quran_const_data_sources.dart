@@ -3,8 +3,7 @@ import '../../../../../core/local_database/quran/quran_transition_json.dart';
 import '../../models/quran_model.dart';
 
 class QuranConstDataSources {
-  static List<MoshafSurahIndexModel> getAllQuranSowar() => QuranTransition.moshafSurahIndexList
-      .map((quaranJson) => MoshafSurahIndexModel.fromJson(quaranJson))
-      .toList();
+  static MoshafIndexModel getAllQuranIndex() =>
+      MoshafIndexModel.fromJson( QuranTransition.moshafSurahIndexList) ;
 
 }
