@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -6,10 +7,12 @@ import '../../../../core/utilits/extensions/arabic_numbers.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/images.dart';
 import '../../bussniess_logic/quran/index_cubit/index_cubit.dart';
+import '../../bussniess_logic/quran/quran_cubit.dart';
+import '../../data/models/quran_model.dart';
 
 
 class QuranSoraComponent extends StatelessWidget {
-  final dynamic indexEntity;
+  final SurahModel indexEntity;
 
   const QuranSoraComponent({
     super.key,
@@ -28,31 +31,31 @@ class QuranSoraComponent extends StatelessWidget {
         
 
         BlocProvider.of<IndexCubit>(context)
-            .goToSoraDetailsEsvent(context,indexEntity.startPage);
+            .moveToPageEvent(context,indexEntity.startPage);
       },
       child: Container(
         padding: EdgeInsets.fromLTRB(40.w, 6.h, 20.w, 6.h),
-        margin: EdgeInsets.only(bottom: 5.h),
+        margin: EdgeInsets.only(bottom:11.h),
         width: Get.width-100.w,
-        height: 55.h,
+        height: 75.h,
         decoration: BoxDecoration(
-            color: AppColor.lightBlue, borderRadius: BorderRadius.circular(15.r)),
-        child: Row(
+            color: Colors.white70, borderRadius: BorderRadius.circular(15.r)),
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Stack(
+           Row(children: [ Stack(
               alignment: Alignment.topCenter,
               children: [
                 Image.asset(
                   AppImages.pattern,
                   width: 32.w,
                   height: 32.h,
-                  color: const Color.fromARGB(255, 151, 109, 219),
+                  color:  AppColor.blueColor,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 3.0),
                   child: Text(
                     indexEntity.id.toString().toArabic,
-                    style: const TextStyle(color: AppColor.blueColor,fontSize: 20),
+                    style:  const TextStyle(color: AppColor.blueColor,fontSize: 20),
                   ),
                 )
               ],
@@ -60,13 +63,32 @@ class QuranSoraComponent extends StatelessWidget {
             SizedBox(
               width: 22.w,
             ),
-            Text(
-              indexEntity.name,
-              style: TextStyle(
-                  color: AppColor.blueColor,
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w700),
-            ),
+            Column(crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 2,),
+                Text(
+                  indexEntity.name,
+                  style: TextStyle(
+                      color: AppColor.blueColor,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w700),
+                ),
+
+                SizedBox(height: 4.h,),
+                Text("رقمها ${QuranCubit.get(context)
+                          .getSurahNumberFromPage(indexEntity.startPage - 1).toString().toArabic} -اياتها ${QuranCubit.get(context).getSurahVersesNumber(indexEntity.name).toString().toArabic} -${indexEntity.makkia==1?"مكية":"مدنية"}",style: const TextStyle(color: AppColor.blueColor,fontWeight: FontWeight.w600,fontSize: 13.5,wordSpacing: 0.2),),
+             const   SizedBox(width: 20,)
+
+              ],
+            )],),
+
+            Container(
+              width: 33,
+              height: 32,
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(right: 20),
+           decoration: const BoxDecoration(color:  AppColor.blueColor,shape: BoxShape.circle),
+              child: Text(indexEntity.startPage.toString().toArabic,style:  TextStyle(fontSize: 15,color: AppColor.white),))
           ],
         ),
       ),

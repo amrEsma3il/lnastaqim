@@ -1,34 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../data/models/quran_model.dart';
+import '../../../data/repository/quran_repository.dart';
 import '../quran_cubit.dart';
-import 'index_state.dart';
 
-class IndexCubit extends Cubit<IndexState> {
-  IndexCubit() : super(SurahIndexState());
+class IndexCubit extends Cubit<int> {
+  IndexCubit() : super(0);
 
   static IndexCubit get(BuildContext context) =>
       BlocProvider.of<IndexCubit>(context);
 
-  goToSoraDetailsEsvent(BuildContext context, int page) {
+  moveToPageEvent(BuildContext context, int page) {
     QuranCubit.get(context).pageController.jumpToPage(604 - page);
   }
 
-  static const List<String> moshafIndexTypes = [  "السور","الاجزاء","الاحزاب"
+  static const List<String> moshafIndexTypes = [  "السور","الاجزاء"
 
   ];
 
-  changeSelector(int index) {
-    switch (index) {
-      case 0:
-        emit(SurahIndexState());
-        break;
-      case 1:
-        emit(ChapterIndexState());
-        break;
+  toggleIndex(int type){
+emit(type);
 
-      case 2:
-        emit(HizbIndexState());
-        break;
-    }
   }
+
+    static List<SurahModel> getQuranSurah() =>
+    QuranRepository.getQuranSurah();
+
+
+        static List<JuzModel> getQuranJuz() =>
+     QuranRepository.getQuranJuz();
+
 }

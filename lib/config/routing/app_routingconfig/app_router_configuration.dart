@@ -51,12 +51,12 @@ List<GetPage<dynamic>>? routes = [
       name: AppRouteName.moshaf,
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),//moshafIndex
-      GetPage(
-      curve: Curves.easeInOut,
-      page: () => const MoshafIndex(),
-      name: AppRouteName.moshafIndex,
-      transition: Transition.fadeIn,
-      transitionDuration: const Duration(milliseconds: 500)),//
+      // GetPage(
+      // curve: Curves.easeInOut,
+      // page: () => const MoshafIndex(),
+      // name: AppRouteName.moshafIndex,
+      // transition: Transition.fadeIn,
+      // transitionDuration: const Duration(milliseconds: 500)),//
   GetPage(
       curve: Curves.easeInOut,
       page: () => const BookmarksView(),

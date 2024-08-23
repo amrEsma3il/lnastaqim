@@ -10,7 +10,6 @@ import 'package:lnastaqim/core/constants/colors.dart';
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
 import '../../../../core/constants/images.dart';
 import '../../../../core/utilits/extensions/arabic_numbers.dart';
-
 import '../../../../core/utilits/functions/check.dart';
 import '../../../../core/utilits/functions/toast_message.dart';
 import '../../../quran_sound/logic/audio_cubit/audio_cubit.dart';
@@ -57,19 +56,20 @@ class ScreenOverlayCubit extends Cubit<int> {
           "text": "الفهرس",
           "onTap": () {
             emit(0);
-          Get.toNamed(AppRouteName.moshafIndex);
+            // Get.toNamed(AppRouteName.moshafIndex);
 
             // implement dialog here
+            showMoshafIndex(context);
           }
         },
 
         ///
-        {
-          "text": "مساعدة",
-          "onTap": () {
-            // implement dialog here
-          }
-        },
+        // {
+        //   "text": "مساعدة",
+        //   "onTap": () {
+        //     // implement dialog here
+        //   }
+        // },
         // {
         //   "text": "من نحن",
         //   "onTap": () {
@@ -252,46 +252,98 @@ class ScreenOverlayCubit extends Cubit<int> {
     );
   }
 
-  // showMoshafIndex(BuildContext context) {
-  //   showBottomSheet(
-  //     context: context,
-  //     builder: (context) {
-  //       return
-  //        SizedBox(
-  //         // height: 450,
-  //         child: Padding(
-  //           padding: EdgeInsets.symmetric(horizontal: 15.w),
-  //           child: Column(
-  //             children: [
-  //               SizedBox(
-  //                 height: 20.h,
-  //               ),
-  //               Expanded(
-  //                 child: Padding(
-  //                   padding: EdgeInsets.only(bottom: 20.h),
-  //                   child: BlocBuilder<IndexCubit, IndexState>(
-  //                     builder: (context, state) {
-  //                            final List<dynamic> indexState=state is SurahIndexState?SurahIndexState.indexList: (state is ChapterIndexState ?ChapterIndexState.indexList: state is HizbIndexState  ?HizbIndexState.indexList:SurahIndexState.indexList);
-  //                       return ListView.builder(
-                     
-  //                         itemCount: indexState.length,
-  //                         itemBuilder: (context, index) =>
-  //                             QuranSoraComponent(
-                               
-  //                             indexEntity: indexState[index],),
-  //                       );
-  //                     },
-  //                   ),
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       );
-        
-  //     },
-  //   );
-  // }
+  showMoshafIndex(BuildContext context) {
+    showBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          decoration:
+              BoxDecoration(color: AppColor.blueColor.withOpacity(0.98)),
+          height: Get.height / 7 * 6,
+          width: Get.width,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 21.h,
+                ),
+                Row(mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+
+                    IconButton(onPressed:() {
+                      Get.back();
+                    } , icon: const Icon(Icons.close,size: 30,color: Colors.white70,)),
+                    Expanded(
+                      child: Center(
+                        child: Padding(
+                          padding:  EdgeInsets.only(left: 36.w),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(
+                                IndexCubit.moshafIndexTypes.length,
+                                (index) => GestureDetector(onTap: () {
+                                  int toggle=index==0?0:1;
+                                  IndexCubit.get(context).toggleIndex(toggle);
+                                },
+                                  child: BlocBuilder<IndexCubit, int>(
+                                        builder: (context, indexState) {
+                                          return Container(
+                                            alignment: Alignment.center,
+                                            width: 88.w,
+                                            height: 40.h,
+                                            decoration: BoxDecoration(
+                                              color: indexState==index?Colors.white70:null,
+                                                border: Border.all(
+                                                    width: 1, color: Colors.white70),
+                                                borderRadius: index == 0
+                                                    ? const BorderRadius.only(
+                                                        topRight: Radius.circular(25),
+                                                        bottomRight: Radius.circular(25))
+                                                    : const BorderRadius.only(
+                                                        bottomLeft: Radius.circular(25),
+                                                        topLeft: Radius.circular(25))),
+                                            child: Text(
+                                              IndexCubit.moshafIndexTypes[index],
+                                              style:  TextStyle(fontWeight: FontWeight.w500,
+                                                  color:indexState==index?AppColor.blueColor:Colors.white, fontSize: 20.r),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                )),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20,),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 20.h),
+                    child: BlocBuilder<IndexCubit, int>(
+                      builder: (context, state) {
+                           
+                        return ListView.builder(
+
+                          itemCount: IndexCubit.getQuranSurah().length,
+                          itemBuilder: (context, index) =>
+                              QuranSoraComponent(
+
+                              indexEntity: IndexCubit.getQuranSurah()[index],),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   void onChangedDebounced(String value, BuildContext context) {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
