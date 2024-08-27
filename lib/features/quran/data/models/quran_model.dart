@@ -149,7 +149,7 @@
 
 
 
-class VerseModel {
+class HizpModel {
   final int surahNumber;
   final String surahName;
   final String surahEnglishName;
@@ -168,7 +168,7 @@ class VerseModel {
   final bool sajda;
   final String codeV2;
 
-  VerseModel({
+  HizpModel({
     required this.surahNumber,
     required this.surahName,
     required this.surahEnglishName,
@@ -188,8 +188,8 @@ class VerseModel {
     required this.codeV2,
   });
 
-  factory VerseModel.fromJson(Map<String, dynamic> json) {
-    return VerseModel(
+  factory HizpModel.fromJson(Map<String, dynamic> json) {
+    return HizpModel(
       surahNumber: json['surah_number'],
       surahName: json['surah_name'],
       surahEnglishName: json['surah_english_name'],
@@ -235,7 +235,7 @@ class VerseModel {
 
 class JuzModel {
   final int juz;
-  final List<VerseModel> verses;
+  final List<HizpModel> verses;
 
   JuzModel({
     required this.juz,
@@ -245,7 +245,7 @@ class JuzModel {
   factory JuzModel.fromJson(Map<String, dynamic> json) {
     return JuzModel(
       juz: json['juz'],
-      verses: (json['verses'] as List).map((e) => VerseModel.fromJson(e)).toList(),
+      verses: (json['verses'] as List).map((e) => HizpModel.fromJson(e)).toList(),
     );
   }
 

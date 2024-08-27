@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../../core/utilits/extensions/arabic_numbers.dart';
-import '../../../../core/constants/colors.dart';
-import '../../../../core/constants/images.dart';
-import '../../bussniess_logic/quran/index_cubit/index_cubit.dart';
-import '../../bussniess_logic/quran/quran_cubit.dart';
-import '../../data/models/quran_model.dart';
+import '../../../../../core/utilits/extensions/arabic_numbers.dart';
+import '../../../../../core/constants/colors.dart';
+import '../../../../../core/constants/images.dart';
+import '../../../bussniess_logic/quran/index_cubit/index_cubit.dart';
+import '../../../bussniess_logic/quran/quran_cubit.dart';
+import '../../../data/models/quran_model.dart';
 
 
 class QuranSoraComponent extends StatelessWidget {
@@ -39,7 +38,7 @@ class QuranSoraComponent extends StatelessWidget {
         width: Get.width-100.w,
         height: 75.h,
         decoration: BoxDecoration(
-            color: Colors.white70, borderRadius: BorderRadius.circular(15.r)),
+            color: Colors.white, borderRadius: BorderRadius.circular(15.r)),
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
            Row(children: [ Stack(
@@ -87,7 +86,7 @@ class QuranSoraComponent extends StatelessWidget {
               height: 32,
               alignment: Alignment.center,
               margin: const EdgeInsets.only(right: 20),
-           decoration: const BoxDecoration(color:  AppColor.blueColor,shape: BoxShape.circle),
+           decoration:  BoxDecoration(color:  AppColor.blueColor.withOpacity(0.85),shape: BoxShape.circle),
               child: Text(indexEntity.startPage.toString().toArabic,style:  TextStyle(fontSize: 15,color: AppColor.white),))
           ],
         ),

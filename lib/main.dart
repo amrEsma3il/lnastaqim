@@ -13,6 +13,7 @@ import 'core/constants/keys.dart';
 import 'core/utilits/controller/search_or_not/search_visibility.dart';
 import 'core/utilits/services/local_notification_service.dart';
 import 'core/utilits/services/work_manager_service.dart';
+import 'features/note/bussniess_logic/overlay_note_control/overlay_note_control_cubit.dart';
 import 'features/paryer_times/bussniess_logic/date_cubit.dart';
 import 'features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
 
@@ -124,6 +125,9 @@ class Lnastaqim extends StatelessWidget {
 
             BlocProvider(
               create: (context) => PrayersTimesCubit(),
+            ),
+             BlocProvider(
+              create: (context) => OverlayNoteControlCubit(),
             ),
 
 

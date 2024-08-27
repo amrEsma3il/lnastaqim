@@ -15,4 +15,11 @@ class NoteCubit extends Cubit<NoteState> {
     notes = notesBox.values.toList();
     emit(NoteSuccessState());
   }
+
+  static updateNote(NoteModel note, String newNote) {
+  note.note = newNote;
+  // Save the updated note
+  note.save();
+}
+
 }

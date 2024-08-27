@@ -6,7 +6,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 1,
-        "surah_name": "سُورَةُ ٱلْفَاتِحَةِ",
+        "surah_name": "ٱلْفَاتِحَةِ",
         "surah_english_name": "Al-Faatiha",
         "surah_english_translation": "The Opening",
         "revelation_type": "Meccan",
@@ -25,7 +25,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -44,7 +44,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -63,7 +63,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -82,7 +82,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -101,7 +101,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -120,7 +120,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -139,7 +139,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -163,7 +163,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -182,7 +182,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -201,7 +201,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -220,7 +220,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -239,7 +239,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -258,7 +258,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -277,7 +277,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -296,7 +296,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -320,7 +320,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -339,7 +339,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -358,7 +358,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -377,7 +377,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 2,
-        "surah_name": "سُورَةُ البَقَرَةِ",
+        "surah_name": "البَقَرَةِ",
         "surah_english_name": "Al-Baqara",
         "surah_english_translation": "The Cow",
         "revelation_type": "Medinan",
@@ -396,7 +396,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 3,
-        "surah_name": "سُورَةُ آلِ عِمۡرَانَ",
+        "surah_name": "آلِ عِمۡرَانَ",
         "surah_english_name": "Aal-i-Imraan",
         "surah_english_translation": "The Family of Imraan",
         "revelation_type": "Medinan",
@@ -415,7 +415,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 3,
-        "surah_name": "سُورَةُ آلِ عِمۡرَانَ",
+        "surah_name": "آلِ عِمۡرَانَ",
         "surah_english_name": "Aal-i-Imraan",
         "surah_english_translation": "The Family of Imraan",
         "revelation_type": "Medinan",
@@ -434,7 +434,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 3,
-        "surah_name": "سُورَةُ آلِ عِمۡرَانَ",
+        "surah_name": "آلِ عِمۡرَانَ",
         "surah_english_name": "Aal-i-Imraan",
         "surah_english_translation": "The Family of Imraan",
         "revelation_type": "Medinan",
@@ -453,7 +453,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 3,
-        "surah_name": "سُورَةُ آلِ عِمۡرَانَ",
+        "surah_name": "آلِ عِمۡرَانَ",
         "surah_english_name": "Aal-i-Imraan",
         "surah_english_translation": "The Family of Imraan",
         "revelation_type": "Medinan",
@@ -477,7 +477,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 3,
-        "surah_name": "سُورَةُ آلِ عِمۡرَانَ",
+        "surah_name": "آلِ عِمۡرَانَ",
         "surah_english_name": "Aal-i-Imraan",
         "surah_english_translation": "The Family of Imraan",
         "revelation_type": "Medinan",
@@ -496,7 +496,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 3,
-        "surah_name": "سُورَةُ آلِ عِمۡرَانَ",
+        "surah_name": "آلِ عِمۡرَانَ",
         "surah_english_name": "Aal-i-Imraan",
         "surah_english_translation": "The Family of Imraan",
         "revelation_type": "Medinan",
@@ -515,7 +515,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 3,
-        "surah_name": "سُورَةُ آلِ عِمۡرَانَ",
+        "surah_name": "آلِ عِمۡرَانَ",
         "surah_english_name": "Aal-i-Imraan",
         "surah_english_translation": "The Family of Imraan",
         "revelation_type": "Medinan",
@@ -534,7 +534,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 3,
-        "surah_name": "سُورَةُ آلِ عِمۡرَانَ",
+        "surah_name": "آلِ عِمۡرَانَ",
         "surah_english_name": "Aal-i-Imraan",
         "surah_english_translation": "The Family of Imraan",
         "revelation_type": "Medinan",
@@ -553,7 +553,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 3,
-        "surah_name": "سُورَةُ آلِ عِمۡرَانَ",
+        "surah_name": "آلِ عِمۡرَانَ",
         "surah_english_name": "Aal-i-Imraan",
         "surah_english_translation": "The Family of Imraan",
         "revelation_type": "Medinan",
@@ -572,7 +572,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 3,
-        "surah_name": "سُورَةُ آلِ عِمۡرَانَ",
+        "surah_name": "آلِ عِمۡرَانَ",
         "surah_english_name": "Aal-i-Imraan",
         "surah_english_translation": "The Family of Imraan",
         "revelation_type": "Medinan",
@@ -591,7 +591,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 4,
-        "surah_name": "سُورَةُ النِّسَاءِ",
+        "surah_name": "النِّسَاءِ",
         "surah_english_name": "An-Nisaa",
         "surah_english_translation": "The Women",
         "revelation_type": "Medinan",
@@ -610,7 +610,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 4,
-        "surah_name": "سُورَةُ النِّسَاءِ",
+        "surah_name": "النِّسَاءِ",
         "surah_english_name": "An-Nisaa",
         "surah_english_translation": "The Women",
         "revelation_type": "Medinan",
@@ -634,7 +634,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 4,
-        "surah_name": "سُورَةُ النِّسَاءِ",
+        "surah_name": "النِّسَاءِ",
         "surah_english_name": "An-Nisaa",
         "surah_english_translation": "The Women",
         "revelation_type": "Medinan",
@@ -653,7 +653,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 4,
-        "surah_name": "سُورَةُ النِّسَاءِ",
+        "surah_name": "النِّسَاءِ",
         "surah_english_name": "An-Nisaa",
         "surah_english_translation": "The Women",
         "revelation_type": "Medinan",
@@ -672,7 +672,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 4,
-        "surah_name": "سُورَةُ النِّسَاءِ",
+        "surah_name": "النِّسَاءِ",
         "surah_english_name": "An-Nisaa",
         "surah_english_translation": "The Women",
         "revelation_type": "Medinan",
@@ -691,7 +691,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 4,
-        "surah_name": "سُورَةُ النِّسَاءِ",
+        "surah_name": "النِّسَاءِ",
         "surah_english_name": "An-Nisaa",
         "surah_english_translation": "The Women",
         "revelation_type": "Medinan",
@@ -710,7 +710,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 4,
-        "surah_name": "سُورَةُ النِّسَاءِ",
+        "surah_name": "النِّسَاءِ",
         "surah_english_name": "An-Nisaa",
         "surah_english_translation": "The Women",
         "revelation_type": "Medinan",
@@ -729,7 +729,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 4,
-        "surah_name": "سُورَةُ النِّسَاءِ",
+        "surah_name": "النِّسَاءِ",
         "surah_english_name": "An-Nisaa",
         "surah_english_translation": "The Women",
         "revelation_type": "Medinan",
@@ -748,7 +748,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 4,
-        "surah_name": "سُورَةُ النِّسَاءِ",
+        "surah_name": "النِّسَاءِ",
         "surah_english_name": "An-Nisaa",
         "surah_english_translation": "The Women",
         "revelation_type": "Medinan",
@@ -767,7 +767,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 4,
-        "surah_name": "سُورَةُ النِّسَاءِ",
+        "surah_name": "النِّسَاءِ",
         "surah_english_name": "An-Nisaa",
         "surah_english_translation": "The Women",
         "revelation_type": "Medinan",
@@ -791,7 +791,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 4,
-        "surah_name": "سُورَةُ النِّسَاءِ",
+        "surah_name": "النِّسَاءِ",
         "surah_english_name": "An-Nisaa",
         "surah_english_translation": "The Women",
         "revelation_type": "Medinan",
@@ -810,7 +810,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 4,
-        "surah_name": "سُورَةُ النِّسَاءِ",
+        "surah_name": "النِّسَاءِ",
         "surah_english_name": "An-Nisaa",
         "surah_english_translation": "The Women",
         "revelation_type": "Medinan",
@@ -829,7 +829,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 5,
-        "surah_name": "سُورَةُ المَائـِدَةِ",
+        "surah_name": "المَائـِدَةِ",
         "surah_english_name": "Al-Maaida",
         "surah_english_translation": "The Table",
         "revelation_type": "Medinan",
@@ -848,7 +848,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 5,
-        "surah_name": "سُورَةُ المَائـِدَةِ",
+        "surah_name": "المَائـِدَةِ",
         "surah_english_name": "Al-Maaida",
         "surah_english_translation": "The Table",
         "revelation_type": "Medinan",
@@ -867,7 +867,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 5,
-        "surah_name": "سُورَةُ المَائـِدَةِ",
+        "surah_name": "المَائـِدَةِ",
         "surah_english_name": "Al-Maaida",
         "surah_english_translation": "The Table",
         "revelation_type": "Medinan",
@@ -886,7 +886,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 5,
-        "surah_name": "سُورَةُ المَائـِدَةِ",
+        "surah_name": "المَائـِدَةِ",
         "surah_english_name": "Al-Maaida",
         "surah_english_translation": "The Table",
         "revelation_type": "Medinan",
@@ -905,7 +905,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 5,
-        "surah_name": "سُورَةُ المَائـِدَةِ",
+        "surah_name": "المَائـِدَةِ",
         "surah_english_name": "Al-Maaida",
         "surah_english_translation": "The Table",
         "revelation_type": "Medinan",
@@ -924,7 +924,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 5,
-        "surah_name": "سُورَةُ المَائـِدَةِ",
+        "surah_name": "المَائـِدَةِ",
         "surah_english_name": "Al-Maaida",
         "surah_english_translation": "The Table",
         "revelation_type": "Medinan",
@@ -948,7 +948,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 5,
-        "surah_name": "سُورَةُ المَائـِدَةِ",
+        "surah_name": "المَائـِدَةِ",
         "surah_english_name": "Al-Maaida",
         "surah_english_translation": "The Table",
         "revelation_type": "Medinan",
@@ -967,7 +967,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 5,
-        "surah_name": "سُورَةُ المَائـِدَةِ",
+        "surah_name": "المَائـِدَةِ",
         "surah_english_name": "Al-Maaida",
         "surah_english_translation": "The Table",
         "revelation_type": "Medinan",
@@ -986,7 +986,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 5,
-        "surah_name": "سُورَةُ المَائـِدَةِ",
+        "surah_name": "المَائـِدَةِ",
         "surah_english_name": "Al-Maaida",
         "surah_english_translation": "The Table",
         "revelation_type": "Medinan",
@@ -1005,7 +1005,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 6,
-        "surah_name": "سُورَةُ الأَنۡعَامِ",
+        "surah_name": "الأَنۡعَامِ",
         "surah_english_name": "Al-An'aam",
         "surah_english_translation": "The Cattle",
         "revelation_type": "Meccan",
@@ -1024,7 +1024,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 6,
-        "surah_name": "سُورَةُ الأَنۡعَامِ",
+        "surah_name": "الأَنۡعَامِ",
         "surah_english_name": "Al-An'aam",
         "surah_english_translation": "The Cattle",
         "revelation_type": "Meccan",
@@ -1043,7 +1043,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 6,
-        "surah_name": "سُورَةُ الأَنۡعَامِ",
+        "surah_name": "الأَنۡعَامِ",
         "surah_english_name": "Al-An'aam",
         "surah_english_translation": "The Cattle",
         "revelation_type": "Meccan",
@@ -1062,7 +1062,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 6,
-        "surah_name": "سُورَةُ الأَنۡعَامِ",
+        "surah_name": "الأَنۡعَامِ",
         "surah_english_name": "Al-An'aam",
         "surah_english_translation": "The Cattle",
         "revelation_type": "Meccan",
@@ -1081,7 +1081,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 6,
-        "surah_name": "سُورَةُ الأَنۡعَامِ",
+        "surah_name": "الأَنۡعَامِ",
         "surah_english_name": "Al-An'aam",
         "surah_english_translation": "The Cattle",
         "revelation_type": "Meccan",
@@ -1105,7 +1105,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 6,
-        "surah_name": "سُورَةُ الأَنۡعَامِ",
+        "surah_name": "الأَنۡعَامِ",
         "surah_english_name": "Al-An'aam",
         "surah_english_translation": "The Cattle",
         "revelation_type": "Meccan",
@@ -1124,7 +1124,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 6,
-        "surah_name": "سُورَةُ الأَنۡعَامِ",
+        "surah_name": "الأَنۡعَامِ",
         "surah_english_name": "Al-An'aam",
         "surah_english_translation": "The Cattle",
         "revelation_type": "Meccan",
@@ -1143,7 +1143,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 6,
-        "surah_name": "سُورَةُ الأَنۡعَامِ",
+        "surah_name": "الأَنۡعَامِ",
         "surah_english_name": "Al-An'aam",
         "surah_english_translation": "The Cattle",
         "revelation_type": "Meccan",
@@ -1162,7 +1162,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 6,
-        "surah_name": "سُورَةُ الأَنۡعَامِ",
+        "surah_name": "الأَنۡعَامِ",
         "surah_english_name": "Al-An'aam",
         "surah_english_translation": "The Cattle",
         "revelation_type": "Meccan",
@@ -1181,7 +1181,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 7,
-        "surah_name": "سُورَةُ الأَعۡرَافِ",
+        "surah_name": "الأَعۡرَافِ",
         "surah_english_name": "Al-A'raaf",
         "surah_english_translation": "The Heights",
         "revelation_type": "Meccan",
@@ -1200,7 +1200,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 7,
-        "surah_name": "سُورَةُ الأَعۡرَافِ",
+        "surah_name": "الأَعۡرَافِ",
         "surah_english_name": "Al-A'raaf",
         "surah_english_translation": "The Heights",
         "revelation_type": "Meccan",
@@ -1219,7 +1219,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 7,
-        "surah_name": "سُورَةُ الأَعۡرَافِ",
+        "surah_name": "الأَعۡرَافِ",
         "surah_english_name": "Al-A'raaf",
         "surah_english_translation": "The Heights",
         "revelation_type": "Meccan",
@@ -1238,7 +1238,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 7,
-        "surah_name": "سُورَةُ الأَعۡرَافِ",
+        "surah_name": "الأَعۡرَافِ",
         "surah_english_name": "Al-A'raaf",
         "surah_english_translation": "The Heights",
         "revelation_type": "Meccan",
@@ -1262,7 +1262,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 7,
-        "surah_name": "سُورَةُ الأَعۡرَافِ",
+        "surah_name": "الأَعۡرَافِ",
         "surah_english_name": "Al-A'raaf",
         "surah_english_translation": "The Heights",
         "revelation_type": "Meccan",
@@ -1281,7 +1281,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 7,
-        "surah_name": "سُورَةُ الأَعۡرَافِ",
+        "surah_name": "الأَعۡرَافِ",
         "surah_english_name": "Al-A'raaf",
         "surah_english_translation": "The Heights",
         "revelation_type": "Meccan",
@@ -1300,7 +1300,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 7,
-        "surah_name": "سُورَةُ الأَعۡرَافِ",
+        "surah_name": "الأَعۡرَافِ",
         "surah_english_name": "Al-A'raaf",
         "surah_english_translation": "The Heights",
         "revelation_type": "Meccan",
@@ -1319,7 +1319,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 7,
-        "surah_name": "سُورَةُ الأَعۡرَافِ",
+        "surah_name": "الأَعۡرَافِ",
         "surah_english_name": "Al-A'raaf",
         "surah_english_translation": "The Heights",
         "revelation_type": "Meccan",
@@ -1338,7 +1338,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 7,
-        "surah_name": "سُورَةُ الأَعۡرَافِ",
+        "surah_name": "الأَعۡرَافِ",
         "surah_english_name": "Al-A'raaf",
         "surah_english_translation": "The Heights",
         "revelation_type": "Meccan",
@@ -1357,7 +1357,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 7,
-        "surah_name": "سُورَةُ الأَعۡرَافِ",
+        "surah_name": "الأَعۡرَافِ",
         "surah_english_name": "Al-A'raaf",
         "surah_english_translation": "The Heights",
         "revelation_type": "Meccan",
@@ -1376,7 +1376,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 8,
-        "surah_name": "سُورَةُ الأَنفَالِ",
+        "surah_name": "الأَنفَالِ",
         "surah_english_name": "Al-Anfaal",
         "surah_english_translation": "The Spoils of War",
         "revelation_type": "Medinan",
@@ -1395,7 +1395,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 8,
-        "surah_name": "سُورَةُ الأَنفَالِ",
+        "surah_name": "الأَنفَالِ",
         "surah_english_name": "Al-Anfaal",
         "surah_english_translation": "The Spoils of War",
         "revelation_type": "Medinan",
@@ -1419,7 +1419,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 8,
-        "surah_name": "سُورَةُ الأَنفَالِ",
+        "surah_name": "الأَنفَالِ",
         "surah_english_name": "Al-Anfaal",
         "surah_english_translation": "The Spoils of War",
         "revelation_type": "Medinan",
@@ -1438,7 +1438,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 8,
-        "surah_name": "سُورَةُ الأَنفَالِ",
+        "surah_name": "الأَنفَالِ",
         "surah_english_name": "Al-Anfaal",
         "surah_english_translation": "The Spoils of War",
         "revelation_type": "Medinan",
@@ -1457,7 +1457,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 9,
-        "surah_name": "سُورَةُ التَّوۡبَةِ",
+        "surah_name": "التَّوۡبَةِ",
         "surah_english_name": "At-Tawba",
         "surah_english_translation": "The Repentance",
         "revelation_type": "Medinan",
@@ -1476,7 +1476,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 9,
-        "surah_name": "سُورَةُ التَّوۡبَةِ",
+        "surah_name": "التَّوۡبَةِ",
         "surah_english_name": "At-Tawba",
         "surah_english_translation": "The Repentance",
         "revelation_type": "Medinan",
@@ -1495,7 +1495,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 9,
-        "surah_name": "سُورَةُ التَّوۡبَةِ",
+        "surah_name": "التَّوۡبَةِ",
         "surah_english_name": "At-Tawba",
         "surah_english_translation": "The Repentance",
         "revelation_type": "Medinan",
@@ -1514,7 +1514,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 9,
-        "surah_name": "سُورَةُ التَّوۡبَةِ",
+        "surah_name": "التَّوۡبَةِ",
         "surah_english_name": "At-Tawba",
         "surah_english_translation": "The Repentance",
         "revelation_type": "Medinan",
@@ -1533,7 +1533,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 9,
-        "surah_name": "سُورَةُ التَّوۡبَةِ",
+        "surah_name": "التَّوۡبَةِ",
         "surah_english_name": "At-Tawba",
         "surah_english_translation": "The Repentance",
         "revelation_type": "Medinan",
@@ -1552,7 +1552,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 9,
-        "surah_name": "سُورَةُ التَّوۡبَةِ",
+        "surah_name": "التَّوۡبَةِ",
         "surah_english_name": "At-Tawba",
         "surah_english_translation": "The Repentance",
         "revelation_type": "Medinan",
@@ -1576,7 +1576,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 9,
-        "surah_name": "سُورَةُ التَّوۡبَةِ",
+        "surah_name": "التَّوۡبَةِ",
         "surah_english_name": "At-Tawba",
         "surah_english_translation": "The Repentance",
         "revelation_type": "Medinan",
@@ -1595,7 +1595,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 9,
-        "surah_name": "سُورَةُ التَّوۡبَةِ",
+        "surah_name": "التَّوۡبَةِ",
         "surah_english_name": "At-Tawba",
         "surah_english_translation": "The Repentance",
         "revelation_type": "Medinan",
@@ -1614,7 +1614,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 9,
-        "surah_name": "سُورَةُ التَّوۡبَةِ",
+        "surah_name": "التَّوۡبَةِ",
         "surah_english_name": "At-Tawba",
         "surah_english_translation": "The Repentance",
         "revelation_type": "Medinan",
@@ -1633,7 +1633,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 10,
-        "surah_name": "سُورَةُ يُونُسَ",
+        "surah_name": "يُونُسَ",
         "surah_english_name": "Yunus",
         "surah_english_translation": "Jonas",
         "revelation_type": "Meccan",
@@ -1652,7 +1652,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 10,
-        "surah_name": "سُورَةُ يُونُسَ",
+        "surah_name": "يُونُسَ",
         "surah_english_name": "Yunus",
         "surah_english_translation": "Jonas",
         "revelation_type": "Meccan",
@@ -1671,7 +1671,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 10,
-        "surah_name": "سُورَةُ يُونُسَ",
+        "surah_name": "يُونُسَ",
         "surah_english_name": "Yunus",
         "surah_english_translation": "Jonas",
         "revelation_type": "Meccan",
@@ -1690,7 +1690,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 10,
-        "surah_name": "سُورَةُ يُونُسَ",
+        "surah_name": "يُونُسَ",
         "surah_english_name": "Yunus",
         "surah_english_translation": "Jonas",
         "revelation_type": "Meccan",
@@ -1709,7 +1709,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 10,
-        "surah_name": "سُورَةُ يُونُسَ",
+        "surah_name": "يُونُسَ",
         "surah_english_name": "Yunus",
         "surah_english_translation": "Jonas",
         "revelation_type": "Meccan",
@@ -1733,7 +1733,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 11,
-        "surah_name": "سُورَةُ هُودٍ",
+        "surah_name": "هُودٍ",
         "surah_english_name": "Hud",
         "surah_english_translation": "Hud",
         "revelation_type": "Meccan",
@@ -1752,7 +1752,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 11,
-        "surah_name": "سُورَةُ هُودٍ",
+        "surah_name": "هُودٍ",
         "surah_english_name": "Hud",
         "surah_english_translation": "Hud",
         "revelation_type": "Meccan",
@@ -1771,7 +1771,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 11,
-        "surah_name": "سُورَةُ هُودٍ",
+        "surah_name": "هُودٍ",
         "surah_english_name": "Hud",
         "surah_english_translation": "Hud",
         "revelation_type": "Meccan",
@@ -1790,7 +1790,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 11,
-        "surah_name": "سُورَةُ هُودٍ",
+        "surah_name": "هُودٍ",
         "surah_english_name": "Hud",
         "surah_english_translation": "Hud",
         "revelation_type": "Meccan",
@@ -1809,7 +1809,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 11,
-        "surah_name": "سُورَةُ هُودٍ",
+        "surah_name": "هُودٍ",
         "surah_english_name": "Hud",
         "surah_english_translation": "Hud",
         "revelation_type": "Meccan",
@@ -1828,7 +1828,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 11,
-        "surah_name": "سُورَةُ هُودٍ",
+        "surah_name": "هُودٍ",
         "surah_english_name": "Hud",
         "surah_english_translation": "Hud",
         "revelation_type": "Meccan",
@@ -1847,7 +1847,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 12,
-        "surah_name": "سُورَةُ يُوسُفَ",
+        "surah_name": "يُوسُفَ",
         "surah_english_name": "Yusuf",
         "surah_english_translation": "Joseph",
         "revelation_type": "Meccan",
@@ -1866,7 +1866,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 12,
-        "surah_name": "سُورَةُ يُوسُفَ",
+        "surah_name": "يُوسُفَ",
         "surah_english_name": "Yusuf",
         "surah_english_translation": "Joseph",
         "revelation_type": "Meccan",
@@ -1890,7 +1890,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 12,
-        "surah_name": "سُورَةُ يُوسُفَ",
+        "surah_name": "يُوسُفَ",
         "surah_english_name": "Yusuf",
         "surah_english_translation": "Joseph",
         "revelation_type": "Meccan",
@@ -1909,7 +1909,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 12,
-        "surah_name": "سُورَةُ يُوسُفَ",
+        "surah_name": "يُوسُفَ",
         "surah_english_name": "Yusuf",
         "surah_english_translation": "Joseph",
         "revelation_type": "Meccan",
@@ -1928,7 +1928,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 12,
-        "surah_name": "سُورَةُ يُوسُفَ",
+        "surah_name": "يُوسُفَ",
         "surah_english_name": "Yusuf",
         "surah_english_translation": "Joseph",
         "revelation_type": "Meccan",
@@ -1947,7 +1947,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 13,
-        "surah_name": "سُورَةُ الرَّعۡدِ",
+        "surah_name": "الرَّعۡدِ",
         "surah_english_name": "Ar-Ra'd",
         "surah_english_translation": "The Thunder",
         "revelation_type": "Medinan",
@@ -1966,7 +1966,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 13,
-        "surah_name": "سُورَةُ الرَّعۡدِ",
+        "surah_name": "الرَّعۡدِ",
         "surah_english_name": "Ar-Ra'd",
         "surah_english_translation": "The Thunder",
         "revelation_type": "Medinan",
@@ -1985,7 +1985,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 13,
-        "surah_name": "سُورَةُ الرَّعۡدِ",
+        "surah_name": "الرَّعۡدِ",
         "surah_english_name": "Ar-Ra'd",
         "surah_english_translation": "The Thunder",
         "revelation_type": "Medinan",
@@ -2004,7 +2004,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 14,
-        "surah_name": "سُورَةُ إِبۡرَاهِيمَ",
+        "surah_name": "إِبۡرَاهِيمَ",
         "surah_english_name": "Ibrahim",
         "surah_english_translation": "Abraham",
         "revelation_type": "Meccan",
@@ -2023,7 +2023,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 14,
-        "surah_name": "سُورَةُ إِبۡرَاهِيمَ",
+        "surah_name": "إِبۡرَاهِيمَ",
         "surah_english_name": "Ibrahim",
         "surah_english_translation": "Abraham",
         "revelation_type": "Meccan",
@@ -2047,7 +2047,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 15,
-        "surah_name": "سُورَةُ الحِجۡرِ",
+        "surah_name": "الحِجۡرِ",
         "surah_english_name": "Al-Hijr",
         "surah_english_translation": "The Rock",
         "revelation_type": "Meccan",
@@ -2066,7 +2066,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 15,
-        "surah_name": "سُورَةُ الحِجۡرِ",
+        "surah_name": "الحِجۡرِ",
         "surah_english_name": "Al-Hijr",
         "surah_english_translation": "The Rock",
         "revelation_type": "Meccan",
@@ -2085,7 +2085,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 16,
-        "surah_name": "سُورَةُ النَّحۡلِ",
+        "surah_name": "النَّحۡلِ",
         "surah_english_name": "An-Nahl",
         "surah_english_translation": "The Bee",
         "revelation_type": "Meccan",
@@ -2104,7 +2104,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 16,
-        "surah_name": "سُورَةُ النَّحۡلِ",
+        "surah_name": "النَّحۡلِ",
         "surah_english_name": "An-Nahl",
         "surah_english_translation": "The Bee",
         "revelation_type": "Meccan",
@@ -2123,7 +2123,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 16,
-        "surah_name": "سُورَةُ النَّحۡلِ",
+        "surah_name": "النَّحۡلِ",
         "surah_english_name": "An-Nahl",
         "surah_english_translation": "The Bee",
         "revelation_type": "Meccan",
@@ -2142,7 +2142,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 16,
-        "surah_name": "سُورَةُ النَّحۡلِ",
+        "surah_name": "النَّحۡلِ",
         "surah_english_name": "An-Nahl",
         "surah_english_translation": "The Bee",
         "revelation_type": "Meccan",
@@ -2161,7 +2161,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 16,
-        "surah_name": "سُورَةُ النَّحۡلِ",
+        "surah_name": "النَّحۡلِ",
         "surah_english_name": "An-Nahl",
         "surah_english_translation": "The Bee",
         "revelation_type": "Meccan",
@@ -2180,7 +2180,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 16,
-        "surah_name": "سُورَةُ النَّحۡلِ",
+        "surah_name": "النَّحۡلِ",
         "surah_english_name": "An-Nahl",
         "surah_english_translation": "The Bee",
         "revelation_type": "Meccan",
@@ -2204,7 +2204,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 17,
-        "surah_name": "سُورَةُ الإِسۡرَاءِ",
+        "surah_name": "الإِسۡرَاءِ",
         "surah_english_name": "Al-Israa",
         "surah_english_translation": "The Night Journey",
         "revelation_type": "Meccan",
@@ -2223,7 +2223,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 17,
-        "surah_name": "سُورَةُ الإِسۡرَاءِ",
+        "surah_name": "الإِسۡرَاءِ",
         "surah_english_name": "Al-Israa",
         "surah_english_translation": "The Night Journey",
         "revelation_type": "Meccan",
@@ -2242,7 +2242,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 17,
-        "surah_name": "سُورَةُ الإِسۡرَاءِ",
+        "surah_name": "الإِسۡرَاءِ",
         "surah_english_name": "Al-Israa",
         "surah_english_translation": "The Night Journey",
         "revelation_type": "Meccan",
@@ -2261,7 +2261,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 17,
-        "surah_name": "سُورَةُ الإِسۡرَاءِ",
+        "surah_name": "الإِسۡرَاءِ",
         "surah_english_name": "Al-Israa",
         "surah_english_translation": "The Night Journey",
         "revelation_type": "Meccan",
@@ -2280,7 +2280,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 17,
-        "surah_name": "سُورَةُ الإِسۡرَاءِ",
+        "surah_name": "الإِسۡرَاءِ",
         "surah_english_name": "Al-Israa",
         "surah_english_translation": "The Night Journey",
         "revelation_type": "Meccan",
@@ -2299,7 +2299,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 18,
-        "surah_name": "سُورَةُ الكَهۡفِ",
+        "surah_name": "الكَهۡفِ",
         "surah_english_name": "Al-Kahf",
         "surah_english_translation": "The Cave",
         "revelation_type": "Meccan",
@@ -2318,7 +2318,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 18,
-        "surah_name": "سُورَةُ الكَهۡفِ",
+        "surah_name": "الكَهۡفِ",
         "surah_english_name": "Al-Kahf",
         "surah_english_translation": "The Cave",
         "revelation_type": "Meccan",
@@ -2337,7 +2337,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 18,
-        "surah_name": "سُورَةُ الكَهۡفِ",
+        "surah_name": "الكَهۡفِ",
         "surah_english_name": "Al-Kahf",
         "surah_english_translation": "The Cave",
         "revelation_type": "Meccan",
@@ -2361,7 +2361,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 18,
-        "surah_name": "سُورَةُ الكَهۡفِ",
+        "surah_name": "الكَهۡفِ",
         "surah_english_name": "Al-Kahf",
         "surah_english_translation": "The Cave",
         "revelation_type": "Meccan",
@@ -2380,7 +2380,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 18,
-        "surah_name": "سُورَةُ الكَهۡفِ",
+        "surah_name": "الكَهۡفِ",
         "surah_english_name": "Al-Kahf",
         "surah_english_translation": "The Cave",
         "revelation_type": "Meccan",
@@ -2399,7 +2399,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 19,
-        "surah_name": "سُورَةُ مَرۡيَمَ",
+        "surah_name": "مَرۡيَمَ",
         "surah_english_name": "Maryam",
         "surah_english_translation": "Mary",
         "revelation_type": "Meccan",
@@ -2418,7 +2418,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 19,
-        "surah_name": "سُورَةُ مَرۡيَمَ",
+        "surah_name": "مَرۡيَمَ",
         "surah_english_name": "Maryam",
         "surah_english_translation": "Mary",
         "revelation_type": "Meccan",
@@ -2437,7 +2437,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 20,
-        "surah_name": "سُورَةُ طه",
+        "surah_name": "طه",
         "surah_english_name": "Taa-Haa",
         "surah_english_translation": "Taa-Haa",
         "revelation_type": "Meccan",
@@ -2456,7 +2456,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 20,
-        "surah_name": "سُورَةُ طه",
+        "surah_name": "طه",
         "surah_english_name": "Taa-Haa",
         "surah_english_translation": "Taa-Haa",
         "revelation_type": "Meccan",
@@ -2475,7 +2475,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 20,
-        "surah_name": "سُورَةُ طه",
+        "surah_name": "طه",
         "surah_english_name": "Taa-Haa",
         "surah_english_translation": "Taa-Haa",
         "revelation_type": "Meccan",
@@ -2494,7 +2494,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 20,
-        "surah_name": "سُورَةُ طه",
+        "surah_name": "طه",
         "surah_english_name": "Taa-Haa",
         "surah_english_translation": "Taa-Haa",
         "revelation_type": "Meccan",
@@ -2518,7 +2518,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 21,
-        "surah_name": "سُورَةُ الأَنبِيَاءِ",
+        "surah_name": "الأَنبِيَاءِ",
         "surah_english_name": "Al-Anbiyaa",
         "surah_english_translation": "The Prophets",
         "revelation_type": "Meccan",
@@ -2537,7 +2537,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 21,
-        "surah_name": "سُورَةُ الأَنبِيَاءِ",
+        "surah_name": "الأَنبِيَاءِ",
         "surah_english_name": "Al-Anbiyaa",
         "surah_english_translation": "The Prophets",
         "revelation_type": "Meccan",
@@ -2556,7 +2556,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 21,
-        "surah_name": "سُورَةُ الأَنبِيَاءِ",
+        "surah_name": "الأَنبِيَاءِ",
         "surah_english_name": "Al-Anbiyaa",
         "surah_english_translation": "The Prophets",
         "revelation_type": "Meccan",
@@ -2575,7 +2575,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 21,
-        "surah_name": "سُورَةُ الأَنبِيَاءِ",
+        "surah_name": "الأَنبِيَاءِ",
         "surah_english_name": "Al-Anbiyaa",
         "surah_english_translation": "The Prophets",
         "revelation_type": "Meccan",
@@ -2594,7 +2594,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 22,
-        "surah_name": "سُورَةُ الحَجِّ",
+        "surah_name": "الحَجِّ",
         "surah_english_name": "Al-Hajj",
         "surah_english_translation": "The Pilgrimage",
         "revelation_type": "Medinan",
@@ -2613,7 +2613,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 22,
-        "surah_name": "سُورَةُ الحَجِّ",
+        "surah_name": "الحَجِّ",
         "surah_english_name": "Al-Hajj",
         "surah_english_translation": "The Pilgrimage",
         "revelation_type": "Medinan",
@@ -2632,7 +2632,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 22,
-        "surah_name": "سُورَةُ الحَجِّ",
+        "surah_name": "الحَجِّ",
         "surah_english_name": "Al-Hajj",
         "surah_english_translation": "The Pilgrimage",
         "revelation_type": "Medinan",
@@ -2651,7 +2651,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 22,
-        "surah_name": "سُورَةُ الحَجِّ",
+        "surah_name": "الحَجِّ",
         "surah_english_name": "Al-Hajj",
         "surah_english_translation": "The Pilgrimage",
         "revelation_type": "Medinan",
@@ -2675,7 +2675,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 23,
-        "surah_name": "سُورَةُ المُؤۡمِنُونَ",
+        "surah_name": "المُؤۡمِنُونَ",
         "surah_english_name": "Al-Muminoon",
         "surah_english_translation": "The Believers",
         "revelation_type": "Meccan",
@@ -2694,7 +2694,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 23,
-        "surah_name": "سُورَةُ المُؤۡمِنُونَ",
+        "surah_name": "المُؤۡمِنُونَ",
         "surah_english_name": "Al-Muminoon",
         "surah_english_translation": "The Believers",
         "revelation_type": "Meccan",
@@ -2713,7 +2713,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 23,
-        "surah_name": "سُورَةُ المُؤۡمِنُونَ",
+        "surah_name": "المُؤۡمِنُونَ",
         "surah_english_name": "Al-Muminoon",
         "surah_english_translation": "The Believers",
         "revelation_type": "Meccan",
@@ -2732,7 +2732,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 24,
-        "surah_name": "سُورَةُ النُّورِ",
+        "surah_name": "النُّورِ",
         "surah_english_name": "An-Noor",
         "surah_english_translation": "The Light",
         "revelation_type": "Medinan",
@@ -2751,7 +2751,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 24,
-        "surah_name": "سُورَةُ النُّورِ",
+        "surah_name": "النُّورِ",
         "surah_english_name": "An-Noor",
         "surah_english_translation": "The Light",
         "revelation_type": "Medinan",
@@ -2770,7 +2770,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 24,
-        "surah_name": "سُورَةُ النُّورِ",
+        "surah_name": "النُّورِ",
         "surah_english_name": "An-Noor",
         "surah_english_translation": "The Light",
         "revelation_type": "Medinan",
@@ -2789,7 +2789,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 24,
-        "surah_name": "سُورَةُ النُّورِ",
+        "surah_name": "النُّورِ",
         "surah_english_name": "An-Noor",
         "surah_english_translation": "The Light",
         "revelation_type": "Medinan",
@@ -2808,7 +2808,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 25,
-        "surah_name": "سُورَةُ الفُرۡقَانِ",
+        "surah_name": "الفُرۡقَانِ",
         "surah_english_name": "Al-Furqaan",
         "surah_english_translation": "The Criterion",
         "revelation_type": "Meccan",
@@ -2832,7 +2832,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 25,
-        "surah_name": "سُورَةُ الفُرۡقَانِ",
+        "surah_name": "الفُرۡقَانِ",
         "surah_english_name": "Al-Furqaan",
         "surah_english_translation": "The Criterion",
         "revelation_type": "Meccan",
@@ -2851,7 +2851,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 25,
-        "surah_name": "سُورَةُ الفُرۡقَانِ",
+        "surah_name": "الفُرۡقَانِ",
         "surah_english_name": "Al-Furqaan",
         "surah_english_translation": "The Criterion",
         "revelation_type": "Meccan",
@@ -2870,7 +2870,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 26,
-        "surah_name": "سُورَةُ الشُّعَرَاءِ",
+        "surah_name": "الشُّعَرَاءِ",
         "surah_english_name": "Ash-Shu'araa",
         "surah_english_translation": "The Poets",
         "revelation_type": "Meccan",
@@ -2889,7 +2889,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 26,
-        "surah_name": "سُورَةُ الشُّعَرَاءِ",
+        "surah_name": "الشُّعَرَاءِ",
         "surah_english_name": "Ash-Shu'araa",
         "surah_english_translation": "The Poets",
         "revelation_type": "Meccan",
@@ -2908,7 +2908,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 26,
-        "surah_name": "سُورَةُ الشُّعَرَاءِ",
+        "surah_name": "الشُّعَرَاءِ",
         "surah_english_name": "Ash-Shu'araa",
         "surah_english_translation": "The Poets",
         "revelation_type": "Meccan",
@@ -2927,7 +2927,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 26,
-        "surah_name": "سُورَةُ الشُّعَرَاءِ",
+        "surah_name": "الشُّعَرَاءِ",
         "surah_english_name": "Ash-Shu'araa",
         "surah_english_translation": "The Poets",
         "revelation_type": "Meccan",
@@ -2946,7 +2946,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 27,
-        "surah_name": "سُورَةُ النَّمۡلِ",
+        "surah_name": "النَّمۡلِ",
         "surah_english_name": "An-Naml",
         "surah_english_translation": "The Ant",
         "revelation_type": "Meccan",
@@ -2965,7 +2965,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 27,
-        "surah_name": "سُورَةُ النَّمۡلِ",
+        "surah_name": "النَّمۡلِ",
         "surah_english_name": "An-Naml",
         "surah_english_translation": "The Ant",
         "revelation_type": "Meccan",
@@ -2989,7 +2989,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 27,
-        "surah_name": "سُورَةُ النَّمۡلِ",
+        "surah_name": "النَّمۡلِ",
         "surah_english_name": "An-Naml",
         "surah_english_translation": "The Ant",
         "revelation_type": "Meccan",
@@ -3008,7 +3008,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 27,
-        "surah_name": "سُورَةُ النَّمۡلِ",
+        "surah_name": "النَّمۡلِ",
         "surah_english_name": "An-Naml",
         "surah_english_translation": "The Ant",
         "revelation_type": "Meccan",
@@ -3027,7 +3027,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 28,
-        "surah_name": "سُورَةُ القَصَصِ",
+        "surah_name": "القَصَصِ",
         "surah_english_name": "Al-Qasas",
         "surah_english_translation": "The Stories",
         "revelation_type": "Meccan",
@@ -3046,7 +3046,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 28,
-        "surah_name": "سُورَةُ القَصَصِ",
+        "surah_name": "القَصَصِ",
         "surah_english_name": "Al-Qasas",
         "surah_english_translation": "The Stories",
         "revelation_type": "Meccan",
@@ -3065,7 +3065,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 28,
-        "surah_name": "سُورَةُ القَصَصِ",
+        "surah_name": "القَصَصِ",
         "surah_english_name": "Al-Qasas",
         "surah_english_translation": "The Stories",
         "revelation_type": "Meccan",
@@ -3084,7 +3084,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 28,
-        "surah_name": "سُورَةُ القَصَصِ",
+        "surah_name": "القَصَصِ",
         "surah_english_name": "Al-Qasas",
         "surah_english_translation": "The Stories",
         "revelation_type": "Meccan",
@@ -3103,7 +3103,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 29,
-        "surah_name": "سُورَةُ العَنكَبُوتِ",
+        "surah_name": "العَنكَبُوتِ",
         "surah_english_name": "Al-Ankaboot",
         "surah_english_translation": "The Spider",
         "revelation_type": "Meccan",
@@ -3122,7 +3122,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 29,
-        "surah_name": "سُورَةُ العَنكَبُوتِ",
+        "surah_name": "العَنكَبُوتِ",
         "surah_english_name": "Al-Ankaboot",
         "surah_english_translation": "The Spider",
         "revelation_type": "Meccan",
@@ -3146,7 +3146,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 29,
-        "surah_name": "سُورَةُ العَنكَبُوتِ",
+        "surah_name": "العَنكَبُوتِ",
         "surah_english_name": "Al-Ankaboot",
         "surah_english_translation": "The Spider",
         "revelation_type": "Meccan",
@@ -3165,7 +3165,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 30,
-        "surah_name": "سُورَةُ الرُّومِ",
+        "surah_name": "الرُّومِ",
         "surah_english_name": "Ar-Room",
         "surah_english_translation": "The Romans",
         "revelation_type": "Meccan",
@@ -3184,7 +3184,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 30,
-        "surah_name": "سُورَةُ الرُّومِ",
+        "surah_name": "الرُّومِ",
         "surah_english_name": "Ar-Room",
         "surah_english_translation": "The Romans",
         "revelation_type": "Meccan",
@@ -3203,7 +3203,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 30,
-        "surah_name": "سُورَةُ الرُّومِ",
+        "surah_name": "الرُّومِ",
         "surah_english_name": "Ar-Room",
         "surah_english_translation": "The Romans",
         "revelation_type": "Meccan",
@@ -3222,7 +3222,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 31,
-        "surah_name": "سُورَةُ لُقۡمَانَ",
+        "surah_name": "لُقۡمَانَ",
         "surah_english_name": "Luqman",
         "surah_english_translation": "Luqman",
         "revelation_type": "Meccan",
@@ -3241,7 +3241,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 32,
-        "surah_name": "سُورَةُ السَّجۡدَةِ",
+        "surah_name": "السَّجۡدَةِ",
         "surah_english_name": "As-Sajda",
         "surah_english_translation": "The Prostration",
         "revelation_type": "Meccan",
@@ -3260,7 +3260,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 33,
-        "surah_name": "سُورَةُ الأَحۡزَابِ",
+        "surah_name": "الأَحۡزَابِ",
         "surah_english_name": "Al-Ahzaab",
         "surah_english_translation": "The Clans",
         "revelation_type": "Medinan",
@@ -3279,7 +3279,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 33,
-        "surah_name": "سُورَةُ الأَحۡزَابِ",
+        "surah_name": "الأَحۡزَابِ",
         "surah_english_name": "Al-Ahzaab",
         "surah_english_translation": "The Clans",
         "revelation_type": "Medinan",
@@ -3303,7 +3303,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 33,
-        "surah_name": "سُورَةُ الأَحۡزَابِ",
+        "surah_name": "الأَحۡزَابِ",
         "surah_english_name": "Al-Ahzaab",
         "surah_english_translation": "The Clans",
         "revelation_type": "Medinan",
@@ -3322,7 +3322,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 33,
-        "surah_name": "سُورَةُ الأَحۡزَابِ",
+        "surah_name": "الأَحۡزَابِ",
         "surah_english_name": "Al-Ahzaab",
         "surah_english_translation": "The Clans",
         "revelation_type": "Medinan",
@@ -3341,7 +3341,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 33,
-        "surah_name": "سُورَةُ الأَحۡزَابِ",
+        "surah_name": "الأَحۡزَابِ",
         "surah_english_name": "Al-Ahzaab",
         "surah_english_translation": "The Clans",
         "revelation_type": "Medinan",
@@ -3360,7 +3360,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 34,
-        "surah_name": "سُورَةُ سَبَإٍ",
+        "surah_name": "سَبَإٍ",
         "surah_english_name": "Saba",
         "surah_english_translation": "Sheba",
         "revelation_type": "Meccan",
@@ -3379,7 +3379,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 34,
-        "surah_name": "سُورَةُ سَبَإٍ",
+        "surah_name": "سَبَإٍ",
         "surah_english_name": "Saba",
         "surah_english_translation": "Sheba",
         "revelation_type": "Meccan",
@@ -3398,7 +3398,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 34,
-        "surah_name": "سُورَةُ سَبَإٍ",
+        "surah_name": "سَبَإٍ",
         "surah_english_name": "Saba",
         "surah_english_translation": "Sheba",
         "revelation_type": "Meccan",
@@ -3417,7 +3417,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 35,
-        "surah_name": "سُورَةُ فَاطِرٍ",
+        "surah_name": "فَاطِرٍ",
         "surah_english_name": "Faatir",
         "surah_english_translation": "The Originator",
         "revelation_type": "Meccan",
@@ -3436,7 +3436,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 35,
-        "surah_name": "سُورَةُ فَاطِرٍ",
+        "surah_name": "فَاطِرٍ",
         "surah_english_name": "Faatir",
         "surah_english_translation": "The Originator",
         "revelation_type": "Meccan",
@@ -3460,7 +3460,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 36,
-        "surah_name": "سُورَةُ يسٓ",
+        "surah_name": "يسٓ",
         "surah_english_name": "Yaseen",
         "surah_english_translation": "Yaseen",
         "revelation_type": "Meccan",
@@ -3479,7 +3479,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 36,
-        "surah_name": "سُورَةُ يسٓ",
+        "surah_name": "يسٓ",
         "surah_english_name": "Yaseen",
         "surah_english_translation": "Yaseen",
         "revelation_type": "Meccan",
@@ -3498,7 +3498,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 37,
-        "surah_name": "سُورَةُ الصَّافَّاتِ",
+        "surah_name": "الصَّافَّاتِ",
         "surah_english_name": "As-Saaffaat",
         "surah_english_translation": "Those drawn up in Ranks",
         "revelation_type": "Meccan",
@@ -3517,7 +3517,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 37,
-        "surah_name": "سُورَةُ الصَّافَّاتِ",
+        "surah_name": "الصَّافَّاتِ",
         "surah_english_name": "As-Saaffaat",
         "surah_english_translation": "Those drawn up in Ranks",
         "revelation_type": "Meccan",
@@ -3536,7 +3536,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 37,
-        "surah_name": "سُورَةُ الصَّافَّاتِ",
+        "surah_name": "الصَّافَّاتِ",
         "surah_english_name": "As-Saaffaat",
         "surah_english_translation": "Those drawn up in Ranks",
         "revelation_type": "Meccan",
@@ -3555,7 +3555,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 38,
-        "surah_name": "سُورَةُ صٓ",
+        "surah_name": "صٓ",
         "surah_english_name": "Saad",
         "surah_english_translation": "The letter Saad",
         "revelation_type": "Meccan",
@@ -3574,7 +3574,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 38,
-        "surah_name": "سُورَةُ صٓ",
+        "surah_name": "صٓ",
         "surah_english_name": "Saad",
         "surah_english_translation": "The letter Saad",
         "revelation_type": "Meccan",
@@ -3593,7 +3593,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 39,
-        "surah_name": "سُورَةُ الزُّمَرِ",
+        "surah_name": "الزُّمَرِ",
         "surah_english_name": "Az-Zumar",
         "surah_english_translation": "The Groups",
         "revelation_type": "Meccan",
@@ -3617,7 +3617,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 39,
-        "surah_name": "سُورَةُ الزُّمَرِ",
+        "surah_name": "الزُّمَرِ",
         "surah_english_name": "Az-Zumar",
         "surah_english_translation": "The Groups",
         "revelation_type": "Meccan",
@@ -3636,7 +3636,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 39,
-        "surah_name": "سُورَةُ الزُّمَرِ",
+        "surah_name": "الزُّمَرِ",
         "surah_english_name": "Az-Zumar",
         "surah_english_translation": "The Groups",
         "revelation_type": "Meccan",
@@ -3655,7 +3655,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 40,
-        "surah_name": "سُورَةُ غَافِرٍ",
+        "surah_name": "غَافِرٍ",
         "surah_english_name": "Ghafir",
         "surah_english_translation": "The Forgiver",
         "revelation_type": "Meccan",
@@ -3674,7 +3674,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 40,
-        "surah_name": "سُورَةُ غَافِرٍ",
+        "surah_name": "غَافِرٍ",
         "surah_english_name": "Ghafir",
         "surah_english_translation": "The Forgiver",
         "revelation_type": "Meccan",
@@ -3693,7 +3693,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 40,
-        "surah_name": "سُورَةُ غَافِرٍ",
+        "surah_name": "غَافِرٍ",
         "surah_english_name": "Ghafir",
         "surah_english_translation": "The Forgiver",
         "revelation_type": "Meccan",
@@ -3712,7 +3712,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 40,
-        "surah_name": "سُورَةُ غَافِرٍ",
+        "surah_name": "غَافِرٍ",
         "surah_english_name": "Ghafir",
         "surah_english_translation": "The Forgiver",
         "revelation_type": "Meccan",
@@ -3731,7 +3731,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 41,
-        "surah_name": "سُورَةُ فُصِّلَتۡ",
+        "surah_name": "فُصِّلَتۡ",
         "surah_english_name": "Fussilat",
         "surah_english_translation": "Explained in detail",
         "revelation_type": "Meccan",
@@ -3750,7 +3750,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 41,
-        "surah_name": "سُورَةُ فُصِّلَتۡ",
+        "surah_name": "فُصِّلَتۡ",
         "surah_english_name": "Fussilat",
         "surah_english_translation": "Explained in detail",
         "revelation_type": "Meccan",
@@ -3774,7 +3774,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 41,
-        "surah_name": "سُورَةُ فُصِّلَتۡ",
+        "surah_name": "فُصِّلَتۡ",
         "surah_english_name": "Fussilat",
         "surah_english_translation": "Explained in detail",
         "revelation_type": "Meccan",
@@ -3793,7 +3793,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 42,
-        "surah_name": "سُورَةُ الشُّورَىٰ",
+        "surah_name": "الشُّورَىٰ",
         "surah_english_name": "Ash-Shura",
         "surah_english_translation": "Consultation",
         "revelation_type": "Meccan",
@@ -3812,7 +3812,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 42,
-        "surah_name": "سُورَةُ الشُّورَىٰ",
+        "surah_name": "الشُّورَىٰ",
         "surah_english_name": "Ash-Shura",
         "surah_english_translation": "Consultation",
         "revelation_type": "Meccan",
@@ -3831,7 +3831,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 42,
-        "surah_name": "سُورَةُ الشُّورَىٰ",
+        "surah_name": "الشُّورَىٰ",
         "surah_english_name": "Ash-Shura",
         "surah_english_translation": "Consultation",
         "revelation_type": "Meccan",
@@ -3850,7 +3850,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 43,
-        "surah_name": "سُورَةُ الزُّخۡرُفِ",
+        "surah_name": "الزُّخۡرُفِ",
         "surah_english_name": "Az-Zukhruf",
         "surah_english_translation": "Ornaments of gold",
         "revelation_type": "Meccan",
@@ -3869,7 +3869,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 43,
-        "surah_name": "سُورَةُ الزُّخۡرُفِ",
+        "surah_name": "الزُّخۡرُفِ",
         "surah_english_name": "Az-Zukhruf",
         "surah_english_translation": "Ornaments of gold",
         "revelation_type": "Meccan",
@@ -3888,7 +3888,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 44,
-        "surah_name": "سُورَةُ الدُّخَانِ",
+        "surah_name": "الدُّخَانِ",
         "surah_english_name": "Ad-Dukhaan",
         "surah_english_translation": "The Smoke",
         "revelation_type": "Meccan",
@@ -3907,7 +3907,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 45,
-        "surah_name": "سُورَةُ الجَاثِيَةِ",
+        "surah_name": "الجَاثِيَةِ",
         "surah_english_name": "Al-Jaathiya",
         "surah_english_translation": "Crouching",
         "revelation_type": "Meccan",
@@ -3931,7 +3931,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 46,
-        "surah_name": "سُورَةُ الأَحۡقَافِ",
+        "surah_name": "الأَحۡقَافِ",
         "surah_english_name": "Al-Ahqaf",
         "surah_english_translation": "The Dunes",
         "revelation_type": "Meccan",
@@ -3950,7 +3950,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 46,
-        "surah_name": "سُورَةُ الأَحۡقَافِ",
+        "surah_name": "الأَحۡقَافِ",
         "surah_english_name": "Al-Ahqaf",
         "surah_english_translation": "The Dunes",
         "revelation_type": "Meccan",
@@ -3969,7 +3969,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 47,
-        "surah_name": "سُورَةُ مُحَمَّدٍ",
+        "surah_name": "مُحَمَّدٍ",
         "surah_english_name": "Muhammad",
         "surah_english_translation": "Muhammad",
         "revelation_type": "Medinan",
@@ -3988,7 +3988,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 47,
-        "surah_name": "سُورَةُ مُحَمَّدٍ",
+        "surah_name": "مُحَمَّدٍ",
         "surah_english_name": "Muhammad",
         "surah_english_translation": "Muhammad",
         "revelation_type": "Medinan",
@@ -4007,7 +4007,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 48,
-        "surah_name": "سُورَةُ الفَتۡحِ",
+        "surah_name": "الفَتۡحِ",
         "surah_english_name": "Al-Fath",
         "surah_english_translation": "The Victory",
         "revelation_type": "Medinan",
@@ -4026,7 +4026,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 49,
-        "surah_name": "سُورَةُ الحُجُرَاتِ",
+        "surah_name": "الحُجُرَاتِ",
         "surah_english_name": "Al-Hujuraat",
         "surah_english_translation": "The Inner Apartments",
         "revelation_type": "Medinan",
@@ -4045,7 +4045,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 49,
-        "surah_name": "سُورَةُ الحُجُرَاتِ",
+        "surah_name": "الحُجُرَاتِ",
         "surah_english_name": "Al-Hujuraat",
         "surah_english_translation": "The Inner Apartments",
         "revelation_type": "Medinan",
@@ -4064,7 +4064,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 50,
-        "surah_name": "سُورَةُ قٓ",
+        "surah_name": "قٓ",
         "surah_english_name": "Qaaf",
         "surah_english_translation": "The letter Qaaf",
         "revelation_type": "Meccan",
@@ -4088,7 +4088,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 51,
-        "surah_name": "سُورَةُ الذَّارِيَاتِ",
+        "surah_name": "الذَّارِيَاتِ",
         "surah_english_name": "Adh-Dhaariyat",
         "surah_english_translation": "The Winnowing Winds",
         "revelation_type": "Meccan",
@@ -4107,7 +4107,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 52,
-        "surah_name": "سُورَةُ الطُّورِ",
+        "surah_name": "الطُّورِ",
         "surah_english_name": "At-Tur",
         "surah_english_translation": "The Mount",
         "revelation_type": "Meccan",
@@ -4126,7 +4126,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 53,
-        "surah_name": "سُورَةُ النَّجۡمِ",
+        "surah_name": "النَّجۡمِ",
         "surah_english_name": "An-Najm",
         "surah_english_translation": "The Star",
         "revelation_type": "Meccan",
@@ -4145,7 +4145,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 54,
-        "surah_name": "سُورَةُ القَمَرِ",
+        "surah_name": "القَمَرِ",
         "surah_english_name": "Al-Qamar",
         "surah_english_translation": "The Moon",
         "revelation_type": "Meccan",
@@ -4164,7 +4164,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 55,
-        "surah_name": "سُورَةُ الرَّحۡمَٰن",
+        "surah_name": "الرَّحۡمَٰن",
         "surah_english_name": "Ar-Rahmaan",
         "surah_english_translation": "The Beneficent",
         "revelation_type": "Medinan",
@@ -4183,7 +4183,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 56,
-        "surah_name": "سُورَةُ الوَاقِعَةِ",
+        "surah_name": "الوَاقِعَةِ",
         "surah_english_name": "Al-Waaqia",
         "surah_english_translation": "The Inevitable",
         "revelation_type": "Meccan",
@@ -4202,7 +4202,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 56,
-        "surah_name": "سُورَةُ الوَاقِعَةِ",
+        "surah_name": "الوَاقِعَةِ",
         "surah_english_name": "Al-Waaqia",
         "surah_english_translation": "The Inevitable",
         "revelation_type": "Meccan",
@@ -4221,7 +4221,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 57,
-        "surah_name": "سُورَةُ الحَدِيدِ",
+        "surah_name": "الحَدِيدِ",
         "surah_english_name": "Al-Hadid",
         "surah_english_translation": "The Iron",
         "revelation_type": "Medinan",
@@ -4245,7 +4245,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 58,
-        "surah_name": "سُورَةُ المُجَادلَةِ",
+        "surah_name": "المُجَادلَةِ",
         "surah_english_name": "Al-Mujaadila",
         "surah_english_translation": "The Pleading Woman",
         "revelation_type": "Medinan",
@@ -4264,7 +4264,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 58,
-        "surah_name": "سُورَةُ المُجَادلَةِ",
+        "surah_name": "المُجَادلَةِ",
         "surah_english_name": "Al-Mujaadila",
         "surah_english_translation": "The Pleading Woman",
         "revelation_type": "Medinan",
@@ -4283,7 +4283,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 59,
-        "surah_name": "سُورَةُ الحَشۡرِ",
+        "surah_name": "الحَشۡرِ",
         "surah_english_name": "Al-Hashr",
         "surah_english_translation": "The Exile",
         "revelation_type": "Medinan",
@@ -4302,7 +4302,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 60,
-        "surah_name": "سُورَةُ المُمۡتَحنَةِ",
+        "surah_name": "المُمۡتَحنَةِ",
         "surah_english_name": "Al-Mumtahana",
         "surah_english_translation": "She that is to be examined",
         "revelation_type": "Medinan",
@@ -4321,7 +4321,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 62,
-        "surah_name": "سُورَةُ الجُمُعَةِ",
+        "surah_name": "الجُمُعَةِ",
         "surah_english_name": "Al-Jumu'a",
         "surah_english_translation": "Friday",
         "revelation_type": "Medinan",
@@ -4340,7 +4340,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 63,
-        "surah_name": "سُورَةُ المُنَافِقُونَ",
+        "surah_name": "المُنَافِقُونَ",
         "surah_english_name": "Al-Munaafiqoon",
         "surah_english_translation": "The Hypocrites",
         "revelation_type": "Medinan",
@@ -4359,7 +4359,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 65,
-        "surah_name": "سُورَةُ الطَّلَاقِ",
+        "surah_name": "الطَّلَاقِ",
         "surah_english_name": "At-Talaaq",
         "surah_english_translation": "Divorce",
         "revelation_type": "Medinan",
@@ -4378,7 +4378,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 66,
-        "surah_name": "سُورَةُ التَّحۡرِيمِ",
+        "surah_name": "التَّحۡرِيمِ",
         "surah_english_name": "At-Tahrim",
         "surah_english_translation": "The Prohibition",
         "revelation_type": "Medinan",
@@ -4402,7 +4402,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 67,
-        "surah_name": "سُورَةُ المُلۡكِ",
+        "surah_name": "المُلۡكِ",
         "surah_english_name": "Al-Mulk",
         "surah_english_translation": "The Sovereignty",
         "revelation_type": "Meccan",
@@ -4421,7 +4421,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 68,
-        "surah_name": "سُورَةُ القَلَمِ",
+        "surah_name": "القَلَمِ",
         "surah_english_name": "Al-Qalam",
         "surah_english_translation": "The Pen",
         "revelation_type": "Meccan",
@@ -4440,7 +4440,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 69,
-        "surah_name": "سُورَةُ الحَاقَّةِ",
+        "surah_name": "الحَاقَّةِ",
         "surah_english_name": "Al-Haaqqa",
         "surah_english_translation": "The Reality",
         "revelation_type": "Meccan",
@@ -4459,7 +4459,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 70,
-        "surah_name": "سُورَةُ المَعَارِجِ",
+        "surah_name": "المَعَارِجِ",
         "surah_english_name": "Al-Ma'aarij",
         "surah_english_translation": "The Ascending Stairways",
         "revelation_type": "Meccan",
@@ -4478,7 +4478,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 72,
-        "surah_name": "سُورَةُ الجِنِّ",
+        "surah_name": "الجِنِّ",
         "surah_english_name": "Al-Jinn",
         "surah_english_translation": "The Jinn",
         "revelation_type": "Meccan",
@@ -4497,7 +4497,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 73,
-        "surah_name": "سُورَةُ المُزَّمِّلِ",
+        "surah_name": "المُزَّمِّلِ",
         "surah_english_name": "Al-Muzzammil",
         "surah_english_translation": "The Enshrouded One",
         "revelation_type": "Meccan",
@@ -4516,7 +4516,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 75,
-        "surah_name": "سُورَةُ القِيَامَةِ",
+        "surah_name": "القِيَامَةِ",
         "surah_english_name": "Al-Qiyaama",
         "surah_english_translation": "The Resurrection",
         "revelation_type": "Meccan",
@@ -4535,7 +4535,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 76,
-        "surah_name": "سُورَةُ الإِنسَانِ",
+        "surah_name": "الإِنسَانِ",
         "surah_english_name": "Al-Insaan",
         "surah_english_translation": "Man",
         "revelation_type": "Medinan",
@@ -4559,7 +4559,7 @@ Map<String,dynamic> moshafIndexJson={
     "verses": [
       {
         "surah_number": 78,
-        "surah_name": "سُورَةُ النَّبَإِ",
+        "surah_name": "النَّبَإِ",
         "surah_english_name": "An-Naba",
         "surah_english_translation": "The Announcement",
         "revelation_type": "Meccan",
@@ -4578,7 +4578,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 80,
-        "surah_name": "سُورَةُ عَبَسَ",
+        "surah_name": "عَبَسَ",
         "surah_english_name": "Abasa",
         "surah_english_translation": "He frowned",
         "revelation_type": "Meccan",
@@ -4597,7 +4597,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 82,
-        "surah_name": "سُورَةُ الانفِطَارِ",
+        "surah_name": "الانفِطَارِ",
         "surah_english_name": "Al-Infitaar",
         "surah_english_translation": "The Cleaving",
         "revelation_type": "Meccan",
@@ -4616,7 +4616,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 84,
-        "surah_name": "سُورَةُ الانشِقَاقِ",
+        "surah_name": "الانشِقَاقِ",
         "surah_english_name": "Al-Inshiqaaq",
         "surah_english_translation": "The Splitting Open",
         "revelation_type": "Meccan",
@@ -4635,7 +4635,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 87,
-        "surah_name": "سُورَةُ الأَعۡلَىٰ",
+        "surah_name": "الأَعۡلَىٰ",
         "surah_english_name": "Al-A'laa",
         "surah_english_translation": "The Most High",
         "revelation_type": "Meccan",
@@ -4654,7 +4654,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 90,
-        "surah_name": "سُورَةُ البَلَدِ",
+        "surah_name": "البَلَدِ",
         "surah_english_name": "Al-Balad",
         "surah_english_translation": "The City",
         "revelation_type": "Meccan",
@@ -4673,7 +4673,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 94,
-        "surah_name": "سُورَةُ الشَّرۡحِ",
+        "surah_name": "الشَّرۡحِ",
         "surah_english_name": "Ash-Sharh",
         "surah_english_translation": "The Consolation",
         "revelation_type": "Meccan",
@@ -4692,7 +4692,7 @@ Map<String,dynamic> moshafIndexJson={
       },
       {
         "surah_number": 100,
-        "surah_name": "سُورَةُ العَادِيَاتِ",
+        "surah_name": "العَادِيَاتِ",
         "surah_english_name": "Al-Aadiyaat",
         "surah_english_translation": "The Chargers",
         "revelation_type": "Meccan",
