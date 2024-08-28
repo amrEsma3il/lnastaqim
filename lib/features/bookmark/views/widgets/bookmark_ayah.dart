@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
 import 'package:lnastaqim/features/bookmark/data/models/bookmark_model.dart';
 
+import '../../../../core/constants/colors.dart';
 import '../../bussniess_logic/bookmark_cubit/bookmark_cubit.dart';
 
 class BookmarkAyah extends StatelessWidget {
@@ -13,26 +15,27 @@ class BookmarkAyah extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 7),
       child: Container(
         width: double.infinity,
         decoration: ShapeDecoration(
-          color: Colors.grey.withOpacity(0.5),
+          color: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(11),
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.fromLTRB(15, 10, 16, 9),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
                 Icons.bookmark,
                 color: Color(bookmarkModel.color),
+                size: 27,
               ),
               const SizedBox(
-                width: 5,
+                width: 10.5,
               ),
               Expanded(
                 flex: 5,
@@ -40,19 +43,25 @@ class BookmarkAyah extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${bookmarkModel.name}  الايه  ${bookmarkModel.ayahNum.toString().toArabic} ",
-                      style: const TextStyle(
+                       "${bookmarkModel.name} - الايه ${bookmarkModel.ayahNum.toString().toArabic} - صفحة ${ bookmarkModel.pageNum.toArabic}",
+                          style: const TextStyle(
+                        wordSpacing: -.5,
+                        color: AppColor.blueColor,
+                        fontSize: 15.2,
+                        fontWeight: FontWeight.w500,
                         fontFamily: 'naskh',
                       ),
                     ),
                     const SizedBox(
-                      height: 5,
+                      height: 0.95,
                     ),
-                    Text(
-                      bookmarkModel.ayah,
-                      softWrap: true,
-                      style: const TextStyle(
-                        fontFamily: 'naskh',
+                    SizedBox(width: 130.w,
+                      child: Text(maxLines: 3,
+                      overflow:TextOverflow.ellipsis ,
+                      
+                        bookmarkModel.ayah,
+                        softWrap: true,
+                        style: const TextStyle(color:AppColor.blueColor,fontSize: 15 ,),
                       ),
                     ),
                   ],
@@ -61,32 +70,15 @@ class BookmarkAyah extends StatelessWidget {
               const Spacer(),
               Column(
                 children: [
-                  CircleAvatar(
-                    radius: 10,
-                    backgroundColor: Colors.white,
-                    child: Text(
-                      bookmarkModel.pageNum.toArabic,
-                      style: const TextStyle(
-                        fontSize: 10,
-                        fontFamily: 'naskh',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      bookmarkModel.delete();
+                Stack(alignment: Alignment.center,
+                        children: [
+                          const CircleAvatar(backgroundColor:  Color.fromARGB(255, 220, 177, 177),radius: 14,),
+                          IconButton(onPressed: (){
+                           bookmarkModel.delete();
                       BlocProvider.of<BookmarkCubit>(context).fetchBookmarks();
-                    },
-                    child: const Icon(
-                      Icons.delete,
-                      size: 15,
-                      color: Colors.red,
-                    ),
-                  ),
-                ],
+                          }, icon:const Icon( Icons.delete_outlined,color: Color.fromARGB(255, 202, 56, 45),size: 18,)),
+                        ],
+                      ), ],
               ),
             ],
           ),

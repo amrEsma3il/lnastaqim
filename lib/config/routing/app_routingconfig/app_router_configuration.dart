@@ -63,12 +63,12 @@ List<GetPage<dynamic>>? routes = [
       name: AppRouteName.bookmark,
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
-  // GetPage(
-  //     curve: Curves.easeInOut,
-  //     page: () => const NoteView(),
-  //     name: AppRouteName.note,
-  //     transition: Transition.fadeIn,
-  //     transitionDuration: const Duration(milliseconds: 500)),
+  GetPage(
+      curve: Curves.easeInOut,
+      page: () => const NoteView(),
+      name: AppRouteName.note,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 500)),
   GetPage(
       curve: Curves.easeInOut,
       page: () => const AzkarView(),

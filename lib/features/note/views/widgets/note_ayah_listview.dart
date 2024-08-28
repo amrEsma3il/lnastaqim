@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/constants/images.dart';
 import '../../../quran/bussniess_logic/quran/quran_cubit.dart';
 
 import '../../bussniess_logic/note_cubit/note_cubit.dart';
@@ -19,7 +20,7 @@ class NoteAyahListView extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         List<NoteModel> notes = BlocProvider.of<NoteCubit>(context).notes ?? [];
-        return ListView.builder(
+        return notes.isEmpty?Center(child: Image.asset(AppImages.empty)): ListView.builder(
             physics: const BouncingScrollPhysics(),
             itemCount: notes.length,
             itemBuilder: (BuildContext context, int index) {

@@ -19,7 +19,8 @@ void showNoteBottomSheet(BuildContext context,Ayah selectedAyah) {
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(48.r), topLeft: Radius.circular(48.r))),
-    builder: (context) => SizedBox(
+    builder: (context) => 
+    SizedBox(
       height: 600.h,
       width: double.infinity,
       child: SingleChildScrollView(

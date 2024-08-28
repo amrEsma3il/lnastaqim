@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../config/routing/app_routes_info/app_routes_name.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../quran/bussniess_logic/quran/quran_cubit.dart';
 import '../../../quran/bussniess_logic/screen_tap_Visibility/screen_tap_visability.dart';
@@ -12,9 +13,9 @@ class NoteCollection extends StatelessWidget {
     return GestureDetector(
       onTap: () {
      QuranCubit.get(context).clearScreen(context);
-        // Get.offNamed(AppRouteName.note);
-        Get.back();
-        ScreenOverlayCubit.showMoshafNotes(context);
+        Get.offNamed(AppRouteName.note);
+        // Get.back();
+        // ScreenOverlayCubit.showMoshafNotes(context);
       },
       child: Container(
         width: double.infinity,

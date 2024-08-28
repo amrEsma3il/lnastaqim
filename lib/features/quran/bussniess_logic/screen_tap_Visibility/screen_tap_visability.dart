@@ -45,8 +45,8 @@ class ScreenOverlayCubit extends Cubit<int> {
           "text": "الملاحظات",
           "onTap": () {
             emit(0);
-            // Get.toNamed(AppRouteName.note);
-            showMoshafNotes(context);
+            Get.toNamed(AppRouteName.note);
+            // showMoshafNotes(context);
             //  NoteAyahListView()
           }
         },
@@ -356,51 +356,55 @@ class ScreenOverlayCubit extends Cubit<int> {
 
 
 
- static showMoshafNotes(BuildContext context) {
-    showBottomSheet(
-      context: context,
-      builder: (context) {
-        return Container(
-          decoration:
-              BoxDecoration(color: AppColor.blueColor.withOpacity(0.85)),
-          height: Get.height / 7 * 6,
-          width: Get.width,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: Column(
-              children: [
-                  const SizedBox(height: 15,),
-                 Row(mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
+//  static showMoshafNotes(BuildContext context) {
+//     showBottomSheet(
+//       context: context,
+//       builder: (context) {
+//         return 
+//         Container(
+//           decoration:
+//               BoxDecoration(color: AppColor.blueColor.withOpacity(0.85)),
+//           height: Get.height / 7 * 6,
+//           width: Get.width,
+//           child: Padding(
+//             padding: EdgeInsets.symmetric(horizontal: 15.w),
+//             child: Column(
+//               children: [
+//                   const SizedBox(height: 15,),
+//                  Row(mainAxisAlignment: MainAxisAlignment.start,
+//                   children: [
                   
 
-                    IconButton(onPressed:() {
-                      Get.back();
-                    } , icon: const Icon(Icons.close,size: 30,color: Colors.white,)),
-                    Expanded(
-                      child: Center(
-                        child: Padding(
-                          padding:  EdgeInsets.only(left: 36.w),
-                          child: const Text("الملاحظات",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w500),)   ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20,),
+//                     IconButton(onPressed:() {
+//                       Get.back();
+//                     } , icon: const Icon(Icons.close,size: 30,color: Colors.white,)),
+//                     Expanded(
+//                       child: Center(
+//                         child: Padding(
+//                           padding:  EdgeInsets.only(left: 36.w),
+//                           child: const Text("الملاحظات",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w500),)   ),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//                 const SizedBox(height: 20,),
 
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 20.h),
-                    child: const NoteAyahListView()
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
+//                 Expanded(
+//                   child: Padding(
+//                     padding: EdgeInsets.only(bottom: 20.h),
+//                     child: 
+//                     // implement slide to action here
+                    
+//                     const NoteAyahListView()
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         );
+//       },
+//     );
+//   }
 
 
 
