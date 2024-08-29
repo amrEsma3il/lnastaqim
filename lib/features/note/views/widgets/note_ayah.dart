@@ -40,15 +40,15 @@ class NoteAyah extends StatelessWidget {
                       style: const TextStyle(
                         wordSpacing: -.5,
                         color: AppColor.blueColor,
-                        fontSize: 15.2,
+                        fontSize: 15.8,
                         fontWeight: FontWeight.w500,
                         fontFamily: 'naskh',
                       ),
                     ),
                     const SizedBox(
-                      height: 5,
+                      height: 4.5,
                     ),
-                    SizedBox(width: 130.w,
+                    SizedBox(width: 168.w,
                       child: Text(maxLines: 2,
                       overflow:TextOverflow.ellipsis ,
                       
