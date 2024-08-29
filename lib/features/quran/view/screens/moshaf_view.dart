@@ -90,6 +90,7 @@ class MoshafView extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
+                            SearchVisabilityCubit.get(context).searchClose();
                             ScreenOverlayCubit.get(context)
                                 .overlaysVisability();
                             if (!verseSoundstate.isPlaying) {
@@ -215,18 +216,31 @@ class MoshafView extends StatelessWidget {
                                                           ),
                                                           IconButton(
                                                             onPressed: () {
-                                                              MoshafBookmarkCubit.get(context).updateBookmark(604-index);
+                                                              MoshafBookmarkCubit
+                                                                      .get(
+                                                                          context)
+                                                                  .updateBookmark(
+                                                                      604 -
+                                                                          index);
                                                             },
                                                             icon: BlocBuilder<
                                                                 MoshafBookmarkCubit,
                                                                 MoshafBookmarkState>(
                                                               builder: (context,
                                                                   moshafBookmarkState) {
-                                                                    bool isBooked=moshafBookmarkState.isMark&&moshafBookmarkState.pageNumber==(604 - index);
-                                                                  // int  pageNum=moshafBookmarkState.pageNumber;
-                                                                return  Icon(isBooked?
-                                                                  Icons
-                                                                      .bookmark:Icons.bookmark_outline,
+                                                                bool isBooked = moshafBookmarkState
+                                                                        .isMark &&
+                                                                    moshafBookmarkState
+                                                                            .pageNumber ==
+                                                                        (604 -
+                                                                            index);
+                                                                // int  pageNum=moshafBookmarkState.pageNumber;
+                                                                return Icon(
+                                                                  isBooked
+                                                                      ? Icons
+                                                                          .bookmark
+                                                                      : Icons
+                                                                          .bookmark_outline,
                                                                   color: Colors
                                                                       .white,
                                                                   size: 25.5,

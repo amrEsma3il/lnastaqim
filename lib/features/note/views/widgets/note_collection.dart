@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../quran/bussniess_logic/quran/quran_cubit.dart';
@@ -14,6 +14,8 @@ class NoteCollection extends StatelessWidget {
       onTap: () {
      QuranCubit.get(context).clearScreen(context);
         Get.offNamed(AppRouteName.note);
+        // Get.back();
+        // ScreenOverlayCubit.showMoshafNotes(context);
       },
       child: Container(
         width: double.infinity,

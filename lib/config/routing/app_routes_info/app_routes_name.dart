@@ -9,7 +9,9 @@ class AppRouteName {
     static const String radio = "/radio";//
 
 
-  static const String tafseer = "/TafseerScreen";
+  static const String tafseer = "/TafseerScreen";//moshafIndex
+    static const String moshafIndex = "/moshafIndex";//
+
 
   static const String paryerTimes = "/paryerTimes";
     static const String surahPlayerScreen = "/surahPlayerScreen";

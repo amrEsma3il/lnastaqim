@@ -13,6 +13,7 @@ import 'core/constants/keys.dart';
 import 'core/utilits/controller/search_or_not/search_visibility.dart';
 import 'core/utilits/services/local_notification_service.dart';
 import 'core/utilits/services/work_manager_service.dart';
+import 'features/note/bussniess_logic/overlay_note_control/overlay_note_control_cubit.dart';
 import 'features/paryer_times/bussniess_logic/date_cubit.dart';
 import 'features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
 
@@ -36,7 +37,7 @@ import 'features/quran/bussniess_logic/sowra_detail/sora_details_cubit.dart';
 
 import 'features/azkar_with_sib7a/business_logic/azkar_category_cubit/azkar_category_cubit.dart';
 import 'features/azkar_with_sib7a/business_logic/azkar_details_cubit/azkar_details_cubit.dart';
-import 'features/quran/bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
+import 'features/quran/bussniess_logic/quran/index_cubit/index_cubit.dart';
 import 'features/quran_sound/data/models/reciter_entity.dart';
 import 'features/quran_sound/logic/audio_cubit/audio_cubit.dart';
 
@@ -85,7 +86,7 @@ class Lnastaqim extends StatelessWidget {
               create: (context) => SearchOnAyaCubit(),
             ),
             BlocProvider(
-              create: (context) => QuranSowarCubit(),
+              create: (context) => IndexCubit(),
             ),
 
             BlocProvider(
@@ -111,10 +112,7 @@ class Lnastaqim extends StatelessWidget {
  BlocProvider(
               create: (context) => AudioControlCubit()..audioPlayerListener(context),
             ),
-            //  BlocProvider(
-            //   create: (context) => MoshafPageCubit()..initPage(),
-            // ),
-//
+   
             BlocProvider(create: (context) => AddBookmarkCubit()),
             BlocProvider(
                 create: (context) => BookmarkCubit()..fetchBookmarks()),
@@ -127,6 +125,9 @@ class Lnastaqim extends StatelessWidget {
 
             BlocProvider(
               create: (context) => PrayersTimesCubit(),
+            ),
+             BlocProvider(
+              create: (context) => OverlayNoteControlCubit(),
             ),
 
 
