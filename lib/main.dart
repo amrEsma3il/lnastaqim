@@ -43,7 +43,7 @@ import 'features/paryer_times/bussniess_logic/date_cubit.dart';
 import 'features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
 import 'features/quran/bussniess_logic/fast_transition/fast_transition_cubit.dart';
 import 'features/quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
-import 'features/quran/bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
+
 import 'features/quran/bussniess_logic/quran_sowar/search_on_aya_from_whole_quran_cubit.dart';
 import 'features/quran/bussniess_logic/quran_sowar/search_or_not_cubit.dart';
 import 'features/quran/bussniess_logic/screen_tap_Visibility/screen_tap_visability.dart';
