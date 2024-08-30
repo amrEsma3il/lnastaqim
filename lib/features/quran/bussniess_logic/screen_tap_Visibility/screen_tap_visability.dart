@@ -10,14 +10,17 @@ import 'package:lnastaqim/core/constants/colors.dart';
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
 import '../../../../core/constants/images.dart';
 import '../../../../core/utilits/extensions/arabic_numbers.dart';
-
 import '../../../../core/utilits/functions/check.dart';
 import '../../../../core/utilits/functions/toast_message.dart';
+import '../../../note/views/widgets/note_ayah_listview.dart';
 import '../../../quran_sound/logic/audio_cubit/audio_cubit.dart';
 import '../../data/models/quran_model.dart';
-import '../../view/widgets/quran_sora_component.dart';
+import '../../view/widgets/index/quran_hizb_component.dart';
+import '../../view/widgets/index/quran_juz_component.dart';
+import '../../view/widgets/index/quran_sora_component.dart';
+import '../quran/index_cubit/index_state.dart';
 import '../quran/quran_cubit.dart';
-import '../quran_sowar/quran_sowar_cubit.dart';
+import '../quran/index_cubit/index_cubit.dart';
 
 class ScreenOverlayCubit extends Cubit<int> {
   ScreenOverlayCubit() : super(0);
@@ -43,6 +46,8 @@ class ScreenOverlayCubit extends Cubit<int> {
           "onTap": () {
             emit(0);
             Get.toNamed(AppRouteName.note);
+            // showMoshafNotes(context);
+            //  NoteAyahListView()
           }
         },
         {
@@ -56,19 +61,20 @@ class ScreenOverlayCubit extends Cubit<int> {
           "text": "الفهرس",
           "onTap": () {
             emit(0);
-            showMoshafIndex(context);
+            // Get.toNamed(AppRouteName.moshafIndex);
 
             // implement dialog here
+            showMoshafIndex(context);
           }
         },
 
         ///
-        {
-          "text": "مساعدة",
-          "onTap": () {
-            // implement dialog here
-          }
-        },
+        // {
+        //   "text": "مساعدة",
+        //   "onTap": () {
+        //     // implement dialog here
+        //   }
+        // },
         // {
         //   "text": "من نحن",
         //   "onTap": () {
@@ -255,26 +261,86 @@ class ScreenOverlayCubit extends Cubit<int> {
     showBottomSheet(
       context: context,
       builder: (context) {
-        return SizedBox(
-          height: 450,
+        return Container(
+          decoration:
+              BoxDecoration(color: AppColor.blueColor.withOpacity(0.85)),
+          height: Get.height / 7 * 6,
+          width: Get.width,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Column(
               children: [
                 SizedBox(
-                  height: 20.h,
+                  height: 21.h,
                 ),
+                Row(mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+
+                    IconButton(onPressed:() {
+                      Get.back();
+                    } , icon: const Icon(Icons.close,size: 30,color: Colors.white,)),
+                    Expanded(
+                      child: Center(
+                        child: Padding(
+                          padding:  EdgeInsets.only(left: 36.w),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(
+                                IndexCubit.moshafIndexTypes.length,
+                                (index) => GestureDetector(onTap: () {
+                                  int toggle=index==0?0:1;
+                                  IndexCubit.get(context).toggleIndex(toggle);
+                                },
+                                  child: BlocBuilder<IndexCubit, int>(
+                                        builder: (context, indexState) {
+                                          return Container(
+                                            alignment: Alignment.center,
+                                            width: 88.w,
+                                            height: 40.h,
+                                            decoration: BoxDecoration(
+                                              color: indexState==index?Colors.white:null,
+                                                border: Border.all(
+                                                    width: 1, color: Colors.white),
+                                                borderRadius: index == 0
+                                                    ? const BorderRadius.only(
+                                                        topRight: Radius.circular(25),
+                                                        bottomRight: Radius.circular(25))
+                                                    : const BorderRadius.only(
+                                                        bottomLeft: Radius.circular(25),
+                                                        topLeft: Radius.circular(25))),
+                                            child: Text(
+                                              IndexCubit.moshafIndexTypes[index],
+                                              style:  TextStyle(fontWeight: FontWeight.w500,
+                                                  color:indexState==index?AppColor.blueColor:Colors.white, fontSize: 20.r),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                )),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20,),
+
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(bottom: 68.h),
-                    child: BlocBuilder<QuranSowarCubit, List<MoshafSurahIndexModel>>(
+                    padding: EdgeInsets.only(bottom: 20.h),
+                    child: BlocBuilder<IndexCubit, int>(
                       builder: (context, state) {
+                           
                         return ListView.builder(
-                          itemCount: state.length,
-                          itemBuilder: (context, index) =>
-                              QuranSoraComponent(
-                               
-                                  quranAyaEntity: state[index]),
+
+                          itemCount:state==0? IndexCubit.getQuranSurah().length:IndexCubit.getQuranJuz().length,
+                          itemBuilder: (context, parentIndex) =>
+                              Visibility(visible: state==0,
+                                replacement:  JuzComponent(parentIndex: parentIndex,),
+                                child: QuranSoraComponent(
+                                
+                                indexEntity: IndexCubit.getQuranSurah()[parentIndex],),
+                              ),
                         );
                       },
                     ),
@@ -284,10 +350,66 @@ class ScreenOverlayCubit extends Cubit<int> {
             ),
           ),
         );
-        
       },
     );
   }
+
+
+
+//  static showMoshafNotes(BuildContext context) {
+//     showBottomSheet(
+//       context: context,
+//       builder: (context) {
+//         return 
+//         Container(
+//           decoration:
+//               BoxDecoration(color: AppColor.blueColor.withOpacity(0.85)),
+//           height: Get.height / 7 * 6,
+//           width: Get.width,
+//           child: Padding(
+//             padding: EdgeInsets.symmetric(horizontal: 15.w),
+//             child: Column(
+//               children: [
+//                   const SizedBox(height: 15,),
+//                  Row(mainAxisAlignment: MainAxisAlignment.start,
+//                   children: [
+                  
+
+//                     IconButton(onPressed:() {
+//                       Get.back();
+//                     } , icon: const Icon(Icons.close,size: 30,color: Colors.white,)),
+//                     Expanded(
+//                       child: Center(
+//                         child: Padding(
+//                           padding:  EdgeInsets.only(left: 36.w),
+//                           child: const Text("الملاحظات",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w500),)   ),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//                 const SizedBox(height: 20,),
+
+//                 Expanded(
+//                   child: Padding(
+//                     padding: EdgeInsets.only(bottom: 20.h),
+//                     child: 
+//                     // implement slide to action here
+                    
+//                     const NoteAyahListView()
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         );
+//       },
+//     );
+//   }
+
+
+
+
+
 
   void onChangedDebounced(String value, BuildContext context) {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
