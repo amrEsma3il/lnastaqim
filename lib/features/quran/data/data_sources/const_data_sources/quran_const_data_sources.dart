@@ -1,11 +1,14 @@
-import '../../../../../core/local_database/quran/quran_local_database.dart';
+
+import '../../../../../core/local_database/quran/index/quran_index_json.dart';
 import '../../models/quran_model.dart';
 
 class QuranConstDataSources {
-  static List<SoraModel> getAllQuranSowar() => QuranDataBase.quranJsonData
-      .map((quaranJson) => SoraModel.fromJson(quaranJson))
-      .toList();
+        static List<SurahModel> getQuranSurah() =>
+     (moshafIndexJson['surah'] as List).map((e) => SurahModel.fromJson(e)).toList();
 
-  static SoraModel getSoraDetails(Map<String,dynamic>quaranJson) =>
-      SoraModel.fromJson(quaranJson);
+
+        static List<JuzModel> getQuranJuz() =>
+     (moshafIndexJson['juz'] as List).map((e) => JuzModel.fromJson(e)).toList();
+
+
 }

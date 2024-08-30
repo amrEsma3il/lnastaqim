@@ -47,6 +47,7 @@ dependencies:
   flutter_native_splash: 2.3.7
   flutter_qiblah: ^2.1.0
   flutter_screenutil: ^5.9.0
+  flutter_slidable: ^3.1.1
   flutter_staggered_animations: ^1.1.1
   flutter_svg: ^2.0.9
   flutter_timezone: ^1.0.8
@@ -60,6 +61,7 @@ dependencies:
   google_maps_flutter: ^2.5.3
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  http: ^0.13.6
   internet_connection_checker: ^1.0.0+1
   intl: any
   meta: ^1.10.0
@@ -67,7 +69,7 @@ dependencies:
   permission_handler: ^11.1.0
   radio_player: ^1.6.0
   retrofit: ">=4.0.0 <5.0.0"
-  screenshot: 2.5.0
+  screenshot: 2.4.0
   share_plus: ^9.0.0
   shared_preferences: ^2.0.15
   smooth_page_indicator: ^1.2.0+3

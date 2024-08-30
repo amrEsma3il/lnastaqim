@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:lnastaqim/core/utilits/extensions/color_from_hex.dart';
 
 class AppColor {
-  static Color crame = "#FAF6EB".toColor;
+  static Color crame = "#FAF6EB".toColor;//a9b6d9
+    static Color lightBlue = "#a9b6d9".toColor;//
+
   static Color darkBrown = "#522700".toColor;
   static Color amber = "#A85000".toColor;
   static Color brownText = "#A85000".toColor;
@@ -16,12 +18,15 @@ class AppColor {
   static Color creame = const Color(0xffFAF6EB);
   static Color lightBrown = const Color(0xffA85000);
   static Color pantone = const Color(0xffA18575);
+  static Color darkYellow = const Color.fromARGB(255, 150, 126, 68);
 
+//const
   static Color lightBrownWithOpacity10 =
       const Color(0xffA85000).withOpacity(0.1);
   static Color primary = const Color(0xff404c6e);
   static Color white2 = const Color(0xffeaeef5);
   static Color blueBlack = const Color(0xff13153B);
+
 
   static Color yellow1 = "#ebb734".toColor; //#
 

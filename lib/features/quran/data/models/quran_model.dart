@@ -1,95 +1,303 @@
-class SoraModel {
-  final int ?id;
-  final String? name;
-  final String? nameEn;
-  final String? nameTranslation;
-  final int? words;
-  final int ?letters;
-  final String? type;
-  final String ?typeEn;
-  final String ?ar;
-  final String ?en;
-  final List<AyatOfSora>? array;
+// class MoshafIndexModel {
+//   final List<SurahIndex> sowarIndex;
+//   final List<ChapterIndex> chapterIndex;
 
-  SoraModel(
-      { this.id,
-       this.name,
-       this.nameEn,
-       this.nameTranslation,
-       this.words,
-       this.letters,
-       this.type,
-       this.typeEn,
-       this.ar,
-       this.en,
-       this.array});
+//   final List<HizbIndex> hizbIndex;
 
-  factory SoraModel.fromJson(Map<String, dynamic> json) => SoraModel(
+//   // Constructor
+//   MoshafIndexModel({
+//     required this.sowarIndex,
+//     required this.chapterIndex,
+//     required this.hizbIndex,
+//   });
+
+//   // Factory constructor for creating a new Surah instance from a map.
+//   factory MoshafIndexModel.fromJson(Map<String, dynamic> json) {
+//     List<SurahIndex> sowarIndex = (json["sower"] as List)
+//         .map((surah) => SurahIndex.fromJson(surah))
+//         .toList();
+
+//     List<ChapterIndex> chapterIndex = (json["chapters"] as List)
+//         .map((chapter) => ChapterIndex.fromJson(chapter))
+//         .toList();
+//     List<HizbIndex> hizbIndex =
+//         (json["hizb"] as List).map((hizb) => HizbIndex.fromJson(hizb)).toList();
+//     return MoshafIndexModel(
+//         sowarIndex: sowarIndex,
+//         chapterIndex: chapterIndex,
+//         hizbIndex: hizbIndex);
+//   }
+
+//   // Method to convert Surah instance to a map.
+//   Map<String, dynamic> toJson() {
+//     return {
+//       "sower": sowarIndex.map((surah) => surah.toJson()).toList(),
+//       "chapters": chapterIndex.map((chapter) => chapter.toJson()).toList(),
+//       "hizb": hizbIndex.map((hizb) => hizb.toJson()).toList()
+//     };
+//   }
+// }
+
+// class SurahIndex {
+//   final int id;
+//   final String name;
+//   final int startPage;
+//   final int endPage;
+//   final int makkia;
+//   final int type;
+
+//   // Constructor
+//   SurahIndex({
+//     required this.id,
+//     required this.name,
+//     required this.startPage,
+//     required this.endPage,
+//     required this.makkia,
+//     required this.type,
+//   });
+
+//   // Factory constructor for creating a new Surah instance from a map.
+//   factory SurahIndex.fromJson(Map<String, dynamic> json) {
+//     return SurahIndex(
+//       id: json['id'],
+//       name: json['name'],
+//       startPage: json['start_page'],
+//       endPage: json['end_page'],
+//       makkia: json['makkia'],
+//       type: json['type'],
+//     );
+//   }
+
+//   // Method to convert Surah instance to a map.
+//   Map<String, dynamic> toJson() {
+//     return {
+//       'id': id,
+//       'name': name,
+//       'start_page': startPage,
+//       'end_page': endPage,
+//       'makkia': makkia,
+//       'type': type,
+//     };
+//   }
+// }
+
+// class ChapterIndex {
+//   final int id;
+//   final String name;
+//   final String surahName;
+//   final int startPage;
+
+//   ChapterIndex({
+//     required this.id,
+//     required this.name,
+//     required this.surahName,
+//     required this.startPage,
+//   });
+
+//   // Factory constructor to create a ChapterIndex from a JSON map
+//   factory ChapterIndex.fromJson(Map<String, dynamic> json) {
+//     return ChapterIndex(
+//       id: json['id'],
+//       name: json['name'],
+//       surahName: json['surah_name'],
+//       startPage: json['start_page'],
+//     );
+//   }
+
+//   // Method to convert a ChapterIndex instance to a JSON map
+//   Map<String, dynamic> toJson() {
+//     return {
+//       'id': id,
+//       'name': name,
+//       'surah_name': surahName,
+//       'start_page': startPage,
+//     };
+//   }
+// }
+
+// class HizbIndex {
+//  final int id;
+//  final String name;
+//   final int startPage;
+
+//   HizbIndex({
+//     required this.startPage,
+//     required this.id,
+//     required this.name,
+//   });
+
+//   // Factory constructor to create a Chapter instance from a JSON map
+//   factory HizbIndex.fromJson(Map<String, dynamic> json) {
+//     return HizbIndex(
+//       id: json['id'],
+//       name: json['name'],
+//            startPage: json['start_page'],
+//     );
+//   }
+
+//   // Method to convert a Chapter instance to a JSON map
+//   Map<String, dynamic> toJson() {
+//     return {
+//       'id': id,
+//       'name': name,
+//       'start_page':startPage
+//     };
+//   }
+// }
+
+
+
+
+
+class HizpModel {
+  final int surahNumber;
+  final String surahName;
+  final String surahEnglishName;
+  final String surahEnglishTranslation;
+  final String revelationType;
+  final int number;
+  final String text;
+  final String ayaTextEmlaey;
+  final int numberInSurah;
+  final int juz;
+  final int manzil;
+  final int page;
+  final int pageInSurah;
+  final int ruku;
+  final int hizbQuarter;
+  final bool sajda;
+  final String codeV2;
+
+  HizpModel({
+    required this.surahNumber,
+    required this.surahName,
+    required this.surahEnglishName,
+    required this.surahEnglishTranslation,
+    required this.revelationType,
+    required this.number,
+    required this.text,
+    required this.ayaTextEmlaey,
+    required this.numberInSurah,
+    required this.juz,
+    required this.manzil,
+    required this.page,
+    required this.pageInSurah,
+    required this.ruku,
+    required this.hizbQuarter,
+    required this.sajda,
+    required this.codeV2,
+  });
+
+  factory HizpModel.fromJson(Map<String, dynamic> json) {
+    return HizpModel(
+      surahNumber: json['surah_number'],
+      surahName: json['surah_name'],
+      surahEnglishName: json['surah_english_name'],
+      surahEnglishTranslation: json['surah_english_translation'],
+      revelationType: json['revelation_type'],
+      number: json['number'],
+      text: json['text'],
+      ayaTextEmlaey: json['aya_text_emlaey'],
+      numberInSurah: json['number_in_surah'],
+      juz: json['juz'],
+      manzil: json['manzil'],
+      page: json['page'],
+      pageInSurah: json['page_in_surah'],
+      ruku: json['ruku'],
+      hizbQuarter: json['hizbQuarter'],
+      sajda: json['sajda'],
+      codeV2: json['code_v2'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'surah_number': surahNumber,
+      'surah_name': surahName,
+      'surah_english_name': surahEnglishName,
+      'surah_english_translation': surahEnglishTranslation,
+      'revelation_type': revelationType,
+      'number': number,
+      'text': text,
+      'aya_text_emlaey': ayaTextEmlaey,
+      'number_in_surah': numberInSurah,
+      'juz': juz,
+      'manzil': manzil,
+      'page': page,
+      'page_in_surah': pageInSurah,
+      'ruku': ruku,
+      'hizbQuarter': hizbQuarter,
+      'sajda': sajda,
+      'code_v2': codeV2,
+    };
+  }
+}
+
+class JuzModel {
+  final int juz;
+  final List<HizpModel> verses;
+
+  JuzModel({
+    required this.juz,
+    required this.verses,
+  });
+
+  factory JuzModel.fromJson(Map<String, dynamic> json) {
+    return JuzModel(
+      juz: json['juz'],
+      verses: (json['verses'] as List).map((e) => HizpModel.fromJson(e)).toList(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'juz': juz,
+      'verses': verses.map((e) => e.toJson()).toList(),
+    };
+  }
+}
+
+
+
+
+class SurahModel {
+  final int id;
+  final String name;
+  final int startPage;
+  final int endPage;
+  final int makkia;
+  final int type;
+
+  SurahModel({
+    required this.id,
+    required this.name,
+    required this.startPage,
+    required this.endPage,
+    required this.makkia,
+    required this.type,
+  });
+
+  factory SurahModel.fromJson(Map<String, dynamic> json) {
+    return SurahModel(
       id: json['id'],
       name: json['name'],
-      nameEn: json['name_en'],
-      nameTranslation: json['name_translation'],
-      words: json['words'],
-      letters: json['letters'],
+      startPage: json['start_page'],
+      endPage: json['end_page'],
+      makkia: json['makkia'],
       type: json['type'],
-      typeEn: json['type_en'],
-      ar: json['ar'],
-      en: json['en'],
-      array: (json['array'] as List<Map<String, dynamic>>)
-          .map(
-            (e) => AyatOfSora.fromJson(e),
-          )
-          .toList());
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'name_en': nameEn,
-        'name_translation': nameTranslation,
-        'words': words,
-        'letters': letters,
-        'type': type,
-        'type_en': typeEn,
-        'ar': ar,
-        'en': en,
-        'array': array!.map((aya) => aya.toJson()).toList(),
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'start_page': startPage,
+      'end_page': endPage,
+      'makkia': makkia,
+      'type': type,
+    };
+  }
 }
 
-class AyatOfSora {
-  final int? id;
-  final String? ar;
-  final String ?en;
-  final String ?filename;
-  final String ?path;
-  final String ?dir;
-  final int ?size;
 
-  AyatOfSora(
-      { this.id,
-       this.ar,
-       this.en,
-       this.filename,
-       this.path,
-       this.dir,
-       this.size});
-
-  factory AyatOfSora.fromJson(Map<String, dynamic> json) => AyatOfSora(
-      id: json['id'],
-      ar: json['ar'],
-      en: json['en'],
-      filename: json['filename'],
-      path: json['path'],
-      dir: json['dir'],
-      size: json['size']);
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'ar': ar,
-        'en': en,
-        'filename': filename,
-        'path': path,
-        'dir': dir,
-        'size': size,
-      };
-}

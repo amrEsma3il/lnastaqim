@@ -1,5 +1,5 @@
 import 'package:lnastaqim/features/radio_stream_channels/data/data_sources/local_data_sources/radio_json.dart';
-import 'package:lnastaqim/features/radio_stream_channels/data/models/radioModel.dart';
+import 'package:lnastaqim/features/radio_stream_channels/data/models/radio_model.dart';
 import 'package:radio_player/radio_player.dart';
 
 class RadioRepository {

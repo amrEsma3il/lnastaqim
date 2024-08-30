@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
+import '../../../../core/constants/colors.dart';
 
 class BookMarkCollection extends StatelessWidget {
   const BookMarkCollection({super.key});
@@ -14,7 +15,7 @@ class BookMarkCollection extends StatelessWidget {
       },
       child: Container(
         width: double.infinity,
-        margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        margin: const EdgeInsets.only(top: 20, bottom: 33),
         padding: const EdgeInsets.symmetric(horizontal: 15),
         height: 50,
         decoration: ShapeDecoration(
@@ -25,10 +26,11 @@ class BookMarkCollection extends StatelessWidget {
           children: [
             Text(
               "المرجعيات",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              style: TextStyle(fontSize: 22, 
+              color:AppColor.blueColor, fontWeight:  FontWeight.w600),
             ),
             Spacer(),
-            Icon(Icons.bookmark),
+            Icon(Icons.bookmark,color: AppColor.blueColor,size: 26,),
           ],
         ),
       ),

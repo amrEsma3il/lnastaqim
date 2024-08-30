@@ -14,7 +14,10 @@ class FeaturesGridView extends StatelessWidget {
         text: "القران",
         image: AppImages.quranFeature,
         route: AppRouteName.moshaf),
-    FeatureModel(text: "سماع القران", image: AppImages.listenFeature),
+    FeatureModel(
+        text: "سماع القران",
+        image: AppImages.listenFeature,
+        route: AppRouteName.surahPlayerScreen),
     FeatureModel(text: "احاديث", image: AppImages.ahadesFeature),
     FeatureModel(
         text: "اذكار",
@@ -24,7 +27,10 @@ class FeaturesGridView extends StatelessWidget {
         text: "القبله",
         image: AppImages.qiblaFeature,
         route: AppRouteName.qibla),
-    FeatureModel(text: "قصص وعبر", image: AppImages.storyFeature),
+    FeatureModel(
+        text: "الراديو",
+        image: AppImages.storyFeature,
+        route: AppRouteName.radio),
   ];
 
   @override

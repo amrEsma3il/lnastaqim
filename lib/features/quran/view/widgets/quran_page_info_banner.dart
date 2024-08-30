@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
 
+import '../../../../core/constants/colors.dart';
 import '../../bussniess_logic/quran/quran_cubit.dart';
 
 
@@ -37,7 +38,7 @@ class QuranPageInfoBanner extends StatelessWidget {
               style: TextStyle(
                   fontSize: 15.sp,
                   fontFamily: 'Naskh',
-                  color:const Color.fromARGB(255, 150, 126, 68)),
+                  color:AppColor.darkYellow),
             ),
 SizedBox(width: 2.w,),
             Text(
@@ -45,7 +46,7 @@ SizedBox(width: 2.w,),
               style: TextStyle(
                   fontSize: 15.sp,
                   fontFamily: 'naskh',
-                  color:const Color.fromARGB(255, 150, 126, 68)),
+                  color:AppColor.darkYellow),
             ),
           ],
         ),
@@ -54,7 +55,7 @@ SizedBox(width: 2.w,),
           style: TextStyle(
               fontSize: 15.sp,
               fontFamily: 'naskh',
-              color:const Color.fromARGB(255, 150, 126, 68)),
+              color:AppColor.darkYellow),
         ),
       ],
     );

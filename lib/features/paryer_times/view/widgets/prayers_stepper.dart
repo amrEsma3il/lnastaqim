@@ -25,6 +25,11 @@ class PrayersStepper extends StatelessWidget {
               myIndex: 1,
             ),
             StepperItem(
+              title: 'الشروق',
+              time: paryerState.sunrise.toArabic,
+              myIndex: 2,
+            ),
+            StepperItem(
               title: 'الظهر',
               time: paryerState.dhuhr.toArabic,
               myIndex: 3,
@@ -74,11 +79,11 @@ class StepperItem extends StatelessWidget {
           Text(title),
           Text(time),
           const SizedBox(height: 10),
-        BlocBuilder<PrayersTimesCubit, PrayersTimeModel>(
+          BlocBuilder<PrayersTimesCubit, PrayersTimeModel>(
             builder: (context, paryerState) {
-              log("===============index=====");
-              log( paryerState.currentPrayer!.index!.toString());
-                 log( paryerState.currentPrayer!.name!.toString());
+              // log("===============index=====");
+              // log(paryerState.currentPrayer!.index!.toString());
+              // log(paryerState.currentPrayer!.name!.toString());
               return Row(
                 children: [
                   isFirst
@@ -97,7 +102,7 @@ class StepperItem extends StatelessWidget {
             },
           ),
           const SizedBox(height: 10),
-           Icon(paryerIcon(myIndex==1?0:myIndex-2))
+          Icon(paryerIcon(myIndex - 1))
         ],
       ),
     );
@@ -145,10 +150,17 @@ class Step extends StatelessWidget {
   }
 }
 
+IconData paryerIcon(int index) {
+  List<IconData> icons = [
+    Icons.nightlight_outlined,
+    Icons.sunny_snowing,
+ Icons.wb_sunny_outlined,
+     Icons.wb_sunny_outlined,
+    
+    Icons.nights_stay_outlined,
+        Icons.nightlight_outlined,
 
-IconData paryerIcon(int index){
-  List<IconData> icons=[Icons.sunny_snowing, Icons.sunny,Icons.sunny,Icons.nights_stay_outlined,Icons.nightlight_outlined];
+  ];
 
   return icons[index];
-
 }

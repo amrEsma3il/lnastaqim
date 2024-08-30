@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/constants/colors.dart';
+
 void showShareBottomSheet(BuildContext context, Widget widget) {
   showModalBottomSheet(
     context: context,
-    backgroundColor: Colors.grey.shade400,
+    backgroundColor: AppColor.blueColor.withOpacity(0.98),
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(48.r), topLeft: Radius.circular(48.r))),
