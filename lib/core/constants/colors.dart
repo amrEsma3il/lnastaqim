@@ -25,6 +25,8 @@ class AppColor {
       const Color(0xffA85000).withOpacity(0.1);
   static Color primary = const Color(0xff404c6e);
   static Color white2 = const Color(0xffeaeef5);
+  static Color blueBlack = const Color(0xff13153B);
+
 
   static Color yellow1 = "#ebb734".toColor; //#
 
