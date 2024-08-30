@@ -3,6 +3,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/config/routing/app_routes_info/app_routes_name.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/category_item.dart';
+
 import '../../data/models/AzkarModel.dart';
 
 class AzkarCategoryListView extends StatefulWidget {
@@ -44,7 +45,13 @@ class _AzkarCategoryListViewState extends State<AzkarCategoryListView>
       uniqueCategories.add(item.category ?? "");
     }
 
-    List<String> categoriesList = uniqueCategories.toList();
+    List<String> categoriesList = uniqueCategories
+        .where((category) =>
+            category.contains("أذكار") ||
+            category.contains("الذكر") ||
+            category.contains("الأذكار") ||
+            category.contains("ذكر"))
+        .toList();
 
     return AnimationLimiter(
       child: ListView.builder(

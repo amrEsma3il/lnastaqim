@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lnastaqim/core/constants/images.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/data/models/AzkarModel.dart';
+import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/item_drop_menu.dart';
+import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/other_category_list_view.dart';
 
 import '../../../../core/constants/colors.dart';
+import '../../../adi3a/views/widgets/adi3a_category_list_view.dart';
 import '../../business_logic/azkar_category_cubit/azkar_category_cubit.dart';
-import '../widgets/category_list_view.dart';
+import '../widgets/azkar_category_list_view.dart';
 
 class AzkarView extends StatefulWidget {
   const AzkarView({super.key});
@@ -15,12 +18,13 @@ class AzkarView extends StatefulWidget {
 }
 
 class _AzkarViewState extends State<AzkarView> {
-  bool isListViewVisible = false;
-  void toggleVisibility() {
-    setState(() {
-      isListViewVisible = !isListViewVisible;
-    });
-  }
+  bool isAzkarListViewVisible = false;
+
+  bool isAdi3aListViewVisible = false;
+
+  bool isOtherListViewVisible = false;
+
+  bool isSibhaVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -36,89 +40,47 @@ class _AzkarViewState extends State<AzkarView> {
               ),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
-                child: Column(
-                  children: [
-                    const Image(
-                      image: AssetImage(AppImages.azkar),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    isListViewVisible
-                        ? Container(
-                            height: 41,
-                            decoration: ShapeDecoration(
-                                shadows: [
-                                  BoxShadow(
-                                      offset: const Offset(0, -1),
-                                      color: const Color(0xff000000)
-                                          .withOpacity(0.25),
-                                      blurRadius: 16,
-                                      blurStyle: BlurStyle.outer,
-                                      spreadRadius:
-                                          BorderSide.strokeAlignInside)
-                                ],
-                                color: AppColor.white2,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15))),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 10.0),
-                                  child: Text(
-                                    "الاذكار",
-                                    style: TextStyle(
-                                        color: AppColor.primary,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                                IconButton(
-                                    onPressed: toggleVisibility,
-                                    icon: Icon(
-                                      Icons.arrow_drop_down,
-                                      color: AppColor.primary,
-                                    )),
-                              ],
-                            ),
-                          )
-                        : Container(
-                            height: 41,
-                            decoration: ShapeDecoration(
-                                color: AppColor.primary,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15))),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.only(right: 10.0),
-                                  child: Text(
-                                    "الاذكار",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                                IconButton(
-                                    onPressed: toggleVisibility,
-                                    icon: const Icon(
-                                      Icons.arrow_drop_up,
-                                      color: Colors.white,
-                                    )),
-                              ],
-                            ),
-                          ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Visibility(
-                        visible: isListViewVisible,
-                        child: Expanded(
-                            child: AzkarCategoryListView(items: state))),
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const Image(
+                        image: AssetImage(AppImages.azkar),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ItemDropMenu(
+                        category: "azkar",
+                        text: "الأذكار",
+                        widget: AzkarCategoryListView(items: state),
+                      ),
+                      ItemDropMenu(
+                        category: "adi3a",
+                        text: "الأدعية",
+                        widget: Adi3aCategoryListView(items: state),
+                      ),
+                      ItemDropMenu(
+                        category: "other",
+                        text: "أخرى",
+                        widget: OtherCategoryListView(items: state),
+                      ),
+                      ItemDropMenu(
+                        category: "sibha",
+                        text: "السبحه",
+                        widget: Container(
+                          height: 250,
+                          width: double.infinity,
+                          decoration: ShapeDecoration(
+                              color: AppColor.blueColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20))),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
