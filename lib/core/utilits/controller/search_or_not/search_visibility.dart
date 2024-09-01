@@ -7,4 +7,6 @@ class SearchVisabilityCubit extends Cubit<bool> {
       BlocProvider.of<SearchVisabilityCubit>(context);
 
   searchVisability() => emit(!state);
+  
+  searchClose() => emit(false);
 }

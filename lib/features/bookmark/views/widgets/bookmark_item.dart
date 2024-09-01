@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lnastaqim/features/bookmark/bussniess_logic/bookmark_cubit/bookmark_cubit.dart';
 
@@ -26,6 +27,7 @@ class BookmarkItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        QuranCubit.get(context).clearMenuOverlayEvent();
         final selectedAyah = pageAyahs
             .expand((ayahList) => ayahList)
             .firstWhere(
@@ -60,7 +62,7 @@ class BookmarkItem extends StatelessWidget {
         }
       },
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 20.0),
+        padding:  EdgeInsets.only(bottom: 21.h),
         child: Row(
           children: [
             Icon(
@@ -72,7 +74,8 @@ class BookmarkItem extends StatelessWidget {
             ),
             Text(
               text,
-              style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              style: const TextStyle(color: Colors.white,
+                fontSize: 23, fontWeight: FontWeight.bold),
             ),
           ],
         ),

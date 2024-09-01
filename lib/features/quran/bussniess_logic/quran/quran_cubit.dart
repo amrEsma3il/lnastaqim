@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:math' as math;
 
 import 'package:collection/collection.dart';
@@ -10,9 +11,11 @@ import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
 import '../../../../core/local_database/quran/quran_local_database.dart';
 import '../../../../core/utilits/functions/search_string_pattern/boyer_moore_algo.dart'
     as boyer_more;
+import '../../data/models/quran_model.dart';
 import '../../data/models/search_ayah_entity.dart';
 import '../../data/models/select_aya_model.dart';
 import '../../data/models/surahs_model.dart';
+import '../../data/repository/quran_repository.dart';
 import '../screen_tap_Visibility/screen_tap_visability.dart';
 // import '../../../../core/utilits/functions/search_string_pattern/kmp_algo.dart' as kmp;
 
@@ -143,6 +146,8 @@ class QuranCubit extends Cubit<SelectAyaModel> {
     });
   }
 
+
+
   List<List<Ayah>> getCurrentPageAyahsSeparatedForBasmalah(int pageIndex) =>
       pages[pageIndex]
           .splitBetween((f, s) => f.ayahNumber > s.ayahNumber)
@@ -164,6 +169,74 @@ class QuranCubit extends Cubit<SelectAyaModel> {
       return "Surah not found";
     }
   }
+
+
+int getPageNumber(int ayanumber) {
+  int pageNum=1;
+  for (var surah in quranSurahs) {
+    for (var ayah in surah['ayahs']) {
+      if (ayah['number'] == ayanumber) {
+        pageNum= ayah['page'];
+        log(pageNum.toString());
+      }
+    }
+  }
+  return pageNum;
+}
+
+int? getFirstAyaPage(int page) {
+  for (var surah in quranSurahs) {
+    for (var ayah in surah['ayahs']) {
+      if (ayah['page'] == page) {
+        //  log(pageNum.toString());
+        return ayah['number'];
+       
+       
+      }
+    }
+  }
+  return null;
+}
+
+
+ String? getSurahNameFromPage2(int page){
+
+List<SurahModel> quranSowar=QuranRepository.getQuranSurah();for (int i = 0; i < quranSowar.length; i++) {
+
+  if (page>=quranSowar[i].startPage && page <= quranSowar[i].endPage) {
+    return quranSowar[i].name;
+  }
+
+}
+  return null;
+  }
+
+
+
+
+   int? getSurahNumberFromPage2(int page){
+
+List<SurahModel> quranSowar=QuranRepository.getQuranSurah();
+for (int i = 0; i < quranSowar.length; i++) {
+
+  if (page>=quranSowar[i].startPage&& page <= quranSowar[i].endPage) {
+    return quranSowar[i].id;
+  }
+
+}
+  return null;
+  }
+//////////////
+int getSurahVersesNumber(String surahName) {
+  List<Map<String,dynamic>> quranSurahs=QuranDataBase.quranJsonData;
+  for (final surah in quranSurahs) {
+    if (surah["name"] == surahName) {
+      return (surah["array"] as List).length;
+    }
+  }
+  return 0; // Return 0 if Surah not found
+}
+
   
   int getSurahNumberByName(String surahName) {
     try {
@@ -175,9 +248,19 @@ class QuranCubit extends Cubit<SelectAyaModel> {
     }
   }
 
+
+ static  String removeTashkeel(String text) {
+  // Define a regular expression to match Arabic diacritics and decorative characters
+  RegExp tashkeelPattern = RegExp(r'[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06DC\u06DF-\u06E4\u06E7-\u06E8\u06EA-\u06ED\u08D3-\u08E1\u08E3-\u08FF]');
+  
+  // Replace all matched diacritics with an empty string
+  return text.replaceAll(tashkeelPattern, '');
+}
+
   List<Ayah> getCurrentPageAyahs(int pageIndex) => pages[pageIndex];
 
   Ayah getPageInfo(int page) => allAyahs.firstWhere((a) => a.page == page + 1);
+
 
   int getSurahNumberByAyah(Ayah ayah) =>
       surahs.firstWhere((s) => s.ayahs.contains(ayah)).surahNumber;
@@ -256,6 +339,48 @@ class QuranCubit extends Cubit<SelectAyaModel> {
     // If the page's Hizb quarter is the same as the previous page, do not display it again
     return "";
   }
+
+
+
+  
+  double getHizbQuarter(int pageNumber) {
+    final List<Ayah> currentPageAyahs =
+        allAyahs.where((ayah) => ayah.page == pageNumber).toList();
+    if (currentPageAyahs.isEmpty) return 0;
+
+    // Find the highest Hizb quarter on the current page
+    int? currentMaxHizbQuarter =
+        currentPageAyahs.map((ayah) => ayah.hizbQuarter).reduce(math.max);
+
+    // Store/update the highest Hizb quarter for this page
+    pageToHizbQuarterMap[pageNumber] = currentMaxHizbQuarter;
+
+    // For displaying the Hizb quarter, check if this is a new Hizb quarter different from the previous page's Hizb quarter
+    // For the first page, there is no "previous page" to compare, so display its Hizb quarter
+    if (pageNumber == 1 ||
+        pageToHizbQuarterMap[pageNumber - 1] != currentMaxHizbQuarter) {
+      int hizbNumber = ((currentMaxHizbQuarter - 1) ~/ 4) + 1;
+      int quarterPosition = (currentMaxHizbQuarter - 1) % 4;
+
+      switch (quarterPosition) {
+        case 0:
+          return hizbNumber.toDouble();
+        case 1:
+          return 1/4;
+        case 2:
+          return 1/2;
+        case 3:
+          return 3/4;
+        default:
+          return 0;
+      }
+    }
+
+    // If the page's Hizb quarter is the same as the previous page, do not display it again
+    return 0;
+  }
+
+
 
   bool getSajdaInfoForPage(List<Ayah> pageAyahs) {
     for (var ayah in pageAyahs) {

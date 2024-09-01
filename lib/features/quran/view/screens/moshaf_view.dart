@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,9 +21,15 @@ import 'package:screenshot/screenshot.dart';
 import 'package:lnastaqim/features/tafaseer/view/screen/tafseer.dart';
 import '../../../../core/constants/images.dart';
 import '../../../../core/utilits/controller/search_or_not/search_visibility.dart';
+import '../../../../core/utilits/functions/toast_message.dart';
 import '../../../../core/utilits/widgets/custom_text_field.dart';
+import '../../../quran_sound/logic/audio_cubit/audio_cubit.dart';
+import '../../../quran_sound/logic/audio_cubit/audio_state.dart';
 import '../../../share/views/widgets/share_ayah_checkbox.dart';
 import '../../../tafaseer/bussniess_logic/tafseer_cubit.dart';
+
+import '../../bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
+import '../../bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_state.dart';
 import '../../bussniess_logic/quran_sowar/search_on_aya_from_whole_quran_cubit.dart';
 import '../../bussniess_logic/screen_tap_Visibility/screen_tap_visability.dart';
 import '../../data/models/search_ayah_entity.dart';
@@ -47,441 +52,768 @@ class MoshafView extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false, //
       body: SafeArea(
-          child: PopScope(onPopInvoked: (didPop) {
-            QuranCubit.get(context).clearScreen(context);
-          },
-            child: GestureDetector(
-                    onTap: () {
-            QuranCubit.get(context).clearMenuOverlayEvent();
-                    },
-                    onHorizontalDragStart: (position) {
-                  QuranCubit.get(context).clearScreen(context);
-                    },
-                    child: PageView.builder(
-              controller: cubit.pageController,
-              onPageChanged: (index) {
-             
-                QuranCubit.get(context).clearScreen(context);
+          child: PopScope(
+        onPopInvoked: (didPop) {
+          QuranCubit.get(context).clearScreen(context);
+        },
+        child: BlocBuilder<AudioControlCubit, AudioControlState>(
+          builder: (context, verseSoundstate) {
+            return GestureDetector(
+              onTap: () {
+                if (!verseSoundstate.isPlaying) {
+                  QuranCubit.get(context).clearMenuOverlayEvent();
+                }
               },
-              itemCount: 604,
-              reverse: true,
-              padEnds: false,
-              physics: const ClampingScrollPhysics(),
-              itemBuilder: (context, index) {
-                return Stack(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        ScreenOverlayCubit.get(context).overlaysVisability();
-                        QuranCubit.get(context).clearMenuOverlayEvent();
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(10.w, 0, 10.w, 0),
-                        child: MoshafPage(pageIndex: 603 - index),
-                      ),
-                    ),
-            
-                    GestureDetector(
-                      onTap: () {
-                        ScreenOverlayCubit.get(context).overlaysVisability();
-                      },
-                      child: BlocBuilder<ScreenOverlayCubit, int>(
-                        builder: (context, state) {
-                          return state == 2
-                              ? Container(
-                                  width: Get.width,
-                                  height: Get.height,
-                                  color: Colors.black45,
-                                )
-                              : const SizedBox();
-                        },
-                      ),
-                    ),
-            
-                    BlocBuilder<ScreenOverlayCubit, int>(
-                      builder: (context, state) {
-                        return Stack(
-                          children: [
-                            state == 1 || state == 2
-                                ? BlocBuilder<SearchVisabilityCubit, bool>(
-                                    builder: (context, searchState) {
-                                      return Positioned(
-                                        top: 0,
-                                        left: 0,
-                                        right: 0,
-                                        child: Container(
-                                          width: Get.width,
-                                          height: 70.h,
-                                          decoration: BoxDecoration(
-                                              color: AppColor.blueColor
-                                                  .withOpacity(0.74)),
-                                          child: Stack(
-                                            children: [
-                                              Positioned(
-                                                right: 3,
-                                                top: 9,
-                                                child: IconButton(
-                                                  onPressed: () {
-                                                    QuranCubit.get(context).clearScreen(context);
-                                                    Get.back();
-                                                  },
-                                                  icon: const Icon(
-                                                    Icons.arrow_back,
-                                                    color: Colors.white,
-                                                    size: 25,
+              onHorizontalDragStart: (position) {
+                if (!verseSoundstate.isPlaying) {
+                  QuranCubit.get(context).clearScreen(context);
+                } else {
+                  ScreenOverlayCubit.get(context).clearIverlayVisability();
+                }
+              },
+              child: PageView.builder(
+                  controller: cubit.pageController,
+                  onPageChanged: (index) {
+                    if (!verseSoundstate.isPlaying) {
+                      QuranCubit.get(context).clearScreen(context);
+                    } else {
+                      ScreenOverlayCubit.get(context).clearIverlayVisability();
+                    }
+                    AudioControlCubit.get(context).updatePage(604 - index);
+                  },
+                  itemCount: 604,
+                  reverse: true,
+                  padEnds: false,
+                  physics: const ClampingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Stack(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            SearchVisabilityCubit.get(context).searchClose();
+                            ScreenOverlayCubit.get(context)
+                                .overlaysVisability();
+                            if (!verseSoundstate.isPlaying) {
+                              QuranCubit.get(context).clearMenuOverlayEvent();
+                            }
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(10.w, 0, 10.w, 0),
+                            child: MoshafPage(
+                              pageIndex: 603 - index,
+                              verseSoundstate: verseSoundstate,
+                            ),
+                          ),
+                        ),
+
+                        GestureDetector(
+                          onTap: () {
+                            ScreenOverlayCubit.get(context)
+                                .overlaysVisability();
+                          },
+                          child: BlocBuilder<ScreenOverlayCubit, int>(
+                            builder: (context, state) {
+                              return state == 2
+                                  ? Container(
+                                      width: Get.width,
+                                      height: Get.height,
+                                      color: Colors.black45,
+                                    )
+                                  : const SizedBox();
+                            },
+                          ),
+                        ),
+
+                        BlocBuilder<ScreenOverlayCubit, int>(
+                          builder: (context, state) {
+                            return Stack(
+                              children: [
+                                state == 1 || state == 2
+                                    ? BlocBuilder<SearchVisabilityCubit, bool>(
+                                        builder: (context, searchState) {
+                                          return Positioned(
+                                            top: 0,
+                                            left: 0,
+                                            right: 0,
+                                            child: Container(
+                                              width: Get.width,
+                                              height: 70.h,
+                                              decoration: BoxDecoration(
+                                                  color: AppColor.blueColor
+                                                      .withOpacity(0.74)),
+                                              child: Stack(
+                                                children: [
+                                                  Positioned(
+                                                    right: 3,
+                                                    top: 9,
+                                                    child: IconButton(
+                                                      onPressed: () {
+                                                        QuranCubit.get(context)
+                                                            .clearScreen(
+                                                                context);
+                                                        AudioControlCubit.get(
+                                                                context)
+                                                            .stop();
+                                                        AudioControlCubit.get(
+                                                                context)
+                                                            .updateVerseNumber(
+                                                                6222);
+                                                        Get.back();
+                                                      },
+                                                      icon: const Icon(
+                                                        Icons.arrow_back,
+                                                        color: Colors.white,
+                                                        size: 25,
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                  left: 9,
-                                                  top: 9,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: [
-                                                      IconButton(
-                                                        onPressed: () {
-                                                          // List<SearchAyahEntity>
-                                                          //     searchResult = cubit
-                                                          //         .searchInMoshaf(
-                                                          //             searchText:
-                                                          //                 'يا');
-                                                          // print(searchResult
-                                                          //     .length);
-                                                          // String finalResult =
-                                                          //     "${searchResult[0].aya.ayaTextEmlaey.substring(0, searchResult[0].startPosition)} ${searchResult[0].aya.ayaTextEmlaey.substring(searchResult[0].startPosition, searchResult[0].startPosition + 2)} ${searchResult[0].aya.ayaTextEmlaey.substring(2 + searchResult[0].startPosition, searchResult[0].aya.ayaTextEmlaey.length)}";
-                                                          // log(finalResult);
-                                                          // print(searchResult.map(
-                                                          //     (e) => e.aya
-                                                          //         .ayaTextEmlaey));
-                                                          if (searchState) {
-            SearchOnAyaCubit.get(context).clearSearchEvent();
-                                                            
-                                                          } else {
-                                                            
-                                                          }
-            
-                                                          SearchVisabilityCubit
-                                                                  .get(context)
-                                                              .searchVisability();
-                                                        },
-                                                        icon: Icon(
-                                                          searchState == false
-                                                              ? Icons.search
-                                                              : Icons.close,
-                                                          color: Colors.white,
-                                                          size: 25,
-                                                        ),
-                                                      ),
-                                                      IconButton(
-                                                        onPressed: () {},
-                                                        icon: const Icon(
-                                                          Icons.bookmark_outline,
-                                                          color: Colors.white,
-                                                          size: 25.5,
-                                                        ),
-                                                      ),
-                                                      // CompositedTransformTarget(
-                                                      //   link: cubit.layerLink,
-                                                      //   child: IconButton(
-                                                      //     onPressed: () {
-                                                      //       ScreenOverlayCubit
-                                                      //               .get(context)
-                                                      //           .menuShow();
-                                                      //     },
-                                                      //     icon: const Icon(
-                                                      //       Icons.more_vert,
-                                                      //       color: Colors.white,
-                                                      //       size: 22,
-                                                      //     ),
-                                                      //   ),
-                                                      // ),
-                                                      CompositedTransformTarget(
-                                                        link: cubit.layerLink,
-                                                        child: InkWell(
-                                                          onTap: () {
-                                                            SearchOnAyaCubit.get(context).clearSearchEvent();
-                                                            ScreenOverlayCubit
-                                                                    .get(context)
-                                                                .menuShow();
-                                                          },
-                                                          child: Image.asset(
-                                                            AppImages.menu,
-                                                            color: Colors.white,
-                                                            height: 27,
-                                                          ),
-                                                        ),
-                                                      )
-                                                    ],
-                                                  )),
-                                              Positioned(
-                                                  right: 70,
-                                                  // top: 2,
-            
-                                                  child: SizedBox(
-                                                    width: 211,
-                                                    child: Stack(
-                                                      children: [
-                                                        AnimatedOpacity(
-                                                          opacity:
+                                                  Positioned(
+                                                      left: 9,
+                                                      top: 9,
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          IconButton(
+                                                            onPressed: () {
+                                                              // List<SearchAyahEntity>
+                                                              //     searchResult = cubit
+                                                              //         .searchInMoshaf(
+                                                              //             searchText:
+                                                              //                 'يا');
+                                                              // print(searchResult
+                                                              //     .length);
+                                                              // String finalResult =
+                                                              //     "${searchResult[0].aya.ayaTextEmlaey.substring(0, searchResult[0].startPosition)} ${searchResult[0].aya.ayaTextEmlaey.substring(searchResult[0].startPosition, searchResult[0].startPosition + 2)} ${searchResult[0].aya.ayaTextEmlaey.substring(2 + searchResult[0].startPosition, searchResult[0].aya.ayaTextEmlaey.length)}";
+                                                              // log(finalResult);
+                                                              // print(searchResult.map(
+                                                              //     (e) => e.aya
+                                                              //         .ayaTextEmlaey));
+                                                              if (searchState) {
+                                                                SearchOnAyaCubit
+                                                                        .get(
+                                                                            context)
+                                                                    .clearSearchEvent();
+                                                              } else {}
+
+                                                              SearchVisabilityCubit
+                                                                      .get(
+                                                                          context)
+                                                                  .searchVisability();
+                                                            },
+                                                            icon: Icon(
                                                               searchState ==
-                                                                      true
-                                                                  ? 0
-                                                                  : 1,
-                                                          duration:
-                                                              const Duration(
-                                                            milliseconds: 450,
+                                                                      false
+                                                                  ? Icons.search
+                                                                  : Icons.close,
+                                                              color:
+                                                                  Colors.white,
+                                                              size: 25,
+                                                            ),
                                                           ),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              Text(
-                                                                cubit.getSurahNameFromPage(
-                                                                    603 - index),
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        24.sp,
-                                                                    fontFamily:
-                                                                        'naskh',
-                                                                    color: Colors
-                                                                        .white),
+                                                          IconButton(
+                                                            onPressed: () {
+                                                              MoshafBookmarkCubit
+                                                                      .get(
+                                                                          context)
+                                                                  .updateBookmark(
+                                                                      604 -
+                                                                          index);
+                                                            },
+                                                            icon: BlocBuilder<
+                                                                MoshafBookmarkCubit,
+                                                                MoshafBookmarkState>(
+                                                              builder: (context,
+                                                                  moshafBookmarkState) {
+                                                                bool isBooked = moshafBookmarkState
+                                                                        .isMark &&
+                                                                    moshafBookmarkState
+                                                                            .pageNumber ==
+                                                                        (604 -
+                                                                            index);
+                                                                // int  pageNum=moshafBookmarkState.pageNumber;
+                                                                return Icon(
+                                                                  isBooked
+                                                                      ? Icons
+                                                                          .bookmark
+                                                                      : Icons
+                                                                          .bookmark_outline,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  size: 25.5,
+                                                                );
+                                                              },
+                                                            ),
+                                                          ),
+                                                          // CompositedTransformTarget(
+                                                          //   link: cubit.layerLink,
+                                                          //   child: IconButton(
+                                                          //     onPressed: () {
+                                                          //       ScreenOverlayCubit
+                                                          //               .get(context)
+                                                          //           .menuShow();
+                                                          //     },
+                                                          //     icon: const Icon(
+                                                          //       Icons.more_vert,
+                                                          //       color: Colors.white,
+                                                          //       size: 22,
+                                                          //     ),
+                                                          //   ),
+                                                          // ),
+                                                          CompositedTransformTarget(
+                                                            link:
+                                                                cubit.layerLink,
+                                                            child: InkWell(
+                                                              onTap: () {
+                                                                SearchOnAyaCubit
+                                                                        .get(
+                                                                            context)
+                                                                    .clearSearchEvent();
+                                                                ScreenOverlayCubit
+                                                                        .get(
+                                                                            context)
+                                                                    .menuShow();
+                                                              },
+                                                              child:
+                                                                  Image.asset(
+                                                                AppImages.menu,
+                                                                color: Colors
+                                                                    .white,
+                                                                height: 27,
                                                               ),
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                    '${'صفحة'} ${(603 - index).toString().toArabic}, ',
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            15.sp,
-                                                                        fontFamily:
-                                                                            'Naskh',
-                                                                        color: Colors
-                                                                            .white70),
-                                                                  ),
-                                                                  Text(
-                                                                    '${'الجزء'}:${cubit.getPageInfo(603 - index).juz.toString().toArabic}',
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            15.sp,
-                                                                        fontFamily:
-                                                                            'Naskh',
-                                                                        color: Colors
-                                                                            .white70),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: 2.w,
-                                                                  ),
-                                                                ],
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Positioned(
-                                                            top: 10,
-                                                            right: 0,
-                                                            // left: 0,
-            
-                                                            child:
-                                                                AnimatedOpacity(
+                                                            ),
+                                                          )
+                                                        ],
+                                                      )),
+                                                  Positioned(
+                                                      right: 70,
+                                                      // top: 2,
+
+                                                      child: SizedBox(
+                                                        width: 211,
+                                                        child: Stack(
+                                                          children: [
+                                                            AnimatedOpacity(
                                                               opacity:
                                                                   searchState ==
                                                                           true
-                                                                      ? 1
-                                                                      : 0,
+                                                                      ? 0
+                                                                      : 1,
                                                               duration:
                                                                   const Duration(
-                                                                milliseconds: 450,
+                                                                milliseconds:
+                                                                    450,
                                                               ),
-                                                              child:
-                                                                  CustomTextField(textColor: Colors.white70,
-                                                                      onChanged: (p0) {
-                                                                    SearchOnAyaCubit.get(context).searchEvent(context);
-                                                                  },
-                                                                controller: SearchOnAyaCubit
-                                                                        .get(
-                                                                            context)
-                                                                    .searchController,
-                                                                height: 40,
-                                                                width:
-                                                                    searchState==
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  Text(
+                                                                    cubit.getSurahNameFromPage(
+                                                                        603 -
+                                                                            index),
+                                                                    style: TextStyle(
+                                                                        fontSize: 24
+                                                                            .sp,
+                                                                        fontFamily:
+                                                                            'naskh',
+                                                                        color: Colors
+                                                                            .white),
+                                                                  ),
+                                                                  Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        '${'صفحة'} ${(604 - index).toString().toArabic}, ',
+                                                                        style: TextStyle(
+                                                                            fontSize: 15
+                                                                                .sp,
+                                                                            fontFamily:
+                                                                                'Naskh',
+                                                                            color:
+                                                                                Colors.white70),
+                                                                      ),
+                                                                      Text(
+                                                                        '${'الجزء'}:${cubit.getPageInfo(603 - index).juz.toString().toArabic}',
+                                                                        style: TextStyle(
+                                                                            fontSize: 15
+                                                                                .sp,
+                                                                            fontFamily:
+                                                                                'Naskh',
+                                                                            color:
+                                                                                Colors.white70),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            2.w,
+                                                                      ),
+                                                                    ],
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            Positioned(
+                                                                top: 10,
+                                                                right: 0,
+                                                                // left: 0,
+
+                                                                child:
+                                                                    AnimatedOpacity(
+                                                                  opacity:
+                                                                      searchState ==
+                                                                              true
+                                                                          ? 1
+                                                                          : 0,
+                                                                  duration:
+                                                                      const Duration(
+                                                                    milliseconds:
+                                                                        450,
+                                                                  ),
+                                                                  child:
+                                                                      CustomTextField(
+                                                                    textColor:
+                                                                        Colors
+                                                                            .white70,
+                                                                    onChanged:
+                                                                        (p0) {
+                                                                      SearchOnAyaCubit.get(
+                                                                              context)
+                                                                          .searchEvent(
+                                                                              context);
+                                                                    },
+                                                                    controller:
+                                                                        SearchOnAyaCubit.get(context)
+                                                                            .searchController,
+                                                                    height: 40,
+                                                                    width: searchState ==
                                                                             true
                                                                         ? 210
                                                                         : 0,
-                                                                hintText:
-                                                                    "بحث في القرءان",
+                                                                    hintText:
+                                                                        "بحث في القرءان",
+                                                                  ),
+                                                                )),
+                                                          ],
+                                                        ),
+                                                      ))
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : const SizedBox(),
+                                state == 1 || state == 2
+                                    ? Positioned(
+                                        bottom: 0,
+                                        right: 0,
+                                        left: 0,
+                                        child: Container(
+                                          width: Get.width,
+                                          height: 55.h,
+                                          decoration: BoxDecoration(
+                                            color: AppColor.blueColor
+                                                .withOpacity(0.74),
+                                          ),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              BlocBuilder<AudioControlCubit,
+                                                  AudioControlState>(
+                                                builder:
+                                                    (context, verseBarStatus) {
+                                                  if (verseBarStatus
+                                                          .playVerseBarStatus ==
+                                                      PlayVerseBarStatus
+                                                          .turnOn) {
+                                                    return Expanded(
+                                                      child: Center(
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  right: 10.w),
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Stack(
+                                                                children: [
+                                                                  Positioned(
+                                                                    child:
+                                                                        IconButton(
+                                                                      icon:
+                                                                          const Icon(
+                                                                        Icons
+                                                                            .repeat,
+                                                                        color: Colors
+                                                                            .white,
+                                                                      ),
+                                                                      onPressed:
+                                                                          () {
+                                                                        context
+                                                                            .read<AudioControlCubit>()
+                                                                            .toggleRepeat();
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                  Positioned(
+                                                                      top: 2.5,
+                                                                      right: 6,
+                                                                      child:
+                                                                          Text(
+                                                                        // verseBarStatus.maxRepeats==AudioControlCubit.infinity?"∞    ":
+                                                                        (verseBarStatus.maxRepeats +
+                                                                                1)
+                                                                            .toString()
+                                                                            .toArabic,
+                                                                        style: const TextStyle(
+                                                                            color:
+                                                                                Colors.white60,
+                                                                            fontSize: 20),
+                                                                      ))
+                                                                ],
                                                               ),
-                                                            )),
-                                                      ],
-                                                    ),
+                                                              IconButton(
+                                                                icon:
+                                                                    const Icon(
+                                                                  Icons
+                                                                      .skip_next,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                onPressed: () {
+                                                                  // final selectedReciter = context.read<AudioControlCubit>().state.selectedReciter;
+                                                                  context
+                                                                      .read<
+                                                                          AudioControlCubit>()
+                                                                      .playPreviousVerse(
+                                                                          context);
+                                                                },
+                                                              ),
+                                                              IconButton(
+                                                                icon: BlocBuilder<
+                                                                    AudioControlCubit,
+                                                                    AudioControlState>(
+                                                                  builder:
+                                                                      (context,
+                                                                          state) {
+                                                                    return Icon(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      state.isPlaying
+                                                                          ? Icons
+                                                                              .pause
+                                                                          : Icons
+                                                                              .play_arrow,
+                                                                    );
+                                                                  },
+                                                                ),
+                                                                onPressed: () {
+                                                                  context
+                                                                      .read<
+                                                                          AudioControlCubit>()
+                                                                      .togglePlayPause(
+                                                                          context);
+                                                                },
+                                                              ),
+                                                              IconButton(
+                                                                icon:
+                                                                    const Icon(
+                                                                  Icons.stop,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                onPressed: () {
+                                                                  // final selectedReciter = context.read<AudioControlCubit>().state.selectedReciter;
+                                                                  context
+                                                                      .read<
+                                                                          AudioControlCubit>()
+                                                                      .stop();
+                                                                },
+                                                              ),
+                                                              IconButton(
+                                                                icon:
+                                                                    const Icon(
+                                                                  Icons
+                                                                      .skip_previous,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                onPressed: () {
+                                                                  // final selectedReciter = context.read<AudioControlCubit>().state.selectedReciter;
+                                                                  context
+                                                                      .read<
+                                                                          AudioControlCubit>()
+                                                                      .playNextVerse(
+                                                                          context);
+                                                                },
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+
+                                                  if (verseBarStatus
+                                                          .playVerseBarStatus ==
+                                                      PlayVerseBarStatus
+                                                          .loading) {
+                                                    return Expanded(
+                                                        child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          right: 14.w,
+                                                          left: 6.w,
+                                                          top: 14.h,
+                                                          bottom: 3.h),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          SizedBox(
+                                                              height: 2.6.h,
+                                                              child:
+                                                                  LinearProgressIndicator(
+                                                                color: AppColor
+                                                                    .yellow1,
+                                                                backgroundColor:
+                                                                    AppColor
+                                                                        .bluishGray,
+                                                              )),
+                                                          SizedBox(
+                                                            height: 3.4.h,
+                                                          ),
+                                                          Text(
+                                                            "تحميل...",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white70,
+                                                                fontSize: 19.r),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ));
+                                                  }
+
+                                                  return Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      // TODO: play sound verse
+                                                      IconButton(
+                                                          onPressed: () {
+                                                            //verse
+                                                            AudioControlCubit
+                                                                    .get(
+                                                                        context)
+                                                                .togglePlayPause(
+                                                                    context);
+                                                            QuranCubit.get(
+                                                                    context)
+                                                                .searchAya(
+                                                                    verseSoundstate
+                                                                        .currentVerse);
+                                                          },
+                                                          icon: Icon(
+                                                            verseSoundstate
+                                                                    .isPlaying
+                                                                ? Icons.pause
+                                                                : Icons
+                                                                    .play_arrow,
+                                                            color: Colors.white,
+                                                          )),
+                                                      Container(
+                                                        color: Colors.white,
+                                                        width: 1.2,
+                                                        height: 45,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 13.w,
+                                                      ),
+                                                      Text(
+                                                        verseSoundstate
+                                                            .selectedReciter
+                                                            .arabicName,
+                                                        style: TextStyle(
+                                                            fontSize: 21.sp,
+                                                            fontFamily: 'naskh',
+                                                            color:
+                                                                Colors.white),
+                                                      )
+                                                    ],
+                                                  );
+                                                },
+                                              ),
+                                              IconButton(
+                                                  onPressed: () {
+                                                    AudioControlCubit.get(
+                                                            context)
+                                                        .showReciters(context);
+                                                  },
+                                                  icon: const Icon(
+                                                    Icons.keyboard_arrow_up,
+                                                    color: Colors.white,
                                                   ))
                                             ],
                                           ),
-                                        ),
-                                      );
-                                    },
-                                  )
-                                : const SizedBox(),
-                            state == 1 || state == 2
+                                        ))
+                                    : const SizedBox()
+                              ],
+                            );
+                          },
+                        ),
+
+                        BlocBuilder<SearchOnAyaCubit, List<SearchAyahEntity>>(
+                          builder: (context, searchAyahState) {
+                            String searchText = SearchOnAyaCubit.get(context)
+                                .searchController
+                                .text;
+                            return searchText.isNotEmpty
                                 ? Positioned(
-                                    bottom: 0,
-                                    right: 0,
-                                    left: 0,
-                                    child: Container(
-                                      width: Get.width,
-                                      height: 55.h,
-                                      decoration: BoxDecoration(
-                                        color:
-                                            AppColor.blueColor.withOpacity(0.74),
-                                      ),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              IconButton(
-                                                  onPressed: () {},
-                                                  icon: const Icon(
-                                                    Icons.play_arrow,
-                                                    color: Colors.white,
-                                                  )),
-                                              Container(
-                                                color: Colors.white,
-                                                width: 1.2,
-                                                height: 45,
-                                              ),
-                                              SizedBox(
-                                                width: 13.w,
-                                              ),
-                                              Text(
-                                                "المنشاوي مجود",
-                                                style: TextStyle(
-                                                    fontSize: 21.sp,
-                                                    fontFamily: 'naskh',
-                                                    color: Colors.white),
+                                    width: Get.width - 14,
+                                    child: CompositedTransformFollower(
+                                      link: cubit.layerLink,
+                                      offset: Offset(-1.5, 55.h),
+                                      showWhenUnlinked: false,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: AppColor.blueColor
+                                              .withOpacity(0.86),
+                                        ),
+                                        height: searchAyahState.isEmpty
+                                            ? 118.h * 3
+                                            : searchAyahState.length < 6
+                                                ? searchAyahState.length * 118.h
+                                                : Get.height - 175,
+                                        width: Get.width - 20,
+                                        child: searchAyahState.isEmpty
+                                            ? const Center(
+                                                child: Text(
+                                                  "لا توجد نتائج ...",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 23,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
                                               )
-                                            ],
-                                          ),
-                                          IconButton(
-                                              onPressed: () {},
-                                              icon: const Icon(
-                                                Icons.keyboard_arrow_up,
-                                                color: Colors.white,
-                                              ))
-                                        ],
+                                            : ListView.separated(
+                                                itemBuilder: (context, index) {
+                                                  return SearchItemComponent(
+                                                    ayaInfo:
+                                                        searchAyahState[index],
+                                                    searchWordLength:
+                                                        searchText.length,
+                                                  );
+                                                },
+                                                separatorBuilder:
+                                                    (context, index) =>
+                                                        Container(
+                                                          width: Get.width,
+                                                          height: 0.9.h,
+                                                          color: Colors.white,
+                                                        ),
+                                                itemCount:
+                                                    searchAyahState.length),
                                       ),
                                     ))
-                                : const SizedBox()
-                          ],
-                        );
-                      },
-                    ),
-            
-                    BlocBuilder<SearchOnAyaCubit,
-                        List<SearchAyahEntity>>(
-                      builder: (context, searchAyahState) {
-                        String searchText=SearchOnAyaCubit.get(context).searchController.text;
-                        return searchText.isNotEmpty? Positioned(
-                            width: Get.width - 14,
-                            child: CompositedTransformFollower(
-                              link: cubit.layerLink,
-                              offset: Offset(-1.5, 55.h),
-                              showWhenUnlinked: false,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: AppColor.blueColor.withOpacity(0.86),
-                                ),
-                                height:searchAyahState.isEmpty?118.h*3: searchAyahState.length<6?searchAyahState.length*118.h: Get.height - 175 ,
-                                width: Get.width - 20,
-                                child:searchAyahState.isEmpty?const Center(child: Text("لا توجد نتائج ...",style: TextStyle(color: Colors.white,fontSize: 23,fontWeight: FontWeight.w500),),): ListView.separated(itemBuilder: (context, index) {
-                                  return SearchItemComponent(ayaInfo:searchAyahState[index] ,searchWordLength: searchText.length,);
-                                }, separatorBuilder: (context, index) => Container(width: Get.width,height: 0.9.h,color: Colors.white,), itemCount: searchAyahState.length),
-                              ),
-                            )):const SizedBox();
-                      },
-                    ),
-                    //TODO: widget component here for menu and improve to
-            
-                    BlocBuilder<ScreenOverlayCubit, int>(
-                      builder: (context, state) {
-                        return state == 2
-                            ? Positioned(
-                                width: 198,
-                                child: CompositedTransformFollower(
-                                    link: cubit.layerLink,
-                                    offset: Offset(-7, -7.h),
-                                    showWhenUnlinked: false,
-                                    child: Container(
-            // width:  170,
-                                      height: 239,
-                                      decoration: BoxDecoration(
-                                          color: AppColor.blueColor,
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: ListView.separated(
-                                          itemBuilder: (context, index) =>
-                                              GestureDetector(
-                                                onTap: ScreenOverlayCubit.get(
-                                                            context)
-                                                        .menuItems(context)[index]
-                                                    ['onTap'],
-                                                child: SizedBox(
-                                                  width: Get.width,
-                                                  child: Padding(
-                                                    padding: EdgeInsets.fromLTRB(
-                                                        0, 16.h, 15.h, 16.h),
-                                                    child: Text(
-                                                      ScreenOverlayCubit.get(
-                                                                  context)
-                                                              .menuItems(
-                                                                  context)[index]
-                                                          ['text'],
-                                                      style: TextStyle(
-                                                          fontSize: 18.sp,
-                                                          fontFamily: 'naskh',
-                                                          color: Colors.white),
+                                : const SizedBox();
+                          },
+                        ),
+                        //TODO: widget component here for menu and improve to
+
+                        BlocBuilder<ScreenOverlayCubit, int>(
+                          builder: (context, state) {
+                            List<Map<String, dynamic>> menuItems =
+                                ScreenOverlayCubit.get(context)
+                                    .menuItems(context);
+                            return state == 2
+                                ? Positioned(
+                                    width: 198,
+                                    child: CompositedTransformFollower(
+                                        link: cubit.layerLink,
+                                        offset: Offset(-7, -7.h),
+                                        showWhenUnlinked: false,
+                                        child: Container(
+                                          // width:  170,
+                                          height: menuItems.length >= 4
+                                              ? (60 * menuItems.length)
+                                                  .toDouble()
+                                              : 239,
+                                          decoration: BoxDecoration(
+                                              color: AppColor.blueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          child: ListView.separated(
+                                              itemBuilder: (context, index) =>
+                                                  GestureDetector(
+                                                    onTap: menuItems[index]
+                                                        ['onTap'],
+                                                    child: SizedBox(
+                                                      width: Get.width,
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.fromLTRB(
+                                                                0,
+                                                                16.h,
+                                                                15.h,
+                                                                16.h),
+                                                        child: Text(
+                                                          menuItems[index]
+                                                              ['text'],
+                                                          style: TextStyle(
+                                                              fontSize: 18.sp,
+                                                              fontFamily:
+                                                                  'naskh',
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ),
-                                          separatorBuilder: (context, index) =>
-                                              Container(
-                                                width: Get.width,
-                                                height: 0.34,
-                                                color: Colors.white,
-                                              ),
-                                          itemCount: 4),
-                                    )))
-                            : const SizedBox();
-                      },
-                    ),
-                  ],
-                );
-              }),
-                  ),
-          )),
+                                              separatorBuilder:
+                                                  (context, index) => Container(
+                                                        width: Get.width,
+                                                        height: 0.34,
+                                                        color: Colors.white,
+                                                      ),
+                                              itemCount: menuItems.length),
+                                        )))
+                                : const SizedBox();
+                          },
+                        ),
+                      ],
+                    );
+                  }),
+            );
+          },
+        ),
+      )),
     );
   }
 }
 
 class MoshafPage extends StatefulWidget {
-  const MoshafPage({super.key, required this.pageIndex});
-
+  const MoshafPage(
+      {super.key, required this.pageIndex, required this.verseSoundstate});
+  final AudioControlState verseSoundstate;
   final int pageIndex;
 
   @override
@@ -584,13 +916,19 @@ class _MoshafPageState extends State<MoshafPage> {
                                         onLongPressStart:
                                             (LongPressStartDetails details) {
                                           print(moshafPageState);
-                                          cubit.toggleAyahSelection(
-                                            selectAya: SelectAyaModel(
-                                              ayaNumber:
-                                                  ayahs[ayahIndex].ayahUQNumber,
-                                              offset: details.globalPosition,
-                                            ),
-                                          );
+                                          if (!widget
+                                              .verseSoundstate.isPlaying) {
+                                            cubit.toggleAyahSelection(
+                                              selectAya: SelectAyaModel(
+                                                ayaNumber: ayahs[ayahIndex]
+                                                    .ayahUQNumber,
+                                                offset: details.globalPosition,
+                                              ),
+                                            );
+                                          }
+                                          AudioControlCubit.get(context)
+                                              .changeAyaIndex(ayahs[ayahIndex]
+                                                  .ayahUQNumber);
                                         },
                                         isFirstAyah:
                                             ayahIndex == 0 ? true : false,
@@ -609,8 +947,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                       backgroundColor:
                                           moshafPageState.ayaNumber ==
                                                   ayahs[ayahIndex].ayahUQNumber
-                                              ? const Color.fromARGB(
-                                                  255, 150, 126, 68)
+                                              ? AppColor.darkYellow
                                               : Colors.transparent,
                                       onLongPressStart:
                                           (LongPressStartDetails details) {
@@ -620,17 +957,17 @@ class _MoshafPageState extends State<MoshafPage> {
                                         TafseerCubit.get(context).getayanumber(
                                             ayahs[ayahIndex].ayahUQNumber);
 
-                                        cubit.toggleAyahSelection(
-                                            selectAya: SelectAyaModel(
-                                                ayaNumber: ayahs[ayahIndex]
-                                                    .ayahUQNumber,
-                                                offset:
-                                                    details.globalPosition));
-                                        // print(details.globalPosition);
-                                        // print(Get.height);
-                                        // print( Get.width- details.globalPosition.dx);
-                                        // print(ayahs[ayahIndex].codeV2);
-                                        // print(pageIndex);
+                                        if (!widget.verseSoundstate.isPlaying) {
+                                          cubit.toggleAyahSelection(
+                                              selectAya: SelectAyaModel(
+                                                  ayaNumber: ayahs[ayahIndex]
+                                                      .ayahUQNumber,
+                                                  offset:
+                                                      details.globalPosition));
+                                        }
+                                        AudioControlCubit.get(context)
+                                            .changeAyaIndex(
+                                                ayahs[ayahIndex].ayahUQNumber);
                                       },
                                       isFirstAyah:
                                           ayahIndex == 0 ? true : false,
@@ -692,20 +1029,42 @@ class _MoshafPageState extends State<MoshafPage> {
                                 Container(
                                   width: 1.5.w,
                                   height: 19.h,
-                                  color: const Color.fromARGB(255, 150, 126, 68),
+                                  color: AppColor.darkYellow,
                                 ),
                                 IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.play_arrow_rounded,
-                                      color: Color.fromARGB(255, 150, 126, 68),
+                                    onPressed: () {
+                                      // clear all tabs than open 1 tap
+                                      //play specific verse
+                                      //  if(!widget.verseSoundstate.isPlaying)  { QuranCubit.get(context)
+                                      //         .clearMenuOverlayEvent();}
+                                      QuranCubit.get(context).searchAya(
+                                          widget.verseSoundstate.currentVerse);
+                                      ScreenOverlayCubit.get(context)
+                                          .overlaysVisability();
+
+// final verses= pageAyahs[pageChangeState.pageNum];
+                                      if (widget.verseSoundstate.isPlaying) {
+                                        AudioControlCubit.get(context).stop();
+                                      } else {
+                                        AudioControlCubit.get(context)
+                                            .togglePlayPause(context,
+                                                verseNumber: widget
+                                                    .verseSoundstate
+                                                    .currentVerse);
+                                      }
+                                    },
+                                    icon: Icon(
+                                      widget.verseSoundstate.isPlaying
+                                          ? Icons.stop
+                                          : Icons.play_arrow_rounded,
+                                      color: const Color.fromARGB(
+                                          255, 150, 126, 68),
                                       size: 32,
                                     )),
                                 Container(
                                   width: 1.5.w,
                                   height: 19.h,
-                                  color:
-                                      const Color.fromARGB(255, 150, 126, 68),
+                                  color: AppColor.darkYellow,
                                 ),
                                 IconButton(
                                     onPressed: () {
@@ -719,8 +1078,7 @@ class _MoshafPageState extends State<MoshafPage> {
                                 Container(
                                   width: 1.5.w,
                                   height: 19.h,
-                                  color:
-                                      const Color.fromARGB(255, 150, 126, 68),
+                                  color: AppColor.darkYellow,
                                 ),
                                 IconButton(
                                     onPressed: () {
@@ -736,13 +1094,15 @@ class _MoshafPageState extends State<MoshafPage> {
                                         Clipboard.setData(ClipboardData(
                                                 text: selectedAyah.text))
                                             .then((_) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            const SnackBar(
-                                                content: Center(
-                                                    child: Text(
-                                                        'تم النسخ إلى الحافظه'))),
-                                          );
+                                          showToast('تم النسخ إلى الحافظه',
+                                              AppColor.blueColor);
+                                          // ScaffoldMessenger.of(context)
+                                          //     .showSnackBar(
+                                          //   const SnackBar(backgroundColor: AppColor.blueColor,
+                                          //       content: Center(
+                                          //           child: Text(
+                                          //               'تم النسخ إلى الحافظه'))),
+                                          // );
                                         });
                                       }
                                     },
@@ -753,35 +1113,34 @@ class _MoshafPageState extends State<MoshafPage> {
                                 Container(
                                   width: 1.5.w,
                                   height: 19.h,
-                                  color:
-                                      const Color.fromARGB(255, 150, 126, 68),
+                                  color: AppColor.darkYellow,
                                 ),
-                              IconButton(
-                                  onPressed: () async {
-                                    if (moshafPageState.ayaNumber != -1) {
-                                      final selectedAyah = pageAyahs
-                                          .expand((ayahList) => ayahList)
-                                          .firstWhere((ayah) =>
-                                              ayah.ayahUQNumber ==
-                                              moshafPageState.ayaNumber);
-                                      showShareBottomSheet(
-                                          context,
-                                          ShareAyahCheckBox(
-                                            ayahNumber: selectedAyah.ayahNumber
-                                                .toString(),
-                                            selectedAyah: selectedAyah,
-                                          ));
-                                    }
-                                  },
-                                  icon: Icon(
-                                    Icons.share_outlined,
-                                    color: "#404c6e".toColor,
-                                  )),
+                                IconButton(
+                                    onPressed: () async {
+                                      if (moshafPageState.ayaNumber != -1) {
+                                        final selectedAyah = pageAyahs
+                                            .expand((ayahList) => ayahList)
+                                            .firstWhere((ayah) =>
+                                                ayah.ayahUQNumber ==
+                                                moshafPageState.ayaNumber);
+                                        showShareBottomSheet(
+                                            context,
+                                            ShareAyahCheckBox(
+                                              ayahNumber: selectedAyah
+                                                  .ayahNumber
+                                                  .toString(),
+                                              selectedAyah: selectedAyah,
+                                            ));
+                                      }
+                                    },
+                                    icon: Icon(
+                                      Icons.share_outlined,
+                                      color: "#404c6e".toColor,
+                                    )),
                                 Container(
                                   width: 1.5.w,
                                   height: 19.h,
-                                  color:
-                                      const Color.fromARGB(255, 150, 126, 68),
+                                  color: AppColor.darkYellow,
                                 ),
                                 IconButton(
                                     onPressed: () {
@@ -816,7 +1175,7 @@ class _MoshafPageState extends State<MoshafPage> {
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w900,
                         fontFamily: 'naskh',
-                        color: const Color.fromARGB(255, 150, 126, 68)),
+                        color: AppColor.darkYellow),
                   ),
                 ),
               ),

@@ -1,15 +1,16 @@
+import 'dart:developer';
+
 import 'package:workmanager/workmanager.dart';
 
 import 'local_notification_service.dart';
 
 class WorkManagerService {
   void registerMyTask() async {
-    //register my task
-    await Workmanager().registerPeriodicTask(
-      'id1',
-      'show simple notification',
-      frequency: const Duration(hours: 2),
-    );
+    // push_notification  task
+    Workmanager().registerPeriodicTask('push_notification', 'push_notification',
+        frequency: const Duration(minutes: 60),
+        initialDelay: const Duration(minutes: 1) // Frequency of the task
+        );
   }
 
   void registerTask() {
@@ -93,10 +94,31 @@ class WorkManagerService {
   void cancelTask(String id) {
     Workmanager().cancelByUniqueName(id);
   }
+
+  Duration calculateInitialDelay(
+      {required int targetHour, required int targetMinute}) {
+    final now = DateTime.now();
+    var targetTime =
+        DateTime(now.year, now.month, now.day, targetHour, targetMinute);
+
+    log("======target========");
+    log(targetTime.toString());
+
+    log("==============");
+    log("======initial========");
+    log(targetTime.difference(now).toString());
+    log(targetTime.difference(now).inHours.toString());
+    log(targetTime.difference(now).inMinutes.toString());
+
+    log("==============");
+
+    return targetTime.difference(now);
+  }
 }
 
 @pragma('vm-entry-point')
 void actionTask() {
+
   Workmanager().executeTask((taskName, inputData) {
     LocalNotificationService.showSalahNabiNotification();
     LocalNotificationService.showMorningAndEveningAzkarScheduledNotification();

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/constants/images.dart';
 import '../../../quran/bussniess_logic/quran/quran_cubit.dart';
-import '../../../quran/bussniess_logic/screen_tap_Visibility/screen_tap_visability.dart';
-import '../../../quran/view/screens/moshaf_view.dart';
+
 import '../../bussniess_logic/note_cubit/note_cubit.dart';
 import '../../data/models/note_model.dart';
 import 'note_ayah.dart';
@@ -20,7 +20,7 @@ class NoteAyahListView extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         List<NoteModel> notes = BlocProvider.of<NoteCubit>(context).notes ?? [];
-        return ListView.builder(
+        return notes.isEmpty?Center(child: Image.asset(AppImages.empty)): ListView.builder(
             physics: const BouncingScrollPhysics(),
             itemCount: notes.length,
             itemBuilder: (BuildContext context, int index) {
@@ -28,15 +28,11 @@ class NoteAyahListView extends StatelessWidget {
                 onTap: () {
      
                       QuranCubit.get(context).clearScreen(context);
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (BuildContext context) => const MoshafView(
-                  //         // indexP: 604 - int.parse(notes[index].pageNum),
-                  //       ),
-                  //     ));
-                  Get.back();
+                 
+                                    Get.back();
                              QuranCubit.get(context).pageController.jumpToPage(604 - int.parse(notes[index].pageNum));
+
+                  QuranCubit.get(context).searchAya(notes[index].ayahNumInQuran);
                 },
                 child: NoteAyah(
                   noteModel: notes[index],
