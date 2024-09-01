@@ -29,7 +29,6 @@ class AppImages {
   static const String azkarHeader = 'assets/images/Group.png';
   static const String menu = '$rootImages/menu.png';
 
-
   static const String forwardIcon = 'assets/images/forward_icon.svg';
 
   // notifications
@@ -37,6 +36,8 @@ class AppImages {
       '$rootImages/notification_largeIcon.png';
   static const String notificationBigPicture =
       '$rootImages/notification_bigPicture.png';
+  static const String notificationScreenBackground =
+      '$rootImages/notification_background.png';
 
   static const String storyFeature = '$rootImages/story_feature_icon.svg';
   static const String qiblaFeature = '$rootImages/qibla_feature_icon.svg';

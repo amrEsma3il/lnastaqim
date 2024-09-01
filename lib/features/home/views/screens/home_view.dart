@@ -34,11 +34,13 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xfff2f4f9),
+
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             child: Stack(
+
               children: [
                 Image(
                   width: Get.width,
@@ -46,6 +48,7 @@ class _HomeViewState extends State<HomeView> {
                   image: const AssetImage(AppImages.homeBackground),
                 ),
                 Padding(
+
                   padding: EdgeInsets.only(top: 53.h, left: 17.w),
                   child: const Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -170,6 +173,7 @@ class _HomeViewState extends State<HomeView> {
                         ],
                       ),
                     ))
+
               ],
             ),
           ),

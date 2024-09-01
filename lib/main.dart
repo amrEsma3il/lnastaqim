@@ -1,6 +1,5 @@
-import 'package:alarm/alarm.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -20,6 +19,7 @@ import 'features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
 
 
 import 'package:hive_flutter/adapters.dart';
+
 import 'package:lnastaqim/features/bookmark/bussniess_logic/bookmark_cubit/bookmark_cubit.dart';
 import 'package:lnastaqim/features/bookmark/data/models/bookmark_model.dart';
 import 'package:lnastaqim/features/note/bussniess_logic/add_note_cubit/add_note_cubit.dart';
@@ -27,6 +27,14 @@ import 'package:lnastaqim/features/note/bussniess_logic/note_cubit/note_cubit.da
 import 'package:lnastaqim/features/note/data/models/note_model.dart';
 import 'package:lnastaqim/features/quran/bussniess_logic/quran/quran_cubit.dart';
 import 'package:lnastaqim/features/tafaseer/bussniess_logic/tafseer_cubit.dart';
+
+import 'config/routing/app_routingconfig/app_router_configuration.dart';
+import 'core/constants/constants.dart';
+import 'core/utilits/services/local_notification_service.dart';
+import 'core/utilits/services/work_manager_service.dart';
+import 'features/bookmark/bussniess_logic/add_bookmark_cubit/add_bookmark_cubit.dart';
+import 'features/notification/bussiness_logic/notification_cubit.dart';
+import 'features/quran/bussniess_logic/quran_sowar/quran_sowar_cubit.dart';
 
 import 'core/constants/constants.dart';
 
@@ -45,8 +53,8 @@ import 'features/quran/bussniess_logic/fast_transition/fast_transition_cubit.dar
 import 'features/quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
 
 import 'features/quran/bussniess_logic/quran_sowar/search_on_aya_from_whole_quran_cubit.dart';
+
 import 'features/quran/bussniess_logic/quran_sowar/search_or_not_cubit.dart';
-import 'features/quran/bussniess_logic/screen_tap_Visibility/screen_tap_visability.dart';
 import 'features/quran/bussniess_logic/sowra_detail/sora_details_cubit.dart';
 
 
@@ -55,18 +63,28 @@ import 'features/quran/bussniess_logic/quran/index_cubit/index_cubit.dart';
 import 'features/quran_sound/data/models/reciter_entity.dart';
 import 'features/quran_sound/logic/audio_cubit/audio_cubit.dart';
 
+
 void main() async {
-  // List<List<int>> matchesInQuran=[];
-  // List<int> boyerMore=boyer.searchPattern("وجاءت","");
-  // print("object");
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Alarm.init();
   await Hive.initFlutter();
+
   Hive.registerAdapter(BookmarkModelAdapter());
   await Hive.openBox<BookmarkModel>(kBookmarkBox);
   Hive.registerAdapter(NoteModelAdapter());
   await Hive.openBox<NoteModel>(kNoteBox);
+
+
+  await Hive.openBox<bool>('notificationBox');
+  await Hive.openBox('userPreferences');
+
+  await Future.wait(
+    [
+      LocalNotificationService.init(),
+      WorkManagerService().init(),
+    ],
+  );
+
   await Hive.openBox<ReciterEntity>(AppKeys.reciterBox);
   await Future.wait([
     LocalNotificationService.init(),
@@ -75,6 +93,7 @@ void main() async {
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppColor.blueColor.withOpacity(0.74)));
+
 
   runApp(const Lnastaqim());
 }
@@ -92,6 +111,7 @@ class Lnastaqim extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
+
             //SearchOnAyaCubit
             BlocProvider(
               create: (context) => SearchVisabilityCubit(),
@@ -99,9 +119,11 @@ class Lnastaqim extends StatelessWidget {
             BlocProvider(
               create: (context) => SearchOnAyaCubit(),
             ),
+
             BlocProvider(
               create: (context) => IndexCubit(),
             ),
+
 
             BlocProvider(
               create: (context) => FastTransitionCubit(),
@@ -109,6 +131,7 @@ class Lnastaqim extends StatelessWidget {
             BlocProvider(
               create: (context) => ScreenOverlayCubit(),
             ),
+
             BlocProvider(
               create: (context) => SearchOrNot(),
             ),
@@ -122,25 +145,30 @@ class Lnastaqim extends StatelessWidget {
               lazy: false,
               create: (context) => QuranCubit()..loadQuran(),
             ),
+
 //
             BlocProvider(
               create: (context) =>
                   AudioControlCubit()..audioPlayerListener(context),
             ),
    
+
             BlocProvider(create: (context) => AddBookmarkCubit()),
             BlocProvider(
                 create: (context) => BookmarkCubit()..fetchBookmarks()),
             BlocProvider(create: (context) => AddNoteCubit()),
             BlocProvider(create: (context) => NoteCubit()..fetchNotes()),
 
+
+
             BlocProvider(
               create: (context) => TafseerCubit(),
             ),
-
+            // Provide the NotificationCubit
             BlocProvider(
-              create: (context) => PrayersTimesCubit(),
+              create: (context) => NotificationCubit(WorkManagerService()),
             ),
+
              BlocProvider(
               create: (context) => OverlayNoteControlCubit(),
             ),
@@ -156,6 +184,7 @@ class Lnastaqim extends StatelessWidget {
                 create: (BuildContext context) =>
                     AzkarDetailsCubit()..getAzkarDetails()),
             BlocProvider(create: (BuildContext context) => SharedAzkarCubit()),
+
           ],
           child: GetMaterialApp(
             locale: const Locale('ar'),
