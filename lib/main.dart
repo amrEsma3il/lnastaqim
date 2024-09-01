@@ -42,6 +42,7 @@ import 'features/azkar_with_sib7a/business_logic/azkar_details_cubit/azkar_detai
 import 'features/azkar_with_sib7a/business_logic/shared_azkar_cubit/shared_azkar_cubit.dart';
 
 
+import 'features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
 import 'features/quran/bussniess_logic/fast_transition/fast_transition_cubit.dart';
 
 
@@ -176,6 +177,9 @@ class Lnastaqim extends StatelessWidget {
             BlocProvider(
                 create: (BuildContext context) =>
                     AzkarCategoryCubit()..getAzkarCategory()),
+                     BlocProvider(
+                create: (BuildContext context) =>
+                    PrayersTimesCubit()..fetchPrayersTimes()),
             BlocProvider(
                 create: (BuildContext context) =>
                     AzkarDetailsCubit()..getAzkarDetails()),
