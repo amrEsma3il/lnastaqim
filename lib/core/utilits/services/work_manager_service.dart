@@ -22,7 +22,7 @@ class WorkManagerService {
     );
   }
 
-  void registerMoringAndEveningAzkarTask() {
+  void registerMoringAndEveningAzkarTask(int durationInMinutes) {
     Workmanager().registerPeriodicTask(
       'id8',
       'name8',
@@ -83,7 +83,7 @@ class WorkManagerService {
   Future<void> init() async {
     await Workmanager().initialize(actionTask, isInDebugMode: false);
     registerTask();
-    registerMoringAndEveningAzkarTask();
+    registerMoringAndEveningAzkarTask(15);
     registerFajrTask();
     registerDhuhrTask();
     registerAsrTask();

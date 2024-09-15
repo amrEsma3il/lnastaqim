@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 
@@ -12,6 +13,8 @@ class NotificationCubit extends Cubit<NotificationState> {
   NotificationCubit(this._workManagerService) : super(NotificationInitial()) {
     _loadNotificationStates();
   }
+static NotificationCubit get(BuildContext context)=>BlocProvider.of<NotificationCubit>(context);
+
 
   bool isSalahNabiNotification = true;
   bool isAzkarNotification = true;
@@ -68,7 +71,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     box.put('isAzkarNotification', isAzkarNotification);
 
     if (isAzkarNotification) {
-      _workManagerService.registerMoringAndEveningAzkarTask();
+      _workManagerService.registerMoringAndEveningAzkarTask(15);
     } else {
       _workManagerService.cancelTask('id8');
     }
@@ -76,8 +79,14 @@ class NotificationCubit extends Cubit<NotificationState> {
     emit(ChangeAzkarNotification());
   }
 
-  void changeNotificationTime(int value) {
-    selectedFrequency = value;
-    emit(ChangeNotificationTime());
+  void changeNotificationTime(int time) {
+   
+    emit(ChangeNotificationTime(durationInMinutes: time));
+  }
+
+
+  reScheduleNotification(int durationInMinutes){
+_workManagerService.registerMoringAndEveningAzkarTask(durationInMinutes);
+
   }
 }

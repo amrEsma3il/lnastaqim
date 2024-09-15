@@ -50,21 +50,26 @@ class _HomeViewState extends State<HomeView> {
                 Padding(
 
                   padding: EdgeInsets.only(top: 53.h, left: 17.w),
-                  child: const Row(
+                  child:  Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.search,
                           color: Colors.white,
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 9.0),
-                          child: Icon(
-                            Icons.notifications_none_outlined,
-                            color: Colors.white,
+                          padding: const EdgeInsets.symmetric(horizontal: 9.0),
+                          child: GestureDetector(
+                            onTap: () {
+                            Get.toNamed(AppRouteName.notification);
+                          },
+                            child: const Icon(
+                              Icons.notifications_none_outlined,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                        Icon(
+                        const Icon(
                           Icons.wb_sunny_outlined,
                           color: Colors.white,
                         )

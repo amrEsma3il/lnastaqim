@@ -16,4 +16,10 @@ class ChangeSalahNabiNotification extends NotificationState {}
 
 class ChangeAzkarNotification extends NotificationState {}
 
-class ChangeNotificationTime extends NotificationState {}
+class ChangeNotificationTime extends NotificationState {
+
+
+ final int durationInMinutes;
+
+  ChangeNotificationTime({required this.durationInMinutes});
+}
