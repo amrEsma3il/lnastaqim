@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lnastaqim/features/note/views/widgets/note_collection.dart';
 
 import '../../../core/constants/colors.dart';
+import '../../../core/utilits/functions/toast_message.dart';
 import '../../quran/bussniess_logic/quran/quran_cubit.dart';
 import '../../quran/data/models/surahs_model.dart';
 import '../bussniess_logic/add_note_cubit/add_note_cubit.dart';
@@ -18,7 +19,8 @@ void showNoteBottomSheet(BuildContext context,Ayah selectedAyah) {
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(48.r), topLeft: Radius.circular(48.r))),
-    builder: (context) => SizedBox(
+    builder: (context) => 
+    SizedBox(
       height: 600.h,
       width: double.infinity,
       child: SingleChildScrollView(
@@ -39,6 +41,7 @@ void showNoteBottomSheet(BuildContext context,Ayah selectedAyah) {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       TextFormField(
+                         style: const TextStyle(color: Colors.white),
                         controller: noteController,
                         maxLines: 10,
                         decoration: InputDecoration(
@@ -74,7 +77,9 @@ void showNoteBottomSheet(BuildContext context,Ayah selectedAyah) {
                             width: 95,
                             child: ElevatedButton(
                                 onPressed: () {
-                                  var name = QuranCubit.get(context)
+
+                                  if (noteController.text.isNotEmpty) {
+                                       var name = QuranCubit.get(context)
                                       .getSurahNameFromAyah(selectedAyah);
                                   var note = NoteModel(ayahNumInQuran: selectedAyah.ayahUQNumber,
                                     note: noteController.text,
@@ -85,6 +90,10 @@ void showNoteBottomSheet(BuildContext context,Ayah selectedAyah) {
 
                                   BlocProvider.of<AddNoteCubit>(context)
                                       .addNote(note);
+                                  } else {
+                                    showToast("قم باضافة ملاحظة",AppColor.lightBlue.withOpacity(0.35));
+                                  }
+                               
                                 },
                                 style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(

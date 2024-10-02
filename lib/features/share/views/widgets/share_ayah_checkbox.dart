@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lnastaqim/features/share/views/widgets/share_fun.dart';
 
+import '../../../../core/constants/colors.dart';
 import '../../../quran/data/models/surahs_model.dart';
 
 class ShareAyahCheckBox extends StatefulWidget {
@@ -29,7 +31,13 @@ class _ShareAyahCheckBoxState extends State<ShareAyahCheckBox> {
             Expanded(
               child: ListTile(
                 leading: Checkbox(
-                  activeColor: const Color(0xff404c6e),
+                  activeColor: Colors.transparent,
+                   side: MaterialStateBorderSide.resolveWith(
+    (states) => const BorderSide(
+      color:Colors.white, // Change border color based on state
+      width: 1, // Set the width of the border
+    ),
+  ),
                   value: _isTextChecked,
                   onChanged: (bool? value) {
                     setState(() {
@@ -38,7 +46,7 @@ class _ShareAyahCheckBoxState extends State<ShareAyahCheckBox> {
                     });
                   },
                 ),
-                title: const Text('نص'),
+                title: const Text('نص',style: TextStyle(color: Colors.white,fontSize: 16)),
                 onTap: () {
                   setState(() {
                     _isTextChecked = true;
@@ -50,7 +58,13 @@ class _ShareAyahCheckBoxState extends State<ShareAyahCheckBox> {
             Expanded(
               child: ListTile(
                 leading: Checkbox(
-                  activeColor: const Color(0xff404c6e),
+                  activeColor: AppColor.transparent,
+                                     side: MaterialStateBorderSide.resolveWith(
+    (states) => const BorderSide(
+      color:Colors.white, // Change border color based on state
+      width: 1, // Set the width of the border
+    ),
+  ),
                   value: _isImageChecked,
                   onChanged: (bool? value) {
                     setState(() {
@@ -59,7 +73,7 @@ class _ShareAyahCheckBoxState extends State<ShareAyahCheckBox> {
                     });
                   },
                 ),
-                title: const Text('صورة'),
+                title: const Text('صورة',style: TextStyle(color: Colors.white,fontSize: 16),),
                 onTap: () {
                   setState(() {
                     _isImageChecked = true;
@@ -70,7 +84,7 @@ class _ShareAyahCheckBoxState extends State<ShareAyahCheckBox> {
             ),
           ],
         ),
-        const SizedBox(height: 20),
+         SizedBox(height: 28.h),
         GestureDetector(
           onTap: () {
             if (_isTextChecked) {
@@ -82,8 +96,8 @@ class _ShareAyahCheckBoxState extends State<ShareAyahCheckBox> {
             }
           },
           child: Container(
-            height: 40,
-            width: 70,
+            height: 45,
+            width: 83,
             decoration: ShapeDecoration(
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
@@ -91,7 +105,7 @@ class _ShareAyahCheckBoxState extends State<ShareAyahCheckBox> {
             child: const Center(
               child: Text(
                 'مشاركة',
-                style: TextStyle(color: Color(0xff404c6e)),
+                style: TextStyle(color:AppColor.blueColor,fontSize: 17,fontWeight: FontWeight.w600),
               ),
             ),
           ),

@@ -40,8 +40,3 @@ searchController.text="";
 
 
 
-enum SearchState{
-  noSearch,
-  searchNoResults,
-  searchHasResults
-}

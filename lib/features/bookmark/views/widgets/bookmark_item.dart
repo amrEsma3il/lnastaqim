@@ -27,6 +27,7 @@ class BookmarkItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        QuranCubit.get(context).clearMenuOverlayEvent();
         final selectedAyah = pageAyahs
             .expand((ayahList) => ayahList)
             .firstWhere(
