@@ -71,10 +71,7 @@ jobs:
       #     }
 
 
-      - name: Add platform for bundler
-        run: |
-          bundle lock --add-platform x86_64-linux
-        working-directory: android
+ 
     
 
       # Install Fastlane dependencies using Bundler
