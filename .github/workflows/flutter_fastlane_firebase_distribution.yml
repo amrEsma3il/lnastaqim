@@ -71,20 +71,12 @@ jobs:
       #     }
 
 
- 
-    
-
-      # Install Fastlane dependencies using Bundler
-      - name: Install Fastlane with Bundler
-        run: |
-          bundle install
-        working-directory: android
 
       # Setup Ruby environment
       - name: Setup Ruby environment
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2.5' # Ensure this matches your Ruby version
+          ruby-version: '3.3.5' # Ensure this matches your Ruby version
           bundler-cache: true
           working-directory: android
 
