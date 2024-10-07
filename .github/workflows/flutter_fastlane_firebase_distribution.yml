@@ -82,7 +82,7 @@ jobs:
         with:
           ruby-version: '3.2.5' # Ensure this matches your Ruby version
           bundler-cache: true
-          working_directory: "android"
+          working-directory: "android"
 
       # Fastlane Firebase Distribution
       - name: Fastlane Firebase Distribution
