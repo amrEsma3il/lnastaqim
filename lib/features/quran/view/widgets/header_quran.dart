@@ -15,7 +15,7 @@ class HeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = QuranCubit.get(context);
+    QuranCubit.get(context);
     return BlocBuilder<SearchOrNot, bool>(
       builder: (context, searchState) {
         return Row(

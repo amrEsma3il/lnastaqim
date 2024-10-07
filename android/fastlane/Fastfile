@@ -15,6 +15,6 @@ platform :android do
       testers: "amrgalalamr10@gmail.com",
       release_notes: "First Fastlane Firebase Distribution lnastaqim"
     )
-  end
+  end 
 end
 
