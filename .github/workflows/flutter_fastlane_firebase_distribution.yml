@@ -70,11 +70,18 @@ jobs:
       #       Write-Output "Bundler already installed"
       #     }
 
+
+      - name: Add platform for bundler
+        run: |
+          bundle lock --add-platform x86_64-linux
+        working-directory: android
+    
+
       # Install Fastlane dependencies using Bundler
-      # - name: Install Fastlane with Bundler
-      #   run: |
-      #     cd android
-      #     bundle install
+      - name: Install Fastlane with Bundler
+        run: |
+          bundle install
+        working-directory: android
 
       # Setup Ruby environment
       - name: Setup Ruby environment
@@ -89,5 +96,5 @@ jobs:
         env:
           FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN}}  # Add Firebase token in GitHub secrets
         run: |
-          cd android
           bundle exec fastlane firebase_distribution
+        working-directory: android
