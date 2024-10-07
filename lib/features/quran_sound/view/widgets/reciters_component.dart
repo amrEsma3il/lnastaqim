@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/constants/colors.dart';
 import '../../data/models/reciter_entity.dart';
 import '../../logic/audio_cubit/audio_cubit.dart';
 import '../../logic/audio_cubit/audio_state.dart';

@@ -8,11 +8,9 @@ import 'package:lnastaqim/features/qibla/view/screen/quiblah_screen.dart';
 import '../../../features/azkar_with_sib7a/view/screens/azkar_details_view.dart';
 import '../../../features/home/views/screens/home_view.dart';
 import '../../../features/notification/view/notification_screen.dart';
-import '../../../features/paryer_times/view/screens/test_screen.dart';
 
 
 
-import '../../../features/quran/view/screens/moshaf_index.dart';
 import '../../../features/quran/view/screens/moshaf_view.dart';
 import '../../../features/quran_sound_player/view/screens/surah_player_screen.dart';
 

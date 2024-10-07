@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constants/colors.dart';
-import '../../../../core/constants/images.dart';
 import '../../bussniess_logic/overlay_note_control/overlay_note_control_cubit.dart';
 import 'overlay_note_controler_component.dart';
 

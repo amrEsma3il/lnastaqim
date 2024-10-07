@@ -62,7 +62,7 @@ Future<void> shareAyahAsImage(
               TextSpan(
                 children: <InlineSpan>[
                   TextSpan(
-                    text: "${selectedAyah.text}",
+                    text: selectedAyah.text,
                     style: TextStyle(
                       height: 2.04.h,
                       fontSize: 20.sp,

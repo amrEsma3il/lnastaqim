@@ -4,7 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 import 'package:lnastaqim/core/constants/colors.dart';
 
@@ -63,7 +64,9 @@ import 'features/quran_sound/logic/audio_cubit/audio_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
   await Hive.initFlutter();
 
   Hive.registerAdapter(BookmarkModelAdapter());
@@ -75,12 +78,7 @@ void main() async {
   await Hive.openBox<bool>('notificationBox');
   await Hive.openBox('userPreferences');
 
-  await Future.wait(
-    [
-      LocalNotificationService.init(),
-      WorkManagerService().init(),
-    ],
-  );
+ 
 
   await Hive.openBox<ReciterEntity>(AppKeys.reciterBox);
   await Future.wait([
