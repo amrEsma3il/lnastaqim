@@ -22,12 +22,6 @@ jobs:
         with:
           flutter-version: "3.22.3"
 
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Build APK
-        run: flutter build apk --no-tree-shake-icons
-
       - name: Setup Ruby environment
         uses: ruby/setup-ruby@v1
         with:
