@@ -18,7 +18,10 @@ class FeaturesGridView extends StatelessWidget {
         text: "سماع القران",
         image: AppImages.listenFeature,
         route: AppRouteName.surahPlayerScreen),
-    FeatureModel(text: "احاديث", image: AppImages.ahadesFeature),
+    FeatureModel(
+        text: "احاديث",
+        image: AppImages.ahadesFeature,
+        route: AppRouteName.a7adithView),
     FeatureModel(
         text: "اذكار",
         image: AppImages.sibhaFeature,

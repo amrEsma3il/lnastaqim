@@ -30,7 +30,8 @@ class NoteCubit extends Cubit<NoteState> {
   }
 
   showEditNoteDialog(BuildContext context, NoteModel note) {
-    showDialog(barrierDismissible: false,
+    showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
         noteEditController.text = note.note;
@@ -96,8 +97,8 @@ class NoteCubit extends Cubit<NoteState> {
                           },
                           style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.all(Colors.white),
-                              shape: MaterialStateProperty.all<
+                                  WidgetStateProperty.all(Colors.white),
+                              shape: WidgetStateProperty.all<
                                       RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12.r),
@@ -125,8 +126,8 @@ class NoteCubit extends Cubit<NoteState> {
                           },
                           style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.all(Colors.white),
-                              shape: MaterialStateProperty.all<
+                                  WidgetStateProperty.all(Colors.white),
+                              shape: WidgetStateProperty.all<
                                       RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12.r),

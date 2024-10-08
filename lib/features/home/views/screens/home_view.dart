@@ -1,18 +1,13 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
 import 'package:lnastaqim/core/constants/images.dart';
 import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
-import 'package:lnastaqim/features/home/data/models/prayer_time_model.dart';
 
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
-import '../../../../core/utilits/models/hijri_date_model.dart';
-import '../../../../core/utilits/services/hijri_date_service.dart';
 import '../../../paryer_times/bussniess_logic/date_cubit.dart';
 import '../../../paryer_times/view/widgets/prayers_stepper.dart';
 import '../../../quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
@@ -20,7 +15,6 @@ import '../../../quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_st
 import '../../../quran/bussniess_logic/quran/quran_cubit.dart';
 import '../widgets/carousel_slider_ayah.dart';
 import '../widgets/features_grid_view.dart';
-import '../widgets/prayer_time_item.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -34,13 +28,11 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xfff2f4f9),
-
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             child: Stack(
-
               children: [
                 Image(
                   width: Get.width,
@@ -48,32 +40,30 @@ class _HomeViewState extends State<HomeView> {
                   image: const AssetImage(AppImages.homeBackground),
                 ),
                 Padding(
-
                   padding: EdgeInsets.only(top: 53.h, left: 17.w),
-                  child:  Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const Icon(
-                          Icons.search,
+                  child:
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    const Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 9.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.toNamed(AppRouteName.notification);
+                        },
+                        child: const Icon(
+                          Icons.notifications_none_outlined,
                           color: Colors.white,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 9.0),
-                          child: GestureDetector(
-                            onTap: () {
-                            Get.toNamed(AppRouteName.notification);
-                          },
-                            child: const Icon(
-                              Icons.notifications_none_outlined,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        const Icon(
-                          Icons.wb_sunny_outlined,
-                          color: Colors.white,
-                        )
-                      ]),
+                      ),
+                    ),
+                    const Icon(
+                      Icons.wb_sunny_outlined,
+                      color: Colors.white,
+                    )
+                  ]),
                 ),
                 Positioned(
                     top: 128.h,
@@ -108,15 +98,16 @@ class _HomeViewState extends State<HomeView> {
                                         int pageNumber =
                                             moshafBookmarState.pageNumber;
                                         return GestureDetector(
-                                          onTap: ()async {
+                                          onTap: () async {
                                             if (isMarkExist) {
                                               //  QuranCubit.get(context).clearScreen(context);
                                               QuranCubit.get(context)
-                                                  .pageController=PageController
-                                                  (initialPage: 604-pageNumber);
-                                              Get.toNamed(AppRouteName.moshaf) ;
+                                                      .pageController =
+                                                  PageController(
+                                                      initialPage:
+                                                          604 - pageNumber);
+                                              Get.toNamed(AppRouteName.moshaf);
                                               log(pageNumber.toString());
-                                            
                                             }
                                           },
                                           child: Text(
@@ -178,7 +169,6 @@ class _HomeViewState extends State<HomeView> {
                         ],
                       ),
                     ))
-
               ],
             ),
           ),
