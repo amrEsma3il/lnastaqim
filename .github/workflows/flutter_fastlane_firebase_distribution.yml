@@ -4,14 +4,9 @@ on:
   push:
     branches:
       - main  # Trigger on push to the main branch
-  # pull_request:
-  #   branches:
-  #     - main  # Trigger on pull requests to the main branch
-
 jobs:
   build:
-    runs-on: ubuntu-latest 
-
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -21,69 +16,28 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-      
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: "3.22.3"
-          
-      # - name: Install Flutter dependencies
-      #   run: flutter pub get
 
-      # Install Ruby on Windows and Add to PATH
-      # - name: Install Chocolatey
-      #   shell: powershell
-      #   run: |
-      #     if (-Not (Get-Command choco -ErrorAction SilentlyContinue)) {
-      #       Write-Output "Chocolatey not found, installing..."
-      #       Set-ExecutionPolicy Bypass -Scope Process -Force
-      #       [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
-      #       iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-      #     } else {
-      #       Write-Output "Chocolatey already installed"
-      #     }
+      - name: Install dependencies
+        run: flutter pub get
 
-      # - name: Install Ruby and Add to PATH
-      #   shell: powershell
-      #   run: |
-      #     if (-Not (Get-Command ruby -ErrorAction SilentlyContinue)) {
-      #       Write-Output "Ruby not found, installing Ruby..."
-      #       choco install ruby -y
+      - name: Build APK
+        run: flutter build apk --no-tree-shake-icons
 
-      #       # Add Ruby to PATH globally
-      #       [System.Environment]::SetEnvironmentVariable('PATH', $env:PATH + ';C:\tools\ruby31\bin', [System.EnvironmentVariableTarget]::Machine)
-
-      #       # Add Ruby to PATH locally (for the current session)
-      #       $env:PATH = [System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Machine) + ';C:\tools\ruby31\bin'
-      #     } else {
-      #       Write-Output "Ruby already installed"
-      #     }
-
-      # # Install Bundler if not installed
-      # - name: Check and Install Bundler
-      #   shell: powershell
-      #   run: |
-      #     if (-Not (gem list bundler -i)) {
-      #       Write-Output "Bundler not installed, installing Bundler..."
-      #       gem install bundler
-      #     } else {
-      #       Write-Output "Bundler already installed"
-      #     }
-
-
-
-      # Setup Ruby environment
       - name: Setup Ruby environment
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3.5' # Ensure this matches your Ruby version
+          ruby-version: '3.3.5'
           bundler-cache: true
           working-directory: android
 
-      # Fastlane Firebase Distribution
       - name: Fastlane Firebase Distribution
         env:
-          FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}  # Add Firebase token in GitHub secrets
+          FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
         run: |
           bundle exec fastlane firebase_distribution
         working-directory: android
