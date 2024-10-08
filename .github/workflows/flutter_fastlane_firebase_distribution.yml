@@ -41,8 +41,6 @@ jobs:
             echo "FIREBASE_APP_ID=${{ secrets.APP_ID }}" >> $GITHUB_ENV
             echo "FIREBASE_TOKEN=${{ secrets.FIREBASE_CLI_TOKEN }}" >> $GITHUB_ENV
   
-      - name: Build Gradle
-        run: flutter build apk --debug
   
       - name: Add Firebase App Distribution Plugin
         run: |
