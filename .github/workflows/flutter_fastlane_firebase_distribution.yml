@@ -1,4 +1,4 @@
-name: Flutter CI/CD with Fastlane on Windows
+name: Flutter CI/CD with Fastlane 
 
 on:
   push:
