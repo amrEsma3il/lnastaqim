@@ -25,10 +25,29 @@ jobs:
       - name: Setup Ruby environment
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3.5'
+          ruby-version: '3.3.5' 
           bundler-cache: true
           working-directory: android
 
+
+      - name: Install bundle
+        run: |
+            cd android   # Change directory to the android directory where Gemfile is located
+            bundle config path vendor/bundle   # Configure Bundler to use vendor/bundle directory
+            bundle install --jobs 4 --retry 3 # Install gems specified in Gemfile
+            
+      - name: Set environment variables from secrets
+        run: |
+            echo "FIREBASE_APP_ID=${{ secrets.APP_ID }}" >> $GITHUB_ENV
+            echo "FIREBASE_TOKEN=${{ secrets.FIREBASE_CLI_TOKEN }}" >> $GITHUB_ENV
+  
+      - name: Build Gradle
+        run: flutter build apk --debug
+  
+      - name: Add Firebase App Distribution Plugin
+        run: |
+            cd android
+            bundle exec fastlane add_plugin firebase_app_distribution
       - name: Fastlane Firebase Distribution
         env:
           FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
