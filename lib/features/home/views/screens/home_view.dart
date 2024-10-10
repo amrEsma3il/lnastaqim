@@ -28,13 +28,11 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xfff2f4f9),
-
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             child: Stack(
-
               children: [
                 Image(
                   width: Get.width,
@@ -42,32 +40,30 @@ class _HomeViewState extends State<HomeView> {
                   image: const AssetImage(AppImages.homeBackground),
                 ),
                 Padding(
-
                   padding: EdgeInsets.only(top: 53.h, left: 17.w),
-                  child:  Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const Icon(
-                          Icons.search,
+                  child:
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    const Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 9.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.toNamed(AppRouteName.notification);
+                        },
+                        child: const Icon(
+                          Icons.notifications_none_outlined,
                           color: Colors.white,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 9.0),
-                          child: GestureDetector(
-                            onTap: () {
-                            Get.toNamed(AppRouteName.notification);
-                          },
-                            child: const Icon(
-                              Icons.notifications_none_outlined,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        const Icon(
-                          Icons.wb_sunny_outlined,
-                          color: Colors.white,
-                        )
-                      ]),
+                      ),
+                    ),
+                    const Icon(
+                      Icons.wb_sunny_outlined,
+                      color: Colors.white,
+                    )
+                  ]),
                 ),
                 Positioned(
                     top: 128.h,
@@ -102,15 +98,16 @@ class _HomeViewState extends State<HomeView> {
                                         int pageNumber =
                                             moshafBookmarState.pageNumber;
                                         return GestureDetector(
-                                          onTap: ()async {
+                                          onTap: () async {
                                             if (isMarkExist) {
                                               //  QuranCubit.get(context).clearScreen(context);
                                               QuranCubit.get(context)
-                                                  .pageController=PageController
-                                                  (initialPage: 604-pageNumber);
-                                              Get.toNamed(AppRouteName.moshaf) ;
+                                                      .pageController =
+                                                  PageController(
+                                                      initialPage:
+                                                          604 - pageNumber);
+                                              Get.toNamed(AppRouteName.moshaf);
                                               log(pageNumber.toString());
-                                            
                                             }
                                           },
                                           child: Text(
@@ -172,7 +169,6 @@ class _HomeViewState extends State<HomeView> {
                         ],
                       ),
                     ))
-
               ],
             ),
           ),

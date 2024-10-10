@@ -30,7 +30,8 @@ class NoteCubit extends Cubit<NoteState> {
   }
 
   showEditNoteDialog(BuildContext context, NoteModel note) {
-    showDialog(barrierDismissible: false,
+    showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
         noteEditController.text = note.note;

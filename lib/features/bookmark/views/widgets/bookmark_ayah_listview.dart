@@ -20,29 +20,32 @@ class BookmarksAyahListView extends StatelessWidget {
       builder: (context, state) {
         List<BookmarkModel> bookmarks =
             BlocProvider.of<BookmarkCubit>(context).bookmarks ?? [];
-        return bookmarks.isEmpty?Center(child: Image.asset(AppImages.ayaMark)): ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: bookmarks.length,
-            itemBuilder: (BuildContext context, int index) {
-              return GestureDetector(
-                onTap: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (BuildContext context) => const MoshafView(
-                  //         // indexP: 604 - int.parse(bookmarks[index].pageNum),
-                  //       ),
-                  //     ));
-                       QuranCubit.get(context).clearScreen(context);
-                       Get.back();
+        return bookmarks.isEmpty
+            ? Center(child: Image.asset(AppImages.ayaMark))
+            : ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: bookmarks.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () {
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (BuildContext context) => const MoshafView(
+                      //         // indexP: 604 - int.parse(bookmarks[index].pageNum),
+                      //       ),
+                      //     ));
+                      QuranCubit.get(context).clearScreen(context);
+                      Get.back();
 
-                             QuranCubit.get(context).pageController.jumpToPage( 604 - int.parse(bookmarks[index].pageNum));
-                },
-                child: BookmarkAyah(
-                  bookmarkModel: bookmarks[index],
-                ),
-              );
-            });
+                      QuranCubit.get(context).pageController.jumpToPage(
+                          604 - int.parse(bookmarks[index].pageNum));
+                    },
+                    child: BookmarkAyah(
+                      bookmarkModel: bookmarks[index],
+                    ),
+                  );
+                });
       },
     );
   }

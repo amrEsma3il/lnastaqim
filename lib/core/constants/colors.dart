@@ -2,8 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:lnastaqim/core/utilits/extensions/color_from_hex.dart';
 
 class AppColor {
-  static Color crame = "#FAF6EB".toColor;//a9b6d9
-    static Color lightBlue = "#a9b6d9".toColor;//
+  static Color crame = "#FAF6EB".toColor; //a9b6d9
+  static Color lightBlue = "#a9b6d9".toColor; //
+
+  static const Color teal = Color(0xff25827a);
+  static const Color steelblue = Color(0xff4a6fa4);
+  static const Color slategray = Color(0xff666d8a);
+  static const Color duskyrose = Color(0xff8e5e6a);
+  static const Color charcoalgray = Color(0xff68696b);
+  static const Color mutedmauve = Color(0xff7c5378);
+  static const Color forestgreen = Color(0xff477050);
+  static const Color warmcopper = Color(0xffa66e4b);
+  static const Color brickred = Color(0xffa74844);
 
   static Color darkBrown = "#522700".toColor;
   static Color amber = "#A85000".toColor;
@@ -26,7 +36,6 @@ class AppColor {
   static Color primary = const Color(0xff404c6e);
   static Color white2 = const Color(0xffeaeef5);
   static Color blueBlack = const Color(0xff13153B);
-
 
   static Color yellow1 = "#ebb734".toColor; //#
 
