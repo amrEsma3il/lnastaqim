@@ -96,9 +96,9 @@ void showNoteBottomSheet(BuildContext context,Ayah selectedAyah) {
                                
                                 },
                                 style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
+                                    backgroundColor: WidgetStateProperty.all(
                                       Colors.white),
-                                    shape: MaterialStateProperty.all<
+                                    shape: WidgetStateProperty.all<
                                             RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(12.r),

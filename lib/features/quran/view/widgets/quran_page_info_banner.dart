@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
 
 import '../../../../core/constants/colors.dart';
@@ -42,7 +41,7 @@ class QuranPageInfoBanner extends StatelessWidget {
             ),
 SizedBox(width: 2.w,),
             Text(
-             "${cubit.getHizbQuarterDisplayByPage(index+1)}",
+             cubit.getHizbQuarterDisplayByPage(index+1),
               style: TextStyle(
                   fontSize: 15.sp,
                   fontFamily: 'naskh',

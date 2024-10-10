@@ -32,7 +32,7 @@ class _ShareAyahCheckBoxState extends State<ShareAyahCheckBox> {
               child: ListTile(
                 leading: Checkbox(
                   activeColor: Colors.transparent,
-                   side: MaterialStateBorderSide.resolveWith(
+                   side: WidgetStateBorderSide.resolveWith(
     (states) => const BorderSide(
       color:Colors.white, // Change border color based on state
       width: 1, // Set the width of the border
@@ -59,7 +59,7 @@ class _ShareAyahCheckBoxState extends State<ShareAyahCheckBox> {
               child: ListTile(
                 leading: Checkbox(
                   activeColor: AppColor.transparent,
-                                     side: MaterialStateBorderSide.resolveWith(
+                                     side: WidgetStateBorderSide.resolveWith(
     (states) => const BorderSide(
       color:Colors.white, // Change border color based on state
       width: 1, // Set the width of the border

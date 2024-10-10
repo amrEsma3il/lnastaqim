@@ -26,13 +26,16 @@ class LPSCustomPainter extends CustomPainter {
     // Layer 1
 
     Paint paintStroke0 = Paint()
+
       ..color = const Color.fromARGB(146, 168, 125, 206)
       ..style = PaintingStyle.stroke
       ..strokeWidth = size.width * 0.00
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round;
 
+
     canvas.drawPath(path_0, paintStroke0);
+
   }
 
   @override
@@ -64,16 +67,20 @@ class RPSCustomPainter extends CustomPainter {
 
     canvas.drawPath(path_0, paintFill1);
 
+
     // Layer 1
 
     Paint paintStroke0 = Paint()
+
       ..color = const Color.fromARGB(146, 168, 125, 206)
       ..style = PaintingStyle.stroke
       ..strokeWidth = size.width * 0.00
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round;
 
+
     canvas.drawPath(path_0, paintStroke0);
+
   }
 
   @override

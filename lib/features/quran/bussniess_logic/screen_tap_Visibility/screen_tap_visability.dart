@@ -8,17 +8,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
-import '../../../../core/constants/images.dart';
 import '../../../../core/utilits/extensions/arabic_numbers.dart';
 import '../../../../core/utilits/functions/check.dart';
 import '../../../../core/utilits/functions/toast_message.dart';
-import '../../../note/views/widgets/note_ayah_listview.dart';
 import '../../../quran_sound/logic/audio_cubit/audio_cubit.dart';
-import '../../data/models/quran_model.dart';
-import '../../view/widgets/index/quran_hizb_component.dart';
 import '../../view/widgets/index/quran_juz_component.dart';
 import '../../view/widgets/index/quran_sora_component.dart';
-import '../quran/index_cubit/index_state.dart';
 import '../quran/quran_cubit.dart';
 import '../quran/index_cubit/index_cubit.dart';
 
