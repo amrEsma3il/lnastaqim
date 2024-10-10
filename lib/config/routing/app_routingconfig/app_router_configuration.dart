@@ -9,6 +9,12 @@ import '../../../features/7adis/view/screen/main_a7adith.dart';
 import '../../../features/azkar_with_sib7a/view/screens/azkar_details_view.dart';
 import '../../../features/home/views/screens/home_view.dart';
 import '../../../features/notification/view/notification_screen.dart';
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> fd77e0de39d3798a5be8e84be1846b2936ad0af0
 import '../../../features/quran/view/screens/moshaf_view.dart';
 import '../../../features/quran_sound_player/view/screens/surah_player_screen.dart';
 import '../../../features/radio_stream_channels/view/pages/radio_screen.dart';

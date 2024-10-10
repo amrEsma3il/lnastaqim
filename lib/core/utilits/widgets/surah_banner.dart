@@ -23,16 +23,31 @@ class LPSCustomPainter extends CustomPainter {
 
     canvas.drawPath(path_0, paintFill0);
 
+<<<<<<< HEAD
     // Layer 1
 
     Paint paintStroke0 = Paint()
+=======
+  // Layer 1
+  
+  Paint paintStroke0 = Paint()
+>>>>>>> fd77e0de39d3798a5be8e84be1846b2936ad0af0
       ..color = const Color.fromARGB(146, 168, 125, 206)
       ..style = PaintingStyle.stroke
       ..strokeWidth = size.width * 0.00
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round;
+<<<<<<< HEAD
 
     canvas.drawPath(path_0, paintStroke0);
+=======
+     
+         
+    
+    canvas.drawPath(path_0, paintStroke0);
+  
+    
+>>>>>>> fd77e0de39d3798a5be8e84be1846b2936ad0af0
   }
 
   @override
@@ -64,16 +79,31 @@ class RPSCustomPainter extends CustomPainter {
 
     canvas.drawPath(path_0, paintFill1);
 
+<<<<<<< HEAD
     // Layer 1
 
     Paint paintStroke0 = Paint()
+=======
+  // Layer 1
+  
+  Paint paintStroke0 = Paint()
+>>>>>>> fd77e0de39d3798a5be8e84be1846b2936ad0af0
       ..color = const Color.fromARGB(146, 168, 125, 206)
       ..style = PaintingStyle.stroke
       ..strokeWidth = size.width * 0.00
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round;
+<<<<<<< HEAD
 
     canvas.drawPath(path_0, paintStroke0);
+=======
+     
+         
+    
+    canvas.drawPath(path_0, paintStroke0);
+  
+    
+>>>>>>> fd77e0de39d3798a5be8e84be1846b2936ad0af0
   }
 
   @override

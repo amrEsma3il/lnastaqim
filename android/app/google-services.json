@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "432670175669",
+    "project_id": "lnastaqim",
+    "storage_bucket": "lnastaqim.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432670175669:android:a524d8279167eda977e9fc",
+        "android_client_info": {
+          "package_name": "com.example.lnastaqim"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYXb3rBdXRzu7ayN3krDhLQ6TQfyTyBOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

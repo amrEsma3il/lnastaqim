@@ -78,10 +78,8 @@ class _ShareZekrCheckBoxState extends State<ShareZekrCheckBox> {
             if (_isTextChecked) {
               shareText(widget.zekr);
             } else if (_isImageChecked) {
-              if (widget.image != null) {
-                await shareImage(widget.image, "zekr");
-              }
-            } else {
+              await shareImage(widget.image, "zekr");
+                        } else {
               print("No option selected");
             }
           },

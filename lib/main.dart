@@ -3,6 +3,24 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+<<<<<<< HEAD
+=======
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+import 'package:lnastaqim/core/constants/colors.dart';
+
+import 'config/routing/app_routingconfig/app_router_configuration.dart';
+// import 'core/utilits/functions/search_string_pattern/boyer_moore_algo.dart' as boyer;
+import 'core/constants/keys.dart';
+import 'core/utilits/controller/search_or_not/search_visibility.dart';
+import 'core/utilits/services/local_notification_service.dart';
+import 'core/utilits/services/work_manager_service.dart';
+import 'features/note/bussniess_logic/overlay_note_control/overlay_note_control_cubit.dart';
+import 'features/paryer_times/bussniess_logic/date_cubit.dart';
+
+
+>>>>>>> fd77e0de39d3798a5be8e84be1846b2936ad0af0
 import 'package:hive_flutter/adapters.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 import 'package:lnastaqim/features/bookmark/bussniess_logic/bookmark_cubit/bookmark_cubit.dart';
@@ -41,7 +59,9 @@ import 'features/quran_sound/logic/audio_cubit/audio_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
   await Hive.initFlutter();
 
   Hive.registerAdapter(BookmarkModelAdapter());
@@ -52,12 +72,7 @@ void main() async {
   await Hive.openBox<bool>('notificationBox');
   await Hive.openBox('userPreferences');
 
-  await Future.wait(
-    [
-      LocalNotificationService.init(),
-      WorkManagerService().init(),
-    ],
-  );
+ 
 
   await Hive.openBox<ReciterEntity>(AppKeys.reciterBox);
   await Future.wait([

@@ -7,7 +7,6 @@ import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/images.dart';
 import '../../bussniess_logic/quran/quran_cubit.dart';
 import '../../bussniess_logic/quran_sowar/search_or_not_cubit.dart';
-import '../../data/models/search_ayah_entity.dart';
 
 class HeaderSection extends StatelessWidget {
   const HeaderSection({
@@ -16,7 +15,7 @@ class HeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = QuranCubit.get(context);
+    QuranCubit.get(context);
     return BlocBuilder<SearchOrNot, bool>(
       builder: (context, searchState) {
         return Row(
