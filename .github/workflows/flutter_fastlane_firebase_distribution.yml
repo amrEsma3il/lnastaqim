@@ -3,7 +3,7 @@ name: "Build & Release"
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
       - run: flutter clean
       - run: flutter pub get
 
-      - run: flutter build apk --release
+      # - run: flutter build apk --release
 
       - run: |
           flutter build ios --no-codesign
