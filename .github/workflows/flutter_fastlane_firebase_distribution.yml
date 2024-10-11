@@ -3,12 +3,17 @@ name: "Build & Release"
 on:
   push:
     branches:
-      - dev
+      - main
+
+permissions:
+  contents: write    # Grants write access to create releases
+  actions: write     # Grants access for GitHub Actions
 
 jobs:
   build:
     name: Build & Release
     runs-on: macos-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -19,6 +24,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.22.3'
           channel: 'stable'
           architecture: x64
 
@@ -39,7 +45,8 @@ jobs:
       - name: Push to Releases
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/apk/release/*,build/ios/iphoneos/app.ipa"
+          artifacts: "build/app/outputs/apk/release/app-release.apk,build/ios/iphoneos/app.ipa"
           tag: v1.0.${{ github.run_number }}
-
-  
+          token: ${{ secrets.GITHUB_TOKEN }}  # Ensure correct use of the GITHUB_TOKEN
+          generateReleaseNotes: false         # Optional: Disable automatic release notes
+          makeLatest: true   
