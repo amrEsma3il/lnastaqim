@@ -39,7 +39,7 @@ jobs:
   release:
     name: Release APK
     runs-on: macos-latest
-    needs: build  # Ensure it runs after the build is done
+    needs: build
 
     steps:
       - uses: actions/checkout@v4
@@ -56,10 +56,14 @@ jobs:
   fastlane:
     name: Fastlane Firebase Distribution & Play Store Deploy
     runs-on: macos-latest
-    needs: build  # Also depends on the build job
+    needs: build
 
     steps:
       - uses: actions/checkout@v4
+
+      # Use the built APK from the 'build' job to avoid duplicating Flutter setup
+      - name: Use APK from Build
+        run: echo "Using APK from build at ${{ needs.build.outputs.apk_path }}"
 
       # Setup Ruby environment
       - name: Setup Ruby environment
@@ -76,11 +80,3 @@ jobs:
         run: |
           bundle exec fastlane firebase_distribution
         working-directory: android
-
-      # Play Store Deployment
-      # - name: Deploy to Google Play Store
-      #   env:
-      #     GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}  # Your service account JSON from Play Console
-      #   run: |
-      #     bundle exec fastlane deploy
-      #   working-directory: android
