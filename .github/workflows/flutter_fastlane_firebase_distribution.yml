@@ -1,0 +1,68 @@
+name: "Build & Release"
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write    # Grants write access to create releases
+  actions: write     # Grants access for GitHub Actions
+
+jobs:
+  build:
+    name: Build & Release
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.3'
+          channel: 'stable'
+          architecture: x64
+
+      - run: flutter clean
+      - run: flutter pub get
+
+      - run: flutter build apk --release
+
+      # - run: |
+      #     flutter build ios --no-codesign
+      #     cd build/ios/iphoneos
+      #     mkdir Payload
+      #     cd Payload
+      #     ln -s ../Runner.app
+      #     cd ..
+      #     zip -r app.ipa Payload
+
+      - name: Push to Releases
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/apk/release/app-release.apk"
+          tag: v1.0.${{ github.run_number }}
+          token: ${{ secrets.GITHUB_TOKEN }}  # Ensure correct use of the GITHUB_TOKEN
+          generateReleaseNotes: false         # Optional: Disable automatic release notes
+          makeLatest: true   
+      
+            # Setup Ruby environment
+      - name: Setup Ruby environment
+        uses: ruby/setup-ruby@v1
+        with:
+              ruby-version: '3.2.5' # Ensure this matches your Ruby version
+              bundler-cache: true
+              working-directory: android
+    
+          # Fastlane Firebase Distribution
+      - name: Fastlane Firebase Distribution
+        env:
+              FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}  # Add Firebase token in GitHub secrets
+        run: |
+              bundle exec fastlane firebase_distribution
+        working-directory: android
