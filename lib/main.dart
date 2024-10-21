@@ -1,10 +1,12 @@
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
+import 'package:lnastaqim/firebase_options.dart';
 import 'config/routing/app_routingconfig/app_router_configuration.dart';
 // import 'core/utilits/functions/search_string_pattern/boyer_moore_algo.dart' as boyer;
 import 'core/constants/keys.dart';
