@@ -60,7 +60,9 @@ import 'features/quran_sound/logic/audio_cubit/audio_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
   await Hive.initFlutter();
 
   Hive.registerAdapter(BookmarkModelAdapter());
@@ -72,12 +74,7 @@ void main() async {
   await Hive.openBox<bool>('notificationBox');
   await Hive.openBox('userPreferences');
 
-  await Future.wait(
-    [
-      LocalNotificationService.init(),
-      WorkManagerService().init(),
-    ],
-  );
+ 
 
   await Hive.openBox<ReciterEntity>(AppKeys.reciterBox);
   await Future.wait([

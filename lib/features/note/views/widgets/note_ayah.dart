@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
 
 import '../../../../core/constants/colors.dart';
-import '../../../../core/constants/images.dart';
 import '../../bussniess_logic/note_cubit/note_cubit.dart';
 import '../../data/models/note_model.dart';
 

@@ -32,7 +32,7 @@ class LPSCustomPainter extends CustomPainter {
 
   // Layer 1
   
-  Paint paint_stroke_0 = Paint()
+  Paint paintStroke0 = Paint()
       ..color = const Color.fromARGB(146, 168, 125, 206)
       ..style = PaintingStyle.stroke
       ..strokeWidth = size.width*0.00
@@ -41,7 +41,7 @@ class LPSCustomPainter extends CustomPainter {
      
          
     
-    canvas.drawPath(path_0, paint_stroke_0);
+    canvas.drawPath(path_0, paintStroke0);
   
     
   }
@@ -96,7 +96,7 @@ class RPSCustomPainter extends CustomPainter{
 
   // Layer 1
   
-  Paint paint_stroke_0 = Paint()
+  Paint paintStroke0 = Paint()
       ..color = const Color.fromARGB(146, 168, 125, 206)
       ..style = PaintingStyle.stroke
       ..strokeWidth = size.width*0.00
@@ -105,7 +105,7 @@ class RPSCustomPainter extends CustomPainter{
      
          
     
-    canvas.drawPath(path_0, paint_stroke_0);
+    canvas.drawPath(path_0, paintStroke0);
   
     
   }
