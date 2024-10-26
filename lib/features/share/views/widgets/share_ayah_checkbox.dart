@@ -7,12 +7,12 @@ import '../../../quran/data/models/surahs_model.dart';
 
 class ShareAyahCheckBox extends StatefulWidget {
   const ShareAyahCheckBox(
-      {Key? key, required this.selectedAyah, required this.ayahNumber})
+      {Key? key, required this.selectedAyah, required this.ayahNumber, required this.ayaLink})
       : super(key: key);
 
   final Ayah selectedAyah;
   final String ayahNumber;
-
+final String ayaLink;
   @override
   State<ShareAyahCheckBox> createState() => _ShareAyahCheckBoxState();
 }
@@ -20,7 +20,7 @@ class ShareAyahCheckBox extends StatefulWidget {
 class _ShareAyahCheckBoxState extends State<ShareAyahCheckBox> {
   bool _isTextChecked = true;
   bool _isImageChecked = false;
-
+   bool _isLinkChecked = false;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,6 +43,7 @@ class _ShareAyahCheckBoxState extends State<ShareAyahCheckBox> {
                     setState(() {
                       _isTextChecked = value!;
                       _isImageChecked = !value;
+                      _isLinkChecked=!value;
                     });
                   },
                 ),
@@ -51,11 +52,12 @@ class _ShareAyahCheckBoxState extends State<ShareAyahCheckBox> {
                   setState(() {
                     _isTextChecked = true;
                     _isImageChecked = false;
+                                        _isLinkChecked = false;
+
                   });
                 },
               ),
-            ),
-            Expanded(
+            ),Expanded(
               child: ListTile(
                 leading: Checkbox(
                   activeColor: AppColor.transparent,
@@ -70,6 +72,7 @@ class _ShareAyahCheckBoxState extends State<ShareAyahCheckBox> {
                     setState(() {
                       _isImageChecked = value!;
                       _isTextChecked = !value;
+                             _isLinkChecked=!value;
                     });
                   },
                 ),
@@ -78,12 +81,47 @@ class _ShareAyahCheckBoxState extends State<ShareAyahCheckBox> {
                   setState(() {
                     _isImageChecked = true;
                     _isTextChecked = false;
+                                        _isLinkChecked = false;
+
                   });
                 },
               ),
             ),
           ],
         ),
+    SizedBox(height:10.h),
+    
+               Expanded(
+              child: ListTile(
+                leading: Checkbox(
+                  activeColor: Colors.transparent,
+                   side: WidgetStateBorderSide.resolveWith(
+    (states) => const BorderSide(
+      color:Colors.white, // Change border color based on state
+      width: 1, // Set the width of the border
+    ),
+  ),
+                  value: _isLinkChecked,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      _isTextChecked = !value!;
+                      _isImageChecked = !value;
+                             _isLinkChecked=value;
+                    });
+                  },
+                ),
+                title: const Text('رابط',style: TextStyle(color: Colors.white,fontSize: 16)),
+                onTap: () {
+                  setState(() {
+                    _isTextChecked = false;
+                    _isImageChecked = false;
+                    _isLinkChecked = true;
+                  });
+                },
+              ),
+            ),
+            
+    
          SizedBox(height: 28.h),
         GestureDetector(
           onTap: () {
@@ -91,6 +129,8 @@ class _ShareAyahCheckBoxState extends State<ShareAyahCheckBox> {
               shareText(widget.selectedAyah.text);
             } else if (_isImageChecked) {
               shareAyahAsImage(widget.ayahNumber, context, widget.selectedAyah);
+            }else if (_isLinkChecked) {
+                shareText(widget.ayaLink);
             } else {
               print("No option selected");
             }
@@ -110,6 +150,7 @@ class _ShareAyahCheckBoxState extends State<ShareAyahCheckBox> {
             ),
           ),
         ),
+        SizedBox(height: 3.h,)
       ],
     );
   }

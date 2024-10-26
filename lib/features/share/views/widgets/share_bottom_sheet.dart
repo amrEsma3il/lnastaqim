@@ -11,11 +11,9 @@ void showShareBottomSheet(BuildContext context, Widget widget) {
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(48.r), topLeft: Radius.circular(48.r))),
     builder: (context) => SizedBox(
-      height: 200.h,
+      height: 235.h,
       width: double.infinity,
-      child: SingleChildScrollView(
-        child: Padding(padding: const EdgeInsets.all(20.0), child: widget),
-      ),
+      child: Padding(padding: const EdgeInsets.all(20.0), child: widget),
     ),
   );
 }

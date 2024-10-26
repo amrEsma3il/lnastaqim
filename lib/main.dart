@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'core/utilits/controller/deep_link_cubit.dart';
 import 'firebase_options.dart';
 
 import 'package:lnastaqim/core/constants/colors.dart';
@@ -17,7 +20,6 @@ import 'core/utilits/services/local_notification_service.dart';
 import 'core/utilits/services/work_manager_service.dart';
 import 'features/note/bussniess_logic/overlay_note_control/overlay_note_control_cubit.dart';
 import 'features/paryer_times/bussniess_logic/date_cubit.dart';
-
 
 import 'package:hive_flutter/adapters.dart';
 import 'package:lnastaqim/features/bookmark/bussniess_logic/bookmark_cubit/bookmark_cubit.dart';
@@ -49,9 +51,9 @@ import 'features/quran_sound/logic/audio_cubit/audio_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
-);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await Hive.initFlutter();
 
   Hive.registerAdapter(BookmarkModelAdapter());
@@ -61,8 +63,6 @@ await Firebase.initializeApp(
 
   await Hive.openBox<bool>('notificationBox');
   await Hive.openBox('userPreferences');
-
- 
 
   await Hive.openBox<ReciterEntity>(AppKeys.reciterBox);
   await Future.wait([
@@ -88,6 +88,9 @@ class Lnastaqim extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
+            BlocProvider(
+              create: (context) => DeepLinkCubit(),
+            ),
             //SearchOnAyaCubit
             BlocProvider(
               create: (context) => SearchVisabilityCubit(),
@@ -162,10 +165,30 @@ class Lnastaqim extends StatelessWidget {
                     AzkarDetailsCubit()..getAzkarDetails()),
             BlocProvider(create: (BuildContext context) => SharedAzkarCubit()),
           ],
-          child: GetMaterialApp(
-            locale: const Locale('ar'),
-            debugShowCheckedModeBanner: false,
-            getPages: routes,
+          child: BlocListener<DeepLinkCubit, Uri?>(
+            listener: (context, deepLink) {
+              if (deepLink != null) {
+                if (deepLink.path == "/moshaf") {
+
+                  int page = int.parse(deepLink.queryParameters["page"]!);
+                  int ayaNum = int.parse(deepLink.queryParameters["verse"]!);
+         
+
+                  QuranCubit.get(context).pageController =
+                      PageController(initialPage: 604 - page);
+                  Get.toNamed(deepLink.path);
+
+                  QuranCubit.get(context).searchAya(ayaNum);
+                } else {
+                  Get.toNamed(deepLink.path);
+                }
+              }
+            },
+            child: GetMaterialApp(
+              locale: const Locale('ar'),
+              debugShowCheckedModeBanner: false,
+              getPages: routes,
+            ),
           ),
         );
       },
