@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +21,7 @@ import 'package:screenshot/screenshot.dart';
 
 import 'package:lnastaqim/features/tafaseer/view/screen/tafseer.dart';
 import '../../../../core/constants/images.dart';
+import '../../../../core/constants/links.dart';
 import '../../../../core/utilits/controller/search_or_not/search_visibility.dart';
 import '../../../../core/utilits/functions/toast_message.dart';
 import '../../../../core/utilits/widgets/custom_text_field.dart';
@@ -809,25 +812,21 @@ class MoshafView extends StatelessWidget {
   }
 }
 
-class MoshafPage extends StatefulWidget {
-  const MoshafPage(
+class MoshafPage extends StatelessWidget {
+   MoshafPage(
       {super.key, required this.pageIndex, required this.verseSoundstate});
   final AudioControlState verseSoundstate;
   final int pageIndex;
 
-  @override
-  State<MoshafPage> createState() => _MoshafPageState();
-}
-
-class _MoshafPageState extends State<MoshafPage> {
   final screenShotController = ScreenshotController();
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<QuranCubit, SelectAyaModel>(
       builder: (context, moshafPageState) {
         var cubit = QuranCubit.get(context);
         var pageAyahs =
-            cubit.getCurrentPageAyahsSeparatedForBasmalah(widget.pageIndex);
+            cubit.getCurrentPageAyahsSeparatedForBasmalah(pageIndex);
         return SizedBox(
           height: Get.height,
           child: Stack(
@@ -840,14 +839,14 @@ class _MoshafPageState extends State<MoshafPage> {
                     SizedBox(
                       height: 8.h,
                     ),
-                    QuranPageInfoBanner(index: widget.pageIndex),
+                    QuranPageInfoBanner(index: pageIndex),
                     SizedBox(height: 3.h),
                     ...List.generate(pageAyahs.length, (i) {
                       final ayahs = pageAyahs[i];
                       return Column(
                         children: [
                           SurahBanner(
-                              pageIndex: widget.pageIndex,
+                              pageIndex: pageIndex,
                               ayaIndex: i,
                               firstPlace: true),
                           cubit.getSurahNumberByAyah(ayahs.first) == 9 ||
@@ -914,9 +913,10 @@ class _MoshafPageState extends State<MoshafPage> {
                                                 .withOpacity(0.3),
                                         onLongPressStart:
                                             (LongPressStartDetails details) {
+                                              log(ayahs[ayahIndex]
+                                                    .ayahUQNumber.toString());
                                           print(moshafPageState);
-                                          if (!widget
-                                              .verseSoundstate.isPlaying) {
+                                          if (!verseSoundstate.isPlaying) {
                                             cubit.toggleAyahSelection(
                                               selectAya: SelectAyaModel(
                                                 ayaNumber: ayahs[ayahIndex]
@@ -934,10 +934,10 @@ class _MoshafPageState extends State<MoshafPage> {
                                         text: ayahIndex == 0
                                             ? "${ayahs[ayahIndex].codeV2[0]}${ayahs[ayahIndex].codeV2.substring(1)}"
                                             : ayahs[ayahIndex].codeV2,
-                                        pageIndex: widget.pageIndex,
+                                        pageIndex: pageIndex,
                                         fontSize: 100.sp,
                                         surahNum: cubit.getSurahNumberFromPage(
-                                            widget.pageIndex),
+                                            pageIndex),
                                         ayahNum: ayahs[ayahIndex].ayahUQNumber,
                                       );
                                     }
@@ -950,13 +950,15 @@ class _MoshafPageState extends State<MoshafPage> {
                                               : Colors.transparent,
                                       onLongPressStart:
                                           (LongPressStartDetails details) {
+                                               log(ayahs[ayahIndex]
+                                                    .ayahUQNumber.toString());
                                         print(moshafPageState);
 
                                         print(ayahs[ayahIndex].ayahUQNumber);
                                         TafseerCubit.get(context).getayanumber(
                                             ayahs[ayahIndex].ayahUQNumber);
 
-                                        if (!widget.verseSoundstate.isPlaying) {
+                                        if (!verseSoundstate.isPlaying) {
                                           cubit.toggleAyahSelection(
                                               selectAya: SelectAyaModel(
                                                   ayaNumber: ayahs[ayahIndex]
@@ -973,17 +975,17 @@ class _MoshafPageState extends State<MoshafPage> {
                                       text: ayahIndex == 0
                                           ? "${ayahs[ayahIndex].codeV2[0]}${ayahs[ayahIndex].codeV2.substring(1)}"
                                           : ayahs[ayahIndex].codeV2,
-                                      pageIndex: widget.pageIndex,
+                                      pageIndex: pageIndex,
                                       fontSize: 100.sp,
                                       surahNum: cubit.getSurahNumberFromPage(
-                                          widget.pageIndex),
+                                          pageIndex),
                                       ayahNum: ayahs[ayahIndex].ayahUQNumber,
                                     );
                                   })),
                             ),
                           ),
                           SurahBanner(
-                              pageIndex: widget.pageIndex,
+                              pageIndex: pageIndex,
                               ayaIndex: i,
                               firstPlace: false),
                         ],
@@ -1037,23 +1039,22 @@ class _MoshafPageState extends State<MoshafPage> {
                                       //  if(!widget.verseSoundstate.isPlaying)  { QuranCubit.get(context)
                                       //         .clearMenuOverlayEvent();}
                                       QuranCubit.get(context).searchAya(
-                                          widget.verseSoundstate.currentVerse);
+                                          verseSoundstate.currentVerse);
                                       ScreenOverlayCubit.get(context)
                                           .overlaysVisability();
 
 // final verses= pageAyahs[pageChangeState.pageNum];
-                                      if (widget.verseSoundstate.isPlaying) {
+                                      if (verseSoundstate.isPlaying) {
                                         AudioControlCubit.get(context).stop();
                                       } else {
                                         AudioControlCubit.get(context)
                                             .togglePlayPause(context,
-                                                verseNumber: widget
-                                                    .verseSoundstate
+                                                verseNumber: verseSoundstate
                                                     .currentVerse);
                                       }
                                     },
                                     icon: Icon(
-                                      widget.verseSoundstate.isPlaying
+                                      verseSoundstate.isPlaying
                                           ? Icons.stop
                                           : Icons.play_arrow_rounded,
                                       color: const Color.fromARGB(
@@ -1122,14 +1123,18 @@ class _MoshafPageState extends State<MoshafPage> {
                                             .firstWhere((ayah) =>
                                                 ayah.ayahUQNumber ==
                                                 moshafPageState.ayaNumber);
+
+                                                String ayaLink="${AppLinks.deepLinks}/moshaf?page=${pageIndex+1}&verse=${selectedAyah.ayahUQNumber}";
                                         showShareBottomSheet(
                                             context,
                                             ShareAyahCheckBox(
                                               ayahNumber: selectedAyah
                                                   .ayahNumber
                                                   .toString(),
-                                              selectedAyah: selectedAyah,
+                                              selectedAyah: selectedAyah,ayaLink: ayaLink,
+                                              
                                             ));
+                                            
                                       }
                                     },
                                     icon: Icon(
@@ -1169,7 +1174,7 @@ class _MoshafPageState extends State<MoshafPage> {
                 bottom: 8.h,
                 child: Center(
                   child: Text(
-                    (widget.pageIndex + 1).toString().toArabic,
+                    (pageIndex + 1).toString().toArabic,
                     style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w900,
