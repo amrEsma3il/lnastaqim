@@ -1124,7 +1124,7 @@ class MoshafPage extends StatelessWidget {
                                                 ayah.ayahUQNumber ==
                                                 moshafPageState.ayaNumber);
 
-                                                String ayaLink="${AppLinks.deepLinks}/moshaf?page=${pageIndex+1}&verse=${selectedAyah.ayahUQNumber}";
+                                                String ayaLink="${AppLinks.appLinks}/moshaf?page=${pageIndex+1}&verse=${selectedAyah.ayahUQNumber}";
                                         showShareBottomSheet(
                                             context,
                                             ShareAyahCheckBox(
