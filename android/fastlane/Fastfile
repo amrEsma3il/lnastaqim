@@ -10,7 +10,7 @@ platform :android do
       firebase_cli_token: ENV['FIREBASE_CLI_TOKEN'],
       android_artifact_type: "APK",
       android_artifact_path: "../build/app/outputs/apk/release/app-release.apk",
-      testers: "amrgalalam10@gmail.com,yttrexgchiiihgffv@gmail.com,mo.seliem2001@gmail.com",
+      testers: "amrgalalamr10@gmail.com,yyttrexcghiiihgffv@gmail.com",
       release_notes: "release v =>1.0.9"
     )
   end
