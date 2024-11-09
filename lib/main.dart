@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'core/utilits/controller/deep_link_cubit.dart';
+import 'features/quran/bussniess_logic/memorized_verse_cubit/memorized_verse_cubit.dart';
 import 'firebase_options.dart';
 
 import 'package:lnastaqim/core/constants/colors.dart';
@@ -156,6 +157,9 @@ class Lnastaqim extends StatelessWidget {
             BlocProvider(
                 create: (BuildContext context) =>
                     AzkarCategoryCubit()..getAzkarCategory()),
+                     BlocProvider(
+                create: (BuildContext context) =>
+                    MemorizedVerseCubit()),
             BlocProvider(
                 create: (BuildContext context) =>
                     PrayersTimesCubit()..fetchPrayersTimes()),
