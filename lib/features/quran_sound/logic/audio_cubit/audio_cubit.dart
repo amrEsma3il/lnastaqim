@@ -44,10 +44,18 @@ class AudioControlCubit extends Cubit<AudioControlState> {
     emit(state.copyWith(currentVerse: verseNumber));
   }
 
-  selectReciters(ReciterEntity reciter) {
+  selectReciters(ReciterEntity reciter,BuildContext context) async {
+      // Save the current position of the audio
+  final Duration? currentPosition = await _audioPlayer.getCurrentPosition();
+  
+  log(currentPosition.toString());
+   await _audioPlayer.stop();
     Box<ReciterEntity> box = Hive.box<ReciterEntity>(AppKeys.reciterBox);
     box.put(AppKeys.reciterNameKey, reciter);
+
+    //TODO:stop immedatelly sound and save the time and play same sound at the saved time 
     emit(state.copyWith(selectedReciter: reciter));
+   if (context.mounted)  playVerse(state.currentVerse, context);
   }
 
   changeAyaIndex(int verseNumber) {
@@ -58,7 +66,7 @@ class AudioControlCubit extends Cubit<AudioControlState> {
     emit(state.copyWith(pageNum: newPageNum));
   }
 
-  Future<void> playVerse(int verseNumber, BuildContext context) async {
+  Future<void> playVerse(int verseNumber, BuildContext context,{Duration? startPosition}) async {
     // QuranCubit.get(context).searchAya(verseNumber-1);
     final quranCubit = QuranCubit.get(context);
     final directory = await getApplicationDocumentsDirectory();
@@ -90,6 +98,9 @@ class AudioControlCubit extends Cubit<AudioControlState> {
 
       await _audioPlayer.play(DeviceFileSource(filePath));
       print(state.isPlaying.toString());
+       if (startPosition != null) {
+      await _audioPlayer.seek(startPosition);
+    }
       emit(state.copyWith(
         isPlaying: true,
         currentVerse: verseNumber,
@@ -119,7 +130,9 @@ class AudioControlCubit extends Cubit<AudioControlState> {
         quranCubit.searchAya(verseNumber);
 
         await _audioPlayer.play(DeviceFileSource(filePath));
-
+ if (startPosition != null) {
+      await _audioPlayer.seek(startPosition);
+    }
         emit(state.copyWith(
           isPlaying: true,
           currentVerse: verseNumber,

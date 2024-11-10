@@ -18,7 +18,7 @@ final ReciterEntity reciter ;
   
                context
                           .read<AudioControlCubit>()
-                          .selectReciters(reciter);
+                          .selectReciters(reciter,context);
                                 Get.back();
       },
       child: BlocBuilder<AudioControlCubit, AudioControlState>(
