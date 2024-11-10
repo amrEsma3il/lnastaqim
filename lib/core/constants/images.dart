@@ -13,8 +13,8 @@ class AppImages {
   static const String indicator = '$rootImages/indicator.png';
   static const String banner = '$rootImages/banner.png';
   static const String azkar = '$rootImages/azkar.png';
-    static const String empty = '$rootImages/empty3.png';
- static const String ayaMark = '$rootImages/aya_mark.png';
+  static const String empty = '$rootImages/empty3.png';
+  static const String ayaMark = '$rootImages/aya_mark.png';
 
   static const String pageMark = 'assets/svgs/bookmark.svg';
   static const String surahNameBanner = 'assets/svgs/surah_banner1.svg';
@@ -45,4 +45,15 @@ class AppImages {
   static const String sibhaFeature = '$rootImages/azkar_feature_icon.svg';
   static const String listenFeature = '$rootImages/listen_feature_icon.svg';
   static const String ahadesFeature = '$rootImages/ahades_feature_icon.svg';
+
+  //hadith
+  static const String bukariImage = '$rootImages/bukari.png';
+  static const String muslimImage = '$rootImages/muslim.png';
+  static const String abidawoodImage = '$rootImages/abidawood.png';
+  static const String tarmziImage = '$rootImages/tarmzi.PNG';
+  static const String neasaiImage = '$rootImages/neasai.PNG';
+  static const String ebnmagaImage = '$rootImages/ebn_maga.PNG';
+  static const String motamalekImage = '$rootImages/mota_malek.PNG';
+  static const String masneddramiImage = '$rootImages/masned_drami.PNG';
+  static const String masnedahmedImage = '$rootImages/masned_ahmed.PNG';
 }

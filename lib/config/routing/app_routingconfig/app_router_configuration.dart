@@ -5,10 +5,10 @@ import 'package:lnastaqim/features/bookmark/views/bookmarks_view.dart';
 import 'package:lnastaqim/features/note/views/note_view.dart';
 import 'package:lnastaqim/features/qibla/view/screen/quiblah_screen.dart';
 
+import '../../../features/7adis/view/screen/main_a7adith.dart';
 import '../../../features/azkar_with_sib7a/view/screens/azkar_details_view.dart';
 import '../../../features/home/views/screens/home_view.dart';
 import '../../../features/notification/view/notification_screen.dart';
-import '../../../features/paryer_times/view/screens/test_screen.dart';
 
 
 
@@ -52,13 +52,13 @@ List<GetPage<dynamic>>? routes = [
       page: () => const MoshafView(),
       name: AppRouteName.moshaf,
       transition: Transition.fadeIn,
-      transitionDuration: const Duration(milliseconds: 500)), //moshafIndex
-  // GetPage(
-  // curve: Curves.easeInOut,
-  // page: () => const MoshafIndex(),
-  // name: AppRouteName.moshafIndex,
-  // transition: Transition.fadeIn,
-  // transitionDuration: const Duration(milliseconds: 500)),//
+      transitionDuration: const Duration(milliseconds: 500)),//moshafIndex
+      // GetPage(
+      // curve: Curves.easeInOut,
+      // page: () => const MoshafIndex(),
+      // name: AppRouteName.moshafIndex,
+      // transition: Transition.fadeIn,
+      // transitionDuration: const Duration(milliseconds: 500)),//
   GetPage(
       curve: Curves.easeInOut,
       page: () => const BookmarksView(),

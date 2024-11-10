@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lnastaqim/features/qibla/bussiness_logic.dart/quiblah_controller.dart';
+import 'package:lnastaqim/features/qibla/bussiness_logic/quiblah_controller.dart';
 import 'package:lnastaqim/features/qibla/view/screen/compass_Screen.dart';
 
 import '../widget/custom_quiblah_screen.dart';
