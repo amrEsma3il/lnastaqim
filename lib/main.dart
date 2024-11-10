@@ -1,10 +1,13 @@
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import 'package:firebase_core/firebase_core.dart';
+import 'core/utilits/controller/deep_link_cubit.dart';
+import 'features/quran/bussniess_logic/memorized_verse_cubit/memorized_verse_cubit.dart';
 import 'firebase_options.dart';
 
 import 'package:lnastaqim/core/constants/colors.dart';
@@ -18,9 +21,7 @@ import 'core/utilits/services/work_manager_service.dart';
 import 'features/note/bussniess_logic/overlay_note_control/overlay_note_control_cubit.dart';
 import 'features/paryer_times/bussniess_logic/date_cubit.dart';
 
-
 import 'package:hive_flutter/adapters.dart';
-
 import 'package:lnastaqim/features/bookmark/bussniess_logic/bookmark_cubit/bookmark_cubit.dart';
 import 'package:lnastaqim/features/bookmark/data/models/bookmark_model.dart';
 import 'package:lnastaqim/features/note/bussniess_logic/add_note_cubit/add_note_cubit.dart';
@@ -29,20 +30,14 @@ import 'package:lnastaqim/features/note/data/models/note_model.dart';
 import 'package:lnastaqim/features/quran/bussniess_logic/quran/quran_cubit.dart';
 import 'package:lnastaqim/features/tafaseer/bussniess_logic/tafseer_cubit.dart';
 
-import 'config/routing/app_routingconfig/app_router_configuration.dart';
 import 'core/constants/constants.dart';
-
-import 'features/bookmark/bussniess_logic/add_bookmark_cubit/add_bookmark_cubit.dart';
-import 'features/notification/bussiness_logic/notification_cubit.dart';
-
-
 // import 'core/utilits/functions/search_string_pattern/boyer_moore_algo.dart' as boyer;
 import 'features/7adis/bussiness_logic/a7adith_cubit.dart';
 import 'features/azkar_with_sib7a/business_logic/azkar_category_cubit/azkar_category_cubit.dart';
 import 'features/azkar_with_sib7a/business_logic/azkar_details_cubit/azkar_details_cubit.dart';
 import 'features/azkar_with_sib7a/business_logic/shared_azkar_cubit/shared_azkar_cubit.dart';
-
-
+import 'features/bookmark/bussniess_logic/add_bookmark_cubit/add_bookmark_cubit.dart';
+import 'features/notification/bussiness_logic/notification_cubit.dart';
 import 'features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
 import 'features/quran/bussniess_logic/fast_transition/fast_transition_cubit.dart';
 import 'features/quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
@@ -53,7 +48,6 @@ import 'features/quran/bussniess_logic/screen_tap_Visibility/screen_tap_visabili
 import 'features/quran/bussniess_logic/sowra_detail/sora_details_cubit.dart';
 import 'features/quran_sound/data/models/reciter_entity.dart';
 import 'features/quran_sound/logic/audio_cubit/audio_cubit.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -94,7 +88,9 @@ class Lnastaqim extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
-
+            BlocProvider(
+              create: (context) => DeepLinkCubit(),
+            ),
             //SearchOnAyaCubit
             BlocProvider(
               create: (context) => SearchVisabilityCubit(),
@@ -163,17 +159,39 @@ class Lnastaqim extends StatelessWidget {
                     AzkarCategoryCubit()..getAzkarCategory()),
                      BlocProvider(
                 create: (BuildContext context) =>
+                    MemorizedVerseCubit()),
+            BlocProvider(
+                create: (BuildContext context) =>
                     PrayersTimesCubit()..fetchPrayersTimes()),
             BlocProvider(
                 create: (BuildContext context) =>
                     AzkarDetailsCubit()..getAzkarDetails()),
             BlocProvider(create: (BuildContext context) => SharedAzkarCubit()),
-
           ],
-          child: GetMaterialApp(
-            locale: const Locale('ar'),
-            debugShowCheckedModeBanner: false,
-            getPages: routes,
+          child: BlocListener<DeepLinkCubit, Uri?>(
+            listener: (context, deepLink) {
+              if (deepLink != null) {
+                if (deepLink.path == "/moshaf") {
+
+                  int page = int.parse(deepLink.queryParameters["page"]!);
+                  int ayaNum = int.parse(deepLink.queryParameters["verse"]!);
+         
+
+                  QuranCubit.get(context).pageController =
+                      PageController(initialPage: 604 - page);
+                  Get.toNamed(deepLink.path);
+
+                  QuranCubit.get(context).searchAya(ayaNum);
+                } else {
+                  Get.toNamed(deepLink.path);
+                }
+              }
+            },
+            child: GetMaterialApp(
+              locale: const Locale('ar'),
+              debugShowCheckedModeBanner: false,
+              getPages: routes,
+            ),
           ),
         );
       },
