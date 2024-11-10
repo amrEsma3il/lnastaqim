@@ -1,24 +1,23 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 import 'package:lnastaqim/features/share/views/widgets/share_fun.dart';
 
-class ShareZekrCheckBox extends StatefulWidget {
-  const ShareZekrCheckBox({
+class ShareHadisCheckbox extends StatefulWidget {
+  const ShareHadisCheckbox({
     Key? key,
-    required this.zekr,
-    required this.image,
+    required this.hadis,
+    required this.category,
   }) : super(key: key);
 
-  final String zekr;
-  final Uint8List image;
+  final String hadis;
+
+  final String category;
 
   @override
-  State<ShareZekrCheckBox> createState() => _ShareZekrCheckBoxState();
+  State<ShareHadisCheckbox> createState() => _ShareHadisCheckboxState();
 }
 
-class _ShareZekrCheckBoxState extends State<ShareZekrCheckBox> {
+class _ShareHadisCheckboxState extends State<ShareHadisCheckbox> {
   bool _isTextChecked = true;
   bool _isImageChecked = false;
 
@@ -87,9 +86,9 @@ class _ShareZekrCheckBoxState extends State<ShareZekrCheckBox> {
         GestureDetector(
           onTap: () async {
             if (_isTextChecked) {
-              shareText(widget.zekr);
+              shareText(widget.hadis);
             } else if (_isImageChecked) {
-              await shareImage(widget.image, "zekr");
+              await shareHadisAsImage(widget.hadis, widget.category);
             } else {
               print("No option selected");
             }

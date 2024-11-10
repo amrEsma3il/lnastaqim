@@ -5,6 +5,7 @@ import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/svg.dart";
 import "package:get/get.dart";
+import "package:lnastaqim/core/constants/colors.dart";
 import "package:lnastaqim/core/utilits/extensions/arabic_numbers.dart";
 import "package:path_provider/path_provider.dart";
 import "package:screenshot/screenshot.dart";
@@ -103,6 +104,77 @@ Future<void> shareAyahAsImage(
 
   print("..................");
   print(selectedAyah.ayahNumber);
+  final file = File(path);
+  await file.writeAsBytes(imageFile);
+
+  final xfile = XFile(path);
+  await Share.shareXFiles([xfile]);
+}
+
+Future<void> shareHadisAsImage(String hadis, String category) async {
+  final directory = (await getApplicationDocumentsDirectory()).path;
+  const fileName = 'hadis.png';
+  final path = '$directory/$fileName';
+  var name = hadis;
+  final screenShotController = ScreenshotController();
+
+  final imageFile = await screenShotController.captureFromWidget(
+    Container(
+      color: Colors.white,
+      child: IntrinsicHeight(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(15),
+              child: Container(
+                decoration: ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(color: AppColor.primary))),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        child: Container(
+                          height: 30,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: AppColor.primary.withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              category,
+                              style: const TextStyle(
+                                  fontFamily: 'Authmanic',
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        name,
+                        style: const TextStyle(
+                            fontSize: 18,
+                            wordSpacing: -0.9,
+                            color: Colors.black),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+
   final file = File(path);
   await file.writeAsBytes(imageFile);
 
