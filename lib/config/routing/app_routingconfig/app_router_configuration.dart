@@ -2,6 +2,7 @@ import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/view/screens/azkar_category_view.dart';
 import 'package:lnastaqim/features/bookmark/views/bookmarks_view.dart';
+import 'package:lnastaqim/features/favourite/views/favourites_view.dart';
 import 'package:lnastaqim/features/note/views/note_view.dart';
 import 'package:lnastaqim/features/qibla/view/screen/quiblah_screen.dart';
 
@@ -9,7 +10,6 @@ import '../../../features/7adis/view/screen/main_a7adith.dart';
 import '../../../features/azkar_with_sib7a/view/screens/azkar_details_view.dart';
 import '../../../features/home/views/screens/home_view.dart';
 import '../../../features/notification/view/notification_screen.dart';
-
 import '../../../features/quran/view/screens/moshaf_view.dart';
 import '../../../features/quran_sound_player/view/screens/surah_player_screen.dart';
 import '../../../features/radio_stream_channels/view/pages/radio_screen.dart';
@@ -100,6 +100,13 @@ List<GetPage<dynamic>>? routes = [
       curve: Curves.easeInOut,
       page: () => const NotificationScreen(),
       name: AppRouteName.notification,
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 500)),
+
+  GetPage(
+      curve: Curves.easeInOut,
+      page: () => const FavouritesView(),
+      name: AppRouteName.favAzkar,
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 500)),
 ];

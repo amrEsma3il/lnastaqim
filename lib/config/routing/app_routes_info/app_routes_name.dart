@@ -26,4 +26,6 @@ class AppRouteName {
   static const String qibla = "/qibla";
 
   static const String notification = "/notification";
+
+  static const String favAzkar = "/favAzkar";
 }

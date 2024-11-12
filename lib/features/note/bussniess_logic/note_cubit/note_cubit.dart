@@ -46,104 +46,106 @@ class NoteCubit extends Cubit<NoteState> {
           content: SizedBox(
             width: Get.width,
             height: Get.height / 7 * 2.9,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  height: 5.h,
-                ),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    height: 5.h,
+                  ),
 
-                // text field here
+                  // text field here
 
-                TextFormField(
-                  style: const TextStyle(color: Colors.white),
-                  controller: noteEditController,
-                  maxLines: 10,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6),
-                        borderSide:
-                            const BorderSide(color: Colors.white, width: 0.5),
+                  TextFormField(
+                    style: const TextStyle(color: Colors.white),
+                    controller: noteEditController,
+                    maxLines: 10,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(6),
+                          borderSide:
+                              const BorderSide(color: Colors.white, width: 0.5),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(6),
+                          borderSide:
+                              const BorderSide(color: Colors.white, width: 0.5),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(6),
+                          borderSide:
+                              const BorderSide(color: Colors.white, width: 0.5),
+                        ),
+                        // hintText: "أضف ملاحظة...",
+                        hintStyle: const TextStyle(
+                            // fontFamily: "naskh",
+                            fontSize: 18.5,
+                            color: Colors.white)),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        height: 40,
+                        width: 85,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    WidgetStateProperty.all(Colors.white),
+                                shape: WidgetStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ))),
+                            child: const Text(
+                              "الغاء",
+                              style: TextStyle(
+                                  // fontFamily: "naskh",
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColor.blueColor),
+                            )),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6),
-                        borderSide:
-                            const BorderSide(color: Colors.white, width: 0.5),
+                      const SizedBox(
+                        width: 10,
                       ),
-                      disabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6),
-                        borderSide:
-                            const BorderSide(color: Colors.white, width: 0.5),
+                      SizedBox(
+                        height: 40,
+                        width: 85,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              updateNote(note, noteEditController.text);
+                              fetchNotes();
+                              Get.back();
+                            },
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    WidgetStateProperty.all(Colors.white),
+                                shape: WidgetStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ))),
+                            child: const Text(
+                              "حفظ",
+                              style: TextStyle(
+                                  // fontFamily: "naskh",
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColor.blueColor),
+                            )),
                       ),
-                      // hintText: "أضف ملاحظة...",
-                      hintStyle: const TextStyle(
-                          // fontFamily: "naskh",
-                          fontSize: 18.5,
-                          color: Colors.white)),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      height: 40,
-                      width: 85,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  WidgetStateProperty.all(Colors.white),
-                              shape: WidgetStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12.r),
-                              ))),
-                          child: const Text(
-                            "الغاء",
-                            style: TextStyle(
-                                // fontFamily: "naskh",
-                                fontSize: 17,
-                                fontWeight: FontWeight.w600,
-                                color: AppColor.blueColor),
-                          )),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    SizedBox(
-                      height: 40,
-                      width: 85,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            updateNote(note, noteEditController.text);
-                            fetchNotes();
-                            Get.back();
-                          },
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  WidgetStateProperty.all(Colors.white),
-                              shape: WidgetStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12.r),
-                              ))),
-                          child: const Text(
-                            "حفظ",
-                            style: TextStyle(
-                                // fontFamily: "naskh",
-                                fontSize: 17,
-                                fontWeight: FontWeight.w600,
-                                color: AppColor.blueColor),
-                          )),
-                    ),
-                  ],
-                )
-              ],
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
 
