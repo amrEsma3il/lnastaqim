@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lnastaqim/core/constants/images.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/data/models/AzkarModel.dart';
+import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/custom_menu.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/item_drop_menu.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/other_category_list_view.dart';
-import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/show_azkar_options_menu.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../../adi3a/views/widgets/adi3a_category_list_view.dart';
@@ -42,28 +42,16 @@ class _AzkarViewState extends State<AzkarView> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Stack(
+                    const Stack(
                       alignment: Alignment.topRight,
                       children: [
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
                           child: Image(
                             image: AssetImage(AppImages.azkar),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 30),
-                          child: GestureDetector(
-                            onTap: () {
-                              showAzkarOptionsMenu(context);
-                            },
-                            child: Image.asset(
-                              AppImages.menu,
-                              color: AppColor.primary,
-                              height: 27,
-                            ),
-                          ),
-                        ),
+                        CustomMenu(isZekr: true,),
                       ],
                     ),
                     Padding(

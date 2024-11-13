@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:lnastaqim/config/routing/app_routes_info/app_routes_name.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 
-void showAzkarOptionsMenu(BuildContext context) {
+void showAzkarOptionsMenu(BuildContext context, bool isZekr) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -18,7 +18,11 @@ void showAzkarOptionsMenu(BuildContext context) {
             children: [
               GestureDetector(
                 onTap: () {
-                  Get.toNamed(AppRouteName.favAzkar);
+                  if (isZekr == true) {
+                    Get.toNamed(AppRouteName.favAzkar);
+                  } else {
+                    Get.toNamed(AppRouteName.fav7adis);
+                  }
                 },
                 child: const Row(
                   children: [

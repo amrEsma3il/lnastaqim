@@ -105,8 +105,19 @@ List<GetPage<dynamic>>? routes = [
 
   GetPage(
       curve: Curves.easeInOut,
-      page: () => const FavouritesView(),
+      page: () => const FavouritesView(
+            isZekr: true,
+          ),
       name: AppRouteName.favAzkar,
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 500)),
+
+  GetPage(
+      curve: Curves.easeInOut,
+      page: () => const FavouritesView(
+            isZekr: false,
+          ),
+      name: AppRouteName.fav7adis,
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 500)),
 ];

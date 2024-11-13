@@ -8,10 +8,17 @@ part 'favourite_state.dart';
 class FavouriteCubit extends Cubit<FavouriteState> {
   FavouriteCubit() : super(FavouriteInitial());
 
-  List<FavouriteModel>? favourites;
-  fetchFavourite() {
+  List<FavouriteModel>? favouritesAzkar;
+  fetchAzkarFavourite() {
     var favouritesBox = Hive.box<FavouriteModel>(kAzkarFavouriteBox);
-    favourites = favouritesBox.values.toList();
+    favouritesAzkar = favouritesBox.values.toList();
+    emit(FavouriteSuccessState());
+  }
+  List<FavouriteModel>? favourites7adis;
+
+  fetch7adisFavourite() {
+    var favouritesBox = Hive.box<FavouriteModel>(k7adisFavouriteBox);
+    favourites7adis = favouritesBox.values.toList();
     emit(FavouriteSuccessState());
   }
 }

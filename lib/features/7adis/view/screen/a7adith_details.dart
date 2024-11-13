@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lnastaqim/features/favourite/bussniess_logic/add_to_fav_cubit/add_to_fav_cubit.dart';
+import 'package:lnastaqim/features/favourite/bussniess_logic/add_to_fav_cubit/add_to_fav_state.dart';
+import 'package:lnastaqim/features/favourite/bussniess_logic/favourites_cubit/favourite_cubit.dart';
+import 'package:lnastaqim/features/favourite/data/models/favourite_model.dart';
 import 'package:lnastaqim/features/share/views/widgets/share_bottom_sheet.dart';
 import 'package:lnastaqim/features/share/views/widgets/share_hadis_checkbox.dart';
 import 'package:screenshot/screenshot.dart';
@@ -131,18 +135,62 @@ class _A7adithDetailsState extends State<A7adithDetails> {
                                                     )),
                                               ),
                                             ),
-                                            Expanded(
-                                              child: CircleAvatar(
-                                                radius: 20,
-                                                backgroundColor: AppColor.white,
-                                                child: IconButton(
-                                                    onPressed: () {},
-                                                    icon: Icon(
-                                                      Icons.favorite_border,
-                                                      size: 18,
-                                                      color: AppColor.primary,
-                                                    )),
-                                              ),
+                                            BlocConsumer<AddToFavouriteCubit,
+                                                AddToFavouriteState>(
+                                              listener: (context, stateC) {
+                                                if (stateC
+                                                    is AddToFavouriteSuccessState) {
+                                                  BlocProvider.of<
+                                                              FavouriteCubit>(
+                                                          context)
+                                                      .fetch7adisFavourite();
+                                                }
+                                              },
+                                              builder: (context, stateC) {
+                                                var favouriteCubit =
+                                                    BlocProvider.of<
+                                                            FavouriteCubit>(
+                                                        context);
+                                                bool isFavourite = favouriteCubit
+                                                        .favourites7adis
+                                                        ?.any((fav) =>
+                                                            fav.name ==
+                                                            (filteredHadiths[
+                                                                        index]
+                                                                    .arabic ??
+                                                                '')) ??
+                                                    false;
+
+                                                return Expanded(
+                                                  child: CircleAvatar(
+                                                    radius: 20,
+                                                    backgroundColor:
+                                                        AppColor.white,
+                                                    child: IconButton(
+                                                      onPressed: () {
+                                                        add7adisToFav(
+                                                            context,
+                                                            isFavourite,
+                                                            '${state.hadiths[0].metadata!.arabic!.title}  |  ${state.hadiths[0].chapters![widget.id - 1].arabic}',
+                                                            filteredHadiths[
+                                                                        index]
+                                                                    .arabic ??
+                                                                "");
+                                                      },
+                                                      icon: Icon(
+                                                        isFavourite
+                                                            ? Icons.favorite
+                                                            : Icons
+                                                                .favorite_border,
+                                                        size: 18,
+                                                        color: isFavourite
+                                                            ? AppColor.red
+                                                            : AppColor.primary,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
                                             ),
                                             Expanded(
                                               child: CircleAvatar(
@@ -195,11 +243,37 @@ class _A7adithDetailsState extends State<A7adithDetails> {
           );
         }
         return const Scaffold(
-          body: Center(
-              child:
-                  CircularProgressIndicator()), // Show a loading spinner while data is loading
+          body: Center(child: CircularProgressIndicator()),
         );
       },
     );
+  }
+
+  void add7adisToFav(
+      BuildContext context, bool isFavourite, String category, String name) {
+    var favourites = BlocProvider.of<FavouriteCubit>(context).favourites7adis;
+
+    if (!isFavourite) {
+      BlocProvider.of<AddToFavouriteCubit>(context).add7adisToFavourite(
+        FavouriteModel(
+          name: name,
+          category: category,
+        ),
+      );
+      setState(() {
+        isFavourite = true;
+      });
+    } else {
+      for (var fav in favourites!) {
+        if (fav.name == name) {
+          fav.delete();
+          break;
+        }
+      }
+      BlocProvider.of<FavouriteCubit>(context).fetch7adisFavourite();
+      setState(() {
+        isFavourite = false;
+      });
+    }
   }
 }

@@ -3,10 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constants/colors.dart';
-import 'favourites_lisview.dart';
+import 'favourites_azkar_7adis_lisview.dart';
 
 class Favouritesviewbody extends StatelessWidget {
-  const Favouritesviewbody({super.key});
+  const Favouritesviewbody({super.key, required this.isZekr});
+
+  final bool isZekr;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class Favouritesviewbody extends StatelessWidget {
                               },
                               icon: const Icon(
                                 Icons.arrow_back,
-                                size: 30,
+                                size: 20,
                                 color: Colors.white,
                               )),
                           Expanded(
@@ -51,23 +53,15 @@ class Favouritesviewbody extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
                       Expanded(
                         child: Padding(
                             padding: EdgeInsets.only(bottom: 20.h),
-                            child:
-                                // implement slide to action here
-
-                                const FavouritesAzkarListView()),
+                            child: FavouritesAzkar7adisListView(
+                              isZekr: isZekr,
+                            )),
                       ),
                     ],
                   ),
-                ))
-
-            // const BookmarksAyahListView()
-
-            ));
+                ))));
   }
 }

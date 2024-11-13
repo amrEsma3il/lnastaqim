@@ -60,6 +60,8 @@ void main() async {
   await Hive.openBox<NoteModel>(kNoteBox);
   Hive.registerAdapter(FavouriteModelAdapter());
   await Hive.openBox<FavouriteModel>(kAzkarFavouriteBox);
+    await Hive.openBox<FavouriteModel>(k7adisFavouriteBox);
+
 
   await Hive.openBox<bool>('notificationBox');
   await Hive.openBox('userPreferences');
@@ -138,7 +140,9 @@ class Lnastaqim extends StatelessWidget {
 
             BlocProvider(create: (context) => AddToFavouriteCubit()),
             BlocProvider(
-                create: (context) => FavouriteCubit()..fetchFavourite()),
+                create: (context) => FavouriteCubit()
+                  ..fetchAzkarFavourite()
+                  ..fetch7adisFavourite()),
             BlocProvider(create: (context) => AddNoteCubit()),
             BlocProvider(create: (context) => NoteCubit()..fetchNotes()),
 

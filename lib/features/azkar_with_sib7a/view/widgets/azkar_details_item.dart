@@ -108,13 +108,13 @@ class _AzkarDetailsItemState extends State<AzkarDetailsItem> {
                     listener: (context, state) {
                       if (state is AddToFavouriteSuccessState) {
                         BlocProvider.of<FavouriteCubit>(context)
-                            .fetchFavourite();
+                            .fetchAzkarFavourite();
                       }
                     },
                     builder: (context, state) {
                       var favouriteCubit =
                           BlocProvider.of<FavouriteCubit>(context);
-                      bool isFavourite = favouriteCubit.favourites?.any(
+                      bool isFavourite = favouriteCubit.favouritesAzkar?.any(
                               (fav) => fav.name == widget.azkarModel.zekr) ??
                           false;
                       return BlocBuilder<FavouriteCubit, FavouriteState>(
@@ -127,7 +127,7 @@ class _AzkarDetailsItemState extends State<AzkarDetailsItem> {
                                   : AppColor.primary.withOpacity(0.3),
                               child: IconButton(
                                 onPressed: () {
-                                  addToFav(context, isFavourite);
+                                  addAzkarToFav(context, isFavourite);
                                 },
                                 icon: Icon(
                                   isFavourite
@@ -175,11 +175,11 @@ class _AzkarDetailsItemState extends State<AzkarDetailsItem> {
     );
   }
 
-  void addToFav(BuildContext context, bool isFavourite) {
-    var favourites = BlocProvider.of<FavouriteCubit>(context).favourites;
+  void addAzkarToFav(BuildContext context, bool isFavourite) {
+    var favourites = BlocProvider.of<FavouriteCubit>(context).favouritesAzkar;
 
     if (!isFavourite) {
-      BlocProvider.of<AddToFavouriteCubit>(context).addToFavourite(
+      BlocProvider.of<AddToFavouriteCubit>(context).addAzkarToFavourite(
         FavouriteModel(
           name: widget.azkarModel.zekr ?? "",
           category: widget.azkarModel.category ?? "",
@@ -195,7 +195,7 @@ class _AzkarDetailsItemState extends State<AzkarDetailsItem> {
           break;
         }
       }
-      BlocProvider.of<FavouriteCubit>(context).fetchFavourite();
+      BlocProvider.of<FavouriteCubit>(context).fetchAzkarFavourite();
       setState(() {
         isFavourite = false;
       });

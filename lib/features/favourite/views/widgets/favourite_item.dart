@@ -6,9 +6,11 @@ import '../../../../core/constants/colors.dart';
 import '../../bussniess_logic/favourites_cubit/favourite_cubit.dart';
 
 class FavouriteItem extends StatelessWidget {
-  const FavouriteItem({super.key, required this.favouriteModel});
+  const FavouriteItem(
+      {super.key, required this.favouriteModel, required this.isZekr});
 
   final FavouriteModel favouriteModel;
+  final bool isZekr;
 
   @override
   Widget build(BuildContext context) {
@@ -33,19 +35,23 @@ class FavouriteItem extends StatelessWidget {
                     vertical: 10,
                   ),
                   child: Container(
-                    height: 30,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: AppColor.primary.withOpacity(0.8),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Center(
-                      child: Text(
-                        favouriteModel.category,
-                        style: const TextStyle(
-                            fontFamily: 'Authmanic',
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 5),
+                      child: Center(
+                        child: Text(
+                          favouriteModel.category,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              fontFamily: 'Authmanic',
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600),
+                        ),
                       ),
                     ),
                   ),
@@ -74,8 +80,13 @@ class FavouriteItem extends StatelessWidget {
                       IconButton(
                           onPressed: () {
                             favouriteModel.delete();
-                            BlocProvider.of<FavouriteCubit>(context)
-                                .fetchFavourite();
+                            if (isZekr == true) {
+                              BlocProvider.of<FavouriteCubit>(context)
+                                  .fetchAzkarFavourite();
+                            } else {
+                              BlocProvider.of<FavouriteCubit>(context)
+                                  .fetch7adisFavourite();
+                            }
                           },
                           icon: const Icon(
                             Icons.delete_outlined,

@@ -8,10 +8,22 @@ import '../../../../core/constants/constants.dart';
 class AddToFavouriteCubit extends Cubit<AddToFavouriteState> {
   AddToFavouriteCubit() : super(ToFavouriteInitial());
 
-  addToFavourite(FavouriteModel favouriteModel) async {
+  addAzkarToFavourite(FavouriteModel favouriteModel) async {
     emit(AddToFavouriteLoadingState());
     try {
       var favouriteBox = Hive.box<FavouriteModel>(kAzkarFavouriteBox);
+
+      await favouriteBox.add(favouriteModel);
+      emit(AddToFavouriteSuccessState());
+    } catch (error) {
+      emit(AddToFavouriteErrorState(error: error.toString()));
+    }
+  }
+
+  add7adisToFavourite(FavouriteModel favouriteModel) async {
+    emit(AddToFavouriteLoadingState());
+    try {
+      var favouriteBox = Hive.box<FavouriteModel>(k7adisFavouriteBox);
 
       await favouriteBox.add(favouriteModel);
       emit(AddToFavouriteSuccessState());
