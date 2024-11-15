@@ -11,6 +11,7 @@ import "package:path_provider/path_provider.dart";
 import "package:screenshot/screenshot.dart";
 import 'package:share_plus/share_plus.dart';
 
+import "../../../../core/utilits/functions/string_words_spliter.dart";
 import "../../../quran/bussniess_logic/quran/quran_cubit.dart";
 import "../../../quran/data/models/surahs_model.dart";
 
@@ -114,72 +115,79 @@ Future<void> shareAyahAsImage(
 Future<void> shareHadisAsImage(String hadis, String category) async {
   final directory = (await getApplicationDocumentsDirectory()).path;
   const fileName = 'hadis.png';
-  final path = '$directory/$fileName';
-  var name = hadis;
-  final screenShotController = ScreenshotController();
 
-  final imageFile = await screenShotController.captureFromWidget(
-    Container(
-      color: Colors.white,
-      child: IntrinsicHeight(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(15),
-              child: Container(
-                decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        side: BorderSide(color: AppColor.primary))),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: Container(
-                          height: 30,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: AppColor.primary.withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Center(
-                            child: Text(
-                              category,
-                              style: const TextStyle(
-                                  fontFamily: 'Authmanic',
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600),
+  // var name = hadis;
+  final screenShotController = ScreenshotController();
+  List<XFile> hadithImageList = [];
+
+  List<String> hadisSplitString = splitStringByWords(hadis, 140);
+  // split long hadith into multi images based on words count
+  for (int i = 0; i < hadisSplitString.length; i++) {
+    final imageFile = await screenShotController.captureFromWidget(
+      Container(
+        color: Colors.white,
+        child: IntrinsicHeight(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: Container(
+                  decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          side: BorderSide(color: AppColor.primary))),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          child: Container(
+                            height: 30,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: AppColor.primary.withOpacity(0.8),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Center(
+                              child: Text(
+                                category,
+                                style: const TextStyle(
+                                    fontFamily: 'Authmanic',
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Text(
-                        name,
-                        style: const TextStyle(
-                            fontSize: 18,
-                            wordSpacing: -0.9,
-                            color: Colors.black),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                        Text(
+                          hadisSplitString[i],
+                          style: const TextStyle(
+                              fontSize: 18,
+                              wordSpacing: -0.9,
+                              color: Colors.black),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ),
-  );
+    );
+    final path = '$directory/$fileName$i';
+    final file = File(path);
+    await file.writeAsBytes(imageFile);
 
-  final file = File(path);
-  await file.writeAsBytes(imageFile);
+    final xfile = XFile(path);
+    hadithImageList.add(xfile);
+  }
 
-  final xfile = XFile(path);
-  await Share.shareXFiles([xfile]);
+  await Share.shareXFiles(hadithImageList);
 }
 
 Future<void> shareImage(Uint8List image, String name) async {
