@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lnastaqim/core/constants/images.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/data/models/AzkarModel.dart';
+import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/custom_menu.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/item_drop_menu.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/other_category_list_view.dart';
 
@@ -38,49 +39,62 @@ class _AzkarViewState extends State<AzkarView> {
                   image: AssetImage(AppImages.azkarBackground),
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const Image(
-                        image: AssetImage(AppImages.azkar),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ItemDropMenu(
-                        category: "azkar",
-                        text: "الأذكار",
-                        widget: AzkarCategoryListView(items: state),
-                      ),
-                      ItemDropMenu(
-                        category: "adi3a",
-                        text: "الأدعية",
-                        widget: Adi3aCategoryListView(items: state),
-                      ),
-                      ItemDropMenu(
-                        category: "other",
-                        text: "أخرى",
-                        widget: OtherCategoryListView(items: state),
-                      ),
-                      ItemDropMenu(
-                        category: "sibha",
-                        text: "السبحه",
-                        widget: Container(
-                          height: 250,
-                          width: double.infinity,
-                          decoration: ShapeDecoration(
-                              color: AppColor.blueColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20))),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const Stack(
+                      alignment: Alignment.topRight,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
+                          child: Image(
+                            image: AssetImage(AppImages.azkar),
+                          ),
                         ),
+                        CustomMenu(isZekr: true,),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ItemDropMenu(
+                            category: "azkar",
+                            text: "الأذكار",
+                            widget: AzkarCategoryListView(items: state),
+                          ),
+                          ItemDropMenu(
+                            category: "adi3a",
+                            text: "الأدعية",
+                            widget: Adi3aCategoryListView(items: state),
+                          ),
+                          ItemDropMenu(
+                            category: "other",
+                            text: "أخرى",
+                            widget: OtherCategoryListView(items: state),
+                          ),
+                          ItemDropMenu(
+                            category: "sibha",
+                            text: "السبحه",
+                            widget: Container(
+                              height: 250,
+                              width: double.infinity,
+                              decoration: ShapeDecoration(
+                                  color: AppColor.blueColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20))),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             );

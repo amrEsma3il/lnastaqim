@@ -213,10 +213,10 @@ packages:
     dependency: "direct main"
     description:
       name: carousel_slider
-      sha256: "9c695cc963bf1d04a47bd6021f68befce8970bcd61d24938e1fb0918cf5d9c42"
+      sha256: "7b006ec356205054af5beaef62e2221160ea36b90fb70a35e4deacd49d0349ae"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.1"
+    version: "5.0.0"
   characters:
     dependency: transitive
     description:
@@ -1149,6 +1149,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+  scroll_screenshot:
+    dependency: "direct main"
+    description:
+      name: scroll_screenshot
+      sha256: c5ed70632114e903e6f0ddc1d3556f2cc92f70933aa445b885c07a523274a4d7
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   share_plus:
     dependency: "direct main"
     description:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/custom_menu.dart';
 
 import '../widget/books_grid_view.dart';
 
@@ -7,17 +8,17 @@ class MainHadithScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            BooksGridView(),
-          ],
+    return Scaffold(
+      appBar: AppBar(
+        leading: const CustomMenu(
+          isZekr: false,
         ),
+      ),
+      body: const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          BooksGridView(),
+        ],
       ),
     );
   }

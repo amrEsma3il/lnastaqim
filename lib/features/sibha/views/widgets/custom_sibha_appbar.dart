@@ -12,7 +12,7 @@ class CustomSibhaAppBar extends StatelessWidget {
     return Container(
       height: 90.h,
       decoration: ShapeDecoration(
-          color: AppColor.darkBrown, shape: const RoundedRectangleBorder()),
+          color: AppColor.blueTint2, shape: const RoundedRectangleBorder()),
       child: Center(
         child: Text(
           "المسبحة الالكترونية",
