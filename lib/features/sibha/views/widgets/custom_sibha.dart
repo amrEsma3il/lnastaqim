@@ -86,13 +86,13 @@ class _CustomSibhaState extends State<CustomSibha>
             alignment: Alignment.center,
             children: [
               Positioned(
-                right: 110,
+                right: 110.w,
                 child: Container(
                   height: 130.h,
                   width: 130.w,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: AppColor.darkBrown.withOpacity(0.29),
+                      color: AppColor.blueGreay,
                       boxShadow: [
                         BoxShadow(
                             color: const Color(0xff000000).withOpacity(0.25),
@@ -104,7 +104,7 @@ class _CustomSibhaState extends State<CustomSibha>
                     child: Text(
                       _count.toString(),
                       style: TextStyle(
-                        color: AppColor.darkBrown,
+                        color: AppColor.blueTint2,
                         fontSize: 53.sp,
                       ),
                     ),
@@ -117,10 +117,11 @@ class _CustomSibhaState extends State<CustomSibha>
                   Expanded(
                     flex: 3,
                     child: Transform.rotate(
+                      origin: Offset(-30.w,0.h),
                       alignment: Alignment.center,
                       angle:
                           _animationController.value * 2.5 * 3.141592653589793,
-                      child: Image.asset(
+                      child: Image.asset(color: AppColor.blueTint2,
                         'assets/images/sibha.png', // Replace with your image asset path
                         width: 350.w,
                         height: 250.h,
@@ -136,7 +137,7 @@ class _CustomSibhaState extends State<CustomSibha>
                         icon: Icon(
                           Icons.refresh,
                           size: 45.h,
-                          color: AppColor.darkBrown,
+                          color: AppColor.blueTint2,
                         )),
                   )
                 ],

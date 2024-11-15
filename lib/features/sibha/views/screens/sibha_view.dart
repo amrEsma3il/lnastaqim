@@ -26,7 +26,7 @@ class SibhaView extends StatelessWidget {
                   height: 117,
                   width: double.infinity,
                   decoration: ShapeDecoration(
-                      color: AppColor.creame,
+                      color: AppColor.bianca,
                       shadows: [
                         BoxShadow(
                             blurRadius: 21,
@@ -42,14 +42,14 @@ class SibhaView extends StatelessWidget {
                         "سبحان الله وبحمده",
                         style: TextStyle(
                             fontSize: 31,
-                            color: AppColor.darkBrown,
+                            color: AppColor.blueTint2,
                             fontWeight: FontWeight.w700),
                       ),
                       Text(
                         "يكتب له ألف حسنة أو يحط عنه ألف خطيئه",
                         style: TextStyle(
                             fontSize: 14,
-                            color: AppColor.darkBrown,
+                            color: AppColor.blueTint2,
                             fontWeight: FontWeight.w600),
                       )
                     ],

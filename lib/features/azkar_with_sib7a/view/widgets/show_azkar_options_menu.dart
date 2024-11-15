@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/config/routing/app_routes_info/app_routes_name.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
@@ -43,8 +44,31 @@ void showAzkarOptionsMenu(BuildContext context, bool isZekr) {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 100,
+               SizedBox(
+                height: 20.h,
+              ),
+               GestureDetector(
+                onTap: () {
+                Get.toNamed(AppRouteName.sibhaView);
+                },
+                child: const Row(
+                  children: [
+                    Text(
+                      "السبحة",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "naskh",
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Spacer(),
+                    Icon(
+                      Icons.pending_sharp,
+                      color: Colors.white,
+                      size: 15,
+                    ),
+                  ],
+                ),
               )
             ],
           ),
