@@ -5,23 +5,22 @@ import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/show_azkar_opti
 
 class CustomMenu extends StatelessWidget {
   const CustomMenu({
-    super.key, required this.isZekr,
+    super.key,
+    required this.isZekr,
   });
 
   final bool isZekr;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 30),
+      padding: const EdgeInsets.only(top: 15, bottom: 15, left: 10, right: 10),
       child: GestureDetector(
         onTap: () {
-          showAzkarOptionsMenu(
-            context,isZekr
-          );
+          showAzkarOptionsMenu(context, isZekr);
         },
         child: Image.asset(
           AppImages.menu,
-          color: AppColor.primary,
+          color: AppColor.white,
           height: 27,
         ),
       ),

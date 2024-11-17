@@ -10,7 +10,7 @@ void showAzkarOptionsMenu(BuildContext context, bool isZekr) {
     builder: (BuildContext context) {
       return AlertDialog(
         backgroundColor: AppColor.primary,
-        insetPadding: const EdgeInsets.only(right: 20, left: 180, bottom: 470),
+        insetPadding: const EdgeInsets.only(right: 180, left: 10, bottom: 520),
         titlePadding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Padding(
@@ -44,32 +44,33 @@ void showAzkarOptionsMenu(BuildContext context, bool isZekr) {
                   ],
                 ),
               ),
-               SizedBox(
+              SizedBox(
                 height: 20.h,
               ),
-               GestureDetector(
-                onTap: () {
-                Get.toNamed(AppRouteName.sibhaView);
-                },
-                child: const Row(
-                  children: [
-                    Text(
-                      "السبحة",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "naskh",
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Spacer(),
-                    Icon(
-                      Icons.pending_sharp,
-                      color: Colors.white,
-                      size: 15,
-                    ),
-                  ],
-                ),
-              )
+              if (isZekr == true)
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(AppRouteName.sibhaView);
+                  },
+                  child: const Row(
+                    children: [
+                      Text(
+                        "السبحة",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "naskh",
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Spacer(),
+                      Icon(
+                        Icons.pending_sharp,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    ],
+                  ),
+                )
             ],
           ),
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
-import 'package:lnastaqim/features/azkar_with_sib7a/view/screens/azkar_category_view.dart';
+import 'package:lnastaqim/features/azkar_with_sib7a/view/screens/azkar_view.dart';
 import 'package:lnastaqim/features/bookmark/views/bookmarks_view.dart';
 import 'package:lnastaqim/features/favourite/views/favourites_view.dart';
 import 'package:lnastaqim/features/note/views/note_view.dart';
