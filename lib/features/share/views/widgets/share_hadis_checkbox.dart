@@ -88,7 +88,7 @@ class _ShareHadisCheckboxState extends State<ShareHadisCheckbox> {
             if (_isTextChecked) {
               shareText(widget.hadis);
             } else if (_isImageChecked) {
-              await shareHadisAsImage(widget.hadis, widget.category);
+              await shareHadisAsImage(widget.hadis, widget.category, context);
             } else {
               print("No option selected");
             }
