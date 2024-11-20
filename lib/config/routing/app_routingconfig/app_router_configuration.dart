@@ -5,6 +5,7 @@ import 'package:lnastaqim/features/bookmark/views/bookmarks_view.dart';
 import 'package:lnastaqim/features/favourite/views/favourites_view.dart';
 import 'package:lnastaqim/features/note/views/note_view.dart';
 import 'package:lnastaqim/features/qibla/view/screen/quiblah_screen.dart';
+import 'package:lnastaqim/features/sibha/views/widgets/azkar_sibha_view.dart';
 
 import '../../../features/7adis/view/screen/main_a7adith.dart';
 import '../../../features/azkar_with_sib7a/view/screens/azkar_details_view.dart';
@@ -92,17 +93,21 @@ List<GetPage<dynamic>>? routes = [
       transitionDuration: const Duration(milliseconds: 500)),
   GetPage(
       curve: Curves.easeInOut,
+      page: () => const AzkarSibhaView(),
+      name: AppRouteName.sibhaAzkar,
+      transition: Transition.leftToRightWithFade,
+      transitionDuration: const Duration(milliseconds: 500)),
+  GetPage(
+      curve: Curves.easeInOut,
       page: () => const QuiblahScreen(),
       name: AppRouteName.qibla,
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 500)),
   GetPage(
-      curve: Curves.easeInOut,
       page: () => const NotificationScreen(),
       name: AppRouteName.notification,
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 500)),
-
   GetPage(
       curve: Curves.easeInOut,
       page: () => const FavouritesView(

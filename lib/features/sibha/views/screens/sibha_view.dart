@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:lnastaqim/config/routing/app_routes_info/app_routes_name.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 import 'package:lnastaqim/core/constants/images.dart';
 
@@ -11,7 +13,10 @@ class SibhaView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextController textController = Get.put(TextController());
+
     return Scaffold(
+      appBar: const CustomSibhaAppBar(),
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
@@ -19,14 +24,13 @@ class SibhaView extends StatelessWidget {
                   image: AssetImage(AppImages.azkarBackground))),
           child: Column(
             children: [
-              const CustomSibhaAppBar(),
               Padding(
                 padding: EdgeInsets.fromLTRB(35.w, 50.h, 35.w, 0.h),
                 child: Container(
                   height: 117,
                   width: double.infinity,
                   decoration: ShapeDecoration(
-                      color: AppColor.bianca,
+                      color: AppColor.primary,
                       shadows: [
                         BoxShadow(
                             blurRadius: 21,
@@ -35,25 +39,32 @@ class SibhaView extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       )),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "سبحان الله وبحمده",
+                  child: Obx(
+                    () => Center(
+                      child: Text(
+                        textController.selectedText.value,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 31,
-                            color: AppColor.blueTint2,
+                            fontSize: 24,
+                            color: AppColor.white,
                             fontWeight: FontWeight.w700),
                       ),
-                      Text(
-                        "يكتب له ألف حسنة أو يحط عنه ألف خطيئه",
-                        style: TextStyle(
-                            fontSize: 14,
-                            color: AppColor.blueTint2,
-                            fontWeight: FontWeight.w600),
-                      )
-                    ],
+                    ),
                   ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: Center(
+                  child: TextButton(
+                      onPressed: () {
+                        Get.toNamed(AppRouteName.sibhaAzkar);
+                      },
+                      child: Text(
+                        "تغيير الذكر",
+                        style: TextStyle(color: AppColor.primary),
+                      )),
                 ),
               ),
               SizedBox(height: 250.h),
@@ -63,5 +74,15 @@ class SibhaView extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class TextController extends GetxController {
+  var selectedText = "سبحان الله".obs;
+  var selectedIndex = -1.obs;
+
+  void updateText(String newText, int index) {
+    selectedText.value = newText;
+    selectedIndex = index;
   }
 }

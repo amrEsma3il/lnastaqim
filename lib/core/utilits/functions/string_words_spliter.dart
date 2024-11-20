@@ -6,7 +6,7 @@ int calculateMaxWordsPerScreen(BuildContext context, double fontSize, double lin
   int maxLines = (screenHeight / lineHeight).floor();
   
   double screenWidth = MediaQuery.of(context).size.width;
-  int averageWordsPerLine = (screenWidth / (fontSize * 0.6)).floor(); // Adjust 0.6 based on average word width
+  int averageWordsPerLine = (screenWidth / (fontSize * 0.6)).floor();
   
   return maxLines * averageWordsPerLine;
 }

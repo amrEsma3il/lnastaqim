@@ -127,8 +127,6 @@ class Lnastaqim extends StatelessWidget {
             ),
 
             BlocProvider(create: (context) => HadithCubit()),
-
-//
             BlocProvider(
               create: (context) =>
                   AudioControlCubit()..audioPlayerListener(context),
@@ -145,7 +143,6 @@ class Lnastaqim extends StatelessWidget {
                   ..fetch7adisFavourite()),
             BlocProvider(create: (context) => AddNoteCubit()),
             BlocProvider(create: (context) => NoteCubit()..fetchNotes()),
-
             BlocProvider(
               create: (context) => TafseerCubit(),
             ),
@@ -153,7 +150,6 @@ class Lnastaqim extends StatelessWidget {
             BlocProvider(
               create: (context) => NotificationCubit(WorkManagerService()),
             ),
-
             BlocProvider(
               create: (context) => OverlayNoteControlCubit(),
             ),
