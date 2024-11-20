@@ -28,6 +28,7 @@ class AppRouteName {
   static const String notification = "/notification";
 
   static const String favAzkar = "/favAzkar";
-    static const String fav7adis = "/fav7adis";
+  static const String fav7adis = "/fav7adis";
 
+  static const String sibhaAzkar = "/sibhaAzkar";
 }

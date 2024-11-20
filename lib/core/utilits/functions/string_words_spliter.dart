@@ -1,26 +1,35 @@
-List<String> splitStringByWords(String input, int maxWords) {
-  // Split the input string into a list of words
-  List<String> words = input.split(RegExp(r'\s+'));
-  
-  // Initialize the result list
-  List<String> result = [];
-  
-  // Create a temporary list to hold words for each chunk
-  List<String> temp = [];
+import 'package:flutter/material.dart';
 
-  for (String word in words) {
-    temp.add(word);
-    if (temp.length == maxWords) {
-      // Add the chunk to the result and reset the temp list
-      result.add(temp.join(' '));
+int calculateMaxWordsPerScreen(BuildContext context, double fontSize, double lineHeight) {
+  double screenHeight = MediaQuery.of(context).size.height;
+  
+  int maxLines = (screenHeight / lineHeight).floor();
+  
+  double screenWidth = MediaQuery.of(context).size.width;
+  int averageWordsPerLine = (screenWidth / (fontSize * 0.6)).floor();
+  
+  return maxLines * averageWordsPerLine;
+}
+
+List<String> splitStringByWords(String input, int maxWords) {
+  List<String> words = input.split(RegExp(r'\s+'));
+  List<String> result = [];
+  StringBuffer temp = StringBuffer();
+
+  for (int i = 0; i < words.length; i++) {
+    temp.write(words[i]);
+    if ((i + 1) % maxWords == 0) {
+      result.add(temp.toString());
       temp.clear();
+    } else {
+      temp.write(' ');
     }
   }
 
-  // Add the remaining words as the last chunk if any
   if (temp.isNotEmpty) {
-    result.add(temp.join(' '));
+    result.add(temp.toString().trim());
   }
 
   return result;
 }
+

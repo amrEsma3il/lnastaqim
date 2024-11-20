@@ -112,16 +112,15 @@ Future<void> shareAyahAsImage(
   await Share.shareXFiles([xfile]);
 }
 
-Future<void> shareHadisAsImage(String hadis, String category) async {
+Future<void> shareHadisAsImage(String hadis, String category, context) async {
   final directory = (await getApplicationDocumentsDirectory()).path;
-  const fileName = 'hadis.png';
-
-  // var name = hadis;
+  const fileName = 'hadis';
   final screenShotController = ScreenshotController();
   List<XFile> hadithImageList = [];
+  int maxWords = calculateMaxWordsPerScreen(context, 18, 130);
+  print(maxWords);
 
-  List<String> hadisSplitString = splitStringByWords(hadis, 140);
-  // split long hadith into multi images based on words count
+  List<String> hadisSplitString = splitStringByWords(hadis, maxWords);
   for (int i = 0; i < hadisSplitString.length; i++) {
     final imageFile = await screenShotController.captureFromWidget(
       Container(
@@ -179,7 +178,7 @@ Future<void> shareHadisAsImage(String hadis, String category) async {
         ),
       ),
     );
-    final path = '$directory/$fileName$i';
+    final path = '$directory/$fileName$i.png';
     final file = File(path);
     await file.writeAsBytes(imageFile);
 

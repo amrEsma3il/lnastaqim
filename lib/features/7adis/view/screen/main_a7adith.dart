@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/custom_menu.dart';
+import 'package:lnastaqim/core/constants/images.dart';
+import 'package:lnastaqim/core/utilits/widgets/custom_azkar_hadis_app.dart';
 
 import '../widget/books_grid_view.dart';
 
@@ -9,16 +10,23 @@ class MainHadithScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const CustomMenu(
-          isZekr: false,
-        ),
+      appBar: const CustomAzkarHadisApp(
+        title: "الاحاديث",
+        isZekr: false,
       ),
-      body: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          BooksGridView(),
-        ],
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(AppImages.azkarBackground),
+          ),
+        ),
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            BooksGridView(),
+          ],
+        ),
       ),
     );
   }
