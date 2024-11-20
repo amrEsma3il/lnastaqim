@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
 import 'package:lnastaqim/core/constants/images.dart';
 import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
+import 'package:lnastaqim/features/home/views/widgets/custom_drawer.dart';
 
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
 import '../../../paryer_times/bussniess_logic/date_cubit.dart';
@@ -24,9 +25,15 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
+      endDrawer: CustomDrawer(
+        scaffoldKey: scaffoldKey,
+      ),
       backgroundColor: const Color(0xfff2f4f9),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,26 +50,31 @@ class _HomeViewState extends State<HomeView> {
                   padding: EdgeInsets.only(top: 53.h, left: 17.w),
                   child:
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    const Icon(
-                      Icons.search,
-                      color: Colors.white,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 9.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.toNamed(AppRouteName.notification);
-                        },
-                        child: const Icon(
-                          Icons.notifications_none_outlined,
-                          color: Colors.white,
-                        ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 9.0),
+                    //   child: GestureDetector(
+                    //     onTap: () {
+                    //       Get.toNamed(AppRouteName.notification);
+                    //     },
+                    //     child: const Icon(
+                    //       Icons.notifications_none_outlined,
+                    //       color: Colors.white,
+                    //     ),
+                    //   ),
+                    // ),
+                    // const Icon(
+                    //   Icons.wb_sunny_outlined,
+                    //   color: Colors.white,
+                    // ),
+                    GestureDetector(
+                      onTap: () {
+                        scaffoldKey.currentState!.openEndDrawer();
+                      },
+                      child: const Icon(
+                        Icons.menu,
+                        color: Colors.white,
                       ),
                     ),
-                    const Icon(
-                      Icons.wb_sunny_outlined,
-                      color: Colors.white,
-                    )
                   ]),
                 ),
                 Positioned(
