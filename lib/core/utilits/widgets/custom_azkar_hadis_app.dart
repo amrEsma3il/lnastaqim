@@ -5,7 +5,8 @@ import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/custom_menu.dar
 
 class CustomAzkarHadisApp extends StatelessWidget
     implements PreferredSizeWidget {
-  const CustomAzkarHadisApp({super.key, required this.title, required this.isZekr});
+  const CustomAzkarHadisApp(
+      {super.key, required this.title, required this.isZekr});
 
   final String title;
 
@@ -32,8 +33,10 @@ class CustomAzkarHadisApp extends StatelessWidget
               color: Colors.white,
               fontWeight: FontWeight.w600),
         ),
-        backgroundColor: AppColor.primary,
-        actions:  [
+        backgroundColor: isZekr == true
+            ? AppColor.primary
+            : AppColor.primary.withOpacity(0.8),
+        actions: [
           CustomMenu(
             isZekr: isZekr,
           ),
