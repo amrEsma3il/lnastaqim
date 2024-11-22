@@ -14,7 +14,8 @@ class AppImages {
   static const String banner = '$rootImages/banner.png';
   static const String azkar = '$rootImages/azkar.png';
   static const String empty = '$rootImages/empty3.png';
-  static const String ayaMark = '$rootImages/aya_mark.png';
+  static const String ayaMark = '$rootImages/aya_mark.png';//microphone
+  static const String microphone= '$rootImages/microphone.png';//microphone
 
   static const String pageMark = 'assets/svgs/bookmark.svg';
   static const String surahNameBanner = 'assets/svgs/surah_banner1.svg';

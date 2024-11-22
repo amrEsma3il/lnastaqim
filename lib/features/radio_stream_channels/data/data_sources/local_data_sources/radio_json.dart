@@ -66,13 +66,7 @@ abstract class Radio {
       }
     ],
     "reciters": [
-      {
-        "title": "الشيخ المنشاوي",
-        "description": "الشيخ المنشاوي",
-        "image":
-            "https://watanimg.elwatannews.com/image_archive/original_lower_quality/15354211131611078316.jpg",
-        "url": "http://quraan.us:9776/;*.mp3"
-      },
+     
       {
         "title": "الشيخ محمد صديق المنشاوي - المصحف المجود",
         "description": "الشيخ محمد صديق المنشاوي - المصحف المجود",
@@ -80,13 +74,7 @@ abstract class Radio {
             "https://watanimg.elwatannews.com/image_archive/original_lower_quality/15354211131611078316.jpg",
         "url": "http://live.mp3quran.net:9826/;"
       },
-      {
-        "title": "المصحف المعلم للشيخ المنشاوي",
-        "description": "المصحف المعلم للشيخ المنشاوي",
-        "image":
-            "https://watanimg.elwatannews.com/image_archive/original_lower_quality/15354211131611078316.jpg",
-        "url": "http://server2.quraan.us:9308/;*.mp3"
-      },
+   
       {
         "title": "الشيخ أحمد نعينع",
         "description": "الشيخ أحمد نعينع",
@@ -122,27 +110,7 @@ abstract class Radio {
             "https://images.akhbarelyom.com//images/images/medium/20210418220018059.jpg",
         "url": "http://live.mp3quran.net:9956/;"
       },
-      {
-        "title": "الشيخ عبدالرحمن السديس",
-        "description": "الشيخ عبدالرحمن السديس",
-        "image":
-            "https://mediaaws.almasryalyoum.com/news/verylarge/2020/09/26/1315846_0.jpg",
-        "url": "http://quraan.us:9850/;"
-      },
-      {
-        "title": "الشيخ علي عبدالله جابر",
-        "description": "الشيخ علي عبدالله جابر",
-        "image":
-            "https://i.pinimg.com/564x/43/57/d3/4357d32cc152d4e3b8f8c37fd525b806.jpg",
-        "url": "http://quraan.us:9912/;"
-      },
-      {
-        "title": "الشيخ فارس عباد",
-        "description": "الشيخ فارس عباد",
-        "image":
-            "https://www.almrsal.com/wp-content/uploads/2016/05/faris-abbad.jpg",
-        "url": "http://live.mp3quran.net:9972/;"
-      },
+  
       {
         "title": "الشيخ ماهر المعيقلي",
         "description": "الشيخ ماهر المعيقلي",
@@ -164,13 +132,7 @@ abstract class Radio {
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL-B-_zZYYSYkWoNgyLcnt2aC8SMuun0dO-Q&usqp=CAU",
         "url": "http://live.mp3quran.net:9834/;"
       },
-      {
-        "title": "الشيخ محمد جبريل",
-        "description": "الشيخ محمد جبريل",
-        "image":
-            "https://tvquran.com/uploads/authors/images/%D9%85%D8%AD%D9%85%D8%AF%20%D8%AC%D8%A8%D8%B1%D9%8A%D9%84.jpg",
-        "url": "http://quraan.us:9894/;"
-      },
+    
       {
         "title": "الشيخ محمود الحصري",
         "description": "الشيخ محمود الحصري",
@@ -213,20 +175,7 @@ abstract class Radio {
             "https://i.pinimg.com/564x/41/e5/5e/41e55ea6e5e5d70798320e94d447cdb7.jpg",
         "url": "http://live.mp3quran.net:9800/;"
       },
-      {
-        "title": "الشيخ ناصر القطامي",
-        "description": "الشيخ ناصر القطامي",
-        "image":
-            "https://yt3.googleusercontent.com/96JU5bA39H227fW5tUXt6X-b2DgjKjAVtYWCjbFGvLwvt74_ngr2OpbPqP3vUC0BmdWw_pbyMw=s900-c-k-c0x00ffffff-no-rj",
-        "url": "http://server2.quraan.us:9886/;"
-      },
-      {
-        "title": "الشيخ ياسر الدوسري",
-        "description": "الشيخ ياسر الدوسري",
-        "image":
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Yasser_Al-Dosari.png/276px-Yasser_Al-Dosari.png",
-        "url": "http://quraan.us:9884/;"
-      }
+
     ],
     "other": [
       {
@@ -236,13 +185,7 @@ abstract class Radio {
             "https://i.pinimg.com/564x/31/39/1d/31391d84908e4c14cafee9b5344e6584.jpg",
         "url": "https://qurango.net/radio/roqiah"
       },
-      {
-        "title": "قناة السنة النبوية",
-        "description": "راديو الحديث النبوي",
-        "image":
-            "https://yt3.googleusercontent.com/ytc/AIf8zZQATKpiQUj8iykX0A80rh4hIe4xhOqKTtOqO-peqw=s900-c-k-c0x00ffffff-no-rj",
-        "url": "https://n05.radiojar.com/x0vs2vzy6k0uv"
-      },
+ 
       {
         "title": "إذاعة الشعراوي",
         "description": "خواطر الشيخ محمد متولي الشعراوي تفسير القرآن",
@@ -250,20 +193,7 @@ abstract class Radio {
             "https://www.independentarabia.com/sites/default/files/styles/1368x911/public/article/mainimage/2019/11/06/120371-483754690.jpg?itok=DJKvg37k",
         "url": "http://3vh.liveradiu.com:8000/el-shaarawy.mp3"
       },
-      {
-        "title": "المجد العلمية",
-        "description": "إذاعة المجد العلمية",
-        "image":
-            "https://upload.wikimedia.org/wikipedia/commons/b/ba/%D8%A7%D9%84%D9%85%D8%AC%D8%AF_%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A%D8%A9.png",
-        "url": "http://r7.tarat.com:8008/;"
-      },
-      {
-        "title": "نداء الإسلام",
-        "description": "إذاعة نداء الإسلام",
-        "image":
-            "https://pbs.twimg.com/profile_images/1653457286780559361/CA2izUFN_400x400.jpg",
-        "url": "http://n0c.radiojar.com/59096z743d0uv"
-      }
+ 
     ]
   };
 }

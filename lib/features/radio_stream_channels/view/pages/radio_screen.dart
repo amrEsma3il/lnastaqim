@@ -1,235 +1,268 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:lnastaqim/features/radio_stream_channels/bussniess_logic/radio_cubit.dart';
-
-// class RadioScreen extends StatelessWidget {
-//   const RadioScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocProvider(
-//       create: (context) => RadioCubit(),
-//       child: BlocConsumer<RadioCubit, RadioState>(
-//         listener: (context, state) {},
-//         builder: (context, state) {
-//           return Scaffold(
-//             body: Column(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               children: [
-//                 const Image(
-//                     image: NetworkImage(
-//                         'https://play-lh.googleusercontent.com/QuVFM8a1DJFaLb3M0iHjgylkrS0ddvpBzDSHOGxs7YzqAFIHeXJwZ53aX7SaMImmA30')),
-//                 const SizedBox(
-//                   height: 30,
-//                 ),
-//                 Row(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   children: [
-//                     IconButton(
-//                         onPressed: () {
-//                           // RadioCubit.get(context).next();
-//                         },
-//                         icon: const Icon(
-//                           Icons.skip_next,
-//                           size: 50,
-//                         )),
-//                     state is RadioLoading
-//                         ? const CircularProgressIndicator()
-//                         : IconButton(
-//                             onPressed: () {
-//                               // RadioCubit.get(context).playRadio();
-//                             },
-//                             icon: const Icon(
-//                               Icons.play_circle,
-//                               size: 50,
-//                             )),
-//                     IconButton(
-//                         onPressed: () {
-//                           // RadioCubit.get(context).back();
-//                         },
-//                         icon: const Icon(
-//                           Icons.skip_previous,
-//                           size: 50,
-//                         ))
-//                   ],
-//                 ),
-//               ],
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:lottie/lottie.dart';
+import '../../../../core/constants/animations.dart';
 import '../../../../core/constants/colors.dart';
+import '../../../../core/constants/images.dart';
+import '../../bussniess_logic/radio_cubit.dart';
+import '../../bussniess_logic/radio_state.dart';
 
-class RadioScreen extends StatefulWidget {
+class RadioScreen extends StatelessWidget {
   const RadioScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _RadioScreenState createState() => _RadioScreenState();
-}
-
-class _RadioScreenState extends State<RadioScreen> {
-
-  final List<Map<String, dynamic>> recitersStream = [
-    {
-      "id": 1,
-      "name": "إذاعة إبراهيم الأخضر",
-      "url": "https://backup.qurango.net/radio/ibrahim_alakdar",
-      "recent_date": "2020-04-25 16:04:04"
-    },
-    {
-      "id": 10,
-      "name": "إذاعة القارئ ياسين",
-      "url": "https://backup.qurango.net/radio/alqaria_yassen",
-      "recent_date": "2020-04-25 16:04:04"
-    },
-    {
-      "id": 100,
-      "name": "إذاعة أحمد الطرابلسي",
-      "url": "https://backup.qurango.net/radio/ahmed_altrabulsi",
-      "recent_date": "2020-04-25 16:04:05"
-    },
-    {
-      "id": 101,
-      "name": "إذاعة عبدالله الكندري",
-      "url": "https://backup.qurango.net/radio/abdullah_alkandari",
-      "recent_date": "2020-04-25 16:04:05"
-    },
-   
-  ];
-
-  final AudioPlayer _audioPlayer = AudioPlayer();
-  String? _playingUrl;
-
-  @override
-  void dispose() {
-    _audioPlayer.dispose();
-    super.dispose();
-  }
-
-  void _playOrPause(String url) async {
-    if (_playingUrl == url) {
-      await _audioPlayer.stop();
-      setState(() {
-        _playingUrl = null;
-      });
-    } else {
-      await _audioPlayer.play(UrlSource(url));
-      setState(() {
-        _playingUrl = url;
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("بث مباشر للقراء"),
-      // ),
-      body: Container(
-        color: AppColor.blueColor,
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 1,
-            mainAxisSpacing: 15,
-            crossAxisSpacing: 20,
+    return BlocProvider(
+      create: (context) => RadioCubit(),
+      child: BlocConsumer<RadioCubit, RadioState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          final cubit = context.read<RadioCubit>();
+          final channel = cubit.currentChannel;
 
-          ),
-          itemCount: recitersStream.length,
-          itemBuilder: (context, index) {
-            final reciter =recitersStream[index];
-            final isPlaying = _playingUrl == reciter['url'];
-            return GestureDetector(
-              onTap: () => _playOrPause(reciter['url']),
-              child: Container(
-                width: 30,
-                height: 70,
-                decoration: BoxDecoration(
-
-
-                  color: AppColor.blueColor.withOpacity(0.9),
-                  borderRadius: BorderRadius.circular(400.r),
-                  image: DecorationImage(
-                    image:  AssetImage('assets/images/reciter_${reciter["id"]}.png'),
-                    fit: BoxFit.cover,
-                    colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.4),
-                      BlendMode.darken,
-                    ),
-                  ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                     CircleAvatar(
-                      radius: 40,
-                      backgroundImage:
-                          AssetImage('assets/images/reciter_${reciter["id"]}.png'),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      reciter['name'],
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                                        const SizedBox(height: 2),
-
-                    Icon(
-                      isPlaying
-                          ? Icons.pause_circle_filled
-                          : Icons.play_circle_filled,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                  ],
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: AppColor.blueTint2,
+              toolbarHeight: 80.h,
+              title: Text(
+                "الاذاعة",
+                style: TextStyle(
+                  fontSize: 27.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
               ),
-            );
-          },
-        ),
+              centerTitle: true,
+              leading: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ),
+            body: Container(
+              color: Colors.grey[200],
+              child: Column(
+                children: [
+                  // شريط التنقل السفلي
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Colors.grey[300]!,
+                          width: 1.0,
+                        ),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: List.generate(
+                        toggleRadioBar.length,
+                        (index) => _buildNavItem(
+                          context: context,
+                          label: toggleRadioBar[index]['label'],
+                          icon: toggleRadioBar[index]['icon'],
+                          isSelected: index == state.radioCatIndex,
+                          onTap: () => cubit.changeRadioCat(index),
+                        ),
+                      ),
+                    ),
+                  ),
+                  // محتوى الشاشة
+                  Expanded(
+                    child: channel == null
+                        ? const Center(child: Text('لا توجد قنوات متاحة'))
+                        : Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(16),
+                                    child: Container(
+                                      width: 250,
+                                      height: 250,
+                                      decoration: BoxDecoration(
+                                        color: AppColor.blueTint2,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Center(
+                                        child: Image.asset(
+                                          AppImages.microphone,
+                                          width: 125.w,
+                                          height: 125.h,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Text(
+                                    channel.title!,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 25.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    channel.description!,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 17.sp,
+                                      color: AppColor.gray,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 30),
+                                  // عناصر التحكم
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      _buildControlButton(
+                                        icon: Icons.skip_next,
+                                        onTap: () => cubit.previous(),
+                                      ),
+                                      SizedBox(width: 16.w),
+                                      CircleAvatar(
+                                        radius: 27,
+                                        backgroundColor: AppColor.lightBlue,
+                                        child: state.isLoading
+                                            ? Lottie.asset(
+         AppAnimation.typeLoading, // مسار ملف Lottie الخاص بك
+          width: 34.w, // حجم الرسوم المتحركة
+          height: 45.h,
+          fit: BoxFit.contain,
+          repeat: true,
+          animate: true,
+
+        )
+                                            : IconButton(
+                                                color: AppColor.blueColor,
+                                                icon: state.isPlaying
+                                                    ? const Icon(Icons.pause_circle_outline)
+                                                    : const Icon(Icons.play_arrow_outlined),
+                                                onPressed: () {
+                                                  cubit.playOrPause();
+                                                },
+                                              ),
+                                      ),
+                                      SizedBox(width: 16.w),
+                                      _buildControlButton(
+
+                                        icon: Icons.skip_previous,
+                                        onTap: () => cubit.next(),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                  // زر عرض القنوات
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      _showChannelList(context, cubit,state);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColor.blueTint2,
+                                    ),
+                                    child: Text(
+                                      "عرض القنوات",
+                                      style: TextStyle(fontSize: 18.sp,color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
+    );
+  }
+
+  Widget _buildNavItem({
+    required BuildContext context,
+    required String label,
+    required IconData icon,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            color: isSelected ? Colors.blue : Colors.grey,
+          ),
+          const SizedBox(height: 5),
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? Colors.blue : AppColor.gray,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+  
+
+  Widget _buildControlButton({
+    required IconData icon,
+    required VoidCallback onTap,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(width: 0.9, color: AppColor.blueTint2),
+      ),
+      child: IconButton(
+        icon: Icon(icon, color: AppColor.blueTint2),
+        onPressed: onTap,
+      ),
+    );
+  }
+
+  void _showChannelList(BuildContext context, RadioCubit cubit,RadioState state) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return ListView.builder(
+              itemCount: cubit.categories[state.radioCatIndex]!.length,
+              itemBuilder: (context, index) {
+                final channel = cubit.categories[state.radioCatIndex]![index];
+                return ListTile(
+                  leading:  Icon(Icons.radio,color: AppColor.blueTint2,),
+                  title: Text(channel.title!),
+                  onTap: () {
+                    cubit.playOrPause(selectesChannel: channel,currentIndex: index);
+                    Navigator.pop(context);
+                  },
+                );
+              },
+            );
+      },
     );
   }
 }
 
+List<Map<String, dynamic>> toggleRadioBar = [
+  {"label": "القرآن", "icon": Icons.radio},
+  {"label": "القراء", "icon": Icons.person},
+  {"label": "أخرى", "icon": Icons.more_horiz},
+];
