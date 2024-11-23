@@ -1,15 +1,18 @@
-import 'dart:io';
+
+import 'dart:developer' as dev;
+// import 'dart:io';
 import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:path_provider/path_provider.dart';
+
 
 import 'surah_player_state.dart';
 
 class SurahPlayerCubit extends Cubit<SurahPlayerState> {
   final AudioPlayer audioPlayer = AudioPlayer();
+  static SurahPlayerCubit get(BuildContext context)=>BlocProvider.of(context);
 
   SurahPlayerCubit()
       : super(SurahPlayerState.initial()) {
@@ -38,20 +41,22 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
     });
   }
 
-  Future<void> playSurah() async {
+  Future<void> playSurah() async {dev.log("رقم السورة"+state.surahNumber.toString());
     String url =
-        'https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${state.surahNumber}.mp3';
+        'https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/110.mp3';
 
-    String fileName = '${state.surahNumber}.mp3';
-    Directory appDocDir = await getApplicationDocumentsDirectory();
-    String filePath = '${appDocDir.path}/$fileName';
+          await audioPlayer.play(UrlSource(url));
+    //         String fileName = '${state.surahNumber}.mp3';
+    // Directory appDocDir = await getApplicationDocumentsDirectory();
+    // String filePath = '${appDocDir.path}/$fileName';
 
-    if (File(filePath).existsSync()) {
-      await audioPlayer.play(AssetSource(filePath));
-    } else {
-      await Dio().download(url, filePath);
-      await audioPlayer.play(AssetSource(filePath));
-    }
+    // if (File(filePath).existsSync()) {
+    //   await audioPlayer.play(AssetSource(filePath));
+    // } else {
+    //   await Dio().download(url, filePath);
+    //   await audioPlayer.play(AssetSource(filePath));
+    // }
+
   }
 
   void togglePlayPause() {

@@ -25,6 +25,7 @@ class RadioModel {
       });
     }
   }
+
   List<Channel>? quran;
   List<Channel>? reciters;
   List<Channel>? other;
