@@ -9,7 +9,7 @@ class RadioCubit extends Cubit<RadioState> {
 
   final List<List<Channel>?>categories = RadioRepository.fetchRadioChannels();
 
-  RadioCubit() : super(const RadioState());
+  RadioCubit() : super( RadioState.init());
 
   // تشغيل أو إيقاف القناة الحالية
   void playOrPause({Channel? selectesChannel,int?  currentIndex}) async {
@@ -20,14 +20,19 @@ class RadioCubit extends Cubit<RadioState> {
       await _audioPlayer.stop();
       emit(state.copyWith(isPlaying: false, playingUrl: null));
     } else {
-      emit(state.copyWith(isLoading: true));
-      await _audioPlayer.play(UrlSource(channel.url!));
+    
+        emit(state.copyWith(audioState: AudioFetchLoading(), currentIndex: currentIndex));
+   try {   await _audioPlayer.play(UrlSource(channel.url!));
       emit(state.copyWith(
-        isLoading: false,
+    audioState: AudioFetchSuccess(),
         isPlaying: true,
-        currentIndex: currentIndex,
+       
         playingUrl: channel.url,
       ));
+    } catch (e) {
+            await _audioPlayer.stop();
+      emit(state.copyWith(isPlaying: false, audioState: AudioFetchFailure(), playingUrl: null));
+    }
     }
   }
 
@@ -42,13 +47,15 @@ class RadioCubit extends Cubit<RadioState> {
 
   // تغيير التصنيف
   void changeRadioCat(int index) {
-    emit(state.copyWith(
+    if (index!=state.radioCatIndex) {
+          emit(state.copyWith(
       radioCatIndex: index,
       currentIndex: 0,
-      playingUrl: null,
-      isPlaying: false,
+
     ));
-    _audioPlayer.stop();
+    playOrPause(selectesChannel: currentChannel);
+    }
+
   }
 
   // الانتقال إلى القناة التالية

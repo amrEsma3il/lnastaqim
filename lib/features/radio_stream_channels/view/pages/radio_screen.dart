@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../core/constants/animations.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/images.dart';
+import '../../../../core/utilits/functions/toast_message.dart';
 import '../../bussniess_logic/radio_cubit.dart';
 import '../../bussniess_logic/radio_state.dart';
 
@@ -16,7 +17,11 @@ class RadioScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => RadioCubit(),
       child: BlocConsumer<RadioCubit, RadioState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if(state.audioState is AudioFetchFailure){
+showToast("توجد مشكلة اثناء تشغيل الملف الصوتي",AppColor.blueTint2);
+          }
+        },
         builder: (context, state) {
           final cubit = context.read<RadioCubit>();
           final channel = cubit.currentChannel;
@@ -131,7 +136,7 @@ class RadioScreen extends StatelessWidget {
                                       CircleAvatar(
                                         radius: 27,
                                         backgroundColor: AppColor.lightBlue,
-                                        child: state.isLoading
+                                        child: state.audioState is AudioFetchLoading
                                             ? Lottie.asset(
          AppAnimation.typeLoading, // مسار ملف Lottie الخاص بك
           width: 34.w, // حجم الرسوم المتحركة
