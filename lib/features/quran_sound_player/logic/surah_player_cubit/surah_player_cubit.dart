@@ -43,7 +43,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
 
   Future<void> playSurah() async {dev.log("رقم السورة"+state.surahNumber.toString());
     String url =
-        'https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/110.mp3';
+        'https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${state.surahNumber}.mp3';
 
           await audioPlayer.play(UrlSource(url));
     //         String fileName = '${state.surahNumber}.mp3';
