@@ -15,34 +15,30 @@ class CustomDrawerItemListView extends StatefulWidget {
 }
 
 class _CustomDrawerItemListViewState extends State<CustomDrawerItemListView> {
-  int selectedIndex = 0;
+  int selectedIndex = -1;
 
   @override
   Widget build(BuildContext context) {
     final items = [
       DrawerItemModel(
-          icon: Icons.home,
-          title: "الصفحه الرئيسيه",
-          onTap: () {
-            widget.scaffoldKey.currentState!.closeEndDrawer();
-          }),
-      DrawerItemModel(
           icon: Icons.favorite,
           title: "المفضلة",
           onTap: () {
             widget.scaffoldKey.currentState!.closeEndDrawer();
-            Get.toNamed(AppRouteName.fav7adis);
+            Get.toNamed(AppRouteName.generalFav);
           }),
+      // DrawerItemModel(
+      //   onTap: () {
+      //     widget.scaffoldKey.currentState!.closeEndDrawer();
+      //     Get.toNamed(AppRouteName.setting);
+      //   },
+      //   icon: Icons.settings,
+      //   title: "الاعدادات",
+      // ),
       DrawerItemModel(
         onTap: () {
           widget.scaffoldKey.currentState!.closeEndDrawer();
-        },
-        icon: Icons.settings,
-        title: "الاعدادات",
-      ),
-      DrawerItemModel(
-        onTap: () {
-          widget.scaffoldKey.currentState!.closeEndDrawer();
+          Get.toNamed(AppRouteName.help);
         },
         icon: Icons.help,
         title: "مساعدة",
@@ -64,7 +60,11 @@ class _CustomDrawerItemListViewState extends State<CustomDrawerItemListView> {
       DrawerItemModel(
         icon: Icons.info,
         title: "من نحن ",
-        onTap: () {},
+        onTap: () {
+          widget.scaffoldKey.currentState!.closeEndDrawer();
+
+          Get.toNamed(AppRouteName.aboutUs);
+        },
       ),
     ];
 
@@ -83,7 +83,6 @@ class _CustomDrawerItemListViewState extends State<CustomDrawerItemListView> {
               },
               child: CustomDrawerItem(
                 drawerItemModel: items[index],
-                isActive: selectedIndex == index,
               ),
             );
           }),

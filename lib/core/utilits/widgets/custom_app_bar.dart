@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
-import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/custom_menu.dart';
 
-class CustomAzkarHadisApp extends StatelessWidget
-    implements PreferredSizeWidget {
-  const CustomAzkarHadisApp(
-      {super.key, required this.title, required this.isZekr});
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const CustomAppBar(
+      {super.key, required this.title,  this.isZekr, this.actions});
 
   final String title;
 
-  final bool isZekr;
+  final bool? isZekr;
+
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +36,7 @@ class CustomAzkarHadisApp extends StatelessWidget
         backgroundColor: isZekr == true
             ? AppColor.primary
             : AppColor.primary.withOpacity(0.8),
-        actions: [
-          CustomMenu(
-            isZekr: isZekr,
-          ),
-        ]);
+        actions: actions);
   }
 
   @override
