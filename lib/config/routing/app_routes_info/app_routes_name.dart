@@ -29,6 +29,11 @@ class AppRouteName {
 
   static const String favAzkar = "/favAzkar";
   static const String fav7adis = "/fav7adis";
+  static const String generalFav = "/generalFav";
 
   static const String sibhaAzkar = "/sibhaAzkar";
+
+  static const String help = "/help";
+  static const String setting = "/setting";
+  static const String aboutUs = "/aboutUs";
 }

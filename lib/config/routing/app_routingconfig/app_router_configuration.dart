@@ -1,10 +1,14 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
+import 'package:lnastaqim/features/about_us/views/about_us_view.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/view/screens/azkar_view.dart';
 import 'package:lnastaqim/features/bookmark/views/bookmarks_view.dart';
 import 'package:lnastaqim/features/favourite/views/favourites_view.dart';
+import 'package:lnastaqim/features/favourite/views/general_favourite_view.dart';
+import 'package:lnastaqim/features/help/views/help_view.dart';
 import 'package:lnastaqim/features/note/views/note_view.dart';
 import 'package:lnastaqim/features/qibla/view/screen/quiblah_screen.dart';
+import 'package:lnastaqim/features/settings/views/settings_view.dart';
 import 'package:lnastaqim/features/sibha/views/widgets/azkar_sibha_view.dart';
 
 import '../../../features/7adis/view/screen/main_a7adith.dart';
@@ -123,6 +127,31 @@ List<GetPage<dynamic>>? routes = [
             isZekr: false,
           ),
       name: AppRouteName.fav7adis,
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 500)),
+
+  GetPage(
+      curve: Curves.easeInOut,
+      page: () => const GeneralFavouriteView(),
+      name: AppRouteName.generalFav,
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 500)),
+       GetPage(
+      curve: Curves.easeInOut,
+      page: () => const HelpView(),
+      name: AppRouteName.help,
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 500)),
+       GetPage(
+      curve: Curves.easeInOut,
+      page: () => const SettingsView(),
+      name: AppRouteName.setting,
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 500)),
+       GetPage(
+      curve: Curves.easeInOut,
+      page: () => const AboutUsView(),
+      name: AppRouteName.aboutUs,
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 500)),
 ];

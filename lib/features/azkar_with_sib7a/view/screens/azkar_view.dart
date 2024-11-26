@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lnastaqim/core/constants/images.dart';
-import 'package:lnastaqim/core/utilits/widgets/custom_azkar_hadis_app.dart';
+import 'package:lnastaqim/core/utilits/widgets/custom_app_bar.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/data/models/AzkarModel.dart';
+import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/custom_menu.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/item_drop_menu.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/other_category_list_view.dart';
 
@@ -29,7 +30,12 @@ class _AzkarViewState extends State<AzkarView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAzkarHadisApp(
+      appBar:  const CustomAppBar(
+        actions: [
+          CustomMenu(
+            isZekr: true,
+          ),
+        ],
         title: "الاذكار",
         isZekr: true,
       ),
