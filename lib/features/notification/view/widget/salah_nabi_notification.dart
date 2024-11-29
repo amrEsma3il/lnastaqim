@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../bussiness_logic/notification_cubit.dart';
 import '../../bussiness_logic/notification_state.dart';
-
 class SalahNabiNotification extends StatelessWidget {
   const SalahNabiNotification({super.key});
 
@@ -16,9 +15,7 @@ class SalahNabiNotification extends StatelessWidget {
         Text(
           'صلي علي محمد',
           style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w800,
-              color: AppColor.primary),
+              fontSize: 20, fontWeight: FontWeight.w800, color: AppColor.primary),
         ),
         const Spacer(),
         BlocBuilder<NotificationCubit, NotificationState>(
@@ -26,12 +23,9 @@ class SalahNabiNotification extends StatelessWidget {
             return Transform.scale(
               scale: 0.8,
               child: Switch(
-                value:
-                    context.read<NotificationCubit>().isSalahNabiNotification,
+                value: context.read<NotificationCubit>().isSalahNabiNotification,
                 onChanged: (value) {
-                  context
-                      .read<NotificationCubit>()
-                      .changeSalahNabiNotification();
+                  context.read<NotificationCubit>().changeSalahNabiNotification();
                 },
                 activeColor: AppColor.white,
                 activeTrackColor: AppColor.primary,

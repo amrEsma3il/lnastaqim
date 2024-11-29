@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 
 import '../../../core/constants/images.dart';
@@ -14,12 +16,12 @@ class NotificationScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            const Image(
-              fit: BoxFit.fill,
-              image: AssetImage(AppImages.notificationScreenBackground),
+             Image(width: Get.width,
+              fit: BoxFit.cover,
+              image: const AssetImage(AppImages.notificationScreenBackground),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding:  EdgeInsets.symmetric(vertical: 20,horizontal: 10.w),
               child: Column(
                 children: [
                   Text(
@@ -30,7 +32,7 @@ class NotificationScreen extends StatelessWidget {
                         color: AppColor.primary),
                   ),
                   const SalahNabiNotification(),
-                  const SizedBox(height: 20),
+                   SizedBox(height: 5.h),
                   const AzkarNotification(),
                 ],
               ),

@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/constants/colors.dart';
 import '../../bussiness_logic/notification_cubit.dart';
 import '../../bussiness_logic/notification_state.dart';
-
 class AzkarNotification extends StatelessWidget {
   const AzkarNotification({super.key});
 
@@ -18,9 +17,7 @@ class AzkarNotification extends StatelessWidget {
             Text(
               'الاذكار',
               style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w800,
-                  color: AppColor.primary),
+                  fontSize: 20, fontWeight: FontWeight.w800, color: AppColor.primary),
             ),
             const Spacer(),
             BlocBuilder<NotificationCubit, NotificationState>(
@@ -28,12 +25,9 @@ class AzkarNotification extends StatelessWidget {
                 return Transform.scale(
                   scale: 0.8,
                   child: Switch(
-                    value:
-                        context.read<NotificationCubit>().isAzkarNotification,
+                    value: context.read<NotificationCubit>().isAzkarNotification,
                     onChanged: (value) {
-                      context
-                          .read<NotificationCubit>()
-                          .changeAzkarNotification();
+                      context.read<NotificationCubit>().changeAzkarNotification();
                     },
                     activeColor: AppColor.white,
                     activeTrackColor: AppColor.primary,
@@ -45,33 +39,38 @@ class AzkarNotification extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(
-          height: 10,
-        ),
-
-        if( context.read<NotificationCubit>().isAzkarNotification)...
-    {    BlocBuilder<NotificationCubit, NotificationState>(
-          builder: (context, state) {
-          int?  time= state is ChangeNotificationTime? state.durationInMinutes:null; 
-            return Slider(
-              min: 15,
-              max: 240,
-              divisions: 12,
-              label: time.toString(),
-              value:(time??15).toDouble(),
-              onChanged: (double value) {
-           NotificationCubit.get(context).changeNotificationTime(value.toInt());
-              },
-              onChangeEnd: (double value) {
-                // Reschedule the task with the updated duration
-                if ( context.read<NotificationCubit>().isAzkarNotification) {
-                  NotificationCubit.get(context).reScheduleNotification(value.toInt());
-                }
-              },
-            );
-          },
-        ),}
-        // Text("Task will run every ${state.} minutes."),
+        const SizedBox(height: 10),
+        if (context.read<NotificationCubit>().isAzkarNotification) ...{
+          BlocBuilder<NotificationCubit, NotificationState>(
+            builder: (context, state) {
+              int? time = state is ChangeNotificationTime ? state.durationInMinutes : null;
+              return Column(
+                children: [
+                  Text(
+                    'مدة التكرار: ${time?.toString() ?? "15"} دقائق',
+                    style: TextStyle(fontSize: 16, color: Colors.black),
+                  ),
+                  Slider(
+                    min: 15,
+                    max: 240,
+                    divisions: 12,
+                    activeColor: AppColor.blueTint2,
+                    label: time.toString(),
+                    value: (time?.toDouble() ?? 15),
+                    onChanged: (double value) {
+                    context.read<NotificationCubit>().changeNotificationTime(value.toInt());
+                    },
+                    onChangeEnd: (double value) {
+                      if (context.read<NotificationCubit>().isAzkarNotification) {
+                  context.read<NotificationCubit>().reScheduleNotification(value.toInt());
+                      }
+                    },
+                  ),
+                ],
+              );
+            },
+          ),
+        }
       ],
     );
   }
