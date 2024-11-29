@@ -22,17 +22,18 @@ class WorkManagerService {
     );
   }
 
-  void registerMoringAndEveningAzkarTask(int durationInMinutes) {
-    Workmanager().registerPeriodicTask(
-      'id8',
-      'name8',
-      frequency: const Duration(hours: 1),
-      inputData: {
-        'تسابيح':
-            "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم\nقُلْ هُوَ ٱللَّهُ أَحَدٌ، ٱللَّهُ ٱلصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ."
-      },
-    );
-  }
+ void registerMoringAndEveningAzkarTask(int durationInMinutes) {
+  Workmanager().registerPeriodicTask(
+    'id8', // المعرف الفريد للمهمة
+    'name8', // اسم المهمة
+    frequency: Duration(minutes: durationInMinutes), // تحديث الزمن هنا
+    inputData: {
+      'تسابيح':
+          "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم\nقُلْ هُوَ ٱللَّهُ أَحَدٌ، ٱللَّهُ ٱلصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ."
+    },
+  );
+}
+
 
   void registerFajrTask() {
     Workmanager().registerPeriodicTask(

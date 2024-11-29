@@ -9,6 +9,7 @@ import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
 import 'package:lnastaqim/features/home/views/widgets/custom_drawer.dart';
 
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
+import '../../../../core/constants/colors.dart';
 import '../../../paryer_times/bussniess_logic/date_cubit.dart';
 import '../../../paryer_times/view/widgets/prayers_stepper.dart';
 import '../../../quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
@@ -50,18 +51,20 @@ class _HomeViewState extends State<HomeView> {
                   padding: EdgeInsets.only(top: 53.h, left: 17.w),
                   child:
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(horizontal: 9.0),
-                    //   child: GestureDetector(
-                    //     onTap: () {
-                    //       Get.toNamed(AppRouteName.notification);
-                    //     },
-                    //     child: const Icon(
-                    //       Icons.notifications_none_outlined,
-                    //       color: Colors.white,
-                    //     ),
-                    //   ),
-                    // ),
+
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 9.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.toNamed(AppRouteName.notification);
+                        },
+                        child: const Icon(
+                          Icons.notifications,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    const Expanded(child: SizedBox.shrink()),
                     // const Icon(
                     //   Icons.wb_sunny_outlined,
                     //   color: Colors.white,
@@ -78,7 +81,7 @@ class _HomeViewState extends State<HomeView> {
                   ]),
                 ),
                 Positioned(
-                    top: 128.h,
+                    top: 116.h,
                     left: 19.w,
                     child: SizedBox(
                       width: Get.width - 35.w,
@@ -88,13 +91,15 @@ class _HomeViewState extends State<HomeView> {
                           Expanded(
                             child: Column(
                               children: [
-                                const Text(
-                                  "القراءة الاخيرة",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 21,
-                                      fontWeight: FontWeight.w400,
-                                      wordSpacing: -2),
+                                Padding(padding: EdgeInsets.only(left:  63.w),
+                                  child: const Text(textAlign: TextAlign.center,
+                                    "القراءة الاخيرة",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 21,
+                                        fontWeight: FontWeight.w400,
+                                        wordSpacing: -2),
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 2.h,
