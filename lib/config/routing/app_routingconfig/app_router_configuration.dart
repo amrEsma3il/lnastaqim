@@ -1,15 +1,21 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
+import 'package:lnastaqim/features/Competitions/view/screens/competitions_view.dart';
 import 'package:lnastaqim/features/about_us/views/about_us_view.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/view/screens/azkar_view.dart';
 import 'package:lnastaqim/features/bookmark/views/bookmarks_view.dart';
+import 'package:lnastaqim/features/calender/view/screens/calender_view.dart';
+import 'package:lnastaqim/features/community/view/screens/community_view.dart';
 import 'package:lnastaqim/features/favourite/views/favourites_view.dart';
 import 'package:lnastaqim/features/favourite/views/general_favourite_view.dart';
 import 'package:lnastaqim/features/help/views/help_view.dart';
+import 'package:lnastaqim/features/layout/presentation/pages/layout.dart';
+import 'package:lnastaqim/features/library/view/screens/library_view.dart';
 import 'package:lnastaqim/features/note/views/note_view.dart';
 import 'package:lnastaqim/features/qibla/view/screen/quiblah_screen.dart';
-import 'package:lnastaqim/features/settings/views/settings_view.dart';
+import 'package:lnastaqim/features/settings/views/screens/settings_view.dart';
 import 'package:lnastaqim/features/sibha/views/widgets/azkar_sibha_view.dart';
+import 'package:lnastaqim/features/support/view/screens/support_view.dart';
 
 import '../../../features/7adis/view/screen/main_a7adith.dart';
 import '../../../features/azkar_with_sib7a/view/screens/azkar_details_view.dart';
@@ -23,8 +29,40 @@ import '../app_routes_info/app_routes_name.dart';
 
 List<GetPage<dynamic>>? routes = [
   GetPage(
+      page: () => const Layout(),
+      name: AppRouteName.layout,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 500)),
+
+  GetPage(
       page: () => const HomeView(),
       name: AppRouteName.home,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 500)),
+
+  GetPage(
+      page: () => const LibraryView(),
+      name: AppRouteName.library,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 500)),
+  GetPage(
+      page: () => const CommunityView(),
+      name: AppRouteName.community,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 500)),
+  GetPage(
+      page: () => const CompetitionsView(),
+      name: AppRouteName.competition,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 500)),
+  GetPage(
+      page: () => const CalenderView(),
+      name: AppRouteName.calender,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 500)),
+  GetPage(
+      page: () => const SupportView(),
+      name: AppRouteName.support,
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
   // GetPage(
@@ -136,19 +174,19 @@ List<GetPage<dynamic>>? routes = [
       name: AppRouteName.generalFav,
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 500)),
-       GetPage(
+  GetPage(
       curve: Curves.easeInOut,
       page: () => const HelpView(),
       name: AppRouteName.help,
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 500)),
-       GetPage(
+  GetPage(
       curve: Curves.easeInOut,
       page: () => const SettingsView(),
       name: AppRouteName.setting,
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 500)),
-       GetPage(
+  GetPage(
       curve: Curves.easeInOut,
       page: () => const AboutUsView(),
       name: AppRouteName.aboutUs,

@@ -14,8 +14,8 @@ class AppImages {
   static const String banner = '$rootImages/banner.png';
   static const String azkar = '$rootImages/azkar.png';
   static const String empty = '$rootImages/empty3.png';
-  static const String ayaMark = '$rootImages/aya_mark.png';//microphone
-  static const String microphone= '$rootImages/microphone.png';//microphone
+  static const String ayaMark = '$rootImages/aya_mark.png'; //microphone
+  static const String microphone = '$rootImages/microphone.png'; //microphone
 
   static const String pageMark = 'assets/svgs/bookmark.svg';
   static const String surahNameBanner = 'assets/svgs/surah_banner1.svg';
@@ -57,4 +57,14 @@ class AppImages {
   static const String motamalekImage = '$rootImages/mota_malek.PNG';
   static const String masneddramiImage = '$rootImages/masned_drami.PNG';
   static const String masnedahmedImage = '$rootImages/masned_ahmed.PNG';
+
+//home
+  static const setting = '$rootImages/setting.svg';
+  static const homeIc = '$rootImages/home.svg';
+  static const prayer = '$rootImages/prayer.svg';
+  static const azkarIc = '$rootImages/azkar.svg';
+  static const mosque = '$rootImages/mosque.svg';
+
+  //quibla
+  static const backgroundQibla = '$rootImages/qibla_background.jpg';
 }

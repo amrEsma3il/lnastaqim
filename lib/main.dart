@@ -60,8 +60,7 @@ void main() async {
   await Hive.openBox<NoteModel>(kNoteBox);
   Hive.registerAdapter(FavouriteModelAdapter());
   await Hive.openBox<FavouriteModel>(kAzkarFavouriteBox);
-    await Hive.openBox<FavouriteModel>(k7adisFavouriteBox);
-
+  await Hive.openBox<FavouriteModel>(k7adisFavouriteBox);
 
   await Hive.openBox<bool>('notificationBox');
   await Hive.openBox('userPreferences');

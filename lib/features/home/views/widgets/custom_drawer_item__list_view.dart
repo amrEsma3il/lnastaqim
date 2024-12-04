@@ -27,43 +27,21 @@ class _CustomDrawerItemListViewState extends State<CustomDrawerItemListView> {
             widget.scaffoldKey.currentState!.closeEndDrawer();
             Get.toNamed(AppRouteName.generalFav);
           }),
-      // DrawerItemModel(
-      //   onTap: () {
-      //     widget.scaffoldKey.currentState!.closeEndDrawer();
-      //     Get.toNamed(AppRouteName.setting);
-      //   },
-      //   icon: Icons.settings,
-      //   title: "الاعدادات",
-      // ),
       DrawerItemModel(
         onTap: () {
           widget.scaffoldKey.currentState!.closeEndDrawer();
-          Get.toNamed(AppRouteName.help);
+          Get.toNamed(AppRouteName.setting);
         },
-        icon: Icons.help,
-        title: "مساعدة",
-      ),
-      DrawerItemModel(
-        onTap: () {
-          widget.scaffoldKey.currentState!.closeEndDrawer();
-        },
-        icon: Icons.share,
-        title: "مشاركة التطبيق",
-      ),
-      DrawerItemModel(
-        onTap: () {
-          widget.scaffoldKey.currentState!.closeEndDrawer();
-        },
-        icon: Icons.rate_review,
-        title: "تقييم التطبيق",
+        icon: Icons.settings,
+        title: "الاعدادات",
       ),
       DrawerItemModel(
         icon: Icons.info,
-        title: "من نحن ",
+        title: "الدعم",
         onTap: () {
           widget.scaffoldKey.currentState!.closeEndDrawer();
 
-          Get.toNamed(AppRouteName.aboutUs);
+          Get.toNamed(AppRouteName.support);
         },
       ),
     ];
