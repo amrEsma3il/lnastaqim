@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:lnastaqim/config/routing/app_routes_info/app_routes_name.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 import 'package:lnastaqim/features/bookmark/bussniess_logic/bookmark_cubit/bookmark_cubit.dart';
 import 'package:lnastaqim/features/bookmark/data/models/bookmark_model.dart';
@@ -182,6 +183,12 @@ class Lnastaqim extends StatelessWidget {
                   Get.toNamed(deepLink.path);
 
                   QuranCubit.get(context).searchAya(ayaNum);
+                } else if (deepLink.path == AppRouteName.azkarDetails) {
+                  int category =
+                      int.parse(deepLink.queryParameters["category"]!);
+                  int zekr = int.parse(deepLink.queryParameters["zekr"]!);
+
+                  Get.toNamed(deepLink.path);
                 } else {
                   Get.toNamed(deepLink.path);
                 }

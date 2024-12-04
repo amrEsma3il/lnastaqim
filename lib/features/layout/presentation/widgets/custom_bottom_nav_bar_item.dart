@@ -28,15 +28,15 @@ class CustomBottomNavigationBarItem extends StatelessWidget {
           Container(
             height: 40.h,
             width: 40.w,
-            decoration: ShapeDecoration(
-              shape: const CircleBorder(),
-              color:
-                  isSelected == true ? AppColor.lightBlue : AppColor.lightGrey,
+            decoration: const ShapeDecoration(
+              shape: CircleBorder(),
+              color: AppColor.lightGrey,
             ),
             child: Center(
               child: Icon(
                 icon,
                 size: 24.h,
+                color: isSelected == true ? AppColor.black : AppColor.primary,
               ),
             ),
           ),
