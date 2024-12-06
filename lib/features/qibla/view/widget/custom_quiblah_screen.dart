@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lnastaqim/core/constants/images.dart';
 
 class CustomQuiblahScreen extends StatelessWidget {
   const CustomQuiblahScreen({super.key});
@@ -10,7 +11,7 @@ class CustomQuiblahScreen extends StatelessWidget {
       body: Stack(
         children: [
           Image.asset(
-            'assets/images/QuiblahBackGround.PNG',
+           AppImages.backgroundQibla,
             fit: BoxFit.cover,
             height: double.infinity,
           ),

@@ -30,11 +30,11 @@ class SibhaView extends StatelessWidget {
                   height: 117,
                   width: double.infinity,
                   decoration: ShapeDecoration(
-                      color: AppColor.primary,
+                      color: AppColor.white,
                       shadows: [
                         BoxShadow(
                             blurRadius: 21,
-                            color: AppColor.darkBrown.withOpacity(0.19))
+                            color: AppColor.primary.withOpacity(0.6))
                       ],
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -46,7 +46,7 @@ class SibhaView extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 24,
-                            color: AppColor.white,
+                            color: AppColor.primary,
                             fontWeight: FontWeight.w700),
                       ),
                     ),

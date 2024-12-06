@@ -1,7 +1,15 @@
 class AppRouteName {
-  static const String home = "/";
+  static const String layout = '/';
+  static const String home = "/home";
   static const String quranSowar = "/quran";
   static const String soraDetails = "/soradetail";
+  static const String library = "/library";
+  static const String competition = "/competition";
+  static const String calender = "/calender";
+  static const String community = "/community";
+  static const String support = "/support";
+
+
 
   static const String moshaf = "/moshaf";
   static const String bookmark = "/bookmark";

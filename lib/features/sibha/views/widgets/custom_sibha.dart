@@ -22,10 +22,12 @@ class _CustomSibhaState extends State<CustomSibha>
   }
 
   void _resetCount() {
+    
     setState(() {
       _count = 0;
     });
   }
+
 
   @override
   void initState() {

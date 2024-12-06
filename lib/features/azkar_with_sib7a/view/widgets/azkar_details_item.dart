@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
+import 'package:lnastaqim/core/constants/links.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/data/models/AzkarModel.dart';
 import 'package:lnastaqim/features/favourite/bussniess_logic/add_to_fav_cubit/add_to_fav_cubit.dart';
 import 'package:lnastaqim/features/favourite/bussniess_logic/add_to_fav_cubit/add_to_fav_state.dart';
@@ -17,9 +18,13 @@ class AzkarDetailsItem extends StatefulWidget {
   const AzkarDetailsItem({
     super.key,
     required this.azkarModel,
+    required this.categoryIndex,
+    required this.zekrIndex,
   });
 
   final AzkarModel azkarModel;
+  final int categoryIndex;
+  final int zekrIndex;
 
   @override
   State<AzkarDetailsItem> createState() => _AzkarDetailsItemState();
@@ -34,9 +39,11 @@ class _AzkarDetailsItemState extends State<AzkarDetailsItem> {
       padding: EdgeInsets.only(right: 15.w, left: 15.w, bottom: 25.h),
       child: Container(
         decoration: ShapeDecoration(
-            color: AppColor.white,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.r))),
+          color: AppColor.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.r),
+          ),
+        ),
         child: Column(
           children: [
             Screenshot(
@@ -44,9 +51,11 @@ class _AzkarDetailsItemState extends State<AzkarDetailsItem> {
               child: Container(
                 width: double.infinity,
                 decoration: ShapeDecoration(
-                    color: AppColor.primary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.r))),
+                  color: AppColor.primary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.r),
+                  ),
+                ),
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(15.w, 12.h, 15.w, 10.h),
                   child: Center(
@@ -62,9 +71,7 @@ class _AzkarDetailsItemState extends State<AzkarDetailsItem> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 15,
-            ),
+            const SizedBox(height: 15),
             Padding(
               padding: EdgeInsets.fromLTRB(15.w, 15.h, 15.w, 15.h),
               child: Row(
@@ -74,21 +81,27 @@ class _AzkarDetailsItemState extends State<AzkarDetailsItem> {
                       radius: 25,
                       backgroundColor: AppColor.primary.withOpacity(0.3),
                       child: IconButton(
-                          onPressed: () async {
-                            var image = await screenshotController.capture();
-                            if (image != null) {
-                              showShareBottomSheet(
-                                  context,
-                                  ShareZekrCheckBox(
-                                      zekr: widget.azkarModel.zekr ?? "",
-                                      image: image));
-                            }
-                          },
-                          icon: const Icon(
-                            Icons.share,
-                            size: 24,
-                            color: Colors.white,
-                          )),
+                        onPressed: () async {
+                          var image = await screenshotController.capture();
+                          if (image != null) {
+                            String zekrLink =
+                                "${AppLinks.appLinks}/azkar?category=${widget.categoryIndex}&zekr=${widget.zekrIndex}";
+                            showShareBottomSheet(
+                              context,
+                              ShareZekrCheckBox(
+                                zekrLink: zekrLink,
+                                zekr: widget.azkarModel.zekr ?? "",
+                                image: image,
+                              ),
+                            );
+                          }
+                        },
+                        icon: const Icon(
+                          Icons.share,
+                          size: 24,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
                   Expanded(
@@ -98,9 +111,10 @@ class _AzkarDetailsItemState extends State<AzkarDetailsItem> {
                       child: Text(
                         widget.azkarModel.count ?? "",
                         style: const TextStyle(
-                            fontSize: 25,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600),
+                          fontSize: 25,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
@@ -148,27 +162,30 @@ class _AzkarDetailsItemState extends State<AzkarDetailsItem> {
                       radius: 25,
                       backgroundColor: AppColor.primary.withOpacity(0.3),
                       child: IconButton(
-                          onPressed: () {
-                            Clipboard.setData(ClipboardData(
-                                    text: widget.azkarModel.zekr ?? ""))
-                                .then((_) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Center(
-                                        child: Text('تم النسخ إلى الحافظه'))),
-                              );
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.copy,
-                            size: 24,
-                            color: Colors.white,
-                          )),
+                        onPressed: () {
+                          Clipboard.setData(ClipboardData(
+                                  text: widget.azkarModel.zekr ?? ""))
+                              .then((_) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Center(
+                                  child: Text('تم النسخ إلى الحافظه'),
+                                ),
+                              ),
+                            );
+                          });
+                        },
+                        icon: const Icon(
+                          Icons.copy,
+                          size: 24,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

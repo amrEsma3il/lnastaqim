@@ -19,7 +19,10 @@ class AzkarDetailsItemsListView extends StatelessWidget {
     return ListView.builder(
         itemCount: filteredItems.length,
         itemBuilder: (BuildContext context, int index) {
-          return AzkarDetailsItem(azkarModel: filteredItems[index]);
+          return AzkarDetailsItem(
+              zekrIndex: index,
+              categoryIndex: items.indexOf(filteredItems[index]),
+              azkarModel: filteredItems[index]);
         });
   }
 }

@@ -15,19 +15,19 @@ class FeaturesGridView extends StatelessWidget {
         image: AppImages.quranFeature,
         route: AppRouteName.moshaf),
     FeatureModel(
-        text: "سماع القران",
-        image: AppImages.listenFeature,
-        route: AppRouteName.surahPlayerScreen),
+        text: "السبحة",
+        image: AppImages.sibhaFeature,
+        route: AppRouteName.sibhaView),
     FeatureModel(
-        text: "احاديث",
+        text: "الأحاديث",
         image: AppImages.ahadesFeature,
         route: AppRouteName.a7adithView),
     FeatureModel(
-        text: "اذكار",
-        image: AppImages.sibhaFeature,
+        text: "الأذكار",
+        image: AppImages.azkarIc,
         route: AppRouteName.azkarView),
     FeatureModel(
-        text: "القبله",
+        text: "القبلة",
         image: AppImages.qiblaFeature,
         route: AppRouteName.qibla),
     FeatureModel(

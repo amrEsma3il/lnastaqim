@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lnastaqim/core/constants/colors.dart';
 import 'package:lnastaqim/features/favourite/data/models/favourite_model.dart';
 import 'package:lnastaqim/features/favourite/views/widgets/favourite_item.dart';
 
@@ -20,8 +21,8 @@ class FavListView extends StatelessWidget {
             isZekr == true
                 ? "لا توجد اذكار في المفضلة!"
                 : "لا يوجد احاديث في المفضلة!",
-            style: const TextStyle(
-              color: Colors.white,
+            style:  TextStyle(
+              color: AppColor.primary,
               fontSize: 30,
               fontFamily: "naskh",
               fontWeight: FontWeight.bold,

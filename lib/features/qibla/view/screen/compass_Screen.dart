@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lnastaqim/core/constants/images.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../../paryer_times/bussniess_logic/date_cubit.dart';
@@ -17,7 +18,7 @@ class CompassScreen extends StatelessWidget {
       body: Stack(
         children: [
           Image.asset(
-            'assets/images/QuiblahBackGround.PNG',
+            AppImages.backgroundQibla,
             fit: BoxFit.cover,
             height: double.infinity,
           ),
