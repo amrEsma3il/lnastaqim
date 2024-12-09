@@ -34,7 +34,11 @@ class FeaturesGridView extends StatelessWidget {
         text: "الراديو",
         image: AppImages.storyFeature,
         route: AppRouteName.radio),
-  ];
+         FeatureModel(
+        text: "سماع القرءان",
+        image: AppImages.listenFeature,
+        route: AppRouteName.surahPlayerScreen),
+  ];//surahPlayerScreen
 
   @override
   Widget build(BuildContext context) {

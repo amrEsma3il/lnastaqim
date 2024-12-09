@@ -1,9 +1,10 @@
+// import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:audioplayers/audioplayers.dart';
 import '../data/models/radio_model.dart';
 import '../data/repositories/radio_repository.dart';
 import 'radio_state.dart';
-
+import 'dart:developer' as dev;
 class RadioCubit extends Cubit<RadioState> {
   final AudioPlayer _audioPlayer = AudioPlayer();
 
@@ -29,7 +30,15 @@ class RadioCubit extends Cubit<RadioState> {
        
         playingUrl: channel.url,
       ));
-    } catch (e) {
+    }catch (e) {
+      // dev.log(e.message??"");
+      //       dev.log(e.details.toString());
+      //             dev.log(e.stacktrace??"");
+      //                   dev.log(e.code);
+
+
+
+      dev.log(e.toString());
             await _audioPlayer.stop();
       emit(state.copyWith(isPlaying: false, audioState: AudioFetchFailure(), playingUrl: null));
     }

@@ -89,6 +89,16 @@ abstract class Radio {
             "https://tvquran.com/uploads/authors/images/%D8%B3%D8%B9%D8%AF%20%D8%A7%D9%84%D8%BA%D8%A7%D9%85%D8%AF%D9%8A.jpg",
         "url": "http://live.mp3quran.net:9976/;"
       },
+
+      
+      // {
+      //   "title": "الشيخ مشاري راشد العفاسي ",
+      //   "description":"الشيخ مشاري راشد العفاسي ",
+      //   "image":
+      //       "https://watanimg.elwatannews.com/image_archive/original_lower_quality/15354211131611078316.jpg",
+      //       "url":"https://cdn.islamic.network/quran/audio-surah/96/my.hashimtinmyint/110.mp3"
+       
+      // },
       {
         "title": "الشيخ عبدالباسط عبدالصمد",
         "description": "الشيخ عبدالباسط عبدالصمد",
