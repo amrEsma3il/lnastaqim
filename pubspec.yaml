@@ -109,6 +109,9 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/svgs/
+
+    - assets/svgs/flags/
+
     - assets/svgs/surah_name/
     - assets/svgs/bookmark.svg
     - assets/json/animations/

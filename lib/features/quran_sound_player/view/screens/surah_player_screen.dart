@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../main.dart';
+import '../../data/repo/repo.dart';
 import '../../logic/surah_player_cubit/surah_player_cubit.dart';
 import '../widgets/surah_controls_widget.dart';
 import '../widgets/surah_info_widget.dart';
@@ -16,7 +17,7 @@ class SurahPlayerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => SurahPlayerCubit(),
+      create: (_) => SurahPlayerCubit(RecitersRepository()),
       child: SafeArea(
         child: Scaffold(
           body: SingleChildScrollView(

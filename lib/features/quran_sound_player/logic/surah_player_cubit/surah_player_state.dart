@@ -1,19 +1,31 @@
 import 'package:equatable/equatable.dart';
 
+import '../../data/models/reciters__model.dart';
+import '../../data/repo/repo.dart';
+import 'surah_player_cubit.dart';
+
 class SurahPlayerState extends Equatable {
   final bool isPlaying;
   final bool isPaused;
   // final int repeatCount;
+  final String reciterCountry, reciterSearchQuery;
   final bool onRepeat;
   final int surahNumber;
+  final Reciter reciter;
   final double currentPosition;
+  
   final double surahDuration;
   final bool isSeeking;
-  final List<int> searchResults; // نتائج البحث
-final AudioFetchState audioState;
+  final List<Reciter> searchReciterResults;
+  final List<int> searchSurahResults; // نتائج البحث
+  final AudioFetchState audioState;
 
   const SurahPlayerState({
-  required this.audioState,
+    required this.reciterCountry,
+    required this.reciterSearchQuery,
+    required this.searchReciterResults,
+    required this.reciter,
+    required this.audioState,
     required this.isSeeking,
     required this.isPlaying,
     required this.isPaused,
@@ -23,55 +35,73 @@ final AudioFetchState audioState;
     required this.surahNumber,
     required this.currentPosition,
     required this.surahDuration,
-    required this.searchResults,
+    required this.searchSurahResults,
   });
 
-  factory SurahPlayerState.initial() =>  SurahPlayerState(
-    audioState: AudioFetchInit(),
-        isSeeking: false,
-        isPlaying: false,
-        isPaused: false,
-        // repeatCount: 0,
-        // maxRepeats: 0,
-        onRepeat: false,
-        surahNumber: 1,
-        currentPosition: 0.0,
-        surahDuration: 0.0,
-        searchResults: const [], // قائمة فارغة عند البداية
+  factory SurahPlayerState.initial() => SurahPlayerState(
+      audioState: AudioFetchInit(),
+      isSeeking: false,
+      isPlaying: false,
+      isPaused: false,
+      reciterCountry: "كل الدول",
+      reciterSearchQuery: "",
+      // repeatCount: 0,
+      // maxRepeats: 0,
+      onRepeat: false,
+      surahNumber: 1,
+      reciter: Reciter(
+          name: "minshawi_mujawwad",
+          nameArabic: "محمد صديق المنشاوي مجود",
+          nationality: "مصر"),
+      currentPosition: 0.0,
+      surahDuration: 0.0,
+      searchSurahResults:SurahPlayerCubit.quranSurahs.keys.toList(),
+       searchReciterResults: RecitersRepository().getAllReciters() // قائمة فارغة عند البداية
       );
 
   SurahPlayerState copyWith({
     bool? isPlaying,
     bool? isSeeking,
     bool? isPaused,
+    String? reciterCountry,
+    String? reciterSearchQuery,
     // int? repeatCount,
     // int? maxRepeats,
-      bool? onRepeat,
+    Reciter? reciter,
+    bool? onRepeat,
     int? surahNumber,
     double? currentPosition,
     double? surahDuration,
-    List<int>? searchResults,
-         AudioFetchState? audioState,
- // إضافة متغير جديد
+    List<int>? searchSurahResults,
+    List<Reciter>? searchReciterResults,
+    AudioFetchState? audioState,
+    // إضافة متغير جديد
   }) {
     return SurahPlayerState(
-            audioState: audioState??this.audioState,
-
-      isSeeking: isSeeking ?? this.isSeeking,
-      isPlaying: isPlaying ?? this.isPlaying,
-      isPaused: isPaused ?? this.isPaused,
-      // repeatCount: repeatCount ?? this.repeatCount,
-      // maxRepeats: maxRepeats ?? this.maxRepeats,
-      onRepeat: onRepeat??this.onRepeat,
-      surahNumber: surahNumber ?? this.surahNumber,
-      currentPosition: currentPosition ?? this.currentPosition,
-      surahDuration: surahDuration ?? this.surahDuration,
-      searchResults: searchResults ?? this.searchResults, // تحديث
-    );
+        reciter: reciter ?? this.reciter,
+        audioState: audioState ?? this.audioState,
+        reciterCountry: reciterCountry ?? this.reciterCountry,
+        reciterSearchQuery: reciterSearchQuery ?? this.reciterSearchQuery,
+        isSeeking: isSeeking ?? this.isSeeking,
+        isPlaying: isPlaying ?? this.isPlaying,
+        isPaused: isPaused ?? this.isPaused,
+        // repeatCount: repeatCount ?? this.repeatCount,
+        // maxRepeats: maxRepeats ?? this.maxRepeats,
+        onRepeat: onRepeat ?? this.onRepeat,
+        surahNumber: surahNumber ?? this.surahNumber,
+        currentPosition: currentPosition ?? this.currentPosition,
+        surahDuration: surahDuration ?? this.surahDuration,
+        searchSurahResults: searchSurahResults ?? this.searchSurahResults,
+        searchReciterResults:
+            searchReciterResults ?? this.searchReciterResults // تحديث
+        );
   }
 
   @override
   List<Object> get props => [
+        reciter,
+        reciterSearchQuery,
+        reciterCountry,
         isSeeking,
         isPlaying,
         isPaused,
@@ -81,37 +111,18 @@ final AudioFetchState audioState;
         surahNumber,
         currentPosition,
         surahDuration,
-        searchResults, 
+        searchSurahResults,
+        searchReciterResults,
         audioState
       ];
 }
 
+abstract class AudioFetchState {}
 
+class AudioFetchLoading implements AudioFetchState {}
 
+class AudioFetchInit implements AudioFetchState {}
 
+class AudioFetchFailure implements AudioFetchState {}
 
-
-
-abstract class AudioFetchState{
-
-}
-
-
-class AudioFetchLoading implements AudioFetchState{
-
-}
-class AudioFetchInit implements AudioFetchState{
-
-}
-
-
-
-
-class AudioFetchFailure implements AudioFetchState{
-  
-}
-
-
-class AudioFetchSuccess implements AudioFetchState{
-  
-}
+class AudioFetchSuccess implements AudioFetchState {}
