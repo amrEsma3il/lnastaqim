@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
+import '../../../../core/constants/animations.dart';
 import '../../../../core/constants/colors.dart';
 import '../../logic/surah_player_cubit/surah_player_cubit.dart';
 import '../../logic/surah_player_cubit/surah_player_state.dart';
@@ -39,7 +41,17 @@ class SurahControlsWidget extends StatelessWidget {
                 return CircleAvatar(
                   radius: 27,
                   backgroundColor: AppColor.lightBlue,
-                  child: IconButton(color: AppColor.blueColor,
+                  child:state.audioState is AudioFetchLoading
+                                            ? Lottie.asset(
+         AppAnimation.typeLoading, // مسار ملف Lottie الخاص بك
+          width: 34.w, // حجم الرسوم المتحركة
+          height: 45.h,
+          fit: BoxFit.contain,
+          repeat: true,
+          animate: true,
+
+        )
+                                            :  IconButton(color: AppColor.blueColor,
                     icon: state.isPlaying
                         ? const Icon(Icons.pause_circle_outline)
                         : const Icon(Icons.play_arrow_outlined),
@@ -67,7 +79,7 @@ class SurahControlsWidget extends StatelessWidget {
                 return IconButton(
                   icon: Icon(size: 27,
                     Icons.repeat,
-                    color: state.maxRepeats > 0 ? Colors.teal :AppColor.lightBlue,
+                    color: state.onRepeat ? Colors.teal :AppColor.lightBlue,
                   ),
                   onPressed: () {
                     context.read<SurahPlayerCubit>().toggleRepeat();

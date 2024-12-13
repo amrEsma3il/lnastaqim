@@ -1,6 +1,6 @@
 class AppImages {
   static const String rootImages = "assets/images";
-
+static const String rootSvgs="assets/svgs";
   static const String pattern = '$rootImages/pattern.png';
   static const String madania = '$rootImages/madania.png';
   static const String kaaba = '$rootImages/Kaaba.png';
@@ -67,4 +67,28 @@ class AppImages {
 
   //quibla
   static const backgroundQibla = '$rootImages/qibla_background.jpg';
+
+
+
+
+
+
+
+
+  //flags
+  static const rootFlags= '$rootSvgs/flags';
+
+
+static const egyptFlag= '$rootFlags/egypt_flag.svg';
+static const syriaFlag= '$rootFlags/syria_flag.svg';
+static const emiratesFlag= '$rootFlags/emirates_flag.svg';
+static const kuwaitFlag= '$rootFlags/kuwait_flag.svg';
+static const suadiaFlag= '$rootFlags/saudia_arabia_flag.svg';
+static const iraqFlag= '$rootFlags/iraq_flag.svg';
+static const bosniaFlag= '$rootFlags/bosnia_and_herzegovina_flag.svg';
+static const pakistanFlag= '$rootFlags/pakistan_flag.svg';
+static const earthFlag= '$rootFlags/earth_flag.svg';
+static const yemenFlag= '$rootFlags/yemen_flag.svg';
+static const unknownFlag= '$rootFlags/unknown_flag.svg';
+
 }
