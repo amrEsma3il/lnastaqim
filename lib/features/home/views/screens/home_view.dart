@@ -201,41 +201,41 @@ class _HomeViewState extends State<HomeView> {
                 ],
               ),
             ),
-            const Column(
+             Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "مواعيد الصلاوات",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
+                            fontWeight: FontWeight.bold, fontSize: 15.5.sp),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      PrayersStepper()
+                      const PrayersStepper()
                     ],
                   ),
                 ),
-                CarouselSliderAyah(),
+                const CarouselSliderAyah(),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "المميزات",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
+                            fontWeight: FontWeight.bold, fontSize: 15.5.sp),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      FeaturesGridView(),
-                      SizedBox(
+                      const FeaturesGridView(),
+                      const SizedBox(
                         height: 30,
                       ),
                     ],

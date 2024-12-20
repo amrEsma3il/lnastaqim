@@ -3,7 +3,9 @@ import 'package:lnastaqim/core/utilits/extensions/color_from_hex.dart';
 
 class AppColor {
   static Color crame = "#FAF6EB".toColor; //a9b6d9
-  static Color lightBlue = "#a9b6d9".toColor; //
+  static Color lightBlue = "#a9b6d9".toColor; //738ed9
+    static Color lightBlue2 = "#6f84bd".toColor; //738ed9
+
   static Color blueTint2 = "#5A6583".toColor;
   static Color blueGreay = "#c1c1c6".toColor;
 
@@ -40,6 +42,8 @@ class AppColor {
   static Color primary = const Color(0xff404c6e);
   static Color white2 = const Color(0xffeaeef5);
   static Color blueBlack = const Color(0xff13153B);
+    static Color blueBlack2 = const Color.fromARGB(255, 31, 34, 79);
+
 
   static Color yellow1 = "#ebb734".toColor; //#
 

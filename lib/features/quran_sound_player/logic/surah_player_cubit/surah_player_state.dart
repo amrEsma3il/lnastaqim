@@ -12,7 +12,7 @@ class SurahPlayerState extends Equatable {
   final bool onRepeat;
   final int surahNumber;
   final Reciter reciter;
-  final double currentPosition;
+  final double currentPosition,audioSpeed;
   
   final double surahDuration;
   final bool isSeeking;
@@ -21,6 +21,7 @@ class SurahPlayerState extends Equatable {
   final AudioFetchState audioState;
 
   const SurahPlayerState({
+    required this.audioSpeed,
     required this.reciterCountry,
     required this.reciterSearchQuery,
     required this.searchReciterResults,
@@ -49,6 +50,7 @@ class SurahPlayerState extends Equatable {
       // maxRepeats: 0,
       onRepeat: false,
       surahNumber: 1,
+      audioSpeed: 1,
       reciter: Reciter(
           name: "minshawi_mujawwad",
           nameArabic: "محمد صديق المنشاوي مجود",
@@ -71,6 +73,7 @@ class SurahPlayerState extends Equatable {
     bool? onRepeat,
     int? surahNumber,
     double? currentPosition,
+    double? audioSpeed,
     double? surahDuration,
     List<int>? searchSurahResults,
     List<Reciter>? searchReciterResults,
@@ -90,6 +93,7 @@ class SurahPlayerState extends Equatable {
         onRepeat: onRepeat ?? this.onRepeat,
         surahNumber: surahNumber ?? this.surahNumber,
         currentPosition: currentPosition ?? this.currentPosition,
+        audioSpeed: audioSpeed??this.audioSpeed,
         surahDuration: surahDuration ?? this.surahDuration,
         searchSurahResults: searchSurahResults ?? this.searchSurahResults,
         searchReciterResults:
@@ -107,6 +111,7 @@ class SurahPlayerState extends Equatable {
         isPaused,
         // repeatCount,
         // maxRepeats,
+        audioSpeed,
         onRepeat,
         surahNumber,
         currentPosition,

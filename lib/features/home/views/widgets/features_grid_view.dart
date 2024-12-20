@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/core/constants/images.dart';
 import 'package:lnastaqim/features/home/data/models/feature_model.dart';
@@ -48,8 +49,8 @@ class FeaturesGridView extends StatelessWidget {
         childAspectRatio: 5 / 3,
         padding: EdgeInsets.zero,
         crossAxisCount: 3,
-        mainAxisSpacing: 20,
-        crossAxisSpacing: 15,
+        mainAxisSpacing: 17.h,
+        crossAxisSpacing: 33.w,
         children: List.generate(
           items.length,
           (item) => GestureDetector(

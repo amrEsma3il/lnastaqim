@@ -48,6 +48,8 @@ import 'features/quran/bussniess_logic/sowra_detail/sora_details_cubit.dart';
 import 'features/quran_sound/data/models/reciter_entity.dart';
 import 'features/quran_sound/logic/audio_cubit/audio_cubit.dart';
 // import 'features/quran_sound_player/logic/surah_player_cubit/surah_player_cubit.dart';
+import 'features/quran_sound_player/data/repo/repo.dart';
+import 'features/quran_sound_player/logic/surah_player_cubit/surah_player_cubit.dart';
 import 'firebase_options.dart';
 
 
@@ -76,7 +78,9 @@ void main() async {
   await Future.wait([
     LocalNotificationService.init(),
     WorkManagerService().init(),
+    LocalNotificationService.requestNotificationPermission()
   ]);
+  
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppColor.blueColor.withOpacity(0.74)));
@@ -93,6 +97,9 @@ void main() async {
 
   runApp(const Lnastaqim());
 }
+
+
+
 
 class Lnastaqim extends StatelessWidget {
   const Lnastaqim({Key? key}) : super(key: key);
@@ -179,6 +186,8 @@ class Lnastaqim extends StatelessWidget {
                     AzkarCategoryCubit()..getAzkarCategory()),
             BlocProvider(
                 create: (BuildContext context) => MemorizedVerseCubit()),
+                 BlocProvider(
+                create: (BuildContext context) => SurahPlayerCubit(RecitersRepository()),),//
             BlocProvider(
                 create: (BuildContext context) =>
                     PrayersTimesCubit()..fetchPrayersTimes()),
