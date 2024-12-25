@@ -1,4 +1,5 @@
 import 'dart:developer' as dev;
+import 'dart:io';
 import 'dart:math';
 
 // import 'package:audio_service/audio_service.dart';
@@ -6,8 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 
 import '../../../../core/constants/images.dart';
+import '../../../share/views/widgets/share_fun.dart';
 import '../../data/models/reciters__model.dart';
 import '../../data/repo/repo.dart';
 import 'surah_player_state.dart';
@@ -151,6 +155,8 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
     114: "سورة الناس",
   };
 
+
+static List<double> audioSpeedRates=[0.5,0.75,1,1.25,1.75,2];
   SurahPlayerCubit(this.recitersRepository)
       : super(SurahPlayerState.initial()) {
     // تحديث حالة التشغيل
@@ -201,16 +207,30 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
   Future<void> playSurah() async {
     dev.log("from play method");
     String surahNumberZeroPad = state.surahNumber.toString().padLeft(3, '0');
+    final directory = await getApplicationDocumentsDirectory();
     Reciter reciter = state.reciter;
     String url =
         'https://download.quranicaudio.com/quran/${reciter.name}/$surahNumberZeroPad.mp3';
 
+    final reciterDir = Directory(
+        '${directory.path}/Quran_listening/${state.reciter.nameArabic}');
+
     emit(state.copyWith(audioState: AudioFetchLoading()));
     // تعيين مصدر الصوت وتشغيله مباشرة
     try {
-      await audioPlayer.setSourceUrl(url);
-      // await _audioHandler.play();
-      await audioPlayer.play(UrlSource(url));
+      final String filePath = '${reciterDir.path}/${state.surahNumber}.mp3';
+
+      if (await File(filePath).exists()) {
+
+        dev.log("بلاي من الاستوردج");
+        //TODO : play WITH local SOUND
+        await audioPlayer.play(DeviceFileSource(filePath));
+      } else {
+        await audioPlayer.setSourceUrl(url);
+        // await _audioHandler.play();
+        await audioPlayer.play(UrlSource(url));
+      }
+
       // await channel.invokeMethod('playMedia');
       emit(state.copyWith(
           audioState: AudioFetchSuccess(), isPlaying: true, isPaused: false));
@@ -242,65 +262,67 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
       emit(state.copyWith(isPlaying: false, isPaused: true));
     } else {
       if (state.isPaused) {
-        audioPlayer.resume();
+    await    audioPlayer.resume();
         emit(state.copyWith(isPlaying: true, isPaused: false));
       } else {
-        playSurah();
+     await   playSurah();
       }
       // await channel.invokeMethod('playMedia');
     }
   }
 
-  void nextSurah() {
+  void nextSurah()async {
     if (state.surahNumber < 114) {
       emit(state.copyWith(
           surahNumber: state.surahNumber + 1, currentPosition: 0));
-      playSurah();
+   await   playSurah();
     }
   }
 
-  void previousSurah() {
+  void previousSurah()async {
     if (state.surahNumber > 1) {
       emit(state.copyWith(
           surahNumber: state.surahNumber - 1, currentPosition: 0));
-      playSurah();
+  await    playSurah();
     }
   }
 
-  changeSurahNum(int surahNumber) {
+//TODO:SCROLL TO CURENT SURAH WHEN OPEN BOTTOM SHEET
+
+ void changeSurahNum(int surahNumber) async{
     if (state.surahNumber != surahNumber) {
       emit(state.copyWith(surahNumber: surahNumber, currentPosition: 0));
 
-      playSurah();
+     await playSurah();
     } else {
       if (state.isPaused) {
-        audioPlayer.resume();
+     await   audioPlayer.resume();
       } else if (!state.isPlaying) {
-        playSurah();
+      await  playSurah();
       } else {
         emit(state.copyWith(isPlaying: true, isPaused: false));
       }
     }
     // تشغيل السورة المختارة
-    Get.back();
+
   }
 
-  changeReciter(Reciter reciter) {
+//TODO:SCROLL TO CURENT RECITER WHEN OPEN BOTTOM SHEET
+  changeReciter(Reciter reciter)async {
     if (state.reciter.name != reciter.name) {
       emit(state.copyWith(reciter: reciter, currentPosition: 0));
 
-      playSurah();
+     await playSurah();
     } else {
       if (state.isPaused) {
-        audioPlayer.resume();
+      await  audioPlayer.resume();
       } else if (!state.isPlaying) {
-        playSurah();
+    await    playSurah();
       } else {
         emit(state.copyWith(isPlaying: true, isPaused: false));
       }
     }
     // تشغيل السورة المختارة
-    Get.back();
   }
 
   void toggleRepeat() {
@@ -319,7 +341,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
     try {
       await audioPlayer.seek(Duration(seconds: position.toInt()));
 
-      playSurah();
+     await playSurah();
       // emit(state.copyWith(  audioState: AudioFetchSuccess(),
       //     isPlaying: true,isPaused: false));
     } on PlatformException catch (e) {
@@ -332,6 +354,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
     emit(state.copyWith(isSeeking: false));
   }
 
+
   changeAudioPosition(double value) {
     emit(state.copyWith(currentPosition: value));
   }
@@ -340,12 +363,28 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
     emit(state.copyWith(isSeeking: isSeeking));
   }
 
-  void playRandomSurah() {
+  void playRandomSurah() async{
     final random = Random();
     int randomSurah = random.nextInt(114) + 1;
     emit(state.copyWith(surahNumber: randomSurah));
-    playSurah();
+   await playSurah();
   }
+
+
+ void setPlaybackRate(double rate)async {
+ 
+     emit(state.copyWith(audioSpeed: rate));
+     await audioPlayer.setPlaybackRate(rate);
+          // await    playSurah();
+
+  
+  }
+
+
+
+
+
+
 
 //البحث والفلترة
 
@@ -378,10 +417,10 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
         recitersRepository.filterReciters(reciterCountry, reciterSearchQuery);
 
     emit(state.copyWith(
-        searchReciterResults: filteredReciters,
-        reciterCountry: reciterCountry,
-        reciterSearchQuery: reciterSearchQuery,
-       ));
+      searchReciterResults: filteredReciters,
+      reciterCountry: reciterCountry,
+      reciterSearchQuery: reciterSearchQuery,
+    ));
   }
 
   static String getCountryFlag(String countryName) {
@@ -401,11 +440,72 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
 
   /// إلغاء البحث وإعادة القائمة الكاملة
   void clearSurahSearch() {
-    emit(state.copyWith(searchSurahResults:quranSurahs.keys.toList(), ));
+    emit(state.copyWith(
+      searchSurahResults: quranSurahs.keys.toList(),
+    ));
   }
 
   void clearReciterSearch() {
-    emit(state.copyWith(searchReciterResults: recitersRepository.getAllReciters(),reciterCountry: "مصر",reciterSearchQuery: ""));
+    emit(state.copyWith(
+        searchReciterResults: recitersRepository.getAllReciters(),
+        reciterCountry: "كل الدول",
+        reciterSearchQuery: ""));
+  }
+
+//others
+  Future<void> downloadSurah() async {
+
+    dev.log("start download");
+    final directory = await getApplicationDocumentsDirectory();
+
+    final reciterDir = Directory(
+        '${directory.path}/Quran_listening/${state.reciter.nameArabic}');
+    //TODO: SHOW NOTIFICATION WITH DOWNLOAD INDICATOR BAR
+    await reciterDir.create(recursive: true);
+
+    String surahNumberZeroPad = state.surahNumber.toString().padLeft(3, '0');
+    Reciter reciter = state.reciter;
+    String url =
+        'https://download.quranicaudio.com/quran/${reciter.name}/$surahNumberZeroPad.mp3';
+
+    final filePath = '${reciterDir.path}/${state.surahNumber}.mp3';
+
+    if (!await File(filePath).exists()) {
+      try {
+        final response = await http.get(Uri.parse(url));
+        if (response.statusCode == 200) {
+          final file = File(filePath);
+          await file.writeAsBytes(response.bodyBytes);
+        }
+      } catch (e) {
+        print('Error downloading Surah ${quranSurahs[state.surahNumber]} ');
+      }
+    }
+  }
+
+  shareSurah() async {
+    final directory = await getApplicationDocumentsDirectory();
+
+    final reciterDir = Directory(
+        '${directory.path}/Quran_listening/${state.reciter.nameArabic}');
+    final filePath = '${reciterDir.path}/${state.surahNumber}.mp3';
+
+    String surahNumberZeroPad = state.surahNumber.toString().padLeft(3, '0');
+    Reciter reciter = state.reciter;
+    String url =
+        'https://download.quranicaudio.com/quran/${reciter.name}/$surahNumberZeroPad.mp3';
+
+    try {
+      if (await File(filePath).exists()) {
+        //TODO : play WITH local SOUND
+
+        await shareSound(filePath,des: quranSurahs[state.surahNumber],subject: "سورة من القرءان الكريم");
+      } else {
+        await shareText("${quranSurahs[state.surahNumber]}............... رابط الاستماع والتحميل : $url",subject: "سورة من القرءان الكريم");
+      }
+    } catch (e) {
+      dev.log(e.toString());
+    }
   }
 
   @override

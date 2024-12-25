@@ -13,9 +13,26 @@ class FeatureItem extends StatelessWidget {
       height: 60.h,
       width: 80.w,
       decoration: ShapeDecoration(
-          color: Colors.white,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r))),
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.r),
+        ),
+        shadows: [
+         
+           BoxShadow(
+            color: Colors.grey.withOpacity(0.2), // ظل رمادي خفيف
+            offset: const Offset(0, 4),          // الاتجاه
+            blurRadius: 10,                      // نعومة الظل
+            spreadRadius: 1,                     // امتداد الظل
+          ),
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2), // ظل رمادي خفيف
+            offset: const Offset(0, 4),          // الاتجاه
+            blurRadius: 10,                      // نعومة الظل
+            spreadRadius: 1,                     // امتداد الظل
+          ),
+        ],
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -27,7 +44,10 @@ class FeatureItem extends StatelessWidget {
           ),
           Text(
             featureModel.text,
-            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+            style:  TextStyle(
+              fontSize: 12.2.sp,
+              fontWeight: FontWeight.w700,
+            ),
           )
         ],
       ),

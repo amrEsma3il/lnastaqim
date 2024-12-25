@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../../../core/constants/animations.dart';
 import '../../../../core/constants/colors.dart';
+import '../../../../core/utilits/services/local_notification_service.dart';
 import '../../logic/surah_player_cubit/surah_player_cubit.dart';
 import '../../logic/surah_player_cubit/surah_player_state.dart';
 
@@ -20,66 +21,67 @@ class SurahControlsWidget extends StatelessWidget {
           children: [
                IconButton(
               icon:  Icon(size: 25,
-                Icons.shuffle,color: AppColor.lightBlue,),
+                Icons.shuffle,color: AppColor.white,),
               onPressed: () {
                 context.read<SurahPlayerCubit>().playRandomSurah();
               },
             ),
-            SizedBox(width: 11.w,),
-            Container(decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(width: 0.9,color: AppColor.lightBlue)),
+            SizedBox(width: 23.w,),
+            Container(decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(width: 0.9,color: AppColor.white)),
               child: IconButton(
-                icon:  Icon(Icons.skip_next,color: AppColor.lightBlue,),
+                icon:  Icon(Icons.skip_next,color: AppColor.white,),
                 onPressed: () {
                   context.read<SurahPlayerCubit>().previousSurah();
                 },
               ),
             ),
-                        SizedBox(width: 16.w,),
-
+                        SizedBox(width: 25.w,),
+    
             BlocBuilder<SurahPlayerCubit, SurahPlayerState>(
               builder: (context, state) {
                 return CircleAvatar(
-                  radius: 27,
-                  backgroundColor: AppColor.lightBlue,
+                  radius: 35,
+                  backgroundColor: AppColor.white,
                   child:state.audioState is AudioFetchLoading
                                             ? Lottie.asset(
          AppAnimation.typeLoading, // مسار ملف Lottie الخاص بك
-          width: 34.w, // حجم الرسوم المتحركة
-          height: 45.h,
+          width: 41.w, // حجم الرسوم المتحركة
+          height: 50.h,
           fit: BoxFit.contain,
           repeat: true,
           animate: true,
-
+    
         )
                                             :  IconButton(color: AppColor.blueColor,
                     icon: state.isPlaying
-                        ? const Icon(Icons.pause_circle_outline)
-                        : const Icon(Icons.play_arrow_outlined),
+                        ? const Icon(Icons.pause,size: 35,)
+                        : const Icon(Icons.play_arrow,size: 37,),
                     onPressed: () {
                       context.read<SurahPlayerCubit>().togglePlayPause();
+                      LocalNotificationService.showMediaNotification();
                     },
                   ),
                 );
               },
             ),
-                        SizedBox(width: 16.w,),
-
-            Container(decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(width: 0.9,color: AppColor.lightBlue)),
+                        SizedBox(width: 25.w,),
+    
+            Container(decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(width: 0.9,color: AppColor.white)),
               child: IconButton(
-                icon:  Icon(Icons.skip_previous,color: AppColor.lightBlue,),
+                icon:  Icon(Icons.skip_previous,color: AppColor.white,),
                 onPressed: () {
                   context.read<SurahPlayerCubit>().nextSurah();
                 },
               ),
             ),
-                        SizedBox(width: 12.w,),
-
+                        SizedBox(width: 24.w,),
+    
              BlocBuilder<SurahPlayerCubit, SurahPlayerState>(
               builder: (context, state) {
                 return IconButton(
                   icon: Icon(size: 27,
                     Icons.repeat,
-                    color: state.onRepeat ? Colors.teal :AppColor.lightBlue,
+                    color: state.onRepeat ? Colors.teal :AppColor.white,
                   ),
                   onPressed: () {
                     context.read<SurahPlayerCubit>().toggleRepeat();
@@ -97,6 +99,28 @@ class SurahControlsWidget extends StatelessWidget {
         //     );
         //   },
         // ),
+    SizedBox(height: 11.h,),
+    
+        Padding(
+                padding:  EdgeInsets.only(left: 19.w,right: 12.w),
+          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            
+            children: [
+              IconButton(
+                icon:  const Icon(size: 20,
+                  Icons.download_outlined,color:  Colors.white54,),
+                onPressed: () {
+                  context.read<SurahPlayerCubit>().downloadSurah();
+                },
+              ),IconButton(
+                icon:  const Icon(size: 20,
+                  Icons.share_outlined,color: Colors.white54,),
+                onPressed: () {
+                  context.read<SurahPlayerCubit>().shareSurah();
+                },
+              ),
+            ],),
+        )
       ],
     );
   }

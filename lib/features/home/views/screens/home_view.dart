@@ -11,6 +11,8 @@ import 'package:lnastaqim/features/home/views/widgets/custom_drawer.dart';
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
 import '../../../paryer_times/bussniess_logic/date_cubit.dart';
 import '../../../paryer_times/view/widgets/prayers_stepper.dart';
+import '../../../quran/bussniess_logic/font_cubit/font_cubit.dart';
+import '../../../quran/bussniess_logic/font_cubit/font_loader_test.dart';
 import '../../../quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
 import '../../../quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_state.dart';
 import '../../../quran/bussniess_logic/quran/quran_cubit.dart';
@@ -26,6 +28,27 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    // _initializeFonts();
+  }
+
+//Temporarily method to can call asynchronous method in init state (also stateful screen will change in future to stateless)
+// Future<void> _initializeFonts() async {
+// try {
+//     await FontService.getfontServiceInstance().downloadProcess();
+//   await FontService.getfontServiceInstance().loadFont('604');
+//   await FontService.getfontServiceInstance().loadFont('603');
+//     await FontService.getfontServiceInstance().loadFont('602');
+
+//   await FontService.getfontServiceInstance().loadFont('601');
+
+// } catch (e) {
+//   log(e.toString());
+// }
+// }
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +79,18 @@ class _HomeViewState extends State<HomeView> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 9.0),
                             child: GestureDetector(
-                              onTap: () {
-                                Get.toNamed(AppRouteName.notification);
+                              onTap: () async {
+                                // Get.toNamed(AppRouteName.notification);
+                              
+                                //FontCubit
+                                await FontService.getfontServiceInstance()
+                                    .loadAllFonts();
+
+
+                                    log("=======================================================================================================================================================================");
+                                    //   FontCubit.getFontCubit(context)
+                                    // .listFilesInDirectory();
+
                               },
                               child: const Icon(
                                 Icons.notifications,
@@ -65,6 +98,7 @@ class _HomeViewState extends State<HomeView> {
                               ),
                             ),
                           ),
+
                           const Expanded(child: SizedBox.shrink()),
                           // const Icon(
                           //   Icons.wb_sunny_outlined,
@@ -201,41 +235,41 @@ class _HomeViewState extends State<HomeView> {
                 ],
               ),
             ),
-            const Column(
+            Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "مواعيد الصلاوات",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
+                            fontWeight: FontWeight.bold, fontSize: 15.5.sp),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      PrayersStepper()
+                      const PrayersStepper()
                     ],
                   ),
                 ),
-                CarouselSliderAyah(),
+                const CarouselSliderAyah(),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "المميزات",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
+                            fontWeight: FontWeight.bold, fontSize: 15.5.sp),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      FeaturesGridView(),
-                      SizedBox(
+                      const FeaturesGridView(),
+                      const SizedBox(
                         height: 30,
                       ),
                     ],

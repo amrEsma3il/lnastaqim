@@ -11,6 +11,7 @@ TextSpan span({
   required Color backgroundColor,
   required String text,
   required int pageIndex,
+   required String fontFamily,
   double? fontSize,
   required int surahNum,
   required int ayahNum,
@@ -42,7 +43,7 @@ TextSpan span({
       first = TextSpan(
         text: partOne,
         style: TextStyle(
-          fontFamily: 'page${pageIndex + 1}',
+          fontFamily: fontFamily,
           fontSize: fontSize,
           letterSpacing: 30,
           color: textColor,
@@ -54,7 +55,7 @@ TextSpan span({
       second = TextSpan(
         text: partTwo,
         style: TextStyle(
-          fontFamily: 'page${pageIndex + 1}',
+          fontFamily: fontFamily,
           fontSize: fontSize,
           letterSpacing: 5,
           color:textColor,
@@ -67,7 +68,7 @@ TextSpan span({
     final TextSpan initialTextSpan = TextSpan(
       text: initialPart,
       style: TextStyle(
-        fontFamily: 'page${pageIndex + 1}',
+        fontFamily: fontFamily,
         fontSize: fontSize,
         letterSpacing: 5,
         color:textColor,
@@ -85,7 +86,7 @@ TextSpan span({
           Shadow(color: "#404c6e".toColor, offset: Offset(1.3.w, 1.3.h), blurRadius: 1.3.r),
           Shadow(color: "#404c6e".toColor, offset: Offset(1.3.w, 1.3.h), blurRadius: 1.3.r),
         ],
-        fontFamily: 'page${pageIndex + 1}',
+        fontFamily:fontFamily,
         fontSize: fontSize,
         letterSpacing: 5,
         color: "#404c6e".toColor,

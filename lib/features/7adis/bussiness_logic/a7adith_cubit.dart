@@ -47,9 +47,9 @@ class HadithCubit extends Cubit<HadithState> {
   }
 
   Future<void> muslimHadithsCubit(BuildContext context) async {
-    bool permissionGranted = await requestStoragePermission();
+    // bool permissionGranted = await requestStoragePermission();
 
-    if (permissionGranted) {
+    
       try {
         emit(HadithLoading());
         SharedPreferences muslimPref = await SharedPreferences.getInstance();
@@ -77,9 +77,9 @@ class HadithCubit extends Cubit<HadithState> {
       } catch (e) {
         emit(HadithError("Failed to download or load Hadiths: $e"));
       }
-    } else {
-      emit(HadithError("Storage permission is required to download Hadiths"));
-    }
+    // } else {
+    //   emit(HadithError("Storage permission is required to download Hadiths"));
+    // }
   }
 
   Future<void> abuDawudHadithsCubit(BuildContext context) async {

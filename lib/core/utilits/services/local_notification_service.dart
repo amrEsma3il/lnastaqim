@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math' as ms;
+import 'dart:developer';
 
 import 'package:adhan/adhan.dart';
 import 'package:alarm/alarm.dart';
@@ -16,6 +17,7 @@ import '../../local_database/azkar/azkar_local_database.dart';
 class LocalNotificationService {
   static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+
   static StreamController<NotificationResponse> streamController =
       StreamController();
 
@@ -30,6 +32,43 @@ class LocalNotificationService {
     streamController.add(notificationResponse);
   }
 
+static void handleNotificationAction(String actionId) {
+  switch (actionId) {
+    case 'play':
+      log('Play button pressed');
+      // قم ببدء التشغيل
+      break;
+    case 'pause':
+      log('Pause button pressed');
+      // قم بإيقاف التشغيل
+      break;
+    case 'next':
+      log('Next button pressed');
+      // قم بتخطي المسار
+      break;
+    case 'previous':
+      log('Previous button pressed');
+      // قم بالرجوع إلى المسار السابق
+      break;
+    default:
+      log('Unknown action: $actionId');
+  }
+}
+
+
+static Future<void> requestNotificationPermission() async {
+  final bool? granted = await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()?.requestNotificationsPermission();
+
+  if (granted == false) {
+    print('Notification permission denied');
+    // يمكنك عرض حوار أو رسالة هنا إذا تم رفض الإذن
+  } else {
+    print('Notification permission granted');
+  }
+}
+
   static Future init() async {
     InitializationSettings settings = const InitializationSettings(
       android: AndroidInitializationSettings('@mipmap/ic_launcher'),
@@ -37,10 +76,57 @@ class LocalNotificationService {
     );
     flutterLocalNotificationsPlugin.initialize(
       settings,
-      onDidReceiveNotificationResponse: onTap,
-      onDidReceiveBackgroundNotificationResponse: onTap,
+      onDidReceiveNotificationResponse: (response) {
+        handleNotificationAction(response.actionId ?? '');
+      },
+      onDidReceiveBackgroundNotificationResponse:  (response) {
+        handleNotificationAction(response.actionId ?? '');
+      },
     );
   }
+
+
+
+static Future<void> showMediaNotification() async {
+
+log("show media notification");
+
+
+  const AndroidNotificationDetails androidPlatformChannelSpecifics =
+      AndroidNotificationDetails(
+    'media_player_channel', // يجب أن يتطابق مع معرف القناة
+    'Media Player Controls',
+    channelDescription: 'Control playback from the notification',
+    importance: Importance.max,
+    priority: Priority.high,
+    showWhen: false,
+    styleInformation: MediaStyleInformation(),
+    actions: <AndroidNotificationAction>[
+      AndroidNotificationAction('play', "",icon:DrawableResourceAndroidBitmap("play_icon") ),
+      AndroidNotificationAction('pause', "",icon:DrawableResourceAndroidBitmap("pause_icon")),
+      AndroidNotificationAction('next',"",icon:DrawableResourceAndroidBitmap("next_icon")),
+      AndroidNotificationAction('previous', "",icon:DrawableResourceAndroidBitmap("previous_icon")),
+    ],
+  );
+
+  const NotificationDetails platformChannelSpecifics =
+      NotificationDetails(android: androidPlatformChannelSpecifics);
+
+  await flutterLocalNotificationsPlugin.show(
+    5, // معرف الإشعار (يمكن تغييره لتحديث الإشعار لاحقاً)
+    'Media Player',
+    'Now Playing: Your Song',
+    platformChannelSpecifics,
+  );
+}
+
+
+
+
+
+
+
+
 
   static void alarmNotification() async {
     final AlarmSettings alarmSettings = AlarmSettings(

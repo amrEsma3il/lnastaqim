@@ -15,8 +15,8 @@ import "../../../../core/utilits/functions/string_words_spliter.dart";
 import "../../../quran/bussniess_logic/quran/quran_cubit.dart";
 import "../../../quran/data/models/surahs_model.dart";
 
-void shareText(String selectedText) {
-  Share.share(selectedText);
+Future<void> shareText(String selectedText,{String? subject})async {
+ await Share.share(selectedText, subject: subject);
 }
 
 Future<void> shareAyahAsImage(
@@ -139,7 +139,7 @@ Future<void> shareHadisAsImage(String hadis, String category, context) async {
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Column(
                       children: [
-                        Padding(
+                    i!=0?const SizedBox.shrink():    Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 10),
                           child: Container(
@@ -199,3 +199,19 @@ Future<void> shareImage(Uint8List image, String name) async {
     [file],
   );
 }
+
+
+Future<void> shareSound(String soundPath,{String? des,String? subject}) async {
+  // final directory = await getTemporaryDirectory();
+  // final imagePath = File('${directory.path}/$name.png');
+  // await imagePath.writeAsBytes(image);
+
+  final XFile file = XFile(soundPath);
+  Share.shareXFiles(
+    [file],
+    text: des,
+    subject: subject
+  );
+}
+
+

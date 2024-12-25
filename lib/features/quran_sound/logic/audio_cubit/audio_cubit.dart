@@ -71,7 +71,7 @@ class AudioControlCubit extends Cubit<AudioControlState> {
     final quranCubit = QuranCubit.get(context);
     final directory = await getApplicationDocumentsDirectory();
     final reciterDir =
-        Directory('${directory.path}/${state.selectedReciter.reciter}');
+        Directory('${directory.path}/Quran/${state.selectedReciter.reciter}');
 
     log("page state from audio cubit${state.pageNum}");
     if (state.pageNum != quranCubit.getPageNumber(verseNumber)) {
@@ -184,6 +184,8 @@ class AudioControlCubit extends Cubit<AudioControlState> {
   }
 
   Future<void> downloadProcess(int verseNumber, Directory reciterDir) async {
+
+    //TODO: SHOW NOTIFICATION WITH DOWNLOAD INDICATOR BAR 
     await reciterDir.create(recursive: true);
 
     for (int i = verseNumber; i <= verseNumber + 5; i++) {

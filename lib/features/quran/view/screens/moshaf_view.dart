@@ -30,6 +30,7 @@ import '../../../quran_sound/logic/audio_cubit/audio_state.dart';
 import '../../../share/views/widgets/share_ayah_checkbox.dart';
 import '../../../tafaseer/bussniess_logic/tafseer_cubit.dart';
 
+import '../../bussniess_logic/font_cubit/font_cubit.dart';
 import '../../bussniess_logic/memorized_verse_cubit/memorized_verse_cubit.dart';
 import '../../bussniess_logic/memorized_verse_cubit/memorized_verse_state.dart';
 import '../../bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
@@ -58,7 +59,7 @@ class MoshafView extends StatelessWidget {
       resizeToAvoidBottomInset: false, //
       body: SafeArea(
           child: PopScope(
-        onPopInvoked: (didPop) {
+        onPopInvokedWithResult: (didPop, result) {
           QuranCubit.get(context).clearScreen(context);
         },
         child: BlocBuilder<MemorizedVerseCubit, MemorizedVerseState>(
@@ -82,11 +83,12 @@ class MoshafView extends StatelessWidget {
                     }
                   },
                   child: PageView.builder(
-                  
                       controller: cubit.pageController,
                       //TODO:stop any events on screen while memorized active
 
                       onPageChanged: (index) {
+
+                        //  FontCubit.getFontCubit(context).loadFont(604 - index);
                         if (!verseSoundstate.isPlaying) {
                           QuranCubit.get(context).clearScreen(context);
                         } else {
@@ -95,10 +97,14 @@ class MoshafView extends StatelessWidget {
                         }
                         AudioControlCubit.get(context).updatePage(604 - index);
                       },
+
+                      //TODO: item count based on font files are (downloaded & register in engine) by chapters
                       itemCount: 604,
                       reverse: true,
                       padEnds: false,
-                      physics:versesVisibilityState.isVisible? const ClampingScrollPhysics():const NeverScrollableScrollPhysics(),
+                      physics: versesVisibilityState.isVisible
+                          ? const ClampingScrollPhysics()
+                          : const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return Stack(
                           children: [
@@ -628,28 +634,32 @@ class MoshafView extends StatelessWidget {
                                                           // TODO: play sound verse
                                                           IconButton(
                                                               onPressed: () {
-                                                                if (versesVisibilityState.isVisible) {
+                                                                if (versesVisibilityState
+                                                                    .isVisible) {
                                                                   AudioControlCubit
-                                                                        .get(
-                                                                            context)
-                                                                    .togglePlayPause(
-                                                                        context);
-                                                                QuranCubit.get(
-                                                                        context)
-                                                                    .searchAya(
-                                                                        verseSoundstate
-                                                                            .currentVerse);
+                                                                          .get(
+                                                                              context)
+                                                                      .togglePlayPause(
+                                                                          context);
+                                                                  QuranCubit.get(
+                                                                          context)
+                                                                      .searchAya(
+                                                                          verseSoundstate
+                                                                              .currentVerse);
                                                                 }
                                                                 //verse
-                                                                
                                                               },
-                                                              icon: Icon(versesVisibilityState.isVisible?
-                                                             (   verseSoundstate
-                                                                        .isPlaying
-                                                                    ? Icons
-                                                                        .pause
+                                                              icon: Icon(
+                                                                versesVisibilityState
+                                                                        .isVisible
+                                                                    ? (verseSoundstate
+                                                                            .isPlaying
+                                                                        ? Icons
+                                                                            .pause
+                                                                        : Icons
+                                                                            .play_arrow)
                                                                     : Icons
-                                                                        .play_arrow):Icons.lock,
+                                                                        .lock,
                                                                 color: Colors
                                                                     .white,
                                                               )),
@@ -675,56 +685,69 @@ class MoshafView extends StatelessWidget {
                                                         ],
                                                       );
                                                     },
-                                                  ),Row(mainAxisSize: MainAxisSize.min,mainAxisAlignment: MainAxisAlignment.start,
+                                                  ),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
                                                     children: [
-                                                  IconButton(
-                                                      onPressed: () {
-                                                        List<int> verses = [];
-                                                        List<List<Ayah>>
-                                                            pageAyahs = cubit
-                                                                .getCurrentPageAyahsSeparatedForBasmalah(
+                                                      IconButton(
+                                                          onPressed: () {
+                                                            List<int> verses =
+                                                                [];
+                                                            List<List<Ayah>>
+                                                                pageAyahs =
+                                                                cubit.getCurrentPageAyahsSeparatedForBasmalah(
                                                                     603 -
                                                                         index);
 
-                                                        for (var element
-                                                            in pageAyahs) {
-                                                          for (var e
-                                                              in element) {
-                                                            verses.add(
-                                                                e.ayahUQNumber);
-                                                          }
-                                                        }
+                                                            for (var element
+                                                                in pageAyahs) {
+                                                              for (var e
+                                                                  in element) {
+                                                                verses.add(e
+                                                                    .ayahUQNumber);
+                                                              }
+                                                            }
 
-                                                        MemorizedVerseCubit.get(
-                                                                context)
-                                                            .toggleVisibility(
-                                                                verses);
-                                                      },
-                                                      //back
-                                                      icon: Icon(
-                                                        versesVisibilityState
-                                                                .isVisible
-                                                            ? Icons.visibility
-                                                            : Icons
-                                                                .visibility_off,
-                                                        color: Colors.white,
-                                                        size: 22.h,
-                                                      )),
-                                                       
-                                                  IconButton(
-                                                      onPressed: () {
-                                                        AudioControlCubit.get(
-                                                                context)
-                                                            .showReciters(
-                                                                context);
-                                                      },
-                                                      icon:  Icon(
-                                                        Icons.keyboard_arrow_up,
-                                                        color: Colors.white,
+                                                            MemorizedVerseCubit
+                                                                    .get(
+                                                                        context)
+                                                                .toggleVisibility(
+                                                                    verses);
+                                                          },
+                                                          //back
+                                                          icon: Icon(
+                                                            versesVisibilityState
+                                                                    .isVisible
+                                                                ? Icons
+                                                                    .visibility
+                                                                : Icons
+                                                                    .visibility_off,
+                                                            color: Colors.white,
+                                                            size: 22.h,
+                                                          )),
+                                                      IconButton(
+                                                        onPressed: () {
+                                                          AudioControlCubit.get(
+                                                                  context)
+                                                              .showReciters(
+                                                                  context);
+                                                        },
+                                                        icon: Icon(
+                                                          Icons
+                                                              .keyboard_arrow_up,
+                                                          color: Colors.white,
                                                           size: 24.h,
+                                                        ),
                                                       ),
-                                                     ), const SizedBox(width: 3,)
-                                                ],)],
+                                                      const SizedBox(
+                                                        width: 3,
+                                                      )
+                                                    ],
+                                                  )
+                                                ],
                                               ),
                                             ))
                                         : const SizedBox()
@@ -941,153 +964,178 @@ class MoshafPage extends StatelessWidget {
                                       : const SizedBox.shrink(),
                                 ),
                           FittedBox(
-                            fit: BoxFit.fitWidth,
-                            child: RichText(
-                              textDirection: TextDirection.rtl,
-                              textAlign: TextAlign.center,
-                              text: TextSpan(
-                                  style: TextStyle(
-                                    //TODO: handle shadow when hide verses
-                                    shadows:versesVisibilityState.isVisible? [
-                                      Shadow(
-                                          color: Colors.black87,
-                                          offset: Offset(0.7.w, 0.7.h),
-                                          blurRadius: 0.7.r),
-                                    ]:null,
-                                    height: 2.04.h,
-                                  ),
-                                  children:
-                                      List.generate(ayahs.length, (ayahIndex) {
-                                    var bookmarks =
-                                        BlocProvider.of<BookmarkCubit>(context)
-                                            .bookmarks;
-                                    var bookmarkedAyah = bookmarks?.firstWhere(
-                                      (bookmark) =>
-                                          bookmark.ayah ==
-                                          ayahs[ayahIndex].text,
-                                      orElse: () => BookmarkModel(
-                                          ayah: "",
-                                          ayahNum: 0,
-                                          color: 0,
-                                          name: "",
-                                          pageNum: ""),
-                                    );
+                              fit: BoxFit.fitWidth,
+                              child: RichText(
+                                  textDirection: TextDirection.rtl,
+                                  textAlign: TextAlign.center,
+                                  text: TextSpan(
+                                      style: TextStyle(
+                                        //TODO: handle shadow when hide verses
+                                        shadows: versesVisibilityState.isVisible
+                                            ? [
+                                                Shadow(
+                                                    color: Colors.black87,
+                                                    offset:
+                                                        Offset(0.7.w, 0.7.h),
+                                                    blurRadius: 0.7.r),
+                                              ]
+                                            : null,
+                                        height: 2.04.h,
+                                      ),
+                                      children: List.generate(ayahs.length,
+                                          (ayahIndex) {
+                                        var bookmarks =
+                                            BlocProvider.of<BookmarkCubit>(
+                                                    context)
+                                                .bookmarks;
+                                        var bookmarkedAyah =
+                                            bookmarks?.firstWhere(
+                                          (bookmark) =>
+                                              bookmark.ayah ==
+                                              ayahs[ayahIndex].text,
+                                          orElse: () => BookmarkModel(
+                                              ayah: "",
+                                              ayahNum: 0,
+                                              color: 0,
+                                              name: "",
+                                              pageNum: ""),
+                                        );
 
-                                    if (bookmarkedAyah != null &&
-                                        bookmarkedAyah.ayah ==
-                                            ayahs[ayahIndex].text) {
-                                      return span(
-                                        // useLongPress:
-                                        //     versesVisibilityState.isVisible,
-                                        textColor: versesVisibilityState
-                                                .versesNum
-                                                .contains(ayahs[ayahIndex]
-                                                    .ayahUQNumber)
-                                            ? Colors.transparent
-                                            : Colors.black,
-                                        backgroundColor:
-                                            Color(bookmarkedAyah.color)
-                                                .withOpacity(0.3),
-                                        //TODO:stop any events on screen while memorized active
-                                        
-                                        onLongPressStart:
-                                            (LongPressStartDetails details) {
-                                          log(ayahs[ayahIndex]
-                                              .ayahUQNumber
-                                              .toString());
-                                          print(moshafPageState);
+                                        if (bookmarkedAyah != null &&
+                                            bookmarkedAyah.ayah ==
+                                                ayahs[ayahIndex].text) {
+                                          return span(
+                                            // useLongPress:
+                                            //     versesVisibilityState.isVisible,
+                                            textColor: versesVisibilityState
+                                                    .versesNum
+                                                    .contains(ayahs[ayahIndex]
+                                                        .ayahUQNumber)
+                                                ? Colors.transparent
+                                                : Colors.black,
+                                            backgroundColor:
+                                                Color(bookmarkedAyah.color)
+                                                    .withOpacity(0.3),
+                                            //TODO:stop any events on screen while memorized active
 
-                                          if (  versesVisibilityState.isVisible) {
-                                                    if (!verseSoundstate.isPlaying) {
-                                            cubit.toggleAyahSelection(
-                                              selectAya: SelectAyaModel(
-                                                ayaNumber: ayahs[ayahIndex]
-                                                    .ayahUQNumber,
-                                                offset: details.globalPosition,
-                                              ),
-                                            );
-                                          }
-                                          AudioControlCubit.get(context)
-                                              .changeAyaIndex(ayahs[ayahIndex]
-                                                  .ayahUQNumber);
-                                          }else{
-                                              MemorizedVerseCubit.get(context)
-                                              .updateVerseNum(ayahs[ayahIndex]
-                                                  .ayahUQNumber);
-                                          }
-                                  
-                                        },
-                                        isFirstAyah:
-                                            ayahIndex == 0 ? true : false,
-                                        text: ayahIndex == 0
-                                            ? "${ayahs[ayahIndex].codeV2[0]}${ayahs[ayahIndex].codeV2.substring(1)}"
-                                            : ayahs[ayahIndex].codeV2,
-                                        pageIndex: pageIndex,
-                                        fontSize: 100.sp,
-                                        surahNum: cubit
-                                            .getSurahNumberFromPage(pageIndex),
-                                        ayahNum: ayahs[ayahIndex].ayahUQNumber,
-                                      );
-                                    }
+                                            onLongPressStart:
+                                                (LongPressStartDetails
+                                                    details) {
+                                              log(ayahs[ayahIndex]
+                                                  .ayahUQNumber
+                                                  .toString());
+                                              print(moshafPageState);
 
-                                    return span(
-                                      // useLongPress:
-                                      //     versesVisibilityState.isVisible,
-                                      textColor: versesVisibilityState.versesNum
-                                              .contains(
-                                                  ayahs[ayahIndex].ayahUQNumber)
-                                          ? Colors.transparent
-                                          : Colors.black,
-                                      backgroundColor:
-                                          moshafPageState.ayaNumber ==
+                                              if (versesVisibilityState
+                                                  .isVisible) {
+                                                if (!verseSoundstate
+                                                    .isPlaying) {
+                                                  cubit.toggleAyahSelection(
+                                                    selectAya: SelectAyaModel(
+                                                      ayaNumber:
+                                                          ayahs[ayahIndex]
+                                                              .ayahUQNumber,
+                                                      offset: details
+                                                          .globalPosition,
+                                                    ),
+                                                  );
+                                                }
+                                                AudioControlCubit.get(context)
+                                                    .changeAyaIndex(
+                                                        ayahs[ayahIndex]
+                                                            .ayahUQNumber);
+                                              } else {
+                                                MemorizedVerseCubit.get(context)
+                                                    .updateVerseNum(
+                                                        ayahs[ayahIndex]
+                                                            .ayahUQNumber);
+                                              }
+                                            },
+                                            isFirstAyah:
+                                                ayahIndex == 0 ? true : false,
+                                            text: ayahIndex == 0
+                                                ? "${ayahs[ayahIndex].codeV2[0]}${ayahs[ayahIndex].codeV2.substring(1)}"
+                                                : ayahs[ayahIndex].codeV2,
+                                            pageIndex: pageIndex,
+                                            fontSize: 100.sp,
+                                            surahNum:
+                                                cubit.getSurahNumberFromPage(
+                                                    pageIndex),
+                                            ayahNum:
+                                                ayahs[ayahIndex].ayahUQNumber,
+                                            fontFamily: 'quran_font_${(pageIndex+1).toString().padLeft(0,'3')}',
+                                          );
+                                        }
+
+                                        return span(
+                                          // useLongPress:
+                                          //     versesVisibilityState.isVisible,
+                                          textColor: versesVisibilityState
+                                                  .versesNum
+                                                  .contains(ayahs[ayahIndex]
+                                                      .ayahUQNumber)
+                                              ? Colors.transparent
+                                              : Colors.black,
+                                          backgroundColor: moshafPageState
+                                                      .ayaNumber ==
                                                   ayahs[ayahIndex].ayahUQNumber
                                               ? AppColor.darkYellow
                                               : Colors.transparent,
-                                      //TODO:stop any events on screen while memorized active
+                                          //TODO:stop any events on screen while memorized active
 
-                                      onLongPressStart:
-                                          (LongPressStartDetails details) {
-                                        log(ayahs[ayahIndex]
-                                            .ayahUQNumber
-                                            .toString());
-                                        print(moshafPageState);
+                                          onLongPressStart:
+                                              (LongPressStartDetails details) {
+                                            log(ayahs[ayahIndex]
+                                                .ayahUQNumber
+                                                .toString());
+                                            print(moshafPageState);
 
-                                        print(ayahs[ayahIndex].ayahUQNumber);
+                                            print(
+                                                ayahs[ayahIndex].ayahUQNumber);
 
-                                         if (  versesVisibilityState.isVisible){TafseerCubit.get(context).getayanumber(
-                                            ayahs[ayahIndex].ayahUQNumber);
+                                            if (versesVisibilityState
+                                                .isVisible) {
+                                              TafseerCubit.get(context)
+                                                  .getayanumber(ayahs[ayahIndex]
+                                                      .ayahUQNumber);
 
-                                        if (!verseSoundstate.isPlaying) {
-                                          cubit.toggleAyahSelection(
-                                              selectAya: SelectAyaModel(
-                                                  ayaNumber: ayahs[ayahIndex]
-                                                      .ayahUQNumber,
-                                                  offset:
-                                                      details.globalPosition));
-                                        }
-                                        AudioControlCubit.get(context)
-                                            .changeAyaIndex(
-                                                ayahs[ayahIndex].ayahUQNumber);}else{
+                                              if (!verseSoundstate.isPlaying) {
+                                                cubit.toggleAyahSelection(
+                                                    selectAya: SelectAyaModel(
+                                                        ayaNumber:
+                                                            ayahs[ayahIndex]
+                                                                .ayahUQNumber,
+                                                        offset: details
+                                                            .globalPosition));
+                                              }
+                                              AudioControlCubit.get(context)
+                                                  .changeAyaIndex(
+                                                      ayahs[ayahIndex]
+                                                          .ayahUQNumber);
+                                            } else {
                                               MemorizedVerseCubit.get(context)
-                                              .updateVerseNum(ayahs[ayahIndex]
-                                                  .ayahUQNumber);
-                                          }
-                                        
-                                      },
-                                      isFirstAyah:
-                                          ayahIndex == 0 ? true : false,
-                                      text: ayahIndex == 0
-                                          ? "${ayahs[ayahIndex].codeV2[0]}${ayahs[ayahIndex].codeV2.substring(1)}"
-                                          : ayahs[ayahIndex].codeV2,
-                                      pageIndex: pageIndex,
-                                      fontSize: 100.sp,
-                                      surahNum: cubit
-                                          .getSurahNumberFromPage(pageIndex),
-                                      ayahNum: ayahs[ayahIndex].ayahUQNumber,
-                                    );
-                                  })),
-                            ),
-                          ),
+                                                  .updateVerseNum(
+                                                      ayahs[ayahIndex]
+                                                          .ayahUQNumber);
+                                            }
+                                          },
+                                          isFirstAyah:
+                                              ayahIndex == 0 ? true : false,
+                                          text: ayahIndex == 0
+                                              ? "${ayahs[ayahIndex].codeV2[0]}${ayahs[ayahIndex].codeV2.substring(1)}"
+                                              : ayahs[ayahIndex].codeV2,
+                                          pageIndex: pageIndex,
+                                          fontSize: 100.sp,
+                                          surahNum:
+                                              cubit.getSurahNumberFromPage(
+                                                  pageIndex),
+                                          ayahNum:
+                                              ayahs[ayahIndex].ayahUQNumber,
+                                         fontFamily: 'quran_font_${(pageIndex+1).toString().padLeft(0,'3')}',
+                                        );
+                                      })),
+                                )
+                             ),
                           SurahBanner(
                               pageIndex: pageIndex,
                               ayaIndex: i,
