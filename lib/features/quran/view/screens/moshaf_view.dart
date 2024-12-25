@@ -59,8 +59,10 @@ class MoshafView extends StatelessWidget {
       resizeToAvoidBottomInset: false, //
       body: SafeArea(
           child: PopScope(
-        onPopInvokedWithResult: (didPop, result) {
-          QuranCubit.get(context).clearScreen(context);
+        onPopInvoked: (didPop) {
+
+                    QuranCubit.get(context).clearScreen(context);
+
         },
         child: BlocBuilder<MemorizedVerseCubit, MemorizedVerseState>(
           builder: (context, versesVisibilityState) {
