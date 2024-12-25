@@ -29,6 +29,7 @@ import 'core/utilits/services/local_notification_service.dart';
 import 'core/utilits/services/work_manager_service.dart';
 // import 'core/utilits/functions/search_string_pattern/boyer_moore_algo.dart' as boyer;
 import 'features/7adis/bussiness_logic/a7adith_cubit.dart';
+import 'features/7adis/data/hadith_service/hadith_service.dart';
 import 'features/azkar_with_sib7a/business_logic/azkar_category_cubit/azkar_category_cubit.dart';
 import 'features/azkar_with_sib7a/business_logic/azkar_details_cubit/azkar_details_cubit.dart';
 import 'features/azkar_with_sib7a/business_logic/shared_azkar_cubit/shared_azkar_cubit.dart';
@@ -38,6 +39,7 @@ import 'features/notification/bussiness_logic/notification_cubit.dart';
 import 'features/paryer_times/bussniess_logic/date_cubit.dart';
 import 'features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
 import 'features/quran/bussniess_logic/fast_transition/fast_transition_cubit.dart';
+import 'features/quran/bussniess_logic/font_cubit/font_cubit.dart';
 import 'features/quran/bussniess_logic/memorized_verse_cubit/memorized_verse_cubit.dart';
 import 'features/quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
 import 'features/quran/bussniess_logic/quran/index_cubit/index_cubit.dart';
@@ -51,6 +53,7 @@ import 'features/quran_sound/logic/audio_cubit/audio_cubit.dart';
 import 'features/quran_sound_player/data/repo/repo.dart';
 import 'features/quran_sound_player/logic/surah_player_cubit/surah_player_cubit.dart';
 import 'firebase_options.dart';
+import 'features/quran/bussniess_logic/font_cubit/font_loader_test.dart';
 
 
 // late final AudioHandler audioHandler;
@@ -78,21 +81,13 @@ void main() async {
   await Future.wait([
     LocalNotificationService.init(),
     WorkManagerService().init(),
-    LocalNotificationService.requestNotificationPermission()
+      
   ]);
   
-
+await requestStoragePermission();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppColor.blueColor.withOpacity(0.74)));
 
-  // audioHandler = await AudioService.init(
-  //   builder: () => AudioHandlerTask(),
-  //   config: const AudioServiceConfig(
-  //     androidNotificationChannelId: 'com.example.quran.audio',
-  //     androidNotificationChannelName: 'Quran Audio',
-  //     androidNotificationOngoing: true,
-  //   ),
-  // );
 
 
   runApp(const Lnastaqim());
@@ -174,9 +169,12 @@ class Lnastaqim extends StatelessWidget {
               create: (context) => NotificationCubit(WorkManagerService()),
             ),
             BlocProvider(
-              create: (context) => OverlayNoteControlCubit(),
+              create: (context) => OverlayNoteControlCubit(),//FontCubit
             ),
 
+//  BlocProvider(
+//               create: (context) => FontCubit(),
+//             ),
             BlocProvider(
               create: (context) => DateCubit()..getDates(),
             ),
@@ -230,3 +228,15 @@ class Lnastaqim extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -287,7 +287,9 @@ static List<double> audioSpeedRates=[0.5,0.75,1,1.25,1.75,2];
     }
   }
 
-  changeSurahNum(int surahNumber) async{
+//TODO:SCROLL TO CURENT SURAH WHEN OPEN BOTTOM SHEET
+
+ void changeSurahNum(int surahNumber) async{
     if (state.surahNumber != surahNumber) {
       emit(state.copyWith(surahNumber: surahNumber, currentPosition: 0));
 
@@ -302,9 +304,10 @@ static List<double> audioSpeedRates=[0.5,0.75,1,1.25,1.75,2];
       }
     }
     // تشغيل السورة المختارة
-    Get.back();
+
   }
 
+//TODO:SCROLL TO CURENT RECITER WHEN OPEN BOTTOM SHEET
   changeReciter(Reciter reciter)async {
     if (state.reciter.name != reciter.name) {
       emit(state.copyWith(reciter: reciter, currentPosition: 0));
@@ -320,7 +323,6 @@ static List<double> audioSpeedRates=[0.5,0.75,1,1.25,1.75,2];
       }
     }
     // تشغيل السورة المختارة
-    Get.back();
   }
 
   void toggleRepeat() {

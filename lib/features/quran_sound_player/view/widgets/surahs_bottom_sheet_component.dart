@@ -120,8 +120,9 @@ class SurahsBottomSheetComponent extends StatelessWidget {
                             color: Colors.white,
                             size: 18,
                           ),
-                          onTap: () {
-                            // Get.back();
+                          onTap: ()async {
+                            Get.back();
+                          await  Future.delayed(const Duration(milliseconds: 200));
                            cubit.changeSurahNum(surahNumber);
                             cubit.clearSurahSearch();
                           },

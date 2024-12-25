@@ -126,8 +126,9 @@ class RecitersBottomSheetComponent extends StatelessWidget {
                             width: 17, // تحديد الحجم
                             height: 17, // تحديد الحجم
                           ),
-                          onTap: () {
-                            // Get.back();
+                          onTap: () async{
+                           Get.back();
+                          await  Future.delayed(const Duration(milliseconds: 200));
                             cubit.changeReciter(reciter);
 
                             cubit.clearReciterSearch();

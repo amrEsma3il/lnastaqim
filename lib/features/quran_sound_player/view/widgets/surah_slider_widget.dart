@@ -48,7 +48,7 @@ class SurahSliderWidget extends StatelessWidget {
   text: TextSpan(
     text: state.audioSpeed.parseInt, // The larger number
     style: TextStyle(
-      fontSize: 25.sp, // Larger font size for the number
+      fontSize: 23.sp, // Larger font size for the number
       color: Colors.white,
       fontWeight: FontWeight.w400,
     ),
@@ -56,7 +56,7 @@ class SurahSliderWidget extends StatelessWidget {
       TextSpan(
         text: "x", // The smaller "x"
         style: TextStyle(
-          fontSize: 18.5.sp, // Smaller font size for "x"
+          fontSize: 17.5.sp, // Smaller font size for "x"
           color: Colors.white,
           fontWeight: FontWeight.w400,
         ),
@@ -178,7 +178,7 @@ class SurahSliderWidget extends StatelessWidget {
   text: TextSpan(
     text: rate.parseInt, // The larger number
     style: TextStyle(
-      fontSize: 25.sp, // Larger font size for the number
+      fontSize: 23.sp, // Larger font size for the number
       color: Colors.white,
       fontWeight: FontWeight.w400,
     ),
@@ -186,7 +186,7 @@ class SurahSliderWidget extends StatelessWidget {
       TextSpan(
         text: "x", // The smaller "x"
         style: TextStyle(
-          fontSize: 18.5.sp, // Smaller font size for "x"
+          fontSize: 17.5.sp, // Smaller font size for "x"
           color: Colors.white,
           fontWeight: FontWeight.w400,
         ),
