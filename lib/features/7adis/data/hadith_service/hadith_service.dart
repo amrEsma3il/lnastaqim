@@ -7,12 +7,12 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../model/a7adith_model.dart';
 
-Future<bool> requestStoragePermission() async {
+Future<void> requestStoragePermission() async {
   var status = await Permission.storage.status;
   if (!status.isGranted) {
     status = await Permission.storage.request();
   }
-  return status.isGranted;
+  // return status.isGranted;
 }
 
 Future<void> downloadHadithFiles(String url, String fileName,

@@ -18,10 +18,12 @@ import 'package:lnastaqim/features/note/bussniess_logic/note_cubit/note_cubit.da
 import 'package:lnastaqim/features/note/data/models/note_model.dart';
 import 'package:lnastaqim/features/quran/bussniess_logic/quran/quran_cubit.dart';
 import 'package:lnastaqim/features/tafaseer/bussniess_logic/tafseer_cubit.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'config/routing/app_routingconfig/app_router_configuration.dart';
 import 'core/constants/constants.dart';
-// import 'core/utilits/functions/search_string_pattern/boyer_moore_algo.dart' as boyer;
+// import 'core/utilits/functions/search_string_pattern/boyer_moore_algo.dart' as boyer;100
 import 'core/constants/keys.dart';
 import 'core/utilits/controller/deep_link_cubit.dart';
 import 'core/utilits/controller/search_or_not/search_visibility.dart';
@@ -40,6 +42,7 @@ import 'features/paryer_times/bussniess_logic/date_cubit.dart';
 import 'features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
 import 'features/quran/bussniess_logic/fast_transition/fast_transition_cubit.dart';
 import 'features/quran/bussniess_logic/font_cubit/font_cubit.dart';
+import 'features/quran/bussniess_logic/font_cubit/qurn_fonts_downlod_progress_persentage_cubit.dart';
 import 'features/quran/bussniess_logic/memorized_verse_cubit/memorized_verse_cubit.dart';
 import 'features/quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
 import 'features/quran/bussniess_logic/quran/index_cubit/index_cubit.dart';
@@ -57,6 +60,19 @@ import 'features/quran/bussniess_logic/font_cubit/font_loader_test.dart';
 
 
 // late final AudioHandler audioHandler;
+ late SharedPreferences prefs ;
+ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+
+ Future<void> requestNotificationPermission() async {
+  var status = await Permission.notification.status;
+  if (!status.isGranted) {
+    status = await Permission.notification.request();
+  }
+  // return status.isGranted;
+}
+
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting('ar', null);
@@ -64,6 +80,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  prefs= await SharedPreferences.getInstance();
   await Hive.initFlutter();
 
   Hive.registerAdapter(BookmarkModelAdapter());
@@ -85,12 +103,15 @@ void main() async {
   ]);
   
 await requestStoragePermission();
+await  requestNotificationPermission();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppColor.blueColor.withOpacity(0.74)));
 
 
 
   runApp(const Lnastaqim());
+
+     await FontService.getfontServiceInstance().checkAnyChapterDownloaded()?await FontService.getfontServiceInstance().loadFontsIndividually():null;
 }
 
 
@@ -171,6 +192,9 @@ class Lnastaqim extends StatelessWidget {
             BlocProvider(
               create: (context) => OverlayNoteControlCubit(),//FontCubit
             ),
+               BlocProvider(
+              create: (context) => FontDownloadPercentage(),//FontCubit
+            ),
 
 //  BlocProvider(
 //               create: (context) => FontCubit(),
@@ -218,6 +242,7 @@ class Lnastaqim extends StatelessWidget {
               }
             },
             child: GetMaterialApp(
+              navigatorKey: navigatorKey,
               locale: const Locale('ar'),
               debugShowCheckedModeBanner: false,
               getPages: routes,

@@ -128,6 +128,34 @@ log("show media notification");
 
 
 
+static  void downloadNotification( int i) async{
+    //show the notifications.
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'progress channel', 'progress channel',
+        channelDescription: 'progress channel description',
+        channelShowBadge: false,
+        importance: Importance.max,
+        priority: Priority.high,
+        onlyAlertOnce: true,
+        showProgress: true,
+        maxProgress: 100,
+        progress: i);
+
+
+    var platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+   await flutterLocalNotificationsPlugin.show(604, 'تحميل المصحف',null,
+       platformChannelSpecifics,
+        payload: 'item x');
+  }
+
+
+
+
+
+
+
+
   static void alarmNotification() async {
     final AlarmSettings alarmSettings = AlarmSettings(
       id: 42,

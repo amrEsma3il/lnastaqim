@@ -83,8 +83,16 @@ class _HomeViewState extends State<HomeView> {
                                 // Get.toNamed(AppRouteName.notification);
                               
                                 //FontCubit
-                                await FontService.getfontServiceInstance()
-                                    .loadAllFonts();
+
+bool isFontExixit=await FontService.getfontServiceInstance().checkfileExisit();
+
+log("font exist? = ${isFontExixit}");
+
+
+
+                                // await FontService.getfontServiceInstance().downloadFont();
+                                // await FontService.getfontServiceInstance()
+                                //     .loadFont("009");
 
 
                                     log("=======================================================================================================================================================================");
