@@ -256,7 +256,7 @@ Future<void>loadFontsIndividually()async{
 
 
 
-  for (var i = 0; i <= 603; i++) {
+  for (var i = 603; i >= 0; i--) {
          String fontNum =( i+1).toString().padLeft(3, '0');
 
       if (loadedFonts.containsKey(fontNum)) {
