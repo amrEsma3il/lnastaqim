@@ -13,121 +13,97 @@ class WorkManagerService {
         );
   }
 
-  void registerTask() {
+  void registersalahNabiTask(int durationInMinutes) {
     Workmanager().registerPeriodicTask(
-      'id4',
-      'name4',
-      frequency: const Duration(minutes: 15),
-      inputData: {'تسابيح': 'اللهم صل وسلم وزد وبارك على نبينا وحبيبنا محمد.'},
+      'uniquesalahNabiTask',
+      'salahNabiTask',
+      frequency: Duration(minutes: durationInMinutes),
+      initialDelay:  Duration(minutes: durationInMinutes)
+
     );
   }
 
- void registerMoringAndEveningAzkarTask(int durationInMinutes) {
-  Workmanager().registerPeriodicTask(
-    'id8', // المعرف الفريد للمهمة
-    'name8', // اسم المهمة
-    frequency: Duration(minutes: durationInMinutes), // تحديث الزمن هنا
-    inputData: {
-      'تسابيح':
-          "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم\nقُلْ هُوَ ٱللَّهُ أَحَدٌ، ٱللَّهُ ٱلصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ."
-    },
-  );
-}
-
-
-  void registerFajrTask() {
+  void registerMoringAndEveningAzkarTask(int durationInMinutes) {
     Workmanager().registerPeriodicTask(
-      'id10',
-      'name10',
-      frequency: const Duration(days: 1),
-      inputData: {'صلاه الفجر': "صلاه الفجر"},
+      'uniquemorningAndEveningTask', // المعرف الفريد للمهمة
+      'morningAndEveningTask', // اسم المهمة
+      frequency: Duration(minutes: durationInMinutes), 
+initialDelay:  Duration(minutes: durationInMinutes)
+   );
+  }
+
+  void registerParyerTimeTask() {
+    Workmanager().registerPeriodicTask(
+      'uniqueparyerTimeTask',
+      'paryerTimeTask',
+       frequency: const Duration(days: 1),
+       initialDelay: const Duration(minutes: 1)
     );
   }
 
-  void registerDhuhrTask() {
-    Workmanager().registerPeriodicTask(
-      'id11',
-      'name11',
-      frequency: const Duration(days: 1),
-      inputData: {'صلاه الظهر': "صلاه الظهر"},
-    );
-  }
 
-  void registerAsrTask() {
-    Workmanager().registerPeriodicTask(
-      'id12',
-      'name12',
-      frequency: const Duration(days: 1),
-      inputData: {'صلاه العصر': "صلاه العصر"},
-    );
-  }
+  //   void registerCancelAllParyerTimeTask() {
+  //   Workmanager().registerPeriodicTask(
+  //     'uniquecancelAllParyerNotification',
+  //     'cancelAllParyerNotification',
+  //      frequency: const Duration(minutes: 15),
+  //   );
+  // }
 
-  void registerMaghribTask() {
-    Workmanager().registerPeriodicTask(
-      'id13',
-      'name13',
-      frequency: const Duration(days: 1),
-      inputData: {'صلاه المغرب': "صلاه المغرب"},
-    );
-  }
-
-  void registerIshaTask() {
-    Workmanager().registerPeriodicTask(
-      'id14',
-      'name14',
-      frequency: const Duration(days: 1),
-      inputData: {'صلاه العشاء': "صلاه العشاء"},
-    );
-  }
+  // void registerBootTask() {
+  //   Workmanager().registerOneOffTask(
+  //     "uniqueCancelNotificationsTask", // اسم فريد للمهمة
+  //     "cancelNotificationsTask", // اسم المهمة الذي يتم ربطه في callbackDispatcher
+  //     constraints: Constraints(
+  //       networkType: NetworkType.not_required,
+  //       requiresDeviceIdle: false, // لا حاجة لأن يكون الجهاز خاملاً
+  //       requiresCharging: false, // لا حاجة للشاحن
+  //     ),
+  //     initialDelay: const Duration(
+  //         seconds: 5), // تأخير التنفيذ بـ 5 ثوانٍ بعد إعادة التشغيل
+  //   );
+  // }
 
   //init work manager service
   Future<void> init() async {
     await Workmanager().initialize(actionTask, isInDebugMode: false);
-    registerTask();
+    registersalahNabiTask(15);
     registerMoringAndEveningAzkarTask(15);
-    registerFajrTask();
-    registerDhuhrTask();
-    registerAsrTask();
-    registerMaghribTask();
-    registerIshaTask();
+    registerParyerTimeTask();
+    // registerCancelAllParyerTimeTask();
   }
 
   void cancelTask(String id) {
     Workmanager().cancelByUniqueName(id);
   }
 
-  Duration calculateInitialDelay(
-      {required int targetHour, required int targetMinute}) {
-    final now = DateTime.now();
-    var targetTime =
-        DateTime(now.year, now.month, now.day, targetHour, targetMinute);
-
-    log("======target========");
-    log(targetTime.toString());
-
-    log("==============");
-    log("======initial========");
-    log(targetTime.difference(now).toString());
-    log(targetTime.difference(now).inHours.toString());
-    log(targetTime.difference(now).inMinutes.toString());
-
-    log("==============");
-
-    return targetTime.difference(now);
+  void changeSalahNabiDurationTo25m() {
+    log("change");
+    cancelTask("uniquesalahNabiTask");
+    registersalahNabiTask(17);
   }
 }
 
 @pragma('vm-entry-point')
 void actionTask() {
+  Workmanager().executeTask((taskName, inputData) async {
+    if (taskName == "paryerTimeTask") {
+      log("test from paryerTimeTask");
+  await    LocalNotificationService.salahFajrNotification();
+   await   LocalNotificationService.salahDuhrNotification();
+   await   LocalNotificationService.salahAsrNotification();
+   await   LocalNotificationService.salahMagribNotification();
+   await   LocalNotificationService.salahIshaNotification();
+    } else if (taskName == "morningAndEveningTask") {
+  await    LocalNotificationService
+          .showMorningAndEveningAzkarScheduledNotification();
+    } else if (taskName == "salahNabiTask") {
+  await    LocalNotificationService.showSalahNabiNotification();
+    } 
+    // else if(taskName == "cancelAllParyerNotification"){
 
-  Workmanager().executeTask((taskName, inputData) {
-    LocalNotificationService.showSalahNabiNotification();
-    LocalNotificationService.showMorningAndEveningAzkarScheduledNotification();
-    LocalNotificationService.salahFajrNotification();
-    LocalNotificationService.salahDuhrNotification();
-    LocalNotificationService.salahAsrNotification();
-    LocalNotificationService.salahMagribNotification();
-    LocalNotificationService.salahIshaNotification();
+    // await  LocalNotificationService.canclAllParyersNotifications();
+    // }
 
     return Future.value(true);
   });

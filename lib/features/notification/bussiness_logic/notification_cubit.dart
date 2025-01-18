@@ -25,7 +25,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     isSalahNabiNotification = !isSalahNabiNotification;
     Hive.box<bool>('notificationBox').put('isSalahNabiNotification', isSalahNabiNotification);
     if (isSalahNabiNotification) {
-      _workManagerService.registerTask();
+      _workManagerService.registersalahNabiTask(15);
     } else {
       _workManagerService.cancelTask('id4');
     }

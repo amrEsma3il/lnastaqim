@@ -20,6 +20,7 @@ import 'package:lnastaqim/features/share/views/widgets/share_bottom_sheet.dart';
 import 'package:screenshot/screenshot.dart';
 
 import 'package:lnastaqim/features/tafaseer/view/screen/tafseer.dart';
+import '../../../../config/routing/app_routes_info/app_routes_name.dart';
 import '../../../../core/constants/images.dart';
 import '../../../../core/constants/links.dart';
 import '../../../../core/utilits/controller/search_or_not/search_visibility.dart';
@@ -32,6 +33,7 @@ import '../../../tafaseer/bussniess_logic/tafseer_cubit.dart';
 
 import '../../bussniess_logic/font_cubit/font_cubit.dart';
 import '../../bussniess_logic/font_cubit/font_loader_test.dart';
+import '../../bussniess_logic/font_cubit/qurn_fonts_downlod_progress_persentage_cubit.dart';
 import '../../bussniess_logic/memorized_verse_cubit/memorized_verse_cubit.dart';
 import '../../bussniess_logic/memorized_verse_cubit/memorized_verse_state.dart';
 import '../../bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
@@ -41,6 +43,8 @@ import '../../bussniess_logic/screen_tap_Visibility/screen_tap_visability.dart';
 import '../../data/models/search_ayah_entity.dart';
 import '../../data/models/select_aya_model.dart';
 import '../../data/models/surahs_model.dart';
+import '../widgets/font/ask_for_download_fonts_dialog.dart';
+import '../widgets/font/download_progress_dialog.dart';
 import '../widgets/quran_page_info_banner.dart';
 import '../widgets/search_item_component.dart';
 import '../widgets/surah_banner/surah_banner.dart';
@@ -63,11 +67,20 @@ class MoshafView extends StatelessWidget {
       body: SafeArea(
           child: PopScope(
         onPopInvoked: (didPop)async {
+ QuranCubit.get(context).clearScreen(context);
+           if ( !await FontDownloadPercentage().checkAnyChapterDownloaded()) {
+        log(".......");
+                  Get.offAllNamed(AppRouteName.home);
+          }else{
+                    log("....back...");
 
-                    QuranCubit.get(context).clearScreen(context);
+            Get.back();
+          }
+
+     
 
         },
-        child:FutureBuilder(future: FontService.getfontServiceInstance().checkAnyChapterDownloaded()
+        child:FutureBuilder(future: FontDownloadPercentage().checkAnyChapterDownloaded()
         , builder: (context, snapshot) {
           
            if (snapshot.connectionState == ConnectionState.waiting) {
@@ -91,7 +104,25 @@ class MoshafView extends StatelessWidget {
         } 
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-    FontService.getfontServiceInstance().showFontDownloadDialog(context);
+     FontDownloadPercentage.isStartDownload
+        ?  showDialog(
+            context: context,
+            // barrierDismissible: false,
+            builder: (BuildContext context) {
+              log(Get.width.toString());
+
+              return const DownloadProgressDialog();
+            },
+          )
+        : showDialog(
+            context: context,
+            // barrierDismissible: false,
+            builder: (BuildContext context) {
+              log(Get.width.toString());
+
+              return const AskForDownloadFontsDialog();
+            },
+          );
   }); 
          return Container(width: Get.width,
         height: Get.height,
@@ -140,7 +171,7 @@ class QuranBody extends StatelessWidget {
     
                   onPageChanged: (index) {
     
-                    //  FontCubit.getFontCubit(context).loadFont(604 - index);
+                   
                     if (!verseSoundstate.isPlaying) {
                       QuranCubit.get(context).clearScreen(context);
                     } else {

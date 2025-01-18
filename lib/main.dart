@@ -1,7 +1,11 @@
+import 'dart:developer';
+import 'dart:ui';
+import 'package:adhan/adhan.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -18,18 +22,17 @@ import 'package:lnastaqim/features/note/bussniess_logic/note_cubit/note_cubit.da
 import 'package:lnastaqim/features/note/data/models/note_model.dart';
 import 'package:lnastaqim/features/quran/bussniess_logic/quran/quran_cubit.dart';
 import 'package:lnastaqim/features/tafaseer/bussniess_logic/tafseer_cubit.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'config/routing/app_routingconfig/app_router_configuration.dart';
 import 'core/constants/constants.dart';
-// import 'core/utilits/functions/search_string_pattern/boyer_moore_algo.dart' as boyer;100
 import 'core/constants/keys.dart';
 import 'core/utilits/controller/deep_link_cubit.dart';
 import 'core/utilits/controller/search_or_not/search_visibility.dart';
+import 'core/utilits/services/audio_service/players_key.dart';
 import 'core/utilits/services/local_notification_service.dart';
+import 'core/utilits/services/location_service.dart';
 import 'core/utilits/services/work_manager_service.dart';
-// import 'core/utilits/functions/search_string_pattern/boyer_moore_algo.dart' as boyer;
 import 'features/7adis/bussiness_logic/a7adith_cubit.dart';
 import 'features/7adis/data/hadith_service/hadith_service.dart';
 import 'features/azkar_with_sib7a/business_logic/azkar_category_cubit/azkar_category_cubit.dart';
@@ -41,7 +44,6 @@ import 'features/notification/bussiness_logic/notification_cubit.dart';
 import 'features/paryer_times/bussniess_logic/date_cubit.dart';
 import 'features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
 import 'features/quran/bussniess_logic/fast_transition/fast_transition_cubit.dart';
-import 'features/quran/bussniess_logic/font_cubit/font_cubit.dart';
 import 'features/quran/bussniess_logic/font_cubit/qurn_fonts_downlod_progress_persentage_cubit.dart';
 import 'features/quran/bussniess_logic/memorized_verse_cubit/memorized_verse_cubit.dart';
 import 'features/quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
@@ -52,26 +54,122 @@ import 'features/quran/bussniess_logic/screen_tap_Visibility/screen_tap_visabili
 import 'features/quran/bussniess_logic/sowra_detail/sora_details_cubit.dart';
 import 'features/quran_sound/data/models/reciter_entity.dart';
 import 'features/quran_sound/logic/audio_cubit/audio_cubit.dart';
-// import 'features/quran_sound_player/logic/surah_player_cubit/surah_player_cubit.dart';
 import 'features/quran_sound_player/data/repo/repo.dart';
 import 'features/quran_sound_player/logic/surah_player_cubit/surah_player_cubit.dart';
+import 'features/radio_stream_channels/bussniess_logic/radio_cubit.dart';
 import 'firebase_options.dart';
 import 'features/quran/bussniess_logic/font_cubit/font_loader_test.dart';
 
+@pragma('vm:entry-point')
+void notificationTapBackground(
+    NotificationResponse notificationResponse) async {
+  log("hi from onDidReceiveNotificationBackgroundResponse");
+  log("before switch case${notificationResponse.actionId}");
 
-// late final AudioHandler audioHandler;
- late SharedPreferences prefs ;
- final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  String action = notificationResponse.actionId!;
+
+    switch (action) {
+      case '${NotificationKeys.quranPlayer}play':
+        log('play quran sound');
+
+        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
+            ?.send('play');
+
+        break;
+      case '${NotificationKeys.quranPlayer}pause':
+        log('pause quran sound');
+
+        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
+            ?.send('pause');
+
+        break;
+
+      case '${NotificationKeys.quranPlayer}stop':
+        log('stop quran sound');
+        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
+            ?.send('stop');
+
+        break;
+
+      case '${NotificationKeys.quranPlayer}next':
+        log('next quran sound');
+        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
+            ?.send('next');
+
+        break;
+      case '${NotificationKeys.quranPlayer}previous':
+        log('previous quran sound');
+        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
+            ?.send('previous');
+
+        break;
 
 
- Future<void> requestNotificationPermission() async {
-  var status = await Permission.notification.status;
-  if (!status.isGranted) {
-    status = await Permission.notification.request();
-  }
-  // return status.isGranted;
+
+        //================================================================================
+
+
+              case '${NotificationKeys.radio}play':
+        log('play radio sound');
+
+        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
+            ?.send('play');
+
+        break;
+      case '${NotificationKeys.radio}pause':
+        log('pause radio sound');
+
+        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
+            ?.send('pause');
+
+        break;
+
+      case '${NotificationKeys.radio}stop':
+        log('stop radio sound');
+        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
+            ?.send('stop');
+
+        break;
+
+      case '${NotificationKeys.radio}next':
+        log('next radio sound');
+        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
+            ?.send('next');
+
+        break;
+      case '${NotificationKeys.radio}previous':
+        log('previous radio sound');
+        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
+            ?.send('previous');
+
+        break;
+        
+        
+          case 'استئناف':
+        log('play quran download sound');
+
+        IsolateNameServer.lookupPortByName(NotificationKeys.quranDownload)
+            ?.send('play');
+
+        break;
+      case 'ايقاف':
+        log('pause quran download sound');
+
+        IsolateNameServer.lookupPortByName(NotificationKeys.quranDownload)
+            ?.send('pause');
+
+        break;
+
+
+    }
+
+
 }
 
+late SharedPreferences prefs;
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+Coordinates? coordinates;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -81,7 +179,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  prefs= await SharedPreferences.getInstance();
+  prefs = await SharedPreferences.getInstance();
+  coordinates =await LocationService.determinePosition();
   await Hive.initFlutter();
 
   Hive.registerAdapter(BookmarkModelAdapter());
@@ -96,26 +195,135 @@ void main() async {
   await Hive.openBox('userPreferences');
 
   await Hive.openBox<ReciterEntity>(AppKeys.reciterBox);
+
   await Future.wait([
-    LocalNotificationService.init(),
     WorkManagerService().init(),
-      
   ]);
-  
-await requestStoragePermission();
-await  requestNotificationPermission();
+
+  await requestStoragePermission();
+  await LocalNotificationService.requestNotificationPermission();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppColor.blueColor.withOpacity(0.74)));
+
+  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  Future<void> handleMediaAction(String action) async {
+
+    switch (action) {
+      case '${NotificationKeys.quranPlayer}play':
+        log('play sound');
+
+        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
+            ?.send('play');
+
+        break;
+      case '${NotificationKeys.quranPlayer}pause':
+        log('pause sound');
+
+        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
+            ?.send('pause');
+
+        break;
+
+      case '${NotificationKeys.quranPlayer}stop':
+        log('stop sound');
+        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
+            ?.send('stop');
+
+        break;
+
+      case '${NotificationKeys.quranPlayer}next':
+        log('next sound');
+        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
+            ?.send('next');
+
+        break;
+      case '${NotificationKeys.quranPlayer}previous':
+        log('previous sound');
+        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
+            ?.send('previous');
+
+        break;
+
+
+
+        //================================================================================
+
+
+              case '${NotificationKeys.radio}play':
+        log('play sound');
+
+        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
+            ?.send('play');
+
+        break;
+      case '${NotificationKeys.radio}pause':
+        log('pause sound');
+
+        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
+            ?.send('pause');
+
+        break;
+
+      case '${NotificationKeys.radio}stop':
+        log('stop sound');
+        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
+            ?.send('stop');
+
+        break;
+
+      case '${NotificationKeys.radio}next':
+        log('next sound');
+        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
+            ?.send('next');
+
+        break;
+      case '${NotificationKeys.radio}previous':
+        log('previous sound');
+        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
+            ?.send('previous');
+
+        break;
+
+    }
+
+
+  }
+
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  InitializationSettings settings = const InitializationSettings(
+    android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+    iOS: DarwinInitializationSettings(),
+  );
+  await flutterLocalNotificationsPlugin.initialize(settings,
+      onDidReceiveNotificationResponse:
+          (NotificationResponse notificationResponse) async {
+    log("hi from onDidReceiveNotificationResponse");
+
+    log(notificationResponse.actionId.toString());
+// if (notificationResponse.actionId == null) {
+//   log("action id is null");
+// } else {
+    await handleMediaAction(notificationResponse.actionId!);
+
+// }
+  }, onDidReceiveBackgroundNotificationResponse: notificationTapBackground);
+
+  ///
+
 
 
 
   runApp(const Lnastaqim());
 
-     await FontService.getfontServiceInstance().checkAnyChapterDownloaded()?await FontService.getfontServiceInstance().loadFontsIndividually():null;
+  await FontDownloadPercentage().checkAnyChapterDownloaded()
+      ? await FontDownloadPercentage().loadFontsIndividually()
+      : null;
 }
-
-
-
 
 class Lnastaqim extends StatelessWidget {
   const Lnastaqim({Key? key}) : super(key: key);
@@ -125,7 +333,7 @@ class Lnastaqim extends StatelessWidget {
     return ScreenUtilInit(
       minTextAdapt: true,
       splitScreenMode: true,
-      designSize: const Size(393, 852),
+      designSize: const Size(411.5, 867.5),
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
@@ -171,6 +379,11 @@ class Lnastaqim extends StatelessWidget {
                   AudioControlCubit()..audioPlayerListener(context),
             ),
 
+              BlocProvider(
+              create: (context) =>
+                  RadioCubit(),
+            ),//RadioCubit()
+
             BlocProvider(create: (context) => AddBookmarkCubit()),
             BlocProvider(
                 create: (context) => BookmarkCubit()..fetchBookmarks()),
@@ -190,10 +403,10 @@ class Lnastaqim extends StatelessWidget {
               create: (context) => NotificationCubit(WorkManagerService()),
             ),
             BlocProvider(
-              create: (context) => OverlayNoteControlCubit(),//FontCubit
+              create: (context) => OverlayNoteControlCubit(), //FontCubit
             ),
-               BlocProvider(
-              create: (context) => FontDownloadPercentage(),//FontCubit
+            BlocProvider(
+              create: (context) => FontDownloadPercentage(), //FontCubit
             ),
 
 //  BlocProvider(
@@ -208,8 +421,10 @@ class Lnastaqim extends StatelessWidget {
                     AzkarCategoryCubit()..getAzkarCategory()),
             BlocProvider(
                 create: (BuildContext context) => MemorizedVerseCubit()),
-                 BlocProvider(
-                create: (BuildContext context) => SurahPlayerCubit(RecitersRepository()),),//
+            BlocProvider(
+              create: (BuildContext context) =>
+                  SurahPlayerCubit(RecitersRepository()),
+            ), //
             BlocProvider(
                 create: (BuildContext context) =>
                     PrayersTimesCubit()..fetchPrayersTimes()),
@@ -253,15 +468,3 @@ class Lnastaqim extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-

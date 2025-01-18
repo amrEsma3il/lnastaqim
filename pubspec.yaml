@@ -29,8 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   adhan: ^2.0.0+1
-  alarm: ^3.1.5
-  # audio_service: ^0.18.15
+  audio_service: ^0.18.16
   audioplayers: ^4.0.0
   cached_network_image: 3.3.1
   carousel_slider: ^5.0.0
@@ -60,7 +59,7 @@ dependencies:
   freezed_annotation: ^2.4.1
   geolocator: ^9.0.2
   get: ^4.6.1
-  get_it: ^7.6.4
+  get_it: ^8.0.3
   go_router: ^10.1.2
   google_maps_flutter: ^2.5.3
   hijri: ^3.0.0

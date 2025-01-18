@@ -12,23 +12,25 @@ class QuiblahCubit extends Cubit<bool> {
  double? latitude;
  double? longitude;
 
-  Future getPremission() async {
-    PermissionStatus locationstatus = await Permission.location.request();
-    if (locationstatus == PermissionStatus.granted) {
-      hasPremission = true;
-      latitude=currentLocation!.latitude;
-      longitude=currentLocation!.longitude;
-      log(latitude!);
-      log(longitude!);
-    }
-    if (locationstatus == PermissionStatus.denied) {
-      const SnackBar(
-        content: Text('This premission is recommended'),
-      );
-    }
-    if (locationstatus == PermissionStatus.permanentlyDenied) {
-      openAppSettings();
-      hasPremission = true;
-    }
-  }
+  // Future getPremission() async {
+  //   PermissionStatus locationstatus = await Permission.location.request();
+  //   if (locationstatus == PermissionStatus.granted) {
+  //     hasPremission = true;
+  //     latitude=currentLocation!.latitude;
+  //     longitude=currentLocation!.longitude;
+  //     log(latitude!);
+  //     log(longitude!);
+  //   }
+  //   if (locationstatus == PermissionStatus.denied) {
+  //     const SnackBar(
+  //       content: Text('This premission is recommended'),
+  //     );
+  //   }
+  //   if (locationstatus == PermissionStatus.permanentlyDenied) {
+  //     openAppSettings();
+  //     hasPremission = true;
+  //   }
+  // }
+
+
 }

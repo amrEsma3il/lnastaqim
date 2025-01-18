@@ -12,12 +12,17 @@ class CustomSibhaAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: AppColor.primary,
-      title: Text(
-        "المسبحة الالكترونية",
-        style: TextStyle(
-            fontSize: 25.sp, fontWeight: FontWeight.w700, color: Colors.white),
-      ),
-      centerTitle: true,
+                    toolbarHeight: 100.h,
+              title: Padding(padding:  EdgeInsets.only(bottom: 15.h,top: 5.h),child: Text(
+                "المسبحة الالكترونية",
+                style: TextStyle(
+                  fontSize: 25.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),),
+              centerTitle: true,
+
       leading: GestureDetector(
         onTap: () {
           Get.back();
