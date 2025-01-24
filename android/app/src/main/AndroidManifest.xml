@@ -10,25 +10,26 @@
 
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
+  <!-- <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/> -->
 
-
-
-
-   <uses-permission android:name="android.permission.VIBRATE" />
-   
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-
-   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
-    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+
+
+
+       <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+   <uses-permission android:name="android.permission.VIBRATE" />
+   <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+   <!-- NOTE: the example app requests USE_EXACT_ALARM to make it easier to run the app.
+        Developers will need to check if their own app needs to use SCHEDULE_EXACT_ALARM instead -->
+   <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+   <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:label="lnastaqim"
@@ -84,15 +85,69 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-            <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
-<receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- If you want your foreground service to be stopped if
+             your app is stopped, set android:stopWithTask to true.
+             See https://developer.android.com/reference/android/R.attr#stopWithTask -->
+        <service
+            android:name="com.dexterous.flutterlocalnotifications.ForegroundService"        
+            android:exported="false"
+            android:stopWithTask="false"
+            android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE" android:value="To demonstrate how to use foreground services to show notifications"/>
+        </service>
+        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver" />
+        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
+        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
+
+
+<!-- <receiver
+    android:name="be.tramckrijte.workmanager.WorkManagerBroadcastReceiver"
+    android:enabled="true"
+    android:exported="true">
     <intent-filter>
-        <action android:name="android.intent.action.BOOT_COMPLETED"/>
-        <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
-        <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-        <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+    </intent-filter>
+</receiver> -->
+
+<service
+    android:name="dev.fluttercommunity.plus.androidalarmmanager.AlarmService"
+    android:permission="android.permission.BIND_JOB_SERVICE"
+    android:exported="false"/>
+<receiver
+    android:name="dev.fluttercommunity.plus.androidalarmmanager.AlarmBroadcastReceiver"
+    android:exported="false"/>
+<receiver
+    android:name="dev.fluttercommunity.plus.androidalarmmanager.RebootBroadcastReceiver"
+    android:enabled="false"
+    android:exported="false">
+    <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
     </intent-filter>
 </receiver>
-<receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver" />
+
     </application>
+        <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
 </manifest>

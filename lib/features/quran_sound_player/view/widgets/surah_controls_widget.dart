@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -58,7 +59,6 @@ class SurahControlsWidget extends StatelessWidget {
                         : const Icon(Icons.play_arrow,size: 37,),
                     onPressed: () {
                       context.read<SurahPlayerCubit>().togglePlayPause();
-                      LocalNotificationService.showMediaNotification();
                     },
                   ),
                 );
@@ -110,6 +110,13 @@ class SurahControlsWidget extends StatelessWidget {
                 icon:  const Icon(size: 20,
                   Icons.download_outlined,color:  Colors.white54,),
                 onPressed: () {
+
+   
+
+
+
+
+                  
                   context.read<SurahPlayerCubit>().downloadSurah();
                 },
               ),IconButton(

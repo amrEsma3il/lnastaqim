@@ -17,60 +17,58 @@ class SibhaView extends StatelessWidget {
 
     return Scaffold(
       appBar: const CustomSibhaAppBar(),
-      body: SafeArea(
-        child: Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(AppImages.azkarBackground))),
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(35.w, 50.h, 35.w, 0.h),
-                child: Container(
-                  height: 117,
-                  width: double.infinity,
-                  decoration: ShapeDecoration(
-                      color: AppColor.white,
-                      shadows: [
-                        BoxShadow(
-                            blurRadius: 21,
-                            color: AppColor.primary.withOpacity(0.6))
-                      ],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      )),
-                  child: Obx(
-                    () => Center(
-                      child: Text(
-                        textController.selectedText.value,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: AppColor.primary,
-                            fontWeight: FontWeight.w700),
-                      ),
+      body: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(fit: BoxFit.cover,
+                image: AssetImage(AppImages.azkarBackground))),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(35.w, 50.h, 35.w, 0.h),
+              child: Container(
+                height: 117,
+                width: double.infinity,
+                decoration: ShapeDecoration(
+                    color: AppColor.white,
+                    shadows: [
+                      BoxShadow(
+                          blurRadius: 21,
+                          color: AppColor.primary.withOpacity(0.6))
+                    ],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    )),
+                child: Obx(
+                  () => Center(
+                    child: Text(
+                      textController.selectedText.value,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 24,
+                          color: AppColor.primary,
+                          fontWeight: FontWeight.w700),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Center(
-                  child: TextButton(
-                      onPressed: () {
-                        Get.toNamed(AppRouteName.sibhaAzkar);
-                      },
-                      child: Text(
-                        "تغيير الذكر",
-                        style: TextStyle(color: AppColor.primary),
-                      )),
-                ),
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30.0),
+              child: Center(
+                child: TextButton(
+                    onPressed: () {
+                      Get.toNamed(AppRouteName.sibhaAzkar);
+                    },
+                    child: Text(
+                      "تغيير الذكر",
+                      style: TextStyle(color: AppColor.primary),
+                    )),
               ),
-              SizedBox(height: 250.h),
-              const CustomSibha()
-            ],
-          ),
+            ),
+            SizedBox(height: 250.h),
+            const CustomSibha()
+          ],
         ),
       ),
     );

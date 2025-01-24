@@ -4,8 +4,12 @@ import 'dart:developer';
 import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:lnastaqim/features/paryer_times/data/models/prayers_time_model.dart';
 import 'package:lnastaqim/features/paryer_times/data/repository/prayers_times_repo.dart';
+
+import '../../../core/utilits/services/location_service.dart';
+import '../../../main.dart';
 
 
 
@@ -21,25 +25,28 @@ static PrayersTimesCubit get(BuildContext context)=>BlocProvider.of<PrayersTimes
   late Timer timer;
 
 
+   static Coordinates myCoordinates = Coordinates(31.053698, 31.409504
+);
 
+
+
+  static CalculationParameters params =
+      PrayersTimesRepo.getCalculationParameters();
+  static PrayersTimeModel prayerTimesModel =
+      PrayersTimesRepo.fetchPrayersTimes(myCoordinates, params);
   fetchPrayersTimes()async{
     log("test from paryer times");
 // Position? position=await LocationService.determinePosition();
-// final myCoordinates = Coordinates(position!.latitude,position.longitude);
-final myCoordinates = Coordinates(31.360835, 31.572778);
 
-  late CalculationParameters params = PrayersTimesRepo.getCalculationParameters();
-
-   PrayersTimeModel prayerTimesModel = PrayersTimesRepo.fetchPrayersTimes(myCoordinates, params);
    emit(prayerTimesModel);
 
-   timer=Timer.periodic(const Duration(minutes: 1), (timer) {  
-log(prayerTimesModel.currentPrayer!.index.toString());
-log(prayerTimesModel.currentPrayer!.name.toString());
+//    timer=Timer.periodic(const Duration(minutes: 1), (timer) {  
+// log(prayerTimesModel.currentPrayer!.index.toString());
+// log(prayerTimesModel.currentPrayer!.name.toString());
 
-    emit(prayerTimesModel);
-           log("-----------------test from paryer times-----------------");
+//     emit(prayerTimesModel);
+//            log("-----------------test from paryer times-----------------");
 
-});
+// });
   }
 }

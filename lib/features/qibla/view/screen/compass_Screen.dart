@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lnastaqim/core/constants/images.dart';
+import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../../paryer_times/bussniess_logic/date_cubit.dart';
@@ -21,6 +22,7 @@ class CompassScreen extends StatelessWidget {
             AppImages.backgroundQibla,
             fit: BoxFit.cover,
             height: double.infinity,
+            width: double.infinity,
           ),
           Align(
             alignment: Alignment.center,
@@ -100,14 +102,14 @@ class CompassScreen extends StatelessWidget {
                           height: 100.h,
                         ),
                         Text(
-                          '${qiblahDirection.offset.toInt()}',
+                          qiblahDirection.offset.toInt().toString().toArabic,
                           style: TextStyle(
-                            fontSize: 25,
+                            fontSize: 25.sp,
                             fontWeight: FontWeight.bold,
                             color: AppColor.primary,
                           ),
                         ),
-                        Text(
+                        Text(textAlign: TextAlign.center,
                           'الاتجاه التقريبي للقبلة \n في الاباجيه ${qiblahDirection.offset.toInt()}',
                           style: TextStyle(
                             fontSize: 15,

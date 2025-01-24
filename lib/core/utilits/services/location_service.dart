@@ -1,40 +1,42 @@
+import 'dart:developer';
+
+import 'package:adhan/adhan.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationService {
-  
- static Future<Position?> determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    // Test if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
-      return Future.error('Location services are disabled.');
+  static Future<Coordinates> determinePosition() async {
+    // التحقق من تفعيل خدمات الموقع
+    if (!await Geolocator.isLocationServiceEnabled()) {
+      throw Exception('خدمات الموقع معطلة. يرجى تفعيلها.');
     }
 
-    permission = await Geolocator.checkPermission();
+    // التحقق من الأذونات
+    LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
     }
 
-    if (permission == LocationPermission.deniedForever ||
-        permission == LocationPermission.denied) {
-      // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+    if (permission == LocationPermission.deniedForever) {
+      throw Exception('تم رفض أذونات الوصول للموقع بشكل دائم.');
     }
 
-//handle stream position
-    if (permission == LocationPermission.whileInUse ||
-        permission == LocationPermission.always) {
-
-      return await Geolocator.getCurrentPosition();
+    if (permission == LocationPermission.denied) {
+      throw Exception('تم رفض أذونات الوصول للموقع.');
     }
- return null;
+
+    // الحصول على الموقع الحالي
+    try {
+
+      Position position=await Geolocator.getCurrentPosition();
+
+   Coordinates   coordinates=Coordinates(position.latitude, position.longitude);
+
+   log(coordinates.latitude.toString());
+      log(coordinates.longitude.toString());
+
+      return coordinates;
+    } catch (e) {
+      throw Exception('حدث خطأ أثناء محاولة الحصول على الموقع: $e');
+    }
   }
-
-
 }
