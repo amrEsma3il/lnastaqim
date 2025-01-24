@@ -6,4 +6,5 @@ class NotificationKeys{
   static const radio ="radio";
     static const quranDownload ="quranDownload";
       static const quranSoundDownload ="quranSoundDownload";
+      static const notificationAndAlarm="notificationAndAlarm";
 }

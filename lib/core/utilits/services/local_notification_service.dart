@@ -1,26 +1,26 @@
 // ignore_for_file: avoid_print
 
 import 'dart:async';
-import 'dart:io';
 import 'dart:math' as ms;
 import 'dart:developer';
 
-import 'package:adhan/adhan.dart';
 // import 'package:alarm/alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
+import '../../../features/notification/bussiness_logic/notification_cubit.dart';
 import '../../../features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
-import '../../../features/paryer_times/data/models/prayers_time_model.dart';
-import '../../../features/paryer_times/data/repository/prayers_times_repo.dart';
-import '../../../features/quran_sound_player/logic/surah_player_cubit/surah_player_cubit.dart';
+
 import '../../../main.dart';
 import '../../local_database/azkar/azkar_local_database.dart';
 import 'audio_service/players_key.dart';
 
 class LocalNotificationService {
+
+  static final NotificationCubit notificationCubit=NotificationCubit();
   static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
@@ -399,51 +399,48 @@ scheduledTime: (currentTimeZone.add(const Duration(minutes: 1))),);
 
 
 //==========================
-static Future<void> initializeAzanNotificationChannel(String sound) async {
-  final AndroidNotificationChannel channel = AndroidNotificationChannel(
-   'azan_channellll_$sound', // قناة جديدة لكل صوت
-    'Prayer Times',
-    description: 'Notification for prayer times with custom sound',
-    importance: Importance.max,
-    sound: RawResourceAndroidNotificationSound(sound),
-  );
 
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(channel);
+static Future<void> setSelectedAzanSound(String sound) async {
+   prefs = await SharedPreferences.getInstance();
+  await prefs.setString('randomAzanSound', sound);
+  log("Selected Azan Sound updated to: $sound");
 }
 
 
+static Future<String> getSavedAzanSound() async {
+   prefs = await SharedPreferences.getInstance();
+  return prefs.getString('randomAzanSound') ?? "azan1"; // الصوت الافتراضي
+}
 
 
-  static Future<void> testAzanSoundOptionsNotification(String sound, ) async {
-  // await cancelNotification(1001001);
-await initializeAzanNotificationChannel(sound);
-    AndroidNotificationDetails android =  AndroidNotificationDetails(
-       'azan_channellll_$sound',
-      'basic notification',
-      channelDescription: "body description",
-      importance: Importance.max,
-      priority: Priority.high,
-      ongoing: true,
-      autoCancel: false,
-     
-      sound: RawResourceAndroidNotificationSound(sound),
-      
-    );
+ static Future<void> testAzanSoundOptionsNotification() async {
+  log("test");
+  String sound = await getSavedAzanSound();
+  await cancelNotification(1001001);
+  await initializeNotificationChannel('azan_channellll_$sound', 'basic notification', sound);
 
-    NotificationDetails details = NotificationDetails(
-      android: android,
-    );
-    await flutterLocalNotificationsPlugin.show(
-      1001001,
-      "اذان",
-      "حان الان موعد صلاة العصر",
-      details,
-      payload: "Payload Data",
-    );
-  }
+  AndroidNotificationDetails android = AndroidNotificationDetails(
+    'azan_channellll_$sound',
+    'basic notification',
+    channelDescription: "body description",
+    importance: Importance.max,
+    priority: Priority.high,
+    ongoing: true,
+    autoCancel: false,
+    sound: RawResourceAndroidNotificationSound(sound),
+  );
+
+  NotificationDetails details = NotificationDetails(
+    android: android,
+  );
+  await flutterLocalNotificationsPlugin.show(
+    1001001,
+    "أذان",
+    "حان الآن موعد صلاة العصر",
+    details,
+    payload: "Payload Data",
+  );
+}
 
 
 
@@ -550,20 +547,54 @@ await initializeAzanNotificationChannel(sound);
   static var maghribTime = parseTime(PrayersTimesCubit.prayerTimesModel.maghrib);
   static var ishaTime = parseTime(PrayersTimesCubit.prayerTimesModel.isha);
 
+
+
+
+  static Future<void> initializeNotificationChannel(String id,String name,String sound) async {
+  final AndroidNotificationChannel channel = AndroidNotificationChannel(
+   id, // قناة جديدة لكل صوت
+    name,
+    description: 'Notification for prayer times with custom sound',
+    importance: Importance.max,
+    sound: RawResourceAndroidNotificationSound(sound),
+  );
+
+
+        await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+}
+
+
+
   static Future<void> showSalahNabiNotification() async{
-    NotificationDetails details = const NotificationDetails(
+
+ prefs = await SharedPreferences.getInstance();
+ String sound= prefs.getString('salahNabiNotificationSound') ?? "salah_mohamed"; // الصوت الافتراضي
+
+
+String id="salahNabiNotification$sound";
+String name="salahNabiNotification";
+
+log(sound);
+
+await cancelNotification(30101);
+    await initializeNotificationChannel(id,name,sound);
+    NotificationDetails details =  NotificationDetails(
       android: AndroidNotificationDetails(
-        'channel_id',
-        'channel_name',
+        id,
+        name,
         importance: Importance.max,
         priority: Priority.high,
+        ongoing: true,
         sound:
-            RawResourceAndroidNotificationSound('salahnabi'),
+             RawResourceAndroidNotificationSound(sound),
              groupKey: 'salahNabi'
       ),
     );
   await  flutterLocalNotificationsPlugin.show(
-        0,
+        30101,
         'ذكر النبي',
         'اللهم صل وسلم وزد وبارك على نبينا وحبيبنا محمد.',
         payload: 'basic notification',
@@ -617,16 +648,30 @@ Future.delayed(exactDelay, () async {
 
 
   static Future<void> salahFajrNotification() async {
+
+ prefs = await SharedPreferences.getInstance();
+ String sound= prefs.getString('fajarAlarmSound') ?? "ahmed_eltrabolsy_fajr"; // الصوت الافتراضي
+
+
+String id="fajarAlarmSound$sound";
+String name="fajarAlarmSound";
+
+log(sound);
+
+await cancelNotification(5);
+    await initializeNotificationChannel(id,name,sound);
+
+
+
     NotificationDetails details = NotificationDetails(
         android: AndroidNotificationDetails(
                     groupKey: "paryers",
 
-            'salahFajr', 'Daily Shduled notification',
-            importance: Importance.max,
+     id,name,            importance: Importance.max,
             priority: Priority.high,
                 audioAttributesUsage: AudioAttributesUsage.alarm,
             sound:
-                RawResourceAndroidNotificationSound('azhan5'.split('.').first),
+                RawResourceAndroidNotificationSound(sound),
             ));
     tz.initializeTimeZones();
     tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
@@ -658,17 +703,32 @@ await scheduleNotificationCancellationAt(id: 5,scheduledTime: shduledTime,curren
   }
 
   static Future<void> salahDuhrNotification()async {
+
+
+ prefs = await SharedPreferences.getInstance();
+ String sound= prefs.getString('duharAlarmSound') ?? "ali_elmola"; // الصوت الافتراضي
+
+
+String id="duharAlarmSound$sound";
+String name="duharAlarmSound";
+
+log(sound);
+
+await cancelNotification(50);
+    await initializeNotificationChannel(id,name,sound);
+
+
     NotificationDetails details = NotificationDetails(
         android: AndroidNotificationDetails(
                     groupKey: "paryers",
 
-            'salahDuhr', 'Daily Shduled notification',
+                 id,name,
             importance: Importance.max,
             priority: Priority.high,
                               audioAttributesUsage: AudioAttributesUsage.alarm,
   
             sound:
-                RawResourceAndroidNotificationSound('azhan5'.split('.').first),
+                RawResourceAndroidNotificationSound(sound),
             ));
     tz.initializeTimeZones();
     tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
@@ -702,17 +762,34 @@ await scheduleNotificationCancellationAt(id: 5,scheduledTime: shduledTime,curren
   }
 
   static Future<void> salahAsrNotification() async{
+
+
+ prefs = await SharedPreferences.getInstance();
+ String sound= prefs.getString('asrAlarmSound') ?? "ali_elmola"; // الصوت الافتراضي
+
+
+String id="asrAlarmSound$sound";
+String name="asrAlarmSound";
+
+log(sound);
+
+await cancelNotification(500);
+    await initializeNotificationChannel(id,name,sound);
+
+
+
+
     NotificationDetails details = NotificationDetails(
         android: AndroidNotificationDetails(
                     groupKey: "paryers",
 
-            'salahAsr', 'Daily Shduled notification',
+                 id,name,
             importance: Importance.max,
             priority: Priority.high,
                                 audioAttributesUsage: AudioAttributesUsage.alarm,
 
             sound:
-                RawResourceAndroidNotificationSound('azhan5'.split('.').first),
+                RawResourceAndroidNotificationSound(sound),
             ));
     tz.initializeTimeZones();
     tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
@@ -746,17 +823,42 @@ await scheduleNotificationCancellationAt(id: 5,scheduledTime: shduledTime,curren
   }
 
   static Future<void> salahMagribNotification() async{
+
+
+
+
+ prefs = await SharedPreferences.getInstance();
+ String sound= prefs.getString('maghribAlarmSound') ?? "ali_elmola"; // الصوت الافتراضي
+
+
+String id="maghribAlarmSound$sound";
+String name="maghribAlarmSound";
+
+log(sound);
+
+await cancelNotification(5000);
+    await initializeNotificationChannel(id,name,sound);
+
+
+
+
+
+
+
+
+
+
     NotificationDetails details = NotificationDetails(
         android: AndroidNotificationDetails(
                     groupKey: "paryers",
 
-            'salahMagrib', 'Daily Shduled notification',
+                 id,name,
             importance: Importance.max,
             priority: Priority.high,
                            audioAttributesUsage: AudioAttributesUsage.alarm,
      
             sound:
-                RawResourceAndroidNotificationSound('azhan5'.split('.').first),
+                RawResourceAndroidNotificationSound(sound),
             ));
     tz.initializeTimeZones();
     tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
@@ -790,16 +892,39 @@ await    flutterLocalNotificationsPlugin.zonedSchedule(
   }
 
   static Future<void> salahIshaNotification()async {
+
+
+
+
+ prefs = await SharedPreferences.getInstance();
+ String sound= prefs.getString('ishaAlarmSound') ?? "ali_elmola"; // الصوت الافتراضي
+
+
+String id="ishaAlarmSound$sound";
+String name="ishaAlarmSound";
+
+log(sound);
+
+await cancelNotification(50000);
+    await initializeNotificationChannel(id,name,sound);
+
+
+
+
+
+
+
+
     NotificationDetails details = NotificationDetails(
         android: AndroidNotificationDetails(
           groupKey: "paryers",
-            'salahIsha', 'Daily Shduled notification',
+           id,name,
             importance: Importance.max,
             priority: Priority.high,
                              audioAttributesUsage: AudioAttributesUsage.alarm,
    
             sound:
-                RawResourceAndroidNotificationSound('azhan5'.split('.').first),
+                RawResourceAndroidNotificationSound(sound),
             ));
     tz.initializeTimeZones();
     tz.setLocalLocation(tz.getLocation('Africa/Cairo'));

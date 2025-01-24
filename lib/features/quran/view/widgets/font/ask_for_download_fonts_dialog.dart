@@ -59,7 +59,7 @@ class AskForDownloadFontsDialog extends StatelessWidget {
 
                         await   context.read<FontDownloadPercentage>().downloadFonts();
 
-                        Get.offAllNamed(AppRouteName.home);
+                        Get.offAllNamed(AppRouteName.layout);
                         Get.toNamed(AppRouteName.moshaf);
                         //   Get.toNamed(AppRouteName.moshaf);
                       },
@@ -69,7 +69,7 @@ class AskForDownloadFontsDialog extends StatelessWidget {
                       )),
                   TextButton(
                       onPressed: () {
-                        Get.offAllNamed(AppRouteName.home);
+                        Get.offAllNamed(AppRouteName.layout);
                       },
                       child: Text(
                         'الصفحة الرئيسية',

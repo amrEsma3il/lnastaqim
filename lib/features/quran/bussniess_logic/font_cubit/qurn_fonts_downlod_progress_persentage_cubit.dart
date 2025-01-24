@@ -69,7 +69,7 @@ class FontDownloadPercentage extends Cubit<FontDownloadState> {
                 if (state.isFinished ) {
 
                   log("انا برا يباشا");
-                  Get.offAllNamed(AppRouteName.home);
+                  Get.offAllNamed(AppRouteName.layout);
                   Get.toNamed(AppRouteName.moshaf);
                 }
               
@@ -88,7 +88,7 @@ class FontDownloadPercentage extends Cubit<FontDownloadState> {
                 if (state.isFinished ) {
 
                   log("انا برا يباشا");
-                  Get.offAllNamed(AppRouteName.home);
+                  Get.offAllNamed(AppRouteName.layout);
                   Get.toNamed(AppRouteName.moshaf);
                 }
               

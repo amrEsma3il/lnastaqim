@@ -29,6 +29,8 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   adhan: ^2.0.0+1
+  alarm: ^3.0.3
+  android_alarm_manager_plus: ^3.0.1
   audio_service: ^0.18.16
   audioplayers: ^4.0.0
   cached_network_image: 3.3.1
@@ -118,6 +120,7 @@ flutter:
     - assets/images/notification_largeIcon.png
     - assets/images/notification_bigPicture.png
     - assets/sounds/
+    - assets/sounds/notification_and_alarms/
     - assets/sounds/azhan.mp3
     - assets/sounds/salahnabi.mp3
 

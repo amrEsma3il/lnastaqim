@@ -74,6 +74,9 @@ class _HomeViewState extends State<HomeView> {
                             child: GestureDetector(
                               onTap: () async {
                                 Get.toNamed(AppRouteName.notification);
+//  await LocalNotificationService.setSelectedAzanSound("azan1");
+
+                                // await WorkManagerService().registerTestChangeSoundTimeTask();
                             // await    LocalNotificationService.testAzanSoundOptionsNotification("azan3");
 
                             //  await LocalNotificationService.testSechduleCancelNotification() ;
@@ -140,6 +143,9 @@ class _HomeViewState extends State<HomeView> {
                           GestureDetector(
                             onTap: ()async {
                               scaffoldKey.currentState!.openEndDrawer();
+
+    // await WorkManagerService().cancelTask("uniquetestChangeSoundTimeTask");
+                                  // await WorkManagerService().registerTestChangeSoundTimeTask();
                               //  await    LocalNotificationService.testAzanSoundOptionsNotification("azan4");
                               // await LocalNotificationService.testCancelNotificationAutoAfterShow() ;
                             },

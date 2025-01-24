@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../bussiness_logic/notification_cubit.dart';
@@ -25,9 +26,9 @@ class AzkarNotification extends StatelessWidget {
                 return Transform.scale(
                   scale: 0.8,
                   child: Switch(
-                    value: context.read<NotificationCubit>().isAzkarNotification,
-                    onChanged: (value) {
-                      context.read<NotificationCubit>().changeAzkarNotification();
+                    value: state.morningAndEviningNotificationStatus,
+                    onChanged: (value) async {
+                  await    context.read<NotificationCubit>().changeAzkarNotificationStatus();
                     },
                     activeColor: AppColor.white,
                     activeTrackColor: AppColor.primary,
@@ -39,38 +40,39 @@ class AzkarNotification extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 10),
-        if (context.read<NotificationCubit>().isAzkarNotification) ...{
+         SizedBox(height: 4.h),
+      
           BlocBuilder<NotificationCubit, NotificationState>(
             builder: (context, state) {
-              int? time = state is ChangeNotificationTime ? state.durationInMinutes : null;
-              return Column(
+              
+              int? time = state.morningAndEviningNotificationFrequancy;
+              return state.morningAndEviningNotificationStatus? Column(
                 children: [
                   Text(
-                    'مدة التكرار: ${time?.toString() ?? "15"} دقائق',
-                    style: TextStyle(fontSize: 16, color: Colors.black),
+                    'مدة التكرار: ${time.toString()} دقائق',
+                    style: const TextStyle(fontSize: 16, color: Colors.black),
                   ),
                   Slider(
                     min: 15,
-                    max: 240,
-                    divisions: 12,
+                    max: 120,
+                    divisions: 8,
                     activeColor: AppColor.blueTint2,
                     label: time.toString(),
-                    value: (time?.toDouble() ?? 15),
+                    value: (time.toDouble()),
                     onChanged: (double value) {
-                    context.read<NotificationCubit>().changeNotificationTime(value.toInt());
+                    context.read<NotificationCubit>().onChangeSliderEvent(azkarNotificationFrequancy: value.toInt());
                     },
                     onChangeEnd: (double value) {
-                      if (context.read<NotificationCubit>().isAzkarNotification) {
-                  context.read<NotificationCubit>().reScheduleNotification(value.toInt());
+                      if (state.morningAndEviningNotificationStatus) {
+     context.read<NotificationCubit>().changeAzkarNotificationFrequancy(value.toInt());
                       }
                     },
                   ),
                 ],
-              );
+              ):const SizedBox.shrink();
             },
           ),
-        }
+        
       ],
     );
   }

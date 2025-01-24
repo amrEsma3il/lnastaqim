@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'dart:ui';
 import 'package:adhan/adhan.dart';
+import 'package:alarm/alarm.dart';
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -198,6 +200,7 @@ void main() async {
 
   await Future.wait([
     WorkManagerService().init(),
+        Alarm.init()
   ]);
 
   await requestStoragePermission();
@@ -400,7 +403,7 @@ class Lnastaqim extends StatelessWidget {
             ),
             // Provide the NotificationCubit
             BlocProvider(
-              create: (context) => NotificationCubit(WorkManagerService()),
+              create: (context) => NotificationCubit(),
             ),
             BlocProvider(
               create: (context) => OverlayNoteControlCubit(), //FontCubit

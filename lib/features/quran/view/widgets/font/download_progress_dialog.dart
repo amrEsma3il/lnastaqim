@@ -48,7 +48,7 @@ class DownloadProgressDialog extends StatelessWidget {
                 if (getState.isFinished ) {
 
                   log("انا برا يباشا");
-                  Get.offAllNamed(AppRouteName.home);
+                  Get.offAllNamed(AppRouteName.layout);
                   Get.toNamed(AppRouteName.moshaf);
                 }
               }
@@ -62,7 +62,7 @@ class DownloadProgressDialog extends StatelessWidget {
             )),
             TextButton(
                 onPressed: () {
-                  Get.offAllNamed(AppRouteName.home);
+                  Get.offAllNamed(AppRouteName.layout);
                 },
                 child: Text(
                   'الصفحة الرئيسية',

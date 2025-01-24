@@ -70,7 +70,7 @@ class MoshafView extends StatelessWidget {
  QuranCubit.get(context).clearScreen(context);
            if ( !await FontDownloadPercentage().checkAnyChapterDownloaded()) {
         log(".......");
-                  Get.offAllNamed(AppRouteName.home);
+                  Get.offAllNamed(AppRouteName.layout);
           }else{
                     log("....back...");
 

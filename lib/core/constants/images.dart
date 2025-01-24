@@ -1,6 +1,7 @@
 class AppImages {
   static const String rootImages = "assets/images";
 static const String rootSvgs="assets/svgs";
+
   static const String pattern = '$rootImages/pattern.png';
   static const String madania = '$rootImages/madania.png';
   static const String kaaba = '$rootImages/Kaaba.png';
