@@ -416,7 +416,7 @@ class Lnastaqim extends StatelessWidget {
 //               create: (context) => FontCubit(),
 //             ),
             BlocProvider(
-              create: (context) => DateCubit()..getDates(),
+              create: (context) => DateCubit(),
             ),
 
             BlocProvider(
@@ -430,7 +430,7 @@ class Lnastaqim extends StatelessWidget {
             ), //
             BlocProvider(
                 create: (BuildContext context) =>
-                    PrayersTimesCubit()..fetchPrayersTimes()),
+                    PrayersTimesCubit()),
             BlocProvider(
                 create: (BuildContext context) =>
                     AzkarDetailsCubit()..getAzkarDetails()),

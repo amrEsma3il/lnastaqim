@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
@@ -15,6 +17,8 @@ class PrayersStepper extends StatelessWidget {
     // final cubit=BlocProvider.of<PrayersTimesCubit>(context);
     return BlocBuilder<PrayersTimesCubit, PrayersTimeModel>(
       builder: (context, paryerState) {
+
+              log("test from stepper"+paryerState.isha);
         return Row(
           children: [
             StepperItem(
@@ -83,6 +87,7 @@ class StepperItem extends StatelessWidget {
               // log("===============index=====");
               // log(paryerState.currentPrayer!.index!.toString());
               // log(paryerState.currentPrayer!.name!.toString());
+            log("test from stepper 2 "+paryerState.isha);
               return Row(
                 children: [
                   isFirst

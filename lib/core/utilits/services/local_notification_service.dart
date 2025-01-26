@@ -5,6 +5,7 @@ import 'dart:math' as ms;
 import 'dart:developer';
 
 // import 'package:alarm/alarm.dart';
+import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +15,8 @@ import 'package:timezone/timezone.dart' as tz;
 import '../../../features/notification/bussiness_logic/notification_cubit.dart';
 import '../../../features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
 
+import '../../../features/paryer_times/data/models/prayers_time_model.dart';
+import '../../../features/paryer_times/data/repository/prayers_times_repo.dart';
 import '../../../main.dart';
 import '../../local_database/azkar/azkar_local_database.dart';
 import 'audio_service/players_key.dart';
@@ -541,11 +544,22 @@ static Future<String> getSavedAzanSound() async {
     return TimeOfDay(hour: hour, minute: minute);
   }
 
-  static var fajrTime = parseTime(PrayersTimesCubit.prayerTimesModel.fajr);
-  static var dhuhrTime = parseTime(PrayersTimesCubit.prayerTimesModel.dhuhr);
-  static var asrTime = parseTime(PrayersTimesCubit.prayerTimesModel.asr);
-  static var maghribTime = parseTime(PrayersTimesCubit.prayerTimesModel.maghrib);
-  static var ishaTime = parseTime(PrayersTimesCubit.prayerTimesModel.isha);
+
+static testImmutability(){
+
+
+  log("testImmutability =>   8");
+}
+
+
+
+
+  //  final CalculationParameters params =
+  //     PrayersTimesRepo.getCalculationParameters();
+  
+
+  
+
 
 
 
@@ -647,8 +661,10 @@ Future.delayed(exactDelay, () async {
 
 
 
-  static Future<void> salahFajrNotification() async {
+   Future<void> salahFajrNotification() async {
 
+final String fajr=PrayersTimesCubit().paryerTimesModel.fajr;
+ final fajrTime = parseTime(fajr);
  prefs = await SharedPreferences.getInstance();
  String sound= prefs.getString('fajarAlarmSound') ?? "ahmed_eltrabolsy_fajr"; // الصوت الافتراضي
 
@@ -702,9 +718,10 @@ await scheduleNotificationCancellationAt(id: 5,scheduledTime: shduledTime,curren
   
   }
 
-  static Future<void> salahDuhrNotification()async {
+   Future<void> salahDuhrNotification()async {
 
-
+final String duhar=PrayersTimesCubit().paryerTimesModel.fajr;
+ final dhuhrTime = parseTime(duhar);
  prefs = await SharedPreferences.getInstance();
  String sound= prefs.getString('duharAlarmSound') ?? "ali_elmola"; // الصوت الافتراضي
 
@@ -761,8 +778,9 @@ await cancelNotification(50);
 
   }
 
-  static Future<void> salahAsrNotification() async{
-
+   Future<void> salahAsrNotification() async{
+final String asr=PrayersTimesCubit().paryerTimesModel.fajr;
+ final asrTime = parseTime(asr);
 
  prefs = await SharedPreferences.getInstance();
  String sound= prefs.getString('asrAlarmSound') ?? "ali_elmola"; // الصوت الافتراضي
@@ -822,10 +840,11 @@ await cancelNotification(500);
    
   }
 
-  static Future<void> salahMagribNotification() async{
+   Future<void> salahMagribNotification() async{
 
 
-
+final String maghrib=PrayersTimesCubit().paryerTimesModel.fajr;
+ final maghribTime = parseTime(maghrib);
 
  prefs = await SharedPreferences.getInstance();
  String sound= prefs.getString('maghribAlarmSound') ?? "ali_elmola"; // الصوت الافتراضي
@@ -891,9 +910,10 @@ await    flutterLocalNotificationsPlugin.zonedSchedule(
     
   }
 
-  static Future<void> salahIshaNotification()async {
+   Future<void> salahIshaNotification()async {
 
-
+final String isha=PrayersTimesCubit().paryerTimesModel.fajr;
+ final ishaTime = parseTime(isha);
 
 
  prefs = await SharedPreferences.getInstance();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 import 'package:lnastaqim/features/calender/view/widgets/calender_days_name.dart';
@@ -105,7 +106,7 @@ class _CustomHijriCalendarState extends State<CustomHijriCalendar> {
     final now = HijriCalendar.now();
 
     return Container(
-      height: 330,
+      height: 342.h,
       margin: const EdgeInsets.all(15),
       decoration: ShapeDecoration(
         color: AppColor.white,
