@@ -50,7 +50,7 @@ class _CustomSibhaState extends State<CustomSibha>
     setState(() {
       _isSpinning = true;
     });
-    _animationController.repeat();
+   _animationController.repeat();
   }
 
   void _stopSpinning() {
@@ -119,10 +119,13 @@ class _CustomSibhaState extends State<CustomSibha>
                   Expanded(
                     flex: 3,
                     child: Transform.rotate(
-                      origin: Offset(-30.w,0.h),
+                      origin:  Offset(
+                        -((MediaQuery.of(context).size.width - 350.w) / 2), // يحسب المركز النسبي للصورة
+                        0,
+                      ),
                       alignment: Alignment.center,
                       angle:
-                          _animationController.value * 2.5 * 3.141592653589793,
+                          _animationController.value * 1.5 * 3.141592653589793,
                       child: Image.asset(color: AppColor.blueTint2,
                         'assets/images/sibha.png', // Replace with your image asset path
                         width: 350.w,

@@ -16,7 +16,7 @@ class CustomSibhaAppBar extends StatelessWidget implements PreferredSizeWidget {
               title: Padding(padding:  EdgeInsets.only(bottom: 15.h,top: 5.h),child: Text(
                 "المسبحة الالكترونية",
                 style: TextStyle(
-                  fontSize: 25.sp,
+                  fontSize: 23.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),

@@ -74,56 +74,54 @@ class A7adithScreen extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Expanded(
-                    child: ListView.separated(
-                      itemBuilder: (context, index) {
-                        return SizedBox(
-                          width: double.infinity,
-                          child: SizedBox(
-                            height: 50,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
+                  child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      return SizedBox(
+                        width: double.infinity,
+                        child: SizedBox(
+                          height: 50,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (
                                     context,
-                                    MaterialPageRoute(
-                                        builder: (
-                                      context,
-                                    ) =>
-                                            A7adithDetails(
-                                              id: index + 1,
-                                            )));
-                              },
-                              child: Card(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 10),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        state.hadiths[0].chapters![index]
-                                            .arabic!,
-                                        style: const TextStyle(
-                                            fontFamily: 'Arab140',
-                                            fontSize: 15),
-                                        textAlign: TextAlign.right,
-                                      ),
-                                      const Spacer(),
-                                      const Icon(Icons.arrow_drop_down),
-                                    ],
-                                  ),
+                                  ) =>
+                                          A7adithDetails(
+                                            id: index + 1,
+                                          )));
+                            },
+                            child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      state.hadiths[0].chapters![index]
+                                          .arabic!,
+                                      style: const TextStyle(
+                                          fontFamily: 'Arab140',
+                                          fontSize: 15),
+                                      textAlign: TextAlign.right,
+                                    ),
+                                    const Spacer(),
+                                    const Icon(Icons.arrow_drop_down),
+                                  ],
                                 ),
                               ),
                             ),
                           ),
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          width: 20,
-                        );
-                      },
-                      itemCount: state.hadiths[0].chapters!.length,
-                    ),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(
+                        width: 20,
+                      );
+                    },
+                    itemCount: state.hadiths[0].chapters!.length,
                   ),
                 ),
               ),

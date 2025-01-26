@@ -39,24 +39,24 @@ initListeners(){
 
 
   if (state == PlayerState.playing) {
-        LocalNotificationService.showMediaNotification(
-              groupKey: "radio",
+        // LocalNotificationService.showMediaNotification(
+        //       groupKey: "radio",
 
-          isPlaying: true,
-          id: 31,
-          keyFeature: NotificationKeys.radio,
+        //   isPlaying: true,
+        //   id: 31,
+        //   keyFeature: NotificationKeys.radio,
          
-          title: currentChannel!.title??"قناة الرحمة");
+        //   title: currentChannel!.title??"قناة الرحمة");
        emit( this.state.copyWith(isPlaying: true, ));
       } else {
-            LocalNotificationService.showMediaNotification(
-                  groupKey: "radio",
+          //   LocalNotificationService.showMediaNotification(
+          //         groupKey: "radio",
 
-          isPlaying: false,
-          id: 31,
-          keyFeature: NotificationKeys.radio,
+          // isPlaying: false,
+          // id: 31,
+          // keyFeature: NotificationKeys.radio,
          
-          title: currentChannel!.title??"قناة الرحمة");
+          // title: currentChannel!.title??"قناة الرحمة");
  emit( this.state.copyWith(isPlaying: false, playingUrl: null));
       }
 
