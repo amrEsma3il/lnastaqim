@@ -176,29 +176,30 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
 
       dev.log("=====الحالة اتغيرت ======${state.name}");
       if (state == PlayerState.playing) {
-        LocalNotificationService.showMediaNotification(
-            groupKey: "quran",
-          isPlaying: true,
-          id: 30,
-          keyFeature: NotificationKeys.quranPlayer,
-          body: this.state.reciter.nameArabic,
-          title: quranSurahs[this.state.surahNumber]!
-        );
+        // LocalNotificationService.showMediaNotification(
+        //     groupKey: "quran",
+        //   isPlaying: true,
+        //   id: 30,
+        //   keyFeature: NotificationKeys.quranPlayer,
+        //   body: this.state.reciter.nameArabic,
+        //   title: quranSurahs[this.state.surahNumber]!
+        // );
        emit( this.state.copyWith(isPlaying: true, isPaused: false));
 
 
          dev.log("${this.state.isPlaying}=====الحالة اتغيرت ====تيست== تشغيل");
       } else {
 
-        LocalNotificationService.showMediaNotification(
-            groupKey: "quran",
-          isPlaying: false,
+        // LocalNotificationService.showMediaNotification(
+        //     groupKey: "quran",
+        //   isPlaying: false,
           
-          id: 30,
-          keyFeature: NotificationKeys.quranPlayer,
-          body: this.state.reciter.nameArabic,
-            title: quranSurahs[this.state.surahNumber]!
-        );
+        //   id: 30,
+        //   keyFeature: NotificationKeys.quranPlayer,
+        //   body: this.state.reciter.nameArabic,
+        //     title: quranSurahs[this.state.surahNumber]!
+        // );
+       
         emit(this.state.copyWith(isPlaying: false, isPaused: true));
 
          dev.log("${this.state.isPlaying}=====الحالة اتغيرت ====تيست== ايقاف");
