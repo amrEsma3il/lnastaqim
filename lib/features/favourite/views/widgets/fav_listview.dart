@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 import 'package:lnastaqim/features/favourite/data/models/favourite_model.dart';
 import 'package:lnastaqim/features/favourite/views/widgets/favourite_item.dart';
@@ -23,9 +24,9 @@ class FavListView extends StatelessWidget {
                 : "لا يوجد احاديث في المفضلة!",
             style:  TextStyle(
               color: AppColor.primary,
-              fontSize: 30,
+              fontSize: 21.sp,
               fontFamily: "naskh",
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w600,
             ),
           ))
         : ListView.builder(

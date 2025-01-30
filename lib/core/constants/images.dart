@@ -41,12 +41,13 @@ static const String rootSvgs="assets/svgs";
   static const String notificationScreenBackground =
       '$rootImages/notification_background.png';
 
-  static const String storyFeature = '$rootImages/story_feature_icon.svg';
+  static const String radioFeature = '$rootImages/radio_feature_icon.svg';
   static const String qiblaFeature = '$rootImages/qibla_feature_icon.svg';
   static const String quranFeature = '$rootImages/quran_feature_icon.svg';
   static const String sibhaFeature = '$rootImages/azkar_feature_icon.svg';
   static const String listenFeature = '$rootImages/listen_feature_icon.svg';
   static const String ahadesFeature = '$rootImages/ahades_feature_icon.svg';
+  static const mosqueFindFeature = '$rootImages/mosque_feature.svg';
 
   //hadith
   static const String bukariImage = '$rootImages/bukari.png';
@@ -67,7 +68,7 @@ static const String rootSvgs="assets/svgs";
   static const mosque = '$rootImages/mosque.svg';
 
   //quibla
-  static const backgroundQibla = '$rootImages/qibla_background.jpg';
+  static const backgroundQibla = '$rootImages/qibla_background.jpg';//assets/images/mosque_find.png
 
 
 

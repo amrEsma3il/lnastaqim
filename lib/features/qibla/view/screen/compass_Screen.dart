@@ -115,7 +115,7 @@ class CompassScreen extends StatelessWidget {
                             ),
                           ),
                           Text(textAlign: TextAlign.center,
-                            'الاتجاه التقريبي للقبلة \n في الاباجيه ${qiblahDirection.offset.toInt()}',
+                            'الاتجاه التقريبي للقبلة \n في الاباجيه ${qiblahDirection.offset.toInt()}'.toArabic,
                             style: TextStyle(
                               fontSize: 15,
                               color: AppColor.blueBlack,

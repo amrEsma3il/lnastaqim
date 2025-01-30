@@ -99,6 +99,7 @@ emit(state.copyWith(salahNabiNotificationStatus: !state.salahNabiNotificationSta
    await   _workManagerService.registersalahNabiTask(state.salahNabiNotificationFrequancy);
     } else {
         log("cancel");
+        await LocalNotificationService.cancelNotification(30101);
    await   _workManagerService.cancelTask('uniquesalahNabiTask');
     }
     
@@ -116,6 +117,8 @@ emit(state.copyWith(morningAndEviningNotificationStatus: !state.morningAndEvinin
     if (state.morningAndEviningNotificationStatus) {
    await   _workManagerService.registerMoringAndEveningAzkarTask(state.morningAndEviningNotificationFrequancy);
     } else {
+              await LocalNotificationService.cancelNotification(2);
+
    await   _workManagerService.cancelTask('uniquemorningAndEveningTask');
     }
     
@@ -131,6 +134,8 @@ Future<void> changeFajrParyerNotificationStatus() async {
   if (state.fajarAlarmStatus) {
     await _workManagerService.registerFajrParyerTimeTask();
   } else {
+            await LocalNotificationService.cancelNotification(5);
+
     await _workManagerService.cancelTask('uniquefajrparyerTimeTask');
   }
 }
@@ -147,6 +152,8 @@ Future<void> changeDuharParyerNotificationStatus() async {
   if (state.duharAlarmStatus) {
     await _workManagerService.registerDuharParyerTimeTask();
   } else {
+            await LocalNotificationService.cancelNotification(50);
+
     await _workManagerService.cancelTask('uniqueduharparyerTimeTask');
   }
 }
@@ -161,6 +168,8 @@ Future<void> changeAsrParyerNotificationStatus() async {
   if (state.asrAlarmStatus) {
     await _workManagerService.registerAsrParyerTimeTask();
   } else {
+            await LocalNotificationService.cancelNotification(500);
+
     await _workManagerService.cancelTask('uniqueasrparyerTimeTask');
   }
 }
@@ -176,6 +185,8 @@ Future<void> changeMaghribParyerNotificationStatus() async {
   if (state.maghribAlarmStatus) {
     await _workManagerService.registerMaghribParyerTimeTask();
   } else {
+            await LocalNotificationService.cancelNotification(5000);
+
     await _workManagerService.cancelTask('uniquemaghribparyerTimeTask');
   }
 }
@@ -192,6 +203,8 @@ Future<void> changeIshaParyerNotificationStatus() async {
   if (state.ishaAlarmStatus) {
     await _workManagerService.registerIshaParyerTimeTask();
   } else {
+            await LocalNotificationService.cancelNotification(50000);
+
     await _workManagerService.cancelTask('uniqueishaparyerTimeTask');
   }
 }

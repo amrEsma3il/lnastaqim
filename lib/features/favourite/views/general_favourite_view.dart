@@ -41,7 +41,7 @@ class _GeneralFavouriteViewState extends State<GeneralFavouriteView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: 40,
+              height: 60.h,
               decoration: ShapeDecoration(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),

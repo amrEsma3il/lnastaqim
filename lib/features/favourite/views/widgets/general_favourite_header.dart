@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 
 class GeneralFavouriteHeader extends StatelessWidget {
@@ -21,10 +22,10 @@ class GeneralFavouriteHeader extends StatelessWidget {
           onTap: onTap,
           child: Text(
             title,
-            style: TextStyle(fontSize: 13,fontWeight: FontWeight.w600,color: AppColor.primary),
+            style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.w600,color: AppColor.primary),
           ),
         ),
-        const Spacer(),
+        SizedBox(height: 5.h,),
         Visibility(
           visible: isVisible,
           child:  SizedBox(

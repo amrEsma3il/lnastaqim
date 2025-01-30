@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 
@@ -37,7 +38,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: true,
         title: Text(
           title,
-          style: const TextStyle(
+          style:  TextStyle(
+            fontSize: 26.sp,
               fontFamily: 'Authmanic',
               color: Colors.white,
               fontWeight: FontWeight.w600),

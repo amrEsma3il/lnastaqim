@@ -112,21 +112,21 @@ void actionTask() {
   Workmanager().executeTask((taskName, inputData) async {
     if (taskName == "fajrparyerTimeTask") {
       log("test from paryerTimeTask");
-  await    LocalNotificationService().salahFajrNotification();
+  await    LocalNotificationService.salahFajrNotification();
   
     } else  if (taskName == "duharparyerTimeTask") {
       log("test from paryerTimeTask");
-   await   LocalNotificationService().salahDuhrNotification();
+   await   LocalNotificationService.salahDuhrNotification();
     }else  if (taskName == "asrparyerTimeTask") {
       log("test from paryerTimeTask");
-   await   LocalNotificationService().salahAsrNotification();
+   await   LocalNotificationService.salahAsrNotification();
     }else  if (taskName == "maghribparyerTimeTask") {
       log("test from paryerTimeTask");
-   await   LocalNotificationService().salahMagribNotification();
+   await   LocalNotificationService.salahMagribNotification();
     }
     else  if (taskName == "ishaparyerTimeTask") {
       log("test from paryerTimeTask");
-   await   LocalNotificationService().salahIshaNotification();
+   await   LocalNotificationService.salahIshaNotification();
     }
     
     

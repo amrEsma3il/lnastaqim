@@ -35,7 +35,8 @@
         android:label="lnastaqim"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:enableOnBackInvokedCallback="true">
         <service android:name=".core.StreamingCore"/>
         <activity
             android:name=".MainActivity"
