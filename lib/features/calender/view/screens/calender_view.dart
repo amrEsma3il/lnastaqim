@@ -62,14 +62,11 @@ class _CalenderViewState extends State<CalenderView> {
             ),
           ),
           Visibility(
-            visible: _isGre,
-            child: CustomCalender(
+            replacement: CustomHijriCalendar(
               onDaySelected: (value) {},
             ),
-          ),
-          Visibility(
-            visible: _isHijri,
-            child: CustomHijriCalendar(
+            visible: _isGre,
+            child: CustomCalender(
               onDaySelected: (value) {},
             ),
           ),

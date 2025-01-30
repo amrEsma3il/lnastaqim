@@ -48,11 +48,6 @@ class _LayoutState extends State<Layout> {
 
   void _onNavBarItemTapped(int index) async{
 
-   if (index==1) {
-      await LocalNotificationService.setSelectedAzanSound("azan3");
-   } else {
-      await LocalNotificationService.setSelectedAzanSound("azan4");
-   } 
     setState(() {
       _currentIndex = index;
     });

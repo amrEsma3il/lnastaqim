@@ -4,7 +4,7 @@ import 'package:adhan/adhan.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationService {
-  static Future<Coordinates> determinePosition() async {
+  static Future<Position> determinePosition() async {
     // التحقق من تفعيل خدمات الموقع
     if (!await Geolocator.isLocationServiceEnabled()) {
       throw Exception('خدمات الموقع معطلة. يرجى تفعيلها.');
@@ -27,14 +27,14 @@ class LocationService {
     // الحصول على الموقع الحالي
     try {
 
-      Position position=await Geolocator.getCurrentPosition();
+      Position position=await Geolocator.getCurrentPosition(desiredAccuracy:LocationAccuracy.bestForNavigation );
 
-   Coordinates   coordinates=Coordinates(position.latitude, position.longitude);
+  //  Coordinates   coordinates=Coordinates(position.latitude, position.longitude);
 
-   log(coordinates.latitude.toString());
-      log(coordinates.longitude.toString());
+  //  log(coordinates.latitude.toString());
+  //     log(coordinates.longitude.toString());
 
-      return coordinates;
+      return position;
     } catch (e) {
       throw Exception('حدث خطأ أثناء محاولة الحصول على الموقع: $e');
     }

@@ -4,8 +4,9 @@ import 'package:get/get.dart';
 import 'package:lnastaqim/core/constants/images.dart';
 import 'package:lnastaqim/features/home/data/models/feature_model.dart';
 import 'package:lnastaqim/features/home/views/widgets/feature_item.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
+import '../../../../core/utilits/services/map_service.dart';
 import '../../../quran/bussniess_logic/font_cubit/font_cubit.dart';
 import '../../../quran/bussniess_logic/font_cubit/font_loader_test.dart';
 
@@ -17,30 +18,42 @@ class FeaturesGridView extends StatelessWidget {
         text: "القران",
         image: AppImages.quranFeature,
         route: AppRouteName.moshaf),
+           FeatureModel(
+        text: "سماع القرءان",
+        image: AppImages.listenFeature,
+        route: AppRouteName.surahPlayerScreen),
+         FeatureModel(
+        text: "الراديو",
+        image: AppImages.radioFeature,
+        route: AppRouteName.radio),
+         FeatureModel(
+        text: "الأحاديث",
+        image: AppImages.ahadesFeature,
+        route: AppRouteName.a7adithView),
+        FeatureModel(
+        text: "اكتشاف المساجد",
+        image: AppImages.mosqueFindFeature,
+        ),
+         FeatureModel(
+        text: "القبلة",
+        image: AppImages.qiblaFeature,
+        route: AppRouteName.qibla),
+        
     FeatureModel(
         text: "السبحة",
         image: AppImages.sibhaFeature,
         route: AppRouteName.sibhaView),
-    FeatureModel(
-        text: "الأحاديث",
-        image: AppImages.ahadesFeature,
-        route: AppRouteName.a7adithView),
+   
     FeatureModel(
         text: "الأذكار",
         image: AppImages.azkarIc,
         route: AppRouteName.azkarView),
-    FeatureModel(
-        text: "القبلة",
-        image: AppImages.qiblaFeature,
-        route: AppRouteName.qibla),
-    FeatureModel(
-        text: "الراديو",
-        image: AppImages.storyFeature,
-        route: AppRouteName.radio),
-         FeatureModel(
-        text: "سماع القرءان",
-        image: AppImages.listenFeature,
-        route: AppRouteName.surahPlayerScreen),
+          
+   
+   
+      
+        
+         
   ];//surahPlayerScreen
 
   @override
@@ -57,8 +70,12 @@ class FeaturesGridView extends StatelessWidget {
           items.length,
           (item) => GestureDetector(
               onTap: ()async {
-                Get.toNamed(items[item].route ?? AppRouteName.home);
-            // items[item].text=="القران"?    FontCubit.getFontCubit(context).loadFont(604):null;
+              if (items[item].text == "اكتشاف المساجد") {
+    await MapUtils.openGoogleMapsForMosques();
+    Get.back();
+  } else {
+    Get.offAndToNamed(items[item].route ?? AppRouteName.home);
+  }
 
               },
               child: FeatureItem(

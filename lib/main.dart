@@ -9,8 +9,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:hive_flutter/adapters.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';import 'package:hive_flutter/adapters.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:lnastaqim/config/routing/app_routes_info/app_routes_name.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
@@ -171,7 +171,7 @@ void notificationTapBackground(
 late SharedPreferences prefs;
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-Coordinates? coordinates;
+Position? position;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -182,7 +182,7 @@ void main() async {
   );
 
   prefs = await SharedPreferences.getInstance();
-  coordinates =await LocationService.determinePosition();
+  position =await LocationService.determinePosition();
   await Hive.initFlutter();
 
   Hive.registerAdapter(BookmarkModelAdapter());

@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,16 +9,9 @@ import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
 import 'package:lnastaqim/features/home/views/widgets/custom_drawer.dart';
 
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
-import '../../../../core/utilits/services/audio_service/audio_players.dart';
-import '../../../../core/utilits/services/audio_service/players_key.dart';
-import '../../../../core/utilits/services/local_notification_service.dart';
-import '../../../../core/utilits/services/work_manager_service.dart';
-import '../../../../main.dart';
+
 import '../../../paryer_times/bussniess_logic/date_cubit.dart';
-import '../../../paryer_times/bussniess_logic/prayers_times_cubit.dart';
 import '../../../paryer_times/view/widgets/prayers_stepper.dart';
-import '../../../quran/bussniess_logic/font_cubit/font_cubit.dart';
-import '../../../quran/bussniess_logic/font_cubit/font_loader_test.dart';
 import '../../../quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
 import '../../../quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_state.dart';
 import '../../../quran/bussniess_logic/quran/quran_cubit.dart';
@@ -75,58 +67,6 @@ class _HomeViewState extends State<HomeView> {
                             child: GestureDetector(
                               onTap: () async {
                                 Get.toNamed(AppRouteName.notification);
-//  await LocalNotificationService.setSelectedAzanSound("azan1");
-
-                                // await WorkManagerService().registerTestChangeSoundTimeTask();
-                            // await    LocalNotificationService.testAzanSoundOptionsNotification("azan3");
-
-                            //  await LocalNotificationService.testSechduleCancelNotification() ;
-                            // await LocalNotificationService.cancelNotification(1001001);
-                              
-                                //FontCubit
-
-// bool isFontExixit=await FontService.getfontServiceInstance().checkfileExisit();
-
-// log("font exist? = ${isFontExixit}");
-
-// await LocalNotificationService.showMediaNotification(isPlaying: true);
-
-//                                 // await FontService.getfontServiceInstance().downloadFont();
-//                                 // await FontService.getfontServiceInstance()
-//                                 //     .loadFont("009");
-
-// log(Get.height.toInt().toString());
-
-// log(Get.width.toString());
-
-// log(2.04.h.toString());
-
-
-// final AudioPlayer audioPlayer1 =
-//       AudioPlayers().getPlayer(NotificationKeys.quranPlayer);
-//       final AudioPlayer audioPlayer1Repeat =
-//       AudioPlayers().getPlayer(NotificationKeys.quranPlayer);
-
-// log(audioPlayer1.playerId);
-// log("========================");
-// log(audioPlayer1Repeat.playerId);
-// log("========================");
-// log((audioPlayer1.playerId==audioPlayer1Repeat.playerId).toString());
-
-
-// log("show all players");
-
-//   AudioPlayers().showAllPlayers();
-
-
-
-// WorkManagerService().changeSalahNabiDurationTo25m();
-// await LocalNotificationService.cancelNotification(00);
-// prefs.setBool("quranFintsSownload", false);
-
-                                    log("=======================================================================================================================================================================");
-                                    //   FontCubit.getFontCubit(context)
-                                    // .listFilesInDirectory();
 
                               },
                               child: const Icon(
@@ -145,12 +85,6 @@ class _HomeViewState extends State<HomeView> {
                             onTap: ()async {
                               scaffoldKey.currentState!.openEndDrawer();
 
-                              // PrayersTimesCubit.get(context).fetchPrayersTimes();
-
-    // await WorkManagerService().cancelTask("uniquetestChangeSoundTimeTask");
-                                  // await WorkManagerService().registerTestChangeSoundTimeTask();
-                              //  await    LocalNotificationService.testAzanSoundOptionsNotification("azan4");
-                              // await LocalNotificationService.testCancelNotificationAutoAfterShow() ;
                             },
                             child: const Icon(
                               Icons.menu,

@@ -22,11 +22,11 @@ getDates();
   
 void getDates() {
   DateTime now = DateTime.now();
-  HijriDate hijriDate =
+ final HijriDate hijriDate =
       DateTimeService.gregorianToHijri(now.year, now.month, now.day);
 
-  String newGregorian = DateTimeService.formatgreGorianDate(now).toArabic;
-  String newHijri = DateTimeService.formatHijriDate(hijriDate).toArabic;
+ final String newGregorian = DateTimeService.formatgreGorianDate(now).toArabic;
+final  String newHijri = DateTimeService.formatHijriDate(hijriDate).toArabic;
 
   if (state["gregorian"] != newGregorian || state["hijri"] != newHijri) {
     emit({
