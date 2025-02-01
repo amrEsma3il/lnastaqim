@@ -1,5 +1,6 @@
 class AppRouteName {
-  static const String layout = '/';
+  static const String splash = '/';
+  static const String layout = '/layout';
   static const String home = "/home";
   static const String quranSowar = "/quran";
   static const String soraDetails = "/soradetail";

@@ -25,9 +25,16 @@ import '../../../features/quran/view/screens/moshaf_view.dart';
 import '../../../features/quran_sound_player/view/screens/surah_player_screen.dart';
 import '../../../features/radio_stream_channels/view/pages/radio_screen.dart';
 import '../../../features/sibha/views/screens/sibha_view.dart';
+import '../../../features/splash/view/screens/splash_screen.dart';
 import '../app_routes_info/app_routes_name.dart';
 
 List<GetPage<dynamic>>? routes = [
+
+    GetPage(
+      page: () => const SplashScreen(),
+      name: AppRouteName.splash,
+      transition: Transition.noTransition,
+     ),
   GetPage(
       page: () => const Layout(),
       name: AppRouteName.layout,

@@ -43,6 +43,8 @@ class AppColor {
   static Color white2 = const Color(0xffeaeef5);
   static Color blueBlack = const Color(0xff13153B);
     static Color blueBlack2 = const Color.fromARGB(255, 31, 34, 79);
+        static Color primaryBlueColor ="#0D347E".toColor;
+
 
 
   static Color yellow1 = "#ebb734".toColor; //#

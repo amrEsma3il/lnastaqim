@@ -93,4 +93,10 @@ static const earthFlag= '$rootFlags/earth_flag.svg';
 static const yemenFlag= '$rootFlags/yemen_flag.svg';
 static const unknownFlag= '$rootFlags/unknown_flag.svg';
 
+
+//splash
+
+static const splash= '$rootImages/app_icon.png';
+
+
 }

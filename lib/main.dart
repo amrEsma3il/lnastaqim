@@ -200,7 +200,7 @@ void main() async {
 
   await Future.wait([
     WorkManagerService().init(),
-        Alarm.init()
+        // Alarm.init()
   ]);
 
   await requestStoragePermission();
@@ -324,7 +324,7 @@ void main() async {
   runApp(const Lnastaqim());
 
   await FontDownloadPercentage().checkAnyChapterDownloaded()
-      ? await FontDownloadPercentage().loadFontsIndividually()
+      ? await FontDownloadPercentage().loadFontsIndividually(start: 603,end:0 )
       : null;
 }
 

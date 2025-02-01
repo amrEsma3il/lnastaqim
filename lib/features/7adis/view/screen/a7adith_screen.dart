@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:lnastaqim/core/constants/images.dart';
 import 'package:lnastaqim/features/7adis/bussiness_logic/a7adith_cubit.dart';
 import 'package:lnastaqim/features/7adis/bussiness_logic/a7adiths_state.dart';
@@ -10,7 +12,8 @@ import 'a7adith_details.dart';
 import 'main_a7adith.dart';
 
 class A7adithScreen extends StatelessWidget {
-  const A7adithScreen({super.key});
+  const A7adithScreen({super.key, required this.bookName});
+  final String bookName;
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +25,68 @@ class A7adithScreen extends StatelessWidget {
           } else if (state is HadithDownloadProgress) {
             return Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  CircularPercentIndicator(
-                    radius: 120.0, // You can adjust the size
-                    lineWidth: 10.0, // Thickness of the circular line
-                    percent: state.progress,
-                    center: Text(
-                      '${(state.progress * 100).toStringAsFixed(0)}%',
-                      style: const TextStyle(fontSize: 24.0),
+                  Padding(
+                    padding:  EdgeInsets.only(right: 10.w,top: 15.h),
+                    child: Align(alignment: Alignment.topRight,
+                      child: IconButton(onPressed: () {
+                        Get.back();
+                      }, icon: Icon(Icons.arrow_back,size: 31,color: 
+                      AppColor.primaryBlueColor,)),
                     ),
-                    progressColor: AppColor.blueColor, // Change color as needed
-                    backgroundColor: Colors.grey[200]!, // Background color
+                  ),
+                  const SizedBox(height: 150,),
+                  Expanded(
+                    child: Center(
+                      child: CircularPercentIndicator(
+                        radius: 120.0, // You can adjust the size
+                        lineWidth: 10.0, // Thickness of the circular line
+                        percent: bookName == "bukhari"
+                            ? state.progressBukhari
+                            : bookName == "muslim"
+                                ? state.progressMuslim
+                                : bookName == "abudawod"
+                                    ? state.progressAbuDawud
+                                    : bookName == "nasai"
+                                        ? state.progressNasai
+                                        : bookName == "tirmidhi"
+                                            ? state.progressTirmidhi
+                                            : bookName == "ibnmajah"
+                                                ? state.progressIbnmajah
+                                                : bookName == "darimi"
+                                                    ? state.progressDarimi
+                                                    : bookName == "malik"
+                                                        ? state.progressMalik
+                                                        : bookName == "ahmed"
+                                                            ? state.progressAhmed
+                                                            : 0.0,
+                        center: Text(
+                          '${((bookName == "bukhari"
+                            ? state.progressBukhari
+                            : bookName == "muslim"
+                                ? state.progressMuslim
+                                : bookName == "abudawod"
+                                    ? state.progressAbuDawud
+                                    : bookName == "nasai"
+                                        ? state.progressNasai
+                                        : bookName == "tirmidhi"
+                                            ? state.progressTirmidhi
+                                            : bookName == "ibnmajah"
+                                                ? state.progressIbnmajah
+                                                : bookName == "darimi"
+                                                    ? state.progressDarimi
+                                                    : bookName == "malik"
+                                                        ? state.progressMalik
+                                                        : bookName == "ahmed"
+                                                            ? state.progressAhmed
+                                                            : 0.0) * 100).toStringAsFixed(0)}%',
+                          style: const TextStyle(fontSize: 24.0),
+                        ),
+                        progressColor: AppColor.blueColor, // Change color as needed
+                        backgroundColor: Colors.grey[200]!, // Background color
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -99,11 +152,9 @@ class A7adithScreen extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Text(
-                                      state.hadiths[0].chapters![index]
-                                          .arabic!,
+                                      state.hadiths[0].chapters![index].arabic!,
                                       style: const TextStyle(
-                                          fontFamily: 'Arab140',
-                                          fontSize: 15),
+                                          fontFamily: 'Arab140', fontSize: 15),
                                       textAlign: TextAlign.right,
                                     ),
                                     const Spacer(),

@@ -28,7 +28,7 @@ static PrayersTimesCubit get(BuildContext context)=>BlocProvider.of<PrayersTimes
   late Timer timer;
 
 
-   static Coordinates myCoordinates = Coordinates(31.053698, 31.409504
+   static Coordinates myCoordinates = Coordinates(position!.latitude, position!.longitude
 );
 
 
@@ -43,8 +43,7 @@ static PrayersTimesCubit get(BuildContext context)=>BlocProvider.of<PrayersTimes
     // إعادة حساب أوقات الصلاة بناءً على الوقت الحالي
     final params = PrayersTimesRepo.getCalculationParameters();
     final newPrayerTimesModel =
-        PrayersTimesRepo.fetchPrayersTimes(Coordinates(31.053698, 31.409504
-), params);
+        PrayersTimesRepo.fetchPrayersTimes(myCoordinates, params);
 
     log("Current prayer index: ${newPrayerTimesModel.currentPrayer?.index}");
     log("Current prayer name: ${newPrayerTimesModel.currentPrayer?.name}");

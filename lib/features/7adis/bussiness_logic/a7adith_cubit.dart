@@ -9,60 +9,94 @@ import '../data/model/a7adith_model.dart';
 import 'a7adiths_state.dart';
 
 class HadithCubit extends Cubit<HadithState> {
-  HadithCubit() : super(HadithInitial());
-
-  Future<void> bukhariHadithsCubit(BuildContext context) async {
-
-
-      try {
-        emit(HadithLoading());
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        bool fileExists = prefs.getBool('fileExists') ?? false;
-        log(fileExists.toString());
-        if (!fileExists) {
-          await downloadHadithFiles(
-            "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/the_9_books/bukhari.json",
-            "bukhari.json",
-            onProgress: (progress) {
-              print("Download progress: $progress");
-              emit(HadithDownloadProgress(progress));
-            },
-          );
-          await prefs.setBool('fileExists', true);
-        }
-        A7adithModel? hadiths = await getBukhariHadiths();
-
-        if (hadiths != null) {
-          emit(HadithLoaded([hadiths]));
-        } else {
-          emit(HadithError("No Hadiths found"));
-        }
-      } catch (e) {
-        emit(HadithError("Failed to download or load Hadiths: $e"));
-      }
-     
+  HadithCubit() : super(HadithInitial()){
+     HadithDownloadProgress.initial() ;
   }
 
+   double progressBukhari=0;
+    double progressMuslim=0;
+    double progressAbuDawud=0;
+    double progressTirmidhi=0;
+    double progressNasai=0;
+    double progressIbnmajah=0;
+    double progressMalik=0;
+    double progressDarimi=0;
+    double progressAhmed=0;
+
+   
+Future<void> bukhariHadithsCubit(BuildContext context) async {
+   emit(HadithLoading());
+  try {
+   
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    bool fileExists = prefs.getBool('bukhariHadith') ?? false;
+
+    log("Bukhari file exists: $fileExists");
+    log("Bukhari progress: $progressBukhari");
+
+    if (!fileExists && progressBukhari == 0) {
+      await downloadHadithFiles(
+        "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/the_9_books/bukhari.json",
+        "bukhari.json",
+        onProgress: (progress) async {
+          print("Download progress: $progress");
+
+          // حفظ progress في SharedPreferences لمنع إعادة التحميل من الصفر
+         progressBukhari=progress;
+
+          if (state is HadithDownloadProgress) {
+            emit((state as HadithDownloadProgress).copyWith(progressBukhari: progress));
+          } else {
+            emit(HadithDownloadProgress.initial().copyWith(progressBukhari: progress));
+          }
+        },
+      );
+
+      // عند انتهاء التحميل، نحفظ الملف كأنه موجود ونضبط progress على 100%
+      await prefs.setBool('bukhariHadith', true);
+progressBukhari=100;    }
+
+    A7adithModel? hadiths = await getBukhariHadiths();
+    if (hadiths != null) {
+      emit(HadithLoaded([hadiths]));
+    } else {
+      emit(HadithError("No Hadiths found"));
+    }
+  } catch (e) {
+    emit(HadithError("Failed to download or load Hadiths: $e"));
+  }
+}
   Future<void> muslimHadithsCubit(BuildContext context) async {
     // bool permissionGranted = await requestStoragePermission();
 
-    
+  emit(HadithLoading());  
       try {
-        emit(HadithLoading());
+        
         SharedPreferences muslimPref = await SharedPreferences.getInstance();
         bool fileMuslimExists = muslimPref.getBool('muslimHadith') ?? false;
         log(fileMuslimExists.toString());
+  
 
-        if (!fileMuslimExists) {
+
+    if (!fileMuslimExists && progressMuslim == 0) {
           await downloadHadithFiles(
             "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/the_9_books/muslim.json",
             "muslim.json",
             onProgress: (progress) {
-              print("Download progress: $progress");
-              emit(HadithDownloadProgress(progress));
-            },
+          print("Download progress: $progress");
+          progressMuslim=progress;
+          if (state is HadithDownloadProgress) {
+            // استخدام copyWith لتحديث progressIbnmajah فقط
+            emit((state as HadithDownloadProgress).copyWith(progressMuslim: progress));
+          } else {
+            // إنشاء حالة جديدة من HadithDownloadProgress بالقيم الابتدائية مع تحديث progressIbnmajah
+            emit(HadithDownloadProgress.initial().copyWith(progressMuslim: progress));
+          }
+        },
           );
           await muslimPref.setBool('muslimHadith', true);
+            progressMuslim=100;
         }
         A7adithModel? hadiths = await getMuslimHadiths();
 
@@ -80,24 +114,32 @@ class HadithCubit extends Cubit<HadithState> {
   }
 
   Future<void> abuDawudHadithsCubit(BuildContext context) async {
-
+emit(HadithLoading());
       try {
-        emit(HadithLoading());
         SharedPreferences abuDawudPrefs = await SharedPreferences.getInstance();
         bool fileAbuDawudExists =
             abuDawudPrefs.getBool('abudawudHadith') ?? false;
         log(fileAbuDawudExists.toString());
 
-        if (!fileAbuDawudExists) {
+
+    if (!fileAbuDawudExists && progressAbuDawud==0)
+         {
           await downloadHadithFiles(
             "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/the_9_books/abudawud.json",
             "abudawud.json",
-            onProgress: (progress) {
-              print("Download progress: $progress");
-              emit(HadithDownloadProgress(progress));
-            },
+            onProgress: (progress){
+          print("Download progress: $progress");
+          if (state is HadithDownloadProgress) {
+            // استخدام copyWith لتحديث progressIbnmajah فقط
+            emit((state as HadithDownloadProgress).copyWith(progressAbuDawud: progress));
+          } else {
+            // إنشاء حالة جديدة من HadithDownloadProgress بالقيم الابتدائية مع تحديث progressIbnmajah
+            emit(HadithDownloadProgress.initial().copyWith(progressAbuDawud: progress));
+          }
+        },
           );
           await abuDawudPrefs.setBool('abudawudHadith', true);
+          progressAbuDawud=100;
         }
         A7adithModel? hadiths = await getAbuDawudHadiths();
 
@@ -111,198 +153,273 @@ class HadithCubit extends Cubit<HadithState> {
       }
    
   }
-
-  Future<void> tirmidhiHadithsCubit(BuildContext context) async {
-
-      try {
-        emit(HadithLoading());
-        SharedPreferences tirmidhiPrefs = await SharedPreferences.getInstance();
-        bool filetirmidhiExists =
-            tirmidhiPrefs.getBool('tirmidhiHadith') ?? false;
-        log(filetirmidhiExists.toString());
-
-        if (!filetirmidhiExists) {
-          await downloadHadithFiles(
-            "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/the_9_books/tirmidhi.json",
-            "tirmidhi.json",
-            onProgress: (progress) {
-              print("Download progress: $progress");
-              emit(HadithDownloadProgress(progress));
-            },
-          );
-          await tirmidhiPrefs.setBool('tirmidhiHadith', true);
-        }
-        A7adithModel? hadiths = await getTirmidhiHadiths();
-
-        if (hadiths != null) {
-          emit(HadithLoaded([hadiths]));
-        } else {
-          emit(HadithError("No Hadiths found"));
-        }
-      } catch (e) {
-        emit(HadithError("Failed to download or load Hadiths: $e"));
-      }
-   
-  }
-
-  Future<void> nasaiHadithsCubit(BuildContext context) async {
-
-      try {
-        emit(HadithLoading());
-        SharedPreferences nasaiPrefs = await SharedPreferences.getInstance();
-        bool filenasaiExists = nasaiPrefs.getBool('nasaiHadith') ?? false;
-        log(filenasaiExists.toString());
-
-        if (!filenasaiExists) {
-          await downloadHadithFiles(
-            "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/the_9_books/nasai.json",
-            "nasai.json",
-            onProgress: (progress) {
-              print("Download progress: $progress");
-              emit(HadithDownloadProgress(progress));
-            },
-          );
-          await nasaiPrefs.setBool('nasaiHadith', true);
-        }
-        A7adithModel? hadiths = await getNasaiHadiths();
-
-        if (hadiths != null) {
-          emit(HadithLoaded([hadiths]));
-        } else {
-          emit(HadithError("No Hadiths found"));
-        }
-      } catch (e) {
-        emit(HadithError("Failed to download or load Hadiths: $e"));
-      }
-  
-  }
-
-  Future<void> ibnmajahHadithsCubit(BuildContext context) async {
-  
-      try {
-        emit(HadithLoading());
-        SharedPreferences ibnmajahPrefs = await SharedPreferences.getInstance();
-        bool fileibnmajahExists =
-            ibnmajahPrefs.getBool('ibnmajahHadith') ?? false;
-        log(fileibnmajahExists.toString());
-
-        if (!fileibnmajahExists) {
-          await downloadHadithFiles(
-            "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/the_9_books/ibnmajah.json",
-            "ibnmajah.json",
-            onProgress: (progress) {
-              print("Download progress: $progress");
-              emit(HadithDownloadProgress(progress));
-            },
-          );
-          await ibnmajahPrefs.setBool('ibnmajahHadith', true);
-        }
-        A7adithModel? hadiths = await getIbnmajahHadiths();
-
-        if (hadiths != null) {
-          emit(HadithLoaded([hadiths]));
-        } else {
-          emit(HadithError("No Hadiths found"));
-        }
-      } catch (e) {
-        emit(HadithError("Failed to download or load Hadiths: $e"));
-      }
-  
-  }
-
-  Future<void> malikHadithsCubit(BuildContext context) async {
-
-      try {
-        emit(HadithLoading());
-        SharedPreferences malikPrefs = await SharedPreferences.getInstance();
-        bool filemalikExists = malikPrefs.getBool('malikHadith') ?? false;
-        log(filemalikExists.toString());
-
-        if (!filemalikExists) {
-          await downloadHadithFiles(
-            "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/the_9_books/malik.json",
-            "malik.json",
-            onProgress: (progress) {
-              print("Download progress: $progress");
-              emit(HadithDownloadProgress(progress));
-            },
-          );
-          await malikPrefs.setBool('malikHadith', true);
-        }
-        A7adithModel? hadiths = await getMalikHadiths();
-
-        if (hadiths != null) {
-          emit(HadithLoaded([hadiths]));
-        } else {
-          emit(HadithError("No Hadiths found"));
-        }
-      } catch (e) {
-        emit(HadithError("Failed to download or load Hadiths: $e"));
-      }
-  
-  }
-
-  Future<void> darimiHadithsCubit(BuildContext context) async {
-
-      try {
-        emit(HadithLoading());
-        SharedPreferences darimiPrefs = await SharedPreferences.getInstance();
-        bool filedarimiExists = darimiPrefs.getBool('darimiHadith') ?? false;
-        log(filedarimiExists.toString());
-
-        if (!filedarimiExists) {
-          await downloadHadithFiles(
-            "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/the_9_books/darimi.json",
-            "darimi.json",
-            onProgress: (progress) {
-              print("Download progress: $progress");
-              emit(HadithDownloadProgress(progress));
-            },
-          );
-          await darimiPrefs.setBool('darimiHadith', true);
-        }
-        A7adithModel? hadiths = await getdarimiHadiths();
-
-        if (hadiths != null) {
-          emit(HadithLoaded([hadiths]));
-        } else {
-          emit(HadithError("No Hadiths found"));
-        }
-      } catch (e) {
-        emit(HadithError("Failed to download or load Hadiths: $e"));
-      }
+Future<void> tirmidhiHadithsCubit(BuildContext context) async {
+  emit(HadithLoading());
+  try {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     
+    bool fileExists = prefs.getBool('tirmidhiHadith') ?? false;
+ 
+
+    log("Tirmidhi file exists: $fileExists");
+   
+
+    if (!fileExists &&   progressTirmidhi==0) {
+      await downloadHadithFiles(
+        "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/the_9_books/tirmidhi.json",
+        "tirmidhi.json",
+        onProgress: (progress) async {
+          print("Download progress: $progress");
+          progressTirmidhi=progress;
+
+          // حفظ progress في SharedPreferences لمنع إعادة التحميل من الصفر
+
+          if (state is HadithDownloadProgress) {
+            emit((state as HadithDownloadProgress).copyWith(progressTirmidhi: progress));
+          } else {
+            emit(HadithDownloadProgress.initial().copyWith(progressTirmidhi: progress));
+          }
+        },
+      );
+          progressTirmidhi=100;
+
+      // عند انتهاء التحميل، نحفظ الملف كأنه موجود ونضبط progress على 100%
+      await prefs.setBool('tirmidhiHadith', true);
+    }
+
+    A7adithModel? hadiths = await getTirmidhiHadiths();
+    if (hadiths != null) {
+      emit(HadithLoaded([hadiths]));
+    } else {
+      emit(HadithError("No Hadiths found"));
+    }
+  } catch (e) {
+    emit(HadithError("Failed to download or load Hadiths: $e"));
   }
+}
 
-  Future<void> ahmedHadithsCubit(BuildContext context) async {
+Future<void> nasaiHadithsCubit(BuildContext context) async {
+  emit(HadithLoading());
+  try {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    
+    bool fileExists = prefs.getBool('nasaiHadith') ?? false;
 
-      try {
-        emit(HadithLoading());
-        SharedPreferences ahmedPrefs = await SharedPreferences.getInstance();
-        bool fileahmedExists = ahmedPrefs.getBool('ahmedHadith') ?? false;
-        log(fileahmedExists.toString());
+    log("Nasai file exists: $fileExists");
 
-        if (!fileahmedExists) {
-          await downloadHadithFiles(
-            "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/the_9_books/ahmed.json",
-            "ahmed.json",
-            onProgress: (progress) {
-              print("Download progress: $progress");
-              emit(HadithDownloadProgress(progress));
-            },
-          );
-          await ahmedPrefs.setBool('ahmedHadith', true);
-        }
-        A7adithModel? hadiths = await getahmedHadiths();
+    if (!fileExists &&   progressNasai==0) {
+      await downloadHadithFiles(
+        "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/the_9_books/nasai.json",
+        "nasai.json",
+        onProgress: (progress) async {
+          print("Download progress: $progress");
 
-        if (hadiths != null) {
-          emit(HadithLoaded([hadiths]));
-        } else {
-          emit(HadithError("No Hadiths found"));
-        }
-      } catch (e) {
-        emit(HadithError("Failed to download or load Hadiths: $e"));
-      }
+          // حفظ progress في SharedPreferences لمنع إعادة التحميل من الصفر
+          progressNasai=progress;
+
+          if (state is HadithDownloadProgress) {
+            emit((state as HadithDownloadProgress).copyWith(progressNasai: progress));
+          } else {
+            emit(HadithDownloadProgress.initial().copyWith(progressNasai: progress));
+          }
+        },
+      );
+
+      // عند انتهاء التحميل، نحفظ الملف كأنه موجود ونضبط progress على 100%
+      await prefs.setBool('nasaiHadith', true);
+          progressNasai=100;
+    }
+
+    A7adithModel? hadiths = await getNasaiHadiths();
+    if (hadiths != null) {
+      emit(HadithLoaded([hadiths]));
+    } else {
+      emit(HadithError("No Hadiths found"));
+    }
+  } catch (e) {
+    emit(HadithError("Failed to download or load Hadiths: $e"));
+  }
+}
+
+
+Future<void> ibnmajahHadithsCubit(BuildContext context) async {
+  emit(HadithLoading());
+  try {
+   
+    SharedPreferences ibnmajahPrefs = await SharedPreferences.getInstance();
+    bool fileibnmajahExists = ibnmajahPrefs.getBool('ibnmajahHadith') ?? false;
+    log(fileibnmajahExists.toString());
+
+
+    if (!fileibnmajahExists &&progressIbnmajah==0) {
+      await downloadHadithFiles(
+        "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/the_9_books/ibnmajah.json",
+        "ibnmajah.json",
+        onProgress: (progress) {
+                    progressIbnmajah=progress;
+
+          print("Download progress: $progress");
+          if (state is HadithDownloadProgress) {
+            // استخدام copyWith لتحديث progressIbnmajah فقط
+            emit((state as HadithDownloadProgress).copyWith(progressIbnmajah: progress));
+          } else {
+            // إنشاء حالة جديدة من HadithDownloadProgress بالقيم الابتدائية مع تحديث progressIbnmajah
+            emit(HadithDownloadProgress.initial().copyWith(progressIbnmajah: progress));
+          }
+        },
+      );
+      await ibnmajahPrefs.setBool('ibnmajahHadith', true);
+                progressIbnmajah=100;
+
+    }
+
+    A7adithModel? hadiths = await getIbnmajahHadiths();
+
+    if (hadiths != null) {
+      emit(HadithLoaded([hadiths]));
+    } else {
+      emit(HadithError("No Hadiths found"));
+    }
+  } catch (e) {
+    emit(HadithError("Failed to download or load Hadiths: $e"));
+  }
+}
+
+
+Future<void> malikHadithsCubit(BuildContext context) async {
+     emit(HadithLoading());
+  try {
+ 
+    SharedPreferences malikPrefs = await SharedPreferences.getInstance();
+    bool filemalikExists = malikPrefs.getBool('malikHadith') ?? false;
+    log(filemalikExists.toString());
+
+   
+
+    if (!filemalikExists && progressMalik==0) {
+      await downloadHadithFiles(
+        "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/the_9_books/malik.json",
+        "malik.json",
+        onProgress: (progress) {
+                    progressMalik=progress;
+
+          print("Download progress: $progress");
+          if (state is HadithDownloadProgress) {
+            // تحديث progressMalik فقط باستخدام copyWith
+            emit((state as HadithDownloadProgress).copyWith(progressMalik: progress));
+          } else {
+            // إنشاء حالة جديدة مع تحديث progressMalik فقط
+            emit(HadithDownloadProgress.initial().copyWith(progressMalik: progress));
+          }
+        },
+      );
+      await malikPrefs.setBool('malikHadith', true);
+                progressMalik=100;
+
+    }
+
+    A7adithModel? hadiths = await getMalikHadiths();
+
+    if (hadiths != null) {
+      emit(HadithLoaded([hadiths]));
+    } else {
+      emit(HadithError("No Hadiths found"));
+    }
+  } catch (e) {
+    emit(HadithError("Failed to download or load Hadiths: $e"));
+  }
+}
+
+Future<void> darimiHadithsCubit(BuildContext context) async {
+  emit(HadithLoading());
+  try {
+   
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    bool fileExists = prefs.getBool('darimiHadith') ?? false;
   
+
+    log("Darimi file exists: $fileExists");
+ 
+
+    if (!fileExists &&  progressDarimi==0) {
+      await downloadHadithFiles(
+        "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/the_9_books/darimi.json",
+        "darimi.json",
+        onProgress: (progress) async {
+          print("Download progress: $progress");
+
+          // حفظ progress في SharedPreferences لمنع إعادة التحميل من الصفر
+                    progressDarimi=progress;
+
+
+          if (state is HadithDownloadProgress) {
+            emit((state as HadithDownloadProgress).copyWith(progressDarimi: progress));
+          } else {
+            emit(HadithDownloadProgress.initial().copyWith(progressDarimi: progress));
+          }
+        },
+      );
+
+      // عند انتهاء التحميل، نحفظ الملف كأنه موجود ونضبط progress على 100%
+      await prefs.setBool('darimiHadith', true);
+                progressDarimi=100;
+
+    }
+
+    A7adithModel? hadiths = await getdarimiHadiths();
+    if (hadiths != null) {
+      emit(HadithLoaded([hadiths]));
+    } else {
+      emit(HadithError("No Hadiths found"));
+    }
+  } catch (e) {
+    emit(HadithError("Failed to download or load Hadiths: $e"));
   }
+}
+
+Future<void> ahmedHadithsCubit(BuildContext context) async {
+  emit(HadithLoading());
+  try {
+    
+    SharedPreferences ahmedPrefs = await SharedPreferences.getInstance();
+    bool fileAhmedExists = ahmedPrefs.getBool('ahmedHadith') ?? false;
+    log(fileAhmedExists.toString());
+
+
+    if (!fileAhmedExists && progressAhmed == 0) {
+      
+     
+      await downloadHadithFiles(
+        "https://raw.githubusercontent.com/AhmedBaset/hadith-json/main/db/by_book/the_9_books/ahmed.json",
+        "ahmed.json",
+        onProgress: (progress) {
+                    progressAhmed=progress;
+
+          print("Download progress: $progress");
+          if (state is HadithDownloadProgress) {
+            emit((state as HadithDownloadProgress).copyWith(progressAhmed: progress));
+          } else {
+            emit(HadithDownloadProgress.initial().copyWith(progressAhmed: progress));
+          }
+        },
+      );
+      await ahmedPrefs.setBool('ahmedHadith', true);
+                progressAhmed=100;
+
+    }
+
+    A7adithModel? hadiths = await getahmedHadiths();
+
+    if (hadiths != null) {
+      emit(HadithLoaded([hadiths]));
+    } else {
+      emit(HadithError("No Hadiths found"));
+    }
+  } catch (e) {
+    emit(HadithError("Failed to download or load Hadiths: $e"));
+  }
+}
+
+
 }
