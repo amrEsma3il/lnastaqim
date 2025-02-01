@@ -74,7 +74,7 @@ class FeaturesGridView extends StatelessWidget {
     await MapUtils.openGoogleMapsForMosques();
     Get.back();
   } else {
-    Get.offAndToNamed(items[item].route ?? AppRouteName.home);
+    Get.toNamed(items[item].route ?? AppRouteName.home);
   }
 
               },

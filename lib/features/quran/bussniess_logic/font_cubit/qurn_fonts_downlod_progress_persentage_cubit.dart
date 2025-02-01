@@ -275,8 +275,8 @@ class FontDownloadPercentage extends Cubit<FontDownloadState> {
 
 //===================================
 
-  Future<void> loadFontsIndividually() async {
-    for (var i = 603; i >= 0; i--) {
+  Future<void> loadFontsIndividually({required int start,required int end}) async {
+    for (var i = start; i >= end; i--) {
       String fontNum = (i + 1).toString().padLeft(3, '0');
 
       if (loadedFonts.containsKey(fontNum)) {

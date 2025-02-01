@@ -45,11 +45,12 @@ dependencies:
   firebase_crashlytics: ^4.1.0
   flutter:
     sdk: flutter
+  flutter_animate: ^4.5.2
   flutter_bloc: ^8.1.4
   flutter_local_notifications: null
   flutter_localizations:
     sdk: flutter
-  flutter_native_splash: 2.3.7
+  flutter_native_splash: ^2.4.4
   flutter_qiblah: ^2.1.0
   flutter_screenutil: ^5.9.0
   flutter_slidable: ^3.1.1
@@ -121,7 +122,6 @@ flutter:
     - assets/images/notification_bigPicture.png
     - assets/sounds/
     - assets/sounds/notification_and_alarms/
-   
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -163,6 +163,9 @@ flutter:
     - family: Basmala
       fonts:
         - asset: assets/fonts/QCF_BSML.ttf
+    - family: Andalus
+      fonts:
+        - asset: assets/fonts/andalus.ttf
     #   - asset: fonts/TrajanPro_Bold.ttf
     #     weight: 700
     # For details regarding fonts from package dependencies,

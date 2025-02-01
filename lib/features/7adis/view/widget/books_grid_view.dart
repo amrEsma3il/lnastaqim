@@ -22,7 +22,7 @@ class BooksGridView extends StatelessWidget {
           onTap: () {
             context.read<HadithCubit>().bukhariHadithsCubit(context);
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const A7adithScreen()));
+                MaterialPageRoute(builder: (context) => const A7adithScreen(bookName: "bukhari",)));
           }),
       BooksModel(
           id: 2,
@@ -32,7 +32,7 @@ class BooksGridView extends StatelessWidget {
           onTap: () {
             context.read<HadithCubit>().muslimHadithsCubit(context);
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const A7adithScreen()));
+                MaterialPageRoute(builder: (context) => const A7adithScreen(bookName: "muslim",)));
           }),
       BooksModel(
         id: 3,
@@ -42,7 +42,7 @@ class BooksGridView extends StatelessWidget {
         onTap: () {
           context.read<HadithCubit>().abuDawudHadithsCubit(context);
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const A7adithScreen()));
+              MaterialPageRoute(builder: (context) => const A7adithScreen(bookName: "abudawod",)));
         },
       ),
       BooksModel(
@@ -53,7 +53,7 @@ class BooksGridView extends StatelessWidget {
         onTap: () {
           context.read<HadithCubit>().tirmidhiHadithsCubit(context);
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const A7adithScreen()));
+              MaterialPageRoute(builder: (context) => const A7adithScreen(bookName: "tirmidhi",)));
         },
       ),
       BooksModel(
@@ -64,7 +64,7 @@ class BooksGridView extends StatelessWidget {
         onTap: () {
           context.read<HadithCubit>().nasaiHadithsCubit(context);
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const A7adithScreen()));
+              MaterialPageRoute(builder: (context) => const A7adithScreen(bookName: "nasai",)));
         },
       ),
       BooksModel(
@@ -75,7 +75,7 @@ class BooksGridView extends StatelessWidget {
           onTap: () {
             context.read<HadithCubit>().ibnmajahHadithsCubit(context);
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const A7adithScreen()));
+                MaterialPageRoute(builder: (context) => const A7adithScreen(bookName: "ibnmajah",)));
           }),
       BooksModel(
           id: 7,
@@ -85,7 +85,7 @@ class BooksGridView extends StatelessWidget {
           onTap: () {
             context.read<HadithCubit>().malikHadithsCubit(context);
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const A7adithScreen()));
+                MaterialPageRoute(builder: (context) => const A7adithScreen(bookName: "malik",)));
           }),
       BooksModel(
           id: 8,
@@ -95,7 +95,7 @@ class BooksGridView extends StatelessWidget {
           onTap: () {
             context.read<HadithCubit>().darimiHadithsCubit(context);
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const A7adithScreen()));
+                MaterialPageRoute(builder: (context) => const A7adithScreen(bookName: "darimi",)));
           }),
       BooksModel(
           id: 9,
@@ -105,7 +105,7 @@ class BooksGridView extends StatelessWidget {
           onTap: () {
             context.read<HadithCubit>().ahmedHadithsCubit(context);
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const A7adithScreen()));
+                MaterialPageRoute(builder: (context) => const A7adithScreen(bookName: "ahmed",)));
           }),
     ];
 

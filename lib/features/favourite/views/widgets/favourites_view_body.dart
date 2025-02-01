@@ -14,19 +14,20 @@ class Favouritesviewbody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-            child: Container(
-                decoration:
-                    BoxDecoration(color: AppColor.blueColor.withOpacity(0.85)),
+            child: SizedBox(
+              
                 height: Get.height,
                 width: Get.width,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                       width: Get.width,
+                          height: 70.h,
+                          color: AppColor.primary.withOpacity(0.8),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           IconButton(
@@ -42,9 +43,9 @@ class Favouritesviewbody extends StatelessWidget {
                             child: Center(
                               child: Padding(
                                   padding: EdgeInsets.only(left: 36.w),
-                                  child: const Text(
+                                  child:  const Text(
                                     "المفضلة",
-                                    style: TextStyle(
+                                    style:  TextStyle(
                                         color: Colors.white,
                                         fontSize: 25,
                                         fontWeight: FontWeight.w500),
@@ -53,15 +54,15 @@ class Favouritesviewbody extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Expanded(
-                        child: Padding(
-                            padding: EdgeInsets.only(bottom: 20.h),
-                            child: FavouritesAzkar7adisListView(
-                              isZekr: isZekr,
-                            )),
-                      ),
-                    ],
-                  ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                          padding: EdgeInsets.only(bottom: 20.h,right: 15.w,left: 15.w),
+                          child: FavouritesAzkar7adisListView(
+                            isZekr: isZekr,
+                          )),
+                    ),
+                  ],
                 ))));
   }
 }
