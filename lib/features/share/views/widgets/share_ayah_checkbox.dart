@@ -7,11 +7,10 @@ import '../../../quran/data/models/surahs_model.dart';
 
 class ShareAyahCheckBox extends StatefulWidget {
   const ShareAyahCheckBox(
-      {Key? key,
+      {super.key,
       required this.selectedAyah,
       required this.ayahNumber,
-      required this.ayaLink})
-      : super(key: key);
+      required this.ayaLink});
 
   final Ayah selectedAyah;
   final String ayahNumber;

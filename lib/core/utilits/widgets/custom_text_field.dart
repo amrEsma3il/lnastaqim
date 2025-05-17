@@ -23,7 +23,7 @@ class CustomTextField extends StatelessWidget {
  TextEditingController controller;
  TextInputType keyBoardType;
    CustomTextField({
-    Key? key,
+    super.key,
     this.hintText,
     this.textColor=Colors.black,
     this.paddingTop=10,
@@ -41,7 +41,7 @@ class CustomTextField extends StatelessWidget {
    this.suffiWidget,
    this.hideKeyboard
 
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

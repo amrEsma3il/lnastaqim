@@ -14,7 +14,6 @@ import '../../../../core/utilits/functions/toast_message.dart';
 import '../../../quran_sound/logic/audio_cubit/audio_cubit.dart';
 import '../../view/widgets/index/quran_juz_component.dart';
 import '../../view/widgets/index/quran_sora_component.dart';
-import '../font_cubit/font_cubit.dart';
 import '../quran/quran_cubit.dart';
 import '../quran/index_cubit/index_cubit.dart';
 

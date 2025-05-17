@@ -4,10 +4,10 @@ import 'package:lnastaqim/features/share/views/widgets/share_fun.dart';
 
 class ShareHadisCheckbox extends StatefulWidget {
   const ShareHadisCheckbox({
-    Key? key,
+    super.key,
     required this.hadis,
     required this.category,
-  }) : super(key: key);
+  });
 
   final String hadis;
 

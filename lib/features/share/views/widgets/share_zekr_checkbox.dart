@@ -7,11 +7,11 @@ import 'package:lnastaqim/features/share/views/widgets/share_fun.dart';
 
 class ShareZekrCheckBox extends StatefulWidget {
   const ShareZekrCheckBox({
-    Key? key,
+    super.key,
     required this.zekr,
     required this.image,
     required this.zekrLink,
-  }) : super(key: key);
+  });
 
   final String zekr;
   final Uint8List image;

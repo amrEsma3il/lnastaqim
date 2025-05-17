@@ -1,9 +1,8 @@
 import 'dart:developer';
+import 'dart:isolate';
 import 'dart:ui';
-import 'package:adhan/adhan.dart';
-import 'package:alarm/alarm.dart';
-import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,8 +58,7 @@ import 'features/quran_sound/logic/audio_cubit/audio_cubit.dart';
 import 'features/quran_sound_player/data/repo/repo.dart';
 import 'features/quran_sound_player/logic/surah_player_cubit/surah_player_cubit.dart';
 import 'features/radio_stream_channels/bussniess_logic/radio_cubit.dart';
-import 'firebase_options.dart';
-import 'features/quran/bussniess_logic/font_cubit/font_loader_test.dart';
+
 
 @pragma('vm:entry-point')
 void notificationTapBackground(
@@ -173,14 +171,31 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Position? position;
 
-void main() async {
+
+Future<void> main(fireBaseOptions) async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting('ar', null);
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+ try {
+      // Check if Firebase is already initialized
+      if (Firebase.apps.isEmpty) {
+        await Firebase.initializeApp(options: fireBaseOptions);
+      }
+      // Otherwise use the existing instance
+    } catch (e) {
+      debugPrint('Firebase initialization error: $e');
+    }
 
+    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    Isolate.current.addErrorListener(
+      RawReceivePort((pair) async {
+        final List<dynamic> errorAndStacktrace = pair;
+        await FirebaseCrashlytics.instance.recordError(
+          errorAndStacktrace.first,
+          errorAndStacktrace.last,
+        );
+      }).sendPort,
+    );
   prefs = await SharedPreferences.getInstance();
   position =await LocationService.determinePosition();
   await Hive.initFlutter();
@@ -329,7 +344,7 @@ void main() async {
 }
 
 class Lnastaqim extends StatelessWidget {
-  const Lnastaqim({Key? key}) : super(key: key);
+  const Lnastaqim({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -449,9 +464,9 @@ class Lnastaqim extends StatelessWidget {
 
                   QuranCubit.get(context).searchAya(ayaNum);
                 } else if (deepLink.path == AppRouteName.azkarDetails) {
-                  int category =
-                      int.parse(deepLink.queryParameters["category"]!);
-                  int zekr = int.parse(deepLink.queryParameters["zekr"]!);
+                  // int category =
+                  //     int.parse(deepLink.queryParameters["category"]!);
+                  // int zekr = int.parse(deepLink.queryParameters["zekr"]!);
 
                   Get.toNamed(deepLink.path);
                 } else {

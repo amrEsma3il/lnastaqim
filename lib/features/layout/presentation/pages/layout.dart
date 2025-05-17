@@ -7,8 +7,6 @@ import 'package:lnastaqim/features/home/views/screens/home_view.dart';
 import 'package:lnastaqim/features/layout/presentation/widgets/custom_bottom_nav_bar_item.dart';
 import 'package:lnastaqim/features/library/view/screens/library_view.dart';
 
-import '../../../../core/utilits/services/local_notification_service.dart';
-import '../../../quran/bussniess_logic/font_cubit/font_loader_test.dart';
 
 class Layout extends StatefulWidget {
   const Layout({super.key});

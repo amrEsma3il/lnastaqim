@@ -31,8 +31,6 @@ import '../../../quran_sound/logic/audio_cubit/audio_state.dart';
 import '../../../share/views/widgets/share_ayah_checkbox.dart';
 import '../../../tafaseer/bussniess_logic/tafseer_cubit.dart';
 
-import '../../bussniess_logic/font_cubit/font_cubit.dart';
-import '../../bussniess_logic/font_cubit/font_loader_test.dart';
 import '../../bussniess_logic/font_cubit/qurn_fonts_downlod_progress_persentage_cubit.dart';
 import '../../bussniess_logic/memorized_verse_cubit/memorized_verse_cubit.dart';
 import '../../bussniess_logic/memorized_verse_cubit/memorized_verse_state.dart';
@@ -56,7 +54,7 @@ class MoshafView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = QuranCubit.get(context);
+    // final cubit = QuranCubit.get(context);
     // final pageController = PageController(
     //   initialPage: indexP ?? 0,
     // );

@@ -11,12 +11,13 @@ import "package:path_provider/path_provider.dart";
 import "package:screenshot/screenshot.dart";
 import 'package:share_plus/share_plus.dart';
 
+import "../../../../core/utilits/functions/format_text.dart";
 import "../../../../core/utilits/functions/string_words_spliter.dart";
 import "../../../quran/bussniess_logic/quran/quran_cubit.dart";
 import "../../../quran/data/models/surahs_model.dart";
 
 Future<void> shareText(String selectedText,{String? subject})async {
- await Share.share(selectedText, subject: subject);
+ await SharePlus.instance.share(ShareParams(text:selectedText, subject: subject));
 }
 
 Future<void> shareAyahAsImage(
@@ -103,13 +104,16 @@ Future<void> shareAyahAsImage(
     ),
   );
 
-  print("..................");
-  print(selectedAyah.ayahNumber);
+ 
   final file = File(path);
   await file.writeAsBytes(imageFile);
 
   final xfile = XFile(path);
-  await Share.shareXFiles([xfile]);
+  await SharePlus.instance.share(ShareParams(
+  files: [
+   xfile
+  ],
+));
 }
 
 Future<void> shareHadisAsImage(String hadis, String category, context) async {
@@ -118,7 +122,7 @@ Future<void> shareHadisAsImage(String hadis, String category, context) async {
   final screenShotController = ScreenshotController();
   List<XFile> hadithImageList = [];
   int maxWords = calculateMaxWordsPerScreen(context, 18, 130);
-  print(maxWords);
+
 
   List<String> hadisSplitString = splitStringByWords(hadis, maxWords);
   for (int i = 0; i < hadisSplitString.length; i++) {
@@ -146,7 +150,7 @@ Future<void> shareHadisAsImage(String hadis, String category, context) async {
                             height: 30,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: AppColor.primary.withOpacity(0.8),
+                              color: AppColor.primary.withValues(alpha:0.8),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Center(
@@ -186,7 +190,9 @@ Future<void> shareHadisAsImage(String hadis, String category, context) async {
     hadithImageList.add(xfile);
   }
 
-  await Share.shareXFiles(hadithImageList);
+  await SharePlus.instance.share(ShareParams(
+  files: hadithImageList
+));
 }
 
 Future<void> shareImage(Uint8List image, String name) async {
@@ -195,8 +201,10 @@ Future<void> shareImage(Uint8List image, String name) async {
   await imagePath.writeAsBytes(image);
 
   final XFile file = XFile(imagePath.path);
-  Share.shareXFiles(
-    [file],
+ SharePlus.instance.share(
+  ShareParams(
+  files: [file]
+)
   );
 }
 
@@ -207,11 +215,24 @@ Future<void> shareSound(String soundPath,{String? des,String? subject}) async {
   // await imagePath.writeAsBytes(image);
 
   final XFile file = XFile(soundPath);
-  Share.shareXFiles(
-    [file],
-    text: des,
+   SharePlus.instance.share(
+  ShareParams(
+  files: [file],
+   text: des,
     subject: subject
+  )
+   
   );
 }
 
-
+Future<void> shareAyahW3bra({
+  required String ayah,
+  required String tafsir,
+}) async {
+  await SharePlus.instance.share(
+    ShareParams(
+      text: FormatText.ayaW3braShareText(ayah: ayah, tafsir: tafsir),
+      subject: 'آية وعبرة',
+    ),
+  );
+}

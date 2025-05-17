@@ -1,8 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-
-
   <uses-permission android:name="android.permission.WAKE_LOCK"/>
   
 
@@ -32,12 +30,13 @@
    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
-        android:label="lnastaqim"
+          android:label="@string/app_name"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"
         android:enableOnBackInvokedCallback="true">
         <service android:name=".core.StreamingCore"/>
+        
         <activity
             android:name=".MainActivity"
             android:showWhenLocked="true"
@@ -59,11 +58,10 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
-                
-                <!-- deeplink -->
             </intent-filter>
+       <!-- deeplink -->
 
-         <intent-filter android:autoVerify="true">
+            <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -86,11 +84,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-            
-
-
-
-
 
 
 
@@ -147,8 +140,16 @@
         <action android:name="android.intent.action.BOOT_COMPLETED" />
     </intent-filter>
 </receiver>
-
     </application>
-        <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- Required to query activities that can process text, see:
+         https://developer.android.com/training/package-visibility and
+         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
 
+         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT"/>
+            <data android:mimeType="text/plain"/>
+        </intent>
+    </queries>
 </manifest>
