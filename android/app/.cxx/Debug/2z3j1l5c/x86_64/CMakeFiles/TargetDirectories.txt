@@ -1,0 +1,2 @@
+/Users/amresmail/psesona_project/lnastaqim/android/app/.cxx/Debug/2z3j1l5c/x86_64/CMakeFiles/edit_cache.dir
+/Users/amresmail/psesona_project/lnastaqim/android/app/.cxx/Debug/2z3j1l5c/x86_64/CMakeFiles/rebuild_cache.dir
