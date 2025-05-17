@@ -1,16 +1,1 @@
-# lnastaqim
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+لنستقيم هو تطبيق اسلامي يوجد به العديد من المزايا مثل : القرءان وتوابعه من قراءة وترتيل واصوات للعديد من الشيوخ المفضلين وتفسير القراءان ومعاني الكلمات وتدوين الملحظات ومشاراكتها مع الاصدقاء ونفس الشئ للاحاديث ومزايا اخري مثل تحديد القبلة ومواقيت الصلاة وتنبيه لها وعرض اشعارات عند كل صلاة واشعارات دورية بالاذكار وحكمة اليوم والمسبحة اذاعة القرءان الكريم والتقويم الهجري وتحديات كالخاتمة والمعلومات الدينية ....مجتمع للمشتركين للاسئلة والردرو العامة والتواصل الخاص وبعض الميزات الاضاقية ك المصحح الاملائي والترتيلي وسلاسل خاصة ومشوقة تحت عنوان كن داعية ................بالتوفيق 🩷🩵
