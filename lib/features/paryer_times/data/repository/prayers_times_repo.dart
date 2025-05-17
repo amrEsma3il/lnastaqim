@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:adhan/adhan.dart';
 import 'package:intl/intl.dart';
 import 'package:lnastaqim/features/paryer_times/data/models/prayers_time_model.dart';
@@ -9,6 +11,13 @@ class PrayersTimesRepo {
     final nextPrayer = prayerTimes.nextPrayer();
     final sunnahTimes = SunnahTimes(prayerTimes);
     final qibla = Qibla(coordinates);
+
+    log("fajr:  ${prayerTimes.fajr}");
+    log("duhar:  ${prayerTimes.dhuhr}");
+    log("asr:  ${prayerTimes.asr}");
+    log("maghrib:  ${prayerTimes.maghrib}");
+    log("isha:  ${prayerTimes.isha}");
+ log("==================pre format=============================");
     return PrayersTimeModel(
         fajr: reformat(prayerTimes.fajr),
         sunrise: reformat(prayerTimes.sunrise),

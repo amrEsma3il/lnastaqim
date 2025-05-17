@@ -9,7 +9,6 @@ import '../../bussiness_logic/notification_cubit.dart';
 import '../widget/azkar_notification.dart';
 import '../widget/paryer_time_notification_component.dart';
 import '../widget/salah_nabi_notification.dart';
-import 'alarm_screen.dart';
 
 // class NotificationScreen extends StatelessWidget {
 //   const NotificationScreen({super.key});

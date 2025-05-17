@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Lnastaqim Dev",
+        "request": "launch",
+        "type": "dart",
+        "program": "lib/main_lnastaqim_dev.dart",
+        "args": ["--flavor", "lnastaqim_dev", "-t", "lib/main_lnastaqim_dev.dart"]
+      },
+      {
+        "name": "Lnastaqim Prod",
+        "request": "launch",
+        "type": "dart",
+        "program": "lib/main_lnastaqim_prod.dart",
+        "args": ["--flavor", "lnastaqim_prod", "-t", "lib/main_lnastaqim_prod.dart"]
+      },
+
+    ]
+  }
+  

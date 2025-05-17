@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +5,6 @@ import 'package:lottie/lottie.dart';
 
 import '../../../../core/constants/animations.dart';
 import '../../../../core/constants/colors.dart';
-import '../../../../core/utilits/services/local_notification_service.dart';
 import '../../logic/surah_player_cubit/surah_player_cubit.dart';
 import '../../logic/surah_player_cubit/surah_player_state.dart';
 

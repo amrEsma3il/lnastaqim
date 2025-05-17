@@ -18,7 +18,7 @@ class PrayersStepper extends StatelessWidget {
     return BlocBuilder<PrayersTimesCubit, PrayersTimeModel>(
       builder: (context, paryerState) {
 
-              log("test from stepper"+paryerState.isha);
+              log("test from stepper${paryerState.isha}");
         return Row(
           children: [
             StepperItem(
@@ -87,7 +87,7 @@ class StepperItem extends StatelessWidget {
               // log("===============index=====");
               // log(paryerState.currentPrayer!.index!.toString());
               // log(paryerState.currentPrayer!.name!.toString());
-            log("test from stepper 2 "+paryerState.isha);
+            log("test from stepper 2 ${paryerState.isha}");
               return Row(
                 children: [
                   isFirst

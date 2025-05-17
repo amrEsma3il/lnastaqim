@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 
 class CustomSibha extends StatefulWidget {
-  const CustomSibha({Key? key}) : super(key: key);
+  const CustomSibha({super.key});
 
   @override
   State<CustomSibha> createState() => _CustomSibhaState();

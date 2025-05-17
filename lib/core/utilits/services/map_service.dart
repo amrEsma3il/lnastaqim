@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
 
 import '../../../main.dart';
+import 'url_launcher.dart';
 
 class MapUtils {
   MapUtils._();
@@ -13,7 +14,7 @@ class MapUtils {
     
 
     // الحصول على الموقع الحالي
-    Position currentPosition = position!;
+    Position currentPosition =position!;
 
 log(currentPosition.latitude.toString());
 log(currentPosition.longitude.toString());
@@ -23,15 +24,11 @@ log(currentPosition.longitude.toString());
     String longitude = currentPosition.longitude.toString();
       //  String query = Uri.encodeComponent("Mosque");
 
-    String googleUrl =
+    String googMapleUrl =
     "https://www.google.com/maps/search/Mosque/@$latitude,$longitude,15z";
 
 
     // فتح الرابط
-    if (await canLaunchUrl(Uri.parse(googleUrl))) {
-      await launchUrl(Uri.parse(googleUrl));
-    } else {
-      throw 'Could not open Google Maps.';
-    }
+   UrlLauncher.launchToUrl(googMapleUrl);
   }
 }
