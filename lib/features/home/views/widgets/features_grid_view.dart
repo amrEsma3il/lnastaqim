@@ -4,11 +4,8 @@ import 'package:get/get.dart';
 import 'package:lnastaqim/core/constants/images.dart';
 import 'package:lnastaqim/features/home/data/models/feature_model.dart';
 import 'package:lnastaqim/features/home/views/widgets/feature_item.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
 import '../../../../core/utilits/services/map_service.dart';
-import '../../../quran/bussniess_logic/font_cubit/font_cubit.dart';
-import '../../../quran/bussniess_logic/font_cubit/font_loader_test.dart';
 
 class FeaturesGridView extends StatelessWidget {
   const FeaturesGridView({super.key});

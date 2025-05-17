@@ -7,10 +7,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 
 import '../../../../core/constants/images.dart';
+import '../../../../core/utilits/functions/format_text.dart';
 import '../../../../core/utilits/services/audio_service/audio_players.dart';
 import '../../../../core/utilits/services/audio_service/players_key.dart';
 import '../../../../core/utilits/services/local_notification_service.dart';
@@ -22,8 +22,9 @@ import 'surah_player_state.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class SurahPlayerCubit extends Cubit<SurahPlayerState> {
-  final AudioPlayer audioPlayer =
-      AudioPlayers().getPlayer(NotificationKeys.quranPlayer);
+  final AudioPlayer audioPlayer = AudioPlayers().getPlayer(
+    NotificationKeys.quranPlayer,
+  );
 
   ReceivePort? receivePort;
 
@@ -31,7 +32,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
   static SurahPlayerCubit get(BuildContext context) => BlocProvider.of(context);
 
   SurahPlayerCubit(this.recitersRepository)
-      : super(SurahPlayerState.initial()) {
+    : super(SurahPlayerState.initial()) {
     initListeners();
 
     registerPort();
@@ -48,7 +49,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
     // "باكستان":AppImages.pakistanFlag,
     // "الإمارات":AppImages.emiratesFlag,
     "اليمن": AppImages.yemenFlag,
-    "غير معروف": AppImages.unknownFlag
+    "غير معروف": AppImages.unknownFlag,
   };
 
   static const Map<int, String> quranSurahs = {
@@ -172,8 +173,6 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
 
   initListeners() {
     audioPlayer.onPlayerStateChanged.listen((PlayerState state) {
-
-
       dev.log("=====الحالة اتغيرت ======${state.name}");
       if (state == PlayerState.playing) {
         // LocalNotificationService.showMediaNotification(
@@ -184,25 +183,23 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
         //   body: this.state.reciter.nameArabic,
         //   title: quranSurahs[this.state.surahNumber]!
         // );
-       emit( this.state.copyWith(isPlaying: true, isPaused: false));
+        emit(this.state.copyWith(isPlaying: true, isPaused: false));
 
-
-         dev.log("${this.state.isPlaying}=====الحالة اتغيرت ====تيست== تشغيل");
+        dev.log("${this.state.isPlaying}=====الحالة اتغيرت ====تيست== تشغيل");
       } else {
-
         // LocalNotificationService.showMediaNotification(
         //     groupKey: "quran",
         //   isPlaying: false,
-          
+
         //   id: 30,
         //   keyFeature: NotificationKeys.quranPlayer,
         //   body: this.state.reciter.nameArabic,
         //     title: quranSurahs[this.state.surahNumber]!
         // );
-       
+
         emit(this.state.copyWith(isPlaying: false, isPaused: true));
 
-         dev.log("${this.state.isPlaying}=====الحالة اتغيرت ====تيست== ايقاف");
+        dev.log("${this.state.isPlaying}=====الحالة اتغيرت ====تيست== ايقاف");
       }
     });
 
@@ -234,11 +231,10 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
     });
   }
 
+  changeAudioState({required isPlaying, required isPaused}) {
+    state.copyWith(isPlaying: isPlaying, isPaused: isPaused);
+  }
 
-changeAudioState({required isPlaying,required isPaused}){
-
-  state.copyWith(isPlaying: isPlaying,isPaused: isPaused);
-}
   Future<void> registerPort() async {
     receivePort = ReceivePort();
     IsolateNameServer.registerPortWithName(
@@ -255,7 +251,7 @@ changeAudioState({required isPlaying,required isPaused}){
   Future<void> _handleNotificationAction(String action) async {
     switch (action) {
       case 'play':
-      dev.log("action play");
+        dev.log("action play");
         await togglePlayPause();
         break;
       case 'pause':
@@ -297,7 +293,8 @@ changeAudioState({required isPlaying,required isPaused}){
         'https://download.quranicaudio.com/quran/${reciter.name}/$surahNumberZeroPad.mp3';
 
     final reciterDir = Directory(
-        '${directory.path}/Quran_listening/${state.reciter.nameArabic}');
+      '${directory.path}/Quran_listening/${state.reciter.nameArabic}',
+    );
 
     emit(state.copyWith(audioState: AudioFetchLoading()));
     // تعيين مصدر الصوت وتشغيله مباشرة
@@ -306,21 +303,18 @@ changeAudioState({required isPlaying,required isPaused}){
 
       await AudioPlayers().pauseAll();
 
-
-
       await LocalNotificationService.showMediaNotification(
-          groupKey: "quran",
-          isPlaying: true,
-          id: 30,
-          keyFeature: NotificationKeys.quranPlayer,
-          body: state.reciter.nameArabic,
-          title: quranSurahs[state.surahNumber]!);
+        groupKey: "quran",
+        isPlaying: true,
+        id: 30,
+        keyFeature: NotificationKeys.quranPlayer,
+        body: state.reciter.nameArabic,
+        title: quranSurahs[state.surahNumber]!,
+      );
 
       if (await File(filePath).exists()) {
         dev.log("بلاي من الاستوردج");
         //TODO : play WITH local SOUND
-
-
 
         await audioPlayer.play(DeviceFileSource(filePath));
       } else {
@@ -330,24 +324,28 @@ changeAudioState({required isPlaying,required isPaused}){
       }
 
       // await channel.invokeMethod('playMedia');
-      emit(state.copyWith(
-          audioState: AudioFetchSuccess(), isPlaying: true, isPaused: false));
-      
+      emit(
+        state.copyWith(
+          audioState: AudioFetchSuccess(),
+          isPlaying: true,
+          isPaused: false,
+        ),
+      );
     } catch (e) {
       //TODO: neccessary handle errors
       dev.log(e.toString());
       await audioPlayer.stop();
       // await channel.invokeMethod('pauseMedia');
 
-       await LocalNotificationService.showMediaNotification(
-          groupKey: "quran",
-          isPlaying: false,
-          id: 30,
-          keyFeature: NotificationKeys.quranPlayer,
-          body: state.reciter.nameArabic,
-          title: quranSurahs[state.surahNumber]!);
+      await LocalNotificationService.showMediaNotification(
+        groupKey: "quran",
+        isPlaying: false,
+        id: 30,
+        keyFeature: NotificationKeys.quranPlayer,
+        body: state.reciter.nameArabic,
+        title: quranSurahs[state.surahNumber]!,
+      );
       emit(state.copyWith(isPlaying: false, audioState: AudioFetchFailure()));
-     
     }
 
     // استخدام تأخير زمني لمحاولة الحصول على الطول الصوتي
@@ -364,33 +362,34 @@ changeAudioState({required isPlaying,required isPaused}){
   }
 
   Future<void> togglePlayPause() async {
-
-//TODO: should change state from any place trigger audio => state.isPlaying
-  dev.log("from toggle play pause");
-  dev.log(state.isPlaying.toString());
+    //TODO: should change state from any place trigger audio => state.isPlaying
+    dev.log("from toggle play pause");
+    dev.log(state.isPlaying.toString());
     if (state.isPlaying) {
       await audioPlayer.pause();
       // await channel.invokeMethod('pauseMedia');
       emit(state.copyWith(isPlaying: false, isPaused: true));
       await LocalNotificationService.showMediaNotification(
-          groupKey: "quran",
-          isPlaying: false,
-          id: 30,
-          keyFeature: NotificationKeys.quranPlayer,
-          body: state.reciter.nameArabic,
-          title: quranSurahs[state.surahNumber]!);
+        groupKey: "quran",
+        isPlaying: false,
+        id: 30,
+        keyFeature: NotificationKeys.quranPlayer,
+        body: state.reciter.nameArabic,
+        title: quranSurahs[state.surahNumber]!,
+      );
     } else {
       if (state.isPaused) {
-     await   AudioPlayers().pauseAll();
+        await AudioPlayers().pauseAll();
         await audioPlayer.resume();
         emit(state.copyWith(isPlaying: true, isPaused: false));
         await LocalNotificationService.showMediaNotification(
-            groupKey: "quran",
-            isPlaying: true,
-            id: 30,
-            keyFeature: NotificationKeys.quranPlayer,
-            body: state.reciter.nameArabic,
-            title: quranSurahs[state.surahNumber]!);
+          groupKey: "quran",
+          isPlaying: true,
+          id: 30,
+          keyFeature: NotificationKeys.quranPlayer,
+          body: state.reciter.nameArabic,
+          title: quranSurahs[state.surahNumber]!,
+        );
       } else {
         dev.log("صباحو");
         await playSurah();
@@ -401,21 +400,23 @@ changeAudioState({required isPlaying,required isPaused}){
 
   Future<void> nextSurah() async {
     if (state.surahNumber < 114) {
-      emit(state.copyWith(
-          surahNumber: state.surahNumber + 1, currentPosition: 0));
+      emit(
+        state.copyWith(surahNumber: state.surahNumber + 1, currentPosition: 0),
+      );
       await playSurah();
     }
   }
 
   Future<void> previousSurah() async {
     if (state.surahNumber > 1) {
-      emit(state.copyWith(
-          surahNumber: state.surahNumber - 1, currentPosition: 0));
+      emit(
+        state.copyWith(surahNumber: state.surahNumber - 1, currentPosition: 0),
+      );
       await playSurah();
     }
   }
 
-//TODO:SCROLL TO CURENT SURAH WHEN OPEN BOTTOM SHEET
+  //TODO:SCROLL TO CURENT SURAH WHEN OPEN BOTTOM SHEET
 
   void changeSurahNum(int surahNumber) async {
     if (state.surahNumber != surahNumber) {
@@ -426,29 +427,31 @@ changeAudioState({required isPlaying,required isPaused}){
       if (state.isPaused) {
         await audioPlayer.resume();
         await LocalNotificationService.showMediaNotification(
-            groupKey: "quran",
-            isPlaying: true,
-            id: 30,
-            keyFeature: NotificationKeys.quranPlayer,
-            body: state.reciter.nameArabic,
-            title: quranSurahs[state.surahNumber]!);
+          groupKey: "quran",
+          isPlaying: true,
+          id: 30,
+          keyFeature: NotificationKeys.quranPlayer,
+          body: state.reciter.nameArabic,
+          title: quranSurahs[state.surahNumber]!,
+        );
       } else if (!state.isPlaying) {
         await playSurah();
       } else {
         emit(state.copyWith(isPlaying: true, isPaused: false));
         await LocalNotificationService.showMediaNotification(
-            groupKey: "quran",
-            isPlaying: true,
-            id: 30,
-            keyFeature: NotificationKeys.quranPlayer,
-            body: state.reciter.nameArabic,
-            title: quranSurahs[state.surahNumber]!);
+          groupKey: "quran",
+          isPlaying: true,
+          id: 30,
+          keyFeature: NotificationKeys.quranPlayer,
+          body: state.reciter.nameArabic,
+          title: quranSurahs[state.surahNumber]!,
+        );
       }
     }
     // تشغيل السورة المختارة
   }
 
-//TODO:SCROLL TO CURENT RECITER WHEN OPEN BOTTOM SHEET
+  //TODO:SCROLL TO CURENT RECITER WHEN OPEN BOTTOM SHEET
   changeReciter(Reciter reciter) async {
     if (state.reciter.name != reciter.name) {
       emit(state.copyWith(reciter: reciter, currentPosition: 0));
@@ -458,23 +461,25 @@ changeAudioState({required isPlaying,required isPaused}){
       if (state.isPaused) {
         await audioPlayer.resume();
         await LocalNotificationService.showMediaNotification(
-            groupKey: "quran",
-            isPlaying: true,
-            id: 30,
-            keyFeature: NotificationKeys.quranPlayer,
-            body: state.reciter.nameArabic,
-            title: quranSurahs[state.surahNumber]!);
+          groupKey: "quran",
+          isPlaying: true,
+          id: 30,
+          keyFeature: NotificationKeys.quranPlayer,
+          body: state.reciter.nameArabic,
+          title: quranSurahs[state.surahNumber]!,
+        );
       } else if (!state.isPlaying) {
         await playSurah();
       } else {
         emit(state.copyWith(isPlaying: true, isPaused: false));
         await LocalNotificationService.showMediaNotification(
-            groupKey: "quran",
-            isPlaying: true,
-            id: 30,
-            keyFeature: NotificationKeys.quranPlayer,
-            body: state.reciter.nameArabic,
-            title: quranSurahs[state.surahNumber]!);
+          groupKey: "quran",
+          isPlaying: true,
+          id: 30,
+          keyFeature: NotificationKeys.quranPlayer,
+          body: state.reciter.nameArabic,
+          title: quranSurahs[state.surahNumber]!,
+        );
       }
     }
     // تشغيل السورة المختارة
@@ -530,20 +535,22 @@ changeAudioState({required isPlaying,required isPaused}){
     // await    playSurah();
   }
 
-//البحث والفلترة
+  //البحث والفلترة
 
   /// البحث عن السور بناءً على الاسم
   void searchSurahs(String query) {
     if (query.isEmpty) {
-      emit(state
-          .copyWith(searchSurahResults: [])); // إفراغ النتائج عند البحث الفارغ
+      emit(
+        state.copyWith(searchSurahResults: []),
+      ); // إفراغ النتائج عند البحث الفارغ
       return;
     }
 
-    final filteredSurahs = quranSurahs.entries
-        .where((entry) => entry.value.contains(query))
-        .map((entry) => entry.key)
-        .toList();
+    final filteredSurahs =
+        quranSurahs.entries
+            .where((entry) => entry.value.contains(query))
+            .map((entry) => entry.key)
+            .toList();
 
     emit(state.copyWith(searchSurahResults: filteredSurahs));
   }
@@ -557,14 +564,18 @@ changeAudioState({required isPlaying,required isPaused}){
     //   return;
     // }
 
-    final filteredReciters =
-        recitersRepository.filterReciters(reciterCountry, reciterSearchQuery);
+    final filteredReciters = recitersRepository.filterReciters(
+      reciterCountry,
+      reciterSearchQuery,
+    );
 
-    emit(state.copyWith(
-      searchReciterResults: filteredReciters,
-      reciterCountry: reciterCountry,
-      reciterSearchQuery: reciterSearchQuery,
-    ));
+    emit(
+      state.copyWith(
+        searchReciterResults: filteredReciters,
+        reciterCountry: reciterCountry,
+        reciterSearchQuery: reciterSearchQuery,
+      ),
+    );
   }
 
   static String getCountryFlag(String countryName) {
@@ -584,25 +595,27 @@ changeAudioState({required isPlaying,required isPaused}){
 
   /// إلغاء البحث وإعادة القائمة الكاملة
   void clearSurahSearch() {
-    emit(state.copyWith(
-      searchSurahResults: quranSurahs.keys.toList(),
-    ));
+    emit(state.copyWith(searchSurahResults: quranSurahs.keys.toList()));
   }
 
   void clearReciterSearch() {
-    emit(state.copyWith(
+    emit(
+      state.copyWith(
         searchReciterResults: recitersRepository.getAllReciters(),
         reciterCountry: "كل الدول",
-        reciterSearchQuery: ""));
+        reciterSearchQuery: "",
+      ),
+    );
   }
 
-//others
+  //others
   Future<void> downloadSurah() async {
     dev.log("start download");
     final directory = await getApplicationDocumentsDirectory();
 
     final reciterDir = Directory(
-        '${directory.path}/Quran_listening/${state.reciter.nameArabic}');
+      '${directory.path}/Quran_listening/${state.reciter.nameArabic}',
+    );
     //TODO: SHOW NOTIFICATION WITH DOWNLOAD INDICATOR BAR
     await reciterDir.create(recursive: true);
 
@@ -614,59 +627,49 @@ changeAudioState({required isPlaying,required isPaused}){
     final filePath = '${reciterDir.path}/${state.surahNumber}.mp3';
 
     if (!await File(filePath).exists()) {
+      final dio = Dio();
 
+      try {
+        dio.download(
+          url,
+          filePath,
 
- final dio = Dio();
-
-    try {
-      dio.download(url,filePath,
-      
           onReceiveProgress: ((count, total) async {
-        
-if(((count/total)*100).toInt()<100){
-             final String progressText =
-            '${((count/total)*100).toInt() }%';
+            if (((count / total) * 100).toInt() < 100) {
+              final String progressText = '${((count / total) * 100).toInt()}%';
 
-
- await LocalNotificationService.downloadNotification(
-   groupKey: "quranSurahDownload",
-            keyFeature: NotificationKeys.quranSoundDownload,
-              title:"تحميل ${quranSurahs[state.surahNumber]!}",
-            hasAction: false,
-            isPlaying: false,
-            progress:((count/total)*100).toInt() ,
-            maxProgress: 100,
-            id: int.parse("1${state.surahNumber}1"),
-            progressText: progressText,
-          
-          );         
-       
-      }else{
-
-        await LocalNotificationService.cancelNotification(int.parse("1${state.surahNumber}1"));
-await LocalNotificationService.showCompletionNotification(2001,"تم تحميل ${quranSurahs[state.surahNumber]!} بنجاح");
+              await LocalNotificationService.downloadNotification(
+                groupKey: "quranSurahDownload",
+                keyFeature: NotificationKeys.quranSoundDownload,
+                title: "تحميل ${quranSurahs[state.surahNumber]!}",
+                hasAction: false,
+                isPlaying: false,
+                progress: ((count / total) * 100).toInt(),
+                maxProgress: 100,
+                id: int.parse("1${state.surahNumber}1"),
+                progressText: progressText,
+              );
+            } else {
+              await LocalNotificationService.cancelNotification(
+                int.parse("1${state.surahNumber}1"),
+              );
+              await LocalNotificationService.showCompletionNotification(
+                2001,
+                "تم تحميل ${quranSurahs[state.surahNumber]!} بنجاح",
+              );
+            }
+          }),
+        );
+      } on DioException catch (e) {
+        dev.log("error downloading file $e");
       }
-      }));
-    } on DioException catch (e) {
-      dev.log("error downloading file $e");
-    }
 
-
-//=========================================================
-
-
-
-
-
-
-
-
-
-
-   
-    }else{
-
-       await LocalNotificationService.showBasicNotification("السورة موجود بالفعل","");
+      //=========================================================
+    } else {
+      await LocalNotificationService.showBasicNotification(
+        "السورة موجود بالفعل",
+        "",
+      );
     }
   }
 
@@ -674,7 +677,8 @@ await LocalNotificationService.showCompletionNotification(2001,"تم تحميل 
     final directory = await getApplicationDocumentsDirectory();
 
     final reciterDir = Directory(
-        '${directory.path}/Quran_listening/${state.reciter.nameArabic}');
+      '${directory.path}/Quran_listening/${state.reciter.nameArabic}',
+    );
     final filePath = '${reciterDir.path}/${state.surahNumber}.mp3';
 
     String surahNumberZeroPad = state.surahNumber.toString().padLeft(3, '0');
@@ -686,13 +690,20 @@ await LocalNotificationService.showCompletionNotification(2001,"تم تحميل 
       if (await File(filePath).exists()) {
         //TODO : play WITH local SOUND
 
-        await shareSound(filePath,
-            des: quranSurahs[state.surahNumber],
-            subject: "سورة من القرءان الكريم");
+        await shareSound(
+          filePath,
+          des: quranSurahs[state.surahNumber],
+          subject: "سورة من القرءان الكريم",
+        );
       } else {
         await shareText(
-            "${quranSurahs[state.surahNumber]}............... رابط الاستماع والتحميل : $url",
-            subject: "سورة من القرءان الكريم");
+          FormatText.surahShareText(
+            surahName: quranSurahs[state.surahNumber]!,
+            reciterName: reciter.nameArabic,
+            url: url,
+          ),
+          subject: "سورة من القرآن الكريم",
+        );
       }
     } catch (e) {
       dev.log(e.toString());

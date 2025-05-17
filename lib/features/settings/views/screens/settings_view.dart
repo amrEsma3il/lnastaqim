@@ -3,6 +3,11 @@ import 'package:lnastaqim/core/utilits/widgets/custom_app_bar.dart';
 import 'package:lnastaqim/features/settings/views/widgets/setting_item.dart';
 import 'package:lnastaqim/features/settings/views/widgets/split_settings.dart';
 
+import '../../../../core/constants/links.dart';
+import '../../../../core/utilits/functions/format_text.dart';
+import '../../../../core/utilits/services/url_launcher.dart';
+import '../../../share/views/widgets/share_fun.dart';
+
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
 
@@ -20,7 +25,14 @@ class SettingsView extends StatelessWidget {
                 SettingItem(
                   icon: Icons.email,
                   text: "تواصل معنا",
-                  onTap: () {},
+                  onTap: () {
+
+                    UrlLauncher.launchToUrl(
+  'mailto:contact@lnastaqim.com',
+  isExternal: true,
+);
+
+                  },
                 ),
                 const SplitSetting(
                   title: "المظهر",
@@ -37,12 +49,20 @@ class SettingsView extends StatelessWidget {
                 SettingItem(
                   icon: Icons.rate_review,
                   text: "تقييم التطبيق",
-                  onTap: () {},
+                  onTap: () {
+                    UrlLauncher.launchToUrl(AppLinks.storeUrl,isExternal: true);
+                  },
                 ),
                 SettingItem(
                   icon: Icons.share,
                   text: "مشاركة التطبيق",
-                  onTap: () {},
+                  onTap: () async{
+                      await shareText(
+           FormatText.appShareText(AppLinks.storeUrl) ,
+          subject:"مشاركة التطبيق" ,
+        );
+                   
+                  },
                 ),
                 const SplitSetting(
                   title: "المزيد",
@@ -52,11 +72,7 @@ class SettingsView extends StatelessWidget {
                   text: "حقوق الملكية",
                   onTap: () {},
                 ),
-                SettingItem(
-                  icon: Icons.privacy_tip,
-                  text: "سياسه الخصوصية",
-                  onTap: () {},
-                ),
+        
                 SettingItem(
                   icon: Icons.info,
                   text: "من نحن",

@@ -1,6 +1,4 @@
-import 'dart:developer';
 
-import 'package:adhan/adhan.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationService {

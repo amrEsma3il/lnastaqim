@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "432670175669",
+    "project_id": "lnastaqim",
+    "storage_bucket": "lnastaqim.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432670175669:android:807ef8fd76fc7ed577e9fc",
+        "android_client_info": {
+          "package_name": "com.islam.lnastaqim"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYXb3rBdXRzu7ayN3krDhLQ6TQfyTyBOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432670175669:android:94ff1f53b6c2084077e9fc",
+        "android_client_info": {
+          "package_name": "com.islam.lnastaqim.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYXb3rBdXRzu7ayN3krDhLQ6TQfyTyBOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

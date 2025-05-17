@@ -1,0 +1,5 @@
+{
+    "yaml.schemaStore.enable": false,
+    "dart.flutterSdkPath": "~/development/flutter29.2",
+    "java.configuration.updateBuildConfiguration": "automatic"
+  }

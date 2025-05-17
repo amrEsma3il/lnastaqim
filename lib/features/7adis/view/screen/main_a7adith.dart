@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/core/constants/images.dart';
 import 'package:lnastaqim/core/utilits/widgets/custom_app_bar.dart';
-import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/custom_menu.dart';
 
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
-import '../../../azkar_with_sib7a/view/widgets/show_azkar_options_menu.dart';
 import '../widget/books_grid_view.dart';
 
 class MainHadithScreen extends StatelessWidget {
