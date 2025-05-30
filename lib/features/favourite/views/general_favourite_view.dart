@@ -4,6 +4,8 @@ import 'package:lnastaqim/core/utilits/widgets/custom_app_bar.dart';
 import 'package:lnastaqim/features/favourite/views/widgets/favourites_azkar_7adis_lisview.dart';
 import 'package:lnastaqim/features/favourite/views/widgets/general_favourite_header.dart';
 
+import 'quran_favourite_sound_player.dart';
+
 class GeneralFavouriteView extends StatefulWidget {
   const GeneralFavouriteView({super.key});
 
@@ -14,11 +16,13 @@ class GeneralFavouriteView extends StatefulWidget {
 class _GeneralFavouriteViewState extends State<GeneralFavouriteView> {
   bool _isAzkar = true;
   bool _is7adis = false;
+  bool _isQuran= false;
 
   void _toggleFavAzkar() {
     setState(() {
       _isAzkar = true;
       _is7adis = false;
+      _isQuran=false;
     });
   }
 
@@ -26,6 +30,14 @@ class _GeneralFavouriteViewState extends State<GeneralFavouriteView> {
     setState(() {
       _isAzkar = false;
       _is7adis = true;
+      _isQuran=false;
+    });
+  }
+  void _toggleFavQuran() {
+    setState(() {
+      _isAzkar = false;
+      _is7adis = false;
+      _isQuran=true;
     });
   }
 
@@ -63,31 +75,36 @@ class _GeneralFavouriteViewState extends State<GeneralFavouriteView> {
                             title: "الاحاديث",
                             onTap: _toggleFav7adis,
                             isVisible: _is7adis)),
+
+                                  Expanded(
+                        child: GeneralFavouriteHeader(
+                            title: "القرآن",
+                            onTap: _toggleFavQuran,
+                            isVisible: _isQuran)),
                   ],
                 ),
               ),
             ),
-            Visibility(
-              visible: _isAzkar,
-              child: Expanded(
-                child: Padding(
-                    padding: EdgeInsets.only(bottom: 20.h),
-                    child: const FavouritesAzkar7adisListView(
-                      isZekr: true,
-                    )),
-              ),
-            ),
-            Visibility(
-              visible: _is7adis,
-              child: Expanded(
-                child: Padding(
-                    padding: EdgeInsets.only(bottom: 20.h),
+            Expanded(
+              child: Padding(
+                 padding: EdgeInsets.only(bottom: 20.h),
+                child: Visibility(
+                  visible: _isAzkar,
+                  replacement: Visibility(
+                    visible: _is7adis,
+                    replacement:const FavoritesQuranScreen(
+                      
+                    ) ,
                     child: const FavouritesAzkar7adisListView(
                       isZekr: false,
-                    )),
+                    ),
+                  ),
+                  child: const FavouritesAzkar7adisListView(
+                    isZekr: true,
+                  ),
+                ),
               ),
-            ),
-          ],
+            ),    ],
         ),
       ),
     );

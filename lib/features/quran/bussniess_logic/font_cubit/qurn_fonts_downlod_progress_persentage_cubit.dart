@@ -153,7 +153,7 @@ class FontDownloadPercentage extends Cubit<FontDownloadState> {
         if (!state.isPlaying) {
           // إذا تم إيقاف التحميل مؤقتًا
 
-          await LocalNotificationService.downloadNotification(
+          await LocalNotificationService.instance.downloadNotification(
            groupKey: "quranDownloadAndLoad",
               title: 'تحميل المصحف',
             keyFeature: NotificationKeys.quranDownload,
@@ -187,7 +187,7 @@ class FontDownloadPercentage extends Cubit<FontDownloadState> {
               log('Failed to download font $fontNum: ${response.statusCode}');
             }
           } catch (e) {
-            await LocalNotificationService.downloadNotification(
+            await LocalNotificationService.instance.downloadNotification(
                groupKey: "quranDownloadAndLoad",
                 title: 'تحميل المصحف',
               keyFeature: NotificationKeys.quranDownload,
@@ -212,7 +212,7 @@ class FontDownloadPercentage extends Cubit<FontDownloadState> {
 
         // حساب التقدم بالنسب المئوية والميجابايت
 
-        await LocalNotificationService.downloadNotification(
+        await LocalNotificationService.instance.downloadNotification(
           groupKey: "quranDownloadAndLoad",
           title: 'تحميل المصحف',
           keyFeature: NotificationKeys.quranDownload,
@@ -225,8 +225,8 @@ class FontDownloadPercentage extends Cubit<FontDownloadState> {
         );
 
         if (progressInMBS >= totalSize) {
-          LocalNotificationService.cancelNotification(604);
-          await LocalNotificationService.showCompletionNotification(606,"تم تحميل المصحف بنجاح");
+          LocalNotificationService.instance.cancelNotification(604);
+          await LocalNotificationService.instance.showCompletionNotification(606,"تم تحميل المصحف بنجاح");
           break;
         }
 

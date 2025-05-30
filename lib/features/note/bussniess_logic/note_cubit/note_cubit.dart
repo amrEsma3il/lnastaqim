@@ -6,6 +6,7 @@ import 'package:hive/hive.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/constants.dart';
+import '../../../../core/constants/keys.dart';
 import '../../data/models/note_model.dart';
 
 part 'note_state.dart';
@@ -18,7 +19,7 @@ class NoteCubit extends Cubit<NoteState> {
       BlocProvider.of<NoteCubit>(context);
   List<NoteModel>? notes;
   fetchNotes() {
-    var notesBox = Hive.box<NoteModel>(kNoteBox);
+    var notesBox = Hive.box<NoteModel>(AppKeys.kNoteBox);
     notes = notesBox.values.toList();
     emit(NoteSuccessState());
   }

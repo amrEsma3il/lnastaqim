@@ -118,7 +118,7 @@ class NotificationCubit extends Cubit<NotificationState> {
       );
     } else {
       log("cancel");
-      await LocalNotificationService.cancelNotification(30101);
+      await LocalNotificationService.instance.cancelNotification(30101);
       await _workManagerService.cancelTask('uniquesalahNabiTask');
     }
   }
@@ -142,7 +142,7 @@ class NotificationCubit extends Cubit<NotificationState> {
         state.morningAndEviningNotificationFrequancy,
       );
     } else {
-      await LocalNotificationService.cancelNotification(2);
+      await LocalNotificationService.instance.cancelNotification(2);
 
       await _workManagerService.cancelTask('uniquemorningAndEveningTask');
     }
@@ -157,7 +157,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     if (state.fajarAlarmStatus) {
       await _workManagerService.registerFajrParyerTimeTask();
     } else {
-      await LocalNotificationService.cancelNotification(5);
+      await LocalNotificationService.instance.cancelNotification(5);
 
       await _workManagerService.cancelTask('uniquefajrparyerTimeTask');
     }
@@ -172,7 +172,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     if (state.duharAlarmStatus) {
       await _workManagerService.registerDuharParyerTimeTask();
     } else {
-      await LocalNotificationService.cancelNotification(50);
+      await LocalNotificationService.instance.cancelNotification(50);
 
       await _workManagerService.cancelTask('uniqueduharparyerTimeTask');
     }
@@ -187,7 +187,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     if (state.asrAlarmStatus) {
       await _workManagerService.registerAsrParyerTimeTask();
     } else {
-      await LocalNotificationService.cancelNotification(500);
+      await LocalNotificationService.instance.cancelNotification(500);
 
       await _workManagerService.cancelTask('uniqueasrparyerTimeTask');
     }
@@ -202,7 +202,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     if (state.maghribAlarmStatus) {
       await _workManagerService.registerMaghribParyerTimeTask();
     } else {
-      await LocalNotificationService.cancelNotification(5000);
+      await LocalNotificationService.instance.cancelNotification(5000);
 
       await _workManagerService.cancelTask('uniquemaghribparyerTimeTask');
     }
@@ -216,7 +216,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     if (state.ishaAlarmStatus) {
       await _workManagerService.registerIshaParyerTimeTask();
     } else {
-      await LocalNotificationService.cancelNotification(50000);
+      await LocalNotificationService.instance.cancelNotification(50000);
 
       await _workManagerService.cancelTask('uniqueishaparyerTimeTask');
     }
@@ -450,7 +450,7 @@ class NotificationCubit extends Cubit<NotificationState> {
 
     log("cancelAllNotifications");
     {
-      await LocalNotificationService.cancelNotification(5);
+      await LocalNotificationService.instance.cancelNotification(5);
 
       await _workManagerService.cancelTask('uniquefajrparyerTimeTask');
     }
@@ -458,7 +458,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     {
       //  Hive.box<bool>('notificationBox').put('duharAlarmStatus', state.duharAlarmStatus);
 
-      await LocalNotificationService.cancelNotification(50);
+      await LocalNotificationService.instance.cancelNotification(50);
 
       await _workManagerService.cancelTask('uniqueduharparyerTimeTask');
     }
@@ -466,7 +466,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     {
       // Hive.box<bool>('notificationBox').put('asrAlarmStatus', state.asrAlarmStatus);
 
-      await LocalNotificationService.cancelNotification(500);
+      await LocalNotificationService.instance.cancelNotification(500);
 
       await _workManagerService.cancelTask('uniqueasrparyerTimeTask');
     }
@@ -474,7 +474,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     {
       //Hive.box<bool>('notificationBox').put('maghribAlarmStatus', state.maghribAlarmStatus);
 
-      await LocalNotificationService.cancelNotification(5000);
+      await LocalNotificationService.instance.cancelNotification(5000);
 
       await _workManagerService.cancelTask('uniquemaghribparyerTimeTask');
     }
@@ -482,7 +482,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     {
       //Hive.box<bool>('notificationBox').put('ishaAlarmStatus', state.ishaAlarmStatus);
 
-      await LocalNotificationService.cancelNotification(50000);
+      await LocalNotificationService.instance.cancelNotification(50000);
 
       await _workManagerService.cancelTask('uniqueishaparyerTimeTask');
     }
@@ -490,14 +490,14 @@ class NotificationCubit extends Cubit<NotificationState> {
     {
       //  Hive.box<bool>('notificationBox').put('salahNabiNotificationStatus', state.salahNabiNotificationStatus);
 
-      await LocalNotificationService.cancelNotification(30101);
+      await LocalNotificationService.instance.cancelNotification(30101);
       await _workManagerService.cancelTask('uniquesalahNabiTask');
     }
 
     {
       // Hive.box<bool>('notificationBox').put('morningAndEviningNotificationStatus', state.morningAndEviningNotificationStatus);
 
-      await LocalNotificationService.cancelNotification(2);
+      await LocalNotificationService.instance.cancelNotification(2);
 
       await _workManagerService.cancelTask('uniquemorningAndEveningTask');
     }

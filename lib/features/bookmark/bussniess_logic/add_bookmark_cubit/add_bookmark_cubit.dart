@@ -3,6 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:lnastaqim/features/bookmark/data/models/bookmark_model.dart';
 
 import '../../../../core/constants/constants.dart';
+import '../../../../core/constants/keys.dart';
 
 part 'add_bookmark_state.dart';
 
@@ -12,7 +13,7 @@ class AddBookmarkCubit extends Cubit<AddBookmarkState> {
   addBookmark(BookmarkModel bookmarkModel) async {
     emit(AddBookmarkLoadingState());
     try {
-      var bookmarkBox = Hive.box<BookmarkModel>(kBookmarkBox);
+      var bookmarkBox = Hive.box<BookmarkModel>(AppKeys.kBookmarkBox);
 
       await bookmarkBox.add(bookmarkModel);
       emit(AddBookmarkSuccessState());

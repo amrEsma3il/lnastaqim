@@ -11,30 +11,24 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-
-import '../../../features/notification/bussiness_logic/notification_cubit.dart';
-import '../../../features/paryer_times/bussniess_logic/prayers_times_cubit.dart';
-
-import '../../../features/paryer_times/data/models/prayers_time_model.dart';
 import '../../../features/paryer_times/data/repository/prayers_times_repo.dart';
 import '../../../main.dart';
 import '../../local_database/azkar/azkar_local_database.dart';
 import 'audio_service/players_key.dart';
 
 class LocalNotificationService {
-  
-  static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  static StreamController<NotificationResponse> streamController =
-      StreamController();
+static LocalNotificationService get instance=>LocalNotificationService();
+  StreamController<NotificationResponse> streamController = StreamController();
 
-  static void onTap(NotificationResponse notificationResponse) {
+  void onTap(NotificationResponse notificationResponse) {
     streamController.add(notificationResponse);
   }
 
   @pragma('vm:entry-point')
-  static void notificationTapBackground(
+  void notificationTapBackground(
     NotificationResponse notificationResponse,
   ) async {
     log("hi from onDidReceiveNotificationBackgroundResponse");
@@ -45,7 +39,7 @@ class LocalNotificationService {
     await handleMediaAction(action);
   }
 
-  static Future<void> handleMediaAction(String action) async {
+  Future<void> handleMediaAction(String action) async {
     // final cubit = SurahPlayerCubit.get(navigatorKey.currentContext!);
 
     log("navigator key${navigatorKey.currentContext}");
@@ -53,7 +47,7 @@ class LocalNotificationService {
       case 'play':
         log('play sound');
         // await  cubit.togglePlayPause();
-        await LocalNotificationService.showMediaNotification(
+        await showMediaNotification(
           groupKey: "quran",
 
           isPlaying: true,
@@ -63,7 +57,7 @@ class LocalNotificationService {
         break;
       case 'pause':
         log('pause sound');
-        await LocalNotificationService.showMediaNotification(
+        await showMediaNotification(
           groupKey: "quran",
 
           isPlaying: false,
@@ -84,7 +78,7 @@ class LocalNotificationService {
     }
   }
 
-  static Future<void> requestNotificationPermission() async {
+  Future<void> requestNotificationPermission() async {
     final bool granted =
         await flutterLocalNotificationsPlugin
             .resolvePlatformSpecificImplementation<
@@ -92,10 +86,6 @@ class LocalNotificationService {
             >()
             ?.areNotificationsEnabled() ??
         false;
-
-    // final bool? granted = await flutterLocalNotificationsPlugin
-    //     .resolvePlatformSpecificImplementation<
-    //         AndroidFlutterLocalNotificationsPlugin>()?.requestNotificationsPermission();
 
     if (granted == false) {
       final bool? granted =
@@ -117,7 +107,7 @@ class LocalNotificationService {
     }
   }
 
-  static Future init() async {
+  Future init() async {
     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
         FlutterLocalNotificationsPlugin();
     InitializationSettings settings = const InitializationSettings(
@@ -143,7 +133,7 @@ class LocalNotificationService {
     );
   }
 
-  static Future<void> showMediaNotification({
+  Future<void> showMediaNotification({
     required String keyFeature,
     required groupKey,
     required int id,
@@ -204,7 +194,7 @@ class LocalNotificationService {
     );
   }
 
-  static Future<void> downloadNotification({
+  Future<void> downloadNotification({
     required int progress,
     required String keyFeature,
     required String title,
@@ -257,7 +247,7 @@ class LocalNotificationService {
     );
   }
 
-  static Future<void> showCompletionNotification(int id, String title) async {
+  Future<void> showCompletionNotification(int id, String title) async {
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
           'download_complete_channel',
@@ -282,7 +272,7 @@ class LocalNotificationService {
     );
   }
 
-  // static void alarmNotification() async {
+  //   void alarmNotification() async {
   //   final AlarmSettings alarmSettings = AlarmSettings(
   //     id: 42,
   //     dateTime: DateTime.now().add(const Duration(minutes: 1)),
@@ -298,7 +288,7 @@ class LocalNotificationService {
   //   await Alarm.set(alarmSettings: alarmSettings);
   // }
 
-  static Future<void> showBasicNotification(String title, String body) async {
+  Future<void> showBasicNotification(String title, String body) async {
     AndroidNotificationDetails android = const AndroidNotificationDetails(
       'id 111',
       'basic notification',
@@ -322,7 +312,7 @@ class LocalNotificationService {
   }
 
   //====================
-  static Future<void> testCancelNotificationAutoAfterShow() async {
+  Future<void> testCancelNotificationAutoAfterShow() async {
     AndroidNotificationDetails android = const AndroidNotificationDetails(
       'test cancel',
       'basic notification',
@@ -355,7 +345,7 @@ class LocalNotificationService {
 
   //===============================
 
-  static Future<void> testSechduleCancelNotification() async {
+  Future<void> testSechduleCancelNotification() async {
     NotificationDetails details = NotificationDetails(
       android: AndroidNotificationDetails(
         groupKey: "paryers",
@@ -415,18 +405,18 @@ class LocalNotificationService {
 
   //==========================
 
-  static Future<void> setSelectedAzanSound(String sound) async {
+  Future<void> setSelectedAzanSound(String sound) async {
     prefs = await SharedPreferences.getInstance();
     await prefs.setString('randomAzanSound', sound);
     log("Selected Azan Sound updated to: $sound");
   }
 
-  static Future<String> getSavedAzanSound() async {
+  Future<String> getSavedAzanSound() async {
     prefs = await SharedPreferences.getInstance();
     return prefs.getString('randomAzanSound') ?? "azan1"; // الصوت الافتراضي
   }
 
-  static Future<void> testAzanSoundOptionsNotification() async {
+  Future<void> testAzanSoundOptionsNotification() async {
     log("test");
     String sound = await getSavedAzanSound();
     await cancelNotification(1001001);
@@ -457,7 +447,7 @@ class LocalNotificationService {
     );
   }
 
-  static Future<void> showMorningAndEveningAzkarScheduledNotification() async {
+  Future<void> showMorningAndEveningAzkarScheduledNotification() async {
     List<Map<String, String>> azkarNotifications = AzkarDataBase.azkarJsonData;
 
     NotificationDetails details = const NotificationDetails(
@@ -531,7 +521,7 @@ class LocalNotificationService {
     }
   }
 
-  static TimeOfDay parseTime(String time) {
+  TimeOfDay parseTime(String time) {
     final period = time.endsWith('AM') ? 'AM' : 'PM';
     final timeWithoutPeriod = time.replaceAll(period, '');
     final timeParts = timeWithoutPeriod.split(':');
@@ -548,38 +538,11 @@ class LocalNotificationService {
     return TimeOfDay(hour: hour, minute: minute);
   }
 
-  static var fajrTime = parseTime(
-    PrayersTimesRepo.fetchPrayersTimes(
-      Coordinates(position!.latitude, position!.longitude),
-      PrayersTimesRepo.getCalculationParameters(),
-    ).fajr,
-  );
-  static var dhuhrTime = parseTime(
-    PrayersTimesRepo.fetchPrayersTimes(
-      Coordinates(position!.latitude, position!.longitude),
-      PrayersTimesRepo.getCalculationParameters(),
-    ).dhuhr,
-  );
-  static var asrTime = parseTime(
-    PrayersTimesRepo.fetchPrayersTimes(
-      Coordinates(position!.latitude, position!.longitude),
-      PrayersTimesRepo.getCalculationParameters(),
-    ).asr,
-  );
-  static var maghribTime = parseTime(
-    PrayersTimesRepo.fetchPrayersTimes(
-      Coordinates(position!.latitude, position!.longitude),
-      PrayersTimesRepo.getCalculationParameters(),
-    ).maghrib,
-  );
-  static var ishaTime = parseTime(
-    PrayersTimesRepo.fetchPrayersTimes(
-      Coordinates(position!.latitude, position!.longitude),
-      PrayersTimesRepo.getCalculationParameters(),
-    ).isha,
-  );
+  
 
-  static Future<void> initializeNotificationChannel(
+
+
+  Future<void> initializeNotificationChannel(
     String id,
     String name,
     String sound,
@@ -599,7 +562,7 @@ class LocalNotificationService {
         ?.createNotificationChannel(channel);
   }
 
-  static Future<void> showSalahNabiNotification() async {
+  Future<void> showSalahNabiNotification() async {
     prefs = await SharedPreferences.getInstance();
     String sound =
         prefs.getString('salahNabiNotificationSound') ??
@@ -632,15 +595,15 @@ class LocalNotificationService {
     );
   }
 
-  static Future<void> cancelNotification(int id) async {
+  Future<void> cancelNotification(int id) async {
     await flutterLocalNotificationsPlugin.cancel(id);
   }
 
-  static Future<void> cancelAllNotification() async {
+  Future<void> cancelAllNotification() async {
     await flutterLocalNotificationsPlugin.cancelAll();
   }
 
-  static Future<void> scheduleNotificationCancellationAt({
+  Future<void> scheduleNotificationCancellationAt({
     required tz.TZDateTime currentTime,
     required int id,
     required tz.TZDateTime scheduledTime,
@@ -658,16 +621,6 @@ class LocalNotificationService {
     }
 
     log("delay =  ${cancelNotificationDelay.inMinutes}");
-    // log("====================currentTime========$currentTime");
-    // log("====================scheduledTime========$scheduledTime");
-
-    // log("====================delayAfterDisplay========$delayAfterDisplay");
-
-    // log("====================delay========$delay");
-
-    Future.delayed(exactDelay, () async {
-      PrayersTimesCubit().fetchPrayersTimes();
-    });
 
     Future.delayed(cancelNotificationDelay, () async {
       await cancelNotification(id);
@@ -677,7 +630,81 @@ class LocalNotificationService {
     });
   }
 
-  static Future<void> salahFajrNotification() async {
+  Future<void> salahFajrTestNotification() async {
+
+      
+
+  var fajrTime = parseTime(
+  "4:20 AM",
+  );
+    prefs = await SharedPreferences.getInstance();
+    String sound =
+        prefs.getString('fajarAlarmSound') ??
+        "ahmed_eltrabolsy_fajr"; // الصوت الافتراضي
+
+    String id = "fajarAlarmSoundtest$sound";
+    String name = "fajarAlarmSoundtest";
+  log("------------------");
+    log("fajr test");
+    log("fajr test hour = ${fajrTime.hour}");
+  log("fajr test minute = ${fajrTime.minute}");
+  log("------------------");
+
+    await cancelNotification(522);
+    await initializeNotificationChannel(id, name, sound);
+
+    NotificationDetails details = NotificationDetails(
+      android: AndroidNotificationDetails(
+        groupKey: "paryers",
+
+        id,
+        name,
+        importance: Importance.max,
+        priority: Priority.high,
+        audioAttributesUsage: AudioAttributesUsage.alarm,
+        sound: RawResourceAndroidNotificationSound(sound),
+      ),
+    );
+    tz.initializeTimeZones();
+    tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
+    var currentTimeZone = tz.TZDateTime.now(tz.local);
+    var shduledTime = tz.TZDateTime(
+      tz.local,
+      currentTimeZone.year,
+      currentTimeZone.month,
+      currentTimeZone.day,
+      fajrTime.hour,
+      fajrTime.minute,
+    );
+    if (shduledTime.isBefore(currentTimeZone)) {
+      shduledTime = shduledTime.add(const Duration(days: 1));
+    }
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      522,
+      'صلاه الفجر',
+      'حان الان موعد اذان الفجر',
+      payload: 'zonedSchedule',
+      shduledTime,
+      details,
+      // uiLocalNotificationDateInterpretation:
+      //     UILocalNotificationDateInterpretation.absoluteTime,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+    );
+
+    await scheduleNotificationCancellationAt(
+      id: 522,
+      scheduledTime: shduledTime,
+      currentTime: currentTimeZone,
+    );
+  }
+
+  Future<void> salahFajrNotification() async {
+    var fajrTime = parseTime(
+    PrayersTimesRepo.fetchPrayersTimes(
+      Coordinates(position!.latitude, position!.longitude),
+      PrayersTimesRepo.getCalculationParameters(),
+    ).fajr,
+  );
     prefs = await SharedPreferences.getInstance();
     String sound =
         prefs.getString('fajarAlarmSound') ??
@@ -736,16 +763,24 @@ class LocalNotificationService {
     );
   }
 
-  static Future<void> salahDuhrNotification() async {
+  Future<void> salahDuhrNotification() async {
+      var dhuhrTime = parseTime(
+    PrayersTimesRepo.fetchPrayersTimes(
+      Coordinates(position!.latitude, position!.longitude),
+      PrayersTimesRepo.getCalculationParameters(),
+    ).dhuhr,
+  );
     prefs = await SharedPreferences.getInstance();
     String sound =
         prefs.getString('duharAlarmSound') ?? "ali_elmola"; // الصوت الافتراضي
 
     String id = "duharAlarmSound$sound";
     String name = "duharAlarmSound";
-
-    log(sound);
-
+    log("====================================");
+    log("duhar from notification hour ${dhuhrTime.hour}");
+    log("duhar from notification minute ${dhuhrTime.minute}");
+    log("duhar from notification $sound");
+    log("====================================");
     await cancelNotification(50);
     await initializeNotificationChannel(id, name, sound);
 
@@ -795,7 +830,13 @@ class LocalNotificationService {
     );
   }
 
-  static Future<void> salahAsrNotification() async {
+  Future<void> salahAsrNotification() async {
+    var asrTime = parseTime(
+    PrayersTimesRepo.fetchPrayersTimes(
+      Coordinates(position!.latitude, position!.longitude),
+      PrayersTimesRepo.getCalculationParameters(),
+    ).asr,
+  );
     prefs = await SharedPreferences.getInstance();
     String sound =
         prefs.getString('asrAlarmSound') ?? "ali_elmola"; // الصوت الافتراضي
@@ -854,7 +895,13 @@ class LocalNotificationService {
     );
   }
 
-  static Future<void> salahMagribNotification() async {
+  Future<void> salahMagribNotification() async {
+      var maghribTime = parseTime(
+    PrayersTimesRepo.fetchPrayersTimes(
+      Coordinates(position!.latitude, position!.longitude),
+      PrayersTimesRepo.getCalculationParameters(),
+    ).maghrib,
+  );
     prefs = await SharedPreferences.getInstance();
     String sound =
         prefs.getString('maghribAlarmSound') ?? "ali_elmola"; // الصوت الافتراضي
@@ -913,7 +960,16 @@ class LocalNotificationService {
     );
   }
 
-  static Future<void> salahIshaNotification() async {
+  Future<void> salahIshaNotification() async {
+
+      
+
+  var ishaTime = parseTime(
+    PrayersTimesRepo.fetchPrayersTimes(
+      Coordinates(position!.latitude, position!.longitude),
+      PrayersTimesRepo.getCalculationParameters(),
+    ).isha,
+  );
     prefs = await SharedPreferences.getInstance();
     String sound =
         prefs.getString('ishaAlarmSound') ?? "ali_elmola"; // الصوت الافتراضي
@@ -970,88 +1026,4 @@ class LocalNotificationService {
       currentTime: currentTimeZone,
     );
   }
-
-  // static Future<void> canclAllParyersNotifications()async{
-  //   tz.initializeTimeZones();
-  //     tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
-  //     var currentTimeZone = tz.TZDateTime.now(tz.local);
-
-  //     var fajrShduledTime = tz.TZDateTime(
-  //         tz.local,
-  //         currentTimeZone.year,
-  //         currentTimeZone.month,
-  //         currentTimeZone.day,
-  //         fajrTime.hour,
-  //         fajrTime.minute);
-  //     if (fajrShduledTime.isBefore(currentTimeZone)) {
-  //       fajrShduledTime = fajrShduledTime.add(const Duration(days: 1));
-  //     }
-
-  // await scheduleNotificationCancellationAt(id: 5,scheduledTime: fajrShduledTime,
-  // currentTime: currentTimeZone);
-
-  // //==========================
-
-  //   var duharShduledTime = tz.TZDateTime(
-  //         tz.local,
-  //         currentTimeZone.year,
-  //         currentTimeZone.month,
-  //         currentTimeZone.day,
-  //         dhuhrTime.hour,
-  //         dhuhrTime.minute);
-  //     if (duharShduledTime.isBefore(currentTimeZone)) {
-  //       duharShduledTime = duharShduledTime.add(const Duration(days: 1));
-  //     }
-
-  // await scheduleNotificationCancellationAt(id: 50,scheduledTime: duharShduledTime,
-  // currentTime: currentTimeZone);
-
-  // //======================================
-
-  //   var asrShduledTime = tz.TZDateTime(
-  //         tz.local,
-  //         currentTimeZone.year,
-  //         currentTimeZone.month,
-  //         currentTimeZone.day,
-  //         asrTime.hour,
-  //         asrTime.minute);
-  //     if (asrShduledTime.isBefore(currentTimeZone)) {
-  //       asrShduledTime = asrShduledTime.add(const Duration(days: 1));
-  //     }
-
-  // await scheduleNotificationCancellationAt(id: 500,scheduledTime: asrShduledTime,
-  // currentTime: currentTimeZone);
-
-  // //===========================
-
-  //       var maghribShduledTime = tz.TZDateTime(
-  //         tz.local,
-  //         currentTimeZone.year,
-  //         currentTimeZone.month,
-  //         currentTimeZone.day,
-  //         maghribTime.hour,
-  //         maghribTime.minute);
-  //     if (maghribShduledTime.isBefore(currentTimeZone)) {
-  //       maghribShduledTime = maghribShduledTime.add(const Duration(days: 1));
-  //     }
-
-  // await scheduleNotificationCancellationAt(id: 5000,scheduledTime: maghribShduledTime,currentTime: currentTimeZone);
-
-  // //==========================
-
-  //       var ishaShduledTime = tz.TZDateTime(
-  //         tz.local,
-  //         currentTimeZone.year,
-  //         currentTimeZone.month,
-  //         currentTimeZone.day,
-  //         ishaTime.hour,
-  //         ishaTime.minute);
-  //     if (ishaShduledTime.isBefore(currentTimeZone)) {
-  //       ishaShduledTime = ishaShduledTime.add(const Duration(days: 1));
-  //     }
-
-  // await scheduleNotificationCancellationAt(id: 50000,scheduledTime: ishaShduledTime,currentTime: currentTimeZone);
-
-  // //=================
-  // }
 }

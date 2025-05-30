@@ -45,9 +45,11 @@ class _CarouselSliderAyahState extends State<CarouselSliderAyah> {
           enableInfiniteScroll: true,
           reverse: false,
           autoPlay: true,
-          autoPlayInterval: const Duration(seconds: 3),
-          autoPlayAnimationDuration: const Duration(milliseconds: 2500),
-          autoPlayCurve: Curves.fastOutSlowIn,
+        
+   autoPlayInterval: Duration(seconds: 10), // مدة بقاء السلايد قبل الانتقال
+    autoPlayAnimationDuration: Duration(seconds: 2), // مدة الحركة بين السلايدات
+    autoPlayCurve: Curves.easeInOut, // حركة ناعمة
+
           scrollDirection: Axis.horizontal,
           viewportFraction: 1,
         ),

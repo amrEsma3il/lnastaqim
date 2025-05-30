@@ -1,13 +1,14 @@
 import 'package:equatable/equatable.dart';
 
-import '../../data/models/reciters__model.dart';
-import '../../data/repo/repo.dart';
+import '../../data/models/reciter_model/reciters_model.dart';
+import '../../data/repo/surah_player_repo.dart';
 import 'surah_player_cubit.dart';
 
 class SurahPlayerState extends Equatable {
   final bool isPlaying;
   final bool isPaused;
   // final int repeatCount;
+    final bool isSurahFavorite; 
   final String reciterCountry, reciterSearchQuery;
   final bool onRepeat;
   final int surahNumber;
@@ -30,6 +31,7 @@ class SurahPlayerState extends Equatable {
     required this.isSeeking,
     required this.isPlaying,
     required this.isPaused,
+        required this.isSurahFavorite,
     // required this.repeatCount,
     // required this.maxRepeats,
     required this.onRepeat,
@@ -46,19 +48,21 @@ class SurahPlayerState extends Equatable {
       isPaused: false,
       reciterCountry: "كل الدول",
       reciterSearchQuery: "",
+       isSurahFavorite: false,
       // repeatCount: 0,
       // maxRepeats: 0,
       onRepeat: false,
       surahNumber: 1,
       audioSpeed: 1,
       reciter: Reciter(
+        id: 94,
           name: "minshawi_mujawwad",
           nameArabic: "محمد صديق المنشاوي مجود",
           nationality: "مصر"),
       currentPosition: 0.0,
       surahDuration: 0.0,
       searchSurahResults:SurahPlayerCubit.quranSurahs.keys.toList(),
-       searchReciterResults: RecitersRepository().getAllReciters() // قائمة فارغة عند البداية
+       searchReciterResults: SurahPlayerRepo().getAllReciters() // قائمة فارغة عند البداية
       );
 
   SurahPlayerState copyWith({
@@ -71,6 +75,7 @@ class SurahPlayerState extends Equatable {
     // int? maxRepeats,
     Reciter? reciter,
     bool? onRepeat,
+    bool? isSurahFavorite,
     int? surahNumber,
     double? currentPosition,
     double? audioSpeed,
@@ -81,6 +86,7 @@ class SurahPlayerState extends Equatable {
     // إضافة متغير جديد
   }) {
     return SurahPlayerState(
+       isSurahFavorite: isSurahFavorite ?? this.isSurahFavorite,
         reciter: reciter ?? this.reciter,
         audioState: audioState ?? this.audioState,
         reciterCountry: reciterCountry ?? this.reciterCountry,
@@ -109,6 +115,7 @@ class SurahPlayerState extends Equatable {
         isSeeking,
         isPlaying,
         isPaused,
+          isSurahFavorite,
         // repeatCount,
         // maxRepeats,
         audioSpeed,

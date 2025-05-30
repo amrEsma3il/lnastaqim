@@ -20,7 +20,7 @@ class WorkManagerService {
       'uniquesalahNabiTask',
       'salahNabiTask',
       frequency: Duration(minutes: durationInMinutes),
-      initialDelay:  Duration(minutes: durationInMinutes)
+      initialDelay:  Duration(minutes: (durationInMinutes/4).toInt())
 
     );
   }
@@ -32,7 +32,7 @@ class WorkManagerService {
       'uniquemorningAndEveningTask', // المعرف الفريد للمهمة
       'morningAndEveningTask', // اسم المهمة
       frequency: Duration(minutes: durationInMinutes), 
-initialDelay:  Duration(minutes: durationInMinutes)
+initialDelay:  Duration(minutes: (durationInMinutes/2).toInt())
    );
   }
 
@@ -107,39 +107,39 @@ initialDelay:  Duration(minutes: durationInMinutes)
  
 }
 
-@pragma('vm-entry-point')
+@pragma('vm:entry-point')
 void actionTask() {
   Workmanager().executeTask((taskName, inputData) async {
     if (taskName == "fajrparyerTimeTask") {
       log("test from paryerTimeTask");
-  await    LocalNotificationService.salahFajrNotification();
+  await       LocalNotificationService.instance.salahFajrNotification();
   
     } else  if (taskName == "duharparyerTimeTask") {
       log("test from paryerTimeTask");
-   await   LocalNotificationService.salahDuhrNotification();
+   await      LocalNotificationService.instance.salahDuhrNotification();
     }else  if (taskName == "asrparyerTimeTask") {
       log("test from paryerTimeTask");
-   await   LocalNotificationService.salahAsrNotification();
+   await      LocalNotificationService.instance.salahAsrNotification();
     }else  if (taskName == "maghribparyerTimeTask") {
       log("test from paryerTimeTask");
-   await   LocalNotificationService.salahMagribNotification();
+   await      LocalNotificationService.instance.salahMagribNotification();
     }
     else  if (taskName == "ishaparyerTimeTask") {
       log("test from paryerTimeTask");
-   await   LocalNotificationService.salahIshaNotification();
+   await      LocalNotificationService.instance.salahIshaNotification();
     }
     
     
     
     else if (taskName == "morningAndEveningTask") {
-  await    LocalNotificationService
+  await       LocalNotificationService.instance
           .showMorningAndEveningAzkarScheduledNotification();
     } else if (taskName == "salahNabiTask") {
-  await    LocalNotificationService.showSalahNabiNotification();
+  await       LocalNotificationService.instance.showSalahNabiNotification();
     } else if (taskName == "testChangeSoundTimeTask"){
 
      
- await    LocalNotificationService.testAzanSoundOptionsNotification();
+ await       LocalNotificationService.instance.testAzanSoundOptionsNotification();
     }
   
 

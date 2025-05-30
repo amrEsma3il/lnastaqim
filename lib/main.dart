@@ -1,3 +1,19 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import 'dart:developer';
 import 'dart:isolate';
 import 'dart:ui';
@@ -55,7 +71,10 @@ import 'features/quran/bussniess_logic/screen_tap_Visibility/screen_tap_visabili
 import 'features/quran/bussniess_logic/sowra_detail/sora_details_cubit.dart';
 import 'features/quran_sound/data/models/reciter_entity.dart';
 import 'features/quran_sound/logic/audio_cubit/audio_cubit.dart';
-import 'features/quran_sound_player/data/repo/repo.dart';
+
+import 'features/quran_sound_player/data/models/reciter_model/reciters_model.dart';
+import 'features/quran_sound_player/data/models/surah_favorite_model/surah_favorite_model.dart';
+import 'features/quran_sound_player/data/repo/surah_player_repo.dart';
 import 'features/quran_sound_player/logic/surah_player_cubit/surah_player_cubit.dart';
 import 'features/radio_stream_channels/bussniess_logic/radio_cubit.dart';
 
@@ -200,28 +219,54 @@ Future<void> main(fireBaseOptions) async {
   position =await LocationService.determinePosition();
   await Hive.initFlutter();
 
+
+
   Hive.registerAdapter(BookmarkModelAdapter());
-  await Hive.openBox<BookmarkModel>(kBookmarkBox);
+
   Hive.registerAdapter(NoteModelAdapter());
-  await Hive.openBox<NoteModel>(kNoteBox);
   Hive.registerAdapter(FavouriteModelAdapter());
-  await Hive.openBox<FavouriteModel>(kAzkarFavouriteBox);
-  await Hive.openBox<FavouriteModel>(k7adisFavouriteBox);
 
-  await Hive.openBox<bool>('notificationBox');
-  await Hive.openBox('userPreferences');
+  Hive.registerAdapter(SurahFavoriteModelAdapter());
 
-  await Hive.openBox<ReciterEntity>(AppKeys.reciterBox);
+  Hive.registerAdapter(ReciterAdapter());
 
+
+  
+
+await  Hive.openBox<FavouriteModel>(AppKeys.kAzkarFavouriteBox);
+  await  Hive.openBox<BookmarkModel>(AppKeys.kBookmarkBox);
+  await  Hive.openBox<NoteModel>(AppKeys.kNoteBox);
+  await  Hive.openBox<SurahFavoriteModel>(AppKeys.favoriteSurahBoxName);
+  await  Hive.openBox<FavouriteModel>(AppKeys.k7adisFavouriteBox);
+  await  Hive.openBox<ReciterEntity>(AppKeys.reciterBox);
+  await  Hive.openBox<bool>(AppKeys.notificationBox);
+  await  Hive.openBox('userPreferences');
+
+
+
+
+
+
+//=======================================
+
+
+
+
+
+
+
+
+  
+//=======================================
   await Future.wait([
     WorkManagerService().init(),
         // Alarm.init()
   ]);
 
   await requestStoragePermission();
-  await LocalNotificationService.requestNotificationPermission();
+  await LocalNotificationService.instance.requestNotificationPermission();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: AppColor.blueColor.withOpacity(0.74)));
+      statusBarColor: AppColor.blueColor.withValues(alpha:  0.74)));
 
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
@@ -441,7 +486,7 @@ class Lnastaqim extends StatelessWidget {
                 create: (BuildContext context) => MemorizedVerseCubit()),
             BlocProvider(
               create: (BuildContext context) =>
-                  SurahPlayerCubit(RecitersRepository()),
+                  SurahPlayerCubit(SurahPlayerRepo()),
             ), //
             BlocProvider(
                 create: (BuildContext context) =>

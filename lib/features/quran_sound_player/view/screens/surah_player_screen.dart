@@ -12,8 +12,8 @@ import '../widgets/surah_info_widget.dart';
 import '../widgets/surah_slider_widget.dart';
 import '../widgets/surahs_bottom_sheet_component.dart';
 
-class SurahPlayerScreen extends StatelessWidget {
-  const SurahPlayerScreen({super.key});
+class SurahPlayerScreen extends StatelessWidget  {
+ const  SurahPlayerScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -147,14 +147,22 @@ class SurahPlayerScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.favorite,
-                        color: AppColor.white,
-                        size: 26,
-                      ),
-                    ),
+IconButton(
+  onPressed: () async {
+    await SurahPlayerCubit.get(context).updateFavoriteList();
+  },
+  icon: BlocBuilder<SurahPlayerCubit, SurahPlayerState>(
+    builder: (context, state) {
+      return Icon(
+        state.isSurahFavorite 
+          ? Icons.favorite 
+          : Icons.favorite_border_outlined,
+        color: AppColor.white,
+        size: 26,
+      );
+    },
+  ),
+),
                   ],
                 ),
                 SizedBox(height: 47.h),
@@ -170,4 +178,6 @@ class SurahPlayerScreen extends StatelessWidget {
       ),
     );
   }
+  
+
 }

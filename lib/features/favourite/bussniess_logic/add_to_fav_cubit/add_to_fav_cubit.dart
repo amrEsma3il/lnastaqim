@@ -4,6 +4,7 @@ import 'package:lnastaqim/features/favourite/bussniess_logic/add_to_fav_cubit/ad
 import 'package:lnastaqim/features/favourite/data/models/favourite_model.dart';
 
 import '../../../../core/constants/constants.dart';
+import '../../../../core/constants/keys.dart';
 
 class AddToFavouriteCubit extends Cubit<AddToFavouriteState> {
   AddToFavouriteCubit() : super(ToFavouriteInitial());
@@ -11,7 +12,7 @@ class AddToFavouriteCubit extends Cubit<AddToFavouriteState> {
   addAzkarToFavourite(FavouriteModel favouriteModel) async {
     emit(AddToFavouriteLoadingState());
     try {
-      var favouriteBox = Hive.box<FavouriteModel>(kAzkarFavouriteBox);
+      var favouriteBox = Hive.box<FavouriteModel>(AppKeys.kAzkarFavouriteBox);
 
       await favouriteBox.add(favouriteModel);
       emit(AddToFavouriteSuccessState());
@@ -23,7 +24,7 @@ class AddToFavouriteCubit extends Cubit<AddToFavouriteState> {
   add7adisToFavourite(FavouriteModel favouriteModel) async {
     emit(AddToFavouriteLoadingState());
     try {
-      var favouriteBox = Hive.box<FavouriteModel>(k7adisFavouriteBox);
+      var favouriteBox = Hive.box<FavouriteModel>(AppKeys.k7adisFavouriteBox);
 
       await favouriteBox.add(favouriteModel);
       emit(AddToFavouriteSuccessState());

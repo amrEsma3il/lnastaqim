@@ -118,7 +118,7 @@ initListeners(){
     if (state.isPlaying && state.playingUrl == channel.url) {
       await audioPlayer.stop();
       emit(state.copyWith(isPlaying: false, playingUrl: null));
-         await LocalNotificationService.showMediaNotification(
+         await LocalNotificationService.instance.showMediaNotification(
               groupKey: "radio",
 
           isPlaying: false,
@@ -133,7 +133,7 @@ initListeners(){
     await AudioPlayers().pauseAll();
     
 
-    await LocalNotificationService.showMediaNotification(
+    await LocalNotificationService.instance.showMediaNotification(
     groupKey: "radio",
           isPlaying: true,
           id: 31,
@@ -167,7 +167,7 @@ initListeners(){
       emit(state.copyWith(isPlaying: false, audioState: AudioFetchFailure(), playingUrl: null));
 
       
-   await LocalNotificationService.showMediaNotification(
+   await LocalNotificationService.instance.showMediaNotification(
         groupKey: "radio",
 
           isPlaying: false,

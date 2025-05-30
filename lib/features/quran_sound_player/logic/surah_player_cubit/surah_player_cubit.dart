@@ -15,8 +15,8 @@ import '../../../../core/utilits/services/audio_service/audio_players.dart';
 import '../../../../core/utilits/services/audio_service/players_key.dart';
 import '../../../../core/utilits/services/local_notification_service.dart';
 import '../../../share/views/widgets/share_fun.dart';
-import '../../data/models/reciters__model.dart';
-import '../../data/repo/repo.dart';
+import '../../data/models/reciter_model/reciters_model.dart';
+import '../../data/repo/surah_player_repo.dart';
 import 'surah_player_state.dart';
 
 import 'package:audioplayers/audioplayers.dart';
@@ -28,11 +28,10 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
 
   ReceivePort? receivePort;
 
-  final RecitersRepository recitersRepository;
+  final SurahPlayerRepo surahPlayerRepo;
   static SurahPlayerCubit get(BuildContext context) => BlocProvider.of(context);
 
-  SurahPlayerCubit(this.recitersRepository)
-    : super(SurahPlayerState.initial()) {
+  SurahPlayerCubit(this.surahPlayerRepo) : super(SurahPlayerState.initial()) {
     initListeners();
 
     registerPort();
@@ -280,7 +279,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
   }
 
   List<Reciter> getAllReciters() {
-    return recitersRepository.getAllReciters();
+    return surahPlayerRepo.getAllReciters();
   }
 
   Future<void> playSurah() async {
@@ -303,7 +302,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
 
       await AudioPlayers().pauseAll();
 
-      await LocalNotificationService.showMediaNotification(
+      await   LocalNotificationService.instance.showMediaNotification(
         groupKey: "quran",
         isPlaying: true,
         id: 30,
@@ -337,7 +336,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
       await audioPlayer.stop();
       // await channel.invokeMethod('pauseMedia');
 
-      await LocalNotificationService.showMediaNotification(
+      await   LocalNotificationService.instance.showMediaNotification(
         groupKey: "quran",
         isPlaying: false,
         id: 30,
@@ -369,7 +368,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
       await audioPlayer.pause();
       // await channel.invokeMethod('pauseMedia');
       emit(state.copyWith(isPlaying: false, isPaused: true));
-      await LocalNotificationService.showMediaNotification(
+      await   LocalNotificationService.instance.showMediaNotification(
         groupKey: "quran",
         isPlaying: false,
         id: 30,
@@ -382,7 +381,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
         await AudioPlayers().pauseAll();
         await audioPlayer.resume();
         emit(state.copyWith(isPlaying: true, isPaused: false));
-        await LocalNotificationService.showMediaNotification(
+        await   LocalNotificationService.instance.showMediaNotification(
           groupKey: "quran",
           isPlaying: true,
           id: 30,
@@ -403,8 +402,11 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
       emit(
         state.copyWith(surahNumber: state.surahNumber + 1, currentPosition: 0),
       );
+       toggleFavorite();
       await playSurah();
     }
+
+     
   }
 
   Future<void> previousSurah() async {
@@ -412,8 +414,11 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
       emit(
         state.copyWith(surahNumber: state.surahNumber - 1, currentPosition: 0),
       );
+       toggleFavorite();
       await playSurah();
     }
+
+     
   }
 
   //TODO:SCROLL TO CURENT SURAH WHEN OPEN BOTTOM SHEET
@@ -421,12 +426,13 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
   void changeSurahNum(int surahNumber) async {
     if (state.surahNumber != surahNumber) {
       emit(state.copyWith(surahNumber: surahNumber, currentPosition: 0));
-
+ toggleFavorite();
       await playSurah();
     } else {
       if (state.isPaused) {
+      
         await audioPlayer.resume();
-        await LocalNotificationService.showMediaNotification(
+        await   LocalNotificationService.instance.showMediaNotification(
           groupKey: "quran",
           isPlaying: true,
           id: 30,
@@ -438,7 +444,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
         await playSurah();
       } else {
         emit(state.copyWith(isPlaying: true, isPaused: false));
-        await LocalNotificationService.showMediaNotification(
+        await   LocalNotificationService.instance.showMediaNotification(
           groupKey: "quran",
           isPlaying: true,
           id: 30,
@@ -448,6 +454,8 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
         );
       }
     }
+
+   
     // تشغيل السورة المختارة
   }
 
@@ -455,12 +463,12 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
   changeReciter(Reciter reciter) async {
     if (state.reciter.name != reciter.name) {
       emit(state.copyWith(reciter: reciter, currentPosition: 0));
-
+ toggleFavorite();
       await playSurah();
     } else {
       if (state.isPaused) {
         await audioPlayer.resume();
-        await LocalNotificationService.showMediaNotification(
+        await   LocalNotificationService.instance.showMediaNotification(
           groupKey: "quran",
           isPlaying: true,
           id: 30,
@@ -472,7 +480,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
         await playSurah();
       } else {
         emit(state.copyWith(isPlaying: true, isPaused: false));
-        await LocalNotificationService.showMediaNotification(
+        await   LocalNotificationService.instance.showMediaNotification(
           groupKey: "quran",
           isPlaying: true,
           id: 30,
@@ -482,6 +490,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
         );
       }
     }
+    
     // تشغيل السورة المختارة
   }
 
@@ -564,7 +573,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
     //   return;
     // }
 
-    final filteredReciters = recitersRepository.filterReciters(
+    final filteredReciters = surahPlayerRepo.filterReciters(
       reciterCountry,
       reciterSearchQuery,
     );
@@ -601,7 +610,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
   void clearReciterSearch() {
     emit(
       state.copyWith(
-        searchReciterResults: recitersRepository.getAllReciters(),
+        searchReciterResults: surahPlayerRepo.getAllReciters(),
         reciterCountry: "كل الدول",
         reciterSearchQuery: "",
       ),
@@ -638,7 +647,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
             if (((count / total) * 100).toInt() < 100) {
               final String progressText = '${((count / total) * 100).toInt()}%';
 
-              await LocalNotificationService.downloadNotification(
+              await LocalNotificationService.instance.downloadNotification(
                 groupKey: "quranSurahDownload",
                 keyFeature: NotificationKeys.quranSoundDownload,
                 title: "تحميل ${quranSurahs[state.surahNumber]!}",
@@ -650,10 +659,10 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
                 progressText: progressText,
               );
             } else {
-              await LocalNotificationService.cancelNotification(
+              await LocalNotificationService.instance.cancelNotification(
                 int.parse("1${state.surahNumber}1"),
               );
-              await LocalNotificationService.showCompletionNotification(
+              await LocalNotificationService.instance.showCompletionNotification(
                 2001,
                 "تم تحميل ${quranSurahs[state.surahNumber]!} بنجاح",
               );
@@ -666,7 +675,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
 
       //=========================================================
     } else {
-      await LocalNotificationService.showBasicNotification(
+      await LocalNotificationService.instance.showBasicNotification(
         "السورة موجود بالفعل",
         "",
       );
@@ -709,6 +718,46 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
       dev.log(e.toString());
     }
   }
+
+  //! surah favorite logic
+
+  void toggleFavorite() async {
+       dev.log("toggleFavorite");
+
+    final isCurrentlyFavorite = surahPlayerRepo.isFavorite(
+      surahNumber: state.surahNumber,
+      reciterId: state.reciter.id,
+    );
+   dev.log("toggleFavorite $isCurrentlyFavorite");
+    // تحديث الحالة
+    emit(state.copyWith(isSurahFavorite: isCurrentlyFavorite));
+  }
+
+  Future<void> updateFavoriteList() async {
+
+   dev.log("favorite list updated");
+    final isCurrentlyFavorite = surahPlayerRepo.isFavorite(
+      surahNumber: state.surahNumber,
+      reciterId: state.reciter.id,
+    );
+
+    if (isCurrentlyFavorite) {
+      await surahPlayerRepo.removeFavorite(
+        surahNumber: state.surahNumber,
+        reciterId: state.reciter.id,
+      );
+    } else {
+      await surahPlayerRepo.addFavorite(
+        surahNumber: state.surahNumber,
+        surahName: quranSurahs[state.surahNumber]!,
+        reciter: state.reciter,
+      );
+    }
+
+    // تحديث الحالة
+    emit(state.copyWith(isSurahFavorite: !isCurrentlyFavorite));
+  }
+  // Update changeSurahNum to handle async
 
   @override
   Future<void> close() {

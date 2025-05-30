@@ -56,7 +56,7 @@ Future<void> bukhariHadithsCubit(BuildContext context) async {
       // عند انتهاء التحميل، نحفظ الملف كأنه موجود ونضبط progress على 100%
       await prefs.setBool('bukhariHadith', true);
 progressBukhari=100;    }
-
+  emit(HadithLoading());  
     A7adithModel? hadiths = await getBukhariHadiths();
     if (hadiths != null) {
       emit(HadithLoaded([hadiths]));
@@ -98,6 +98,8 @@ progressBukhari=100;    }
           await muslimPref.setBool('muslimHadith', true);
             progressMuslim=100;
         }
+// TODO: ADD LOADING STATE
+          emit(HadithLoading());  
         A7adithModel? hadiths = await getMuslimHadiths();
 
         if (hadiths != null) {
@@ -141,6 +143,7 @@ emit(HadithLoading());
           await abuDawudPrefs.setBool('abudawudHadith', true);
           progressAbuDawud=100;
         }
+          emit(HadithLoading());  
         A7adithModel? hadiths = await getAbuDawudHadiths();
 
         if (hadiths != null) {
@@ -186,7 +189,7 @@ Future<void> tirmidhiHadithsCubit(BuildContext context) async {
       // عند انتهاء التحميل، نحفظ الملف كأنه موجود ونضبط progress على 100%
       await prefs.setBool('tirmidhiHadith', true);
     }
-
+  emit(HadithLoading());  
     A7adithModel? hadiths = await getTirmidhiHadiths();
     if (hadiths != null) {
       emit(HadithLoaded([hadiths]));
@@ -229,7 +232,7 @@ Future<void> nasaiHadithsCubit(BuildContext context) async {
       await prefs.setBool('nasaiHadith', true);
           progressNasai=100;
     }
-
+  emit(HadithLoading());  
     A7adithModel? hadiths = await getNasaiHadiths();
     if (hadiths != null) {
       emit(HadithLoaded([hadiths]));
@@ -272,7 +275,7 @@ Future<void> ibnmajahHadithsCubit(BuildContext context) async {
                 progressIbnmajah=100;
 
     }
-
+  emit(HadithLoading());  
     A7adithModel? hadiths = await getIbnmajahHadiths();
 
     if (hadiths != null) {
@@ -317,7 +320,7 @@ Future<void> malikHadithsCubit(BuildContext context) async {
                 progressMalik=100;
 
     }
-
+  emit(HadithLoading());  
     A7adithModel? hadiths = await getMalikHadiths();
 
     if (hadiths != null) {
@@ -366,7 +369,7 @@ Future<void> darimiHadithsCubit(BuildContext context) async {
                 progressDarimi=100;
 
     }
-
+  emit(HadithLoading());  
     A7adithModel? hadiths = await getdarimiHadiths();
     if (hadiths != null) {
       emit(HadithLoaded([hadiths]));
@@ -408,7 +411,7 @@ Future<void> ahmedHadithsCubit(BuildContext context) async {
                 progressAhmed=100;
 
     }
-
+  emit(HadithLoading());  
     A7adithModel? hadiths = await getahmedHadiths();
 
     if (hadiths != null) {

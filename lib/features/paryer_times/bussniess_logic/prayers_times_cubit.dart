@@ -1,4 +1,4 @@
-
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:adhan/adhan.dart';
@@ -40,22 +40,29 @@ class PrayersTimesCubit extends Cubit<PrayersTimeModel> {
         Position? newPosition,
       ) async {
         log("position");
-        position = newPosition;
-        fetchPrayersTimes();
+        if (position!.latitude != newPosition!.latitude ||
+            position!.longitude != newPosition.longitude) {
+          position = newPosition;
+          fetchPrayersTimes();
 
-
-await notificationCubit.cancelAllNotifications();
-await notificationCubit.registerAllNotifications();
-
+          await notificationCubit.cancelAllNotifications();
+          await notificationCubit.registerAllNotifications();
+        }
       });
     } catch (e) {
       throw Exception('حدث خطأ أثناء محاولة الحصول على الموقع: $e');
     }
+
+    timer = Timer.periodic(const Duration(minutes: 1), (timer) {
+      fetchPrayersTimes();
+    });
   }
 
   static PrayersTimesCubit get(BuildContext context) =>
       BlocProvider.of<PrayersTimesCubit>(context);
-      final notificationCubit = NotificationCubit();
+  final notificationCubit = NotificationCubit();
+
+  Timer? timer;
 
   //   static Coordinates myCoordinates = Coordinates(position!.latitude, position!.longitude,
   //   );
