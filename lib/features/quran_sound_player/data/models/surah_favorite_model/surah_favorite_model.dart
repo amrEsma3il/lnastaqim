@@ -4,7 +4,7 @@ import '../reciter_model/reciters_model.dart';
 
 part 'surah_favorite_model.g.dart'; // This will be generated
 
-@HiveType(typeId: 3) // Use a different typeId than your NoteModel
+@HiveType(typeId: 3) 
 class SurahFavoriteModel extends HiveObject {
   @HiveField(0)
   final int surahNumber;

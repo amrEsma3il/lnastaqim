@@ -60,12 +60,18 @@ static const String rootSvgs="assets/svgs";
   static const String masneddramiImage = '$rootImages/masned_drami.PNG';
   static const String masnedahmedImage = '$rootImages/masned_ahmed.PNG';
 
+
+  // ibtihal
+  static const String ibtihalImage = '$rootImages/ibtihal.png';
+
+
 //home
   static const setting = '$rootImages/setting.svg';
   static const homeIc = '$rootImages/home.svg';
   static const prayer = '$rootImages/prayer.svg';
   static const azkarIc = '$rootImages/azkar.svg';
   static const mosque = '$rootImages/mosque.svg';
+   static const ibtihal = '$rootImages/ibtihal.svg';
 
   //quibla
   static const backgroundQibla = '$rootImages/qibla_background.jpg';//assets/images/mosque_find.png

@@ -37,6 +37,8 @@ class FeatureItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(
+            width: 25,
+            height: 25,
             featureModel.image,
           ),
           const SizedBox(

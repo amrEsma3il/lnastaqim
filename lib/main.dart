@@ -56,6 +56,11 @@ import 'features/azkar_with_sib7a/business_logic/azkar_category_cubit/azkar_cate
 import 'features/azkar_with_sib7a/business_logic/azkar_details_cubit/azkar_details_cubit.dart';
 import 'features/azkar_with_sib7a/business_logic/shared_azkar_cubit/shared_azkar_cubit.dart';
 import 'features/bookmark/bussniess_logic/add_bookmark_cubit/add_bookmark_cubit.dart';
+import 'features/ibtihal/bussnies_logic/ibtihal_player_cubit.dart';
+import 'features/ibtihal/data/models/ibtihal_fav_model/ibtihal_fav_model.dart';
+import 'features/ibtihal/data/models/ibtihal_info.dart';
+import 'features/ibtihal/data/models/reciter_ibtihal_model/reciter_ibtihal_model.dart';
+import 'features/ibtihal/data/repo/ibtihal_player_repo.dart';
 import 'features/note/bussniess_logic/overlay_note_control/overlay_note_control_cubit.dart';
 import 'features/notification/bussiness_logic/notification_cubit.dart';
 import 'features/paryer_times/bussniess_logic/date_cubit.dart';
@@ -227,13 +232,15 @@ Future<void> main(fireBaseOptions) async {
   Hive.registerAdapter(FavouriteModelAdapter());
 
   Hive.registerAdapter(SurahFavoriteModelAdapter());
-
-  Hive.registerAdapter(ReciterAdapter());
-
-
   
 
+Hive.registerAdapter(IbtihalInfoAdapter());
+  Hive.registerAdapter(ReciterAdapter());
+Hive.registerAdapter(IbtihalFavoriteModelAdapter());
+  Hive.registerAdapter(ReciterIbtihalModelAdapter());
+
 await  Hive.openBox<FavouriteModel>(AppKeys.kAzkarFavouriteBox);
+await  Hive.openBox<IbtihalFavoriteModel>(AppKeys.favoriteIbtihalBoxName);
   await  Hive.openBox<BookmarkModel>(AppKeys.kBookmarkBox);
   await  Hive.openBox<NoteModel>(AppKeys.kNoteBox);
   await  Hive.openBox<SurahFavoriteModel>(AppKeys.favoriteSurahBoxName);
@@ -487,6 +494,10 @@ class Lnastaqim extends StatelessWidget {
             BlocProvider(
               create: (BuildContext context) =>
                   SurahPlayerCubit(SurahPlayerRepo()),
+            ), //IbtihalatPlayerCubit
+            BlocProvider(
+              create: (BuildContext context) =>
+                  IbtihalatPlayerCubit(IbtihalatPlayerRepo()),
             ), //
             BlocProvider(
                 create: (BuildContext context) =>

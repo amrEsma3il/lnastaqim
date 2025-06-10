@@ -25,6 +25,7 @@ class AppRouteName {
 
   static const String paryerTimes = "/paryerTimes";
   static const String surahPlayerScreen = "/surahPlayerScreen";
+  static const String ibtihalPlayerScreen = "/ibtihalPlayerScreen";
 
   //surahPlayerScreen
 

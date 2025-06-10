@@ -78,20 +78,20 @@ class _LayoutState extends State<Layout> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            CustomBottomNavigationBarItem(
-              pageController: _pageController,
-              icon: Icons.psychology_outlined,
-              index: 4,
-              isSelected: _currentIndex == 4,
-              onTap: _onNavBarItemTapped,
-            ),
-            CustomBottomNavigationBarItem(
-              pageController: _pageController,
-              icon: Icons.groups_2,
-              index: 3,
-              isSelected: _currentIndex == 3,
-              onTap: _onNavBarItemTapped,
-            ),
+            // CustomBottomNavigationBarItem(
+            //   pageController: _pageController,
+            //   icon: Icons.psychology_outlined,
+            //   index: 4,
+            //   isSelected: _currentIndex == 4,
+            //   onTap: _onNavBarItemTapped,
+            // ),
+            // CustomBottomNavigationBarItem(
+            //   pageController: _pageController,
+            //   icon: Icons.groups_2,
+            //   index: 3,
+            //   isSelected: _currentIndex == 3,
+            //   onTap: _onNavBarItemTapped,
+            // ),
             CustomBottomNavigationBarItem(
               pageController: _pageController,
               icon: Icons.calendar_month,

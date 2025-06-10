@@ -20,6 +20,7 @@ import 'package:lnastaqim/features/support/view/screens/support_view.dart';
 import '../../../features/7adis/view/screen/main_a7adith.dart';
 import '../../../features/azkar_with_sib7a/view/screens/azkar_details_view.dart';
 import '../../../features/home/views/screens/home_view.dart';
+import '../../../features/ibtihal/view/screens/ibtihalat_player_screen.dart';
 import '../../../features/notification/view/screnns/notification_screen.dart';
 import '../../../features/quran/view/screens/moshaf_view.dart';
 import '../../../features/quran_sound_player/view/screens/surah_player_screen.dart';
@@ -92,6 +93,13 @@ List<GetPage<dynamic>>? routes = [
       curve: Curves.easeInOut,
       page: () => const SurahPlayerScreen(),
       name: AppRouteName.surahPlayerScreen,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 500)),//ibtihalPlayerScreen
+
+      GetPage(
+      curve: Curves.easeInOut,
+      page: () => const IbtihalatPlayerScreen(),
+      name: AppRouteName.ibtihalPlayerScreen,
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
   GetPage(

@@ -46,7 +46,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         backgroundColor: isZekr == true
             ? AppColor.primary
-            : AppColor.primary.withOpacity(0.8),
+            : AppColor.primary.withValues(alpha:  0.8),
         actions: actions);
   }
 

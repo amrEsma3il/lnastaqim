@@ -49,4 +49,11 @@ $storeUrl
 #لنستقيم #تطبيق_إسلامي
 ''';
   }
+
+
+ static String  ibtihalShareText({   required String ibtihalName,
+    required String reciterName,
+    required String url}){
+    return 'استمع إلى الابتهال "$ibtihalName" بصوت الشيخ $reciterName\n$url';
+ }
 }

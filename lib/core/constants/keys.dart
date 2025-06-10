@@ -14,4 +14,6 @@ static const String k7adisFavouriteBox = "hadis_fav_box";
 static const String favoriteSurahBoxName = 'surah_favorites_box';//notificationBox
 
 static const String notificationBox = 'notificationBox';//notificationBox
+static const String favoriteIbtihalBoxName = 'favoriteIbtihalBoxName';
+
 }
