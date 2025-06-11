@@ -125,3 +125,40 @@ flutter:
     - assets/images/notification_bigPicture.png
     - assets/sounds/
     - assets/sounds/notification_and_alarms/
+    
+  fonts:
+    - family: Mushaf
+      fonts:
+        - asset: assets\fonts\Al Mushaf Quran.ttf
+    - family: Naskh
+      fonts:
+        - asset: assets/fonts/NotoNaskhArabic-VariableFont_wght.ttf
+    - family: Thuluth
+      fonts:
+        - asset: assets/fonts/thuluth-decorated.ttf
+    - family: Amiri
+      fonts:
+        - asset: assets\fonts\Amiri.ttf
+
+    - family: Majeed
+      fonts:
+        - asset: assets/fonts/Al Majeed Quranic Font_shiped.ttf
+
+    - family: Arab140
+      fonts:
+        - asset: assets/fonts/ArabQuranIslamic140-7BG9A.ttf
+    - family: NotoNaskhArabic
+      fonts:
+        - asset: assets/fonts/me_quran Regular.ttf
+
+    - family: Authmanic
+      fonts:
+        - asset: assets/fonts/UthmanicHafs_V20.ttf
+    - family: Basmala
+      fonts:
+        - asset: assets/fonts/QCF_BSML.ttf
+    #   - asset: fonts/TrajanPro_Bold.ttf
+    #     weight: 700
+    # For details regarding fonts from package dependencies,
+    # see https://flutter.dev/custom-fonts/#from-packages
+    # assets/fonts/UthmanicHafs1B Ver13.ttf assets/fonts/QCF_BSML.ttf
