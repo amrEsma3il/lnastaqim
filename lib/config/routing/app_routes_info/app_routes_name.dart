@@ -45,5 +45,9 @@ class AppRouteName {
 
   static const String help = "/help";
   static const String setting = "/setting";
+ 
+      static const String privacyPolicy= "/privacyPolicy";
+        static const String copyRight = "/copyRight";
+
   static const String aboutUs = "/aboutUs";
 }

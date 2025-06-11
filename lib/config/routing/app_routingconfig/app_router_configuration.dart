@@ -25,6 +25,9 @@ import '../../../features/notification/view/screnns/notification_screen.dart';
 import '../../../features/quran/view/screens/moshaf_view.dart';
 import '../../../features/quran_sound_player/view/screens/surah_player_screen.dart';
 import '../../../features/radio_stream_channels/view/pages/radio_screen.dart';
+import '../../../features/settings/views/screens/about_us.dart';
+import '../../../features/settings/views/screens/copy_right.dart';
+import '../../../features/settings/views/screens/privacy_policy.dart';
 import '../../../features/sibha/views/screens/sibha_view.dart';
 import '../../../features/splash/view/screens/splash_screen.dart';
 import '../app_routes_info/app_routes_name.dart';
@@ -195,12 +198,36 @@ List<GetPage<dynamic>>? routes = [
       name: AppRouteName.help,
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 500)),
+      //!
   GetPage(
       curve: Curves.easeInOut,
       page: () => const SettingsView(),
       name: AppRouteName.setting,
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 500)),
+      
+      
+      
+        GetPage(
+      curve: Curves.easeInOut,
+      page: () => const AboutUsScreen(),
+      name: AppRouteName.aboutUs,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 50)),
+        GetPage(
+      curve: Curves.easeInOut,
+      page: () => const PrivacyPolicyScreen(),
+      name: AppRouteName.privacyPolicy,
+          transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 50)),
+        GetPage(
+      curve: Curves.easeInOut,
+      page: () => const CopyrightScreen(),
+      name: AppRouteName.copyRight,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 50)),
+      
+      //!
   GetPage(
       curve: Curves.easeInOut,
       page: () => const AboutUsView(),
