@@ -3,15 +3,17 @@ default_platform(:android)
 platform :android do
   desc "Lane for Android Firebase App Distribution"
   
-  lane :firebase_distribution do
-    sh "flutter build apk --release --no-tree-shake-icons"  
+  lane :android_lnastaqim_prod do
+    sh "flutter clean"
+    sh "flutter build apk --release --flavor lnastaqim_prod -t lib/main_lnastaqim_prod.dart --build-name=1.1.3.0 --build-number=2 --no-tree-shake-icons"
     firebase_app_distribution(
-      app: "1:432670175669:android:a524d8279167eda977e9fc",
+      app: "1:432670175669:android:807ef8fd76fc7ed577e9fc",
       firebase_cli_token: ENV['FIREBASE_CLI_TOKEN'],
       android_artifact_type: "APK",
       android_artifact_path: "../build/app/outputs/apk/release/app-release.apk",
-      testers: "amrgalalamr10@gmail.com,yyttrexcghiiihgffv@gmail.com,osmanramadan840@gmail.com,esmailelcomi@gmail.com",
-      release_notes: "release v =>1.0.9"
+      groups: "lnastaqim",
+      release_notes:"(lnastaqim prod app)",
+      upload_timeout: 600
     )
   end
   
