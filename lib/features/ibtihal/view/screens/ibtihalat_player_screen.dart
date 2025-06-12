@@ -438,7 +438,7 @@ class IbtihalatSliderWidget extends StatelessWidget {
                         builder: (context, state) {
                           return RichText(
                             text: TextSpan(
-                              text: state.audioSpeed.toStringAsFixed(2),
+                              text: state.audioSpeed.parseInt,
                               style: TextStyle(
                                 fontSize: 23.sp,
                                 color: Colors.white,
@@ -543,7 +543,7 @@ class IbtihalatSliderWidget extends StatelessWidget {
           value: rate,
           child: RichText(
             text: TextSpan(
-              text: rate.toStringAsFixed(2),
+              text: rate.parseInt,
               style: TextStyle(
                 fontSize: 23.sp,
                 color: Colors.white,
