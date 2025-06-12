@@ -129,7 +129,7 @@ class CopyrightScreen extends StatelessWidget {
                       'lnastaqim@gmail.com',
                       style: TextStyle(
                         fontSize: 16,
-                        fontFamily: 'Amiri',
+                 
                         color: AppColor.primary,
                         decoration: TextDecoration.underline,
                       ),
@@ -166,7 +166,7 @@ class CopyrightScreen extends StatelessWidget {
                     '⚠️ يُعد انتهاك أي من هذه الشروط سببًا لاتخاذ إجراءات قانونية.',
                     style: const TextStyle(
                       fontSize: 15,
-                      fontFamily: 'Amiri',
+                     
                       color: Colors.redAccent,
                     ),
                     textAlign: TextAlign.center,
@@ -209,7 +209,7 @@ class CopyrightScreen extends StatelessWidget {
       style: const TextStyle(
         fontSize: 16,
         height: 1.6,
-        fontFamily: 'Amiri',
+       
         color: Colors.black87,
       ),
       textAlign: TextAlign.justify,

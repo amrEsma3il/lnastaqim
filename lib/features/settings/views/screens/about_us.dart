@@ -73,7 +73,7 @@ class AboutUsScreen extends StatelessWidget {
 بُني هذا التطبيق بعناية ليكون دافعًا عمليًا لكل من يسعى للتقرب إلى الله في زمن الفتن.''',
                     style: TextStyle(
                       fontSize: 15.5,
-                      fontFamily: 'Amiri',
+                 
                       height: 1.8,
                       color: Colors.black87,
                     ),
@@ -99,7 +99,7 @@ class AboutUsScreen extends StatelessWidget {
                     'هذا العمل نتاج تعاون فريق متميز من ٦ مطورين، عملوا بشغف واحتساب لخدمة هذا الهدف النبيل.\nنسأل الله أن ينفع به.',
                     style: TextStyle(
                       fontSize: 14.5,
-                      fontFamily: 'Amiri',
+                    
                       height: 1.7,
                       color: Colors.black87,
                     ),
@@ -164,7 +164,7 @@ class AboutUsScreen extends StatelessWidget {
                       'أو عبر البريد: lnastaqim@gmail.com',
                       style: TextStyle(
                         fontSize: 13.5,
-                        fontFamily: 'Amiri',
+                     
                         color: Colors.black87,
                       ),
                     ),

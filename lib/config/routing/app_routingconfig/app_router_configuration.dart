@@ -72,7 +72,7 @@ List<GetPage<dynamic>>? routes = [
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
   GetPage(
-      page: () => const SupportView(),
+      page: () => const SupportScreen(),
       name: AppRouteName.support,
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),

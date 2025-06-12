@@ -133,7 +133,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
                       'lnastaqim@gmail.com',
                       style: TextStyle(
                         fontSize: 16,
-                        fontFamily: 'Amiri',
+                     
                         color: AppColor.primary,
                         decoration: TextDecoration.underline,
                       ),
@@ -182,7 +182,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
       style: const TextStyle(
         fontSize: 16,
         height: 1.6,
-        fontFamily: 'Amiri',
+        
         color: Colors.black87,
       ),
       textAlign: TextAlign.justify,

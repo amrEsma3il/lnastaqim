@@ -7,7 +7,6 @@ import 'package:lnastaqim/features/home/views/screens/home_view.dart';
 import 'package:lnastaqim/features/layout/presentation/widgets/custom_bottom_nav_bar_item.dart';
 import 'package:lnastaqim/features/library/view/screens/library_view.dart';
 
-
 class Layout extends StatefulWidget {
   const Layout({super.key});
 
@@ -16,15 +15,9 @@ class Layout extends StatefulWidget {
 }
 
 class _LayoutState extends State<Layout> {
-
-
-@override
+  @override
   void initState() {
-
-
     super.initState();
-
-    
   }
 
   final PageController _pageController = PageController();
@@ -32,10 +25,11 @@ class _LayoutState extends State<Layout> {
 
   final List<Widget> _pages = [
     const HomeView(),
-    const LibraryView(),
+
     const CalenderView(),
+    const LibraryView(),
     const CommunityView(),
-    const CompetitionsView()
+    const CompetitionsView(),
   ];
 
   @override
@@ -44,25 +38,18 @@ class _LayoutState extends State<Layout> {
     super.dispose();
   }
 
-
-
-  void _onNavBarItemTapped(int index) async{
-
+  void _onNavBarItemTapped(int index) async {
     setState(() {
       _currentIndex = index;
     });
-    _pageController.animateToPage(
+    _pageController.jumpToPage(
       index,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
+    
     );
   }
 
   @override
   Widget build(BuildContext context) {
-
-
-    
     return Scaffold(
       backgroundColor: Colors.white,
       body: PageView(
@@ -72,9 +59,7 @@ class _LayoutState extends State<Layout> {
       ),
       bottomNavigationBar: Container(
         margin: const EdgeInsets.only(left: 16, right: 16, bottom: 33, top: 15),
-        decoration: BoxDecoration(
-          color: AppColor.white,
-        ),
+        decoration: BoxDecoration(color: AppColor.white),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -92,20 +77,22 @@ class _LayoutState extends State<Layout> {
             //   isSelected: _currentIndex == 3,
             //   onTap: _onNavBarItemTapped,
             // ),
+
             CustomBottomNavigationBarItem(
               pageController: _pageController,
-              icon: Icons.calendar_month,
+              icon: Icons.local_library_outlined,
               index: 2,
               isSelected: _currentIndex == 2,
               onTap: _onNavBarItemTapped,
             ),
             CustomBottomNavigationBarItem(
               pageController: _pageController,
-              icon: Icons.local_library_outlined,
+              icon: Icons.calendar_month,
               index: 1,
               isSelected: _currentIndex == 1,
               onTap: _onNavBarItemTapped,
             ),
+            
             CustomBottomNavigationBarItem(
               pageController: _pageController,
               icon: Icons.home,
