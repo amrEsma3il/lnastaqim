@@ -76,11 +76,11 @@ class _GeneralFavouriteViewState extends State<GeneralFavouriteView> {
                             onTap: _toggleFav7adis,
                             isVisible: _is7adis)),
 
-                                  Expanded(
-                        child: GeneralFavouriteHeader(
-                            title: "القرآن",
-                            onTap: _toggleFavQuran,
-                            isVisible: _isQuran)),
+                        //           Expanded(
+                        // child: GeneralFavouriteHeader(
+                        //     title: "القرآن",
+                        //     onTap: _toggleFavQuran,
+                        //     isVisible: _isQuran)),
                   ],
                 ),
               ),
@@ -90,14 +90,8 @@ class _GeneralFavouriteViewState extends State<GeneralFavouriteView> {
                  padding: EdgeInsets.only(bottom: 20.h),
                 child: Visibility(
                   visible: _isAzkar,
-                  replacement: Visibility(
-                    visible: _is7adis,
-                    replacement:const FavoritesQuranScreen(
-                      
-                    ) ,
-                    child: const FavouritesAzkar7adisListView(
-                      isZekr: false,
-                    ),
+                  replacement: const FavouritesAzkar7adisListView(
+                    isZekr: false,
                   ),
                   child: const FavouritesAzkar7adisListView(
                     isZekr: true,
