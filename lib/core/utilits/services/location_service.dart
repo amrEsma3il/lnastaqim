@@ -1,92 +1,39 @@
-import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
 
 class LocationService {
-  static Future<Position?> determinePosition() async {
-    // التحقق من تفعيل خدمات الموقع
+  static Future<Position> determinePosition() async {
+    // Check if location services are enabled
     if (!await Geolocator.isLocationServiceEnabled()) {
-      // عرض رسالة للمستخدم مع خيار لفتح الإعدادات
-      await _showLocationServicesDialog(Get.context!);
-      return null; // الرجوع بدون موقع
+      throw Exception('خدمات الموقع معطلة. يرجى تفعيلها.');
     }
 
-    // التحقق من الأذونات
+    // Check permissions
     LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
+    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
       permission = await Geolocator.requestPermission();
     }
 
     if (permission == LocationPermission.deniedForever) {
-      await _showPermissionDeniedDialog(Get.context!);
-      return null;
+      throw Exception(
+        'تم رفض صلاحيات الوصول للموقع بشكل دائم. يرجى تفعيلها من إعدادات التطبيق.',
+      );
     }
 
     if (permission == LocationPermission.denied) {
-      ScaffoldMessenger.of(Get.context!).showSnackBar(
-        SnackBar(content: Text('تم رفض أذونات الوصول للموقع.')),
-      );
-      return null;
+      throw Exception('تم رفض صلاحيات الوصول للموقع.');
     }
 
-    // الحصول على الموقع الحالي
+    // Get current position
     try {
       Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.bestForNavigation,
+        locationSettings: LocationSettings(
+          accuracy: LocationAccuracy.bestForNavigation,
+          distanceFilter: 200,
+        ),
       );
       return position;
     } catch (e) {
-      ScaffoldMessenger.of(Get.context!).showSnackBar(
-        SnackBar(content: Text('حدث خطأ أثناء محاولة الحصول على الموقع: $e')),
-      );
-      return null;
+      throw Exception('حدث خطأ أثناء محاولة الحصول على الموقع: $e');
     }
-  }
-
-  static Future<void> _showLocationServicesDialog(BuildContext context) async {
-    await showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text('خدمات الموقع غير مفعلة'),
-        content: Text('يرجى تفعيل خدمات الموقع لاستخدام هذه الميزة.'),
-        actions: [
-          TextButton(
-            onPressed: () async {
-              Navigator.of(context).pop();
-              await Geolocator.openLocationSettings(); // يفتح إعدادات الموقع
-            },
-            child: Text('فتح الإعدادات'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text('إلغاء'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  static Future<void> _showPermissionDeniedDialog(BuildContext context) async {
-    await showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text('أذونات الموقع مرفوضة نهائياً'),
-        content: Text(
-            'لقد رفضت أذونات الموقع بشكل دائم. يرجى تفعيل الأذونات من إعدادات التطبيق.'),
-        actions: [
-          TextButton(
-            onPressed: () async {
-              Navigator.of(context).pop();
-              await Geolocator.openAppSettings(); // يفتح إعدادات التطبيق
-            },
-            child: Text('فتح الإعدادات'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text('إلغاء'),
-          ),
-        ],
-      ),
-    );
   }
 }

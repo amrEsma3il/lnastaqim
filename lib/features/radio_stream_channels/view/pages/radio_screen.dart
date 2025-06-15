@@ -27,7 +27,7 @@ class RadioScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: AppColor.blueTint2,
-            toolbarHeight: 80.h,
+            toolbarHeight: 60.h,
             title: Text(
               "الاذاعة",
               style: TextStyle(

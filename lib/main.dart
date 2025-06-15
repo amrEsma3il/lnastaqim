@@ -1,19 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import 'dart:developer';
 import 'dart:isolate';
 import 'dart:ui';
@@ -25,7 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';import 'package:hive_flutter/adapters.dart';
+import 'package:get/get.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:lnastaqim/config/routing/app_routes_info/app_routes_name.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
@@ -50,6 +35,7 @@ import 'core/utilits/services/audio_service/players_key.dart';
 import 'core/utilits/services/local_notification_service.dart';
 import 'core/utilits/services/location_service.dart';
 import 'core/utilits/services/work_manager_service.dart';
+import 'core/utilits/widgets/error_app_screen.dart';
 import 'features/7adis/bussiness_logic/a7adith_cubit.dart';
 import 'features/7adis/data/hadith_service/hadith_service.dart';
 import 'features/azkar_with_sib7a/business_logic/azkar_category_cubit/azkar_category_cubit.dart';
@@ -83,315 +69,260 @@ import 'features/quran_sound_player/data/repo/surah_player_repo.dart';
 import 'features/quran_sound_player/logic/surah_player_cubit/surah_player_cubit.dart';
 import 'features/radio_stream_channels/bussniess_logic/radio_cubit.dart';
 
-
-@pragma('vm:entry-point')
-void notificationTapBackground(
-    NotificationResponse notificationResponse) async {
-  log("hi from onDidReceiveNotificationBackgroundResponse");
-  log("before switch case${notificationResponse.actionId}");
-
-  String action = notificationResponse.actionId!;
-
+// Notification handling logic
+class NotificationHandler {
+  static void handleMediaAction(String action) {
     switch (action) {
       case '${NotificationKeys.quranPlayer}play':
         log('play quran sound');
-
-        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
-            ?.send('play');
-
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.quranPlayer,
+        )?.send('play');
         break;
       case '${NotificationKeys.quranPlayer}pause':
         log('pause quran sound');
-
-        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
-            ?.send('pause');
-
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.quranPlayer,
+        )?.send('pause');
         break;
-
       case '${NotificationKeys.quranPlayer}stop':
         log('stop quran sound');
-        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
-            ?.send('stop');
-
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.quranPlayer,
+        )?.send('stop');
         break;
-
       case '${NotificationKeys.quranPlayer}next':
         log('next quran sound');
-        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
-            ?.send('next');
-
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.quranPlayer,
+        )?.send('next');
         break;
       case '${NotificationKeys.quranPlayer}previous':
         log('previous quran sound');
-        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
-            ?.send('previous');
-
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.quranPlayer,
+        )?.send('previous');
         break;
-
-
-
-        //================================================================================
-
-
-              case '${NotificationKeys.radio}play':
+      case '${NotificationKeys.radio}play':
         log('play radio sound');
-
-        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
-            ?.send('play');
-
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.radio,
+        )?.send('play');
         break;
       case '${NotificationKeys.radio}pause':
         log('pause radio sound');
-
-        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
-            ?.send('pause');
-
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.radio,
+        )?.send('pause');
         break;
-
       case '${NotificationKeys.radio}stop':
         log('stop radio sound');
-        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
-            ?.send('stop');
-
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.radio,
+        )?.send('stop');
         break;
-
       case '${NotificationKeys.radio}next':
         log('next radio sound');
-        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
-            ?.send('next');
-
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.radio,
+        )?.send('next');
         break;
       case '${NotificationKeys.radio}previous':
         log('previous radio sound');
-        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
-            ?.send('previous');
-
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.radio,
+        )?.send('previous');
         break;
-        
-        
-          case 'استئناف':
+      case 'استئناف':
         log('play quran download sound');
-
-        IsolateNameServer.lookupPortByName(NotificationKeys.quranDownload)
-            ?.send('play');
-
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.quranDownload,
+        )?.send('play');
         break;
       case 'ايقاف':
         log('pause quran download sound');
-
-        IsolateNameServer.lookupPortByName(NotificationKeys.quranDownload)
-            ?.send('pause');
-
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.quranDownload,
+        )?.send('pause');
         break;
-
-
     }
+  }
 
-
+  @pragma('vm:entry-point')
+  static void notificationTapBackground(
+    NotificationResponse notificationResponse,
+  ) async {
+    log("hi from onDidReceiveNotificationBackgroundResponse");
+    log("before switch case${notificationResponse.actionId}");
+    if (notificationResponse.actionId != null) {
+      handleMediaAction(notificationResponse.actionId!);
+    }
+  }
 }
 
 late SharedPreferences prefs;
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
 Position? position;
-
+bool initMain=false;
 
 Future<void> main(fireBaseOptions) async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting('ar', null);
 
- try {
-      // Check if Firebase is already initialized
-      if (Firebase.apps.isEmpty) {
-        await Firebase.initializeApp(options: fireBaseOptions);
-      }
-      // Otherwise use the existing instance
-    } catch (e) {
-      debugPrint('Firebase initialization error: $e');
+  try {
+    // Initialize Firebase
+    if (Firebase.apps.isEmpty) {
+      await Firebase.initializeApp(options: fireBaseOptions);
     }
+  } catch (e) {
+    debugPrint('Firebase initialization error: $e');
+  }
 
-    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-    Isolate.current.addErrorListener(
-      RawReceivePort((pair) async {
-        final List<dynamic> errorAndStacktrace = pair;
-        await FirebaseCrashlytics.instance.recordError(
-          errorAndStacktrace.first,
-          errorAndStacktrace.last,
-        );
-      }).sendPort,
-    );
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  Isolate.current.addErrorListener(
+    RawReceivePort((pair) async {
+      final List<dynamic> errorAndStacktrace = pair;
+      await FirebaseCrashlytics.instance.recordError(
+        errorAndStacktrace.first,
+        errorAndStacktrace.last,
+      );
+    }).sendPort,
+  );
+
   prefs = await SharedPreferences.getInstance();
-  position =await LocationService.determinePosition();
-  await Hive.initFlutter();
 
-
-
+  // Initialize Hive
+if(!initMain){  await Hive.initFlutter();
   Hive.registerAdapter(BookmarkModelAdapter());
-
   Hive.registerAdapter(NoteModelAdapter());
   Hive.registerAdapter(FavouriteModelAdapter());
-
   Hive.registerAdapter(SurahFavoriteModelAdapter());
-  
-
-Hive.registerAdapter(IbtihalInfoAdapter());
+  Hive.registerAdapter(IbtihalInfoAdapter());
   Hive.registerAdapter(ReciterAdapter());
-Hive.registerAdapter(IbtihalFavoriteModelAdapter());
+  Hive.registerAdapter(IbtihalFavoriteModelAdapter());
   Hive.registerAdapter(ReciterIbtihalModelAdapter());
 
-await  Hive.openBox<FavouriteModel>(AppKeys.kAzkarFavouriteBox);
-await  Hive.openBox<IbtihalFavoriteModel>(AppKeys.favoriteIbtihalBoxName);
-  await  Hive.openBox<BookmarkModel>(AppKeys.kBookmarkBox);
-  await  Hive.openBox<NoteModel>(AppKeys.kNoteBox);
-  await  Hive.openBox<SurahFavoriteModel>(AppKeys.favoriteSurahBoxName);
-  await  Hive.openBox<FavouriteModel>(AppKeys.k7adisFavouriteBox);
-  await  Hive.openBox<ReciterEntity>(AppKeys.reciterBox);
-  await  Hive.openBox<bool>(AppKeys.notificationBox);
-  await  Hive.openBox('userPreferences');
+  await Hive.openBox<FavouriteModel>(AppKeys.kAzkarFavouriteBox);
+  await Hive.openBox<IbtihalFavoriteModel>(AppKeys.favoriteIbtihalBoxName);
+  await Hive.openBox<BookmarkModel>(AppKeys.kBookmarkBox);
+  await Hive.openBox<NoteModel>(AppKeys.kNoteBox);
+  await Hive.openBox<SurahFavoriteModel>(AppKeys.favoriteSurahBoxName);
+  await Hive.openBox<FavouriteModel>(AppKeys.k7adisFavouriteBox);
+  await Hive.openBox<ReciterEntity>(AppKeys.reciterBox);
+  await Hive.openBox<bool>(AppKeys.notificationBox);
+  await Hive.openBox('userPreferences');
 
+  // Initialize WorkManager
+  await WorkManagerService().init();
 
-
-
-
-
-//=======================================
-
-
-
-
-
-
-
-
-  
-//=======================================
-  await Future.wait([
-    WorkManagerService().init(),
-        // Alarm.init()
-  ]);
-
+  // Request storage permission
   await requestStoragePermission();
-  await LocalNotificationService.instance.requestNotificationPermission();
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: AppColor.blueColor.withValues(alpha:  0.74)));
+}
+  // Try to get location first
+  try {
+    position = await LocationService.determinePosition();
+  } catch (e) {
+    initMain=true;
+    // Navigate to ErrorApp on location error
+    runApp(
+      ErrorApp(
+        errorMessage: e.toString(),
+        onRetry: () async {
+          log('Retrying location request');
+          try {
+            position = await LocationService.determinePosition();
+            log('Location obtained, navigating to Lnastaqim');
+            main(fireBaseOptions);
+          } catch (e) {
+            log('Retry failed: $e');
+            runApp(
+              ErrorApp(
+                errorMessage: e.toString(),
+                onRetry: () async {
+                  position = await LocationService.determinePosition();
+                  main(fireBaseOptions);
+                },
+              ),
+            );
+          }
+        },
+      ),
+    );
+    return;
+  }
 
+  // Request notification permission after location is confirmed
+  try {
+    await LocalNotificationService.instance.requestNotificationPermission();
+  } catch (e) {
+    initMain=true;
+    // Navigate to ErrorApp for notification permission denial
+    runApp(
+      ErrorApp(
+        errorMessage: e.toString(),
+        onRetry: () async {
+          try {
+            await LocalNotificationService.instance
+                .requestNotificationPermission();
+            // Restart main app
+            main(fireBaseOptions);
+          } catch (e) {
+            log('Retry failed: $e');
+            runApp(
+              ErrorApp(
+                errorMessage: e.toString(),
+                onRetry: () async {
+                  await LocalNotificationService.instance
+                      .requestNotificationPermission();
+                  // Restart main app
+                  main(fireBaseOptions);
+                },
+              ),
+            );
+          }
+        },
+      ),
+    );
+    return;
+  }
+
+  // Initialize UI settings
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: AppColor.blueColor.withValues(alpha: 0.74),
+    ),
+  );
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  Future<void> handleMediaAction(String action) async {
-
-    switch (action) {
-      case '${NotificationKeys.quranPlayer}play':
-        log('play sound');
-
-        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
-            ?.send('play');
-
-        break;
-      case '${NotificationKeys.quranPlayer}pause':
-        log('pause sound');
-
-        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
-            ?.send('pause');
-
-        break;
-
-      case '${NotificationKeys.quranPlayer}stop':
-        log('stop sound');
-        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
-            ?.send('stop');
-
-        break;
-
-      case '${NotificationKeys.quranPlayer}next':
-        log('next sound');
-        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
-            ?.send('next');
-
-        break;
-      case '${NotificationKeys.quranPlayer}previous':
-        log('previous sound');
-        IsolateNameServer.lookupPortByName(NotificationKeys.quranPlayer)
-            ?.send('previous');
-
-        break;
-
-
-
-        //================================================================================
-
-
-              case '${NotificationKeys.radio}play':
-        log('play sound');
-
-        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
-            ?.send('play');
-
-        break;
-      case '${NotificationKeys.radio}pause':
-        log('pause sound');
-
-        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
-            ?.send('pause');
-
-        break;
-
-      case '${NotificationKeys.radio}stop':
-        log('stop sound');
-        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
-            ?.send('stop');
-
-        break;
-
-      case '${NotificationKeys.radio}next':
-        log('next sound');
-        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
-            ?.send('next');
-
-        break;
-      case '${NotificationKeys.radio}previous':
-        log('previous sound');
-        IsolateNameServer.lookupPortByName(NotificationKeys.radio)
-            ?.send('previous');
-
-        break;
-
-    }
-
-
-  }
-
+  // Initialize notifications
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
-  InitializationSettings settings = const InitializationSettings(
+  const InitializationSettings settings = InitializationSettings(
     android: AndroidInitializationSettings('@mipmap/ic_launcher'),
     iOS: DarwinInitializationSettings(),
   );
-  await flutterLocalNotificationsPlugin.initialize(settings,
-      onDidReceiveNotificationResponse:
-          (NotificationResponse notificationResponse) async {
-    log("hi from onDidReceiveNotificationResponse");
-
-    log(notificationResponse.actionId.toString());
-// if (notificationResponse.actionId == null) {
-//   log("action id is null");
-// } else {
-    await handleMediaAction(notificationResponse.actionId!);
-
-// }
-  }, onDidReceiveBackgroundNotificationResponse: notificationTapBackground);
-
-  ///
-
-
-
+  await flutterLocalNotificationsPlugin.initialize(
+    settings,
+    onDidReceiveNotificationResponse: (
+      NotificationResponse notificationResponse,
+    ) async {
+      log("hi from onDidReceiveNotificationResponse");
+      log(notificationResponse.actionId.toString());
+      if (notificationResponse.actionId != null) {
+        NotificationHandler.handleMediaAction(notificationResponse.actionId!);
+      }
+    },
+    onDidReceiveBackgroundNotificationResponse:
+        NotificationHandler.notificationTapBackground,
+  );
 
   runApp(const Lnastaqim());
 
   await FontDownloadPercentage().checkAnyChapterDownloaded()
-      ? await FontDownloadPercentage().loadFontsIndividually(start: 603,end:0 )
+      ? await FontDownloadPercentage().loadFontsIndividually(start: 603, end: 0)
       : null;
 }
 
@@ -407,37 +338,19 @@ class Lnastaqim extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
-            BlocProvider(
-              create: (context) => DeepLinkCubit(),
-            ),
+            BlocProvider(create: (context) => DeepLinkCubit()),
             //SearchOnAyaCubit
-            BlocProvider(
-              create: (context) => SearchVisabilityCubit(),
-            ),
-            BlocProvider(
-              create: (context) => SearchOnAyaCubit(),
-            ),
+            BlocProvider(create: (context) => SearchVisabilityCubit()),
+            BlocProvider(create: (context) => SearchOnAyaCubit()),
 
-            BlocProvider(
-              create: (context) => IndexCubit(),
-            ),
+            BlocProvider(create: (context) => IndexCubit()),
 
-            BlocProvider(
-              create: (context) => FastTransitionCubit(),
-            ),
-            BlocProvider(
-              create: (context) => ScreenOverlayCubit(),
-            ),
+            BlocProvider(create: (context) => FastTransitionCubit()),
+            BlocProvider(create: (context) => ScreenOverlayCubit()),
 
-            BlocProvider(
-              create: (context) => SearchOrNot(),
-            ),
-            BlocProvider(
-              create: (context) => MoshafBookmarkCubit(),
-            ), //
-            BlocProvider(
-              create: (context) => QuranSowarVersusCubit(),
-            ),
+            BlocProvider(create: (context) => SearchOrNot()),
+            BlocProvider(create: (context) => MoshafBookmarkCubit()), //
+            BlocProvider(create: (context) => QuranSowarVersusCubit()),
             BlocProvider(
               lazy: false,
               create: (context) => QuranCubit()..loadQuran(),
@@ -445,33 +358,31 @@ class Lnastaqim extends StatelessWidget {
 
             BlocProvider(create: (context) => HadithCubit()),
             BlocProvider(
-              create: (context) =>
-                  AudioControlCubit()..audioPlayerListener(context),
+              create:
+                  (context) =>
+                      AudioControlCubit()..audioPlayerListener(context),
             ),
 
-              BlocProvider(
-              create: (context) =>
-                  RadioCubit(),
-            ),//RadioCubit()
+            BlocProvider(create: (context) => RadioCubit()), //RadioCubit()
 
             BlocProvider(create: (context) => AddBookmarkCubit()),
             BlocProvider(
-                create: (context) => BookmarkCubit()..fetchBookmarks()),
+              create: (context) => BookmarkCubit()..fetchBookmarks(),
+            ),
 
             BlocProvider(create: (context) => AddToFavouriteCubit()),
             BlocProvider(
-                create: (context) => FavouriteCubit()
-                  ..fetchAzkarFavourite()
-                  ..fetch7adisFavourite()),
+              create:
+                  (context) =>
+                      FavouriteCubit()
+                        ..fetchAzkarFavourite()
+                        ..fetch7adisFavourite(),
+            ),
             BlocProvider(create: (context) => AddNoteCubit()),
             BlocProvider(create: (context) => NoteCubit()..fetchNotes()),
-            BlocProvider(
-              create: (context) => TafseerCubit(),
-            ),
+            BlocProvider(create: (context) => TafseerCubit()),
             // Provide the NotificationCubit
-            BlocProvider(
-              create: (context) => NotificationCubit(),
-            ),
+            BlocProvider(create: (context) => NotificationCubit()),
             BlocProvider(
               create: (context) => OverlayNoteControlCubit(), //FontCubit
             ),
@@ -479,32 +390,34 @@ class Lnastaqim extends StatelessWidget {
               create: (context) => FontDownloadPercentage(), //FontCubit
             ),
 
-//  BlocProvider(
-//               create: (context) => FontCubit(),
-//             ),
-            BlocProvider(
-              create: (context) => DateCubit(),
-            ),
+            //  BlocProvider(
+            //               create: (context) => FontCubit(),
+            //             ),
+            BlocProvider(create: (context) => DateCubit()),
 
             BlocProvider(
-                create: (BuildContext context) =>
-                    AzkarCategoryCubit()..getAzkarCategory()),
+              create:
+                  (BuildContext context) =>
+                      AzkarCategoryCubit()..getAzkarCategory(),
+            ),
             BlocProvider(
-                create: (BuildContext context) => MemorizedVerseCubit()),
+              create: (BuildContext context) => MemorizedVerseCubit(),
+            ),
             BlocProvider(
-              create: (BuildContext context) =>
-                  SurahPlayerCubit(SurahPlayerRepo()),
+              create:
+                  (BuildContext context) => SurahPlayerCubit(SurahPlayerRepo()),
             ), //IbtihalatPlayerCubit
             BlocProvider(
-              create: (BuildContext context) =>
-                  IbtihalatPlayerCubit(IbtihalatPlayerRepo()),
+              create:
+                  (BuildContext context) =>
+                      IbtihalatPlayerCubit(IbtihalatPlayerRepo()),
             ), //
+            BlocProvider(create: (BuildContext context) => PrayersTimesCubit()),
             BlocProvider(
-                create: (BuildContext context) =>
-                    PrayersTimesCubit()),
-            BlocProvider(
-                create: (BuildContext context) =>
-                    AzkarDetailsCubit()..getAzkarDetails()),
+              create:
+                  (BuildContext context) =>
+                      AzkarDetailsCubit()..getAzkarDetails(),
+            ),
             BlocProvider(create: (BuildContext context) => SharedAzkarCubit()),
           ],
           child: BlocListener<DeepLinkCubit, Uri?>(
@@ -514,8 +427,9 @@ class Lnastaqim extends StatelessWidget {
                   int page = int.parse(deepLink.queryParameters["page"]!);
                   int ayaNum = int.parse(deepLink.queryParameters["verse"]!);
 
-                  QuranCubit.get(context).pageController =
-                      PageController(initialPage: 604 - page);
+                  QuranCubit.get(context).pageController = PageController(
+                    initialPage: 604 - page,
+                  );
                   Get.toNamed(deepLink.path);
 
                   QuranCubit.get(context).searchAya(ayaNum);

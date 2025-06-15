@@ -16,5 +16,20 @@ platform :android do
       upload_timeout: 600
     )
   end
+
+
+
+
+    lane :android_lnastaqim_dev do
+    firebase_app_distribution(
+      app: "1:432670175669:android:94ff1f53b6c2084077e9fc",
+      firebase_cli_token: ENV['FIREBASE_CLI_TOKEN'],
+      android_artifact_type: "APK",
+      android_artifact_path: "../build/app/outputs/flutter-apk/app-lnastaqim_dev-release.apk",
+      groups: "lnastaqim",
+      release_notes:"(lnastaqim prod app)",
+      upload_timeout: 600
+    )
+  end
   
 end

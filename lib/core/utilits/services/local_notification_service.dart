@@ -78,36 +78,31 @@ static LocalNotificationService get instance=>LocalNotificationService();
     }
   }
 
-  Future<void> requestNotificationPermission() async {
-    final bool granted =
-        await flutterLocalNotificationsPlugin
+  
+Future<void> requestNotificationPermission() async {
+    final bool granted = await flutterLocalNotificationsPlugin
             .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin
-            >()
+                AndroidFlutterLocalNotificationsPlugin>()
             ?.areNotificationsEnabled() ??
         false;
 
-    if (granted == false) {
-      final bool? granted =
-          await flutterLocalNotificationsPlugin
-              .resolvePlatformSpecificImplementation<
-                AndroidFlutterLocalNotificationsPlugin
-              >()
-              ?.requestNotificationsPermission();
+    if (!granted) {
+      final bool? result = await flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>()
+          ?.requestNotificationsPermission();
 
-      if (granted!) {
-        print('Notification permission granted');
-      } else {
-        print('Notification permission not enabled');
+      if (result != true) {
+        throw Exception('تم رفض إذن الإشعارات. يرجى تفعيلها ');
       }
-
-      // يمكنك عرض حوار أو رسالة هنا إذا تم رفض الإذن
-    } else {
       print('Notification permission granted');
+    } else {
+      print('Notification permission already granted');
     }
   }
-
-  Future init() async {
+  
+  
+    Future init() async {
     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
         FlutterLocalNotificationsPlugin();
     InitializationSettings settings = const InitializationSettings(

@@ -318,6 +318,7 @@ class FontDownloadPercentage extends Cubit<FontDownloadState> {
   }
 
   Future<bool> checkAnyChapterDownloaded() async {
+    log("checkAnyChapterDownloaded ${prefs.getBool("quranFintsSownload") ?? false}");
     return prefs.getBool("quranFintsSownload") ?? false;
   }
 
