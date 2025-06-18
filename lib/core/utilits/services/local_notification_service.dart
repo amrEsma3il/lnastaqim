@@ -8,9 +8,11 @@ import 'dart:developer';
 import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import '../../../config/routing/app_routes_info/app_routes_name.dart';
 import '../../../features/paryer_times/data/repository/prayers_times_repo.dart';
 import '../../../main.dart';
 import '../../local_database/azkar/azkar_local_database.dart';
@@ -34,9 +36,32 @@ static LocalNotificationService get instance=>LocalNotificationService();
     log("hi from onDidReceiveNotificationBackgroundResponse");
     log("before switch case${notificationResponse.actionId}");
 
-    String action = notificationResponse.actionId!;
+   
 
-    await handleMediaAction(action);
+     if (notificationResponse.actionId == null || notificationResponse.actionId!.isEmpty ) {
+           
+          log("action id is null");
+
+          switch (notificationResponse.id) {
+            case 310:
+              Get.toNamed(AppRouteName.ibtihalPlayerScreen);
+              break;
+
+               case 30:
+              Get.toNamed(AppRouteName.surahPlayerScreen);
+              break;
+               case 31:
+              Get.toNamed(AppRouteName.radio);
+              break;
+           
+          }
+        } else {
+            log(notificationResponse.actionId.toString());
+            await handleMediaAction(notificationResponse.actionId!);
+        }
+        
+
+
   }
 
   Future<void> handleMediaAction(String action) async {
@@ -117,10 +142,29 @@ Future<void> requestNotificationPermission() async {
         log("hi from onDidReceiveNotificationResponse");
 
         log(notificationResponse.actionId.toString());
-        // if (notificationResponse.actionId == null) {
-        //   log("action id is null");
-        // } else {
-        await handleMediaAction(notificationResponse.actionId!);
+    
+        if (notificationResponse.actionId == null) {
+          
+          log("action id is null");
+
+          switch (notificationResponse.id) {
+            case 310:
+              Get.toNamed(AppRouteName.ibtihalPlayerScreen);
+              break;
+
+               case 30:
+              Get.toNamed(AppRouteName.surahPlayerScreen);
+              break;
+               case 31:
+              Get.toNamed(AppRouteName.radio);
+              break;
+           
+          }
+        } else {
+            log(notificationResponse.actionId.toString());
+            await handleMediaAction(notificationResponse.actionId!);
+        }
+        
 
         // }
       },
@@ -152,7 +196,7 @@ Future<void> requestNotificationPermission() async {
       importance: Importance.low,
       priority: Priority.low,
       showWhen: false,
-      icon: 'drawable/quran_notification_icon',
+    
       styleInformation: const MediaStyleInformation(),
       actions: <AndroidNotificationAction>[
         AndroidNotificationAction(

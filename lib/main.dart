@@ -70,8 +70,8 @@ import 'features/quran_sound_player/logic/surah_player_cubit/surah_player_cubit.
 import 'features/radio_stream_channels/bussniess_logic/radio_cubit.dart';
 
 // Notification handling logic
-class NotificationHandler {
-  static void handleMediaAction(String action) {
+ 
+   void handleMediaAction(String action) {
     switch (action) {
       case '${NotificationKeys.quranPlayer}play':
         log('play quran sound');
@@ -103,6 +103,42 @@ class NotificationHandler {
           NotificationKeys.quranPlayer,
         )?.send('previous');
         break;
+
+
+        //ibtihal
+
+
+case '${NotificationKeys.ibtihalatPlayer}play':
+        log('play ibtihal sound');
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.ibtihalatPlayer,
+        )?.send('play');
+        break;
+      case '${NotificationKeys.ibtihalatPlayer}pause':
+        log('pause ibtihal sound');
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.ibtihalatPlayer,
+        )?.send('pause');
+        break;
+      case '${NotificationKeys.ibtihalatPlayer}stop':
+        log('stop ibtihal sound');
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.ibtihalatPlayer,
+        )?.send('stop');
+        break;
+      case '${NotificationKeys.ibtihalatPlayer}next':
+        log('next ibtihal sound');
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.ibtihalatPlayer,
+        )?.send('next');
+        break;
+      case '${NotificationKeys.ibtihalatPlayer}previous':
+        log('previous ibtihal sound');
+        IsolateNameServer.lookupPortByName(
+          NotificationKeys.ibtihalatPlayer,
+        )?.send('previous');
+        break;
+
       case '${NotificationKeys.radio}play':
         log('play radio sound');
         IsolateNameServer.lookupPortByName(
@@ -149,16 +185,35 @@ class NotificationHandler {
   }
 
   @pragma('vm:entry-point')
-  static void notificationTapBackground(
+   void notificationTapBackground(
     NotificationResponse notificationResponse,
   ) async {
     log("hi from onDidReceiveNotificationBackgroundResponse");
     log("before switch case${notificationResponse.actionId}");
-    if (notificationResponse.actionId != null) {
-      handleMediaAction(notificationResponse.actionId!);
-    }
+     if (notificationResponse.actionId == null || notificationResponse.actionId!.isEmpty ) {
+           
+          log("action id is null");
+
+          switch (notificationResponse.id) {
+            case 310:
+              Get.toNamed(AppRouteName.ibtihalPlayerScreen);
+              break;
+
+               case 30:
+              Get.toNamed(AppRouteName.surahPlayerScreen);
+              break;
+               case 31:
+              Get.toNamed(AppRouteName.radio);
+              break;
+           
+          }
+        } else {
+            log(notificationResponse.actionId.toString());
+             handleMediaAction(notificationResponse.actionId!);
+        }
+        
   }
-}
+
 
 late SharedPreferences prefs;
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -202,16 +257,17 @@ if(!initMain){  await Hive.initFlutter();
   Hive.registerAdapter(IbtihalFavoriteModelAdapter());
   Hive.registerAdapter(ReciterIbtihalModelAdapter());
 
-  await Hive.openBox<FavouriteModel>(AppKeys.kAzkarFavouriteBox);
-  await Hive.openBox<IbtihalFavoriteModel>(AppKeys.favoriteIbtihalBoxName);
-  await Hive.openBox<BookmarkModel>(AppKeys.kBookmarkBox);
-  await Hive.openBox<NoteModel>(AppKeys.kNoteBox);
-  await Hive.openBox<SurahFavoriteModel>(AppKeys.favoriteSurahBoxName);
-  await Hive.openBox<FavouriteModel>(AppKeys.k7adisFavouriteBox);
-  await Hive.openBox<ReciterEntity>(AppKeys.reciterBox);
-  await Hive.openBox<bool>(AppKeys.notificationBox);
-  await Hive.openBox('userPreferences');
-
+await Future.wait([
+  Hive.openBox<FavouriteModel>(AppKeys.kAzkarFavouriteBox),
+  Hive.openBox<IbtihalFavoriteModel>(AppKeys.favoriteIbtihalBoxName),
+  Hive.openBox<BookmarkModel>(AppKeys.kBookmarkBox),
+  Hive.openBox<NoteModel>(AppKeys.kNoteBox),
+  Hive.openBox<SurahFavoriteModel>(AppKeys.favoriteSurahBoxName),
+  Hive.openBox<FavouriteModel>(AppKeys.k7adisFavouriteBox),
+  Hive.openBox<ReciterEntity>(AppKeys.reciterBox),
+  Hive.openBox<bool>(AppKeys.notificationBox),
+  Hive.openBox('userPreferences'),
+]);
   // Initialize WorkManager
   await WorkManagerService().init();
 
@@ -311,12 +367,31 @@ if(!initMain){  await Hive.initFlutter();
     ) async {
       log("hi from onDidReceiveNotificationResponse");
       log(notificationResponse.actionId.toString());
-      if (notificationResponse.actionId != null) {
-        NotificationHandler.handleMediaAction(notificationResponse.actionId!);
-      }
+      if (notificationResponse.actionId == null || notificationResponse.actionId!.isEmpty ) {
+           
+          log("action id is null");
+
+          switch (notificationResponse.id) {
+            case 310:
+              Get.toNamed(AppRouteName.ibtihalPlayerScreen);
+              break;
+
+               case 30:
+              Get.toNamed(AppRouteName.surahPlayerScreen);
+              break;
+               case 31:
+              Get.toNamed(AppRouteName.radio);
+              break;
+           
+          }
+        } else {
+            log(notificationResponse.actionId.toString());
+             handleMediaAction(notificationResponse.actionId!);
+        }
+        
     },
     onDidReceiveBackgroundNotificationResponse:
-        NotificationHandler.notificationTapBackground,
+       notificationTapBackground,
   );
 
   runApp(const Lnastaqim());

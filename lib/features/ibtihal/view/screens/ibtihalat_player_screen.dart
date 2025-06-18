@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,6 +12,7 @@ import '../../../../core/constants/animations.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/images.dart';
 import '../../bussnies_logic/ibtihal_player_cubit.dart';
+
 class IbtihalatPlayerScreen extends StatelessWidget {
   const IbtihalatPlayerScreen({super.key});
 
@@ -39,9 +39,7 @@ class IbtihalatPlayerScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: Get.width,
-                ),
+                SizedBox(width: Get.width),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -71,20 +69,17 @@ class IbtihalatPlayerScreen extends StatelessWidget {
                                 context: context,
                                 backgroundColor: AppColor.blueColor,
                                 shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(25.0)),
+                                  borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
                                 ),
                                 builder: (bottomSheetContext) {
-                                  return RecitersBottomSheetComponent(
-                                      cubit: IbtihalatPlayerCubit.get(context));
+                                  return RecitersBottomSheetComponent(cubit: IbtihalatPlayerCubit.get(context));
                                 },
                               );
                             },
-                            child:
-                                BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
+                            child: BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
                               builder: (context, state) {
                                 return Text(
-                                  state.reciter.nameArabic,
+                                  state.reciter.nameArabic.isNotEmpty ? state.reciter.nameArabic : 'غير معروف',
                                   style: TextStyle(
                                       wordSpacing: 0.1,
                                       fontSize: 16.sp,
@@ -96,17 +91,16 @@ class IbtihalatPlayerScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
+                              IbtihalatPlayerCubit.get(context).clearIbtihalSearch(); // Reset search results
                               showModalBottomSheet(
                                 enableDrag: false,
                                 context: context,
                                 backgroundColor: AppColor.blueColor,
                                 shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(25.0)),
+                                  borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
                                 ),
                                 builder: (bottomSheetContext) {
-                                  return IbtihalatBottomSheetComponent(
-                                      cubit: IbtihalatPlayerCubit.get(context));
+                                  return IbtihalatBottomSheetComponent(cubit: IbtihalatPlayerCubit.get(context));
                                 },
                               );
                             },
@@ -115,11 +109,14 @@ class IbtihalatPlayerScreen extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  BlocBuilder<IbtihalatPlayerCubit,
-                                      IbtihalatPlayerState>(
+                                  BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
                                     builder: (context, state) {
+                                      final ibtihalName = state.reciter.info.isNotEmpty &&
+                                              state.ibtihalNumber < state.reciter.info.length
+                                          ? state.reciter.info[state.ibtihalNumber].name
+                                          : 'غير معروف';
                                       return Text(
-                                        state.reciter.info[state.ibtihalNumber].name,
+                                        ibtihalName,
                                         style: TextStyle(
                                             fontSize: 14.sp,
                                             color: Colors.white70,
@@ -127,11 +124,8 @@ class IbtihalatPlayerScreen extends StatelessWidget {
                                       );
                                     },
                                   ),
-                                  SizedBox(
-                                    width: 4.w,
-                                  ),
-                                  const Icon(Icons.keyboard_arrow_down_sharp,
-                                      size: 21, color: Colors.white70)
+                                  SizedBox(width: 4.w),
+                                  const Icon(Icons.keyboard_arrow_down_sharp, size: 21, color: Colors.white70),
                                 ],
                               ),
                             ),
@@ -139,21 +133,23 @@ class IbtihalatPlayerScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    IconButton(
-                      onPressed: () async {
-                        await IbtihalatPlayerCubit.get(context).updateFavoriteList();
-                      },
-                      icon: BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
-                        builder: (context, state) {
-                          return Icon(
-                            state.isIbtihalFavorite
-                                ? Icons.favorite
-                                : Icons.favorite_border_outlined,
+                    BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
+                      builder: (context, state) {
+                        return IconButton(
+                          onPressed: () async {
+                            try {
+                              await IbtihalatPlayerCubit.get(context).updateFavoriteList();
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('خطأ: $e')));
+                            }
+                          },
+                          icon: Icon(
+                            state.isIbtihalFavorite ? Icons.favorite : Icons.favorite_border_outlined,
                             color: AppColor.white,
                             size: 26,
-                          );
-                        },
-                      ),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -173,10 +169,7 @@ class IbtihalatPlayerScreen extends StatelessWidget {
 }
 
 class RecitersBottomSheetComponent extends StatelessWidget {
-  const RecitersBottomSheetComponent({
-    super.key,
-    required this.cubit,
-  });
+  const RecitersBottomSheetComponent({super.key, required this.cubit});
 
   final IbtihalatPlayerCubit cubit;
 
@@ -199,8 +192,7 @@ class RecitersBottomSheetComponent extends StatelessWidget {
                     children: [
                       Expanded(
                         child: TextField(
-                          onChanged: (value) =>
-                              cubit.searchReciters(query: value),
+                          onChanged: (value) => cubit.searchReciters(query: value),
                           decoration: const InputDecoration(
                             hintText: 'ابحث عن قارئ...',
                             hintStyle: TextStyle(color: Colors.white70),
@@ -212,19 +204,13 @@ class RecitersBottomSheetComponent extends StatelessWidget {
                           cursorRadius: const Radius.circular(10),
                         ),
                       ),
-                      SizedBox(
-                        width: 14.w,
-                      ),
-                      CountryFilterComponent(
-                        cubit: cubit,
-                      ),
+                      SizedBox(width: 14.w),
+                      CountryFilterComponent(cubit: cubit),
                     ],
                   ),
                 ),
               ),
-              SizedBox(
-                width: 14.w,
-              ),
+              SizedBox(width: 14.w),
               GestureDetector(
                 onTap: () {
                   Get.back();
@@ -236,67 +222,55 @@ class RecitersBottomSheetComponent extends StatelessWidget {
                     color: Colors.white.withOpacity(0.1),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
-                    Icons.close,
-                    color: Colors.white,
-                    size: 19,
-                  ),
+                  child: const Icon(Icons.close, color: Colors.white, size: 19),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 10),
           Expanded(
-            child: BlocProvider.value(
-              value: cubit,
-              child: BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
-                builder: (context, state) {
-                  final results = state.searchReciterResults;
-
-                  return Visibility(
-                    visible: results.isNotEmpty,
-                    replacement: Container(
-                      decoration:
-                          const BoxDecoration(color: Colors.transparent),
-                      child: Center(
-                          child: Text(
+            child: BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
+              builder: (context, state) {
+                final results = state.searchReciterResults;
+                return Visibility(
+                  visible: results.isNotEmpty,
+                  replacement: Container(
+                    decoration: const BoxDecoration(color: Colors.transparent),
+                    child: Center(
+                      child: Text(
                         "لا يوجد قراء",
                         style: TextStyle(
-                            color: AppColor.lightBlue,
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.bold),
-                      )),
+                            color: AppColor.lightBlue, fontSize: 20.sp, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                    child: ListView.builder(
-                      itemCount: results.length,
-                      itemBuilder: (context, index) {
-                        final reciter = results[index];
-                        return ListTile(
-                          selected: reciter.id == state.reciter.id,
-                          selectedTileColor: Colors.white.withOpacity(0.1),
-                          title: Text(
-                            reciter.nameArabic,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          trailing: SvgPicture.asset(
-                            IbtihalatPlayerCubit.getCountryFlag(
-                                reciter.nationality),
-                            width: 17,
-                            height: 17,
-                          ),
-                          onTap: () async {
-                            Get.back();
-                            await Future.delayed(
-                                const Duration(milliseconds: 200));
-                            cubit.changeReciter(reciter);
-                            cubit.clearReciterSearch();
-                          },
-                        );
-                      },
-                    ),
-                  );
-                },
-              ),
+                  ),
+                  child: ListView.builder(
+                    itemCount: results.length,
+                    itemBuilder: (context, index) {
+                      final reciter = results[index];
+                      return ListTile(
+                        selected: reciter.id == state.reciter.id,
+                        selectedTileColor: Colors.white.withOpacity(0.1),
+                        title: Text(
+                          reciter.nameArabic.isNotEmpty ? reciter.nameArabic : 'غير معروف',
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        trailing: SvgPicture.asset(
+                          IbtihalatPlayerCubit.getCountryFlag(reciter.nationality),
+                          width: 17,
+                          height: 17,
+                        ),
+                        onTap: () async {
+                          Get.back();
+                          await Future.delayed(const Duration(milliseconds: 200));
+                          cubit.changeReciter(reciter);
+                          cubit.clearReciterSearch();
+                        },
+                      );
+                    },
+                  ),
+                );
+              },
             ),
           ),
         ],
@@ -317,41 +291,33 @@ class CountryFilterComponent extends StatelessWidget {
       },
       child: IntrinsicWidth(
         child: Container(
-          padding:
-              EdgeInsets.only(right: 7.8.w, bottom: 4.h, top: 4.h, left: 3.w),
+          padding: EdgeInsets.only(right: 7.8.w, bottom: 4.h, top: 4.h, left: 3.w),
           margin: const EdgeInsets.only(left: 5),
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.25),
             borderRadius: BorderRadius.circular(15),
             border: Border.all(color: AppColor.lightBlue, width: 1),
           ),
-          child: BlocProvider.value(
-            value: cubit,
-            child: BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
-              builder: (context, state) {
-                return Row(
-                  children: [
-                    SvgPicture.asset(
-                      IbtihalatPlayerCubit.recitersCountries[
-                          state.reciterCountry]!,
-                      height: 22,
-                      width: 22,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      state.reciterCountry,
-                      style: const TextStyle(color: Colors.white, fontSize: 14),
-                    ),
-                    const SizedBox(width: 4),
-                    const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.white,
-                      size: 13.5,
-                    ),
-                  ],
-                );
-              },
-            ),
+          child: BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
+            builder: (context, state) {
+              return Row(
+                children: [
+                  SvgPicture.asset(
+                    IbtihalatPlayerCubit.recitersCountries[state.reciterCountry] ??
+                        AppImages.earthFlag,
+                    height: 22,
+                    width: 22,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    state.reciterCountry.isNotEmpty ? state.reciterCountry : 'كل الدول',
+                    style: const TextStyle(color: Colors.white, fontSize: 14),
+                  ),
+                  const SizedBox(width: 4),
+                  const Icon(Icons.keyboard_arrow_down, color: Colors.white, size: 13.5),
+                ],
+              );
+            },
           ),
         ),
       ),
@@ -362,7 +328,7 @@ class CountryFilterComponent extends StatelessWidget {
     return await showMenu(
       shadowColor: Colors.black,
       context: context,
-      position: const RelativeRect.fromLTRB(290, 185, 187, 1190),
+      position: const RelativeRect.fromLTRB(290, 290, 187, 822),
       items: IbtihalatPlayerCubit.recitersCountries.entries.map((entry) {
         return PopupMenuItem(
           value: entry.key,
@@ -419,6 +385,9 @@ class IbtihalatSliderWidget extends StatelessWidget {
 
     return BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
       builder: (context, state) {
+        final ibtihalName = state.reciter.info.isNotEmpty && state.ibtihalNumber < state.reciter.info.length
+            ? state.reciter.info[state.ibtihalNumber].name
+            : 'غير معروف';
         return SizedBox(
           width: Get.width,
           child: Column(
@@ -434,55 +403,32 @@ class IbtihalatSliderWidget extends StatelessWidget {
                       onTap: () async {
                         await showAudioSpeedMenu(context, cubit);
                       },
-                      child: BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
-                        builder: (context, state) {
-                          return RichText(
-                            text: TextSpan(
-                              text: state.audioSpeed.parseInt,
+                      child: RichText(
+                        text: TextSpan(
+                          text: state.audioSpeed.parseInt,
+                          style: TextStyle(fontSize: 23.sp, color: Colors.white, fontWeight: FontWeight.w400),
+                          children: [
+                            TextSpan(
+                              text: "x",
                               style: TextStyle(
-                                fontSize: 23.sp,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: "x",
-                                  style: TextStyle(
-                                    fontSize: 17.5.sp,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ],
+                                  fontSize: 17.5.sp, color: Colors.white, fontWeight: FontWeight.w400),
                             ),
-                          );
-                        },
+                          ],
+                        ),
                       ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
-                          builder: (context, state) {
-                            return Text(
-                              state.reciter.info[state.ibtihalNumber].name,
-                              style: TextStyle(
-                                  fontSize: 17.sp,
-                                  color: AppColor.white,
-                                  fontWeight: FontWeight.bold),
-                            );
-                          },
+                        Text(
+                          ibtihalName,
+                          style: TextStyle(
+                              fontSize: 17.sp, color: AppColor.white, fontWeight: FontWeight.bold),
                         ),
-                        BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
-                          builder: (context, state) {
-                            return Text(
-                              state.reciter.nameArabic,
-                              style: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: Colors.white70,
-                                  fontWeight: FontWeight.w400),
-                            );
-                          },
+                        Text(
+                          state.reciter.nameArabic.isNotEmpty ? state.reciter.nameArabic : 'غير معروف',
+                          style: TextStyle(
+                              fontSize: 14.sp, color: Colors.white70, fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),
@@ -496,9 +442,7 @@ class IbtihalatSliderWidget extends StatelessWidget {
                 value: state.currentPosition,
                 max: state.ibtihalDuration <= 0 ? 149.0 : state.ibtihalDuration,
                 onChangeStart: (_) {
-                  context
-                      .read<IbtihalatPlayerCubit>()
-                      .sliderSeekToggle(isSeeking: true);
+                  context.read<IbtihalatPlayerCubit>().sliderSeekToggle(isSeeking: true);
                 },
                 onChanged: (value) {
                   context.read<IbtihalatPlayerCubit>().changeAudioPosition(value);
@@ -513,13 +457,11 @@ class IbtihalatSliderWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      IbtihalatPlayerCubit.formatDuration(
-                          state.currentPosition.toInt()),
+                      IbtihalatPlayerCubit.formatDuration(state.currentPosition.toInt()),
                       style: const TextStyle(color: Colors.white60),
                     ),
                     Text(
-                      IbtihalatPlayerCubit.formatDuration(
-                          state.ibtihalDuration.toInt()),
+                      IbtihalatPlayerCubit.formatDuration(state.ibtihalDuration.toInt()),
                       style: const TextStyle(color: Colors.white60),
                     ),
                   ],
@@ -532,8 +474,7 @@ class IbtihalatSliderWidget extends StatelessWidget {
     );
   }
 
-  Future showAudioSpeedMenu(
-      BuildContext context, IbtihalatPlayerCubit cubit) async {
+  Future showAudioSpeedMenu(BuildContext context, IbtihalatPlayerCubit cubit) async {
     return await showMenu(
       shadowColor: Colors.black,
       context: context,
@@ -544,19 +485,12 @@ class IbtihalatSliderWidget extends StatelessWidget {
           child: RichText(
             text: TextSpan(
               text: rate.parseInt,
-              style: TextStyle(
-                fontSize: 23.sp,
-                color: Colors.white,
-                fontWeight: FontWeight.w400,
-              ),
+              style: TextStyle(fontSize: 23.sp, color: Colors.white, fontWeight: FontWeight.w400),
               children: [
                 TextSpan(
                   text: "x",
                   style: TextStyle(
-                    fontSize: 17.5.sp,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                  ),
+                      fontSize: 17.5.sp, color: Colors.white, fontWeight: FontWeight.w400),
                 ),
               ],
             ),
@@ -586,22 +520,15 @@ class IbtihalatControlsWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-              icon: Icon(
-                size: 25,
-                Icons.shuffle,
-                color: AppColor.white,
-              ),
+              icon: Icon(size: 25, Icons.shuffle, color: AppColor.white),
               onPressed: () {
                 context.read<IbtihalatPlayerCubit>().playRandomIbtihal();
               },
             ),
-            SizedBox(
-              width: 23.w,
-            ),
+            SizedBox(width: 23.w),
             Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(width: 0.9, color: AppColor.white)),
+              decoration:
+                  BoxDecoration(shape: BoxShape.circle, border: Border.all(width: 0.9, color: AppColor.white)),
               child: IconButton(
                 icon: Icon(Icons.skip_next, color: AppColor.white),
                 onPressed: () {
@@ -609,9 +536,7 @@ class IbtihalatControlsWidget extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(
-              width: 25.w,
-            ),
+            SizedBox(width: 25.w),
             BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
               builder: (context, state) {
                 return CircleAvatar(
@@ -629,14 +554,8 @@ class IbtihalatControlsWidget extends StatelessWidget {
                       : IconButton(
                           color: AppColor.blueColor,
                           icon: state.isPlaying
-                              ? const Icon(
-                                  Icons.pause,
-                                  size: 35,
-                                )
-                              : const Icon(
-                                  Icons.play_arrow,
-                                  size: 37,
-                                ),
+                              ? const Icon(Icons.pause, size: 35)
+                              : const Icon(Icons.play_arrow, size: 37),
                           onPressed: () {
                             context.read<IbtihalatPlayerCubit>().togglePlayPause();
                           },
@@ -644,13 +563,10 @@ class IbtihalatControlsWidget extends StatelessWidget {
                 );
               },
             ),
-            SizedBox(
-              width: 25.w,
-            ),
+            SizedBox(width: 25.w),
             Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(width: 0.9, color: AppColor.white)),
+              decoration:
+                  BoxDecoration(shape: BoxShape.circle, border: Border.all(width: 0.9, color: AppColor.white)),
               child: IconButton(
                 icon: Icon(Icons.skip_previous, color: AppColor.white),
                 onPressed: () {
@@ -658,9 +574,7 @@ class IbtihalatControlsWidget extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(
-              width: 24.w,
-            ),
+            SizedBox(width: 24.w),
             BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
               builder: (context, state) {
                 return IconButton(
@@ -684,21 +598,13 @@ class IbtihalatControlsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                icon: const Icon(
-                  size: 20,
-                  Icons.download_outlined,
-                  color: Colors.white54,
-                ),
+                icon: const Icon(size: 20, Icons.download_outlined, color: Colors.white54),
                 onPressed: () {
                   context.read<IbtihalatPlayerCubit>().downloadIbtihal();
                 },
               ),
               IconButton(
-                icon: const Icon(
-                  size: 20,
-                  Icons.share_outlined,
-                  color: Colors.white54,
-                ),
+                icon: const Icon(size: 20, Icons.share_outlined, color: Colors.white54),
                 onPressed: () {
                   context.read<IbtihalatPlayerCubit>().shareIbtihal();
                 },
@@ -712,10 +618,7 @@ class IbtihalatControlsWidget extends StatelessWidget {
 }
 
 class IbtihalatBottomSheetComponent extends StatelessWidget {
-  const IbtihalatBottomSheetComponent({
-    super.key,
-    required this.cubit,
-  });
+  const IbtihalatBottomSheetComponent({super.key, required this.cubit});
 
   final IbtihalatPlayerCubit cubit;
 
@@ -754,9 +657,7 @@ class IbtihalatBottomSheetComponent extends StatelessWidget {
                   cursorRadius: const Radius.circular(10),
                 ),
               ),
-              SizedBox(
-                width: 14.w,
-              ),
+              SizedBox(width: 14.w),
               GestureDetector(
                 onTap: () {
                   Get.back();
@@ -768,67 +669,55 @@ class IbtihalatBottomSheetComponent extends StatelessWidget {
                     color: Colors.white.withOpacity(0.1),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
-                    Icons.close,
-                    color: Colors.white,
-                    size: 19,
-                  ),
+                  child: const Icon(Icons.close, color: Colors.white, size: 19),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 10),
           Expanded(
-            child: BlocProvider.value(
-              value: cubit,
-              child: BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
-                builder: (context, state) {
-                  final results = state.searchIbtihalResults;
-
-                  return Visibility(
-                    visible: results.isNotEmpty,
-                    replacement: Container(
-                      decoration:
-                          const BoxDecoration(color: Color.fromARGB(0, 3, 2, 2)),
-                      child: Center(
-                          child: Text(
+            child: BlocBuilder<IbtihalatPlayerCubit, IbtihalatPlayerState>(
+              builder: (context, state) {
+                final results = state.searchIbtihalResults;
+                return Visibility(
+                  visible: results.isNotEmpty,
+                  replacement: Container(
+                    decoration: const BoxDecoration(color: Color.fromARGB(0, 3, 2, 2)),
+                    child: Center(
+                      child: Text(
                         "لا توجد ابتهالات",
                         style: TextStyle(
-                            color: AppColor.lightBlue,
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.bold),
-                      )),
+                            color: AppColor.lightBlue, fontSize: 20.sp, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                    child: ListView.builder(
-                      itemCount: results.length,
-                      itemBuilder: (context, index) {
-                        final ibtihalNumber = results[index];
-                        final ibtihalName = state.reciter.info[ibtihalNumber].name;
-                        return ListTile(
-                          selected: ibtihalNumber == state.ibtihalNumber,
-                          selectedTileColor: Colors.white.withOpacity(0.1),
-                          title: Text(
-                            ibtihalName,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          trailing: const Icon(
-                            Icons.music_note_outlined,
-                            color: Colors.white,
-                            size: 18,
-                          ),
-                          onTap: () async {
-                            Get.back();
-                            await Future.delayed(
-                                const Duration(milliseconds: 200));
-                            cubit.changeIbtihalNum(ibtihalNumber);
-                            cubit.clearIbtihalSearch();
-                          },
-                        );
-                      },
-                    ),
-                  );
-                },
-              ),
+                  ),
+                  child: ListView.builder(
+                    itemCount: results.length,
+                    itemBuilder: (context, index) {
+                      final ibtihalNumber = results[index];
+                      final ibtihalName = state.reciter.info.isNotEmpty &&
+                              ibtihalNumber < state.reciter.info.length
+                          ? state.reciter.info[ibtihalNumber].name
+                          : 'غير معروف';
+                      return ListTile(
+                        selected: ibtihalNumber == state.ibtihalNumber,
+                        selectedTileColor: Colors.white.withOpacity(0.1),
+                        title: Text(
+                          ibtihalName,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        trailing: const Icon(Icons.music_note_outlined, color: Colors.white, size: 18),
+                        onTap: () async {
+                          Get.back();
+                          await Future.delayed(const Duration(milliseconds: 200));
+                          cubit.changeIbtihalNum(ibtihalNumber);
+                          cubit.clearIbtihalSearch();
+                        },
+                      );
+                    },
+                  ),
+                );
+              },
             ),
           ),
         ],
@@ -836,3 +725,5 @@ class IbtihalatBottomSheetComponent extends StatelessWidget {
     );
   }
 }
+
+

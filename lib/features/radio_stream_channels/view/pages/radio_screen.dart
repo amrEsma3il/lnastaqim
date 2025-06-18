@@ -147,7 +147,7 @@ class RadioScreen extends StatelessWidget {
                                           : IconButton(
                                               color: AppColor.blueColor,
                                               icon: state.isPlaying
-                                                  ? const Icon(Icons.pause_circle_outline)
+                                                  ? const Icon(Icons.pause_outlined)
                                                   : const Icon(Icons.play_arrow_outlined),
                                               onPressed: () {
                                                 cubit.playOrPause();

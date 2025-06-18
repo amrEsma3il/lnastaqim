@@ -1,3 +1,4 @@
+
 import 'dart:developer' as dev;
 import 'dart:io';
 import 'dart:isolate';
@@ -12,19 +13,19 @@ import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
 
 import '../../../core/constants/images.dart';
-
 import '../../../core/utilits/functions/format_text.dart';
+import '../../../core/utilits/services/audio_service/audio_players.dart';
 import '../../../core/utilits/services/audio_service/players_key.dart';
 import '../../../core/utilits/services/local_notification_service.dart';
 import '../../share/views/widgets/share_fun.dart';
-
 import '../data/models/ibtihal_info.dart';
 import '../data/models/reciter_ibtihal_model/reciter_ibtihal_model.dart';
 import '../data/repo/ibtihal_player_repo.dart';
 
-
 class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
-  final AudioPlayer audioPlayer = AudioPlayer();
+    final AudioPlayer audioPlayer = AudioPlayers().getPlayer(
+    NotificationKeys.ibtihalatPlayer,
+  );
   final IbtihalatPlayerRepo ibtihalatPlayerRepo;
 
   ReceivePort? receivePort;
@@ -54,13 +55,13 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
     });
 
     audioPlayer.onPositionChanged.listen((Duration position) {
-      if (!this.state.isSeeking) {
-        emit(this.state.copyWith(currentPosition: position.inSeconds.toDouble()));
+      if (!state.isSeeking) {
+        emit(state.copyWith(currentPosition: position.inSeconds.toDouble()));
       }
     });
 
     audioPlayer.onDurationChanged.listen((Duration duration) {
-      emit(this.state.copyWith(ibtihalDuration: duration.inSeconds.toDouble()));
+      emit(state.copyWith(ibtihalDuration: duration.inSeconds.toDouble()));
     });
 
     audioPlayer.onPlayerComplete.listen((_) {
@@ -116,13 +117,24 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
   }
 
   Future<void> playIbtihal() async {
+    dev.log("playIbtihal");
     emit(state.copyWith(audioState: AudioFetchLoading()));
     try {
       final directory = await getApplicationDocumentsDirectory();
       final reciterDir = Directory(
         '${directory.path}/Ibtihalat_listening/${state.reciter.nameArabic}',
       );
-      final filePath = '${reciterDir.path}/${state.ibtihalNumber}.mp3';
+    final filePath = '${reciterDir.path}/ابتهال ${state.reciter.info[state.ibtihalNumber].name}.mp3';
+    await AudioPlayers().pauseAll();
+   await   LocalNotificationService.instance.showMediaNotification(
+          groupKey: "ibtihal",
+          isPlaying: true,
+          id: 310,
+          keyFeature: NotificationKeys.ibtihalatPlayer,
+
+          body: state.reciter.nameArabic,
+          title:state.reciter.info[state.ibtihalNumber].name,
+        );
 
       Source source;
       if (await File(filePath).exists()) {
@@ -138,21 +150,51 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
         isPaused: false,
       ));
     } catch (e) {
-      dev.log(e.toString());
+      dev.log("ibtihal audio failure$e");
       await audioPlayer.stop();
-      emit(state.copyWith(isPlaying: false, audioState: AudioFetchFailure()));
+         await   LocalNotificationService.instance.showMediaNotification(
+          groupKey: "ibtihal",
+          isPlaying: false,
+          id: 310,
+          keyFeature: NotificationKeys.ibtihalatPlayer,
+
+          body: state.reciter.nameArabic,
+          title:state.reciter.info[state.ibtihalNumber].name,
+        );
+      emit(state.copyWith(isPlaying: false,isPaused: false, audioState: AudioFetchFailure()));
     }
   }
 
   Future<void> togglePlayPause() async {
+    dev.log("toggle test playing ${state.isPlaying} ");
     if (state.isPlaying) {
       await audioPlayer.pause();
       emit(state.copyWith(isPlaying: false, isPaused: true));
+         await   LocalNotificationService.instance.showMediaNotification(
+          groupKey: "ibtihal",
+          isPlaying: false,
+          id: 310,
+          keyFeature: NotificationKeys.ibtihalatPlayer,
+
+          body: state.reciter.nameArabic,
+          title:state.reciter.info[state.ibtihalNumber].name,
+        );
     } else {
       if (state.isPaused) {
+         await AudioPlayers().pauseAll();
         await audioPlayer.resume();
         emit(state.copyWith(isPlaying: true, isPaused: false));
+           await   LocalNotificationService.instance.showMediaNotification(
+          groupKey: "ibtihal",
+          isPlaying: true,
+          id: 310,
+          keyFeature: NotificationKeys.ibtihalatPlayer,
+
+          body: state.reciter.nameArabic,
+          title:state.reciter.info[state.ibtihalNumber].name,
+        );
       } else {
+        dev.log("play audio from stop ");
         await playIbtihal();
       }
     }
@@ -184,26 +226,69 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
     } else {
       if (state.isPaused) {
         await audioPlayer.resume();
+           await   LocalNotificationService.instance.showMediaNotification(
+          groupKey: "ibtihal",
+          isPlaying: true,
+          id: 310,
+          keyFeature: NotificationKeys.ibtihalatPlayer,
+
+          body: state.reciter.nameArabic,
+          title:state.reciter.info[state.ibtihalNumber].name,
+        );
       } else if (!state.isPlaying) {
         await playIbtihal();
       } else {
         emit(state.copyWith(isPlaying: true, isPaused: false));
+           await   LocalNotificationService.instance.showMediaNotification(
+          groupKey: "ibtihal",
+          isPlaying: true,
+          id: 310,
+          keyFeature: NotificationKeys.ibtihalatPlayer,
+
+          body: state.reciter.nameArabic,
+          title:state.reciter.info[state.ibtihalNumber].name,
+        );
       }
     }
   }
 
   void changeReciter(ReciterIbtihalModel reciter) async {
     if (state.reciter.id != reciter.id) {
-      emit(state.copyWith(reciter: reciter, ibtihalNumber: 0, currentPosition: 0));
+      emit(state.copyWith(
+          reciter: reciter,
+          ibtihalNumber: 0,
+          currentPosition: 0,
+          searchIbtihalResults: List.generate(reciter.info.length, (index) => index)));
       toggleFavorite();
       await playIbtihal();
     } else {
       if (state.isPaused) {
         await audioPlayer.resume();
+           await   LocalNotificationService.instance.showMediaNotification(
+          groupKey: "ibtihal",
+          isPlaying: true,
+          id: 310,
+          keyFeature: NotificationKeys.ibtihalatPlayer,
+
+          body: state.reciter.nameArabic,
+          title:state.reciter.info[state.ibtihalNumber].name,
+        );
       } else if (!state.isPlaying) {
         await playIbtihal();
       } else {
         emit(state.copyWith(isPlaying: true, isPaused: false));
+
+
+
+            await   LocalNotificationService.instance.showMediaNotification(
+          groupKey: "ibtihal",
+          isPlaying: true,
+          id: 310,
+          keyFeature: NotificationKeys.ibtihalatPlayer,
+
+          body: state.reciter.nameArabic,
+          title:state.reciter.info[state.ibtihalNumber].name,
+        );
       }
     }
   }
@@ -306,7 +391,7 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
       '${directory.path}/Ibtihalat_listening/${state.reciter.nameArabic}',
     );
     await reciterDir.create(recursive: true);
-    final filePath = '${reciterDir.path}/${state.ibtihalNumber}.mp3';
+    final filePath = '${reciterDir.path}/ابتهال ${state.reciter.info[state.ibtihalNumber].name}.mp3';
 
     if (!await File(filePath).exists()) {
       final dio = Dio();
@@ -355,7 +440,8 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
     final reciterDir = Directory(
       '${directory.path}/Ibtihalat_listening/${state.reciter.nameArabic}',
     );
-    final filePath = '${reciterDir.path}/${state.ibtihalNumber}.mp3';
+    final filePath = '${reciterDir.path}/ابتهال ${state.reciter.info[state.ibtihalNumber].name}.mp3';
+
     final url = state.reciter.info[state.ibtihalNumber].url;
 
     try {
@@ -452,34 +538,32 @@ class IbtihalatPlayerState extends Equatable {
     required this.searchIbtihalResults,
   });
 
-  factory IbtihalatPlayerState.initial() => IbtihalatPlayerState(
-        audioState: AudioFetchInit(),
-        isSeeking: false,
-        isPlaying: false,
-        isPaused: false,
-        reciterCountry: "كل الدول",
-        reciterSearchQuery: "",
-        isIbtihalFavorite: false,
-        onRepeat: false,
-        ibtihalNumber: 0,
-        audioSpeed: 1,
-        reciter: ReciterIbtihalModel(
-          id: 1,
-          name: "mohammed_omran",
-          nameArabic: "محمد عمران",
-          nationality: "مصر",
-          info: [
-            IbtihalInfo(
-              name: "في الليل يارب وفي الأسحار",
-              url: "https://archive.org/download/20230916_20230916_0318/001%20%20-%20%D9%81%D9%89%20%D8%A7%D9%84%D9%84%D9%8A%D9%84%20%D9%8A%D8%A7%D8%B1%D8%A8%20%D9%88%D9%81%D9%89%20%D8%A7%D9%84%D8%A3%D8%B3%D8%AD%D8%A7%D8%B1%20%20%D8%A7%D9%84%D8%B4%D9%8A%D8%AE%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%B9%D9%85%D8%B1%D8%A7%D9%86%20%20%D8%AC%D9%88%D8%AF%D8%A9%20%D8%B9%D8%A7%D9%84%D9%8A%D8%A9%20HD.mp3",
-            ),
-          ],
-        ),
-        currentPosition: 0.0,
-        ibtihalDuration: 0.0,
-        searchIbtihalResults: [0],
-        searchReciterResults: IbtihalatPlayerRepo().getAllReciters(),
-      );
+  factory IbtihalatPlayerState.initial() {
+    final defaultReciter = ReciterIbtihalModel(
+      id: 1,
+      name: "mohammed_omran",
+      nameArabic: "محمد عمران",
+      nationality: "مصر",
+      info: IbtihalatPlayerRepo.ibtahalInfoInitList,
+    );
+    return IbtihalatPlayerState(
+      audioState: AudioFetchInit(),
+      isSeeking: false,
+      isPlaying: false,
+      isPaused: false,
+      reciterCountry: "كل الدول",
+      reciterSearchQuery: "",
+      isIbtihalFavorite: false,
+      onRepeat: false,
+      ibtihalNumber: 0,
+      audioSpeed: 1,
+      reciter: defaultReciter,
+      currentPosition: 0.0,
+      ibtihalDuration: 0.0,
+      searchIbtihalResults: List.generate(defaultReciter.info.length, (index) => index),
+      searchReciterResults: IbtihalatPlayerRepo().getAllReciters(),
+    );
+  }
 
   IbtihalatPlayerState copyWith({
     bool? isPlaying,

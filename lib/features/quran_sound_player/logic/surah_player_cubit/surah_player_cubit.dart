@@ -298,7 +298,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
     emit(state.copyWith(audioState: AudioFetchLoading()));
     // تعيين مصدر الصوت وتشغيله مباشرة
     try {
-      final String filePath = '${reciterDir.path}/${state.surahNumber}.mp3';
+      final filePath = '${reciterDir.path}/${quranSurahs[state.surahNumber]}.mp3';
 
       await AudioPlayers().pauseAll();
 
@@ -344,7 +344,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
         body: state.reciter.nameArabic,
         title: quranSurahs[state.surahNumber]!,
       );
-      emit(state.copyWith(isPlaying: false, audioState: AudioFetchFailure()));
+      emit(state.copyWith(isPlaying: false,isPaused: false, audioState: AudioFetchFailure()));
     }
 
     // استخدام تأخير زمني لمحاولة الحصول على الطول الصوتي
@@ -633,7 +633,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
     String url =
         'https://download.quranicaudio.com/quran/${reciter.name}/$surahNumberZeroPad.mp3';
 
-    final filePath = '${reciterDir.path}/${state.surahNumber}.mp3';
+    final filePath = '${reciterDir.path}/${quranSurahs[state.surahNumber]}.mp3';
 
     if (!await File(filePath).exists()) {
       final dio = Dio();
@@ -688,7 +688,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
     final reciterDir = Directory(
       '${directory.path}/Quran_listening/${state.reciter.nameArabic}',
     );
-    final filePath = '${reciterDir.path}/${state.surahNumber}.mp3';
+     final filePath = '${reciterDir.path}/${quranSurahs[state.surahNumber]}.mp3';
 
     String surahNumberZeroPad = state.surahNumber.toString().padLeft(3, '0');
     Reciter reciter = state.reciter;

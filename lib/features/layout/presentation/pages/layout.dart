@@ -80,7 +80,7 @@ class _LayoutState extends State<Layout> {
 
             CustomBottomNavigationBarItem(
               pageController: _pageController,
-              icon: Icons.local_library_outlined,
+              icon: Icons.menu_book,
               index: 2,
               isSelected: _currentIndex == 2,
               onTap: _onNavBarItemTapped,

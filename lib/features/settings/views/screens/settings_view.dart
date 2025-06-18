@@ -4,8 +4,10 @@ import 'package:lnastaqim/core/utilits/widgets/custom_app_bar.dart';
 import 'package:lnastaqim/features/settings/views/widgets/setting_item.dart';
 import 'package:lnastaqim/features/settings/views/widgets/split_settings.dart';
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
+import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/links.dart';
 import '../../../../core/utilits/functions/format_text.dart';
+import '../../../../core/utilits/functions/toast_message.dart';
 import '../../../../core/utilits/services/url_launcher.dart';
 import '../../../share/views/widgets/share_fun.dart';
 
@@ -25,12 +27,19 @@ class SettingsView extends StatelessWidget {
               SettingItem(
                 icon: Icons.email,
                 text: "تواصل معنا",
-                onTap: () {
-                  UrlLauncher.launchToUrl(
-                    'lnastaqim@gmail.com',
-                    isExternal: true,
-                  );
-                },
+                                            onTap: () async{
+   try {
+                        await UrlLauncher.launchEmail(
+                          toEmail: 'lnastaqim@gmail.com',
+                          subject: 'استفسار',
+                        );
+                      } catch (e) {
+                              showToast(
+                          'تعذر فتح البريد. تأكد من وجود التطبيق على جهازك.',
+                          AppColor.primary.withValues(alpha: 0.9),
+                        );
+                  
+                      }              },
               ),
               const SplitSetting(title: "المظهر"),
               SettingItem(

@@ -10,7 +10,7 @@ platform :android do
       app: "1:432670175669:android:807ef8fd76fc7ed577e9fc",
       firebase_cli_token: ENV['FIREBASE_CLI_TOKEN'],
       android_artifact_type: "APK",
-      android_artifact_path: "../build/app/outputs/apk/release/app-release.apk",
+      android_artifact_path: "../build/app/outputs/flutter-apk/app-lnastaqim_prod-release.apk",
       groups: "lnastaqim",
       release_notes:"(lnastaqim prod app)",
       upload_timeout: 600

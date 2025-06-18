@@ -33,8 +33,7 @@ $url
     return formattedText;
   }
 
-
-   static String appShareText(String storeUrl) {
+  static String appShareText(String storeUrl) {
     return '''
 🌟 *تطبيق لنستقيم* 🌟
 
@@ -50,10 +49,20 @@ $storeUrl
 ''';
   }
 
-
- static String  ibtihalShareText({   required String ibtihalName,
+  static String ibtihalShareText({
+    required String ibtihalName,
     required String reciterName,
-    required String url}){
-    return 'استمع إلى الابتهال "$ibtihalName" بصوت الشيخ $reciterName\n$url';
- }
+    required String url,
+  }) {
+    final formattedText = '''
+🎵 ابتهال: $ibtihalName
+🗣️ القارئ: $reciterName
+
+🎧 رابط الاستماع والتحميل:
+$url
+
+#لنستقيم
+''';
+    return formattedText;
+  }
 }

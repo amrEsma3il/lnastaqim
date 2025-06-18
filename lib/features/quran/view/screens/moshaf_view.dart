@@ -236,21 +236,26 @@ class QuranBody extends StatelessWidget {
                                     ? BlocBuilder<SearchVisabilityCubit,
                                         bool>(
                                         builder: (context, searchState) {
+
+                                          //! the problem especially here
                                           return Positioned(
                                             top: 0,
                                             left: 0,
                                             right: 0,
                                             child: Container(
                                               width: Get.width,
-                                              height: 70.h,
+                                              height: 70.w,
                                               decoration: BoxDecoration(
                                                   color: AppColor.blueColor
                                                       .withOpacity(0.74)),
                                               child: Stack(
                                                 children: [
                                                   Positioned(
-                                                    right: 3,
-                                                    top: 9,
+                                                    right: 3.w,
+                                                  top:searchState 
+                                                                    ? 14.w
+                                                                    : 10.w
+                                                                     ,
                                                     child: IconButton(
                                                       onPressed: () {
                                                         QuranCubit.get(
@@ -275,9 +280,13 @@ class QuranBody extends StatelessWidget {
                                                       ),
                                                     ),
                                                   ),
+                                               
                                                   Positioned(
-                                                      left: 9,
-                                                      top: 9,
+                                                      left: 9.w,
+                                                      top:searchState
+                                                                    ? 14.w
+                                                                    : 10.w
+                                                                     ,
                                                       child: Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
@@ -306,7 +315,7 @@ class QuranBody extends StatelessWidget {
                                                                         context)
                                                                     .clearSearchEvent();
                                                               } else {}
-    
+                                                              
                                                               SearchVisabilityCubit
                                                                       .get(
                                                                           context)
@@ -353,7 +362,7 @@ class QuranBody extends StatelessWidget {
                                                                   color: Colors
                                                                       .white,
                                                                   size:
-                                                                      25.5,
+                                                                      25,
                                                                 );
                                                               },
                                                             ),
@@ -397,12 +406,15 @@ class QuranBody extends StatelessWidget {
                                                           )
                                                         ],
                                                       )),
+                                          
+                                          
                                                   Positioned(
-                                                      right: 70,
+                                                      right:searchState ? 55.w:70.w,
+                                                      top: 10.w,
                                                       // top: 2,
     
                                                       child: SizedBox(
-                                                        width: 211,
+                                                        width: 211.w,
                                                         child: Stack(
                                                           children: [
                                                             AnimatedOpacity(
@@ -463,7 +475,7 @@ class QuranBody extends StatelessWidget {
                                                               ),
                                                             ),
                                                             Positioned(
-                                                                top: 10,
+                                                                top: 10.w,
                                                                 right: 0,
                                                                 // left: 0,
     
@@ -490,10 +502,10 @@ class QuranBody extends StatelessWidget {
                                                                     controller:
                                                                         SearchOnAyaCubit.get(context).searchController,
                                                                     height:
-                                                                        40,
+                                                                        40.w,
                                                                     width: searchState ==
                                                                             true
-                                                                        ? 210
+                                                                        ? 210.w
                                                                         : 0,
                                                                     hintText:
                                                                         "بحث في القرءان",

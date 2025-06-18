@@ -15,7 +15,7 @@ class AppRouteName {
   static const String moshaf = "/moshaf";
   static const String bookmark = "/bookmark";
   static const String note = "/note"; //
-  static const String radio = "/radio"; //
+
 
   static const String a7adithView = "/a7adithView";
   static const String a7adithDetails = "/a7adithDetails";
@@ -24,8 +24,10 @@ class AppRouteName {
   static const String moshafIndex = "/moshafIndex"; //
 
   static const String paryerTimes = "/paryerTimes";
+  
   static const String surahPlayerScreen = "/surahPlayerScreen";
   static const String ibtihalPlayerScreen = "/ibtihalPlayerScreen";
+    static const String radio = "/radio"; //
 
   //surahPlayerScreen
 
