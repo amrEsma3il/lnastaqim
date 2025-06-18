@@ -44,7 +44,7 @@ class IbtihalatData {
         "nationality": "مصر",
         "info": [
           {
-            "name": "أجيب وذو اللطائف",
+            "name": "أغيب وذو اللطائف",
             "url": "https://www.matb3aa.com/music/ALnakshabandy/Agheb.W.Zo.Allata2f-Elnakshabndy-MaTb3aa.Com.mp3"
           },
           {
@@ -52,7 +52,7 @@ class IbtihalatData {
             "url": "https://www.matb3aa.com/music/ALnakshabandy/Ya.mn.Lah.Satra.Gamel-Elnakshabndy-MaTb3aa.Com.mp3"
           },
           {
-            "name": "عظمة ذنبي",
+            "name": "عظمة ذنوبي",
             "url": "https://www.matb3aa.com/music/ALnakshabandy/3azmat.Znobey-Elnakshabndy-MaTb3aa.Com.mp3"
           },
           {

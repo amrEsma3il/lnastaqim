@@ -21,62 +21,62 @@ class ScreenOverlayCubit extends Cubit<int> {
   ScreenOverlayCubit() : super(0);
   static ScreenOverlayCubit get(BuildContext context) =>
       BlocProvider.of<ScreenOverlayCubit>(context);
-// final QuranCubit quranCubit= QuranCubit();
+  // final QuranCubit quranCubit= QuranCubit();
   Timer? _debounce;
   TextEditingController fastMove = TextEditingController();
   TextEditingController surahName = TextEditingController();
   TextEditingController pageNum = TextEditingController();
 
   List<Map<String, dynamic>> menuItems(BuildContext context) => [
-        {
-          "text": "انتقال سريع",
-          "onTap": () {
-            emit(1);
-            showPageDialog(context);
-          }
-        },
+    {
+      "text": "انتقال سريع",
+      "onTap": () {
+        emit(1);
+        showPageDialog(context);
+      },
+    },
 
-        {
-          "text": "الملاحظات",
-          "onTap": () {
-            emit(0);
-            Get.toNamed(AppRouteName.note);
-            // showMoshafNotes(context);
-            //  NoteAyahListView()
-          }
-        },
-        {
-          "text": "المرجعيات",
-          "onTap": () {
-            emit(0);
-            Get.toNamed(AppRouteName.bookmark);
-          }
-        },
-        {
-          "text": "الفهرس",
-          "onTap": () {
-            emit(0);
-            // Get.toNamed(AppRouteName.moshafIndex);
+    {
+      "text": "الملاحظات",
+      "onTap": () {
+        emit(0);
+        Get.toNamed(AppRouteName.note);
+        // showMoshafNotes(context);
+        //  NoteAyahListView()
+      },
+    },
+    {
+      "text": "المرجعيات",
+      "onTap": () {
+        emit(0);
+        Get.toNamed(AppRouteName.bookmark);
+      },
+    },
+    {
+      "text": "الفهرس",
+      "onTap": () {
+        emit(0);
+        // Get.toNamed(AppRouteName.moshafIndex);
 
-            // implement dialog here
-            showMoshafIndex(context);
-          }
-        },
+        // implement dialog here
+        showMoshafIndex(context);
+      },
+    },
 
-        ///
-        // {
-        //   "text": "مساعدة",
-        //   "onTap": () {
-        //     // implement dialog here
-        //   }
-        // },
-        // {
-        //   "text": "من نحن",
-        //   "onTap": () {
-        //     // implement dialog here
-        //   }
-        // }
-      ];
+    ///
+    // {
+    //   "text": "مساعدة",
+    //   "onTap": () {
+    //     // implement dialog here
+    //   }
+    // },
+    // {
+    //   "text": "من نحن",
+    //   "onTap": () {
+    //     // implement dialog here
+    //   }
+    // }
+  ];
 
   overlaysVisability() {
     if (state == 0 || state == 2) {
@@ -85,15 +85,15 @@ class ScreenOverlayCubit extends Cubit<int> {
       emit(0);
     }
 
-//  quranCubit.stream.listen((ayaState) {
-//       // React to changes in FirstCubit's state
-//   if (ayaState.offset.dx==0&&ayaState.offset.dy==0
-// ) {
-//   if (state==0||state==1) {
-//     emit(state);
-// }
-// }
-//     });
+    //  quranCubit.stream.listen((ayaState) {
+    //       // React to changes in FirstCubit's state
+    //   if (ayaState.offset.dx==0&&ayaState.offset.dy==0
+    // ) {
+    //   if (state==0||state==1) {
+    //     emit(state);
+    // }
+    // }
+    //     });
   }
 
   clearIverlayVisability() {
@@ -108,17 +108,41 @@ class ScreenOverlayCubit extends Cubit<int> {
     emit(state);
   }
 
+  clearFields() {
+    surahName.clear();
+    fastMove.clear();
+    pageNum.clear();
+  }
+
   showPageDialog(BuildContext context) {
     showDialog(
       context: context,
+      useSafeArea: true,
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: AppColor.blueColor.withOpacity(0.89),
           contentPadding: const EdgeInsets.all(20),
-          title: const Text(
-            'انتقال سريع',
-            style: TextStyle(color: Colors.white),
-            textAlign: TextAlign.right,
+          title: Row(crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+          
+              const Text(
+                'انتقال سريع',
+                style: TextStyle(color: Colors.white),
+                textAlign: TextAlign.right,
+              ),
+
+
+                  IconButton(
+                icon: const Icon(Icons.close, color: Colors.white, size: 26),
+                onPressed: () {
+
+                  Get.back();
+                  clearFields();
+                },
+              ),
+            ],
           ),
           content: SizedBox(
             width: (Get.width),
@@ -127,9 +151,7 @@ class ScreenOverlayCubit extends Cubit<int> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
-                  height: 1.h,
-                ),
+                SizedBox(height: 1.h),
                 const Text(
                   " أدخل رقم الصفحة او اسم السورة",
                   textAlign: TextAlign.right,
@@ -140,9 +162,7 @@ class ScreenOverlayCubit extends Cubit<int> {
                   controller: fastMove,
                   textAlign: TextAlign.right,
                   // keyboardType: TextInputType.number,
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
+                  style: const TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
                     contentPadding: EdgeInsets.fromLTRB(0, 0, 15, 0),
                     hintText: '١',
@@ -150,26 +170,46 @@ class ScreenOverlayCubit extends Cubit<int> {
                   ),
                   onChanged: (value) {
                     // onChangedDebounced(value,context);
-                    bool isPage = isNumeric(value);
+                    log("value  $value");
+                    bool isPage = isNumeric(value.toEnglish);
+
+                    log("isPage  $isPage");
                     fastMove.text = value.toArabic;
 
                     if (isPage) {
-                      pageNum.text = value.toArabic;
-                      String surahNameText = QuranCubit.get(context)
-                          .getSurahNameFromPage(int.parse(value) - 1);
-                      int surahNumberText = QuranCubit.get(context)
-                          .getSurahNumberFromPage(int.parse(value) - 1);
-                      surahName.text =
-                          "${surahNumberText.toString().toArabic}.$surahNameText";
+                      if (int.parse(value.toEnglish) > 604) {
+                        log("out ");
+                        surahName.text = "لا يوجد سورة بهذا الرقم";
+
+                        pageNum.text = "...";
+                      } else {
+                        pageNum.text = value.toArabic;
+                        String surahNameText = QuranCubit.get(
+                          context,
+                        ).getSurahNameFromPage(int.parse(value.toEnglish) - 1);
+                        int surahNumberText = QuranCubit.get(
+                          context,
+                        ).getSurahNumberFromPage(
+                          int.parse(value.toEnglish) - 1,
+                        );
+                        surahName.text =
+                            "${surahNumberText.toString().toArabic}.$surahNameText";
+                      }
                     } else {
-                      int? surahNumberText =
-                          QuranCubit.get(context).getSurahNumber(value);
-                      int? pageNumberText =
-                          QuranCubit.get(context).getSurahStartPage(value);
+                      int? surahNumberText = QuranCubit.get(
+                        context,
+                      ).getSurahNumber(value.toEnglish);
+                      int? pageNumberText = QuranCubit.get(
+                        context,
+                      ).getSurahStartPage(value.toEnglish);
                       if (surahNumberText != null && pageNumberText != null) {
                         pageNum.text = pageNumberText.toString().toArabic;
                         surahName.text =
-                            "${surahNumberText.toString().toArabic}.${value.toString()}";
+                            "${surahNumberText.toString().toArabic}.سورة ${value.toString().toArabic}";
+                      } else {
+                        surahName.text =
+                            value.isEmpty ? "" : "لا يوجد سورة بهذا الاسم";
+                        pageNum.text = value.isEmpty ? "" : "...";
                       }
                     }
                   },
@@ -188,13 +228,11 @@ class ScreenOverlayCubit extends Cubit<int> {
                       controller: surahName,
                       textAlign: TextAlign.right,
                       keyboardType: TextInputType.number,
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
+                      style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         constraints: BoxConstraints(maxWidth: 180.w),
                         contentPadding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                        hintText: '١. الفاتحة',
+                        hintText: "١.سورة الفاتحة",
                         hintStyle: const TextStyle(color: Colors.white60),
                       ),
                     ),
@@ -202,9 +240,7 @@ class ScreenOverlayCubit extends Cubit<int> {
                       controller: pageNum,
                       textAlign: TextAlign.right,
                       keyboardType: TextInputType.number,
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
+                      style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.fromLTRB(0, 0, 25, 0),
                         constraints: BoxConstraints(maxWidth: 55.w),
@@ -220,19 +256,18 @@ class ScreenOverlayCubit extends Cubit<int> {
           actions: [
             TextButton(
               onPressed: () {
-
-
                 if (fastMove.text.isNotEmpty) {
-
-
                   int pageIndex = 604 - int.parse(pageNum.text.toEnglish);
                   pageIndex = pageIndex > 604 ? 604 : pageIndex;
 
-                  log("رقم الصفحة عند الانتقال${int.parse(pageNum.text.toEnglish)}");
-// FontCubit.getFontCubit(context).loadFont(int.parse(pageNum.text.toEnglish));
+                  log(
+                    "رقم الصفحة عند الانتقال${int.parse(pageNum.text.toEnglish)}",
+                  );
+                  // FontCubit.getFontCubit(context).loadFont(int.parse(pageNum.text.toEnglish));
                   Navigator.of(context).pop();
-                  AudioControlCubit.get(context)
-                      .updatePage(int.parse(pageNum.text.toEnglish));
+                  AudioControlCubit.get(
+                    context,
+                  ).updatePage(int.parse(pageNum.text.toEnglish));
                   log(int.parse(pageNum.text.toEnglish).toString());
 
                   fastMove.text = "";
@@ -241,16 +276,15 @@ class ScreenOverlayCubit extends Cubit<int> {
                   emit(0);
                   QuranCubit.get(context).pageController.jumpToPage(pageIndex);
                 } else {
-                  showToast("يجب ادخال رقم الصفحة او اسم السورة",
-                      AppColor.blueColor.withOpacity(.95));
+                  showToast(
+                    "يجب ادخال رقم الصفحة او اسم السورة",
+                    AppColor.blueColor.withOpacity(.95),
+                  );
                 }
 
                 //  log("int.parse(pageNum.text.toEnglish) ${int.parse(pageNum.text.toEnglish)} ");
               },
-              child: const Text(
-                'موافق',
-                style: TextStyle(color: Colors.white),
-              ),
+              child: const Text('موافق', style: TextStyle(color: Colors.white)),
             ),
           ],
         );
@@ -263,84 +297,116 @@ class ScreenOverlayCubit extends Cubit<int> {
       context: context,
       builder: (context) {
         return Container(
-          decoration:
-              BoxDecoration(color: AppColor.blueColor.withOpacity(0.85)),
+          decoration: BoxDecoration(
+            color: AppColor.blueColor.withOpacity(0.85),
+          ),
           height: Get.height / 7 * 6,
           width: Get.width,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Column(
               children: [
-                SizedBox(
-                  height: 21.h,
-                ),
-                Row(mainAxisAlignment: MainAxisAlignment.start,
+                SizedBox(height: 21.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-
-                    IconButton(onPressed:() {
-                      Get.back();
-                    } , icon: const Icon(Icons.close,size: 30,color: Colors.white,)),
+                    IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: const Icon(
+                        Icons.close,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                    ),
                     Expanded(
                       child: Center(
                         child: Padding(
-                          padding:  EdgeInsets.only(left: 36.w),
+                          padding: EdgeInsets.only(left: 36.w),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: List.generate(
-                                IndexCubit.moshafIndexTypes.length,
-                                (index) => GestureDetector(onTap: () {
-                                  int toggle=index==0?0:1;
+                              IndexCubit.moshafIndexTypes.length,
+                              (index) => GestureDetector(
+                                onTap: () {
+                                  int toggle = index == 0 ? 0 : 1;
                                   IndexCubit.get(context).toggleIndex(toggle);
                                 },
-                                  child: BlocBuilder<IndexCubit, int>(
-                                        builder: (context, indexState) {
-                                          return Container(
-                                            alignment: Alignment.center,
-                                            width: 88.w,
-                                            height: 40.h,
-                                            decoration: BoxDecoration(
-                                              color: indexState==index?Colors.white:null,
-                                                border: Border.all(
-                                                    width: 1, color: Colors.white),
-                                                borderRadius: index == 0
-                                                    ? const BorderRadius.only(
-                                                        topRight: Radius.circular(25),
-                                                        bottomRight: Radius.circular(25))
-                                                    : const BorderRadius.only(
-                                                        bottomLeft: Radius.circular(25),
-                                                        topLeft: Radius.circular(25))),
-                                            child: Text(
-                                              IndexCubit.moshafIndexTypes[index],
-                                              style:  TextStyle(fontWeight: FontWeight.w500,
-                                                  color:indexState==index?AppColor.blueColor:Colors.white, fontSize: 20.r),
-                                            ),
-                                          );
-                                        },
+                                child: BlocBuilder<IndexCubit, int>(
+                                  builder: (context, indexState) {
+                                    return Container(
+                                      alignment: Alignment.center,
+                                      width: 88.w,
+                                      height: 40.h,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            indexState == index
+                                                ? Colors.white
+                                                : null,
+                                        border: Border.all(
+                                          width: 1,
+                                          color: Colors.white,
+                                        ),
+                                        borderRadius:
+                                            index == 0
+                                                ? const BorderRadius.only(
+                                                  topRight: Radius.circular(25),
+                                                  bottomRight: Radius.circular(
+                                                    25,
+                                                  ),
+                                                )
+                                                : const BorderRadius.only(
+                                                  bottomLeft: Radius.circular(
+                                                    25,
+                                                  ),
+                                                  topLeft: Radius.circular(25),
+                                                ),
                                       ),
-                                )),
+                                      child: Text(
+                                        IndexCubit.moshafIndexTypes[index],
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          color:
+                                              indexState == index
+                                                  ? AppColor.blueColor
+                                                  : Colors.white,
+                                          fontSize: 20.r,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 20,),
+                const SizedBox(height: 20),
 
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 20.h),
                     child: BlocBuilder<IndexCubit, int>(
                       builder: (context, state) {
-                           
                         return ListView.builder(
-
-                          itemCount:state==0? IndexCubit.getQuranSurah().length:IndexCubit.getQuranJuz().length,
-                          itemBuilder: (context, parentIndex) =>
-                              Visibility(visible: state==0,
-                                replacement:  JuzComponent(parentIndex: parentIndex,),
+                          itemCount:
+                              state == 0
+                                  ? IndexCubit.getQuranSurah().length
+                                  : IndexCubit.getQuranJuz().length,
+                          itemBuilder:
+                              (context, parentIndex) => Visibility(
+                                visible: state == 0,
+                                replacement: JuzComponent(
+                                  parentIndex: parentIndex,
+                                ),
                                 child: QuranSoraComponent(
-                                
-                                indexEntity: IndexCubit.getQuranSurah()[parentIndex],),
+                                  indexEntity:
+                                      IndexCubit.getQuranSurah()[parentIndex],
+                                ),
                               ),
                         );
                       },
@@ -355,62 +421,54 @@ class ScreenOverlayCubit extends Cubit<int> {
     );
   }
 
+  //  static showMoshafNotes(BuildContext context) {
+  //     showBottomSheet(
+  //       context: context,
+  //       builder: (context) {
+  //         return
+  //         Container(
+  //           decoration:
+  //               BoxDecoration(color: AppColor.blueColor.withOpacity(0.85)),
+  //           height: Get.height / 7 * 6,
+  //           width: Get.width,
+  //           child: Padding(
+  //             padding: EdgeInsets.symmetric(horizontal: 15.w),
+  //             child: Column(
+  //               children: [
+  //                   const SizedBox(height: 15,),
+  //                  Row(mainAxisAlignment: MainAxisAlignment.start,
+  //                   children: [
 
+  //                     IconButton(onPressed:() {
+  //                       Get.back();
+  //                     } , icon: const Icon(Icons.close,size: 30,color: Colors.white,)),
+  //                     Expanded(
+  //                       child: Center(
+  //                         child: Padding(
+  //                           padding:  EdgeInsets.only(left: 36.w),
+  //                           child: const Text("الملاحظات",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w500),)   ),
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //                 const SizedBox(height: 20,),
 
-//  static showMoshafNotes(BuildContext context) {
-//     showBottomSheet(
-//       context: context,
-//       builder: (context) {
-//         return 
-//         Container(
-//           decoration:
-//               BoxDecoration(color: AppColor.blueColor.withOpacity(0.85)),
-//           height: Get.height / 7 * 6,
-//           width: Get.width,
-//           child: Padding(
-//             padding: EdgeInsets.symmetric(horizontal: 15.w),
-//             child: Column(
-//               children: [
-//                   const SizedBox(height: 15,),
-//                  Row(mainAxisAlignment: MainAxisAlignment.start,
-//                   children: [
-                  
+  //                 Expanded(
+  //                   child: Padding(
+  //                     padding: EdgeInsets.only(bottom: 20.h),
+  //                     child:
+  //                     // implement slide to action here
 
-//                     IconButton(onPressed:() {
-//                       Get.back();
-//                     } , icon: const Icon(Icons.close,size: 30,color: Colors.white,)),
-//                     Expanded(
-//                       child: Center(
-//                         child: Padding(
-//                           padding:  EdgeInsets.only(left: 36.w),
-//                           child: const Text("الملاحظات",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w500),)   ),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//                 const SizedBox(height: 20,),
-
-//                 Expanded(
-//                   child: Padding(
-//                     padding: EdgeInsets.only(bottom: 20.h),
-//                     child: 
-//                     // implement slide to action here
-                    
-//                     const NoteAyahListView()
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         );
-//       },
-//     );
-//   }
-
-
-
-
-
+  //                     const NoteAyahListView()
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         );
+  //       },
+  //     );
+  //   }
 
   void onChangedDebounced(String value, BuildContext context) {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
@@ -420,24 +478,31 @@ class ScreenOverlayCubit extends Cubit<int> {
   }
 
   Future<void> performHeavyComputation(
-      String value, BuildContext context) async {
+    String value,
+    BuildContext context,
+  ) async {
     bool isPage = isNumeric(value);
     fastMove.text =
         value.toArabic; // Assuming toArabic() is an extension method
     if (isPage) {
       pageNum.text =
           value.toArabic; // Assuming toArabic() is an extension method
-      final result = await compute(_heavyComputationForPage,
-          {"page": int.parse(value) - 1, "context": context});
+      final result = await compute(_heavyComputationForPage, {
+        "page": int.parse(value) - 1,
+        "context": context,
+      });
       surahName.text =
           "${result!['surahNumberText']}.${result['surahNameText']}";
     } else {
-      final result = await compute(
-          _heavyComputationForSurah, {"surah": value, "context": context});
+      final result = await compute(_heavyComputationForSurah, {
+        "surah": value,
+        "context": context,
+      });
       if (result != null) {
-        pageNum.text = result['pageNumberText']
-            .toString()
-            .toArabic; // Assuming toArabic() is an extension method
+        pageNum.text =
+            result['pageNumberText']
+                .toString()
+                .toArabic; // Assuming toArabic() is an extension method
         surahName.text =
             "${result['surahNumberText'].toString().toArabic}.$value"; // Assuming toArabic() is an extension method
       }
@@ -445,19 +510,22 @@ class ScreenOverlayCubit extends Cubit<int> {
   }
 
   static Map<String, dynamic>? _heavyComputationForPage(
-      Map<String, dynamic> args) {
+    Map<String, dynamic> args,
+  ) {
     // Perform your heavy computation here
     // For example, fetching Surah name and number from a page number
     int page = args['page'];
     BuildContext context = args['context'];
     final surahNameText = QuranCubit.get(context).getSurahNameFromPage(page);
-    final surahNumberText =
-        QuranCubit.get(context).getSurahNumberFromPage(page);
+    final surahNumberText = QuranCubit.get(
+      context,
+    ).getSurahNumberFromPage(page);
     return {'surahNameText': surahNameText, 'surahNumberText': surahNumberText};
   }
 
   static Map<String, dynamic>? _heavyComputationForSurah(
-      Map<String, dynamic> args) {
+    Map<String, dynamic> args,
+  ) {
     // Perform your heavy computation here
     // For example, fetching Surah number and start page from Surah name
     String surah = args['surah'];
@@ -467,7 +535,7 @@ class ScreenOverlayCubit extends Cubit<int> {
     if (surahNumberText != null && pageNumberText != null) {
       return {
         'surahNumberText': surahNumberText,
-        'pageNumberText': pageNumberText
+        'pageNumberText': pageNumberText,
       };
     }
     return null;
