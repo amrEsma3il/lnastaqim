@@ -1,13 +1,17 @@
 import 'dart:developer';
+import 'dart:developer' as dev;
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:lnastaqim/core/utilits/extensions/arabic_numbers.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../../../config/routing/app_routes_info/app_routes_name.dart';
+import '../../../../core/constants/colors.dart';
 import '../../../../core/utilits/services/audio_service/players_key.dart';
 import '../../../../core/utilits/services/local_notification_service.dart';
 import '../../../../main.dart';
@@ -274,49 +278,133 @@ class FontDownloadPercentage extends Cubit<FontDownloadState> {
 
 //===================================
 
-  Future<void> loadFontsIndividually({required int start,required int end}) async {
-    for (var i = start; i >= end; i--) {
-      String fontNum = (i + 1).toString().padLeft(3, '0');
 
-      if (loadedFonts.containsKey(fontNum)) {
-        log("font $fontNum already loaded befor");
 
-        continue; // الخط محمل مسبقًا، لا حاجة لتحميله مرة أخرى
+//!new handle for pagination
+Future<void> downloadAndLoadFont(int pageNumber) async {
+  String fontNum = pageNumber.toString().padLeft(3, '0');
+
+  // التحقق مما إذا كان الخط محملًا بالفعل
+  if (loadedFonts.containsKey(fontNum)) {
+    dev.log("Font $fontNum already loaded in engine");
+    emit(state.copyWith(loadedPages: {...state.loadedPages, pageNumber: true}));
+    return;
+  }
+
+  final directory = await getApplicationDocumentsDirectory();
+  final fontDirectory = Directory('${directory.path}/fonts');
+  await fontDirectory.create(recursive: true);
+  final fontPath = '${fontDirectory.path}/quran_font_$fontNum.ttf';
+  final fontFile = File(fontPath);
+
+  // دالة مساعدة لإعادة المحاولة
+  Future<void> attemptDownloadAndLoad(int retryCount) async {
+    if (retryCount <= 0) {
+      // نفدت المحاولات، اعرض SnackBar وألقِ الاستثناء
+      if (Get.context != null) {
+        Get.snackbar(
+          'خطأ في التحميل', 
+          "فشل في تحميل الصفحة ${pageNumber}, الرجاء التحقق من اتصال الإنترنت" ,
+          snackPosition: SnackPosition.TOP,
+         backgroundColor: AppColor.primary.withOpacity(0.9),
+          colorText: Colors.white,
+    duration: const Duration(milliseconds: 4500),
+        );
       }
+      throw Exception('فشل تحميل الخط $fontNum بعد جميع المحاولات');
+    }
 
-      // الحصول على مسار تخزين التطبيق المحلي
-      final directory = await getApplicationDocumentsDirectory();
-
-      final fontDirectory = Directory('${directory.path}/fonts');
-
-      final fontPath = '${fontDirectory.path}/quran_font_$fontNum.ttf';
-
-      // قراءة ملف الخط من التخزين المحلي
-      final fontFile = File(fontPath);
+    try {
+      // التحقق مما إذا كان الخط موجودًا محليًا
       if (fontFile.existsSync()) {
-        log(fontFile.path);
-        // قراءة بيانات الخط كـ bytes
         final fontData = await fontFile.readAsBytes();
-
-        // إنشاء FontLoader وربطه باسم مميز للخط (quran_font_$page)
         final fontLoader = FontLoader('quran_font_$fontNum');
-
-        // إضافة بيانات الخط إلى FontLoader
         fontLoader.addFont(Future.value(ByteData.view(fontData.buffer)));
-
-        // تحميل الخط وتسجيله في الـ engine
         await fontLoader.load();
-
-        // إضافة الخط إلى قائمة الخطوط المحملة
         loadedFonts[fontNum] = 'quran_font_$fontNum';
-
-        log('Font for page $fontNum loaded.');
-      } else {
-        log("font $fontPath not found");
+        dev.log('Font $fontNum loaded from local storage.');
+        emit(state.copyWith(loadedPages: {...state.loadedPages, pageNumber: true}));
+        return;
       }
+
+      // تحميل الخط من الإنترنت
+      final url = 'https://raw.githubusercontent.com/amrEsma3il/lnastaqim_assets/main/fonts/p2$fontNum.ttf';
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        await fontFile.writeAsBytes(response.bodyBytes);
+        dev.log('Downloaded font $fontNum');
+      } else {
+        dev.log('Failed to download font $fontNum: ${response.statusCode}');
+        throw Exception('فشل تحميل الخط $fontNum');
+      }
+
+      final fontData = await fontFile.readAsBytes();
+      final fontLoader = FontLoader('quran_font_$fontNum');
+      fontLoader.addFont(Future.value(ByteData.view(fontData.buffer)));
+      await fontLoader.load();
+      loadedFonts[fontNum] = 'quran_font_$fontNum';
+      dev.log('Font $fontNum loaded into engine.');
+      emit(state.copyWith(loadedPages: {...state.loadedPages, pageNumber: true}));
+    } catch (e) {
+      dev.log('Error downloading/loading font $fontNum: $e');
+      await attemptDownloadAndLoad(retryCount - 1); // إعادة المحاولة بدون SnackBar
     }
   }
 
+  // بدء عملية التحميل مع 2 محاولة (يمكن تغيير العدد)
+  await attemptDownloadAndLoad(2);
+}
+  Future<void> downloadAndLoadSurroundingFonts({
+    required int currentPage,
+    bool onlyPage = false,
+  }) async {
+    if (onlyPage) {
+      // تحميل الصفحة الحالية فقط
+      if (!state.loadedPages.containsKey(currentPage)) {
+        await downloadAndLoadFont(currentPage);
+      }
+    } else {
+      // تحميل الصفحة الحالية أولاً
+      if (!state.loadedPages.containsKey(currentPage)) {
+        await downloadAndLoadFont(currentPage);
+      }
+
+      // تقسيم التحميل إلى جزأين بالتوازي مع ترتيب صحيح
+      final int start = (currentPage - 3).clamp(1, 604);
+      final int end = (currentPage + 3).clamp(1, 604);
+
+      // إنشاء قائمتين للصفحات السابقة واللاحقة مع البدء من الصفحة الحالية نحو الخارج
+      List<int> previousPages = List.generate(
+        currentPage - start,
+        (index) => currentPage - 1 - index,
+      ).where((i) => i != currentPage && !state.loadedPages.containsKey(i)).toList();
+
+      List<int> nextPages = List.generate(
+        end - currentPage,
+        (index) => currentPage + 1 + index,
+      ).where((i) => i != currentPage && !state.loadedPages.containsKey(i)).toList();
+
+      // تحميل الصفحات بالتوازي
+      await Future.wait([
+        // تحميل الصفحات السابقة (من currentPage - 1 إلى currentPage - 3)
+        Future.forEach(previousPages, (int i) async {
+          await downloadAndLoadFont(i);
+        }),
+        // تحميل الصفحات التالية (من currentPage + 1 إلى currentPage + 3)
+        Future.forEach(nextPages, (int i) async {
+          await downloadAndLoadFont(i);
+        }),
+      ]);
+    }
+  }
+
+
+
+  bool isFontLoadedForPage(int pageNumber) {
+    return state.loadedPages[pageNumber] ?? false;
+  }
+
+//!
   Future<bool> checkAnyChapterDownloaded() async {
     log("checkAnyChapterDownloaded ${prefs.getBool("quranFintsSownload") ?? false}");
     return prefs.getBool("quranFintsSownload") ?? false;

@@ -2,29 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:developer';
 
-
-
 class ErrorApp extends StatelessWidget {
   final String errorMessage;
   final Future<void> Function()? onRetry;
 
-  const ErrorApp({
-    super.key,
-    required this.errorMessage,
-    this.onRetry,
-  });
+  const ErrorApp({super.key, required this.errorMessage, this.onRetry});
 
   @override
   Widget build(BuildContext context) {
     log('Showing ErrorApp with message: $errorMessage');
     return MaterialApp(
-          debugShowCheckedModeBanner: false,
-      home: PermissionErrorScreen(errorMessage: errorMessage,onRetry:onRetry,));
+      debugShowCheckedModeBanner: false,
+      home: PermissionErrorScreen(errorMessage: errorMessage, onRetry: onRetry),
+    );
   }
 }
-
-
-
 
 class PermissionErrorScreen extends StatelessWidget {
   final String errorMessage;
@@ -39,7 +31,6 @@ class PermissionErrorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
@@ -69,9 +60,11 @@ class PermissionErrorScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child:  Icon(
-                 errorMessage.contains('الإشعارات')? Icons
-                            .notifications_off:  Icons.location_off, // أو Icons.notifications_off حسب الحالة
+                  child: Icon(
+                    errorMessage.contains('الإشعارات')
+                        ? Icons.notifications_off
+                        : Icons
+                            .location_off, // أو Icons.notifications_off حسب الحالة
                     size: 66,
                     color: Color(0xFF37517E),
                   ),
@@ -108,9 +101,11 @@ class PermissionErrorScreen extends StatelessWidget {
 
                 // زر المحاولة مجددًا
                 ElevatedButton.icon(
-                  icon: const Icon(Icons.settings,color: Colors.white,),
-                  label:  Text(
-               errorMessage.contains('خدمات')?     'افتح الإعدادات':"السماح للصلاحيات",
+                  icon: const Icon(Icons.settings, color: Colors.white),
+                  label: Text(
+                    errorMessage.contains('خدمات')
+                        ? 'افتح الإعدادات'
+                        : "السماح للصلاحيات",
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: 'Amiri',
@@ -119,34 +114,37 @@ class PermissionErrorScreen extends StatelessWidget {
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF37517E),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                 onPressed: () async {
-                  log('Retry button pressed');
-                  if (errorMessage.contains('خدمات')) {
-                    log('Opening location settings');
-                    bool opened = await Geolocator.openAppSettings();
-                    log('Location settings opened: $opened');
-                  }
-                  if (onRetry != null) {
-                    log('Executing onRetry callback');
-                    await onRetry!();
-                  }
-                },
+                  onPressed: () async {
+                    log('Retry button pressed');
+                    if (errorMessage.contains('خدمات')) {
+                      log('Opening location settings');
+               
+                       LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+      permission = await Geolocator.requestPermission();
+    }
+          
+                    }
+                    if (onRetry != null) {
+                      log('Executing onRetry callback');
+                      await onRetry!();
+                    }
+                  },
                 ),
 
                 const SizedBox(height: 20),
 
                 const Text(
                   '▬▬▬▬ ❖ ▬▬▬▬',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Color(0xFF37517E),
-                  ),
+                  style: TextStyle(fontSize: 18, color: Color(0xFF37517E)),
                 ),
               ],
             ),

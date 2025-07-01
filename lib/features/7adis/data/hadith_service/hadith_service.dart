@@ -2,18 +2,32 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../model/a7adith_model.dart';
 
-Future<void> requestStoragePermission() async {
+Future<void> requestStoragePermissionGlobal() async {
   var status = await Permission.storage.status;
   if (!status.isGranted) {
     status = await Permission.storage.request();
   }
   // return status.isGranted;
 }
+
+ Future<void> requestStoragePermissionFeature() async {
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      status = await Permission.storage.request();
+      if (!status.isGranted) {
+        // Permission granted, proceed with your logic
+        Get.back();
+        return;
+      }
+    }
+ 
+  }
 
 Future<void> downloadHadithFiles(String url, String fileName,
     {Function(double)? onProgress}) async {

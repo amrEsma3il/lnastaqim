@@ -1,10 +1,11 @@
-
 import 'dart:developer' as dev;
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,8 +13,10 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
 
+import '../../../core/constants/colors.dart';
 import '../../../core/constants/images.dart';
 import '../../../core/utilits/functions/format_text.dart';
+import '../../../core/utilits/functions/toast_message.dart';
 import '../../../core/utilits/services/audio_service/audio_players.dart';
 import '../../../core/utilits/services/audio_service/players_key.dart';
 import '../../../core/utilits/services/local_notification_service.dart';
@@ -22,18 +25,33 @@ import '../data/models/ibtihal_info.dart';
 import '../data/models/reciter_ibtihal_model/reciter_ibtihal_model.dart';
 import '../data/repo/ibtihal_player_repo.dart';
 
+// Cubit
 class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
-    final AudioPlayer audioPlayer = AudioPlayers().getPlayer(
+  final AudioPlayer audioPlayer = AudioPlayers().getPlayer(
     NotificationKeys.ibtihalatPlayer,
   );
   final IbtihalatPlayerRepo ibtihalatPlayerRepo;
 
   ReceivePort? receivePort;
+  double? pendingSeek;
 
-  static IbtihalatPlayerCubit get(BuildContext context) => BlocProvider.of<IbtihalatPlayerCubit>(context);
+  static IbtihalatPlayerCubit get(BuildContext context) =>
+      BlocProvider.of<IbtihalatPlayerCubit>(context);
 
   IbtihalatPlayerCubit(this.ibtihalatPlayerRepo)
-      : super(IbtihalatPlayerState.initial()) {
+    : super(IbtihalatPlayerState.initial()) {
+
+
+      audioPlayer.setSourceUrl(state.reciter.info[ state.ibtihalNumber].url).then((_) async {
+      final duration = await audioPlayer.getDuration();
+      if (duration != null) {
+        dev.log("Initial duration: ${duration.inSeconds}");
+        emit(state.copyWith(ibtihalDuration: duration.inSeconds.toDouble()));
+      } else {
+        dev.log("Failed to get initial duration");
+      }
+    
+    });
     initListeners();
     registerPort();
   }
@@ -54,22 +72,41 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
       }
     });
 
-    audioPlayer.onPositionChanged.listen((Duration position) {
-      if (!state.isSeeking) {
+audioPlayer.onPositionChanged.listen((Duration position) {
+      if (!state.isSeeking && state.audioState is AudioFetchSuccess) {
+        dev.log("Position changed: ${position.inSeconds}");
         emit(state.copyWith(currentPosition: position.inSeconds.toDouble()));
       }
     });
 
     audioPlayer.onDurationChanged.listen((Duration duration) {
+      dev.log("changed duration listener ${duration.inSeconds.toInt()}");
       emit(state.copyWith(ibtihalDuration: duration.inSeconds.toDouble()));
     });
 
-    audioPlayer.onPlayerComplete.listen((_) {
-      if (state.onRepeat) {
+    audioPlayer.onPlayerComplete.listen((_) async {
+  // Check here if internet connection is available
+  // var connectivityResult = await Connectivity().checkConnectivity();
+
+  final bool isConnected = await InternetConnectionChecker.instance.hasConnection;
+
+  if (isConnected) {
+    dev.log("internet connection");
+     if (state.onRepeat) {
         playIbtihal();
       } else {
-        nextIbtihal();
+        dev.log("state.isRandom ${state.isRandom}");
+        if (state.isRandom) {
+          playRandomIbtihal();
+        } else {
+          nextIbtihal();
+        }
       }
+  }else{
+    dev.log("no internet connection");
+  }
+      //check here if internet connection is available
+    
     });
   }
 
@@ -101,7 +138,7 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
         previousIbtihal();
         break;
       case 'next':
-        nextIbtihal();
+        nextIbtihal(isFromUserHitAction: true);
         break;
     }
   }
@@ -116,52 +153,71 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
     return ibtihalatPlayerRepo.getAllReciters();
   }
 
-  Future<void> playIbtihal() async {
-    dev.log("playIbtihal");
+  Future<void> playIbtihal({int? ibtihalNum}) async {
+    dev.log("playIbtihal with position: ${state.currentPosition}");
     emit(state.copyWith(audioState: AudioFetchLoading()));
     try {
       final directory = await getApplicationDocumentsDirectory();
       final reciterDir = Directory(
         '${directory.path}/Ibtihalat_listening/${state.reciter.nameArabic}',
       );
-    final filePath = '${reciterDir.path}/ابتهال ${state.reciter.info[state.ibtihalNumber].name}.mp3';
-    await AudioPlayers().pauseAll();
-   await   LocalNotificationService.instance.showMediaNotification(
-          groupKey: "ibtihal",
-          isPlaying: true,
-          id: 310,
-          keyFeature: NotificationKeys.ibtihalatPlayer,
-
-          body: state.reciter.nameArabic,
-          title:state.reciter.info[state.ibtihalNumber].name,
-        );
+      final filePath =
+          '${reciterDir.path}/ابتهال ${state.reciter.info[ibtihalNum ?? state.ibtihalNumber].name}.mp3';
+      await AudioPlayers().pauseAll();
+      await LocalNotificationService.instance.showMediaNotification(
+        groupKey: "ibtihal",
+        isPlaying: true,
+        id: 310,
+        keyFeature: NotificationKeys.ibtihalatPlayer,
+        body: state.reciter.nameArabic,
+        title: state.reciter.info[ibtihalNum ?? state.ibtihalNumber].name,
+      );
 
       Source source;
       if (await File(filePath).exists()) {
         source = DeviceFileSource(filePath);
       } else {
-        source = UrlSource(state.reciter.info[state.ibtihalNumber].url);
+        source = UrlSource(
+          state.reciter.info[ibtihalNum ?? state.ibtihalNumber].url,
+        );
       }
 
-      await audioPlayer.play(source);
-      emit(state.copyWith(
-        audioState: AudioFetchSuccess(),
-        isPlaying: true,
-        isPaused: false,
-      ));
-    } catch (e) {
-      dev.log("ibtihal audio failure$e");
-      await audioPlayer.stop();
-         await   LocalNotificationService.instance.showMediaNotification(
-          groupKey: "ibtihal",
-          isPlaying: false,
-          id: 310,
-          keyFeature: NotificationKeys.ibtihalatPlayer,
+      // Reset position if ibtihal number changes
+      final position = ibtihalNum != null && ibtihalNum != state.ibtihalNumber
+          ? 0
+          : state.currentPosition.toInt();
+      await audioPlayer.play(
+        source,
+        position: Duration(seconds: position),
+      );
 
-          body: state.reciter.nameArabic,
-          title:state.reciter.info[state.ibtihalNumber].name,
-        );
-      emit(state.copyWith(isPlaying: false,isPaused: false, audioState: AudioFetchFailure()));
+      emit(
+        state.copyWith(
+          audioState: AudioFetchSuccess(),
+          isPlaying: true,
+          isPaused: false,
+          currentPosition: position.toDouble(),
+        ),
+      );
+    } catch (e) {
+      dev.log("ibtihal audio failure: $e");
+      await audioPlayer.stop();
+       showToast("توجد مشكلة اثناء تشغيل الابتهال", AppColor.blueTint2);
+      // await LocalNotificationService.instance.showMediaNotification(
+      //   groupKey: "ibtihal",
+      //   isPlaying: false,
+      //   id: 310,
+      //   keyFeature: NotificationKeys.ibtihalatPlayer,
+      //   body: state.reciter.nameArabic,
+      //   title: state.reciter.info[ibtihalNum ?? state.ibtihalNumber].name,
+      // );
+      emit(
+        state.copyWith(
+          isPlaying: false,
+          isPaused: false,
+          audioState: AudioFetchFailure("توجد مشكلة اثناء تشغيل الابتهال"),
+        ),
+      );
     }
   }
 
@@ -170,28 +226,26 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
     if (state.isPlaying) {
       await audioPlayer.pause();
       emit(state.copyWith(isPlaying: false, isPaused: true));
-         await   LocalNotificationService.instance.showMediaNotification(
-          groupKey: "ibtihal",
-          isPlaying: false,
-          id: 310,
-          keyFeature: NotificationKeys.ibtihalatPlayer,
-
-          body: state.reciter.nameArabic,
-          title:state.reciter.info[state.ibtihalNumber].name,
-        );
+      await LocalNotificationService.instance.showMediaNotification(
+        groupKey: "ibtihal",
+        isPlaying: false,
+        id: 310,
+        keyFeature: NotificationKeys.ibtihalatPlayer,
+        body: state.reciter.nameArabic,
+        title: state.reciter.info[state.ibtihalNumber].name,
+      );
     } else {
       if (state.isPaused) {
-         await AudioPlayers().pauseAll();
+        await AudioPlayers().pauseAll();
         await audioPlayer.resume();
         emit(state.copyWith(isPlaying: true, isPaused: false));
-           await   LocalNotificationService.instance.showMediaNotification(
+        await LocalNotificationService.instance.showMediaNotification(
           groupKey: "ibtihal",
           isPlaying: true,
           id: 310,
           keyFeature: NotificationKeys.ibtihalatPlayer,
-
           body: state.reciter.nameArabic,
-          title:state.reciter.info[state.ibtihalNumber].name,
+          title: state.reciter.info[state.ibtihalNumber].name,
         );
       } else {
         dev.log("play audio from stop ");
@@ -200,114 +254,159 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
     }
   }
 
-  Future<void> nextIbtihal() async {
-    if (state.ibtihalNumber < state.reciter.info.length - 1) {
-      emit(state.copyWith(
-          ibtihalNumber: state.ibtihalNumber + 1, currentPosition: 0));
-      toggleFavorite();
-      await playIbtihal();
+  Future<void> nextIbtihal({bool isFromUserHitAction = false}) async {
+    if (isFromUserHitAction) {
+      await audioPlayer.stop();
+      emit(
+        state.copyWith(
+          isPlaying: !isFromUserHitAction,
+          isPaused: !isFromUserHitAction,
+          currentPosition: 0,
+          audioState: AudioFetchInit(),
+        ),
+      );
     }
+
+    if (state.ibtihalNumber < state.reciter.info.length - 1) {
+      emit(
+        state.copyWith(
+          ibtihalNumber: state.ibtihalNumber + 1,
+          currentPosition: 0,
+        ),
+      );
+      toggleFavorite();
+      if (!isFromUserHitAction) {
+        await playIbtihal();
+      }
+    }
+
+
+
+
+
+       audioPlayer.setSourceUrl(state.reciter.info[ state.ibtihalNumber].url).then((_) async {
+      final duration = await audioPlayer.getDuration();
+      if (duration != null) {
+        dev.log("Initial duration: ${duration.inSeconds}");
+        emit(state.copyWith(ibtihalDuration: duration.inSeconds.toDouble()));
+      } else {
+        dev.log("Failed to get initial duration");
+      }
+    
+    });
   }
 
   Future<void> previousIbtihal() async {
+    await audioPlayer.stop();
+    emit(state.copyWith(isPlaying: false, isPaused: true, currentPosition: 0));
     if (state.ibtihalNumber > 0) {
-      emit(state.copyWith(
-          ibtihalNumber: state.ibtihalNumber - 1, currentPosition: 0));
+      emit(state.copyWith(ibtihalNumber: state.ibtihalNumber - 1));
       toggleFavorite();
-      await playIbtihal();
     }
+
+
+
+       audioPlayer.setSourceUrl(state.reciter.info[ state.ibtihalNumber].url).then((_) async {
+      final duration = await audioPlayer.getDuration();
+      if (duration != null) {
+        dev.log("Initial duration: ${duration.inSeconds}");
+        emit(state.copyWith(ibtihalDuration: duration.inSeconds.toDouble()));
+      } else {
+        dev.log("Failed to get initial duration");
+      }
+    
+    });
   }
 
   void changeIbtihalNum(int ibtihalNumber) async {
-    if (state.ibtihalNumber != ibtihalNumber) {
-      emit(state.copyWith(ibtihalNumber: ibtihalNumber, currentPosition: 0));
-      toggleFavorite();
-      await playIbtihal();
-    } else {
-      if (state.isPaused) {
-        await audioPlayer.resume();
-           await   LocalNotificationService.instance.showMediaNotification(
-          groupKey: "ibtihal",
-          isPlaying: true,
-          id: 310,
-          keyFeature: NotificationKeys.ibtihalatPlayer,
+    await audioPlayer.stop();
+    emit(
+      state.copyWith(
+        isPlaying: false,
+        isPaused: true,
+        currentPosition: 0,
+        ibtihalNumber: ibtihalNumber,
+        audioState: AudioFetchInit(),
+      ),
+    );
 
-          body: state.reciter.nameArabic,
-          title:state.reciter.info[state.ibtihalNumber].name,
-        );
-      } else if (!state.isPlaying) {
-        await playIbtihal();
+       audioPlayer.setSourceUrl(state.reciter.info[ state.ibtihalNumber].url).then((_) async {
+      final duration = await audioPlayer.getDuration();
+      if (duration != null) {
+        dev.log("Initial duration: ${duration.inSeconds}");
+        emit(state.copyWith(ibtihalDuration: duration.inSeconds.toDouble()));
       } else {
-        emit(state.copyWith(isPlaying: true, isPaused: false));
-           await   LocalNotificationService.instance.showMediaNotification(
-          groupKey: "ibtihal",
-          isPlaying: true,
-          id: 310,
-          keyFeature: NotificationKeys.ibtihalatPlayer,
-
-          body: state.reciter.nameArabic,
-          title:state.reciter.info[state.ibtihalNumber].name,
-        );
+        dev.log("Failed to get initial duration");
       }
-    }
+    
+    });
+    toggleFavorite();
+
+
+
   }
 
   void changeReciter(ReciterIbtihalModel reciter) async {
-    if (state.reciter.id != reciter.id) {
-      emit(state.copyWith(
-          reciter: reciter,
-          ibtihalNumber: 0,
-          currentPosition: 0,
-          searchIbtihalResults: List.generate(reciter.info.length, (index) => index)));
-      toggleFavorite();
-      await playIbtihal();
-    } else {
-      if (state.isPaused) {
-        await audioPlayer.resume();
-           await   LocalNotificationService.instance.showMediaNotification(
-          groupKey: "ibtihal",
-          isPlaying: true,
-          id: 310,
-          keyFeature: NotificationKeys.ibtihalatPlayer,
+    await audioPlayer.stop();
+    emit(
+      state.copyWith(
+        isPlaying: false,
+        isPaused: true,
+        currentPosition: 0,
+        reciter: reciter,
+        ibtihalNumber: 0,
+        searchIbtihalResults: List.generate(
+          reciter.info.length,
+          (index) => index,
+        ),
+        audioState: AudioFetchInit(),
+      ),
+    );
 
-          body: state.reciter.nameArabic,
-          title:state.reciter.info[state.ibtihalNumber].name,
-        );
-      } else if (!state.isPlaying) {
-        await playIbtihal();
+       audioPlayer.setSourceUrl(state.reciter.info[ state.ibtihalNumber].url).then((_) async {
+      final duration = await audioPlayer.getDuration();
+      if (duration != null) {
+        dev.log("Initial duration: ${duration.inSeconds}");
+        emit(state.copyWith(ibtihalDuration: duration.inSeconds.toDouble()));
       } else {
-        emit(state.copyWith(isPlaying: true, isPaused: false));
-
-
-
-            await   LocalNotificationService.instance.showMediaNotification(
-          groupKey: "ibtihal",
-          isPlaying: true,
-          id: 310,
-          keyFeature: NotificationKeys.ibtihalatPlayer,
-
-          body: state.reciter.nameArabic,
-          title:state.reciter.info[state.ibtihalNumber].name,
-        );
+        dev.log("Failed to get initial duration");
       }
-    }
+    
+    });
+    toggleFavorite();
   }
 
   void toggleRepeat() {
     emit(state.copyWith(onRepeat: !state.onRepeat));
   }
 
-  void seek(double position) async {
-    emit(state.copyWith(isSeeking: true, audioState: AudioFetchLoading()));
+  Future<void> seek(double position) async {
+    dev.log("Seeking to position: ${position.toInt()}");
+    emit(state.copyWith(
+      isSeeking: true,
+      currentPosition: position,
+      audioState: state.isPlaying ? AudioFetchLoading() : state.audioState,
+    ));
     try {
-      await audioPlayer.seek(Duration(seconds: position.toInt()));
-      await playIbtihal();
+      if (state.audioState is AudioFetchSuccess || state.isPlaying || state.isPaused) {
+        await audioPlayer.seek(Duration(seconds: position.toInt()));
+        dev.log("Seek completed to position: ${position.toInt()}");
+      } else {
+        dev.log("Storing seek position for later, audio not initialized");
+        // Audio not initialized, just update position for when play starts
+      }
+      emit(state.copyWith(
+        isSeeking: false,
+        audioState: state.isPlaying ? AudioFetchSuccess() : state.audioState,
+      ));
     } catch (e) {
-      dev.log(e.toString());
-      await audioPlayer.stop();
-      emit(state.copyWith(isPlaying: false, audioState: AudioFetchFailure()));
+      dev.log("Seek error: $e");
+      showToast("توجد مشكلة اثناء تشغيل الابتهال", AppColor.blueTint2);
+      emit(state.copyWith(
+        isSeeking: false,
+        audioState: AudioFetchFailure("توجد مشكلة اثناء تشغيل الابتهال"),
+      ));
     }
-    emit(state.copyWith(isSeeking: false));
   }
 
   void changeAudioPosition(double value) {
@@ -321,8 +420,12 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
   void playRandomIbtihal() async {
     final random = Random();
     int randomIbtihal = random.nextInt(state.reciter.info.length);
-    emit(state.copyWith(ibtihalNumber: randomIbtihal));
+    emit(state.copyWith(ibtihalNumber: randomIbtihal, currentPosition: 0));
     await playIbtihal();
+  }
+
+  void changeRandomStatus() async {
+    emit(state.copyWith(isRandom: !state.isRandom));
   }
 
   void setPlaybackRate(double rate) async {
@@ -332,17 +435,24 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
 
   void searchIbtihalat(String query) {
     if (query.isEmpty) {
-      emit(state.copyWith(
-          searchIbtihalResults: List.generate(state.reciter.info.length, (index) => index)));
+      emit(
+        state.copyWith(
+          searchIbtihalResults: List.generate(
+            state.reciter.info.length,
+            (index) => index,
+          ),
+        ),
+      );
       return;
     }
 
-    final filteredIbtihalat = state.reciter.info
-        .asMap()
-        .entries
-        .where((entry) => entry.value.name.contains(query))
-        .map((entry) => entry.key)
-        .toList();
+    final filteredIbtihalat =
+        state.reciter.info
+            .asMap()
+            .entries
+            .where((entry) => entry.value.name.contains(query))
+            .map((entry) => entry.key)
+            .toList();
 
     emit(state.copyWith(searchIbtihalResults: filteredIbtihalat));
   }
@@ -370,8 +480,14 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
   }
 
   void clearIbtihalSearch() {
-    emit(state.copyWith(
-        searchIbtihalResults: List.generate(state.reciter.info.length, (index) => index)));
+    emit(
+      state.copyWith(
+        searchIbtihalResults: List.generate(
+          state.reciter.info.length,
+          (index) => index,
+        ),
+      ),
+    );
   }
 
   void clearReciterSearch() {
@@ -385,52 +501,121 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
   }
 
   Future<void> downloadIbtihal() async {
+    final ibtihalIndex = state.ibtihalNumber;
+
+    if (state.downloadingIbtihalat.contains(ibtihalIndex)) {
+      await LocalNotificationService.instance.showBasicNotification(
+        "جاري تحميل الابتهال بالفعل...",
+        "",
+      );
+      return;
+    }
+
+    emit(
+      state.copyWith(
+        downloadingIbtihalat: {...state.downloadingIbtihalat, ibtihalIndex},
+      ),
+    );
+
     dev.log("start download");
+
     final directory = await getApplicationDocumentsDirectory();
     final reciterDir = Directory(
       '${directory.path}/Ibtihalat_listening/${state.reciter.nameArabic}',
     );
     await reciterDir.create(recursive: true);
-    final filePath = '${reciterDir.path}/ابتهال ${state.reciter.info[state.ibtihalNumber].name}.mp3';
 
-    if (!await File(filePath).exists()) {
-      final dio = Dio();
-      try {
-        await dio.download(
-          state.reciter.info[state.ibtihalNumber].url,
-          filePath,
-          onReceiveProgress: ((count, total) async {
-            if (((count / total) * 100).toInt() < 100) {
-              final String progressText = '${((count / total) * 100).toInt()}%';
-              await LocalNotificationService.instance.downloadNotification(
-                groupKey: "ibtihalatDownload",
-                keyFeature: NotificationKeys.ibtihalatDownload,
-                title: "تحميل ${state.reciter.info[state.ibtihalNumber].name}",
-                hasAction: false,
-                isPlaying: false,
-                progress: ((count / total) * 100).toInt(),
-                maxProgress: 100,
-                id: int.parse("2${state.ibtihalNumber}2"),
-                progressText: progressText,
-              );
-            } else {
-              await LocalNotificationService.instance.cancelNotification(
-                int.parse("2${state.ibtihalNumber}2"),
-              );
-              await LocalNotificationService.instance.showCompletionNotification(
-                2002,
-                "تم تحميل ${state.reciter.info[state.ibtihalNumber].name} بنجاح",
-              );
-            }
-          }),
-        );
-      } on DioException catch (e) {
-        dev.log("error downloading file $e");
-      }
-    } else {
+    final filePath =
+        '${reciterDir.path}/ابتهال ${state.reciter.info[ibtihalIndex].name}.mp3';
+    final tempFilePath = '$filePath.part';
+
+    final finalFile = File(filePath);
+    final tempFile = File(tempFilePath);
+
+    if (await finalFile.exists()) {
       await LocalNotificationService.instance.showBasicNotification(
         "الابتهال موجود بالفعل",
         "",
+      );
+
+      emit(
+        state.copyWith(
+          downloadingIbtihalat: {...state.downloadingIbtihalat}
+            ..remove(ibtihalIndex),
+        ),
+      );
+      return;
+    }
+
+    if (await tempFile.exists()) {
+      await LocalNotificationService.instance.showBasicNotification(
+        "جاري تحميل الابتهال بالفعل...",
+        "",
+      );
+
+      emit(
+        state.copyWith(
+          downloadingIbtihalat: {...state.downloadingIbtihalat}
+            ..remove(ibtihalIndex),
+        ),
+      );
+      return;
+    }
+
+    final dio = Dio();
+
+    try {
+
+      
+      await dio.download(
+        state.reciter.info[ibtihalIndex].url,
+        tempFilePath,
+        onReceiveProgress: ((count, total) async {
+          final progress = ((count / total) * 100).toInt();
+          final String progressText = '$progress%';
+
+          if (progress < 100) {
+            await LocalNotificationService.instance.downloadNotification(
+              groupKey: "ibtihalatDownload",
+              keyFeature: NotificationKeys.ibtihalatDownload,
+              title: "تحميل ${state.reciter.info[ibtihalIndex].name}",
+              hasAction: false,
+              isPlaying: false,
+              progress: progress,
+              maxProgress: 100,
+              id: int.parse("2${ibtihalIndex}2"),
+              progressText: progressText,
+            );
+          } else {
+            await LocalNotificationService.instance.cancelNotification(
+              int.parse("2${ibtihalIndex}2"),
+            );
+            await LocalNotificationService.instance.showCompletionNotification(
+              2002,
+              "تم تحميل ${state.reciter.info[ibtihalIndex].name} بنجاح",
+            );
+          }
+        }),
+      );
+
+      await tempFile.rename(filePath);
+    } on DioException catch (e) {
+      dev.log("error downloading file $e");
+      await LocalNotificationService.instance.showBasicNotification(
+        "فشل تحميل الابتهال",
+        "",
+
+      );
+      showToast("فشل تحميل الابتهال", AppColor.blueTint2);
+      if (await tempFile.exists()) {
+        await tempFile.delete();
+      }
+    } finally {
+      emit(
+        state.copyWith(
+          downloadingIbtihalat: {...state.downloadingIbtihalat}
+            ..remove(ibtihalIndex),
+        ),
       );
     }
   }
@@ -440,7 +625,8 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
     final reciterDir = Directory(
       '${directory.path}/Ibtihalat_listening/${state.reciter.nameArabic}',
     );
-    final filePath = '${reciterDir.path}/ابتهال ${state.reciter.info[state.ibtihalNumber].name}.mp3';
+    final filePath =
+        '${reciterDir.path}/ابتهال ${state.reciter.info[state.ibtihalNumber].name}.mp3';
 
     final url = state.reciter.info[state.ibtihalNumber].url;
 
@@ -462,6 +648,7 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
         );
       }
     } catch (e) {
+      showToast("حدث خطا أثناء مشاركة الابتهال", AppColor.blueTint2);
       dev.log(e.toString());
     }
   }
@@ -506,6 +693,7 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
 }
 
 class IbtihalatPlayerState extends Equatable {
+  final bool isRandom;
   final bool isPlaying;
   final bool isPaused;
   final bool isIbtihalFavorite;
@@ -519,8 +707,11 @@ class IbtihalatPlayerState extends Equatable {
   final List<ReciterIbtihalModel> searchReciterResults;
   final List<int> searchIbtihalResults;
   final AudioFetchState audioState;
+  final Set<int> downloadingIbtihalat;
 
   const IbtihalatPlayerState({
+    required this.isRandom,
+    required this.downloadingIbtihalat,
     required this.audioSpeed,
     required this.reciterCountry,
     required this.reciterSearchQuery,
@@ -547,6 +738,8 @@ class IbtihalatPlayerState extends Equatable {
       info: IbtihalatPlayerRepo.ibtahalInfoInitList,
     );
     return IbtihalatPlayerState(
+      isRandom: false,
+      downloadingIbtihalat: <int>{},
       audioState: AudioFetchInit(),
       isSeeking: false,
       isPlaying: false,
@@ -560,12 +753,17 @@ class IbtihalatPlayerState extends Equatable {
       reciter: defaultReciter,
       currentPosition: 0.0,
       ibtihalDuration: 0.0,
-      searchIbtihalResults: List.generate(defaultReciter.info.length, (index) => index),
+      searchIbtihalResults: List.generate(
+        defaultReciter.info.length,
+        (index) => index,
+      ),
       searchReciterResults: IbtihalatPlayerRepo().getAllReciters(),
     );
   }
 
   IbtihalatPlayerState copyWith({
+    Set<int>? downloadingIbtihalat,
+    bool? isRandom,
     bool? isPlaying,
     bool? isSeeking,
     bool? isPaused,
@@ -583,6 +781,8 @@ class IbtihalatPlayerState extends Equatable {
     AudioFetchState? audioState,
   }) {
     return IbtihalatPlayerState(
+      isRandom: isRandom ?? this.isRandom,
+      downloadingIbtihalat: downloadingIbtihalat ?? this.downloadingIbtihalat,
       isIbtihalFavorite: isIbtihalFavorite ?? this.isIbtihalFavorite,
       reciter: reciter ?? this.reciter,
       audioState: audioState ?? this.audioState,
@@ -603,22 +803,24 @@ class IbtihalatPlayerState extends Equatable {
 
   @override
   List<Object> get props => [
-        reciter,
-        reciterSearchQuery,
-        reciterCountry,
-        isSeeking,
-        isPlaying,
-        isPaused,
-        isIbtihalFavorite,
-        audioSpeed,
-        onRepeat,
-        ibtihalNumber,
-        currentPosition,
-        ibtihalDuration,
-        searchIbtihalResults,
-        searchReciterResults,
-        audioState,
-      ];
+    reciter,
+    isRandom,
+    reciterSearchQuery,
+    reciterCountry,
+    isSeeking,
+    isPlaying,
+    isPaused,
+    isIbtihalFavorite,
+    audioSpeed,
+    onRepeat,
+    ibtihalNumber,
+    currentPosition,
+    ibtihalDuration,
+    searchIbtihalResults,
+    searchReciterResults,
+    audioState,
+    downloadingIbtihalat,
+  ];
 }
 
 class AudioFetchState {}
@@ -627,6 +829,12 @@ class AudioFetchLoading implements AudioFetchState {}
 
 class AudioFetchInit implements AudioFetchState {}
 
-class AudioFetchFailure implements AudioFetchState {}
+class AudioFetchFailure implements AudioFetchState {
+
+
+  final String errorMessage;
+
+  AudioFetchFailure(this.errorMessage);
+}
 
 class AudioFetchSuccess implements AudioFetchState {}

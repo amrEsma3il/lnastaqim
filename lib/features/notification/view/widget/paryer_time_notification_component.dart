@@ -14,8 +14,11 @@ import '../../data/repo/notification_repo.dart';
 class ParyerTimeNotificationComponent extends StatelessWidget {
   final String prayerName;
   final Future<void> Function() submitMethod;
-  const ParyerTimeNotificationComponent(
-      {super.key, required this.prayerName, required this.submitMethod});
+  const ParyerTimeNotificationComponent({
+    super.key,
+    required this.prayerName,
+    required this.submitMethod,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +32,23 @@ class ParyerTimeNotificationComponent extends StatelessWidget {
                 Text(
                   "صلاة $prayerName",
                   style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w800,
-                      color: AppColor.primary),
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w800,
+                    color: AppColor.primary,
+                  ),
                 ),
-                SizedBox(
-                  width: 4.w,
-                ),
+                SizedBox(width: 4.w),
                 GestureDetector(
                   onTap: () {
                     // context.read<NotificationCubit>().changeSoundSalahNabi(sound: "azan2");
 
                     showDialog(
                       context: context,
-                      builder: (context) => RadioDialog(
-                        prayerName: prayerName,
-                        submitMethod: submitMethod,
-                      ),
+                      builder:
+                          (context) => RadioDialog(
+                            prayerName: prayerName,
+                            submitMethod: submitMethod,
+                          ),
                     );
                   },
                   child: BlocBuilder<NotificationCubit, NotificationState>(
@@ -83,21 +86,32 @@ class ParyerTimeNotificationComponent extends StatelessWidget {
                       return (prayerName == "الفجر"
                               ? state.fajarAlarmStatus
                               : prayerName == "الظهر"
-                                  ? state.duharAlarmStatus
-                                  : prayerName == "العصر"
-                                      ? state.asrAlarmStatus
-                                      : prayerName == "المغرب"
-                                          ? state.maghribAlarmStatus
-                                          : prayerName == "العشاء"
-                                              ? state.ishaAlarmStatus
-                                              : false)
+                              ? state.duharAlarmStatus
+                              : prayerName == "العصر"
+                              ? state.asrAlarmStatus
+                              : prayerName == "المغرب"
+                              ? state.maghribAlarmStatus
+                              : prayerName == "العشاء"
+                              ? state.ishaAlarmStatus
+                              : false)
                           ? Text(
-                              "( ${prayerName == "الفجر" ? state.fajarAlarmSound : prayerName == "الظهر" ? state.duharAlarmSound : prayerName == "العصر" ? state.asrAlarmSound : prayerName == "المغرب" ? state.maghribAlarmSound : prayerName == "العشاء" ? state.ishaAlarmSound : ""} )",
-                              style: TextStyle(
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColor.gray),
-                            )
+                            "( ${prayerName == "الفجر"
+                                ? state.fajarAlarmSound
+                                : prayerName == "الظهر"
+                                ? state.duharAlarmSound
+                                : prayerName == "العصر"
+                                ? state.asrAlarmSound
+                                : prayerName == "المغرب"
+                                ? state.maghribAlarmSound
+                                : prayerName == "العشاء"
+                                ? state.ishaAlarmSound
+                                : ""} )",
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
+                              color: AppColor.gray,
+                            ),
+                          )
                           : const SizedBox.shrink();
                     },
                   ),
@@ -138,24 +152,23 @@ class ParyerTimeNotificationComponent extends StatelessWidget {
                       prayerName == "الفجر"
                           ? state.fajr.toArabic
                           : prayerName == "الظهر"
-                              ? state.dhuhr.toArabic
-                              : prayerName == "العصر"
-                                  ? state.asr.toArabic
-                                  : prayerName == "المغرب"
-                                      ? state.maghrib.toArabic
-                                      : prayerName == "العشاء"
-                                          ? state.isha.toArabic
-                                          : "",
+                          ? state.dhuhr.toArabic
+                          : prayerName == "العصر"
+                          ? state.asr.toArabic
+                          : prayerName == "المغرب"
+                          ? state.maghrib.toArabic
+                          : prayerName == "العشاء"
+                          ? state.isha.toArabic
+                          : "",
                       style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AppColor.gray),
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
+                        color: AppColor.gray,
+                      ),
                     );
                   },
                 ),
-                SizedBox(
-                  width: 8.w,
-                ),
+                SizedBox(width: 8.w),
                 BlocBuilder<NotificationCubit, NotificationState>(
                   builder: (context, state) {
                     // late bool prayerStatus;
@@ -186,17 +199,18 @@ class ParyerTimeNotificationComponent extends StatelessWidget {
                     return Transform.scale(
                       scale: 0.8,
                       child: Switch(
-                        value: prayerName == "الفجر"
-                            ? state.fajarAlarmStatus
-                            : prayerName == "الظهر"
+                        value:
+                            prayerName == "الفجر"
+                                ? state.fajarAlarmStatus
+                                : prayerName == "الظهر"
                                 ? state.duharAlarmStatus
                                 : prayerName == "العصر"
-                                    ? state.asrAlarmStatus
-                                    : prayerName == "المغرب"
-                                        ? state.maghribAlarmStatus
-                                        : prayerName == "العشاء"
-                                            ? state.ishaAlarmStatus
-                                            : false,
+                                ? state.asrAlarmStatus
+                                : prayerName == "المغرب"
+                                ? state.maghribAlarmStatus
+                                : prayerName == "العشاء"
+                                ? state.ishaAlarmStatus
+                                : false,
                         onChanged: (value) async {
                           switch (prayerName) {
                             case "الفجر":
@@ -244,8 +258,11 @@ class ParyerTimeNotificationComponent extends StatelessWidget {
 }
 
 class RadioDialog extends StatelessWidget {
-  const RadioDialog(
-      {super.key, required this.submitMethod, required this.prayerName});
+  const RadioDialog({
+    super.key,
+    required this.submitMethod,
+    required this.prayerName,
+  });
   final Future<void> Function() submitMethod;
   final String prayerName;
   // Stores the selected value
@@ -312,17 +329,18 @@ class RadioDialog extends StatelessWidget {
                       return RadioListTile<String>(
                         title: Text(radioTile['title'] as String),
                         value: radioTile["value"] as String,
-                        groupValue: prayerName == "الفجر"
-                            ? state.fajarAlarmSound
-                            : prayerName == "الظهر"
+                        groupValue:
+                            prayerName == "الفجر"
+                                ? state.fajarAlarmSound
+                                : prayerName == "الظهر"
                                 ? state.duharAlarmSound
                                 : prayerName == "العصر"
-                                    ? state.asrAlarmSound
-                                    : prayerName == "المغرب"
-                                        ? state.maghribAlarmSound
-                                        : prayerName == "العشاء"
-                                            ? state.ishaAlarmSound
-                                            : "",
+                                ? state.asrAlarmSound
+                                : prayerName == "المغرب"
+                                ? state.maghribAlarmSound
+                                : prayerName == "العشاء"
+                                ? state.ishaAlarmSound
+                                : "",
                         onChanged: radioTile["onChanged"],
                       );
                     },
@@ -342,18 +360,21 @@ class RadioDialog extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () async{
-
-                          if (context.mounted) {await    context
-                        .read<NotificationCubit>().stopAlarmSound();}
+                      onPressed: () async {
+                        if (context.mounted) {
+                          await context
+                              .read<NotificationCubit>()
+                              .stopAlarmSound();
+                        }
                         Get.back(); // Close dialog
                       },
                       child: Text(
                         'الغاء',
                         style: TextStyle(
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.w600,
-                            color: AppColor.white),
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColor.white,
+                        ),
                       ),
                     ),
                     ElevatedButton(
@@ -365,15 +386,20 @@ class RadioDialog extends StatelessWidget {
                       ),
                       onPressed: () async {
                         await submitMethod();
-                           if(context.mounted)     {  await context.read<NotificationCubit>().stopAlarmSound();}
+                        if (context.mounted) {
+                          await context
+                              .read<NotificationCubit>()
+                              .stopAlarmSound();
+                        }
                         Get.back(); // Return selected value
                       },
                       child: Text(
                         'موافق',
                         style: TextStyle(
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.w600,
-                            color: AppColor.white),
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColor.white,
+                        ),
                       ),
                     ),
                   ],
@@ -424,4 +450,3 @@ class RadioTileComponent extends StatelessWidget {
 // }
 // return sound;
 // }
-

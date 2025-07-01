@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/core/utilits/widgets/custom_app_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'dart:developer' as dev;
 import '../../../../core/constants/colors.dart';
 import '../../../../core/utilits/functions/toast_message.dart';
 import '../../../../core/utilits/services/url_launcher.dart';
@@ -51,6 +51,7 @@ class SupportScreen extends StatelessWidget {
                       isExternal: true,
                     );
                   } catch (e) {
+                    dev.log("Error opening Vodafone Cash: $e");
                     showToast(
                       'تعذر فتح الهاتف. تأكد من وجود التطبيق على جهازك.',
                       AppColor.primary.withValues(alpha: 0.9),

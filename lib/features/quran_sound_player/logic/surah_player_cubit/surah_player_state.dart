@@ -7,6 +7,8 @@ import 'surah_player_cubit.dart';
 class SurahPlayerState extends Equatable {
   final bool isPlaying;
   final bool isPaused;
+  final Set<int> downloadingSurahs;
+
   // final int repeatCount;
     final bool isSurahFavorite; 
   final String reciterCountry, reciterSearchQuery;
@@ -22,6 +24,7 @@ class SurahPlayerState extends Equatable {
   final AudioFetchState audioState;
 
   const SurahPlayerState({
+    required this.downloadingSurahs,
     required this.audioSpeed,
     required this.reciterCountry,
     required this.reciterSearchQuery,
@@ -42,6 +45,7 @@ class SurahPlayerState extends Equatable {
   });
 
   factory SurahPlayerState.initial() => SurahPlayerState(
+      downloadingSurahs: <int>{},
       audioState: AudioFetchInit(),
       isSeeking: false,
       isPlaying: false,
@@ -67,6 +71,7 @@ class SurahPlayerState extends Equatable {
 
   SurahPlayerState copyWith({
     bool? isPlaying,
+    Set<int>? downloadingSurahs,
     bool? isSeeking,
     bool? isPaused,
     String? reciterCountry,
@@ -86,6 +91,8 @@ class SurahPlayerState extends Equatable {
     // إضافة متغير جديد
   }) {
     return SurahPlayerState(
+      downloadingSurahs: downloadingSurahs ?? this.downloadingSurahs,
+
        isSurahFavorite: isSurahFavorite ?? this.isSurahFavorite,
         reciter: reciter ?? this.reciter,
         audioState: audioState ?? this.audioState,
@@ -125,7 +132,8 @@ class SurahPlayerState extends Equatable {
         surahDuration,
         searchSurahResults,
         searchReciterResults,
-        audioState
+        audioState,
+        downloadingSurahs
       ];
 }
 

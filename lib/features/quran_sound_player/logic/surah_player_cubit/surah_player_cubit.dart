@@ -619,69 +619,111 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
 
   //others
   Future<void> downloadSurah() async {
-    dev.log("start download");
-    final directory = await getApplicationDocumentsDirectory();
+  final surahIndex = state.surahNumber;
 
-    final reciterDir = Directory(
-      '${directory.path}/Quran_listening/${state.reciter.nameArabic}',
+  // لو السورة بالفعل قيد التحميل
+  if (state.downloadingSurahs.contains(surahIndex)) {
+    await LocalNotificationService.instance.showBasicNotification(
+      "جاري تحميل السورة بالفعل...",
+      "",
     );
-    //TODO: SHOW NOTIFICATION WITH DOWNLOAD INDICATOR BAR
-    await reciterDir.create(recursive: true);
-
-    String surahNumberZeroPad = state.surahNumber.toString().padLeft(3, '0');
-    Reciter reciter = state.reciter;
-    String url =
-        'https://download.quranicaudio.com/quran/${reciter.name}/$surahNumberZeroPad.mp3';
-
-    final filePath = '${reciterDir.path}/${quranSurahs[state.surahNumber]}.mp3';
-
-    if (!await File(filePath).exists()) {
-      final dio = Dio();
-
-      try {
-        dio.download(
-          url,
-          filePath,
-
-          onReceiveProgress: ((count, total) async {
-            if (((count / total) * 100).toInt() < 100) {
-              final String progressText = '${((count / total) * 100).toInt()}%';
-
-              await LocalNotificationService.instance.downloadNotification(
-                groupKey: "quranSurahDownload",
-                keyFeature: NotificationKeys.quranSoundDownload,
-                title: "تحميل ${quranSurahs[state.surahNumber]!}",
-                hasAction: false,
-                isPlaying: false,
-                progress: ((count / total) * 100).toInt(),
-                maxProgress: 100,
-                id: int.parse("1${state.surahNumber}1"),
-                progressText: progressText,
-              );
-            } else {
-              await LocalNotificationService.instance.cancelNotification(
-                int.parse("1${state.surahNumber}1"),
-              );
-              await LocalNotificationService.instance.showCompletionNotification(
-                2001,
-                "تم تحميل ${quranSurahs[state.surahNumber]!} بنجاح",
-              );
-            }
-          }),
-        );
-      } on DioException catch (e) {
-        dev.log("error downloading file $e");
-      }
-
-      //=========================================================
-    } else {
-      await LocalNotificationService.instance.showBasicNotification(
-        "السورة موجود بالفعل",
-        "",
-      );
-    }
+    return;
   }
 
+  // أضف السورة لقائمة التحميل
+  emit(state.copyWith(
+    downloadingSurahs: {...state.downloadingSurahs, surahIndex},
+  ));
+
+  dev.log("start download");
+  final directory = await getApplicationDocumentsDirectory();
+
+  final reciterDir = Directory(
+    '${directory.path}/Quran_listening/${state.reciter.nameArabic}',
+  );
+
+  await reciterDir.create(recursive: true);
+
+  String surahNumberZeroPad = surahIndex.toString().padLeft(3, '0');
+  Reciter reciter = state.reciter;
+  String url = 'https://download.quranicaudio.com/quran/${reciter.name}/$surahNumberZeroPad.mp3';
+
+  final filePath = '${reciterDir.path}/${quranSurahs[surahIndex]}.mp3';
+  final tempFilePath = '$filePath.part';
+
+  final finalFile = File(filePath);
+  final tempFile = File(tempFilePath);
+
+  if (await finalFile.exists()) {
+    await LocalNotificationService.instance.showBasicNotification(
+      "السورة موجود بالفعل",
+      "",
+    );
+    emit(state.copyWith(
+      downloadingSurahs: {...state.downloadingSurahs}..remove(surahIndex),
+    ));
+    return;
+  }
+
+  if (await tempFile.exists()) {
+    await LocalNotificationService.instance.showBasicNotification(
+      "جاري تحميل السورة بالفعل...",
+      "",
+    );
+    emit(state.copyWith(
+      downloadingSurahs: {...state.downloadingSurahs}..remove(surahIndex),
+    ));
+    return;
+  }
+
+  final dio = Dio();
+
+  try {
+    await dio.download(
+      url,
+      tempFilePath,
+      onReceiveProgress: ((count, total) async {
+        final progress = ((count / total) * 100).toInt();
+        final progressText = '$progress%';
+
+        if (progress < 100) {
+          await LocalNotificationService.instance.downloadNotification(
+            groupKey: "quranSurahDownload",
+            keyFeature: NotificationKeys.quranSoundDownload,
+            title: "تحميل ${quranSurahs[surahIndex]!}",
+            hasAction: false,
+            isPlaying: false,
+            progress: progress,
+            maxProgress: 100,
+            id: int.parse("1${surahIndex}1"),
+            progressText: progressText,
+          );
+        } else {
+          await LocalNotificationService.instance.cancelNotification(
+            int.parse("1${surahIndex}1"),
+          );
+          await LocalNotificationService.instance.showCompletionNotification(
+            2001,
+            "تم تحميل ${quranSurahs[surahIndex]!} بنجاح",
+          );
+        }
+      }),
+    );
+
+    // rename بعد التحميل
+    await tempFile.rename(filePath);
+  } on DioException catch (e) {
+    dev.log("error downloading file $e");
+    if (await tempFile.exists()) {
+      await tempFile.delete();
+    }
+  } finally {
+    // شيل السورة من قائمة التحميل سواء نجح أو فشل
+    emit(state.copyWith(
+      downloadingSurahs: {...state.downloadingSurahs}..remove(surahIndex),
+    ));
+  }
+}
   shareSurah() async {
     final directory = await getApplicationDocumentsDirectory();
 
