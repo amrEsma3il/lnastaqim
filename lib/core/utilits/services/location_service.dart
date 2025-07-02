@@ -4,11 +4,24 @@ class LocationService {
   static Future<Position> determinePosition() async {
     // Check if location services are enabled
     if (!await Geolocator.isLocationServiceEnabled()) {
-      throw Exception('خدمات الموقع معطلة. يرجى تفعيلها.');
+         LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+      permission = await Geolocator.requestPermission();
     }
 
-    // Check permissions
-    LocationPermission permission = await Geolocator.checkPermission();
+
+
+     if (permission == LocationPermission.deniedForever) {
+      throw Exception(
+        'تم رفض صلاحيات الوصول للموقع بشكل دائم. يرجى تفعيلها من إعدادات التطبيق.',
+      );
+    }
+
+    if (permission == LocationPermission.denied) {
+      throw Exception('تم رفض صلاحيات الوصول للموقع.');
+    }
+
+    }else{    LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
       permission = await Geolocator.requestPermission();
     }
@@ -21,7 +34,10 @@ class LocationService {
 
     if (permission == LocationPermission.denied) {
       throw Exception('تم رفض صلاحيات الوصول للموقع.');
-    }
+    }}
+
+    // Check permissions
+
 
     // Get current position
     try {

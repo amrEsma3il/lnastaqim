@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:developer' as dev;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import '../../../../core/utilits/functions/toast_message.dart';
 import '../../../quran_sound/logic/audio_cubit/audio_cubit.dart';
 import '../../view/widgets/index/quran_juz_component.dart';
 import '../../view/widgets/index/quran_sora_component.dart';
+import '../font_cubit/qurn_fonts_downlod_progress_persentage_cubit.dart';
 import '../quran/quran_cubit.dart';
 import '../quran/index_cubit/index_cubit.dart';
 
@@ -79,6 +81,7 @@ class ScreenOverlayCubit extends Cubit<int> {
   ];
 
   overlaysVisability() {
+    dev.log("Overlay visibility changed to: $state");
     if (state == 0 || state == 2) {
       emit(1);
     } else {
@@ -100,8 +103,9 @@ class ScreenOverlayCubit extends Cubit<int> {
     emit(0);
   }
 
-  menuShow() {
+  menuShow() {   
     emit(2);
+       dev.log("Overlay visibility changed to: $state");
   }
 
   keepOverlayState(int state) {
@@ -123,21 +127,19 @@ class ScreenOverlayCubit extends Cubit<int> {
         return AlertDialog(
           backgroundColor: AppColor.blueColor.withOpacity(0.89),
           contentPadding: const EdgeInsets.all(20),
-          title: Row(crossAxisAlignment: CrossAxisAlignment.start,
+          title: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-          
               const Text(
                 'انتقال سريع',
                 style: TextStyle(color: Colors.white),
                 textAlign: TextAlign.right,
               ),
 
-
-                  IconButton(
+              IconButton(
                 icon: const Icon(Icons.close, color: Colors.white, size: 26),
                 onPressed: () {
-
                   Get.back();
                   clearFields();
                 },
@@ -255,7 +257,7 @@ class ScreenOverlayCubit extends Cubit<int> {
           ),
           actions: [
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 if (fastMove.text.isNotEmpty) {
                   int pageIndex = 604 - int.parse(pageNum.text.toEnglish);
                   pageIndex = pageIndex > 604 ? 604 : pageIndex;
@@ -264,17 +266,22 @@ class ScreenOverlayCubit extends Cubit<int> {
                     "رقم الصفحة عند الانتقال${int.parse(pageNum.text.toEnglish)}",
                   );
                   // FontCubit.getFontCubit(context).loadFont(int.parse(pageNum.text.toEnglish));
-                  Navigator.of(context).pop();
+                  Get.back();
                   AudioControlCubit.get(
                     context,
-                  ).updatePage(int.parse(pageNum.text.toEnglish));
+                  ).updatePage(int.parse(pageNum.text.toEnglish),context);
                   log(int.parse(pageNum.text.toEnglish).toString());
 
                   fastMove.text = "";
                   surahName.text = "";
                   pageNum.text = "";
                   emit(0);
+                    // AudioControlCubit.get(context).updatePage(pageIndex,context);
                   QuranCubit.get(context).pageController.jumpToPage(pageIndex);
+
+                  
+                  await FontDownloadPercentage()
+                      .downloadAndLoadSurroundingFonts(currentPage: pageIndex);
                 } else {
                   showToast(
                     "يجب ادخال رقم الصفحة او اسم السورة",

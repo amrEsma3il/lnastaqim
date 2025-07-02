@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 import 'package:lnastaqim/core/constants/images.dart';
 import 'package:lnastaqim/features/azkar_with_sib7a/view/widgets/show_azkar_options_menu.dart';
+
+import '../../../../config/routing/app_routes_info/app_routes_name.dart';
 
 class CustomMenu extends StatelessWidget {
   const CustomMenu({
@@ -12,18 +15,8 @@ class CustomMenu extends StatelessWidget {
   final bool isZekr;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15, bottom: 15, left: 10, right: 10),
-      child: GestureDetector(
-        onTap: () {
-          showAzkarOptionsMenu(context, isZekr);
-        },
-        child: Image.asset(
-          AppImages.menu,
-          color: AppColor.white,
-          height: 27,
-        ),
-      ),
-    );
+    return IconButton(onPressed: () {
+              Get.toNamed(AppRouteName.favAzkar);
+       }, icon: const Icon(Icons.favorite,color: Colors.white,));
   }
 }

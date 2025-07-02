@@ -57,52 +57,52 @@ class _LayoutState extends State<Layout> {
         physics: const NeverScrollableScrollPhysics(),
         children: _pages,
       ),
-      bottomNavigationBar: Container(
-        margin: const EdgeInsets.only(left: 16, right: 16, bottom: 33, top: 15),
-        decoration: BoxDecoration(color: AppColor.white),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            // CustomBottomNavigationBarItem(
-            //   pageController: _pageController,
-            //   icon: Icons.psychology_outlined,
-            //   index: 4,
-            //   isSelected: _currentIndex == 4,
-            //   onTap: _onNavBarItemTapped,
-            // ),
-            // CustomBottomNavigationBarItem(
-            //   pageController: _pageController,
-            //   icon: Icons.groups_2,
-            //   index: 3,
-            //   isSelected: _currentIndex == 3,
-            //   onTap: _onNavBarItemTapped,
-            // ),
+      // bottomNavigationBar: Container(
+      //   margin: const EdgeInsets.only(left: 16, right: 16, bottom: 33, top: 15),
+      //   decoration: BoxDecoration(color: AppColor.white),
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //     children: [
+      //       // CustomBottomNavigationBarItem(
+      //       //   pageController: _pageController,
+      //       //   icon: Icons.psychology_outlined,
+      //       //   index: 4,
+      //       //   isSelected: _currentIndex == 4,
+      //       //   onTap: _onNavBarItemTapped,
+      //       // ),
+      //       // CustomBottomNavigationBarItem(
+      //       //   pageController: _pageController,
+      //       //   icon: Icons.groups_2,
+      //       //   index: 3,
+      //       //   isSelected: _currentIndex == 3,
+      //       //   onTap: _onNavBarItemTapped,
+      //       // ),
 
-            CustomBottomNavigationBarItem(
-              pageController: _pageController,
-              icon: Icons.menu_book,
-              index: 2,
-              isSelected: _currentIndex == 2,
-              onTap: _onNavBarItemTapped,
-            ),
-            CustomBottomNavigationBarItem(
-              pageController: _pageController,
-              icon: Icons.calendar_month,
-              index: 1,
-              isSelected: _currentIndex == 1,
-              onTap: _onNavBarItemTapped,
-            ),
+      //       CustomBottomNavigationBarItem(
+      //         pageController: _pageController,
+      //         icon: Icons.menu_book,
+      //         index: 2,
+      //         isSelected: _currentIndex == 2,
+      //         onTap: _onNavBarItemTapped,
+      //       ),
+      //       CustomBottomNavigationBarItem(
+      //         pageController: _pageController,
+      //         icon: Icons.calendar_month,
+      //         index: 1,
+      //         isSelected: _currentIndex == 1,
+      //         onTap: _onNavBarItemTapped,
+      //       ),
             
-            CustomBottomNavigationBarItem(
-              pageController: _pageController,
-              icon: Icons.home,
-              index: 0,
-              isSelected: _currentIndex == 0,
-              onTap: _onNavBarItemTapped,
-            ),
-          ],
-        ),
-      ),
+      //       CustomBottomNavigationBarItem(
+      //         pageController: _pageController,
+      //         icon: Icons.home,
+      //         index: 0,
+      //         isSelected: _currentIndex == 0,
+      //         onTap: _onNavBarItemTapped,
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }

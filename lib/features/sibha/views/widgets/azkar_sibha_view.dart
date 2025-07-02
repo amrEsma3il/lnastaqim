@@ -5,39 +5,131 @@ import 'package:lnastaqim/features/sibha/views/screens/sibha_view.dart';
 
 class AzkarSibhaView extends StatelessWidget {
   const AzkarSibhaView({super.key});
-
-  static const Map<String, dynamic> azkar = {
-    "سبحان الله":
+static const Map<String, Map<String, dynamic>> azkar = {
+  "سبحان الله": {
+    "repeats": 1,
+    "repeatPerRound": 33,
+    "importance":
         "قال رسول الله ﷺ : (أَيَعْجِزُ أحدُكم ، أن يكسِبَ كُلَّ يومٍ ألفَ حسَنَةٍ ؟ يُسَبِّحُ اللهَ مائَةَ تسبيحَةٍ ؛ فَيَكْتُبُ اللهُ لَهُ بَها ألفَ حسَنَةٍ ، ويَحُطُّ عنه بِها ألْفَ خَطِيئَةٍ ) . رواه مسلم",
-    "الحمد لله":
+  },
+  "الحمد لله": {
+    "repeats": 1,
+    "repeatPerRound": 33,
+    "importance":
         "قال رسول الله ﷺ : (الطُّهورُ شطْرُ الإيمانِ ، والحمدُ للهِ تملأُ الميزانَ ، وسُبحانَ اللهِ والحمدُ للهِ تَملآنِ ما بين السماءِ والأرضِ ) . رواه مسلم",
-    "لا إله إلا الله ":
+  },
+  "لا إله إلا الله": {
+    "repeats": 1,
+    "repeatPerRound": 33,
+    "importance":
         "قال رسول الله ﷺ : (فإنَّ اللَّهَ قدْ حَرَّمَ علَى النَّارِ مَن قالَ: لا إلَهَ إلَّا اللَّهُ، يَبْتَغِي بذلكَ وجْهَ اللَّهِ ) . رواه البخاري",
-    "الله أكبر":
-        "قال الله تعالى : ( َقُلِ الْحَمْدُ لِلَّهِ الَّذِي لَمْ يَتَّخِذْ وَلَدًا وَلَمْ يَكُن لَّهُ شَرِيكٌ فِي الْمُلْكِ وَلَمْ يَكُن لَّهُ وَلِيٌّ مِّنَ الذُّلِّ  وَكَبِّرْهُ تَكْبِيرًا) . سورة : الْإِسْرَآء - الأية :(111)",
-    "سبحان الله، والحمد لله، ولا إله إلا الله، والله أكبر":
+  },
+  "الله أكبر": {
+    "repeats": 1,
+    "repeatPerRound": 33,
+    "importance":
+        "قال الله تعالى : (وَكَبِّرْهُ تَكْبِيرًا) . سورة الإسراء: 111",
+  },
+  "سبحان الله، والحمد لله، ولا إله إلا الله، والله أكبر": {
+    "repeats": 1,
+    "repeatPerRound": 25,
+    "importance":
         "قال رسول الله ﷺ : ( أحبُّ الكَلامِ إلى اللهِ أرْبَعٌ: سُبْحانَ اللهِ، والْحَمْدُ لِلَّهِ، ولا إلَهَ إلَّا اللَّهُ، واللَّهُ أكْبَرُ) . رواه مسلم",
-    "سبحان الله وبحمده":
+  },
+  "سبحان الله وبحمده": {
+    "repeats": 1,
+    "repeatPerRound": 100,
+    "importance":
         "قال رسول الله ﷺ : ( من قال : سبحان اللهِ وبحمدِه مائةَ مرةٍ غُفرَتْ له ذنوبُه وإنْ كانتْ مثلَ زبَدِ البحرِ) . رواه الترمذي ",
-    "أستغفر الله":
-        "قال الله عز وجل : ( فَقُلْتُ اسْتَغْفِرُوا رَبَّكُمْ إِنَّهُ كَانَ غَفَّارًا (10) يُرْسِلِ السَّمَاءَ عَلَيْكُم مِّدْرَارًا (11) وَيُمْدِدْكُم بِأَمْوَالٍ وَبَنِينَ وَيَجْعَل لَّكُمْ جَنَّاتٍ وَيَجْعَل لَّكُمْ أَنْهَارًا (12))  سوره نوح : 10 - 12",
-    "حسبي الله ونعم الوكيل":
-        "قال الله تعالى : (الَّذِينَ قَالَ لَهُمُ النَّاسُ إِنَّ النَّاسَ قَدْ جَمَعُوا لَكُمْ فَاخْشَوْهُمْ فَزَادَهُمْ إِيمَانًا وَقَالُوا حَسْبُنَا اللَّـهُ وَنِعْمَ الْوَكِيلُ) سوره أل عمران : 173",
-    "لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ":
-        "قال رسول الله ﷺ: (دعوةُ ذي النُّونِ؛ إذ دعا بها في بَطنِ الحوتِ: لا إلهَ إلَّا أنتَ سُبْحانَكَ، إنِّي كنتُ مِن الظالمينَ، فإنَّه لن يَدعُوَ بها مسلمٌ في شيءٍ إلَّا استجابَ له) . رواه الترمذي ",
-    "اللهم صل على سيدنا محمد":
-        "عن ابي هريره ان رسول الله ﷺ قال : (مَن صلى عَلَيَّ واحدةً ، صلى اللهُ عليه بها عَشْرًا) . رواه مسلم",
-    "سبحان الله وبحمده،سبحان الله العظيم":
-        "قال رسول الله ﷺ: (كَلِمَتَانِ خَفِيفَتَانِ علَى اللِّسَانِ، ثَقِيلَتَانِ في المِيزَانِ، حَبِيبَتَانِ إلى الرَّحْمَنِ: سُبْحَانَ اللهِ وَبِحَمْدِهِ، سُبْحَانَ اللهِ العَظِيمِ.) . رواه البخاري",
-    "لا إلَهَ إلَّا اللَّهُ وحدَهُ لا شريكَ لَهُ ، لَهُ الملكُ ولَهُ الحمدُ وَهوَ على كلِّ شيءٍ قديرٌ":
-        " في حديث ابي هريرة يقول رسول الله ﷺ: ( مَن قالَ: لا إلَهَ إلَّا اللَّهُ، وحْدَهُ لا شَرِيكَ له، له المُلْكُ وله الحَمْدُ، وهو علَى كُلِّ شَيءٍ قَدِيرٌ، في يَومٍ مِئَةَ مَرَّةٍ؛ كانَتْ له عَدْلَ عَشْرِ رِقابٍ، وكُتِبَتْ له مِئَةُ حَسَنَةٍ، ومُحِيَتْ عنْه مِئَةُ سَيِّئَةٍ، وكانَتْ له حِرْزًا مِنَ الشَّيْطانِ يَومَهُ ذلكَ حتَّى يُمْسِيَ، ولَمْ يَأْتِ أحَدٌ بأَفْضَلَ ممَّا جاءَ به، إلَّا أحَدٌ عَمِلَ أكْثَرَ مِن ذلكَ.) .  رواه البخاري",
-    "لاحول ولا قوة إلا بالله":
-        "قال رسول الله ﷺ : ( ألَا أدُلُّكَ علَى كَلِمَةٍ هي كَنْزٌ مِن كُنُوزِ الجَنَّةِ؟ لا حَوْلَ ولَا قُوَّةَ إلَّا باللَّهِ) . متفق عليه"
-  };
-
+  },
+  "أستغفر الله": {
+    "repeats": 3,
+    "repeatPerRound": 33,
+    "importance":
+        "قال الله عز وجل : (فَقُلْتُ اسْتَغْفِرُوا رَبَّكُمْ إِنَّهُ كَانَ غَفَّارًا) . نوح: 10",
+  },
+  "حسبي الله ونعم الوكيل": {
+    "repeats": 1,
+    "repeatPerRound": 10,
+    "importance":
+        "قال الله تعالى : (الَّذِينَ قَالَ لَهُمُ النَّاسُ ... وَقَالُوا حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ) . آل عمران: 173",
+  },
+  "لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ": {
+    "repeats": 1,
+    "repeatPerRound": 7,
+    "importance":
+        "قال رسول الله ﷺ: (دعوةُ ذي النُّونِ ... فإنَّه لن يَدعُوَ بها مسلمٌ إلَّا استجابَ له) . رواه الترمذي ",
+  },
+  "اللهم صل على سيدنا محمد": {
+    "repeats": 1,
+    "repeatPerRound": 10,
+    "importance":
+        "عن أبي هريرة أن رسول الله ﷺ قال : (مَن صلى عَلَيَّ واحدةً ، صلى اللهُ عليه بها عَشْرًا) . رواه مسلم",
+  },
+  "سبحان الله وبحمده،سبحان الله العظيم": {
+    "repeats": 1,
+    "repeatPerRound": 33,
+    "importance":
+        "قال رسول الله ﷺ: (كَلِمَتَانِ خَفِيفَتَانِ ... حَبِيبَتَانِ إلى الرَّحْمَنِ: سُبْحانَ اللهِ وَبِحَمْدِهِ، سُبْحانَ اللهِ العَظِيمِ.) . رواه البخاري",
+  },
+  "لا إلَهَ إلَّا اللَّهُ وحدَهُ لا شريكَ لَهُ": {
+    "repeats": 1,
+    "repeatPerRound": 100,
+    "importance":
+        "قال ﷺ: (مَن قالَ: لا إلَهَ إلَّا اللَّهُ ... في يَومٍ مِئَةَ مَرَّةٍ ... كانَتْ له عَدْلَ عَشْرِ رِقابٍ) . رواه البخاري",
+  },
+  "لاحول ولا قوة إلا بالله": {
+    "repeats": 1,
+    "repeatPerRound": 10,
+    "importance":
+        "قال رسول الله ﷺ : (ألَا أدُلُّكَ علَى كَلِمَةٍ هي كَنْزٌ مِن كُنُوزِ الجَنَّةِ؟ لا حَوْلَ ولَا قُوَّةَ إلَّا باللَّهِ) . متفق عليه"
+  },
+  "رضيت بالله رباً، وبالإسلام ديناً، وبمحمد ﷺ نبيًا": {
+    "repeats": 1,
+    "repeatPerRound": 3,
+    "importance":
+        "قال رسول الله ﷺ: (مَن قالَ حينَ يُصبِحُ ... كانَ حقًّا على اللَّهِ أن يُرضِيَهُ). رواه أحمد"
+  },
+  "اللهم اغفر لي ولوالديّ": {
+    "repeats": 1,
+    "repeatPerRound": 10,
+    "importance":
+        "قال تعالى: (رَّبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ) . إبراهيم: 41"
+  },
+  "اللهم إني أسألك الجنة وأعوذ بك من النار": {
+    "repeats": 1,
+    "repeatPerRound": 7,
+    "importance":
+        "قال رسول الله ﷺ: (مَن سألَ اللَّهَ الجنَّةَ ثلاثَ مرَّاتٍ ... قالتِ الجنَّةُ: اللَّهمَّ أدخِلهُ الجنةَ). رواه الترمذي"
+  },
+  "اللهم آتنا في الدنيا حسنة وفي الآخرة حسنة": {
+    "repeats": 1,
+    "repeatPerRound": 5,
+    "importance":
+        "قال تعالى: (رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً ...) . البقرة: 201"
+  },
+  "اللهم إنك عفو تحب العفو فاعف عني": {
+    "repeats": 1,
+    "repeatPerRound": 10,
+    "importance":
+        "قالت عائشة رضي الله عنها: قلت: يا رسول الله ... قال: (قولي: اللهم إنك عفو تحب العفو فاعف عني). رواه الترمذي"
+  },
+  "اللهم ثبت قلبي على دينك": {
+    "repeats": 1,
+    "repeatPerRound": 7,
+    "importance":
+        "كان من دعاء النبي ﷺ: (يا مقلب القلوب ثبت قلبي على دينك). رواه الترمذي"
+  },
+  "يا حي يا قيوم برحمتك أستغيث": {
+    "repeats": 1,
+    "repeatPerRound": 5,
+    "importance":
+        "من دعاء النبي ﷺ في الكرب والضيق"
+  }
+};
   @override
   Widget build(BuildContext context) {
-    final TextController textController = Get.find();
+    final ZekrController controller = Get.find();
 
     return Scaffold(
       appBar: AppBar(
@@ -62,15 +154,25 @@ class AzkarSibhaView extends StatelessWidget {
         child: ListView.builder(
           itemCount: azkar.length,
           itemBuilder: (BuildContext context, int index) {
+            final zekrKey = azkar.keys.elementAt(index);
+            final zekrData = azkar[zekrKey]!;
             return GestureDetector(
               onTap: () {
-                textController.updateText(azkar.keys.elementAt(index), index);
+                final zekrModel = ZekrModel(
+                  text: zekrKey,
+                  category: "أذكار التسبيح",
+                  repeatPerRound: zekrData["repeatPerRound"],
+                  totalRounds: zekrData["repeats"],
+                  note: zekrData["importance"],
+                );
+                controller.updateZekr(zekrModel);
                 Get.back();
               },
               child: TasbeehZekr(
-                zekr: azkar.keys.elementAt(index),
-                zekrImportance: azkar.values.elementAt(index),
+                zekr: zekrKey,
+                zekrImportance: zekrData["importance"],
                 index: index,
+                isSelected: controller.selectedZekr.value.text == zekrKey,
               ),
             );
           },
@@ -81,20 +183,22 @@ class AzkarSibhaView extends StatelessWidget {
 }
 
 class TasbeehZekr extends StatelessWidget {
-  const TasbeehZekr(
-      {super.key,
-      required this.index,
-      required this.zekr,
-      required this.zekrImportance});
+  const TasbeehZekr({
+    super.key,
+    required this.index,
+    required this.zekr,
+    required this.zekrImportance,
+    required this.isSelected,
+  });
 
   final int index;
   final String zekr;
   final String zekrImportance;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
-    final TextController textController = Get.find();
-    bool isSelected = textController.selectedIndex == index;
+    final ZekrController controller = Get.find();
 
     return Column(
       children: [
@@ -136,15 +240,15 @@ class TasbeehZekr extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
         Text(
           zekrImportance,
           style: const TextStyle(
             fontFamily: "naskh",
-            fontSize: 18,
+            fontSize: 14,
           ),
         ),
-        const SizedBox(height: 50),
+        const SizedBox(height: 30),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 60),
           child: SizedBox(child: Divider()),

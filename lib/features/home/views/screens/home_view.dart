@@ -13,9 +13,11 @@ import '../../../../config/routing/app_routes_info/app_routes_name.dart';
 import '../../../../core/utilits/services/local_notification_service.dart';
 import '../../../paryer_times/bussniess_logic/date_cubit.dart';
 import '../../../paryer_times/view/widgets/prayers_stepper.dart';
+import '../../../quran/bussniess_logic/font_cubit/qurn_fonts_downlod_progress_persentage_cubit.dart';
 import '../../../quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_cubit.dart';
 import '../../../quran/bussniess_logic/moshaf_book_mark_cubit/moshaf_bookmark_state.dart';
 import '../../../quran/bussniess_logic/quran/quran_cubit.dart';
+import '../../../quran_sound/logic/audio_cubit/audio_cubit.dart';
 import '../widgets/carousel_slider_ayah.dart';
 import '../widgets/features_grid_view.dart';
 
@@ -28,22 +30,20 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+  ScrollController scrollController=ScrollController();
 
   @override
   void initState() {
     super.initState();
+    //make scroll controller scrolling to max position
     // _initializeFonts();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      endDrawer: CustomDrawer(
-        scaffoldKey: scaffoldKey,
-      ),
+      endDrawer: CustomDrawer(scaffoldKey: scaffoldKey),
       backgroundColor: const Color(0xfff2f4f9),
       body: SingleChildScrollView(
         child: Column(
@@ -60,157 +60,163 @@ class _HomeViewState extends State<HomeView> {
                   Padding(
                     padding: EdgeInsets.only(top: 53.h, left: 17.w),
                     child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 9.0),
-                            child: GestureDetector(
-                              onTap: () async {
-                                Get.toNamed(AppRouteName.notification);
-
-                              },
-                              child: const Icon(
-                                Icons.notifications,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-
-                          const Expanded(child: SizedBox.shrink()),
-                          // const Icon(
-                          //   Icons.wb_sunny_outlined,
-                          //   color: Colors.white,
-                          // ),
-                          GestureDetector(
-                            onTap: ()async {
-                              scaffoldKey.currentState!.openEndDrawer();
-
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 9.0),
+                          child: GestureDetector(
+                            onTap: () async {
+                              Get.toNamed(AppRouteName.notification);
                             },
                             child: const Icon(
-                              Icons.menu,
+                              Icons.notifications,
                               color: Colors.white,
                             ),
                           ),
-                        ]),
+                        ),
+
+                        const Expanded(child: SizedBox.shrink()),
+                        // const Icon(
+                        //   Icons.wb_sunny_outlined,
+                        //   color: Colors.white,
+                        // ),
+                        GestureDetector(
+                          onTap: () async {
+                            scaffoldKey.currentState!.openEndDrawer();
+                          },
+                          child: const Icon(Icons.menu, color: Colors.white),
+                        ),
+                      ],
+                    ),
                   ),
                   Positioned(
-                      top: 116.h,
-                      left: 19.w,
-                      child: SizedBox(
-                        width: Get.width - 35.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 63.w),
-                                    child: const Text(
-                                      textAlign: TextAlign.center,
-                                      "القراءة الاخيرة",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 21,
-                                          fontWeight: FontWeight.w400,
-                                          wordSpacing: -2),
+                    top: 116.h,
+                    left: 19.w,
+                    child: SizedBox(
+                      width: Get.width - 35.w,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(left: 63.w),
+                                  child: const Text(
+                                    textAlign: TextAlign.center,
+                                    "القراءة الاخيرة",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 21,
+                                      fontWeight: FontWeight.w400,
+                                      wordSpacing: -2,
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 2.h,
-                                  ),
-                                  GestureDetector(
-                                    child: Row(
-                                      children: [
-                                        BlocBuilder<MoshafBookmarkCubit,
-                                            MoshafBookmarkState>(
-                                          builder:
-                                              (context, moshafBookmarState) {
-                                            bool isMarkExist =
-                                                moshafBookmarState.isMark &&
-                                                    moshafBookmarState
-                                                            .pageNumber !=
-                                                        0;
-                                            int pageNumber =
-                                                moshafBookmarState.pageNumber;
-                                            return GestureDetector(
-                                              onTap: () async {
-                                                if (isMarkExist) {
-                                                  //  QuranCubit.get(context).clearScreen(context);
-                                                  QuranCubit.get(context)
-                                                          .pageController =
-                                                      PageController(
-                                                          initialPage:
-                                                              604 - pageNumber);
-                                                  Get.toNamed(
-                                                      AppRouteName.moshaf);
-                                                  log(pageNumber.toString());
-                                                }
-                                              },
-                                              child: Text(
-                                                isMarkExist
-                                                    ? '${'صفحة رقم'} ${pageNumber.toString().toArabic}'
-                                                    : "لا توجد قراه بعد",
-                                                style: const TextStyle(
-                                                    color: Colors.white60,
-                                                    fontSize: 21,
-                                                    fontWeight: FontWeight.w400,
-                                                    wordSpacing: 1.9),
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                        SizedBox(
-                                          width: 3.w,
-                                        ),
-                                        const Icon(
-                                          Icons.bookmark_outline,
-                                          color: Colors.white,
-                                          size: 21,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            BlocBuilder<DateCubit, Map<String, String>>(
-                              builder: (context, dateState) {
-                                return Expanded(
-                                  child: Column(
+                                ),
+                                SizedBox(height: 2.h),
+                                GestureDetector(
+                                  child: Row(
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 5.w),
-                                        child: Text(
-                                          dateState["gregorian"]!,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 21,
-                                              fontWeight: FontWeight.w400,
-                                              wordSpacing: -2),
-                                        ),
+                                      BlocBuilder<
+                                        MoshafBookmarkCubit,
+                                        MoshafBookmarkState
+                                      >(
+                                        builder: (context, moshafBookmarState) {
+                                          bool isMarkExist =
+                                              moshafBookmarState.isMark &&
+                                              moshafBookmarState.pageNumber !=
+                                                  0;
+                                          int pageNumber =
+                                              moshafBookmarState.pageNumber;
+                                          return GestureDetector(
+                                            onTap: () async {
+                                              if (isMarkExist) {
+                                                //  QuranCubit.get(context).clearScreen(context);
+                                                QuranCubit.get(
+                                                      context,
+                                                    ).pageController =
+                                                    PageController(
+                                                      initialPage:
+                                                          604 - pageNumber,
+                                                    );
+                                                Get.toNamed(
+                                                  AppRouteName.moshaf,
+                                                );
+                                                // Download and load surrounding fonts
+
+
+                                                 AudioControlCubit.get(context).updatePage(pageNumber,context);
+                                                await FontDownloadPercentage()
+                                                    .downloadAndLoadSurroundingFonts(
+                                                      currentPage:
+                                                           pageNumber,
+                                                    );
+                                                log(pageNumber.toString());
+                                              }
+                                            },
+                                            child: Text(
+                                              isMarkExist
+                                                  ? '${'صفحة رقم'} ${pageNumber.toString().toArabic}'
+                                                  : "لا توجد قراه بعد",
+                                              style: const TextStyle(
+                                                color: Colors.white60,
+                                                fontSize: 21,
+                                                fontWeight: FontWeight.w400,
+                                                wordSpacing: 1.9,
+                                              ),
+                                            ),
+                                          );
+                                        },
                                       ),
-                                      SizedBox(
-                                        height: 2.h,
-                                      ),
-                                      Text(
-                                        dateState["hijri"]!,
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 21,
-                                            fontWeight: FontWeight.w400,
-                                            wordSpacing: 1.9),
+                                      SizedBox(width: 3.w),
+                                      const Icon(
+                                        Icons.bookmark_outline,
+                                        color: Colors.white,
+                                        size: 21,
                                       ),
                                     ],
                                   ),
-                                );
-                              },
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ))
+                          ),
+                          BlocBuilder<DateCubit, Map<String, String>>(
+                            builder: (context, dateState) {
+                              return Expanded(
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 5.w),
+                                      child: Text(
+                                        dateState["gregorian"]!,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 21,
+                                          fontWeight: FontWeight.w400,
+                                          wordSpacing: -2,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 2.h),
+                                    Text(
+                                      dateState["hijri"]!,
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 21,
+                                        fontWeight: FontWeight.w400,
+                                        wordSpacing: 1.9,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -224,12 +230,12 @@ class _HomeViewState extends State<HomeView> {
                       Text(
                         "مواعيد الصلاوات",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15.5.sp),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.5.sp,
+                        ),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const PrayersStepper()
+                      const SizedBox(height: 20),
+                      const PrayersStepper(),
                     ],
                   ),
                 ),
@@ -242,20 +248,22 @@ class _HomeViewState extends State<HomeView> {
                       Text(
                         "المميزات",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15.5.sp),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.5.sp,
+                        ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       const FeaturesGridView(),
-                      const SizedBox(
-                        height: 30,
-                      ),
+                      const SizedBox(height: 30),
                     ],
                   ),
                 ),
               ],
-            )
+            ),
+       
+       SizedBox(
+              height: 5.h,
+            ),
           ],
         ),
       ),

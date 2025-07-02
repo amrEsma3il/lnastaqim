@@ -14,12 +14,8 @@ class RadioScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RadioCubit, RadioState>(
-      listener: (context, state) {
-        if(state.audioState is AudioFetchFailure){
-    showToast("توجد مشكلة اثناء تشغيل الملف الصوتي",AppColor.blueTint2);
-        }
-      },
+    return BlocBuilder<RadioCubit, RadioState>(
+   
       builder: (context, state) {
         final cubit = context.read<RadioCubit>();
         final channel = cubit.currentChannel;
@@ -252,7 +248,7 @@ class RadioScreen extends StatelessWidget {
                   leading:  Icon(Icons.radio,color: AppColor.blueTint2,),
                   title: Text(channel.title!),
                   onTap: () {
-                    cubit.playOrPause(selectesChannel: channel,currentIndex: index);
+                    cubit.changeChannel(selectesChannel: channel,currentIndex: index);
                     Navigator.pop(context);
                   },
                 );

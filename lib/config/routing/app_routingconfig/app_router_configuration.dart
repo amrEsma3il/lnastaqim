@@ -22,6 +22,7 @@ import '../../../features/azkar_with_sib7a/view/screens/azkar_details_view.dart'
 import '../../../features/home/views/screens/home_view.dart';
 import '../../../features/ibtihal/view/screens/ibtihalat_player_screen.dart';
 import '../../../features/notification/view/screnns/notification_screen.dart';
+import '../../../features/quran/view/screens/moshaf_index_screen.dart';
 import '../../../features/quran/view/screens/moshaf_view.dart';
 import '../../../features/quran_sound_player/view/screens/surah_player_screen.dart';
 import '../../../features/radio_stream_channels/view/pages/radio_screen.dart';
@@ -111,12 +112,12 @@ List<GetPage<dynamic>>? routes = [
       name: AppRouteName.moshaf,
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)), //moshafIndex
-  // GetPage(
-  // curve: Curves.easeInOut,
-  // page: () => const MoshafIndex(),
-  // name: AppRouteName.moshafIndex,
-  // transition: Transition.fadeIn,
-  // transitionDuration: const Duration(milliseconds: 500)),//
+  GetPage(
+  curve: Curves.easeInOut,
+  page: () => const MoshafIndex(),
+  name: AppRouteName.moshafIndex,
+  transition: Transition.fadeIn,
+  transitionDuration: const Duration(milliseconds: 500)),//
   GetPage(
       curve: Curves.easeInOut,
       page: () => const MainHadithScreen(),
@@ -144,7 +145,7 @@ List<GetPage<dynamic>>? routes = [
   GetPage(
       page: () => const AzkarDetailsView(),
       name: AppRouteName.azkarDetails,
-      transition: Transition.leftToRightWithFade,
+      transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
   GetPage(
       page: () => const SibhaView(),
@@ -155,7 +156,7 @@ List<GetPage<dynamic>>? routes = [
       curve: Curves.easeInOut,
       page: () => const AzkarSibhaView(),
       name: AppRouteName.sibhaAzkar,
-      transition: Transition.leftToRightWithFade,
+      transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
   GetPage(
       curve: Curves.easeInOut,
@@ -174,7 +175,7 @@ List<GetPage<dynamic>>? routes = [
             isZekr: true,
           ),
       name: AppRouteName.favAzkar,
-      transition: Transition.rightToLeft,
+            transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
 
   GetPage(

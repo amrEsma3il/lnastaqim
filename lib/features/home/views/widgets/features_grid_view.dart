@@ -14,7 +14,7 @@ class FeaturesGridView extends StatelessWidget {
     FeatureModel(
         text: "القران",
         image: AppImages.quranFeature,
-        route: AppRouteName.moshaf),
+        route: AppRouteName.moshafIndex),
          
 
               FeatureModel(

@@ -6,7 +6,10 @@ import 'surah_player_cubit.dart';
 
 class SurahPlayerState extends Equatable {
   final bool isPlaying;
+    final bool isRandom;
   final bool isPaused;
+  final Set<int> downloadingSurahs;
+
   // final int repeatCount;
     final bool isSurahFavorite; 
   final String reciterCountry, reciterSearchQuery;
@@ -22,6 +25,8 @@ class SurahPlayerState extends Equatable {
   final AudioFetchState audioState;
 
   const SurahPlayerState({
+    required this.isRandom,
+    required this.downloadingSurahs,
     required this.audioSpeed,
     required this.reciterCountry,
     required this.reciterSearchQuery,
@@ -42,6 +47,8 @@ class SurahPlayerState extends Equatable {
   });
 
   factory SurahPlayerState.initial() => SurahPlayerState(
+      isRandom: false,
+      downloadingSurahs: <int>{},
       audioState: AudioFetchInit(),
       isSeeking: false,
       isPlaying: false,
@@ -60,13 +67,15 @@ class SurahPlayerState extends Equatable {
           nameArabic: "محمد صديق المنشاوي مجود",
           nationality: "مصر"),
       currentPosition: 0.0,
-      surahDuration: 0.0,
+      surahDuration: 177.0,
       searchSurahResults:SurahPlayerCubit.quranSurahs.keys.toList(),
        searchReciterResults: SurahPlayerRepo().getAllReciters() // قائمة فارغة عند البداية
       );
 
   SurahPlayerState copyWith({
+    bool? isRandom,
     bool? isPlaying,
+    Set<int>? downloadingSurahs,
     bool? isSeeking,
     bool? isPaused,
     String? reciterCountry,
@@ -86,6 +95,9 @@ class SurahPlayerState extends Equatable {
     // إضافة متغير جديد
   }) {
     return SurahPlayerState(
+      isRandom: isRandom ?? this.isRandom,
+      downloadingSurahs: downloadingSurahs ?? this.downloadingSurahs,
+
        isSurahFavorite: isSurahFavorite ?? this.isSurahFavorite,
         reciter: reciter ?? this.reciter,
         audioState: audioState ?? this.audioState,
@@ -109,6 +121,7 @@ class SurahPlayerState extends Equatable {
 
   @override
   List<Object> get props => [
+    isRandom,
         reciter,
         reciterSearchQuery,
         reciterCountry,
@@ -125,7 +138,8 @@ class SurahPlayerState extends Equatable {
         surahDuration,
         searchSurahResults,
         searchReciterResults,
-        audioState
+        audioState,
+        downloadingSurahs
       ];
 }
 
@@ -135,6 +149,10 @@ class AudioFetchLoading implements AudioFetchState {}
 
 class AudioFetchInit implements AudioFetchState {}
 
-class AudioFetchFailure implements AudioFetchState {}
+class AudioFetchFailure implements AudioFetchState {
+    final String errorMessage;
+
+  AudioFetchFailure(this.errorMessage);
+}
 
 class AudioFetchSuccess implements AudioFetchState {}

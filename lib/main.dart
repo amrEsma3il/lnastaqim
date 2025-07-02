@@ -70,155 +70,142 @@ import 'features/quran_sound_player/logic/surah_player_cubit/surah_player_cubit.
 import 'features/radio_stream_channels/bussniess_logic/radio_cubit.dart';
 
 // Notification handling logic
- 
-   void handleMediaAction(String action) {
-    switch (action) {
-      case '${NotificationKeys.quranPlayer}play':
-        log('play quran sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.quranPlayer,
-        )?.send('play');
-        break;
-      case '${NotificationKeys.quranPlayer}pause':
-        log('pause quran sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.quranPlayer,
-        )?.send('pause');
-        break;
-      case '${NotificationKeys.quranPlayer}stop':
-        log('stop quran sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.quranPlayer,
-        )?.send('stop');
-        break;
-      case '${NotificationKeys.quranPlayer}next':
-        log('next quran sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.quranPlayer,
-        )?.send('next');
-        break;
-      case '${NotificationKeys.quranPlayer}previous':
-        log('previous quran sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.quranPlayer,
-        )?.send('previous');
+
+void handleMediaAction(String action) {
+  switch (action) {
+    case '${NotificationKeys.quranPlayer}play':
+      log('play quran sound');
+      IsolateNameServer.lookupPortByName(
+        NotificationKeys.quranPlayer,
+      )?.send('play');
+      break;
+    case '${NotificationKeys.quranPlayer}pause':
+      log('pause quran sound');
+      IsolateNameServer.lookupPortByName(
+        NotificationKeys.quranPlayer,
+      )?.send('pause');
+      break;
+    case '${NotificationKeys.quranPlayer}stop':
+      log('stop quran sound');
+      IsolateNameServer.lookupPortByName(
+        NotificationKeys.quranPlayer,
+      )?.send('stop');
+      break;
+    case '${NotificationKeys.quranPlayer}next':
+      log('next quran sound');
+      IsolateNameServer.lookupPortByName(
+        NotificationKeys.quranPlayer,
+      )?.send('next');
+      break;
+    case '${NotificationKeys.quranPlayer}previous':
+      log('previous quran sound');
+      IsolateNameServer.lookupPortByName(
+        NotificationKeys.quranPlayer,
+      )?.send('previous');
+      break;
+
+    //ibtihal
+
+    case '${NotificationKeys.ibtihalatPlayer}play':
+      log('play ibtihal sound');
+      IsolateNameServer.lookupPortByName(
+        NotificationKeys.ibtihalatPlayer,
+      )?.send('play');
+      break;
+    case '${NotificationKeys.ibtihalatPlayer}pause':
+      log('pause ibtihal sound');
+      IsolateNameServer.lookupPortByName(
+        NotificationKeys.ibtihalatPlayer,
+      )?.send('pause');
+      break;
+    case '${NotificationKeys.ibtihalatPlayer}stop':
+      log('stop ibtihal sound');
+      IsolateNameServer.lookupPortByName(
+        NotificationKeys.ibtihalatPlayer,
+      )?.send('stop');
+      break;
+    case '${NotificationKeys.ibtihalatPlayer}next':
+      log('next ibtihal sound');
+      IsolateNameServer.lookupPortByName(
+        NotificationKeys.ibtihalatPlayer,
+      )?.send('next');
+      break;
+    case '${NotificationKeys.ibtihalatPlayer}previous':
+      log('previous ibtihal sound');
+      IsolateNameServer.lookupPortByName(
+        NotificationKeys.ibtihalatPlayer,
+      )?.send('previous');
+      break;
+
+    case '${NotificationKeys.radio}play':
+      log('play radio sound');
+      IsolateNameServer.lookupPortByName(NotificationKeys.radio)?.send('play');
+      break;
+    case '${NotificationKeys.radio}pause':
+      log('pause radio sound');
+      IsolateNameServer.lookupPortByName(NotificationKeys.radio)?.send('pause');
+      break;
+    case '${NotificationKeys.radio}stop':
+      log('stop radio sound');
+      IsolateNameServer.lookupPortByName(NotificationKeys.radio)?.send('stop');
+      break;
+    case '${NotificationKeys.radio}next':
+      log('next radio sound');
+      IsolateNameServer.lookupPortByName(NotificationKeys.radio)?.send('next');
+      break;
+    case '${NotificationKeys.radio}previous':
+      log('previous radio sound');
+      IsolateNameServer.lookupPortByName(
+        NotificationKeys.radio,
+      )?.send('previous');
+      break;
+    case 'استئناف':
+      log('play quran download sound');
+      IsolateNameServer.lookupPortByName(
+        NotificationKeys.quranDownload,
+      )?.send('play');
+      break;
+    case 'ايقاف':
+      log('pause quran download sound');
+      IsolateNameServer.lookupPortByName(
+        NotificationKeys.quranDownload,
+      )?.send('pause');
+      break;
+  }
+}
+
+@pragma('vm:entry-point')
+void notificationTapBackground(
+  NotificationResponse notificationResponse,
+) async {
+  log("hi from onDidReceiveNotificationBackgroundResponse");
+  log("before switch case${notificationResponse.actionId}");
+  if (notificationResponse.actionId == null ||
+      notificationResponse.actionId!.isEmpty) {
+    log("action id is null");
+
+    switch (notificationResponse.id) {
+      case 310:
+        Get.offAllNamed(AppRouteName.ibtihalPlayerScreen);
         break;
 
-
-        //ibtihal
-
-
-case '${NotificationKeys.ibtihalatPlayer}play':
-        log('play ibtihal sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.ibtihalatPlayer,
-        )?.send('play');
+      case 30:
+        Get.offAllNamed(AppRouteName.surahPlayerScreen);
         break;
-      case '${NotificationKeys.ibtihalatPlayer}pause':
-        log('pause ibtihal sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.ibtihalatPlayer,
-        )?.send('pause');
-        break;
-      case '${NotificationKeys.ibtihalatPlayer}stop':
-        log('stop ibtihal sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.ibtihalatPlayer,
-        )?.send('stop');
-        break;
-      case '${NotificationKeys.ibtihalatPlayer}next':
-        log('next ibtihal sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.ibtihalatPlayer,
-        )?.send('next');
-        break;
-      case '${NotificationKeys.ibtihalatPlayer}previous':
-        log('previous ibtihal sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.ibtihalatPlayer,
-        )?.send('previous');
-        break;
-
-      case '${NotificationKeys.radio}play':
-        log('play radio sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.radio,
-        )?.send('play');
-        break;
-      case '${NotificationKeys.radio}pause':
-        log('pause radio sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.radio,
-        )?.send('pause');
-        break;
-      case '${NotificationKeys.radio}stop':
-        log('stop radio sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.radio,
-        )?.send('stop');
-        break;
-      case '${NotificationKeys.radio}next':
-        log('next radio sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.radio,
-        )?.send('next');
-        break;
-      case '${NotificationKeys.radio}previous':
-        log('previous radio sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.radio,
-        )?.send('previous');
-        break;
-      case 'استئناف':
-        log('play quran download sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.quranDownload,
-        )?.send('play');
-        break;
-      case 'ايقاف':
-        log('pause quran download sound');
-        IsolateNameServer.lookupPortByName(
-          NotificationKeys.quranDownload,
-        )?.send('pause');
+      case 31:
+        Get.offAllNamed(AppRouteName.radio);
         break;
     }
+  } else {
+    log(notificationResponse.actionId.toString());
+    handleMediaAction(notificationResponse.actionId!);
   }
-
-  @pragma('vm:entry-point')
-   void notificationTapBackground(
-    NotificationResponse notificationResponse,
-  ) async {
-    log("hi from onDidReceiveNotificationBackgroundResponse");
-    log("before switch case${notificationResponse.actionId}");
-     if (notificationResponse.actionId == null || notificationResponse.actionId!.isEmpty ) {
-           
-          log("action id is null");
-
-          switch (notificationResponse.id) {
-            case 310:
-              Get.toNamed(AppRouteName.ibtihalPlayerScreen);
-              break;
-
-               case 30:
-              Get.toNamed(AppRouteName.surahPlayerScreen);
-              break;
-               case 31:
-              Get.toNamed(AppRouteName.radio);
-              break;
-           
-          }
-        } else {
-            log(notificationResponse.actionId.toString());
-             handleMediaAction(notificationResponse.actionId!);
-        }
-        
-  }
-
+}
 
 late SharedPreferences prefs;
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Position? position;
-bool initMain=false;
+bool initMain = false;
 
 Future<void> main(fireBaseOptions) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -247,60 +234,63 @@ Future<void> main(fireBaseOptions) async {
   prefs = await SharedPreferences.getInstance();
 
   // Initialize Hive
-if(!initMain){  await Hive.initFlutter();
-  Hive.registerAdapter(BookmarkModelAdapter());
-  Hive.registerAdapter(NoteModelAdapter());
-  Hive.registerAdapter(FavouriteModelAdapter());
-  Hive.registerAdapter(SurahFavoriteModelAdapter());
-  Hive.registerAdapter(IbtihalInfoAdapter());
-  Hive.registerAdapter(ReciterAdapter());
-  Hive.registerAdapter(IbtihalFavoriteModelAdapter());
-  Hive.registerAdapter(ReciterIbtihalModelAdapter());
+  if (!initMain) {
+    await Hive.initFlutter();
+    Hive.registerAdapter(BookmarkModelAdapter());
+    Hive.registerAdapter(NoteModelAdapter());
+    Hive.registerAdapter(FavouriteModelAdapter());
+    Hive.registerAdapter(SurahFavoriteModelAdapter());
+    Hive.registerAdapter(IbtihalInfoAdapter());
+    Hive.registerAdapter(ReciterAdapter());
+    Hive.registerAdapter(IbtihalFavoriteModelAdapter());
+    Hive.registerAdapter(ReciterIbtihalModelAdapter());
+Hive.registerAdapter(ReciterEntityAdapter());
 
-await Future.wait([
-  Hive.openBox<FavouriteModel>(AppKeys.kAzkarFavouriteBox),
-  Hive.openBox<IbtihalFavoriteModel>(AppKeys.favoriteIbtihalBoxName),
-  Hive.openBox<BookmarkModel>(AppKeys.kBookmarkBox),
-  Hive.openBox<NoteModel>(AppKeys.kNoteBox),
-  Hive.openBox<SurahFavoriteModel>(AppKeys.favoriteSurahBoxName),
-  Hive.openBox<FavouriteModel>(AppKeys.k7adisFavouriteBox),
-  Hive.openBox<ReciterEntity>(AppKeys.reciterBox),
-  Hive.openBox<bool>(AppKeys.notificationBox),
-  Hive.openBox('userPreferences'),
-]);
-  // Initialize WorkManager
-  await WorkManagerService().init();
+    await Future.wait([
+      Hive.openBox<FavouriteModel>(AppKeys.kAzkarFavouriteBox),
+      Hive.openBox<IbtihalFavoriteModel>(AppKeys.favoriteIbtihalBoxName),
+      Hive.openBox<BookmarkModel>(AppKeys.kBookmarkBox),
+      Hive.openBox<NoteModel>(AppKeys.kNoteBox),
+      Hive.openBox<SurahFavoriteModel>(AppKeys.favoriteSurahBoxName),
+      Hive.openBox<FavouriteModel>(AppKeys.k7adisFavouriteBox),
+      Hive.openBox<ReciterEntity>(AppKeys.reciterBox),
+      Hive.openBox<bool>(AppKeys.notificationBox),
+      Hive.openBox('userPreferences'),
+    ]);
+    // Initialize WorkManager
+    await WorkManagerService().init();
 
-  // Request storage permission
-  await requestStoragePermission();
-}
+    // Request storage permission
+    await requestStoragePermissionGlobal();
+  }
   // Try to get location first
   try {
     position = await LocationService.determinePosition();
   } catch (e) {
-    initMain=true;
+    initMain = true;
     // Navigate to ErrorApp on location error
     runApp(
       ErrorApp(
         errorMessage: e.toString(),
         onRetry: () async {
           log('Retrying location request');
-          try {
-            position = await LocationService.determinePosition();
+          // try
+          {
             log('Location obtained, navigating to Lnastaqim');
-            main(fireBaseOptions);
-          } catch (e) {
-            log('Retry failed: $e');
-            runApp(
-              ErrorApp(
-                errorMessage: e.toString(),
-                onRetry: () async {
-                  position = await LocationService.determinePosition();
-                  main(fireBaseOptions);
-                },
-              ),
-            );
+            await main(fireBaseOptions);
           }
+          // catch (e) {
+          //   log('Retry failed: $e');
+          //   runApp(
+          //     ErrorApp(
+          //       errorMessage: e.toString(),
+          //       onRetry: () async {
+          //         position = await LocationService.determinePosition();
+          //      await   main(fireBaseOptions);
+          //       },
+          //     ),
+          //   );
+          // }
         },
       ),
     );
@@ -311,31 +301,34 @@ await Future.wait([
   try {
     await LocalNotificationService.instance.requestNotificationPermission();
   } catch (e) {
-    initMain=true;
+    initMain = true;
     // Navigate to ErrorApp for notification permission denial
     runApp(
       ErrorApp(
         errorMessage: e.toString(),
         onRetry: () async {
-          try {
-            await LocalNotificationService.instance
-                .requestNotificationPermission();
+          // try
+
+          {
+            // await LocalNotificationService.instance
+            //     .requestNotificationPermission();
             // Restart main app
-            main(fireBaseOptions);
-          } catch (e) {
-            log('Retry failed: $e');
-            runApp(
-              ErrorApp(
-                errorMessage: e.toString(),
-                onRetry: () async {
-                  await LocalNotificationService.instance
-                      .requestNotificationPermission();
-                  // Restart main app
-                  main(fireBaseOptions);
-                },
-              ),
-            );
+            await main(fireBaseOptions);
           }
+          // catch (e) {
+          //   log('Retry failed: $e');
+          //   runApp(
+          //     ErrorApp(
+          //       errorMessage: e.toString(),
+          //       onRetry: () async {
+          //         await LocalNotificationService.instance
+          //             .requestNotificationPermission();
+          //         // Restart main app
+          //       await  main(fireBaseOptions);
+          //       },
+          //     ),
+          //   );
+          // }
         },
       ),
     );
@@ -367,38 +360,35 @@ await Future.wait([
     ) async {
       log("hi from onDidReceiveNotificationResponse");
       log(notificationResponse.actionId.toString());
-      if (notificationResponse.actionId == null || notificationResponse.actionId!.isEmpty ) {
-           
-          log("action id is null");
+      if (notificationResponse.actionId == null ||
+          notificationResponse.actionId!.isEmpty) {
+        log("action id is null");
 
-          switch (notificationResponse.id) {
-            case 310:
-              Get.toNamed(AppRouteName.ibtihalPlayerScreen);
-              break;
+        switch (notificationResponse.id) {
+          case 310:
+            Get.toNamed(AppRouteName.ibtihalPlayerScreen);
+            break;
 
-               case 30:
-              Get.toNamed(AppRouteName.surahPlayerScreen);
-              break;
-               case 31:
-              Get.toNamed(AppRouteName.radio);
-              break;
-           
-          }
-        } else {
-            log(notificationResponse.actionId.toString());
-             handleMediaAction(notificationResponse.actionId!);
+          case 30:
+            Get.toNamed(AppRouteName.surahPlayerScreen);
+            break;
+          case 31:
+            Get.toNamed(AppRouteName.radio);
+            break;
         }
-        
+      } else {
+        log(notificationResponse.actionId.toString());
+        handleMediaAction(notificationResponse.actionId!);
+      }
     },
-    onDidReceiveBackgroundNotificationResponse:
-       notificationTapBackground,
+    onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
   );
 
   runApp(const Lnastaqim());
 
-  await FontDownloadPercentage().checkAnyChapterDownloaded()
-      ? await FontDownloadPercentage().loadFontsIndividually(start: 603, end: 0)
-      : null;
+  // await FontDownloadPercentage().checkAnyChapterDownloaded()
+  //     ? await FontDownloadPercentage().loadFontsIndividually(start: 603, end: 0)
+  //     : null;
 }
 
 class Lnastaqim extends StatelessWidget {

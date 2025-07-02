@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lnastaqim/core/utilits/widgets/custom_app_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'dart:developer' as dev;
 import '../../../../core/constants/colors.dart';
 import '../../../../core/utilits/functions/toast_message.dart';
 import '../../../../core/utilits/services/url_launcher.dart';
@@ -51,6 +51,7 @@ class SupportScreen extends StatelessWidget {
                       isExternal: true,
                     );
                   } catch (e) {
+                    dev.log("Error opening Vodafone Cash: $e");
                     showToast(
                       'تعذر فتح الهاتف. تأكد من وجود التطبيق على جهازك.',
                       AppColor.primary.withValues(alpha: 0.9),
@@ -58,27 +59,29 @@ class SupportScreen extends StatelessWidget {
                   }
                 },
               ),
-              const SizedBox(height: 15),
-              _buildSupportCard(
-                shortLink: "paypal.me/lnastaqim",
-                context: context,
-                title: 'PayPal',
-                description: 'https://paypal.me/lnastaqim',
-                icon: Icons.payment,
-                onTapCard: () async {
-                  try {
-                    await UrlLauncher.launchToUrl(
-                      'https://paypal.me/lnastaqim',
-                      isExternal: true,
-                    );
-                  } catch (e) {
-                    showToast(
-                      'تعذر فتح paypal. تأكد من وجود التطبيق على جهازك.',
-                      AppColor.primary.withValues(alpha: 0.9),
-                    );
-                  }
-                },
-              ),
+
+              // const SizedBox(height: 15),
+              // _buildSupportCard(
+              //   shortLink: "paypal.me/lnastaqim",
+              //   context: context,
+              //   title: 'PayPal',
+              //   description: 'https://paypal.me/lnastaqim',
+              //   icon: Icons.payment,
+              //   onTapCard: () async {
+              //     try {
+              //       await UrlLauncher.launchToUrl(
+              //         'https://paypal.me/lnastaqim',
+              //         isExternal: true,
+              //       );
+              //     } catch (e) {
+              //       showToast(
+              //         'تعذر فتح paypal. تأكد من وجود التطبيق على جهازك.',
+              //         AppColor.primary.withValues(alpha: 0.9),
+              //       );
+              //     }
+              //   },
+              // ),
+              
               const SizedBox(height: 15),
               _buildSupportCard(
                 shortLink: "ipn.eg/S/ismail20.galal/instapay",

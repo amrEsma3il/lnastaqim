@@ -1,29 +1,37 @@
+import 'package:hive/hive.dart';
+
+part 'reciter_entity.g.dart'; // مهم جدًا لو هتستخدم generate
+
+@HiveType(typeId: 8)
 class ReciterEntity {
+  @HiveField(0)
   final String reciter;
+
+  @HiveField(1)
   final String downloadUrl;
+
+  @HiveField(2)
   final String arabicName;
 
   ReciterEntity({
-    required this.arabicName,
-    required this.downloadUrl,
     required this.reciter,
+    required this.downloadUrl,
+    required this.arabicName,
   });
 
   ReciterEntity copyWith({
     String? reciter,
     String? downloadUrl,
-  
     String? arabicName,
-
   }) {
     return ReciterEntity(
       reciter: reciter ?? this.reciter,
       downloadUrl: downloadUrl ?? this.downloadUrl,
       arabicName: arabicName ?? this.arabicName,
-  
     );
   }
 }
+
 
 // enum DownloadStatus{
 //   complete,
