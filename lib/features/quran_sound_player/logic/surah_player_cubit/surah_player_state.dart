@@ -6,6 +6,7 @@ import 'surah_player_cubit.dart';
 
 class SurahPlayerState extends Equatable {
   final bool isPlaying;
+    final bool isRandom;
   final bool isPaused;
   final Set<int> downloadingSurahs;
 
@@ -24,6 +25,7 @@ class SurahPlayerState extends Equatable {
   final AudioFetchState audioState;
 
   const SurahPlayerState({
+    required this.isRandom,
     required this.downloadingSurahs,
     required this.audioSpeed,
     required this.reciterCountry,
@@ -45,6 +47,7 @@ class SurahPlayerState extends Equatable {
   });
 
   factory SurahPlayerState.initial() => SurahPlayerState(
+      isRandom: false,
       downloadingSurahs: <int>{},
       audioState: AudioFetchInit(),
       isSeeking: false,
@@ -70,6 +73,7 @@ class SurahPlayerState extends Equatable {
       );
 
   SurahPlayerState copyWith({
+    bool? isRandom,
     bool? isPlaying,
     Set<int>? downloadingSurahs,
     bool? isSeeking,
@@ -91,6 +95,7 @@ class SurahPlayerState extends Equatable {
     // إضافة متغير جديد
   }) {
     return SurahPlayerState(
+      isRandom: isRandom ?? this.isRandom,
       downloadingSurahs: downloadingSurahs ?? this.downloadingSurahs,
 
        isSurahFavorite: isSurahFavorite ?? this.isSurahFavorite,
@@ -116,6 +121,7 @@ class SurahPlayerState extends Equatable {
 
   @override
   List<Object> get props => [
+    isRandom,
         reciter,
         reciterSearchQuery,
         reciterCountry,
@@ -143,6 +149,10 @@ class AudioFetchLoading implements AudioFetchState {}
 
 class AudioFetchInit implements AudioFetchState {}
 
-class AudioFetchFailure implements AudioFetchState {}
+class AudioFetchFailure implements AudioFetchState {
+    final String errorMessage;
+
+  AudioFetchFailure(this.errorMessage);
+}
 
 class AudioFetchSuccess implements AudioFetchState {}

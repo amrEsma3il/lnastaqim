@@ -30,10 +30,12 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+  ScrollController scrollController=ScrollController();
 
   @override
   void initState() {
     super.initState();
+    //make scroll controller scrolling to max position
     // _initializeFonts();
   }
 
@@ -257,6 +259,10 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
               ],
+            ),
+       
+       SizedBox(
+              height: 5.h,
             ),
           ],
         ),

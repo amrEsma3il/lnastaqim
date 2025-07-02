@@ -10,6 +10,7 @@ import 'package:lnastaqim/core/utilits/extensions/double_int_parser_extension.da
 import '../../../../core/constants/colors.dart';
 import '../../logic/surah_player_cubit/surah_player_cubit.dart';
 import '../../logic/surah_player_cubit/surah_player_state.dart';
+import 'reciters_bottom_sheet_component.dart';
 
 class SurahSliderWidget extends StatelessWidget {
   const SurahSliderWidget({super.key});
@@ -86,18 +87,51 @@ class SurahSliderWidget extends StatelessWidget {
                                 },
                               ),
                               //  SizedBox(height: 2.h),
-                              
-                          BlocBuilder<SurahPlayerCubit, SurahPlayerState>(
-                            builder: (context, state) {
-                              return Text(
-                                state.reciter.nameArabic,
-                                style: TextStyle(
-                                    fontSize: 14.sp,
-                                    color: Colors.white70,
-                                    fontWeight: FontWeight.w400),
+                              GestureDetector(
+                                
+                                onTap: ()async{
+                                       SurahPlayerCubit.get(
+                                context,
+                              ).clearReciterSearch();
+                            await      showModalBottomSheet(
+                                //  isScrollControlled: true,
+                                enableDrag: false,
+                                context: context,
+                                backgroundColor: AppColor.blueColor,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(25.0)),
+                                ),
+                                builder: (bottomSheetContext) {
+                                  return RecitersBottomSheetComponent(
+                                      cubit: SurahPlayerCubit.get(context));
+                                },
                               );
-                            },
-                          ),
+                                },
+                                child: Row(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                        const Icon(
+                                    Icons.keyboard_arrow_down_sharp,
+                                    size: 16,
+                                    color: Colors.white70,
+                                  ),
+                                  SizedBox(width: 2.w),
+                                    BlocBuilder<SurahPlayerCubit, SurahPlayerState>(
+                                                            builder: (context, state) {
+                                return Text(
+                                  state.reciter.nameArabic,
+                                  style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: Colors.white70,
+                                      fontWeight: FontWeight.w400),
+                                );
+                                                            },
+                                                          ),
+                                    ],
+                                  ),
+                              )
+                        
                           
                     ],),
 

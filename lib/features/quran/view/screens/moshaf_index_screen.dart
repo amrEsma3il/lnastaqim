@@ -41,7 +41,7 @@ class _MoshafIndexState extends State<MoshafIndex> {
           onPressed: () => Get.back(),
         ),
         title: const Text(
-          'فهرس القرآن',
+          'فهرس المصحف',
           style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,

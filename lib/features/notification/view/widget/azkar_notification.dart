@@ -18,7 +18,7 @@ class AzkarNotification extends StatelessWidget {
             Text(
               'الاذكار',
               style: TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.w800, color: AppColor.primary),
+                  fontSize: 20.sp, fontWeight: FontWeight.w800, color: AppColor.primary),
             ),
             const Spacer(),
             BlocBuilder<NotificationCubit, NotificationState>(

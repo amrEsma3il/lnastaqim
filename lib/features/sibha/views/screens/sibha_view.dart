@@ -13,6 +13,7 @@ import 'package:lnastaqim/core/constants/colors.dart';
 import 'package:lnastaqim/core/constants/images.dart';
 import 'package:fl_chart/fl_chart.dart';
 
+import '../../../../core/utilits/functions/toast_message.dart';
 import '../widgets/custom_sibha_appbar.dart';
 
 class ZekrModel {
@@ -35,7 +36,8 @@ class ZekrModel {
 // كونترولر GetX
 //-----------------------------------------------------------------------------
 class ZekrController extends GetxController {
-    static ZekrController instance = Get.put(ZekrController());
+  static ZekrController instance = Get.put(ZekrController());
+
   /// الذِّكر الحالي
   var selectedZekr =
       ZekrModel(text: "سبحان الله", category: "أذكار التسبيح").obs;
@@ -85,7 +87,9 @@ class ZekrController extends GetxController {
           _finishAllRounds();
         }
       }
-    }else{  totalCounter.value++;}
+    } else {
+      totalCounter.value++;
+    }
   }
 
   //───────────────────────────────────────────────────────────────────────────
@@ -117,7 +121,7 @@ class ZekrController extends GetxController {
   //───────────────────────────────────────────────────────────────────────────
   void toggleFreeMode() {
     isFreeMode.value = !isFreeMode.value;
-    currentCount.value = 0; 
+    currentCount.value = 0;
     totalCounter.value = 0;
     achievementUnlocked.value = false;
   }
@@ -126,23 +130,16 @@ class ZekrController extends GetxController {
   // مشاركة الإنجاز
   //───────────────────────────────────────────────────────────────────────────
   void shareAchievement() async {
-     String text="";
-  if (!isFreeMode.value) {
-     text = "لقد أتممت ${selectedZekr.value.text} عدد ${totalCounter.value} مرة في تطبيق لنستقيم 💠";
- 
-  } else {
-     text = "لقد أتممت ${totalCounter.value} تسبيحة في تطبيق لنستقيم 💠";
-  
+    String text = "";
+    if (!isFreeMode.value) {
+      text =
+          "لقد أتممت ${selectedZekr.value.text} عدد ${totalCounter.value} مرة في تطبيق لنستقيم 💠";
+    } else {
+      text = "لقد أتممت ${totalCounter.value} تسبيحة في تطبيق لنستقيم 💠";
+    }
+
+    await SharePlus.instance.share(ShareParams(text: text, subject: "تسابيح"));
   }
-
-
-   await SharePlus.instance.share(
-    ShareParams(
-      text: text,
-      subject: "تسابيح",
-    ),
-  );
-}
 
   //───────────────────────────────────────────────────────────────────────────
   // حفظ الإحصائيات في SharedPreferences
@@ -354,8 +351,6 @@ class SibhaView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
-
     return Scaffold(
       appBar: CustomSibhaAppBar(),
       body: Container(
@@ -393,7 +388,7 @@ class SibhaView extends StatelessWidget {
                         child: Text(
                           ZekrController.instance.isFreeMode.value
                               ? "تسبيح حر"
-                              :  ZekrController.instance.selectedZekr.value.text,
+                              : ZekrController.instance.selectedZekr.value.text,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 24,
@@ -403,12 +398,13 @@ class SibhaView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      if ( ZekrController.instance.selectedZekr.value.note != null &&
-                          ! ZekrController.instance.isFreeMode.value)
+                      if (ZekrController.instance.selectedZekr.value.note !=
+                              null &&
+                          !ZekrController.instance.isFreeMode.value)
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0),
                           child: Text(
-                             ZekrController.instance.selectedZekr.value.note!,
+                            ZekrController.instance.selectedZekr.value.note!,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               fontSize: 14,
@@ -417,15 +413,15 @@ class SibhaView extends StatelessWidget {
                           ),
                         ),
                       Visibility(
-                        visible: ! ZekrController.instance.isFreeMode.value,
+                        visible: !ZekrController.instance.isFreeMode.value,
                         child: const SizedBox(height: 12),
                       ),
                       Visibility(
-                        visible: ! ZekrController.instance.isFreeMode.value,
+                        visible: !ZekrController.instance.isFreeMode.value,
                         child: Obx(
                           () => Text(
-                            "التكرار: ${ ZekrController.instance.currentRound.value}/${ ZekrController.instance.selectedZekr.value.totalRounds} - "
-                            "التسبيحات: ${ ZekrController.instance.currentCount.value}/${ ZekrController.instance.selectedZekr.value.repeatPerRound}",
+                            "التكرار: ${ZekrController.instance.currentRound.value}/${ZekrController.instance.selectedZekr.value.totalRounds} - "
+                            "التسبيحات: ${ZekrController.instance.currentCount.value}/${ZekrController.instance.selectedZekr.value.repeatPerRound}",
                             style: const TextStyle(
                               fontSize: 14.5,
                               color: Colors.black54,
@@ -442,7 +438,7 @@ class SibhaView extends StatelessWidget {
             // زر تغيير الذكر (مخفي في الوضع الحر)
             Obx(
               () => Visibility(
-                visible: ! ZekrController.instance.isFreeMode.value,
+                visible: !ZekrController.instance.isFreeMode.value,
                 child: TextButton(
                   onPressed: () => Get.toNamed(AppRouteName.sibhaAzkar),
                   child: Text(
@@ -459,7 +455,7 @@ class SibhaView extends StatelessWidget {
             const Spacer(),
 
             // الزر الدوّار
-            RotatingSibhaButton(controller:  ZekrController.instance),
+            RotatingSibhaButton(controller: ZekrController.instance),
 
             SizedBox(height: 16.h),
             Row(
@@ -468,25 +464,26 @@ class SibhaView extends StatelessWidget {
                 IconButton(
                   icon: Icon(Icons.refresh, color: AppColor.blueTint2),
                   onPressed: () {
-               if ( ZekrController.instance.isFreeMode.value) {
-             ZekrController.instance.totalCounter.value = 0;
-               }else{ ZekrController.instance.resetAll();}
+                    if (ZekrController.instance.isFreeMode.value) {
+                      ZekrController.instance.totalCounter.value = 0;
+                    } else {
+                      ZekrController.instance.resetAll();
+                    }
                   },
                 ),
                 IconButton(
                   icon: Icon(Icons.share, color: AppColor.primary),
-                  onPressed:  ZekrController.instance.shareAchievement,
+                  onPressed: ZekrController.instance.shareAchievement,
                 ),
                 Obx(
                   () => Visibility(
-                    visible: ! ZekrController.instance.isFreeMode.value,
+                    visible: !ZekrController.instance.isFreeMode.value,
                     child: IconButton(
                       icon: Icon(Icons.bar_chart, color: AppColor.primary),
                       onPressed: () => Get.to(() => const SibhaStatsView()),
                     ),
                   ),
                 ),
-                
               ],
             ),
             const SizedBox(height: 40),
@@ -508,6 +505,7 @@ class SibhaStatsView extends StatefulWidget {
 
 class _SibhaStatsViewState extends State<SibhaStatsView> {
   Future<List<dynamic>>? _future;
+  bool isStatisticsEmpty = false;
 
   @override
   void initState() {
@@ -550,70 +548,75 @@ class _SibhaStatsViewState extends State<SibhaStatsView> {
   }
 
   Future<void> clearAllStats() async {
-    Get.defaultDialog(
-      title: "تأكيد الحذف",
-      content: SizedBox(
-        width: 300,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text("هل أنت متأكد من حذف كافة الإحصائيات؟"),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // زر «لا» بإطار فقط (اختر إحدى الطريقتين)
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white, // خلفية بيضاء
-                    elevation: 0, // بدون ظل
-                    foregroundColor: AppColor.primary, // لون النص
-                    shape: RoundedRectangleBorder(
-                      // ⬅️ نصف القُطر أكبر ليظهر التدوير بوضوح
-                      borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(
-                        // الحدّ الملوّن
-                        color: AppColor.primary,
-                        width: 2,
+    if (!isStatisticsEmpty) {
+      Get.defaultDialog(
+        title: "تأكيد الحذف",
+        content: SizedBox(
+          width: 300,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text("هل أنت متأكد من حذف كافة الإحصائيات؟"),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // زر «لا» بإطار فقط (اختر إحدى الطريقتين)
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white, // خلفية بيضاء
+                      elevation: 0, // بدون ظل
+                      foregroundColor: AppColor.primary, // لون النص
+                      shape: RoundedRectangleBorder(
+                        // ⬅️ نصف القُطر أكبر ليظهر التدوير بوضوح
+                        borderRadius: BorderRadius.circular(20),
+                        side: BorderSide(
+                          // الحدّ الملوّن
+                          color: AppColor.primary,
+                          width: 2,
+                        ),
                       ),
                     ),
+                    onPressed: () => Get.back(),
+                    child: const Text("لا"),
                   ),
-                  onPressed: () => Get.back(),
-                  child: const Text("لا"),
-                ),
-                SizedBox(width: 20.w),
+                  SizedBox(width: 20.w),
 
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColor.primary,
-                  ),
-                  onPressed: () async {
-                    final prefs = await SharedPreferences.getInstance();
-                    for (final key in prefs.getKeys()) {
-                      if (key.startsWith('stats_') ||
-                          key.startsWith('total_')) {
-                        await prefs.remove(key);
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColor.primary,
+                    ),
+                    onPressed: () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      for (final key in prefs.getKeys()) {
+                        if (key.startsWith('stats_') ||
+                            key.startsWith('total_')) {
+                          await prefs.remove(key);
+                        }
                       }
-                    }
-                    Get.back();
-                    setState(_loadData);
-                    Get.snackbar(
-                      "تم الحذف",
-                      "تم حذف كافة الإحصائيات بنجاح.",
-                      backgroundColor: AppColor.lightGrey.withOpacity(0.3),
-                    );
-                  },
-                  child: const Text(
-                    "نعم",
-                    style: TextStyle(color: Colors.white),
+                      Get.back();
+                      setState(_loadData);
+                      Get.snackbar(
+                        "تم الحذف",
+                        "تم حذف كافة الإحصائيات بنجاح.",
+                        backgroundColor: AppColor.lightGrey.withOpacity(0.3),
+                      );
+                    },
+                    child: const Text(
+                      "نعم",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }else {
+      showToast("لا توجد إحصائيات لحذفها.", AppColor.primary.withOpacity(0.9));
+   
+    }
   }
 
   @override
@@ -639,12 +642,24 @@ class _SibhaStatsViewState extends State<SibhaStatsView> {
       body: FutureBuilder<List<dynamic>>(
         future: _future,
         builder: (ctx, snap) {
-          if (!snap.hasData)
+          if (!snap.hasData) {
             return const Center(child: CircularProgressIndicator());
+          }
           final daily = snap.data![0] as Map<String, Map<String, int>>;
           final total = snap.data![1] as Map<String, int>;
-          if (daily.isEmpty && total.isEmpty)
-            return const Center(child: Text("لا توجد إحصائيات بعد."));
+          if (daily.isEmpty && total.isEmpty) {
+            isStatisticsEmpty = true;
+            return Center(
+              child: Text(
+                "لا يوجد إحصائيات بعد ...",
+                style: TextStyle(
+                  fontSize: 22.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColor.primary,
+                ),
+              ),
+            );
+          }
 
           return ListView(
             padding: const EdgeInsets.all(16),

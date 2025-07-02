@@ -65,47 +65,28 @@ class IbtihalatPlayerScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              showModalBottomSheet(
-                                enableDrag: false,
-                                context: context,
-                                backgroundColor: AppColor.blueColor,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(25.0),
-                                  ),
+                          BlocBuilder<IbtihalatPlayerCubit,
+                              IbtihalatPlayerState>(
+                            builder: (context, state) {
+                              return Text(
+                                state.reciter.nameArabic.isNotEmpty
+                                    ? state.reciter.nameArabic
+                                    : 'غير معروف',
+                                style: TextStyle(
+                                  wordSpacing: 0.1,
+                                  fontSize: 16.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
                                 ),
-                                builder: (bottomSheetContext) {
-                                  return RecitersBottomSheetComponent(
-                                    cubit: IbtihalatPlayerCubit.get(context),
-                                  );
-                                },
                               );
                             },
-                            child: BlocBuilder<IbtihalatPlayerCubit,
-                                IbtihalatPlayerState>(
-                              builder: (context, state) {
-                                return Text(
-                                  state.reciter.nameArabic.isNotEmpty
-                                      ? state.reciter.nameArabic
-                                      : 'غير معروف',
-                                  style: TextStyle(
-                                    wordSpacing: 0.1,
-                                    fontSize: 16.sp,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                );
-                              },
-                            ),
                           ),
                           GestureDetector(
-                            onTap: () {
+                            onTap: ()async {
                               IbtihalatPlayerCubit.get(
                                 context,
                               ).clearIbtihalSearch();
-                              showModalBottomSheet(
+                              await showModalBottomSheet(
                                 enableDrag: false,
                                 context: context,
                                 backgroundColor: AppColor.blueColor,
@@ -476,8 +457,11 @@ class IbtihalatSliderWidget extends StatelessWidget {
                         ),
                      
                           GestureDetector(
-                            onTap: () {
-                              showModalBottomSheet(
+                            onTap: () async {
+                                   IbtihalatPlayerCubit.get(
+                                context,
+                              ).clearReciterSearch();
+                              await showModalBottomSheet(
                                 enableDrag: false,
                                 context: context,
                                 backgroundColor: AppColor.blueColor,

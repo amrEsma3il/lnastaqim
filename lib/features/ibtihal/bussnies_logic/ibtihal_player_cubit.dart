@@ -93,13 +93,13 @@ audioPlayer.onPositionChanged.listen((Duration position) {
   if (isConnected) {
     dev.log("internet connection");
      if (state.onRepeat) {
-        playIbtihal();
+      await  playIbtihal();
       } else {
         dev.log("state.isRandom ${state.isRandom}");
         if (state.isRandom) {
-          playRandomIbtihal();
+       await   playRandomIbtihal();
         } else {
-          nextIbtihal();
+         await nextIbtihal();
         }
       }
   }else{
@@ -135,10 +135,10 @@ audioPlayer.onPositionChanged.listen((Duration position) {
         await audioPlayer.stop();
         break;
       case 'previous':
-        previousIbtihal();
+    await    previousIbtihal();
         break;
       case 'next':
-        nextIbtihal(isFromUserHitAction: true);
+      await  nextIbtihal(isFromUserHitAction: true);
         break;
     }
   }
@@ -153,6 +153,8 @@ audioPlayer.onPositionChanged.listen((Duration position) {
     return ibtihalatPlayerRepo.getAllReciters();
   }
 
+
+//here
   Future<void> playIbtihal({int? ibtihalNum}) async {
     dev.log("playIbtihal with position: ${state.currentPosition}");
     emit(state.copyWith(audioState: AudioFetchLoading()));
@@ -220,7 +222,7 @@ audioPlayer.onPositionChanged.listen((Duration position) {
       );
     }
   }
-
+//here
   Future<void> togglePlayPause() async {
     dev.log("toggle test playing ${state.isPlaying} ");
     if (state.isPlaying) {
@@ -253,7 +255,7 @@ audioPlayer.onPositionChanged.listen((Duration position) {
       }
     }
   }
-
+//here
   Future<void> nextIbtihal({bool isFromUserHitAction = false}) async {
     if (isFromUserHitAction) {
       await audioPlayer.stop();
@@ -295,7 +297,7 @@ audioPlayer.onPositionChanged.listen((Duration position) {
     
     });
   }
-
+//here
   Future<void> previousIbtihal() async {
     await audioPlayer.stop();
     emit(state.copyWith(isPlaying: false, isPaused: true, currentPosition: 0));
@@ -317,9 +319,9 @@ audioPlayer.onPositionChanged.listen((Duration position) {
     
     });
   }
-
+//here
   void changeIbtihalNum(int ibtihalNumber) async {
-    await audioPlayer.stop();
+ if (state.ibtihalNumber != ibtihalNumber) {  await audioPlayer.stop();
     emit(
       state.copyWith(
         isPlaying: false,
@@ -329,7 +331,7 @@ audioPlayer.onPositionChanged.listen((Duration position) {
         audioState: AudioFetchInit(),
       ),
     );
-
+}
        audioPlayer.setSourceUrl(state.reciter.info[ state.ibtihalNumber].url).then((_) async {
       final duration = await audioPlayer.getDuration();
       if (duration != null) {
@@ -345,23 +347,24 @@ audioPlayer.onPositionChanged.listen((Duration position) {
 
 
   }
-
+//here
   void changeReciter(ReciterIbtihalModel reciter) async {
-    await audioPlayer.stop();
-    emit(
-      state.copyWith(
-        isPlaying: false,
-        isPaused: true,
-        currentPosition: 0,
-        reciter: reciter,
-        ibtihalNumber: 0,
+if (state.reciter.name != reciter.name) {
+      await audioPlayer.stop();
+      emit(
+        state.copyWith(
+          isPlaying: false,
+          isPaused: true,
+          currentPosition: 0,
+          reciter: reciter,
+          ibtihalNumber: 0,
         searchIbtihalResults: List.generate(
           reciter.info.length,
           (index) => index,
         ),
         audioState: AudioFetchInit(),
       ),
-    );
+    );}
 
        audioPlayer.setSourceUrl(state.reciter.info[ state.ibtihalNumber].url).then((_) async {
       final duration = await audioPlayer.getDuration();
@@ -375,11 +378,11 @@ audioPlayer.onPositionChanged.listen((Duration position) {
     });
     toggleFavorite();
   }
-
+//here
   void toggleRepeat() {
     emit(state.copyWith(onRepeat: !state.onRepeat));
   }
-
+//here
   Future<void> seek(double position) async {
     dev.log("Seeking to position: ${position.toInt()}");
     emit(state.copyWith(
@@ -408,22 +411,22 @@ audioPlayer.onPositionChanged.listen((Duration position) {
       ));
     }
   }
-
+//here
   void changeAudioPosition(double value) {
     emit(state.copyWith(currentPosition: value));
   }
-
+//here
   void sliderSeekToggle({required bool isSeeking}) {
     emit(state.copyWith(isSeeking: isSeeking));
   }
-
-  void playRandomIbtihal() async {
+//here
+  Future<void> playRandomIbtihal() async {
     final random = Random();
     int randomIbtihal = random.nextInt(state.reciter.info.length);
     emit(state.copyWith(ibtihalNumber: randomIbtihal, currentPosition: 0));
     await playIbtihal();
   }
-
+//here
   void changeRandomStatus() async {
     emit(state.copyWith(isRandom: !state.isRandom));
   }
@@ -500,6 +503,7 @@ audioPlayer.onPositionChanged.listen((Duration position) {
     );
   }
 
+//here
   Future<void> downloadIbtihal() async {
     final ibtihalIndex = state.ibtihalNumber;
 

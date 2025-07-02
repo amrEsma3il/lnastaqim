@@ -18,12 +18,18 @@ class SurahControlsWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            IconButton(
-              icon: Icon(size: 25, Icons.shuffle, color: AppColor.white),
+
+                 BlocBuilder<SurahPlayerCubit, SurahPlayerState>(
+              builder: (context, state) {
+                return   IconButton(
+              icon: Icon(size: 25, Icons.shuffle,color: state.isRandom ? AppColor.softGreen : AppColor.white),
               onPressed: () {
-                context.read<SurahPlayerCubit>().playRandomSurah();
+                context.read<SurahPlayerCubit>().changeRandomStatus();
+              },
+            );
               },
             ),
+        
             SizedBox(width: 23.w),
             Container(
               decoration: BoxDecoration(

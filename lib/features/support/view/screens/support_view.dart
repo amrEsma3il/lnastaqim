@@ -59,27 +59,29 @@ class SupportScreen extends StatelessWidget {
                   }
                 },
               ),
-              const SizedBox(height: 15),
-              _buildSupportCard(
-                shortLink: "paypal.me/lnastaqim",
-                context: context,
-                title: 'PayPal',
-                description: 'https://paypal.me/lnastaqim',
-                icon: Icons.payment,
-                onTapCard: () async {
-                  try {
-                    await UrlLauncher.launchToUrl(
-                      'https://paypal.me/lnastaqim',
-                      isExternal: true,
-                    );
-                  } catch (e) {
-                    showToast(
-                      'تعذر فتح paypal. تأكد من وجود التطبيق على جهازك.',
-                      AppColor.primary.withValues(alpha: 0.9),
-                    );
-                  }
-                },
-              ),
+
+              // const SizedBox(height: 15),
+              // _buildSupportCard(
+              //   shortLink: "paypal.me/lnastaqim",
+              //   context: context,
+              //   title: 'PayPal',
+              //   description: 'https://paypal.me/lnastaqim',
+              //   icon: Icons.payment,
+              //   onTapCard: () async {
+              //     try {
+              //       await UrlLauncher.launchToUrl(
+              //         'https://paypal.me/lnastaqim',
+              //         isExternal: true,
+              //       );
+              //     } catch (e) {
+              //       showToast(
+              //         'تعذر فتح paypal. تأكد من وجود التطبيق على جهازك.',
+              //         AppColor.primary.withValues(alpha: 0.9),
+              //       );
+              //     }
+              //   },
+              // ),
+              
               const SizedBox(height: 15),
               _buildSupportCard(
                 shortLink: "ipn.eg/S/ismail20.galal/instapay",
