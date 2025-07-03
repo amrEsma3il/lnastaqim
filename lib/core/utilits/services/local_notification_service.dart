@@ -6,9 +6,11 @@ import 'dart:developer';
 
 // import 'package:alarm/alarm.dart';
 import 'package:adhan/adhan.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -105,26 +107,34 @@ static LocalNotificationService get instance=>LocalNotificationService();
 
   
 Future<void> requestNotificationPermission() async {
-    final bool granted = await flutterLocalNotificationsPlugin
-            .resolvePlatformSpecificImplementation<
-                AndroidFlutterLocalNotificationsPlugin>()
-            ?.areNotificationsEnabled() ??
-        false;
-
-    if (!granted) {
-      final bool? result = await flutterLocalNotificationsPlugin
+  final bool granted = await flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin>()
-          ?.requestNotificationsPermission();
+          ?.areNotificationsEnabled() ??
+      false;
 
-      if (result != true) {
-        throw Exception('تم رفض إذن الإشعارات. يرجى تفعيلها ');
+  if (!granted) {
+    final result = await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestNotificationsPermission();
+
+    if (result != true) {
+      final androidInfo = await DeviceInfoPlugin().androidInfo;
+      if (androidInfo.version.sdkInt < 33) {
+        // ارسل المستخدم لإعدادات التطبيق مباشرة
+        await openAppSettings();
+      } else {
+        throw Exception('تم رفض إذن الإشعارات. يرجى تفعيلها من الإعدادات');
       }
-      print('Notification permission granted');
     } else {
-      print('Notification permission already granted');
+      print('Notification permission granted');
     }
+  } else {
+    print('Notification permission already granted');
   }
+}
+
   
   
     Future init() async {

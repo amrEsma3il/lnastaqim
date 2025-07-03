@@ -38,6 +38,7 @@ dependencies:
   connectivity_plus: ^6.1.4
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
+  device_info_plus: ^11.5.0
   dio: ^5.4.0
   equatable: ^2.0.5
   firebase_core: ^3.4.0
