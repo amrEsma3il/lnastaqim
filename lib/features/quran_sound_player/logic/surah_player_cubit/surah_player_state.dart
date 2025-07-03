@@ -67,7 +67,7 @@ class SurahPlayerState extends Equatable {
           nameArabic: "محمد صديق المنشاوي مجود",
           nationality: "مصر"),
       currentPosition: 0.0,
-      surahDuration: 0.0,
+      surahDuration: 177.0,
       searchSurahResults:SurahPlayerCubit.quranSurahs.keys.toList(),
        searchReciterResults: SurahPlayerRepo().getAllReciters() // قائمة فارغة عند البداية
       );

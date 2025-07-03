@@ -144,7 +144,7 @@ class SurahSliderWidget extends StatelessWidget {
                 thumbColor: AppColor.white,
                 inactiveColor: "#6a738a".toColor,
                 value: state.currentPosition,
-                max: state.surahDuration <= 0 ? 149.0 : state.surahDuration,
+                max: state.surahDuration <= 0 ? 177.0 : state.surahDuration,
                 onChangeStart: (_) {
                        context.read<SurahPlayerCubit>().sliderSeekToggle(isSeeking: true);
               

@@ -42,16 +42,7 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
     : super(IbtihalatPlayerState.initial()) {
 
 
-      audioPlayer.setSourceUrl(state.reciter.info[ state.ibtihalNumber].url).then((_) async {
-      final duration = await audioPlayer.getDuration();
-      if (duration != null) {
-        dev.log("Initial duration: ${duration.inSeconds}");
-        emit(state.copyWith(ibtihalDuration: duration.inSeconds.toDouble()));
-      } else {
-        dev.log("Failed to get initial duration");
-      }
     
-    });
     initListeners();
     registerPort();
   }
@@ -89,9 +80,9 @@ audioPlayer.onPositionChanged.listen((Duration position) {
   // var connectivityResult = await Connectivity().checkConnectivity();
 
   final bool isConnected = await InternetConnectionChecker.instance.hasConnection;
-
-  if (isConnected) {
-    dev.log("internet connection");
+//problem is here
+  {
+   
      if (state.onRepeat) {
       await  playIbtihal();
       } else {
@@ -102,8 +93,6 @@ audioPlayer.onPositionChanged.listen((Duration position) {
          await nextIbtihal();
         }
       }
-  }else{
-    dev.log("no internet connection");
   }
       //check here if internet connection is available
     
@@ -143,11 +132,15 @@ audioPlayer.onPositionChanged.listen((Duration position) {
     }
   }
 
-  static String formatDuration(int seconds) {
-    final minutes = (seconds ~/ 60).toString().padLeft(2, '0');
-    final secs = (seconds % 60).toString().padLeft(2, '0');
-    return "$minutes:$secs";
+static String formatDuration(int seconds) {
+  final hours = seconds ~/ 3600;
+  final minutes = ((seconds % 3600) ~/ 60).toString().padLeft(2, '0');
+  final secs = (seconds % 60).toString().padLeft(2, '0');
+  if (hours > 0) {
+    return "${hours.toString().padLeft(2, '0')}:$minutes:$secs";
   }
+  return "$minutes:$secs";
+}
 
   List<ReciterIbtihalModel> getAllReciters() {
     return ibtihalatPlayerRepo.getAllReciters();
@@ -756,7 +749,7 @@ class IbtihalatPlayerState extends Equatable {
       audioSpeed: 1,
       reciter: defaultReciter,
       currentPosition: 0.0,
-      ibtihalDuration: 0.0,
+      ibtihalDuration: 233.0,
       searchIbtihalResults: List.generate(
         defaultReciter.info.length,
         (index) => index,

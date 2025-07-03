@@ -521,7 +521,7 @@ class IbtihalatSliderWidget extends StatelessWidget {
                 thumbColor: AppColor.white,
                 inactiveColor: "#6a738a".toColor,
                 value: state.currentPosition,
-                max: state.ibtihalDuration <= 0 ? 149.0 : state.ibtihalDuration,
+                max: state.ibtihalDuration <= 0 ? 233.0 : state.ibtihalDuration,
                 onChangeStart: (_) {
                   dev.log("Start seeking");
                   context.read<IbtihalatPlayerCubit>().sliderSeekToggle(

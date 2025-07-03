@@ -36,26 +36,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
   static SurahPlayerCubit get(BuildContext context) => BlocProvider.of(context);
 
   SurahPlayerCubit(this.surahPlayerRepo) : super(SurahPlayerState.initial()) {
-    {
-      String surahNumberZeroPad = state.surahNumber.toString().padLeft(3, '0');
-
-      Reciter reciter = state.reciter;
-      audioPlayer
-          .setSourceUrl(
-            'https://download.quranicaudio.com/quran/${reciter.name}/$surahNumberZeroPad.mp3',
-          )
-          .then((_) async {
-            final duration = await audioPlayer.getDuration();
-            if (duration != null) {
-              dev.log("surah duration: ${duration.inSeconds}");
-              emit(
-                state.copyWith(surahDuration: duration.inSeconds.toDouble()),
-              );
-            } else {
-              dev.log("Failed to get initial duration");
-            }
-          });
-    }
+  
     initListeners();
 
     registerPort();
@@ -222,7 +203,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
       final bool isConnected =
           await InternetConnectionChecker.instance.hasConnection;
 
-      if (isConnected) {
+ {
         dev.log("internet connection");
         if (state.onRepeat) {
           await playSurah();
@@ -234,8 +215,6 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
             await nextSurah();
           }
         }
-      } else {
-        dev.log("no internet connection");
       }
       //check here if internet connection is available
     });
@@ -283,11 +262,15 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
     }
   }
 
-  static String formatDuration(int seconds) {
-    final minutes = (seconds ~/ 60).toString().padLeft(2, '0');
-    final secs = (seconds % 60).toString().padLeft(2, '0');
-    return "$minutes:$secs";
+ static String formatDuration(int seconds) {
+  final hours = seconds ~/ 3600;
+  final minutes = ((seconds % 3600) ~/ 60).toString().padLeft(2, '0');
+  final secs = (seconds % 60).toString().padLeft(2, '0');
+  if (hours > 0) {
+    return "${hours.toString().padLeft(2, '0')}:$minutes:$secs";
   }
+  return "$minutes:$secs";
+}
 
   List<Reciter> getAllReciters() {
     return surahPlayerRepo.getAllReciters();

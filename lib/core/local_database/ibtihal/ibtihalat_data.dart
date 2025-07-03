@@ -20,6 +20,16 @@ class IbtihalatData {
             
             "url":"https://ia801501.us.archive.org/34/items/3baqera_omran/%D9%85%D9%86%20%D8%B0%D8%A7%20%D8%A7%D9%84%D8%B0%D9%89%20%D9%8A%D8%AD%D9%8A%D9%89%20%D8%A7%D9%84%D8%B9%D8%A8%D8%A7%D8%AF%20%D8%B3%D9%88%D8%A7%D9%87%20-%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%B9%D9%85%D8%B1%D8%A7%D9%86.mp3"},
 
+            {"name":"قد حل حبك في قلبي بمنزلةٍ",
+            "url":"https://ia601501.us.archive.org/34/items/3baqera_omran/%D9%82%D8%AF%20%D8%AD%D9%84%20%D8%AD%D8%A8%D9%83%20%D9%81%D9%89%20%D9%82%D9%84%D8%A8%D9%89%20%D8%A8%D9%85%D9%86%D8%B2%D9%84%D9%87%20-%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%B9%D9%85%D8%B1%D8%A7%D9%86.mp3"},
+
+              {"name":"الهي عبدك الجاني قد اتاك",
+            "url":"https://ia801501.us.archive.org/34/items/3baqera_omran/%D8%A7%D9%84%D9%87%D9%89%20%D8%B9%D8%A8%D8%AF%D9%83%20%D8%A7%D9%84%D8%AC%D8%A7%D9%86%D9%89%20%D9%82%D8%AF%20%D8%A7%D8%AA%D8%A7%D9%83%20-%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%B9%D9%85%D8%B1%D8%A7%D9%86.mp3"},
+
+
+              {"name":" النور أشرق في الوجود جميل",
+            "url":"https://ia601501.us.archive.org/34/items/3baqera_omran/%D8%A7%D9%84%D9%86%D9%88%D8%B1%20%D8%A7%D8%B4%D8%B1%D9%82%20%D9%81%D9%89%20%D8%A7%D9%84%D9%88%D8%AC%D9%88%D8%AF%20%D8%AC%D9%85%D9%8A%D9%84%20-%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%B9%D9%85%D8%B1%D8%A7%D9%86.mp3"},
+
   {"name":"من يكشف الضر غير الواحد الأحد",
             
             "url":"https://ia601501.us.archive.org/34/items/3baqera_omran/%D9%85%D9%86%20%D9%8A%D9%83%D8%B4%D9%81%20%D8%A7%D9%84%D8%B6%D8%B1%20%D8%BA%D9%8A%D8%B1%20%D8%A7%D9%84%D9%88%D8%A7%D8%AD%D8%AF%20%D8%A7%D9%84%D8%A7%D8%AD%D8%AF%20-%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%B9%D9%85%D8%B1%D8%A7%D9%86.mp3"},
@@ -73,6 +83,14 @@ class IbtihalatData {
             "name": "فكم لله من لطف خفي",
             "url": "https://ia801501.us.archive.org/34/items/3baqera_omran/%D9%81%D9%83%D9%85%20%D9%84%D9%84%D9%87%20%D9%85%D9%86%20%D9%84%D8%B7%D9%81%20%D8%AE%D9%81%D9%89%20-%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%B9%D9%85%D8%B1%D8%A7%D9%86.mp3"
           },
+
+
+
+          {
+            "name": "أسلمت وجهي للذي أحياني",
+            "url": "https://ia601501.us.archive.org/34/items/3baqera_omran/%D8%A7%D8%B3%D9%84%D9%85%D8%AA%20%D9%88%D8%AC%D9%87%D9%89%20%D9%84%D9%84%D8%B0%D9%89%20%D8%A7%D8%AD%D9%8A%D8%A7%D9%86%D9%89%20-%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%B9%D9%85%D8%B1%D8%A7%D9%86.mp3"
+          }
+        ,
           {
             "name": "يا سلام على النوادر",
             "url": "https://archive.org/download/20230916_20230916_0318/008%20%20%D9%8A%D8%A7%20%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%89%20%D8%A7%D9%84%D9%86%D9%88%D8%A7%D8%AF%D8%B1%20%20%D9%81%D9%8A%D8%AF%D9%8A%D9%88%20%D9%84%D9%84%D8%B4%D9%8A%D8%AE%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%B9%D9%85%D8%B1%D8%A7%D9%86%20%D8%A7%D8%A8%D8%AA%D9%87%D8%A7%D9%84%20%D9%86%D8%A7%D8%AF%D8%B1%20%D9%8A%D8%A7%D8%B3%D9%8A%D8%AF%20%D8%A7%D9%84%D9%83%D9%88%D9%86%D9%8A%D9%86%20%D8%B9%D8%A7%D9%85%201993%20%D8%B1%D9%88%D8%A7%D8%A6%D8%B9%20%D9%88%D9%86%D9%88%D8%A7%D8%AF%D8%B1.mp3"
@@ -97,6 +115,40 @@ class IbtihalatData {
             "name": "عظمة ذنوبي",
             "url": "https://www.matb3aa.com/music/ALnakshabandy/3azmat.Znobey-Elnakshabndy-MaTb3aa.Com.mp3"
           },
+
+
+
+
+
+{           "name": "سيدي يا رسول الله _النقشبندي. كاملا",
+            "url": "https://ia800209.us.archive.org/1/items/Sama3almelouk_yahoo_20160525/%D8%B3%D9%8A%D8%AF%D9%8A%20%D9%8A%D8%A7%20%D8%B1%D8%B3%D9%88%D9%84%20%D8%A7%D9%84%D9%84%D9%87%20_%D8%A7%D9%84%D9%86%D9%82%D8%B4%D8%A8%D9%86%D8%AF%D9%8A.%20%D9%83%D8%A7%D9%85%D9%84%D8%A7%20%D9%8B.mp3"
+          },
+          {
+            "name": "يا من له ستر جميل",
+            "url": "https://www.matb3aa.com/music/ALnakshabandy/Ya.mn.Lah.Satra.Gamel-Elnakshabndy-MaTb3aa.Com.mp3"
+          },
+          {
+            "name": "أنت الذي أرجوه",
+            "url": "https://www.matb3aa.com/music/ALnakshabandy/Anta.Allazi.Arjoh-Elnakshabndy-MaTb3aa.Com.mp3"
+          },
+          {
+            "name": "يا رب صلي على النبي",
+            "url": "https://www.matb3aa.com/music/ALnakshabandy/Ya.Rab.Saly.Ala.Alnaby-Elnakshabndy-MaTb3aa.Com.mp3"
+          },
+          {
+            "name": "يا من له ستر جميل",
+            "url": "https://www.matb3aa.com/music/ALnakshabandy/Ya.mn.Lah.Satra.Gamel-Elnakshabndy-MaTb3aa.Com.mp3"
+          },
+          {
+            "name": "أنت الذي أرجوه",
+            "url": "https://www.matb3aa.com/music/ALnakshabandy/Anta.Allazi.Arjoh-Elnakshabndy-MaTb3aa.Com.mp3"
+          },
+
+
+
+
+
+
           {
             "name": "النفس تشكو",
             "url": "https://www.matb3aa.com/music/ALnakshabandy/Alnafs.Tashko-Elnakshabndy-MaTb3aa.Com.mp3"
