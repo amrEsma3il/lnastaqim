@@ -245,7 +245,7 @@ Future<void> main(fireBaseOptions) async {
     Hive.registerAdapter(ReciterAdapter());
     Hive.registerAdapter(IbtihalFavoriteModelAdapter());
     Hive.registerAdapter(ReciterIbtihalModelAdapter());
-Hive.registerAdapter(ReciterEntityAdapter());
+    Hive.registerAdapter(ReciterEntityAdapter());
 
     await Future.wait([
       Hive.openBox<FavouriteModel>(AppKeys.kAzkarFavouriteBox),
@@ -265,67 +265,81 @@ Hive.registerAdapter(ReciterEntityAdapter());
     await requestStoragePermissionGlobal();
   }
   // Try to get location first
-  // In main.dart, modify the ErrorApp calls to ensure navigation
-try {
-  position = await LocationService.determinePosition();
-} catch (e) {
-  initMain = true;
-  runApp(
-    ErrorApp(
-      errorMessage: e.toString(),
-      onRetry: () async {
-        log('Retrying location request');
-        try {
-          position = await LocationService.determinePosition();
-          log('Location obtained, navigating to Lnastaqim');
-          await main(fireBaseOptions); // This will run Lnastaqim
-        } catch (e) {
-          log('Retry failed: $e');
-          runApp(
-            ErrorApp(
-              errorMessage: e.toString(),
-              onRetry: () async {
-                await main(fireBaseOptions);
-              },
-            ),
-          );
-        }
-      },
-    ),
-  );
-  return;
-}
+  try {
+    position = await LocationService.determinePosition();
+  } catch (e) {
+    final controller = ErrorAppController();
+    controller.changeLoading(false);
+    initMain = true;
+    // Navigate to ErrorApp on location error
+    runApp(
+      ErrorApp(
+        errorMessage: e.toString(),
+        onRetry: () async {
+          log('Retrying location request');
+          // try
+          {
+            log('Location obtained, navigating to Lnastaqim');
+            await main(fireBaseOptions);
+          }
+          // catch (e) {
+          //   log('Retry failed: $e');
+          //   runApp(
+          //     ErrorApp(
+          //       errorMessage: e.toString(),
+          //       onRetry: () async {
+          //         position = await LocationService.determinePosition();
+          //      await   main(fireBaseOptions);
+          //       },
+          //     ),
+          //   );
+          // }
+        },
+      ),
+    );
+    return;
+  }
 
-// Notification permission
-try {
-  dev.log('Requesting notification permission');
-  await LocalNotificationService.instance.requestNotificationPermission();
-} catch (e) {
-  initMain = true;
-  runApp(
-    ErrorApp(
-      errorMessage: e.toString(),
-      onRetry: () async {
-        try {
-          await LocalNotificationService.instance.requestNotificationPermission();
-          log('Notification permission granted, navigating to Lnastaqim');
-          await main(fireBaseOptions);
-        } catch (e) {
-          log('Retry failed: $e');
-          runApp(
-            ErrorApp(
-              errorMessage: e.toString(),
-              onRetry: () async {
-                await main(fireBaseOptions);
-              },
-            ),
-          );
-        }
-      },
-    ),
-  );
-  return;
-}
+  // Request notification permission after location is confirmed
+  try {
+    dev.log('Requesting notification permission');
+    await LocalNotificationService.instance.requestNotificationPermission();
+  } catch (e) {
+    final controller = ErrorAppController();
+    controller.changeLoading(false);
+    initMain = true;
+    // Navigate to ErrorApp for notification permission denial
+    runApp(
+      ErrorApp(
+        errorMessage: e.toString(),
+        onRetry: () async {
+          // try
+
+          {
+            // await LocalNotificationService.instance
+            //     .requestNotificationPermission();
+            // Restart main app
+            await main(fireBaseOptions);
+          }
+          // catch (e) {
+          //   log('Retry failed: $e');
+          //   runApp(
+          //     ErrorApp(
+          //       errorMessage: e.toString(),
+          //       onRetry: () async {
+          //         await LocalNotificationService.instance
+          //             .requestNotificationPermission();
+          //         // Restart main app
+          //       await  main(fireBaseOptions);
+          //       },
+          //     ),
+          //   );
+          // }
+        },
+      ),
+    );
+    return;
+  }
 
   // Initialize UI settings
   SystemChrome.setSystemUIOverlayStyle(
@@ -395,6 +409,8 @@ class Lnastaqim extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
+            //here i add this controller
+            // BlocProvider(create: (context) => ErrorAppController()),
             BlocProvider(create: (context) => DeepLinkCubit()),
             //SearchOnAyaCubit
             BlocProvider(create: (context) => SearchVisabilityCubit()),

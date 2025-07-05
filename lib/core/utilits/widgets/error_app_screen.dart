@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'dart:developer';
+import 'package:permission_handler/permission_handler.dart';
 
 class ErrorApp extends StatelessWidget {
   final String errorMessage;
@@ -13,12 +16,18 @@ class ErrorApp extends StatelessWidget {
     log('Showing ErrorApp with message: $errorMessage');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: PermissionErrorScreen(errorMessage: errorMessage, onRetry: onRetry),
+      home: BlocProvider(
+        create: (context) => ErrorAppController(),
+        child: PermissionErrorScreen(
+          errorMessage: errorMessage,
+          onRetry: onRetry,
+        ),
+      ),
     );
   }
 }
 
-class PermissionErrorScreen extends StatefulWidget {
+class PermissionErrorScreen extends StatelessWidget {
   final String errorMessage;
   final Future<void> Function()? onRetry;
 
@@ -27,14 +36,6 @@ class PermissionErrorScreen extends StatefulWidget {
     required this.errorMessage,
     this.onRetry,
   });
-
-  @override
-  // ignore: library_private_types_in_public_api
-  _PermissionErrorScreenState createState() => _PermissionErrorScreenState();
-}
-
-class _PermissionErrorScreenState extends State<PermissionErrorScreen> {
-  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,6 @@ class _PermissionErrorScreenState extends State<PermissionErrorScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // أيقونة داخل دائرة
                 Container(
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
@@ -62,22 +62,21 @@ class _PermissionErrorScreenState extends State<PermissionErrorScreen> {
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black12.withValues(alpha:  0.2),
+                        color: Colors.black12.withOpacity(0.2),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
                     ],
                   ),
                   child: Icon(
-                    widget.errorMessage.contains('الإشعارات')
+                    errorMessage.contains('الإشعارات')
                         ? Icons.notifications_off
                         : Icons.location_off,
                     size: 66,
-                    color: const Color(0xFF37517E),
+                    color: Color(0xFF37517E),
                   ),
                 ),
                 const SizedBox(height: 28),
-                // العنوان
                 const Text(
                   'لم نتمكن من المتابعة',
                   style: TextStyle(
@@ -88,9 +87,8 @@ class _PermissionErrorScreenState extends State<PermissionErrorScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                // رسالة الخطأ
                 Text(
-                  widget.errorMessage.replaceAll("Exception", "خطأ"),
+                  errorMessage.replaceAll("Exception", "خطأ"),
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 16,
@@ -100,66 +98,69 @@ class _PermissionErrorScreenState extends State<PermissionErrorScreen> {
                   ),
                 ),
                 const SizedBox(height: 28),
-                // زر إعادة المحاولة أو فتح الإعدادات
-                ElevatedButton.icon(
-                  icon: _isLoading
-                      ? const SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 2,
-                          ),
-                        )
-                      : const Icon(Icons.settings, color: Colors.white),
-                  label: Text(
-                    _isLoading
-                        ? 'جاري المعالجة...'
-                        : widget.errorMessage.contains('دائم')
+                BlocBuilder<ErrorAppController, bool>(
+                  builder: (context, state) {
+                    return ElevatedButton.icon(
+                      icon:
+                          state
+                              ? const SizedBox(
+                                width: 24,
+                                height: 24,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 2,
+                                ),
+                              )
+                              : const Icon(Icons.settings, color: Colors.white),
+                      label: Text(
+                        state
+                            ? 'جاري المعالجة...'
+                            : errorMessage.contains('دائم')
                             ? 'افتح الإعدادات'
                             : 'السماح للصلاحيات',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Amiri',
-                      color: Colors.white,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF37517E),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 12,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  onPressed: _isLoading
-                      ? null // Disable button during loading
-                      : () async {
-                          setState(() {
-                            _isLoading = true;
-                          });
-                          log('Retry button pressed');
-                          if (widget.errorMessage.contains('دائم')) {
-                            log('Opening location settings');
-                            await openAppSettings().then((_) async {
-                              if (widget.onRetry != null) {
-                                log('Executing onRetry callback after settings');
-                                await widget.onRetry!();
-                              }
-                            });
-                          } else {
-                            if (widget.onRetry != null) {
-                              log('Executing onRetry callback');
-                              await widget.onRetry!();
-                            }
-                          }
-                          // Keep loading until navigation is complete
-                          // setState(() {
-                          //   _isLoading = false;
-                          // });
-                        },
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Amiri',
+                          color: Colors.white,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(
+                          0xFF37517E,
+                        ), // اللون الأزرق عند التنشيط
+                        disabledBackgroundColor: const Color(0xFF37517E),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 12,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      onPressed:
+                          state
+                              ? null
+                              : () async {
+                                final controller = ErrorAppController();
+                                controller.changeLoading(true);
+                                log('Retry button pressed');
+                                try {
+                                  if (errorMessage.contains('دائم')) {
+                                    log('Opening location settings');
+                                    await openAppSettings();
+                                    if (onRetry != null) {
+                                      await onRetry!();
+                                    }
+                                  } else if (onRetry != null) {
+                                    await onRetry!();
+                                  }
+                                } catch (e) {
+                                  log('Permission request failed: $e');
+                                  controller.changeLoading(false);
+                                }
+                              },
+                    );
+                  },
                 ),
                 const SizedBox(height: 20),
                 const Text(
@@ -172,5 +173,23 @@ class _PermissionErrorScreenState extends State<PermissionErrorScreen> {
         ),
       ),
     );
+  }
+}
+
+class ErrorAppController extends Cubit<bool> {
+  // Singleton instance
+  static final ErrorAppController _instance = ErrorAppController._internal(
+    false,
+  );
+
+  // Private constructor with initial state
+  ErrorAppController._internal(super.initialState);
+
+  // Factory constructor to return the singleton instance
+  factory ErrorAppController() => _instance;
+
+  // Method to change loading state
+  void changeLoading(bool value) {
+    emit(value);
   }
 }
