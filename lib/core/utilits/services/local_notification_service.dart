@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'dart:async';
+import 'dart:developer' as dev;
 import 'dart:math' as ms;
 import 'dart:developer';
 
@@ -21,10 +22,11 @@ import '../../local_database/azkar/azkar_local_database.dart';
 import 'audio_service/players_key.dart';
 
 class LocalNotificationService {
+  
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-static LocalNotificationService get instance=>LocalNotificationService();
+  static LocalNotificationService get instance => LocalNotificationService();
   StreamController<NotificationResponse> streamController = StreamController();
 
   void onTap(NotificationResponse notificationResponse) {
@@ -38,32 +40,26 @@ static LocalNotificationService get instance=>LocalNotificationService();
     log("hi from onDidReceiveNotificationBackgroundResponse");
     log("before switch case${notificationResponse.actionId}");
 
-   
+    if (notificationResponse.actionId == null ||
+        notificationResponse.actionId!.isEmpty) {
+      log("action id is null");
 
-     if (notificationResponse.actionId == null || notificationResponse.actionId!.isEmpty ) {
-           
-          log("action id is null");
+      switch (notificationResponse.id) {
+        case 310:
+          Get.toNamed(AppRouteName.ibtihalPlayerScreen);
+          break;
 
-          switch (notificationResponse.id) {
-            case 310:
-              Get.toNamed(AppRouteName.ibtihalPlayerScreen);
-              break;
-
-               case 30:
-              Get.toNamed(AppRouteName.surahPlayerScreen);
-              break;
-               case 31:
-              Get.toNamed(AppRouteName.radio);
-              break;
-           
-          }
-        } else {
-            log(notificationResponse.actionId.toString());
-            await handleMediaAction(notificationResponse.actionId!);
-        }
-        
-
-
+        case 30:
+          Get.toNamed(AppRouteName.surahPlayerScreen);
+          break;
+        case 31:
+          Get.toNamed(AppRouteName.radio);
+          break;
+      }
+    } else {
+      log(notificationResponse.actionId.toString());
+      await handleMediaAction(notificationResponse.actionId!);
+    }
   }
 
   Future<void> handleMediaAction(String action) async {
@@ -105,39 +101,34 @@ static LocalNotificationService get instance=>LocalNotificationService();
     }
   }
 
-  
-Future<void> requestNotificationPermission() async {
-  final bool granted = await flutterLocalNotificationsPlugin
-          .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>()
-          ?.areNotificationsEnabled() ??
-      false;
+  Future<void> requestNotificationPermission() async {
+  var status = await Permission.notification.status;
 
-  if (!granted) {
-    final result = await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-        ?.requestNotificationsPermission();
-
-    if (result != true) {
-      final androidInfo = await DeviceInfoPlugin().androidInfo;
-      if (androidInfo.version.sdkInt < 33) {
-        // ارسل المستخدم لإعدادات التطبيق مباشرة
-        await openAppSettings();
-      } else {
-        throw Exception('تم رفض إذن الإشعارات. يرجى تفعيلها من الإعدادات');
-      }
-    } else {
-      print('Notification permission granted');
-    }
-  } else {
-    print('Notification permission already granted');
+  if (!status.isGranted) {
+    status = await Permission.notification.request();
   }
-}
 
-  
-  
-    Future init() async {
+
+
+     if (status==PermissionStatus.permanentlyDenied) {
+      dev.log('notification permission is denied forever');
+      throw Exception(
+        'تم رفض صلاحيات الإشعارات بشكل دائم. يرجى تفعيلها من إعدادات التطبيق.',
+      );
+    }
+
+ if (status==PermissionStatus.denied) {
+      dev.log('notification permission is denied');
+      throw Exception(
+       'تم رفض إذن الإشعارات. يرجى السماح للصلاحيات',
+      );
+    }
+
+
+
+  }
+
+  Future init() async {
     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
         FlutterLocalNotificationsPlugin();
     InitializationSettings settings = const InitializationSettings(
@@ -152,9 +143,8 @@ Future<void> requestNotificationPermission() async {
         log("hi from onDidReceiveNotificationResponse");
 
         log(notificationResponse.actionId.toString());
-    
+
         if (notificationResponse.actionId == null) {
-          
           log("action id is null");
 
           switch (notificationResponse.id) {
@@ -162,19 +152,17 @@ Future<void> requestNotificationPermission() async {
               Get.toNamed(AppRouteName.ibtihalPlayerScreen);
               break;
 
-               case 30:
+            case 30:
               Get.toNamed(AppRouteName.surahPlayerScreen);
               break;
-               case 31:
+            case 31:
               Get.toNamed(AppRouteName.radio);
               break;
-           
           }
         } else {
-            log(notificationResponse.actionId.toString());
-            await handleMediaAction(notificationResponse.actionId!);
+          log(notificationResponse.actionId.toString());
+          await handleMediaAction(notificationResponse.actionId!);
         }
-        
 
         // }
       },
@@ -206,7 +194,7 @@ Future<void> requestNotificationPermission() async {
       importance: Importance.low,
       priority: Priority.low,
       showWhen: false,
-    
+
       styleInformation: const MediaStyleInformation(),
       actions: <AndroidNotificationAction>[
         AndroidNotificationAction(
@@ -587,10 +575,6 @@ Future<void> requestNotificationPermission() async {
     return TimeOfDay(hour: hour, minute: minute);
   }
 
-  
-
-
-
   Future<void> initializeNotificationChannel(
     String id,
     String name,
@@ -680,12 +664,7 @@ Future<void> requestNotificationPermission() async {
   }
 
   Future<void> salahFajrTestNotification() async {
-
-      
-
-  var fajrTime = parseTime(
-  "4:20 AM",
-  );
+    var fajrTime = parseTime("4:20 AM");
     prefs = await SharedPreferences.getInstance();
     String sound =
         prefs.getString('fajarAlarmSound') ??
@@ -693,11 +672,11 @@ Future<void> requestNotificationPermission() async {
 
     String id = "fajarAlarmSoundtest$sound";
     String name = "fajarAlarmSoundtest";
-  log("------------------");
+    log("------------------");
     log("fajr test");
     log("fajr test hour = ${fajrTime.hour}");
-  log("fajr test minute = ${fajrTime.minute}");
-  log("------------------");
+    log("fajr test minute = ${fajrTime.minute}");
+    log("------------------");
 
     await cancelNotification(522);
     await initializeNotificationChannel(id, name, sound);
@@ -749,11 +728,11 @@ Future<void> requestNotificationPermission() async {
 
   Future<void> salahFajrNotification() async {
     var fajrTime = parseTime(
-    PrayersTimesRepo.fetchPrayersTimes(
-      Coordinates(position!.latitude, position!.longitude),
-      PrayersTimesRepo.getCalculationParameters(),
-    ).fajr,
-  );
+      PrayersTimesRepo.fetchPrayersTimes(
+        Coordinates(position!.latitude, position!.longitude),
+        PrayersTimesRepo.getCalculationParameters(),
+      ).fajr,
+    );
     prefs = await SharedPreferences.getInstance();
     String sound =
         prefs.getString('fajarAlarmSound') ??
@@ -813,12 +792,12 @@ Future<void> requestNotificationPermission() async {
   }
 
   Future<void> salahDuhrNotification() async {
-      var dhuhrTime = parseTime(
-    PrayersTimesRepo.fetchPrayersTimes(
-      Coordinates(position!.latitude, position!.longitude),
-      PrayersTimesRepo.getCalculationParameters(),
-    ).dhuhr,
-  );
+    var dhuhrTime = parseTime(
+      PrayersTimesRepo.fetchPrayersTimes(
+        Coordinates(position!.latitude, position!.longitude),
+        PrayersTimesRepo.getCalculationParameters(),
+      ).dhuhr,
+    );
     prefs = await SharedPreferences.getInstance();
     String sound =
         prefs.getString('duharAlarmSound') ?? "ali_elmola"; // الصوت الافتراضي
@@ -881,11 +860,11 @@ Future<void> requestNotificationPermission() async {
 
   Future<void> salahAsrNotification() async {
     var asrTime = parseTime(
-    PrayersTimesRepo.fetchPrayersTimes(
-      Coordinates(position!.latitude, position!.longitude),
-      PrayersTimesRepo.getCalculationParameters(),
-    ).asr,
-  );
+      PrayersTimesRepo.fetchPrayersTimes(
+        Coordinates(position!.latitude, position!.longitude),
+        PrayersTimesRepo.getCalculationParameters(),
+      ).asr,
+    );
     prefs = await SharedPreferences.getInstance();
     String sound =
         prefs.getString('asrAlarmSound') ?? "ali_elmola"; // الصوت الافتراضي
@@ -945,12 +924,12 @@ Future<void> requestNotificationPermission() async {
   }
 
   Future<void> salahMagribNotification() async {
-      var maghribTime = parseTime(
-    PrayersTimesRepo.fetchPrayersTimes(
-      Coordinates(position!.latitude, position!.longitude),
-      PrayersTimesRepo.getCalculationParameters(),
-    ).maghrib,
-  );
+    var maghribTime = parseTime(
+      PrayersTimesRepo.fetchPrayersTimes(
+        Coordinates(position!.latitude, position!.longitude),
+        PrayersTimesRepo.getCalculationParameters(),
+      ).maghrib,
+    );
     prefs = await SharedPreferences.getInstance();
     String sound =
         prefs.getString('maghribAlarmSound') ?? "ali_elmola"; // الصوت الافتراضي
@@ -1010,15 +989,12 @@ Future<void> requestNotificationPermission() async {
   }
 
   Future<void> salahIshaNotification() async {
-
-      
-
-  var ishaTime = parseTime(
-    PrayersTimesRepo.fetchPrayersTimes(
-      Coordinates(position!.latitude, position!.longitude),
-      PrayersTimesRepo.getCalculationParameters(),
-    ).isha,
-  );
+    var ishaTime = parseTime(
+      PrayersTimesRepo.fetchPrayersTimes(
+        Coordinates(position!.latitude, position!.longitude),
+        PrayersTimesRepo.getCalculationParameters(),
+      ).isha,
+    );
     prefs = await SharedPreferences.getInstance();
     String sound =
         prefs.getString('ishaAlarmSound') ?? "ali_elmola"; // الصوت الافتراضي

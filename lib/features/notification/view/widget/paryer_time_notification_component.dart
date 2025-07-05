@@ -38,20 +38,21 @@ class ParyerTimeNotificationComponent extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: 4.w),
-                GestureDetector(
-                  onTap: () {
-                    // context.read<NotificationCubit>().changeSoundSalahNabi(sound: "azan2");
+                // GestureDetector(
+                  // onTap: () {
+                  //   // context.read<NotificationCubit>().changeSoundSalahNabi(sound: "azan2");
 
-                    showDialog(
-                      context: context,
-                      builder:
-                          (context) => RadioDialog(
-                            prayerName: prayerName,
-                            submitMethod: submitMethod,
-                          ),
-                    );
-                  },
-                  child: BlocBuilder<NotificationCubit, NotificationState>(
+                  //   showDialog(
+                  //     context: context,
+                  //     builder:
+                  //         (context) => RadioDialog(
+                  //           prayerName: prayerName,
+                  //           submitMethod: submitMethod,
+                  //         ),
+                  //   );
+                  // },
+                  // child: 
+                  BlocBuilder<NotificationCubit, NotificationState>(
                     builder: (context, state) {
                       // late String prayerSound;
                       // late bool prayerStatus;
@@ -115,7 +116,7 @@ class ParyerTimeNotificationComponent extends StatelessWidget {
                           : const SizedBox.shrink();
                     },
                   ),
-                ),
+                // ),
               ],
             ),
             const Spacer(),

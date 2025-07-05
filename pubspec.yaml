@@ -1,5 +1,5 @@
 name: lnastaqim
-description: "A new Flutter project."
+description: "An Islamic app that provides prayer times, Quran recitation, and more."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -150,9 +150,7 @@ flutter:
     - family: Arab140
       fonts:
         - asset: assets/fonts/ArabQuranIslamic140-7BG9A.ttf
-    - family: NotoNaskhArabic
-      fonts:
-        - asset: assets/fonts/me_quran Regular.ttf
+
 
     - family: Authmanic
       fonts:

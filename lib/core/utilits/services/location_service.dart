@@ -1,9 +1,12 @@
+import 'dart:developer' as dev;
+
 import 'package:geolocator/geolocator.dart';
 
 class LocationService {
   static Future<Position> determinePosition() async {
     // Check if location services are enabled
-    if (!await Geolocator.isLocationServiceEnabled()) {
+ {
+   
          LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
       permission = await Geolocator.requestPermission();
@@ -12,6 +15,7 @@ class LocationService {
 
 
      if (permission == LocationPermission.deniedForever) {
+      dev.log('Location permission is denied forever');
       throw Exception(
         'تم رفض صلاحيات الوصول للموقع بشكل دائم. يرجى تفعيلها من إعدادات التطبيق.',
       );
@@ -21,22 +25,7 @@ class LocationService {
       throw Exception('تم رفض صلاحيات الوصول للموقع.');
     }
 
-    }else{    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
-      permission = await Geolocator.requestPermission();
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      throw Exception(
-        'تم رفض صلاحيات الوصول للموقع بشكل دائم. يرجى تفعيلها من إعدادات التطبيق.',
-      );
-    }
-
-    if (permission == LocationPermission.denied) {
-      throw Exception('تم رفض صلاحيات الوصول للموقع.');
-    }}
-
-    // Check permissions
+    }  // Check permissions
 
 
     // Get current position
