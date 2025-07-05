@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'dart:developer';
 
 class ErrorApp extends StatelessWidget {
@@ -18,7 +18,7 @@ class ErrorApp extends StatelessWidget {
   }
 }
 
-class PermissionErrorScreen extends StatelessWidget {
+class PermissionErrorScreen extends StatefulWidget {
   final String errorMessage;
   final Future<void> Function()? onRetry;
 
@@ -27,6 +27,14 @@ class PermissionErrorScreen extends StatelessWidget {
     required this.errorMessage,
     this.onRetry,
   });
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _PermissionErrorScreenState createState() => _PermissionErrorScreenState();
+}
+
+class _PermissionErrorScreenState extends State<PermissionErrorScreen> {
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,24 +62,21 @@ class PermissionErrorScreen extends StatelessWidget {
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black12.withOpacity(0.2),
+                        color: Colors.black12.withValues(alpha:  0.2),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
                     ],
                   ),
                   child: Icon(
-                    errorMessage.contains('الإشعارات')
+                    widget.errorMessage.contains('الإشعارات')
                         ? Icons.notifications_off
-                        : Icons
-                            .location_off, // أو Icons.notifications_off حسب الحالة
+                        : Icons.location_off,
                     size: 66,
-                    color: Color(0xFF37517E),
+                    color: const Color(0xFF37517E),
                   ),
                 ),
-
                 const SizedBox(height: 28),
-
                 // العنوان
                 const Text(
                   'لم نتمكن من المتابعة',
@@ -82,12 +87,10 @@ class PermissionErrorScreen extends StatelessWidget {
                     color: Color(0xFF37517E),
                   ),
                 ),
-
                 const SizedBox(height: 16),
-
-                // رسالة الخطأ من المتغير
+                // رسالة الخطأ
                 Text(
-                  errorMessage.replaceAll("Exception", "خطأ"),
+                  widget.errorMessage.replaceAll("Exception", "خطأ"),
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 16,
@@ -96,17 +99,26 @@ class PermissionErrorScreen extends StatelessWidget {
                     color: Colors.black87,
                   ),
                 ),
-
                 const SizedBox(height: 28),
-
-                // زر المحاولة مجددًا
+                // زر إعادة المحاولة أو فتح الإعدادات
                 ElevatedButton.icon(
-                  icon: const Icon(Icons.settings, color: Colors.white),
+                  icon: _isLoading
+                      ? const SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 2,
+                          ),
+                        )
+                      : const Icon(Icons.settings, color: Colors.white),
                   label: Text(
-                    errorMessage.contains('خدمات')
-                        ? 'افتح الإعدادات'
-                        : "السماح للصلاحيات",
-                    style: TextStyle(
+                    _isLoading
+                        ? 'جاري المعالجة...'
+                        : widget.errorMessage.contains('دائم')
+                            ? 'افتح الإعدادات'
+                            : 'السماح للصلاحيات',
+                    style: const TextStyle(
                       fontSize: 16,
                       fontFamily: 'Amiri',
                       color: Colors.white,
@@ -122,26 +134,34 @@ class PermissionErrorScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  onPressed: () async {
-                    log('Retry button pressed');
-                    if (errorMessage.contains('خدمات')) {
-                      log('Opening location settings');
-               
-                       LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
-      permission = await Geolocator.requestPermission();
-    }
-          
-                    }
-                    if (onRetry != null) {
-                      log('Executing onRetry callback');
-                      await onRetry!();
-                    }
-                  },
+                  onPressed: _isLoading
+                      ? null // Disable button during loading
+                      : () async {
+                          setState(() {
+                            _isLoading = true;
+                          });
+                          log('Retry button pressed');
+                          if (widget.errorMessage.contains('دائم')) {
+                            log('Opening location settings');
+                            await openAppSettings().then((_) async {
+                              if (widget.onRetry != null) {
+                                log('Executing onRetry callback after settings');
+                                await widget.onRetry!();
+                              }
+                            });
+                          } else {
+                            if (widget.onRetry != null) {
+                              log('Executing onRetry callback');
+                              await widget.onRetry!();
+                            }
+                          }
+                          // Keep loading until navigation is complete
+                          // setState(() {
+                          //   _isLoading = false;
+                          // });
+                        },
                 ),
-
                 const SizedBox(height: 20),
-
                 const Text(
                   '▬▬▬▬ ❖ ▬▬▬▬',
                   style: TextStyle(fontSize: 18, color: Color(0xFF37517E)),

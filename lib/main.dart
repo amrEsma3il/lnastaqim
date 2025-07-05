@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:developer' as dev;
 import 'dart:isolate';
 import 'dart:ui';
 import 'package:firebase_core/firebase_core.dart';
@@ -264,76 +265,67 @@ Hive.registerAdapter(ReciterEntityAdapter());
     await requestStoragePermissionGlobal();
   }
   // Try to get location first
-  try {
-    position = await LocationService.determinePosition();
-  } catch (e) {
-    initMain = true;
-    // Navigate to ErrorApp on location error
-    runApp(
-      ErrorApp(
-        errorMessage: e.toString(),
-        onRetry: () async {
-          log('Retrying location request');
-          // try
-          {
-            log('Location obtained, navigating to Lnastaqim');
-            await main(fireBaseOptions);
-          }
-          // catch (e) {
-          //   log('Retry failed: $e');
-          //   runApp(
-          //     ErrorApp(
-          //       errorMessage: e.toString(),
-          //       onRetry: () async {
-          //         position = await LocationService.determinePosition();
-          //      await   main(fireBaseOptions);
-          //       },
-          //     ),
-          //   );
-          // }
-        },
-      ),
-    );
-    return;
-  }
+  // In main.dart, modify the ErrorApp calls to ensure navigation
+try {
+  position = await LocationService.determinePosition();
+} catch (e) {
+  initMain = true;
+  runApp(
+    ErrorApp(
+      errorMessage: e.toString(),
+      onRetry: () async {
+        log('Retrying location request');
+        try {
+          position = await LocationService.determinePosition();
+          log('Location obtained, navigating to Lnastaqim');
+          await main(fireBaseOptions); // This will run Lnastaqim
+        } catch (e) {
+          log('Retry failed: $e');
+          runApp(
+            ErrorApp(
+              errorMessage: e.toString(),
+              onRetry: () async {
+                await main(fireBaseOptions);
+              },
+            ),
+          );
+        }
+      },
+    ),
+  );
+  return;
+}
 
-  // Request notification permission after location is confirmed
-  try {
-    await LocalNotificationService.instance.requestNotificationPermission();
-  } catch (e) {
-    initMain = true;
-    // Navigate to ErrorApp for notification permission denial
-    runApp(
-      ErrorApp(
-        errorMessage: e.toString(),
-        onRetry: () async {
-          // try
-
-          {
-            // await LocalNotificationService.instance
-            //     .requestNotificationPermission();
-            // Restart main app
-            await main(fireBaseOptions);
-          }
-          // catch (e) {
-          //   log('Retry failed: $e');
-          //   runApp(
-          //     ErrorApp(
-          //       errorMessage: e.toString(),
-          //       onRetry: () async {
-          //         await LocalNotificationService.instance
-          //             .requestNotificationPermission();
-          //         // Restart main app
-          //       await  main(fireBaseOptions);
-          //       },
-          //     ),
-          //   );
-          // }
-        },
-      ),
-    );
-    return;
-  }
+// Notification permission
+try {
+  dev.log('Requesting notification permission');
+  await LocalNotificationService.instance.requestNotificationPermission();
+} catch (e) {
+  initMain = true;
+  runApp(
+    ErrorApp(
+      errorMessage: e.toString(),
+      onRetry: () async {
+        try {
+          await LocalNotificationService.instance.requestNotificationPermission();
+          log('Notification permission granted, navigating to Lnastaqim');
+          await main(fireBaseOptions);
+        } catch (e) {
+          log('Retry failed: $e');
+          runApp(
+            ErrorApp(
+              errorMessage: e.toString(),
+              onRetry: () async {
+                await main(fireBaseOptions);
+              },
+            ),
+          );
+        }
+      },
+    ),
+  );
+  return;
+}
 
   // Initialize UI settings
   SystemChrome.setSystemUIOverlayStyle(
