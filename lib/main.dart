@@ -221,16 +221,16 @@ Future<void> main(fireBaseOptions) async {
     debugPrint('Firebase initialization error: $e');
   }
 
-  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-  Isolate.current.addErrorListener(
-    RawReceivePort((pair) async {
-      final List<dynamic> errorAndStacktrace = pair;
-      await FirebaseCrashlytics.instance.recordError(
-        errorAndStacktrace.first,
-        errorAndStacktrace.last,
-      );
-    }).sendPort,
-  );
+  // await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  // Isolate.current.addErrorListener(
+  //   RawReceivePort((pair) async {
+  //     final List<dynamic> errorAndStacktrace = pair;
+  //     await FirebaseCrashlytics.instance.recordError(
+  //       errorAndStacktrace.first,
+  //       errorAndStacktrace.last,
+  //     );
+  //   }).sendPort,
+  // );
 
   prefs = await SharedPreferences.getInstance();
 

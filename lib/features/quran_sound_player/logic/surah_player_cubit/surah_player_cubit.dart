@@ -256,7 +256,7 @@ class SurahPlayerCubit extends Cubit<SurahPlayerState> {
         break;
 
       case 'next':
-        await nextSurah();
+        await nextSurah(isFromUserHitAction: true);
 
         break;
     }

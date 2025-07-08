@@ -146,7 +146,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
                   Divider(color: Colors.grey.shade300),
                   const SizedBox(height: 8),
                   Text(
-                    'آخر تحديث: 09 يونيو 2025',
+                    'آخر تحديث: 06 يوليو 2025',
                     style: const TextStyle(
                       fontSize: 14,
                       fontFamily: 'Amiri',
