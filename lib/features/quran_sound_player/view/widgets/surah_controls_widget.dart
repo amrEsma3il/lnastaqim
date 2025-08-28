@@ -86,7 +86,7 @@ class SurahControlsWidget extends StatelessWidget {
               child: IconButton(
                 icon: Icon(Icons.skip_previous, color: AppColor.white),
                 onPressed: () {
-                  context.read<SurahPlayerCubit>().nextSurah();
+                  context.read<SurahPlayerCubit>().nextSurah(isFromUserHitAction: true);
                 },
               ),
             ),

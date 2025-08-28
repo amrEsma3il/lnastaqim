@@ -683,6 +683,7 @@ class IbtihalatControlsWidget extends StatelessWidget {
               child: IconButton(
                 icon: Icon(Icons.skip_previous, color: AppColor.white),
                 onPressed: () {
+                  dev.log("Next ibtihal action triggered");
                   context
                       .read<IbtihalatPlayerCubit>()
                       .nextIbtihal(isFromUserHitAction: true);

@@ -251,6 +251,7 @@ static String formatDuration(int seconds) {
 //here
   Future<void> nextIbtihal({bool isFromUserHitAction = false}) async {
     if (isFromUserHitAction) {
+      dev.log("Next ibtihal action triggered $isFromUserHitAction");
       await audioPlayer.stop();
       emit(
         state.copyWith(
