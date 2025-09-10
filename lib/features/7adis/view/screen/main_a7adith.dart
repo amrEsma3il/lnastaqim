@@ -22,7 +22,7 @@ class _MainHadithScreenState extends State<MainHadithScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    requestStoragePermissionFeature();
+    // requestStoragePermissionFeature();
   }
 
   @override

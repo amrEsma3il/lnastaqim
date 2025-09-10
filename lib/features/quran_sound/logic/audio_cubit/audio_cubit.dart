@@ -109,8 +109,9 @@ class AudioControlCubit extends Cubit<AudioControlState> {
 
 
     final filePath = '${reciterDir.path}/$verseNumber.mp3';
-
+    dev.log("before check file existence");
     if (await File(filePath).exists()) {
+      dev.log("after check file found existence");
       emit(state.copyWith(playVerseBarStatus: PlayVerseBarStatus.turnOn));
       if (context.mounted) {
         //  print(quranCubit.getPageNumber(verseNumber).toDouble());
@@ -130,13 +131,17 @@ class AudioControlCubit extends Cubit<AudioControlState> {
       if (startPosition != null) {
         await _audioPlayer.seek(startPosition);
       }
+
+      dev.log("state is playing before emit: ${state.isPlaying}");
       emit(state.copyWith(isPlaying: true, currentVerse: verseNumber));
+      dev.log("state is playing after emit: ${state.isPlaying}");
 
       if (!await File('${reciterDir.path}/${verseNumber + 5}.mp3').exists() &&
           verseNumber < 6236 - 5) {
         downloadProcess(verseNumber, reciterDir);
       }
     } else {
+      dev.log("after check file not foundexistance");
   final bool isConnected = await InternetConnectionChecker.instance.hasConnection;
 
 if (isConnected){      print('Verse $verseNumber not found');

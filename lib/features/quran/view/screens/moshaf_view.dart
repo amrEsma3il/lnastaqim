@@ -66,7 +66,7 @@ class _MoshafViewState extends State<MoshafView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    requestStoragePermissionFeature();
+    // requestStoragePermissionFeature();
   }
 
   @override
