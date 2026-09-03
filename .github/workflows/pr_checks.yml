@@ -50,7 +50,7 @@ jobs:
         continue-on-error: true
 
       - name: Run Static Code Analysis
-        run: flutter analyze --no-fatal-infos --no-fatal-warnings
+        run: flutter analyze --no-fatal-infos
 
       - name: Run Unit & Widget Tests
         run: flutter test

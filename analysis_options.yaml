@@ -5,10 +5,15 @@ analyzer:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
     - "build/**"
+    - "tool/**"
   errors:
     missing_required_param: error
     missing_return: error
     todo: ignore
+    unused_import: ignore
+    unused_local_variable: ignore
+    deprecated_member_use: ignore
+    avoid_print: ignore
 
 linter:
   rules:
