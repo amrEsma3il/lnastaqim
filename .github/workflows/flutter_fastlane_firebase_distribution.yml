@@ -1,9 +1,9 @@
 name: "Build, Release & Firebase Distribution"
 
 on:
+  release:
+    types: [published]
   push:
-    branches:
-      - main
     tags:
       - 'v*'
   workflow_dispatch:
@@ -56,11 +56,11 @@ jobs:
         run: |
           bundle exec fastlane android_lnastaqim_prod
 
-      - name: Push to GitHub Releases
+      - name: Push APK to GitHub Release
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/flutter-apk/app-lnastaqim_prod-release.apk"
-          tag: ${{ github.ref_type == 'tag' && github.ref_name || format('v1.0.{0}', github.run_number) }}
+          tag: ${{ github.event.release.tag_name || github.ref_name }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          allowUpdates: true
           generateReleaseNotes: true
-          makeLatest: true
