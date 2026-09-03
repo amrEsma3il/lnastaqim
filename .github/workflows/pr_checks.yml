@@ -84,3 +84,10 @@ jobs:
       - name: Validate Dev APK Build
         run: |
           flutter build apk --flavor lnastaqim_dev -t lib/main_lnastaqim_dev.dart --no-tree-shake-icons
+
+      - name: Upload Dev APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lnastaqim-dev-apk
+          path: build/app/outputs/flutter-apk/*.apk
+          retention-days: 14
