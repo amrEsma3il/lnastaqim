@@ -3,7 +3,6 @@
 A production-grade Islamic mobile platform built with Flutter, providing Quranic reading and audio streaming, astronomical prayer calculations, hadith indexes, and location-based religious utilities.
 
 [![CI Status](https://img.shields.io/github/actions/workflow/status/amrEsma3il/lnastaqim/pr_checks.yml?branch=main&label=CI&style=flat-square)](https://github.com/amrEsma3il/lnastaqim/actions)
-[![Quality Gate](https://img.shields.io/badge/SonarQube-Quality%20Gate-005b96?style=flat-square)](sonar-project.properties)
 [![Flutter](https://img.shields.io/badge/Flutter-3.29.2-02569B?style=flat-square&logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.7.2-0175C2?style=flat-square&logo=dart&logoColor=white)](https://dart.dev)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
@@ -150,12 +149,6 @@ Continuous integration pipelines enforce high code standards and deterministic d
 
   # Test suite execution
   flutter test
-  ```
-
-- **Code Security & Metrics (`sonar.yml`):**
-  Generates LCOV coverage metrics and runs static security audits via SonarQube.
-  ```bash
-  flutter test --coverage
   ```
 
 - **Deployment Pipeline (`flutter_fastlane_firebase_distribution.yml`):**
