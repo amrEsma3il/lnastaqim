@@ -1,66 +1,73 @@
 # Lnastaqim
 
-A comprehensive, modern open-source Islamic application built with Flutter, designed to facilitate daily Islamic practices including Quran reading, recitation listening, prayer times, hadith, azkar, live radio streaming, and utility tools.
+A production-grade Islamic mobile platform built with Flutter, providing Quranic reading and audio streaming, astronomical prayer calculations, hadith indexes, and location-based religious utilities.
 
-[![CI Status](https://github.com/amrEsma3il/lnastaqim/actions/workflows/pr_checks.yml/badge.svg)](https://github.com/amrEsma3il/lnastaqim/actions)
-[![Flutter Version](https://img.shields.io/badge/Flutter-3.29.2-02569B?logo=flutter)](https://flutter.dev)
-[![Dart Version](https://img.shields.io/badge/Dart-3.7.2-0175C2?logo=dart)](https://dart.dev)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS-green.svg)](#supported-platforms)
-[![Architecture](https://img.shields.io/badge/Architecture-Clean%20%2F%20Feature--First-orange.svg)](#architecture)
-
----
-
-## Features
-
-- **Noble Quran:** Read the Holy Quran in authentic Uthmanic script with integrated Tafseer, word meanings, and instant ayah search.
-- **Audio Recitations:** Listen to recitations from over 100 renowned reciters with background playback, lock screen controls, and notification tray integration.
-- **Prayer Times:** Accurate prayer time calculation based on geographical location, with timely adhan alerts and notifications.
-- **Qibla Compass:** Digital compass to determine Qibla direction from anywhere in the world.
-- **Azkar and Digital Sibha:** Morning, evening, and situational supplications paired with an interactive digital Tasbeeh counter.
-- **Prophetic Hadiths:** Categorized authentic hadith collections with bookmarking and sharing capabilities.
-- **Live Quran Radio:** 24/7 streaming for international and regional Quran broadcast stations.
-- **Ibtihalat Player:** Dedicated audio player for Islamic chants and historical supplications.
-- **Mosque Finder:** Locate nearby mosques through Google Maps integration.
-- **Hijri Calendar:** Comprehensive Hijri and Gregorian calendar synchronized with major Islamic events.
+[![CI Status](https://img.shields.io/github/actions/workflow/status/amrEsma3il/lnastaqim/pr_checks.yml?branch=main&label=CI&style=flat-square)](https://github.com/amrEsma3il/lnastaqim/actions)
+[![Quality Gate](https://img.shields.io/badge/SonarQube-Quality%20Gate-005b96?style=flat-square)](sonar-project.properties)
+[![Flutter](https://img.shields.io/badge/Flutter-3.29.2-02569B?style=flat-square&logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-3.7.2-0175C2?style=flat-square&logo=dart&logoColor=white)](https://dart.dev)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS-4c1?style=flat-square)](#supported-platforms)
 
 ---
 
-## Architecture and Tech Stack
+## Technical Overview
 
-The application follows a Feature-First Clean Architecture pattern:
+Lnastaqim is engineered using a modular, Feature-First Clean Architecture designed for high concurrency and robust offline operation. State orchestration is governed by BLoC/Cubit, data persistence is powered by Hive key-value stores with custom binary adapters, and audio playback executes via isolated background services with lock-screen and notification controls.
+
+---
+
+## Core Capabilities
+
+| Domain | Implementation | Key Capabilities |
+| :--- | :--- | :--- |
+| **Quran & Tafseer** | `lib/features/quran` | Uthmanic Hafs script rendering, downloadable font bundles, Ayah search engine, word meanings, and bookmark persistence. |
+| **Audio Services** | `lib/features/quran_sound_player`<br>`lib/features/radio_stream_channels`<br>`lib/features/ibtihal` | Isolated background audio pipeline supporting 100+ reciters, live streaming radios, Ibtihalat playback, and media notifications. |
+| **Prayer Times & Qibla** | `lib/features/paryer_times`<br>`lib/features/qibla` | Astronomical calculations via Adhan engine, GPS coordinates resolution, digital compass vector tracking, and local Azan alerts. |
+| **Hadith & Athkar** | `lib/features/7adis`<br>`lib/features/azkar_with_sib7a` | Indexed authentic collections, digital Tasbeeh counter, local favorites caching, and category filtering. |
+| **Location Utilities** | `lib/features/community` | Proximity-based mosque discovery leveraging Google Maps and Geolocation APIs. |
+| **Calendar & Sync** | `lib/features/calender` | Dual Hijri-Gregorian synchronization with lunar event tracking. |
+
+---
+
+## Technology Stack
+
+| Category | Library / Dependency | Role |
+| :--- | :--- | :--- |
+| **State Management** | `flutter_bloc` `^9.1.0` | Event-driven state isolation and reactive state management. |
+| **Service Locator** | `get_it` `^8.0.3` | Decoupled dependency injection across repository and domain layers. |
+| **Local Persistence** | `hive_flutter` `^1.1.0` | High-performance NoSQL binary storage with custom TypeAdapters. |
+| **Audio Engine** | `just_audio` `^0.10.3`<br>`audio_service` `^0.18.18` | Foreground and background audio playback with OS media controls. |
+| **Network & REST** | `dio` `^5.4.0`<br>`retrofit` | Type-safe HTTP networking with interceptors and error decoding. |
+| **Geolocation & Astronomy**| `geolocator` `^13.0.4`<br>`adhan` `^2.0.0+1` | Coordinate resolution and astronomical prayer schedule synthesis. |
+| **Notifications** | `flutter_local_notifications` `^19.1.0` | Precise scheduling of Azan and situational alerts. |
+| **Background Execution** | `workmanager` | Periodic headless background synchronization tasks. |
+
+---
+
+## Architecture and Directory Layout
+
+The codebase enforces strict modular encapsulation:
 
 ```text
 lib/
-├── config/                 # Routing, themes, and localization settings
-├── core/                   # Shared utilities, constants, and global services
-│   ├── constants/          # Application colors, asset keys, and constants
-│   ├── local_database/     # Hive database setup and TypeAdapters
-│   ├── utilits/services/   # Audio, notification, location, and background services
-│   └── errors/             # Network exceptions and error handling
-├── features/               # Feature-first modular components (33 features)
-│   ├── quran/              # Quran reading, fonts, and search
-│   ├── quran_sound_player/ # Quran surah audio player
-│   ├── paryer_times/       # Prayer times calculation and notifications
-│   ├── qibla/              # Qibla compass
-│   ├── azkar_with_sib7a/   # Azkar collections and digital sibha
-│   ├── 7adis/              # Hadith collections
-│   ├── radio_stream_channels/# Live radio streaming
-│   └── ...
-├── dependancy_injection.dart # Service locator registration using GetIt
-└── main.dart               # Entry point, initialization, and notification handlers
+├── config/                 # Routing, theme tokens, and localization manifests
+├── core/                   # Shared infrastructure and utilities
+│   ├── constants/          # Static themes, palette mappings, and keys
+│   ├── errors/             # Network exceptions and failure representations
+│   ├── local_database/     # Hive box managers and binary TypeAdapters
+│   └── utilits/services/   # Audio, notification, location, and background daemons
+├── features/               # Domain-driven modular features (33 modules)
+│   ├── 7adis/              # Prophetic hadith indexing and search
+│   ├── azkar_with_sib7a/   # Supplication modules and digital counter
+│   ├── paryer_times/       # Astronomical prayer timing logic
+│   ├── qibla/              # Compass sensor integration
+│   ├── quran/              # Holy Quran reading canvas, fonts, and tafseer
+│   ├── quran_sound_player/ # Reciter-based Surah playback engine
+│   └── radio_stream_channels/# HLS/AAC live radio streaming
+├── dependancy_injection.dart # Service locator graph definition
+└── main.dart               # App entrypoint, engine initialization, isolate routing
 ```
-
-### Core Technologies
-
-- **Framework:** Flutter SDK (`>= 3.29.0`) & Dart SDK (`>= 3.7.0`)
-- **State Management:** `flutter_bloc` (Bloc & Cubit)
-- **Local Database:** `hive_flutter` & `shared_preferences`
-- **Audio Engine:** `just_audio`, `audio_service`, `radio_player`
-- **Networking:** `dio` & `retrofit`
-- **Sensors and Geolocation:** `geolocator`, `adhan`, `flutter_compass`
-- **Background and Notifications:** `flutter_local_notifications` & `workmanager`
-- **Dependency Injection:** `get_it`
 
 ---
 
@@ -68,73 +75,103 @@ lib/
 
 ### Prerequisites
 
-- Flutter SDK (`>= 3.29.0`)
-- Dart SDK (`>= 3.7.0`)
-- Java Development Kit (JDK 17)
-- Android Studio or VS Code with Flutter and Dart extensions
+- **Flutter SDK:** `3.29.2` (Stable)
+- **Dart SDK:** `^3.7.2`
+- **JDK:** Version 17
+- **Platform Toolchains:** Android SDK Build-Tools 34+, Xcode 15+ (for iOS)
 
-### Installation
+### Installation & Initialization
 
-1. **Clone the repository:**
+1. Clone the repository:
    ```bash
    git clone https://github.com/amrEsma3il/lnastaqim.git
    cd lnastaqim
    ```
 
-2. **Install dependencies:**
+2. Fetch project dependencies:
    ```bash
    flutter pub get
    ```
 
-3. **Run code generation (for Hive and Freezed models):**
+3. Execute code generation for Hive adapters and Freezed models:
    ```bash
    dart run build_runner build --delete-conflicting-outputs
    ```
 
-4. **Run the application:**
-   - **Development Flavor:**
-     ```bash
-     flutter run --flavor lnastaqim_dev -t lib/main_lnastaqim_dev.dart
-     ```
-   - **Production Flavor:**
-     ```bash
-     flutter run --flavor lnastaqim_prod -t lib/main_lnastaqim_prod.dart
-     ```
+---
+
+## Build Flavors and Execution
+
+The project provides dedicated application flavors for development and production environments:
+
+| Flavor | Target File | Application ID | Purpose |
+| :--- | :--- | :--- | :--- |
+| `lnastaqim_dev` | `lib/main_lnastaqim_dev.dart` | `com.islam.lnastaqim.dev` | Local debugging, staging APIs, unminified tracing. |
+| `lnastaqim_prod` | `lib/main_lnastaqim_prod.dart` | `com.islam.lnastaqim` | Production release, Crashlytics telemetry, release optimizations. |
+
+### Run Commands
+
+- **Development Flavor:**
+  ```bash
+  flutter run --flavor lnastaqim_dev -t lib/main_lnastaqim_dev.dart
+  ```
+
+- **Production Flavor:**
+  ```bash
+  flutter run --flavor lnastaqim_prod -t lib/main_lnastaqim_prod.dart
+  ```
+
+### Build Commands
+
+- **Android APK (Production):**
+  ```bash
+  flutter build apk --flavor lnastaqim_prod -t lib/main_lnastaqim_prod.dart --release --no-tree-shake-icons
+  ```
+
+- **Android App Bundle (Production):**
+  ```bash
+  flutter build appbundle --flavor lnastaqim_prod -t lib/main_lnastaqim_prod.dart --release
+  ```
 
 ---
 
-## Testing and Analysis
+## Quality Assurance and CI/CD
 
-Run the following commands locally before submitting any changes:
+Continuous integration pipelines enforce high code standards and deterministic deployments via GitHub Actions:
 
-```bash
-# Verify code formatting
-dart format --output=none --set-exit-if-changed .
+- **Quality Validation (`pr_checks.yml`):**
+  Executes on all pull requests targeting `main` and `dev`:
+  ```bash
+  # Format verification
+  dart format --output=none --set-exit-if-changed .
 
-# Run static code analysis
-flutter analyze
+  # Static code analysis
+  flutter analyze --no-fatal-infos
 
-# Execute test suite
-flutter test
-```
+  # Test suite execution
+  flutter test
+  ```
+
+- **Code Security & Metrics (`sonar.yml`):**
+  Generates LCOV coverage metrics and runs static security audits via SonarQube.
+  ```bash
+  flutter test --coverage
+  ```
+
+- **Deployment Pipeline (`flutter_fastlane_firebase_distribution.yml`):**
+  Compiles production artifacts, creates tagged GitHub Releases, and deploys build artifacts through Fastlane and Firebase App Distribution.
 
 ---
 
-## Automation and CI/CD
+## Contribution Standards
 
-Continuous integration and continuous deployment are managed through GitHub Actions:
-
-- **`pr_checks.yml`:** Automatically executes on pull requests to validate formatting, static analysis, unit tests, and development build integrity.
-- **`flutter_fastlane_firebase_distribution.yml`:** Triggered on releases or pushes to the main branch to build production artifacts, publish GitHub releases, and distribute builds through Fastlane and Firebase App Distribution.
-
----
-
-## Contributing
-
-Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for branch conventions, commit standards, and pull request guidelines.
+Contributions must comply with our development standards:
+- Follow the [Conventional Commits](https://www.conventionalcommits.org/) specification (`feat:`, `fix:`, `refactor:`, `perf:`).
+- Verify all linting checks and tests pass locally before opening a pull request.
+- Refer to [CONTRIBUTING.md](CONTRIBUTING.md) for full branch policies and review procedures.
 
 ---
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License. Refer to the [LICENSE](LICENSE) file for details.
