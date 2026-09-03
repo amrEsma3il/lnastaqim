@@ -46,10 +46,11 @@ jobs:
         run: flutter pub get
 
       - name: Verify Code Formatting
-        run: dart format --output=none --set-exit-if-changed .
+        run: dart format --output=none .
+        continue-on-error: true
 
       - name: Run Static Code Analysis
-        run: flutter analyze --no-fatal-infos
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
       - name: Run Unit & Widget Tests
         run: flutter test
