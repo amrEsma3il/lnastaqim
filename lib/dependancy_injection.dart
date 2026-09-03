@@ -6,50 +6,17 @@ import 'features/quran_sound_player/logic/surah_player_cubit/surah_player_cubit.
 
 final sl = GetIt.instance;
 
-Future<void> setup()async {
+Future<void> setup() async {
+  // Repositories
+  if (!sl.isRegistered<SurahPlayerRepo>()) {
+    sl.registerLazySingleton<SurahPlayerRepo>(() => SurahPlayerRepo());
+  }
 
-sl.registerLazySingleton<SurahPlayerRepo>(() => SurahPlayerRepo());
-  sl.registerLazySingleton(() => SurahPlayerCubit(sl<SurahPlayerRepo>()));
-
-
-//cubit
-
-// sl.registerSingleton(() =>SurahPlayerCubit(sl()));
-sl.registerLazySingleton(() =>FontDownloadPercentage());
-
-
-
-
-
-
-
-
-
-
-
-
-
-//repo
-
-sl.registerLazySingleton<SurahPlayerRepo>(() => SurahPlayerRepo());
-
-
-
-
-//datasources
-
-// sl.registerLazySingleton(() => AuthRemoteDataSources(sl()));
-
-
-// //other
-// sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
-// sl.registerLazySingleton(() => InternetConnectionChecker());
-// final sharedPreferences = await SharedPreferences.getInstance();
-// sl.registerLazySingleton(() => sharedPreferences);
-// sl.registerLazySingleton(() =>Dio());
-
-
-
-
- 
+  // Cubits / Logic
+  if (!sl.isRegistered<SurahPlayerCubit>()) {
+    sl.registerLazySingleton(() => SurahPlayerCubit(sl<SurahPlayerRepo>()));
+  }
+  if (!sl.isRegistered<FontDownloadPercentage>()) {
+    sl.registerLazySingleton(() => FontDownloadPercentage());
+  }
 }

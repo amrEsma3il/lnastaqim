@@ -1,68 +1,66 @@
-name: "Build & Release"
+name: "Build, Release & Firebase Distribution"
 
 on:
   push:
     branches:
       - main
+    tags:
+      - 'v*'
+  workflow_dispatch:
 
 permissions:
-  contents: write    # Grants write access to create releases
-  actions: write     # Grants access for GitHub Actions
+  contents: write
+  actions: write
+
+concurrency:
+  group: production-deployment
+  cancel-in-progress: false
 
 jobs:
-  build:
-    name: Build & Release
-    runs-on: macos-latest
+  distribute:
+    name: Build & Distribute (Prod Flavor)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v4
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      - uses: subosito/flutter-action@v2
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.29.2'
           channel: 'stable'
-          architecture: x64
+          cache: true
 
-      - run: flutter clean
-      - run: flutter pub get
-
-      - run: flutter build apk --release
-
-      # - run: |
-      #     flutter build ios --no-codesign
-      #     cd build/ios/iphoneos
-      #     mkdir Payload
-      #     cd Payload
-      #     ln -s ../Runner.app
-      #     cd ..
-      #     zip -r app.ipa Payload
-
-      - name: Push to Releases
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/app/outputs/apk/release/app-release.apk"
-          tag: v1.0.${{ github.run_number }}
-          token: ${{ secrets.GITHUB_TOKEN }}  # Ensure correct use of the GITHUB_TOKEN
-          generateReleaseNotes: false         # Optional: Disable automatic release notes
-          makeLatest: true   
-      
-            # Setup Ruby environment
       - name: Setup Ruby environment
         uses: ruby/setup-ruby@v1
         with:
-              ruby-version: '3.2.5' # Ensure this matches your Ruby version
-              bundler-cache: true
-              working-directory: android
-    
-          # Fastlane Firebase Distribution
-      - name: Fastlane Firebase Distribution
-        env:
-              FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}  # Add Firebase token in GitHub secrets
-        run: |
-              bundle exec fastlane android_lnastaqim_prod
+          ruby-version: '3.2.5'
+          bundler-cache: true
+          working-directory: android
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Build and Distribute via Fastlane
         working-directory: android
+        env:
+          FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
+        run: |
+          bundle exec fastlane android_lnastaqim_prod
+
+      - name: Push to GitHub Releases
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/flutter-apk/app-lnastaqim_prod-release.apk"
+          tag: ${{ github.ref_type == 'tag' && github.ref_name || format('v1.0.{0}', github.run_number) }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          generateReleaseNotes: true
+          makeLatest: true

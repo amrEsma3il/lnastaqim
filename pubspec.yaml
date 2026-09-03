@@ -131,7 +131,7 @@ flutter:
   fonts:
     - family: Mushaf
       fonts:
-        - asset: assets\fonts\Al Mushaf Quran.ttf
+        - asset: assets/fonts/Al Mushaf Quran.ttf
     - family: Naskh
       fonts:
         - asset: assets/fonts/NotoNaskhArabic-VariableFont_wght.ttf
@@ -140,7 +140,7 @@ flutter:
         - asset: assets/fonts/thuluth-decorated.ttf
     - family: Amiri
       fonts:
-        - asset: assets\fonts\Amiri.ttf
+        - asset: assets/fonts/Amiri.ttf
 
     - family: Majeed
       fonts:
