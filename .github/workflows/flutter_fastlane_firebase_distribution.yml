@@ -1,24 +1,30 @@
-name: "Build, Release & Firebase Distribution"
+name: "Build & Release APK"
 
 on:
   release:
-    types: [published]
+    types: [published, created]
   push:
     tags:
       - 'v*'
   workflow_dispatch:
+    inputs:
+      build_dev:
+        description: 'Also build dev flavor APK'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
   actions: write
 
 concurrency:
-  group: production-deployment
+  group: production-release-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  distribute:
-    name: Build & Distribute (Prod Flavor)
+  build-and-release:
+    name: Build & Release APK
     runs-on: ubuntu-latest
     timeout-minutes: 45
 
@@ -39,28 +45,64 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Setup Ruby environment
+      - name: Get Dependencies
+        run: flutter pub get
+
+      - name: Build Prod Release APK
+        run: |
+          flutter build apk --release --flavor lnastaqim_prod -t lib/main_lnastaqim_prod.dart --no-tree-shake-icons
+
+      - name: Build Dev Release APK (Optional)
+        if: ${{ inputs.build_dev }}
+        run: |
+          flutter build apk --release --flavor lnastaqim_dev -t lib/main_lnastaqim_dev.dart --no-tree-shake-icons
+
+      - name: Organize Release Artifacts
+        run: |
+          mkdir -p release-apks
+          # Copy and standardize names of generated APKs
+          if [ -f "build/app/outputs/flutter-apk/app-lnastaqim_prod-release.apk" ]; then
+            cp build/app/outputs/flutter-apk/app-lnastaqim_prod-release.apk release-apks/lnastaqim-prod-release.apk
+          fi
+          if [ -f "build/app/outputs/flutter-apk/app-lnastaqim_dev-release.apk" ]; then
+            cp build/app/outputs/flutter-apk/app-lnastaqim_dev-release.apk release-apks/lnastaqim-dev-release.apk
+          fi
+          # Fallback: copy any other APKs found
+          cp build/app/outputs/flutter-apk/*.apk release-apks/ 2>/dev/null || true
+          ls -lh release-apks/
+
+      - name: Upload APK to GitHub Actions Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: lnastaqim-release-apks
+          path: release-apks/*.apk
+          retention-days: 30
+
+      - name: Attach APK to GitHub Release
+        if: ${{ github.event_name == 'release' || startsWith(github.ref, 'refs/tags/') }}
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release-apks/*.apk
+          tag_name: ${{ github.event.release.tag_name || github.ref_name }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          generate_release_notes: true
+
+      # Optional: Firebase App Distribution (runs only if FIREBASE_CLI_TOKEN is provided)
+      - name: Setup Ruby for Fastlane (Firebase Distribution)
+        if: ${{ env.FIREBASE_CLI_TOKEN != '' }}
         uses: ruby/setup-ruby@v1
+        env:
+          FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
         with:
           ruby-version: '3.2.5'
           bundler-cache: true
           working-directory: android
 
-      - name: Install Dependencies
-        run: flutter pub get
-
-      - name: Build and Distribute via Fastlane
+      - name: Distribute to Firebase via Fastlane
+        if: ${{ env.FIREBASE_CLI_TOKEN != '' }}
+        continue-on-error: true
         working-directory: android
         env:
           FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
         run: |
           bundle exec fastlane android_lnastaqim_prod
-
-      - name: Push APK to GitHub Release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/app/outputs/flutter-apk/app-lnastaqim_prod-release.apk"
-          tag: ${{ github.event.release.tag_name || github.ref_name }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          allowUpdates: true
-          generateReleaseNotes: true
