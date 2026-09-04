@@ -213,10 +213,10 @@ class RadioCubit extends Cubit<RadioState> {
   }
 
   @override
-  Future<void> close() {
+  Future<void> close() async {
     IsolateNameServer.removePortNameMapping(NotificationKeys.radio);
     receivePort?.close();
-    audioPlayer.dispose();
+    await AudioPlayers().disposePlayer(NotificationKeys.radio);
     return super.close();
   }
 }

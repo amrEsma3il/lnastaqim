@@ -37,4 +37,18 @@ void main() {
     expect(events, ['pause-two', 'pause-one']);
     expect(coordinator.activeParticipant, 'two');
   });
+
+  test('unregistered participant is not paused on future activations', () async {
+    var radioPauses = 0;
+    var surahPauses = 0;
+    coordinator.register('radio', () async => radioPauses++);
+    coordinator.register('surah', () async => surahPauses++);
+
+    coordinator.unregister('radio');
+
+    await coordinator.activate('surah');
+    expect(radioPauses, 0);
+    expect(surahPauses, 0);
+    expect(coordinator.activeParticipant, 'surah');
+  });
 }
