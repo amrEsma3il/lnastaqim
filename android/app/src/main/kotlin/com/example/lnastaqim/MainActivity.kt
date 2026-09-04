@@ -6,12 +6,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.NonNull
-import io.flutter.embedding.android.FlutterActivity
+import com.ryanheise.audioservice.AudioServiceActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodChannel
 
-class MainActivity : FlutterActivity() {
+class MainActivity : AudioServiceActivity() {
 
     private val CHANNEL = "qr.lnastaqim/channel"
     private val EVENTS = "qr.lnastaqim/events"

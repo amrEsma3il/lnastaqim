@@ -21,8 +21,20 @@ import '../../../main.dart';
 import '../../local_database/azkar/azkar_local_database.dart';
 import 'audio_service/players_key.dart';
 
+Future<bool> requestNotificationPermissionWithoutBlocking({
+  required Future<void> Function() request,
+  void Function(Object error)? onError,
+}) async {
+  try {
+    await request();
+    return true;
+  } catch (error) {
+    onError?.call(error);
+    return false;
+  }
+}
+
 class LocalNotificationService {
-  
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
@@ -102,30 +114,23 @@ class LocalNotificationService {
   }
 
   Future<void> requestNotificationPermission() async {
-  var status = await Permission.notification.status;
+    var status = await Permission.notification.status;
 
-  if (!status.isGranted) {
-    status = await Permission.notification.request();
-  }
+    if (!status.isGranted) {
+      status = await Permission.notification.request();
+    }
 
-
-
-     if (status==PermissionStatus.permanentlyDenied) {
+    if (status == PermissionStatus.permanentlyDenied) {
       dev.log('notification permission is denied forever');
       throw Exception(
         'تم رفض صلاحيات الإشعارات بشكل دائم. يرجى تفعيلها من إعدادات التطبيق.',
       );
     }
 
- if (status==PermissionStatus.denied) {
+    if (status == PermissionStatus.denied) {
       dev.log('notification permission is denied');
-      throw Exception(
-       'تم رفض إذن الإشعارات. يرجى السماح للصلاحيات',
-      );
+      throw Exception('تم رفض إذن الإشعارات. يرجى السماح للصلاحيات');
     }
-
-
-
   }
 
   Future init() async {
@@ -333,7 +338,6 @@ class LocalNotificationService {
       importance: Importance.max,
       priority: Priority.high,
       ongoing: true,
-  
 
       sound: RawResourceAndroidNotificationSound('sound'),
     );

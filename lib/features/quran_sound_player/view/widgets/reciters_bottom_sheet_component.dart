@@ -10,10 +10,7 @@ import '../../logic/surah_player_cubit/surah_player_state.dart';
 import 'country_filter_component.dart';
 
 class RecitersBottomSheetComponent extends StatelessWidget {
-  const RecitersBottomSheetComponent({
-    super.key,
-    required this.cubit,
-  });
+  const RecitersBottomSheetComponent({super.key, required this.cubit});
 
   final SurahPlayerCubit cubit;
 
@@ -36,34 +33,30 @@ class RecitersBottomSheetComponent extends StatelessWidget {
                     children: [
                       Expanded(
                         child: TextField(
-                          onChanged: (value) =>
-                              cubit.searchReciters(query: value),
+                          onChanged:
+                              (value) => cubit.searchReciters(query: value),
                           decoration: const InputDecoration(
                             hintText: 'ابحث عن قارئ...',
                             hintStyle: TextStyle(color: Colors.white70),
                             prefixIcon: Icon(Icons.search, color: Colors.white),
-                            border: InputBorder
-                                .none, // Remove the decoration border
+                            border:
+                                InputBorder
+                                    .none, // Remove the decoration border
                           ),
                           style: const TextStyle(color: Colors.white),
                           cursorColor: AppColor.lightBlue,
                           cursorRadius: const Radius.circular(
-                              10), // تغيير لون الكيرسور إلى الأزرق
+                            10,
+                          ), // تغيير لون الكيرسور إلى الأزرق
                         ),
                       ),
-                      SizedBox(
-                        width: 14.w,
-                      ),
-                      CountryFilterComponent(
-                        cubit: cubit,
-                      )
+                      SizedBox(width: 14.w),
+                      CountryFilterComponent(cubit: cubit),
                     ],
                   ),
                 ),
               ),
-              SizedBox(
-                width: 14.w,
-              ),
+              SizedBox(width: 14.w),
               GestureDetector(
                 onTap: () {
                   Get.back();
@@ -73,15 +66,12 @@ class RecitersBottomSheetComponent extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(7),
                   decoration: BoxDecoration(
-                    color: Colors.white
-                        .withOpacity(0.1), // Set your desired background color
+                    color: Colors.white.withOpacity(
+                      0.1,
+                    ), // Set your desired background color
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
-                    Icons.close,
-                    color: Colors.white,
-                    size: 19,
-                  ),
+                  child: const Icon(Icons.close, color: Colors.white, size: 19),
                 ),
               ),
             ],
@@ -97,14 +87,19 @@ class RecitersBottomSheetComponent extends StatelessWidget {
                   return Visibility(
                     visible: results.isNotEmpty,
                     replacement: Container(
-                      decoration:
-                          const BoxDecoration(color: Colors.transparent),
+                      decoration: const BoxDecoration(
+                        color: Colors.transparent,
+                      ),
                       child: Center(
-                          child: Text("لا يوجد قراء",
-                              style: TextStyle(
-                                  color: AppColor.lightBlue,
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.bold))),
+                        child: Text(
+                          "لا يوجد قراء",
+                          style: TextStyle(
+                            color: AppColor.lightBlue,
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                     ),
                     child: ListView.builder(
                       itemCount: results.length,
@@ -120,16 +115,19 @@ class RecitersBottomSheetComponent extends StatelessWidget {
                             style: const TextStyle(color: Colors.white),
                           ),
                           trailing: SvgPicture.asset(
-                            SurahPlayerCubit.getCountryFlag(reciter
-                                .nationality), // استبدل بالمسار المناسب لملف الـ SVG
+                            SurahPlayerCubit.getCountryFlag(
+                              reciter.nationality,
+                            ), // استبدل بالمسار المناسب لملف الـ SVG
                             // color: AppColor.lightBlue, // تغيير اللون
                             width: 17, // تحديد الحجم
                             height: 17, // تحديد الحجم
                           ),
-                          onTap: () async{
-                           Get.back();
-                          await  Future.delayed(const Duration(milliseconds: 200));
-                            cubit.changeReciter(reciter);
+                          onTap: () async {
+                            Get.back();
+                            await Future.delayed(
+                              const Duration(milliseconds: 200),
+                            );
+                            await cubit.changeReciter(reciter);
 
                             cubit.clearReciterSearch();
                           },

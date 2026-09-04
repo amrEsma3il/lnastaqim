@@ -3,6 +3,8 @@ import 'dart:developer';
 
 import 'package:audioplayers/audioplayers.dart';
 
+import 'playback_coordinator.dart';
+
 class AudioPlayers {
   static final AudioPlayers _instance = AudioPlayers._internal();
   factory AudioPlayers() => _instance;
@@ -14,6 +16,10 @@ class AudioPlayers {
   AudioPlayer getPlayer(String featureName) {
     if (!_players.containsKey(featureName)) {
       _players[featureName] = AudioPlayer();
+      PlaybackCoordinator.instance.register(
+        featureName,
+        _players[featureName]!.pause,
+      );
     }
     return _players[featureName]!;
   }

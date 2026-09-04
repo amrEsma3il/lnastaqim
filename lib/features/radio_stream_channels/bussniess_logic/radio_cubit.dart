@@ -8,6 +8,7 @@ import '../../../core/constants/colors.dart';
 import '../../../core/utilits/functions/toast_message.dart';
 import '../../../core/utilits/services/audio_service/audio_players.dart';
 import '../../../core/utilits/services/audio_service/players_key.dart';
+import '../../../core/utilits/services/audio_service/playback_coordinator.dart';
 import '../../../core/utilits/services/local_notification_service.dart';
 import '../data/models/radio_model.dart';
 import '../data/repositories/radio_repository.dart';
@@ -118,7 +119,7 @@ class RadioCubit extends Cubit<RadioState> {
         ),
       );
       try {
-        await AudioPlayers().pauseAll();
+        await PlaybackCoordinator.instance.activate(NotificationKeys.radio);
 
         await LocalNotificationService.instance.showMediaNotification(
           groupKey: "radio",
@@ -213,7 +214,7 @@ class RadioCubit extends Cubit<RadioState> {
 
   @override
   Future<void> close() {
-    IsolateNameServer.removePortNameMapping(NotificationKeys.quranPlayer);
+    IsolateNameServer.removePortNameMapping(NotificationKeys.radio);
     receivePort?.close();
     audioPlayer.dispose();
     return super.close();

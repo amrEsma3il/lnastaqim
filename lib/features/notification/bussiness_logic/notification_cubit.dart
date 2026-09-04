@@ -7,16 +7,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/sounds.dart';
 import '../../../core/utilits/services/audio_service/audio_players.dart';
 import '../../../core/utilits/services/audio_service/players_key.dart';
+import '../../../core/utilits/services/audio_service/playback_coordinator.dart';
 import '../../../core/utilits/services/local_notification_service.dart';
 import '../../../core/utilits/services/work_manager_service.dart';
 import '../../../main.dart';
 import 'notification_state.dart';
 
 class NotificationCubit extends Cubit<NotificationState> {
+  static const String audioPlayerKey = NotificationKeys.notificationAndAlarm;
   final WorkManagerService _workManagerService = WorkManagerService();
-  final AudioPlayer audioPlayer = AudioPlayers().getPlayer(
-    NotificationKeys.quranPlayer,
-  );
+  final AudioPlayer audioPlayer = AudioPlayers().getPlayer(audioPlayerKey);
 
   static final NotificationCubit _instance = NotificationCubit._internal();
 
@@ -433,7 +433,9 @@ class NotificationCubit extends Cubit<NotificationState> {
   }
 
   Future<void> playAlarmSound(String sound) async {
-    await AudioPlayers().pauseAll();
+    await PlaybackCoordinator.instance.activate(
+      NotificationKeys.notificationAndAlarm,
+    );
 
     await audioPlayer.play(
       AssetSource("${AppSounds.notificationSounds}/$sound.mp3"),
@@ -447,7 +449,6 @@ class NotificationCubit extends Cubit<NotificationState> {
   //==================================================================================================
 
   Future<void> cancelAllNotifications() async {
-
     log("cancelAllNotifications");
     {
       await LocalNotificationService.instance.cancelNotification(5);
@@ -512,43 +513,43 @@ class NotificationCubit extends Cubit<NotificationState> {
     }
 
     {
-if (state.duharAlarmStatus) {
-      await _workManagerService.registerDuharParyerTimeTask();
-    }    }
-
-    {
-        if (state.asrAlarmStatus) {
-      await _workManagerService.registerAsrParyerTimeTask();
-    } 
+      if (state.duharAlarmStatus) {
+        await _workManagerService.registerDuharParyerTimeTask();
+      }
     }
 
     {
-       if (state.maghribAlarmStatus) {
-      await _workManagerService.registerMaghribParyerTimeTask();
+      if (state.asrAlarmStatus) {
+        await _workManagerService.registerAsrParyerTimeTask();
+      }
     }
+
+    {
+      if (state.maghribAlarmStatus) {
+        await _workManagerService.registerMaghribParyerTimeTask();
+      }
     }
 
     {
       if (state.ishaAlarmStatus) {
-      await _workManagerService.registerIshaParyerTimeTask();
-    }
+        await _workManagerService.registerIshaParyerTimeTask();
+      }
     }
 
     {
       if (state.salahNabiNotificationStatus) {
-     
-      await _workManagerService.registersalahNabiTask(
-        state.salahNabiNotificationFrequancy,
-      );
-    } 
+        await _workManagerService.registersalahNabiTask(
+          state.salahNabiNotificationFrequancy,
+        );
+      }
     }
 
     {
-       if (state.morningAndEviningNotificationStatus) {
-      await _workManagerService.registerMoringAndEveningAzkarTask(
-        state.morningAndEviningNotificationFrequancy,
-      );
-    }
+      if (state.morningAndEviningNotificationStatus) {
+        await _workManagerService.registerMoringAndEveningAzkarTask(
+          state.morningAndEviningNotificationFrequancy,
+        );
+      }
     }
   }
 }

@@ -33,6 +33,7 @@ import 'core/constants/keys.dart';
 import 'core/utilits/controller/deep_link_cubit.dart';
 import 'core/utilits/controller/search_or_not/search_visibility.dart';
 import 'core/utilits/services/audio_service/players_key.dart';
+import 'core/utilits/services/audio_service/unified_audio_handler.dart';
 import 'core/utilits/services/local_notification_service.dart';
 import 'core/utilits/services/location_service.dart';
 import 'core/utilits/services/work_manager_service.dart';
@@ -74,37 +75,6 @@ import 'features/radio_stream_channels/bussniess_logic/radio_cubit.dart';
 
 void handleMediaAction(String action) {
   switch (action) {
-    case '${NotificationKeys.quranPlayer}play':
-      log('play quran sound');
-      IsolateNameServer.lookupPortByName(
-        NotificationKeys.quranPlayer,
-      )?.send('play');
-      break;
-    case '${NotificationKeys.quranPlayer}pause':
-      log('pause quran sound');
-      IsolateNameServer.lookupPortByName(
-        NotificationKeys.quranPlayer,
-      )?.send('pause');
-      break;
-    case '${NotificationKeys.quranPlayer}stop':
-      log('stop quran sound');
-      IsolateNameServer.lookupPortByName(
-        NotificationKeys.quranPlayer,
-      )?.send('stop');
-      break;
-    case '${NotificationKeys.quranPlayer}next':
-      log('next quran sound');
-      IsolateNameServer.lookupPortByName(
-        NotificationKeys.quranPlayer,
-      )?.send('next');
-      break;
-    case '${NotificationKeys.quranPlayer}previous':
-      log('previous quran sound');
-      IsolateNameServer.lookupPortByName(
-        NotificationKeys.quranPlayer,
-      )?.send('previous');
-      break;
-
     //ibtihal
 
     case '${NotificationKeys.ibtihalatPlayer}play':
@@ -210,6 +180,7 @@ bool initMain = false;
 
 Future<void> main(fireBaseOptions) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await AudioServices.initialize();
   await initializeDateFormatting('ar', null);
 
   try {
@@ -301,45 +272,14 @@ Future<void> main(fireBaseOptions) async {
   }
 
   // Request notification permission after location is confirmed
-  try {
-    dev.log('Requesting notification permission');
-    await LocalNotificationService.instance.requestNotificationPermission();
-  } catch (e) {
-    final controller = ErrorAppController();
-    controller.changeLoading(false);
-    initMain = true;
-    // Navigate to ErrorApp for notification permission denial
-    runApp(
-      ErrorApp(
-        errorMessage: e.toString(),
-        onRetry: () async {
-          // try
-
-          {
-            // await LocalNotificationService.instance
-            //     .requestNotificationPermission();
-            // Restart main app
-            await main(fireBaseOptions);
-          }
-          // catch (e) {
-          //   log('Retry failed: $e');
-          //   runApp(
-          //     ErrorApp(
-          //       errorMessage: e.toString(),
-          //       onRetry: () async {
-          //         await LocalNotificationService.instance
-          //             .requestNotificationPermission();
-          //         // Restart main app
-          //       await  main(fireBaseOptions);
-          //       },
-          //     ),
-          //   );
-          // }
-        },
-      ),
-    );
-    return;
-  }
+  dev.log('Requesting notification permission');
+  await requestNotificationPermissionWithoutBlocking(
+    request: LocalNotificationService.instance.requestNotificationPermission,
+    onError: (error) {
+      // Permission controls presentation, not access to the app or playback.
+      dev.log('Notification permission unavailable: $error');
+    },
+  );
 
   // Initialize UI settings
   SystemChrome.setSystemUIOverlayStyle(

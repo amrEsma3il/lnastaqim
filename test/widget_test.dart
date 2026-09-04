@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lnastaqim/core/constants/colors.dart';
 import 'package:lnastaqim/core/utilits/extensions/color_from_hex.dart';
+import 'package:lnastaqim/features/quran_sound_player/view/widgets/surah_slider_widget.dart';
 
 void main() {
   group('Core Utilities & Constants Tests', () {
@@ -20,14 +21,29 @@ void main() {
 
     testWidgets('Basic MaterialApp smoke test', (WidgetTester tester) async {
       await tester.pumpWidget(
-        const MaterialApp(
+        const MaterialApp(home: Scaffold(body: Text('Lnastaqim App'))),
+      );
+
+      expect(find.text('Lnastaqim App'), findsOneWidget);
+    });
+
+    testWidgets('Surah slider safely clamps a tail position above duration', (
+      WidgetTester tester,
+    ) async {
+      const duration = 46.215;
+      const finalPositionTick = 46.236;
+      final value = safeSurahSliderValue(finalPositionTick, duration);
+
+      await tester.pumpWidget(
+        MaterialApp(
           home: Scaffold(
-            body: Text('Lnastaqim App'),
+            body: Slider(value: value, max: duration, onChanged: (_) {}),
           ),
         ),
       );
 
-      expect(find.text('Lnastaqim App'), findsOneWidget);
+      expect(tester.widget<Slider>(find.byType(Slider)).value, duration);
+      expect(tester.takeException(), isNull);
     });
   });
 }

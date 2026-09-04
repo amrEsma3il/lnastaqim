@@ -19,6 +19,7 @@ import '../../../core/utilits/functions/format_text.dart';
 import '../../../core/utilits/functions/toast_message.dart';
 import '../../../core/utilits/services/audio_service/audio_players.dart';
 import '../../../core/utilits/services/audio_service/players_key.dart';
+import '../../../core/utilits/services/audio_service/playback_coordinator.dart';
 import '../../../core/utilits/services/local_notification_service.dart';
 import '../../share/views/widgets/share_fun.dart';
 import '../data/models/ibtihal_info.dart';
@@ -40,9 +41,6 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
 
   IbtihalatPlayerCubit(this.ibtihalatPlayerRepo)
     : super(IbtihalatPlayerState.initial()) {
-
-
-    
     initListeners();
     registerPort();
   }
@@ -63,7 +61,7 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
       }
     });
 
-audioPlayer.onPositionChanged.listen((Duration position) {
+    audioPlayer.onPositionChanged.listen((Duration position) {
       if (!state.isSeeking && state.audioState is AudioFetchSuccess) {
         dev.log("Position changed: ${position.inSeconds}");
         emit(state.copyWith(currentPosition: position.inSeconds.toDouble()));
@@ -76,26 +74,25 @@ audioPlayer.onPositionChanged.listen((Duration position) {
     });
 
     audioPlayer.onPlayerComplete.listen((_) async {
-  // Check here if internet connection is available
-  // var connectivityResult = await Connectivity().checkConnectivity();
+      // Check here if internet connection is available
+      // var connectivityResult = await Connectivity().checkConnectivity();
 
-  final bool isConnected = await InternetConnectionChecker.instance.hasConnection;
-//problem is here
-  {
-   
-     if (state.onRepeat) {
-      await  playIbtihal();
-      } else {
-        dev.log("state.isRandom ${state.isRandom}");
-        if (state.isRandom) {
-       await   playRandomIbtihal();
+      final bool isConnected =
+          await InternetConnectionChecker.instance.hasConnection;
+      //problem is here
+      {
+        if (state.onRepeat) {
+          await playIbtihal();
         } else {
-         await nextIbtihal();
+          dev.log("state.isRandom ${state.isRandom}");
+          if (state.isRandom) {
+            await playRandomIbtihal();
+          } else {
+            await nextIbtihal();
+          }
         }
       }
-  }
       //check here if internet connection is available
-    
     });
   }
 
@@ -124,30 +121,29 @@ audioPlayer.onPositionChanged.listen((Duration position) {
         await audioPlayer.stop();
         break;
       case 'previous':
-    await    previousIbtihal();
+        await previousIbtihal();
         break;
       case 'next':
-      await  nextIbtihal(isFromUserHitAction: true);
+        await nextIbtihal(isFromUserHitAction: true);
         break;
     }
   }
 
-static String formatDuration(int seconds) {
-  final hours = seconds ~/ 3600;
-  final minutes = ((seconds % 3600) ~/ 60).toString().padLeft(2, '0');
-  final secs = (seconds % 60).toString().padLeft(2, '0');
-  if (hours > 0) {
-    return "${hours.toString().padLeft(2, '0')}:$minutes:$secs";
+  static String formatDuration(int seconds) {
+    final hours = seconds ~/ 3600;
+    final minutes = ((seconds % 3600) ~/ 60).toString().padLeft(2, '0');
+    final secs = (seconds % 60).toString().padLeft(2, '0');
+    if (hours > 0) {
+      return "${hours.toString().padLeft(2, '0')}:$minutes:$secs";
+    }
+    return "$minutes:$secs";
   }
-  return "$minutes:$secs";
-}
 
   List<ReciterIbtihalModel> getAllReciters() {
     return ibtihalatPlayerRepo.getAllReciters();
   }
 
-
-//here
+  //here
   Future<void> playIbtihal({int? ibtihalNum}) async {
     dev.log("playIbtihal with position: ${state.currentPosition}");
     emit(state.copyWith(audioState: AudioFetchLoading()));
@@ -158,7 +154,9 @@ static String formatDuration(int seconds) {
       );
       final filePath =
           '${reciterDir.path}/ابتهال ${state.reciter.info[ibtihalNum ?? state.ibtihalNumber].name}.mp3';
-      await AudioPlayers().pauseAll();
+      await PlaybackCoordinator.instance.activate(
+        NotificationKeys.ibtihalatPlayer,
+      );
       await LocalNotificationService.instance.showMediaNotification(
         groupKey: "ibtihal",
         isPlaying: true,
@@ -178,13 +176,11 @@ static String formatDuration(int seconds) {
       }
 
       // Reset position if ibtihal number changes
-      final position = ibtihalNum != null && ibtihalNum != state.ibtihalNumber
-          ? 0
-          : state.currentPosition.toInt();
-      await audioPlayer.play(
-        source,
-        position: Duration(seconds: position),
-      );
+      final position =
+          ibtihalNum != null && ibtihalNum != state.ibtihalNumber
+              ? 0
+              : state.currentPosition.toInt();
+      await audioPlayer.play(source, position: Duration(seconds: position));
 
       emit(
         state.copyWith(
@@ -197,7 +193,7 @@ static String formatDuration(int seconds) {
     } catch (e) {
       dev.log("ibtihal audio failure: $e");
       await audioPlayer.stop();
-       showToast("توجد مشكلة اثناء تشغيل الابتهال", AppColor.blueTint2);
+      showToast("توجد مشكلة اثناء تشغيل الابتهال", AppColor.blueTint2);
       // await LocalNotificationService.instance.showMediaNotification(
       //   groupKey: "ibtihal",
       //   isPlaying: false,
@@ -215,7 +211,8 @@ static String formatDuration(int seconds) {
       );
     }
   }
-//here
+
+  //here
   Future<void> togglePlayPause() async {
     dev.log("toggle test playing ${state.isPlaying} ");
     if (state.isPlaying) {
@@ -231,7 +228,9 @@ static String formatDuration(int seconds) {
       );
     } else {
       if (state.isPaused) {
-        await AudioPlayers().pauseAll();
+        await PlaybackCoordinator.instance.activate(
+          NotificationKeys.ibtihalatPlayer,
+        );
         await audioPlayer.resume();
         emit(state.copyWith(isPlaying: true, isPaused: false));
         await LocalNotificationService.instance.showMediaNotification(
@@ -248,7 +247,8 @@ static String formatDuration(int seconds) {
       }
     }
   }
-//here
+
+  //here
   Future<void> nextIbtihal({bool isFromUserHitAction = false}) async {
     if (isFromUserHitAction) {
       dev.log("Next ibtihal action triggered $isFromUserHitAction");
@@ -276,11 +276,9 @@ static String formatDuration(int seconds) {
       }
     }
 
-
-
-
-
-       audioPlayer.setSourceUrl(state.reciter.info[ state.ibtihalNumber].url).then((_) async {
+    audioPlayer.setSourceUrl(state.reciter.info[state.ibtihalNumber].url).then((
+      _,
+    ) async {
       final duration = await audioPlayer.getDuration();
       if (duration != null) {
         dev.log("Initial duration: ${duration.inSeconds}");
@@ -288,10 +286,10 @@ static String formatDuration(int seconds) {
       } else {
         dev.log("Failed to get initial duration");
       }
-    
     });
   }
-//here
+
+  //here
   Future<void> previousIbtihal() async {
     await audioPlayer.stop();
     emit(state.copyWith(isPlaying: false, isPaused: true, currentPosition: 0));
@@ -300,9 +298,9 @@ static String formatDuration(int seconds) {
       toggleFavorite();
     }
 
-
-
-       audioPlayer.setSourceUrl(state.reciter.info[ state.ibtihalNumber].url).then((_) async {
+    audioPlayer.setSourceUrl(state.reciter.info[state.ibtihalNumber].url).then((
+      _,
+    ) async {
       final duration = await audioPlayer.getDuration();
       if (duration != null) {
         dev.log("Initial duration: ${duration.inSeconds}");
@@ -310,23 +308,26 @@ static String formatDuration(int seconds) {
       } else {
         dev.log("Failed to get initial duration");
       }
-    
     });
   }
-//here
+
+  //here
   void changeIbtihalNum(int ibtihalNumber) async {
- if (state.ibtihalNumber != ibtihalNumber) {  await audioPlayer.stop();
-    emit(
-      state.copyWith(
-        isPlaying: false,
-        isPaused: true,
-        currentPosition: 0,
-        ibtihalNumber: ibtihalNumber,
-        audioState: AudioFetchInit(),
-      ),
-    );
-}
-       audioPlayer.setSourceUrl(state.reciter.info[ state.ibtihalNumber].url).then((_) async {
+    if (state.ibtihalNumber != ibtihalNumber) {
+      await audioPlayer.stop();
+      emit(
+        state.copyWith(
+          isPlaying: false,
+          isPaused: true,
+          currentPosition: 0,
+          ibtihalNumber: ibtihalNumber,
+          audioState: AudioFetchInit(),
+        ),
+      );
+    }
+    audioPlayer.setSourceUrl(state.reciter.info[state.ibtihalNumber].url).then((
+      _,
+    ) async {
       final duration = await audioPlayer.getDuration();
       if (duration != null) {
         dev.log("Initial duration: ${duration.inSeconds}");
@@ -334,16 +335,13 @@ static String formatDuration(int seconds) {
       } else {
         dev.log("Failed to get initial duration");
       }
-    
     });
     toggleFavorite();
-
-
-
   }
-//here
+
+  //here
   void changeReciter(ReciterIbtihalModel reciter) async {
-if (state.reciter.name != reciter.name) {
+    if (state.reciter.name != reciter.name) {
       await audioPlayer.stop();
       emit(
         state.copyWith(
@@ -352,15 +350,18 @@ if (state.reciter.name != reciter.name) {
           currentPosition: 0,
           reciter: reciter,
           ibtihalNumber: 0,
-        searchIbtihalResults: List.generate(
-          reciter.info.length,
-          (index) => index,
+          searchIbtihalResults: List.generate(
+            reciter.info.length,
+            (index) => index,
+          ),
+          audioState: AudioFetchInit(),
         ),
-        audioState: AudioFetchInit(),
-      ),
-    );}
+      );
+    }
 
-       audioPlayer.setSourceUrl(state.reciter.info[ state.ibtihalNumber].url).then((_) async {
+    audioPlayer.setSourceUrl(state.reciter.info[state.ibtihalNumber].url).then((
+      _,
+    ) async {
       final duration = await audioPlayer.getDuration();
       if (duration != null) {
         dev.log("Initial duration: ${duration.inSeconds}");
@@ -368,59 +369,72 @@ if (state.reciter.name != reciter.name) {
       } else {
         dev.log("Failed to get initial duration");
       }
-    
     });
     toggleFavorite();
   }
-//here
+
+  //here
   void toggleRepeat() {
     emit(state.copyWith(onRepeat: !state.onRepeat));
   }
-//here
+
+  //here
   Future<void> seek(double position) async {
     dev.log("Seeking to position: ${position.toInt()}");
-    emit(state.copyWith(
-      isSeeking: true,
-      currentPosition: position,
-      audioState: state.isPlaying ? AudioFetchLoading() : state.audioState,
-    ));
+    emit(
+      state.copyWith(
+        isSeeking: true,
+        currentPosition: position,
+        audioState: state.isPlaying ? AudioFetchLoading() : state.audioState,
+      ),
+    );
     try {
-      if (state.audioState is AudioFetchSuccess || state.isPlaying || state.isPaused) {
+      if (state.audioState is AudioFetchSuccess ||
+          state.isPlaying ||
+          state.isPaused) {
         await audioPlayer.seek(Duration(seconds: position.toInt()));
         dev.log("Seek completed to position: ${position.toInt()}");
       } else {
         dev.log("Storing seek position for later, audio not initialized");
         // Audio not initialized, just update position for when play starts
       }
-      emit(state.copyWith(
-        isSeeking: false,
-        audioState: state.isPlaying ? AudioFetchSuccess() : state.audioState,
-      ));
+      emit(
+        state.copyWith(
+          isSeeking: false,
+          audioState: state.isPlaying ? AudioFetchSuccess() : state.audioState,
+        ),
+      );
     } catch (e) {
       dev.log("Seek error: $e");
       showToast("توجد مشكلة اثناء تشغيل الابتهال", AppColor.blueTint2);
-      emit(state.copyWith(
-        isSeeking: false,
-        audioState: AudioFetchFailure("توجد مشكلة اثناء تشغيل الابتهال"),
-      ));
+      emit(
+        state.copyWith(
+          isSeeking: false,
+          audioState: AudioFetchFailure("توجد مشكلة اثناء تشغيل الابتهال"),
+        ),
+      );
     }
   }
-//here
+
+  //here
   void changeAudioPosition(double value) {
     emit(state.copyWith(currentPosition: value));
   }
-//here
+
+  //here
   void sliderSeekToggle({required bool isSeeking}) {
     emit(state.copyWith(isSeeking: isSeeking));
   }
-//here
+
+  //here
   Future<void> playRandomIbtihal() async {
     final random = Random();
     int randomIbtihal = random.nextInt(state.reciter.info.length);
     emit(state.copyWith(ibtihalNumber: randomIbtihal, currentPosition: 0));
     await playIbtihal();
   }
-//here
+
+  //here
   void changeRandomStatus() async {
     emit(state.copyWith(isRandom: !state.isRandom));
   }
@@ -497,7 +511,7 @@ if (state.reciter.name != reciter.name) {
     );
   }
 
-//here
+  //here
   Future<void> downloadIbtihal() async {
     final ibtihalIndex = state.ibtihalNumber;
 
@@ -563,8 +577,6 @@ if (state.reciter.name != reciter.name) {
     final dio = Dio();
 
     try {
-
-      
       await dio.download(
         state.reciter.info[ibtihalIndex].url,
         tempFilePath,
@@ -602,7 +614,6 @@ if (state.reciter.name != reciter.name) {
       await LocalNotificationService.instance.showBasicNotification(
         "فشل تحميل الابتهال",
         "",
-
       );
       showToast("فشل تحميل الابتهال", AppColor.blueTint2);
       if (await tempFile.exists()) {
@@ -828,8 +839,6 @@ class AudioFetchLoading implements AudioFetchState {}
 class AudioFetchInit implements AudioFetchState {}
 
 class AudioFetchFailure implements AudioFetchState {
-
-
   final String errorMessage;
 
   AudioFetchFailure(this.errorMessage);

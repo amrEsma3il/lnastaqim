@@ -18,18 +18,21 @@ class SurahControlsWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
-                 BlocBuilder<SurahPlayerCubit, SurahPlayerState>(
+            BlocBuilder<SurahPlayerCubit, SurahPlayerState>(
               builder: (context, state) {
-                return   IconButton(
-              icon: Icon(size: 25, Icons.shuffle,color: state.isRandom ? AppColor.softGreen : AppColor.white),
-              onPressed: () {
-                context.read<SurahPlayerCubit>().changeRandomStatus();
-              },
-            );
+                return IconButton(
+                  icon: Icon(
+                    size: 25,
+                    Icons.shuffle,
+                    color: state.isRandom ? AppColor.softGreen : AppColor.white,
+                  ),
+                  onPressed: () {
+                    context.read<SurahPlayerCubit>().changeRandomStatus();
+                  },
+                );
               },
             ),
-        
+
             SizedBox(width: 23.w),
             Container(
               decoration: BoxDecoration(
@@ -53,8 +56,7 @@ class SurahControlsWidget extends StatelessWidget {
                   child:
                       state.audioState is AudioFetchLoading
                           ? Lottie.asset(
-                            AppAnimation
-                                .typeLoading, // مسار ملف Lottie الخاص بك
+                            AppAnimation.typeLoading, // مسار ملف Lottie الخاص بك
                             width: 41.w, // حجم الرسوم المتحركة
                             height: 50.h,
                             fit: BoxFit.contain,
@@ -68,9 +70,7 @@ class SurahControlsWidget extends StatelessWidget {
                                     ? const Icon(Icons.pause, size: 35)
                                     : const Icon(Icons.play_arrow, size: 37),
                             onPressed: () {
-                              context
-                                  .read<SurahPlayerCubit>()
-                                  .togglePlayPause();
+                              context.read<SurahPlayerCubit>().togglePlayPause();
                             },
                           ),
                 );
@@ -124,32 +124,26 @@ class SurahControlsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
             children: [
-            BlocBuilder<SurahPlayerCubit, SurahPlayerState>(
+              BlocBuilder<SurahPlayerCubit, SurahPlayerState>(
                 builder: (context, state) {
                   final isThisDownloading = state.downloadingSurahs.contains(state.surahNumber);
                   return IconButton(
-                    icon:  Icon(
+                    icon: Icon(
                       size: 20,
                       Icons.download_outlined,
-                      color:isThisDownloading?AppColor.softGreen: Colors.white54,
+                      color: isThisDownloading ? AppColor.softGreen : Colors.white54,
                     ),
                     onPressed:
                         isThisDownloading
                             ? null
                             : () {
-                              context
-                                  .read<SurahPlayerCubit>()
-                                  .downloadSurah();
+                              context.read<SurahPlayerCubit>().downloadSurah();
                             },
                   );
                 },
               ),
               IconButton(
-                icon: const Icon(
-                  size: 20,
-                  Icons.share_outlined,
-                  color: Colors.white54,
-                ),
+                icon: const Icon(size: 20, Icons.share_outlined, color: Colors.white54),
                 onPressed: () {
                   context.read<SurahPlayerCubit>().shareSurah();
                 },
