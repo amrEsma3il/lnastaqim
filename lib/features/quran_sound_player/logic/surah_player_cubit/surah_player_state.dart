@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import '../../../../core/utilits/services/audio_service/surah_playback_service.dart';
 
 import '../../data/models/reciter_model/reciters_model.dart';
 import '../../data/repo/surah_player_repo.dart';
@@ -6,18 +7,18 @@ import 'surah_player_cubit.dart';
 
 class SurahPlayerState extends Equatable {
   final bool isPlaying;
-    final bool isRandom;
+  final bool isRandom;
   final bool isPaused;
   final Set<int> downloadingSurahs;
 
   // final int repeatCount;
-    final bool isSurahFavorite; 
+  final bool isSurahFavorite;
   final String reciterCountry, reciterSearchQuery;
   final bool onRepeat;
   final int surahNumber;
   final Reciter reciter;
-  final double currentPosition,audioSpeed;
-  
+  final double currentPosition, audioSpeed;
+
   final double surahDuration;
   final bool isSeeking;
   final List<Reciter> searchReciterResults;
@@ -36,7 +37,7 @@ class SurahPlayerState extends Equatable {
     required this.isSeeking,
     required this.isPlaying,
     required this.isPaused,
-        required this.isSurahFavorite,
+    required this.isSurahFavorite,
     // required this.repeatCount,
     // required this.maxRepeats,
     required this.onRepeat,
@@ -47,30 +48,32 @@ class SurahPlayerState extends Equatable {
   });
 
   factory SurahPlayerState.initial() => SurahPlayerState(
-      isRandom: false,
-      downloadingSurahs: <int>{},
-      audioState: AudioFetchInit(),
-      isSeeking: false,
-      isPlaying: false,
-      isPaused: false,
-      reciterCountry: "كل الدول",
-      reciterSearchQuery: "",
-       isSurahFavorite: false,
-      // repeatCount: 0,
-      // maxRepeats: 0,
-      onRepeat: false,
-      surahNumber: 1,
-      audioSpeed: 1,
-      reciter: Reciter(
-        id: 94,
-          name: "minshawi_mujawwad",
-          nameArabic: "محمد صديق المنشاوي مجود",
-          nationality: "مصر"),
-      currentPosition: 0.0,
-      surahDuration: 177.0,
-      searchSurahResults:SurahPlayerCubit.quranSurahs.keys.toList(),
-       searchReciterResults: SurahPlayerRepo().getAllReciters() // قائمة فارغة عند البداية
-      );
+    isRandom: false,
+    downloadingSurahs: <int>{},
+    audioState: AudioFetchInit(),
+    isSeeking: false,
+    isPlaying: false,
+    isPaused: false,
+    reciterCountry: "كل الدول",
+    reciterSearchQuery: "",
+    isSurahFavorite: false,
+    // repeatCount: 0,
+    // maxRepeats: 0,
+    onRepeat: false,
+    surahNumber: 1,
+    audioSpeed: 1,
+    reciter: Reciter(
+      id: 94,
+      name: "minshawi_mujawwad",
+      nameArabic: "محمد صديق المنشاوي مجود",
+      nationality: "مصر",
+    ),
+    currentPosition: 0.0,
+    surahDuration: 177.0,
+    searchSurahResults: SurahPlayerCubit.quranSurahs.keys.toList(),
+    searchReciterResults:
+        SurahPlayerRepo().getAllReciters(), // قائمة فارغة عند البداية
+  );
 
   SurahPlayerState copyWith({
     bool? isRandom,
@@ -98,49 +101,49 @@ class SurahPlayerState extends Equatable {
       isRandom: isRandom ?? this.isRandom,
       downloadingSurahs: downloadingSurahs ?? this.downloadingSurahs,
 
-       isSurahFavorite: isSurahFavorite ?? this.isSurahFavorite,
-        reciter: reciter ?? this.reciter,
-        audioState: audioState ?? this.audioState,
-        reciterCountry: reciterCountry ?? this.reciterCountry,
-        reciterSearchQuery: reciterSearchQuery ?? this.reciterSearchQuery,
-        isSeeking: isSeeking ?? this.isSeeking,
-        isPlaying: isPlaying ?? this.isPlaying,
-        isPaused: isPaused ?? this.isPaused,
-        // repeatCount: repeatCount ?? this.repeatCount,
-        // maxRepeats: maxRepeats ?? this.maxRepeats,
-        onRepeat: onRepeat ?? this.onRepeat,
-        surahNumber: surahNumber ?? this.surahNumber,
-        currentPosition: currentPosition ?? this.currentPosition,
-        audioSpeed: audioSpeed??this.audioSpeed,
-        surahDuration: surahDuration ?? this.surahDuration,
-        searchSurahResults: searchSurahResults ?? this.searchSurahResults,
-        searchReciterResults:
-            searchReciterResults ?? this.searchReciterResults // تحديث
-        );
+      isSurahFavorite: isSurahFavorite ?? this.isSurahFavorite,
+      reciter: reciter ?? this.reciter,
+      audioState: audioState ?? this.audioState,
+      reciterCountry: reciterCountry ?? this.reciterCountry,
+      reciterSearchQuery: reciterSearchQuery ?? this.reciterSearchQuery,
+      isSeeking: isSeeking ?? this.isSeeking,
+      isPlaying: isPlaying ?? this.isPlaying,
+      isPaused: isPaused ?? this.isPaused,
+      // repeatCount: repeatCount ?? this.repeatCount,
+      // maxRepeats: maxRepeats ?? this.maxRepeats,
+      onRepeat: onRepeat ?? this.onRepeat,
+      surahNumber: surahNumber ?? this.surahNumber,
+      currentPosition: currentPosition ?? this.currentPosition,
+      audioSpeed: audioSpeed ?? this.audioSpeed,
+      surahDuration: surahDuration ?? this.surahDuration,
+      searchSurahResults: searchSurahResults ?? this.searchSurahResults,
+      searchReciterResults:
+          searchReciterResults ?? this.searchReciterResults, // تحديث
+    );
   }
 
   @override
   List<Object> get props => [
     isRandom,
-        reciter,
-        reciterSearchQuery,
-        reciterCountry,
-        isSeeking,
-        isPlaying,
-        isPaused,
-          isSurahFavorite,
-        // repeatCount,
-        // maxRepeats,
-        audioSpeed,
-        onRepeat,
-        surahNumber,
-        currentPosition,
-        surahDuration,
-        searchSurahResults,
-        searchReciterResults,
-        audioState,
-        downloadingSurahs
-      ];
+    reciter,
+    reciterSearchQuery,
+    reciterCountry,
+    isSeeking,
+    isPlaying,
+    isPaused,
+    isSurahFavorite,
+    // repeatCount,
+    // maxRepeats,
+    audioSpeed,
+    onRepeat,
+    surahNumber,
+    currentPosition,
+    surahDuration,
+    searchSurahResults,
+    searchReciterResults,
+    audioState,
+    downloadingSurahs,
+  ];
 }
 
 abstract class AudioFetchState {}
@@ -150,9 +153,10 @@ class AudioFetchLoading implements AudioFetchState {}
 class AudioFetchInit implements AudioFetchState {}
 
 class AudioFetchFailure implements AudioFetchState {
-    final String errorMessage;
+  final String errorMessage;
+  final SurahPlaybackFailureType type;
 
-  AudioFetchFailure(this.errorMessage);
+  AudioFetchFailure(this.errorMessage, this.type);
 }
 
 class AudioFetchSuccess implements AudioFetchState {}

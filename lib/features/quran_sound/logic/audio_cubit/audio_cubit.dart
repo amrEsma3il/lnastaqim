@@ -17,6 +17,8 @@ import 'package:http/http.dart' as http;
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/keys.dart';
 import '../../../../core/utilits/functions/toast_message.dart';
+import '../../../../core/utilits/services/audio_service/playback_coordinator.dart';
+import '../../../../core/utilits/services/audio_service/players_key.dart';
 import '../../../quran/bussniess_logic/quran/quran_cubit.dart';
 import '../../data/models/reciter_entity.dart';
 import '../../view/widgets/reciters_component.dart';
@@ -27,7 +29,12 @@ class AudioControlCubit extends Cubit<AudioControlState> {
 
   AudioControlCubit()
     : _audioPlayer = AudioPlayer(),
-      super(AudioControlState.initial());
+      super(AudioControlState.initial()) {
+    PlaybackCoordinator.instance.register(
+      NotificationKeys.versePlayer,
+      _audioPlayer.pause,
+    );
+  }
 
   static AudioControlCubit get(BuildContext context) =>
       BlocProvider.of<AudioControlCubit>(context);
@@ -93,7 +100,6 @@ class AudioControlCubit extends Cubit<AudioControlState> {
   }) async {
     // QuranCubit.get(context).searchAya(verseNumber-1);
 
-
     final quranCubit = QuranCubit.get(context);
     final directory = await getApplicationDocumentsDirectory();
     final reciterDir = Directory(
@@ -106,7 +112,6 @@ class AudioControlCubit extends Cubit<AudioControlState> {
       log("first verse in page${quranCubit.getFirstAyaPage(state.pageNum)}");
     }
     // quranCubit.searchAya(verseNumber);
-
 
     final filePath = '${reciterDir.path}/$verseNumber.mp3';
     dev.log("before check file existence");
@@ -126,6 +131,7 @@ class AudioControlCubit extends Cubit<AudioControlState> {
       // log(verseRepatedNumber[state.audioRepeat].toString());
       quranCubit.searchAya(verseNumber);
 
+      await PlaybackCoordinator.instance.activate(NotificationKeys.versePlayer);
       await _audioPlayer.play(DeviceFileSource(filePath));
       print(state.isPlaying.toString());
       if (startPosition != null) {
@@ -142,37 +148,48 @@ class AudioControlCubit extends Cubit<AudioControlState> {
       }
     } else {
       dev.log("after check file not foundexistance");
-  final bool isConnected = await InternetConnectionChecker.instance.hasConnection;
+      final bool isConnected =
+          await InternetConnectionChecker.instance.hasConnection;
 
-if (isConnected){      print('Verse $verseNumber not found');
-      //TODO:download 6 verse after and 2 befor
+      if (isConnected) {
+        print('Verse $verseNumber not found');
+        //TODO:download 6 verse after and 2 befor
 
-      emit(state.copyWith(playVerseBarStatus: PlayVerseBarStatus.loading));
-      print(state.playVerseBarStatus.toString());
-      downloadProcess(verseNumber, reciterDir).then((value) async {
-        emit(state.copyWith(playVerseBarStatus: PlayVerseBarStatus.turnOn));
-        if (context.mounted) {
-          print(quranCubit.getPageNumber(verseNumber).toDouble());
-          quranCubit.pageController.jumpToPage(
-            604 - quranCubit.getPageNumber(verseNumber),
+        emit(state.copyWith(playVerseBarStatus: PlayVerseBarStatus.loading));
+        print(state.playVerseBarStatus.toString());
+        downloadProcess(verseNumber, reciterDir).then((value) async {
+          emit(state.copyWith(playVerseBarStatus: PlayVerseBarStatus.turnOn));
+          if (context.mounted) {
+            print(quranCubit.getPageNumber(verseNumber).toDouble());
+            quranCubit.pageController.jumpToPage(
+              604 - quranCubit.getPageNumber(verseNumber),
+            );
+            emit(
+              state.copyWith(pageNum: quranCubit.getPageNumber(verseNumber)),
+            );
+
+            QuranCubit.get(context).searchAya(verseNumber);
+          }
+          // log(verseRepatedNumber[state.audioRepeat].toString());
+          quranCubit.searchAya(verseNumber);
+
+          await PlaybackCoordinator.instance.activate(
+            NotificationKeys.versePlayer,
           );
-          emit(state.copyWith(pageNum: quranCubit.getPageNumber(verseNumber)));
-
-          QuranCubit.get(context).searchAya(verseNumber);
-        }
-        // log(verseRepatedNumber[state.audioRepeat].toString());
-        quranCubit.searchAya(verseNumber);
-
-        await _audioPlayer.play(DeviceFileSource(filePath));
-        if (startPosition != null) {
-          await _audioPlayer.seek(startPosition);
-        }
-        emit(state.copyWith(isPlaying: true, currentVerse: verseNumber));
-      });
-} else{
-showToast("لتشغيل الآية لأول مرة يجب الاتصال بالإنترنت",AppColor.blueTint2);
-  dev.log("No internet connection");
-}   }
+          await _audioPlayer.play(DeviceFileSource(filePath));
+          if (startPosition != null) {
+            await _audioPlayer.seek(startPosition);
+          }
+          emit(state.copyWith(isPlaying: true, currentVerse: verseNumber));
+        });
+      } else {
+        showToast(
+          "لتشغيل الآية لأول مرة يجب الاتصال بالإنترنت",
+          AppColor.blueTint2,
+        );
+        dev.log("No internet connection");
+      }
+    }
     if (verseNumber == 6236) {
       await stop();
     }
@@ -180,7 +197,7 @@ showToast("لتشغيل الآية لأول مرة يجب الاتصال بال�
 
   Future<void> playNextVerse(BuildContext context) async {
     if (state.currentVerse < 6236) {
-    await  playVerse(state.currentVerse + 1, context);
+      await playVerse(state.currentVerse + 1, context);
     } else {
       print('All verses played');
     }
@@ -197,11 +214,11 @@ showToast("لتشغيل الآية لأول مرة يجب الاتصال بال�
     dev.log("verse number: $verseNumber");
     if (state.isPlaying) {
       dev.log("pause verse");
-     await _audioPlayer.pause();
+      await _audioPlayer.pause();
     } else {
       if (_audioPlayer.state == PlayerState.stopped) {
         dev.log(" play new verse");
-      await  playVerse(verseNumber ?? state.currentVerse, context);
+        await playVerse(verseNumber ?? state.currentVerse, context);
       } else {
         if (verseNumber != null && verseNumber != state.currentVerse) {
           dev.log("stop and play new verse $verseNumber");
@@ -209,7 +226,10 @@ showToast("لتشغيل الآية لأول مرة يجب الاتصال بال�
           if (context.mounted) playVerse(verseNumber, context);
         } else {
           dev.log("resume current verse");
-      await    _audioPlayer.resume();
+          await PlaybackCoordinator.instance.activate(
+            NotificationKeys.versePlayer,
+          );
+          await _audioPlayer.resume();
         }
       }
     }
@@ -250,7 +270,7 @@ showToast("لتشغيل الآية لأول مرة يجب الاتصال بال�
             await file.writeAsBytes(response.bodyBytes);
           }
         } catch (e) {
-          showToast("فشل في تحميل الآية رقم $i",AppColor.blueTint2);
+          showToast("فشل في تحميل الآية رقم $i", AppColor.blueTint2);
           print('Error downloading verse $i: $e');
         }
       }
@@ -330,5 +350,12 @@ showToast("لتشغيل الآية لأول مرة يجب الاتصال بال�
             ),
           ),
     );
+  }
+
+  @override
+  Future<void> close() async {
+    PlaybackCoordinator.instance.unregister(NotificationKeys.versePlayer);
+    await _audioPlayer.dispose();
+    return super.close();
   }
 }
