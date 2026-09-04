@@ -60,15 +60,13 @@ jobs:
       - name: Organize Release Artifacts
         run: |
           mkdir -p release-apks
-          # Copy and standardize names of generated APKs
+          # Move and standardize name of generated APK
           if [ -f "build/app/outputs/flutter-apk/app-lnastaqim_prod-release.apk" ]; then
-            cp build/app/outputs/flutter-apk/app-lnastaqim_prod-release.apk release-apks/lnastaqim-prod-release.apk
+            mv build/app/outputs/flutter-apk/app-lnastaqim_prod-release.apk release-apks/lnastaqim-prod-release.apk
           fi
           if [ -f "build/app/outputs/flutter-apk/app-lnastaqim_dev-release.apk" ]; then
-            cp build/app/outputs/flutter-apk/app-lnastaqim_dev-release.apk release-apks/lnastaqim-dev-release.apk
+            mv build/app/outputs/flutter-apk/app-lnastaqim_dev-release.apk release-apks/lnastaqim-dev-release.apk
           fi
-          # Fallback: copy any other APKs found
-          cp build/app/outputs/flutter-apk/*.apk release-apks/ 2>/dev/null || true
           ls -lh release-apks/
 
       - name: Upload APK to GitHub Actions Artifacts
