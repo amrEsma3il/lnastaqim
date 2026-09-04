@@ -1,6 +1,7 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lnastaqim/core/utilits/services/audio_service/surah_playback_service.dart';
+import 'package:lnastaqim/core/utilits/services/audio_service/ibtihal_playback_service.dart';
 import 'package:lnastaqim/core/utilits/services/audio_service/unified_audio_handler.dart';
 
 void main() {
@@ -53,5 +54,24 @@ void main() {
     final position = clampSurahPlaybackPosition(finalPositionTick, duration);
 
     expect(position, duration);
+  });
+
+  test('Ibtihal media items expose feature-specific notification artwork', () {
+    final artworkUri = Uri.file(
+      '/app-support/ibtihal_notification_artwork.png',
+    );
+    final item = IbtihalPlaybackItem(
+      id: 'ibtihal:reciter:2',
+      uri: Uri.https('example.test', '/ibtihal.mp3'),
+      title: 'ابتهال',
+      reciter: 'المبتهل',
+      index: 2,
+    );
+
+    final mediaItem = buildIbtihalMediaItem(item, artworkUri: artworkUri);
+
+    expect(mediaItem.artUri, artworkUri);
+    expect(mediaItem.extras!['mode'], 'ibtihal');
+    expect(mediaItem.extras!['index'], 2);
   });
 }

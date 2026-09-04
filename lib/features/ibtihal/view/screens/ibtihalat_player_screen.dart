@@ -15,6 +15,12 @@ import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/images.dart';
 import '../../bussnies_logic/ibtihal_player_cubit.dart';
 
+double safeIbtihalSliderMaximum(double duration) =>
+    duration > 0 ? duration : 233.0;
+
+double safeIbtihalSliderValue(double position, double duration) =>
+    position.clamp(0.0, safeIbtihalSliderMaximum(duration)).toDouble();
+
 // UI Components
 
 class IbtihalatPlayerScreen extends StatelessWidget {
@@ -263,7 +269,7 @@ class RecitersBottomSheetComponent extends StatelessWidget {
                           await Future.delayed(
                             const Duration(milliseconds: 200),
                           );
-                          cubit.changeReciter(reciter);
+                          await cubit.changeReciter(reciter);
                           cubit.clearReciterSearch();
                         },
                       );
@@ -520,8 +526,11 @@ class IbtihalatSliderWidget extends StatelessWidget {
                 activeColor: AppColor.white,
                 thumbColor: AppColor.white,
                 inactiveColor: "#6a738a".toColor,
-                value: state.currentPosition,
-                max: state.ibtihalDuration <= 0 ? 233.0 : state.ibtihalDuration,
+                value: safeIbtihalSliderValue(
+                  state.currentPosition,
+                  state.ibtihalDuration,
+                ),
+                max: safeIbtihalSliderMaximum(state.ibtihalDuration),
                 onChangeStart: (_) {
                   dev.log("Start seeking");
                   context.read<IbtihalatPlayerCubit>().sliderSeekToggle(
@@ -858,7 +867,7 @@ class IbtihalatBottomSheetComponent extends StatelessWidget {
                           await Future.delayed(
                             const Duration(milliseconds: 200),
                           );
-                          cubit.changeIbtihalNum(ibtihalNumber);
+                          await cubit.changeIbtihalNum(ibtihalNumber);
                           cubit.clearIbtihalSearch();
                         },
                       );
