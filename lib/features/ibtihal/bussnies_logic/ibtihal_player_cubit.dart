@@ -693,10 +693,10 @@ class IbtihalatPlayerCubit extends Cubit<IbtihalatPlayerState> {
   }
 
   @override
-  Future<void> close() {
+  Future<void> close() async {
     IsolateNameServer.removePortNameMapping(NotificationKeys.ibtihalatPlayer);
     receivePort?.close();
-    audioPlayer.dispose();
+    await AudioPlayers().disposePlayer(NotificationKeys.ibtihalatPlayer);
     return super.close();
   }
 }

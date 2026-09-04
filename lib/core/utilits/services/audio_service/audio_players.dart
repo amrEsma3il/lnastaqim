@@ -24,6 +24,14 @@ class AudioPlayers {
     return _players[featureName]!;
   }
 
+  Future<void> disposePlayer(String featureName) async {
+    PlaybackCoordinator.instance.unregister(featureName);
+    final player = _players.remove(featureName);
+    if (player != null) {
+      await player.dispose();
+    }
+  }
+
   Future<void> pauseAll() async {
     log("test from pause all");
     for (var player in _players.values) {
